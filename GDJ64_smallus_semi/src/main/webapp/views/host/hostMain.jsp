@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/views/host/host-header.jsp"%>
+<%@ include file="/views/host/hostHeader.jsp"%>
     <!--main-->
     <div id="mainOpacity h-host-main">
         <!-- host-main reservation -->
@@ -56,11 +56,11 @@
         <!-- host-main-calc -->
         <section class="h-main">
             <div class="h-main-title">
-                <h2>5월 매출 내역</h2>
+                <h2>월별 매출 내역</h2>
                 <!-- 매출 내역 상세 페이지로 이동 -->
                 <div class="h-viewList"><a href="">+</a></div>
             </div><hr>
             <div class="h-r-callendar" id="h-main-chart"></div>
         </section>
-<%@ include file="/views/host/host-footer.jsp"%>
+<%@ include file="/views/host/hostFooter.jsp"%>
         

@@ -151,3 +151,28 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 .fc-toolbar-title {
 	font-size: 1rem;
 }
+
+/* host class list page */
+div.h-class-list {
+	width:50%;
+	border:1px solid red;
+	display:flex;
+}
+
+
+div.h-class-list>img{
+	width: 6rem;
+	height: 6rem;
+}
+
+div.h-class-list table{
+	font-size:0.8rem;
+	margin:0 auto;
+	border: 0px;
+}
+div.h-class-list table td, div.h-class-list table th{
+	border:0px;
+	height:1.8rem;
+}
+	
+

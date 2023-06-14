@@ -1,4 +1,4 @@
-    /* 전체페이지 스타일 */
+/* 전체페이지 스타일 */
     * {
         margin: 0;
         padding: 0;
@@ -34,7 +34,7 @@
     header {
         background-color: #FFFBF5;
         width: 100%;
-        /* box-shadow: 0 12px rgba(0, 0, 0, 0.3); */
+        box-shadow: 0 12px rgba(0, 0, 0, 0.3);
     }
 
     .icon :first-child {
@@ -48,6 +48,7 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
+        
     }
 
     /* 로고 */
