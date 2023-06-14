@@ -175,13 +175,13 @@ button{
 	scroll-snap-type: unset;
 }
 
-li {
+.h-gallery li {
 	scroll-snap-align: center;
 	display: inline-block;
 	font-size: 0;
     width:480px;
 }
-li img {
+.h-gallery li img {
     width: 360px;
     height: 500px;
     border-radius: 20px;
