@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Small us ☺</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/headr_footer.css">
-<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/main.css"> --%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/main.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage/mypage.css">
 </head>
 <body id="bodys">

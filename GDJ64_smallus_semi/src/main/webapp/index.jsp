@@ -65,7 +65,7 @@
 	</section>
 
 	<!-- new class section -->
-	<h2 class="h-h2">NEW CLASS</h2>
+	<h2>NEW CLASS</h2>
 	<section class="h-imgContainer">
 		<div class="h-img-list">
 			<a href=""> <img src="./img/img-slide2-4.png" alt="no img">
@@ -134,7 +134,7 @@
 	</section>
 
 	<!-- best class section -->
-	<h2 class="h-h2">BEST CLASS</h2>
+	<h2>BEST CLASS</h2>
 	<section class="h-imgContainer h-best-class">
 		<div class="h-img-list">
 			<a href=""> <img src="./img/img-slide2-4.png" alt="no img">
