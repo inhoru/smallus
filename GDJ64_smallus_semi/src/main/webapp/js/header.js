@@ -73,9 +73,9 @@ $(document).click((e) => {
         categoriesTable.slideUp(500);
     }
 });
-
+// 알림
 $(".notification-icon").on("click", e => {
-    $(".notification-container").slideToggle(300)
+    $(".notification-container").slideToggle(300);
 });
   
 

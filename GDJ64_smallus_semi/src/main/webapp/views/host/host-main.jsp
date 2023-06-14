@@ -3,41 +3,6 @@
 <%@ include file="/views/host/host-header.jsp"%>
     <!--main-->
     <div id="mainOpacity h-host-main">
-        <!-- menu-category -->
-        <section class="h-menu">
-            <div>
-                <table>
-                    <tr>
-                        <th>호스트 관리</th>
-                        <th>클래스 관리</th>
-                        <th>예약 관리</th>
-                        <th>고객 센터</th>
-                    </tr>
-                    <tr><a href=""></a>
-                        <td><a href="">프로필 수정</a></td>
-                        <td><a href="">내 클래스 보기</a></td>
-                        <td><a href="">클래스 예약 관리</a></td>
-                        <td><a href="">공지사항</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="">회원 탈퇴</a></td>
-                        <td><a href="">클래스 등록하기</a></td>
-                        <td><a href="">정산 정보 관리</a></td>
-                        <td><a href="">1:1 문의</a></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><a href="">Q&A 관리</a></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><a href="">후기 관리</a></td>
-                    </tr>
-                </table>
-            </div>            
-        </section>
         <!-- host-main reservation -->
         <section class="h-main">
             <div class="h-main-title">
@@ -97,5 +62,5 @@
             </div><hr>
             <div class="h-r-callendar" id="h-main-chart"></div>
         </section>
-<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/host/host-footer.jsp"%>
         
