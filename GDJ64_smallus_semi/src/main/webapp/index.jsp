@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/main-header.jsp"%>
-
 <div id="mainOpacity">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container">
@@ -49,14 +48,18 @@
 	<section class="h-main-banner">
 		<div class="h-banner-container">
 			<div class="h-banner-area">
-				<h3>신규 가입 10% 쿠폰 지급</h3>
-				<div></div>
-				<button name="enroll" id="enroll">가입하기</button>
+				<a href="">
+					<h3>신규 가입 10% 쿠폰 지급</h3>
+					<div></div>
+					<button name="enroll" id="enroll">가입하기</button>
+				</a>
 			</div>
 			<div class="h-banner-area">
-				<h3>small us X KB pay</h3>
-				<div></div>
-				<h5>KB Pay로 10만원 이상 결제 시 5천원 할인</h5>
+				<a href="">
+					<h3>small us X KB pay</h3>
+					<div></div>
+					<h5>KB Pay로 10만원 이상 결제 시 5천원 할인</h5>
+				</a>
 			</div>
 		</div>
 	</section>
@@ -70,17 +73,13 @@
 				<h5>category | location</h5>
 			</a>
 			<div class="h-wish-container">
-				<input type="checkbox" checked="checked" id="i-favorite1"
-					name="favorite-checkbox" value="favorite-button"> <label
-					for="i-favorite1" class="i-container"> <svg
-						xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-						viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-						stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-heart">
-                            <path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+				<input type="checkbox" checked="checked" id="i-favorite1" name="favorite-checkbox" value="favorite-button">
+					<label for="i-favorite1" class="i-container">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
-                        </svg>
+                     </svg>
 				</label>
 			</div>
 		</div>
@@ -90,17 +89,13 @@
 				<h5>category | location</h5>
 			</a>
 			<div class="h-wish-container">
-				<input type="checkbox" checked="checked" id="i-favorite2"
-					name="favorite-checkbox" value="favorite-button"> <label
-					for="i-favorite2" class="i-container"> <svg
-						xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-						viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-						stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-heart">
-                            <path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+				<input type="checkbox" checked="checked" id="i-favorite2" name="favorite-checkbox" value="favorite-button">
+					<label for="i-favorite2" class="i-container">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
-                        </svg>
+                    </svg>
 				</label>
 			</div>
 		</div>
@@ -110,17 +105,13 @@
 				<h5>category | location</h5>
 			</a>
 			<div class="h-wish-container">
-				<input type="checkbox" checked="checked" id="i-favorite3"
-					name="favorite-checkbox" value="favorite-button"> <label
-					for="i-favorite3" class="i-container"> <svg
-						xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-						viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-						stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-heart">
-                            <path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+				<input type="checkbox" checked="checked" id="i-favorite3" name="favorite-checkbox" value="favorite-button">
+					<label for="i-favorite3" class="i-container">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
-                        </svg>
+                    </svg>
 				</label>
 			</div>
 		</div>
@@ -130,17 +121,13 @@
 				<h5>category | location</h5>
 			</a>
 			<div class="h-wish-container">
-				<input type="checkbox" checked="checked" id="i-favorite4"
-					name="favorite-checkbox" value="favorite-button"> <label
-					for="i-favorite4" class="i-container"> <svg
-						xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-						viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-						stroke-linecap="round" stroke-linejoin="round"
-						class="feather feather-heart">
-                            <path
-							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+				<input type="checkbox" checked="checked" id="i-favorite4" name="favorite-checkbox" value="favorite-button">
+					<label for="i-favorite4" class="i-container">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                             </path>
-                        </svg>
+                     </svg>
 				</label>
 			</div>
 		</div>
@@ -181,12 +168,11 @@
 					<div class="h-wish-container">
 						<input type="checkbox" checked="checked" id="i-favorite7" name="favorite-checkbox" value="favorite-button">
 						<label for="i-favorite7" class="i-container">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
-                                    <path
-									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" 
+								stroke-linejoin="round" class="feather feather-heart">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                                     </path>
-                                </svg>
+                             </svg>
 						</label>
 					</div>
 				</div>
@@ -198,17 +184,13 @@
 						<h5>category | location</h5>
 					</a>
 					<div class="h-wish-container">
-						<input type="checkbox" checked="checked" id="i-favorite6"
-							name="favorite-checkbox" value="favorite-button"> <label
-							for="i-favorite6" class="i-container"> <svg
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-heart">
-                                    <path
-									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+						<input type="checkbox" checked="checked" id="i-favorite6" name="favorite-checkbox" value="favorite-button">
+						<label for="i-favorite6" class="i-container">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                                     </path>
-                                </svg>
+                            </svg>
 						</label>
 					</div>
 				</div>
@@ -218,17 +200,13 @@
 						<h5>category | location</h5>
 					</a>
 					<div class="h-wish-container">
-						<input type="checkbox" checked="checked" id="i-favorite8"
-							name="favorite-checkbox" value="favorite-button"> <label
-							for="i-favorite8" class="i-container"> <svg
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-heart">
-                                    <path
-									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                    </path>
-                                </svg>
+						<input type="checkbox" checked="checked" id="i-favorite8" name="favorite-checkbox" value="favorite-button">
+						<label for="i-favorite8" class="i-container">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+									stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                        	    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
 						</label>
 					</div>
 				</div>

@@ -73,3 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 });
 
+// 알림
+$(".h-notification-icon").on("click", e => {
+	console.log(e);
+    $(".h-notification-container").slideToggle(300);
+});
+  

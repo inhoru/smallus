@@ -59,7 +59,7 @@
 
 
     /* 아이콘 */
-    .iconContainer {
+    div.h-iconContainer {
         display: flex;
         justify-content: space-between;
         width: 30%;
@@ -69,7 +69,7 @@
 
     }
 
-    .iconContainer>a {
+    .h-iconContainer>a {
         font-size: 1rem;
         height:2rem;
         align-items: center;
@@ -77,7 +77,7 @@
     }
 
     /* 알람 아이콘 */
-    .notification-icon {
+    .h-notification-icon {
         position: relative;
         margin-right: 1em;
         align-items: center;
@@ -87,7 +87,7 @@
     }
 
     /* 알람 갯수 */
-    .num-count {
+    .h-num-count {
         position: absolute;
         user-select: none;
         cursor: default;
@@ -106,7 +106,7 @@
     }
 
     /* 알람 내용 */
-    .notification-container {
+    .h-notification-container {
         display: none;
         cursor: default;
         position: absolute;
@@ -120,21 +120,21 @@
         background-color: #FFFCF5;
     }
 
-    .notification {
+    .h-notification {
         box-sizing: border-box;
         background-color: #FFFCF5;
     }
 
-    input.checkbox[type=checkbox] {
+    input.h-checkbox[type=checkbox] {
         display: none;
     }
 
-    input.checkbox[type=checkbox]+label {
+    input.h-checkbox[type=checkbox]+label {
         display: block;
     }
 
     /* 알람 세부목록 */
-    .notification {
+    .h-notification {
         height: 3.25rem;
         padding: 1.125rem 4rem 0.75rem 2rem;
         font-size: 75%;
@@ -143,7 +143,7 @@
     }
 
     /* 알람 목록 */
-    .notification-container:before {
+    .h-notification-container:before {
         content: "";
         position: absolute;
         top: 1px;
@@ -173,3 +173,38 @@
     }
 
     /*  */
+    .footer {
+    width: 100%;
+    flex-direction: column;
+    background-color: #F3EEE6;
+}
+
+.footer div {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    /* padding: 1% 0; */
+}
+
+.footer>div {
+    padding: 1% 0;
+}
+
+.usMenu ul {
+    width: 100%;
+}
+
+.usInfo .copyright {
+    width: 160%;
+    margin-right: auto;
+}
+
+.aside {
+    flex-direction: column;
+    padding-left: 5%;
+}
+
+a {
+    color: inherit;
+
+}
