@@ -155,24 +155,53 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 /* host class list page */
 div.h-class-list {
 	width:50%;
-	border:1px solid red;
+	border-top:1px solid #F6E9DF;
+	border-bottom:1px solid #F6E9DF;
+	/* border-radius:1rem; */
 	display:flex;
+	align-items: center;
 }
 
-
+/* class list img */
+div.h-class-list-container{
+	display:flexbox;
+}
 div.h-class-list>img{
-	width: 6rem;
-	height: 6rem;
+	width: 7rem;
+	height:7rem;
+	object-fit:cover;
+	margin:1rem 1rem 1rem 0;
+	display:flex;
+	border-radius: 0.5rem;
 }
 
+/* class table style*/
 div.h-class-list table{
+	width:85%;
 	font-size:0.8rem;
-	margin:0 auto;
-	border: 0px;
+	margin:1rem auto;
+	border: 0px; 
 }
+div.h-class-list table tr:nth-child(2)>td,div.h-class-list table tr:first-child>th:first-child,div.h-class-list table tr:nth-child(3)>td:first-child{
+	text-align:left;
+}
+/* div.h-class-list table tr:first-child{
+	border-bottom: 1px solid #888888;
+} */
+
 div.h-class-list table td, div.h-class-list table th{
 	border:0px;
 	height:1.8rem;
 }
-	
+div.h-class-list-container button{
+	background-color: #F6E9DF;
+	border:0px;
+	border-radius: 0.7rem;
+	padding: 0.4rem 0.6rem;
+	font-size: 0.8rem;
+}
+div.h-button-container{
+	display: block;
+}
+
 
