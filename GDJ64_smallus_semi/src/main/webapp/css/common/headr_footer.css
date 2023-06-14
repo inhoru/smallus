@@ -1,0 +1,234 @@
+    /* 전체페이지 스타일 */
+    * {
+        margin: 0;
+        padding: 0;
+        color: #555555;
+        list-style-type: none;
+        text-decoration: none;
+        font-family: 'GmarketSansMedium';
+    }
+    @font-face {
+        font-family: 'GmarketSansMedium';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+        font-weight: 300;
+
+        font-style: normal;
+    }
+
+    /* 전체헤더 */
+    header {
+        background-color: #FFFBF5;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        margin: 1 0 1% 0;
+        z-index: 100;
+        height: 77px;
+    }
+    .icon :first-child {
+        cursor: pointer;
+    }
+
+    /* 헤더 내용 */
+    #headerContainer {
+        
+        width: 1280px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        
+    }
+
+    /* 로고 */
+    #logo {
+        width: 90px;
+        height: 60px;
+        
+        padding: 5px 0 5px 0;
+    }
+
+    /* 메뉴 */
+    .menu {
+        width: 100%;
+    }
+
+    /* 돋보기 누르면 나오는 검색창 */
+    #hiddenseach {
+        display: none;
+        justify-content: space-evenly;
+
+    }
+
+    /* 검색창 설정 */
+    .menu input {
+        width: 650px;
+        height: 25px;
+        border-radius: 10px;
+    }
+
+    /* 카테고리 */
+    #categories {
+        cursor: pointer;
+        display: flex;
+        width: 110px;
+        justify-content: space-between;
+        margin-left:3%;
+
+    }
+
+    /* 카테고리 부등호 */
+    #categories img {
+        position: relative;
+        top: 4px;
+        left: 5px;
+        transform: rotate(90deg);
+
+    }
+
+    /* 카테고리 테이블 */
+    #categoriesTable {
+        border-top: 1px solid #efebe5;
+        border-bottom: 1px solid #efebe5;
+        display: flex;
+        justify-content: center;
+        background-color: #FFFBF5;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 0;
+        padding-bottom:10px;
+    }
+
+
+    /* 카테고리 td */
+    .ca {
+        font-size: 18px;
+        font-weight: bolder;
+
+    }
+
+    /* 카테고리 td tr */
+    #categoriesTable td,
+    tr {
+        font-size: 16px;
+        padding-left: 200px;
+        height: 50px;
+    }
+
+    ::placeholder {
+        font-weight: 800;
+    }
+
+
+    /* 아이콘 */
+    .iconContainer {
+        display: flex;
+        justify-content: space-around;
+        width: 20%;
+    }
+
+    /* 알람 아이콘 */
+.notification-icon {
+  position: relative;
+  margin-right: 1em;
+  border-radius: 5px;
+}
+/* 알람 갯수 */
+.num-count {
+  position: absolute;
+  user-select: none;
+  cursor: default;
+  font-size: 0.6rem;
+  background: #e74c3c;
+  width: 1.2rem;
+  height: 1.2rem;
+  color: #ecf0f1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  top: -0.33rem;
+  right: -0.66rem;
+  box-sizing: border-box;
+}
+
+/* 알람 내용 */
+.notification-container {
+    background-color: #FFFBF5;
+display: none;
+  cursor: default;
+  position: absolute;
+  z-index: 999;
+  top: 50px;
+  right: 0px;
+  width: 400px;
+  font-weight: 300;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+
+}
+
+.notification {
+  box-sizing: border-box;
+}
+input.checkbox[type=checkbox] {
+  display: none;
+}
+input.checkbox[type=checkbox] + label {
+  display: block;
+}
+/* 알람 세부목록 */
+.notification{
+  height: 3.25rem;
+  padding: 1.125rem 4rem 0.75rem 2rem;
+  font-size: 75%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+/* 알람 목록 */
+.notification-container:before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    right: 0;
+    width: 0;
+    height: 0;
+    transform: translate(-1rem, -100%);
+    border-left: 0.75rem solid transparent;
+    border-right: 0.75rem solid transparent;
+    border-bottom: 0.75rem solid white;
+}
+.footer {
+    width: 100%;
+    flex-direction: column;
+    background-color: #F3EEE6;
+}
+
+.footer div {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    /* padding: 1% 0; */
+}
+
+.footer>div {
+    padding: 1% 0;
+}
+
+.usMenu ul {
+    width: 100%;
+}
+
+.usInfo .copyright {
+    width: 160%;
+    margin-right: auto;
+}
+
+.aside {
+    flex-direction: column;
+    padding-left: 5%;
+}
+
+a {
+    color: inherit;
+
+}
