@@ -9,6 +9,7 @@
     <title>Small us ☺</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/h-header.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/h-main.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mypage/mypage.css">
     <!-- fullcalendar css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>

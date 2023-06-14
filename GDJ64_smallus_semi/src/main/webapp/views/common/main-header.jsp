@@ -8,16 +8,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Small us ☺</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/headr_footer.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/main.css">
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/main.css"> --%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage/mypage.css">
 </head>
 <body id="bodys">
 	<header id="scroll">
 		<div id="headerContainer">
-			<a href=""><img src="./img/main.png" alt="" id="logo"></a>
+			<a href=""><img src="<%=request.getContextPath()%>/img/main.png" alt="" id="logo"></a>
 			<nav class="menu">
 				<div id="categories">
 					<h4>Categories</h4>
-					<img src="./img/부등호.png" alt="" width="12px" height="12px">
+					<img src="<%=request.getContextPath()%>/img/부등호.png" alt="" width="12px" height="12px">
 				</div>
 				<div id="hiddenseach">
 					<form action="http://www.google.co.kr/search" method="get">
@@ -28,19 +29,19 @@
 			</nav>
 			<div class="iconContainer">
 				<div class="icon">
-					<img src="./img/검색.png" alt="" width="25px" height="25px">
+					<img src="<%=request.getContextPath()%>/img/검색.png" alt="" width="25px" height="25px">
 				</div>
 				<div class="icon">
-					<a href="./mypage.html"><img src="./img/마이페이지.png" alt=""
+					<a href="<%=request.getContextPath()%>/mypage.html"><img src="<%=request.getContextPath()%>/img/마이페이지.png" alt=""
 						width="25px" height="25px"></a>
 				</div>
 				<div class="icon">
-					<a href=""><img src="./img/하트.png" alt="" width="25px"
+					<a href=""><img src="<%=request.getContextPath()%>/img/하트.png" alt="" width="25px"
 						height="25px"></a>
 				</div>
 				<div class="notification-icon">
 					<div class="icon">
-						<img src="./img/알림.png" alt="" width="25px" height="25px"> <span
+						<img src="<%=request.getContextPath()%>/img/알림.png" alt="" width="25px" height="25px"> <span
 							class="num-count">13</span>
 					</div>
 

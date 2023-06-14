@@ -175,18 +175,18 @@ button{
 	scroll-snap-type: unset;
 }
 
-li {
+h-img-slider2 {
 	scroll-snap-align: center;
 	display: inline-block;
 	font-size: 0;
     width:480px;
 }
-li img {
+h-img-slider2 img {
     width: 360px;
     height: 500px;
     border-radius: 20px;
 }
-h2 {
+h-h2 {
     width:70%;
     margin: 0 auto;
     font-family: "GmarketSansBold";
