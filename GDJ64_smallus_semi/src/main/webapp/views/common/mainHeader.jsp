@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/headrFooter.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/main.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/mypage/mypage.css">
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
 </head>
 <body id="bodys">
 	<header id="scroll">

@@ -1,4 +1,4 @@
-package com.smallus.member.model.controller;
+package com.smallus.member.controller;
 
 import java.io.IOException;
 
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.smallus.member.model.service.MemberService;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.service.MemberService;
 
 
 /**
  * Servlet implementation class MemberLoginServlet
  */
-@WebServlet("/login/member.do")
+@WebServlet("/member/memberlogin.do")
 public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -70,9 +70,6 @@ public class MemberLoginServlet extends HttpServlet {
 			request.setAttribute("msg","아이디,패스워드가 일치하지 않습니다");
 			request.setAttribute("loc","/");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			
-			
-			
 		}
 	}
 
