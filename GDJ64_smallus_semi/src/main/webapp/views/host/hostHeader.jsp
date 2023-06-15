@@ -16,6 +16,10 @@
     <!-- fullcalendar 언어 설정관련 script -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <!-- 호스트 클래스등록 css 적용(다영) -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClass.css"/>
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClassSchedule.css"/>
 
 </head>
 <body>
@@ -59,7 +63,7 @@
                     </tr>
                     <tr>
                         <td><a href="">프로필 수정</a></td>
-                        <td><a href="">내 클래스 보기</a></td>
+                        <td><a href="<%=request.getContextPath()%>/views/host/hostClassList.jsp">내 클래스 보기</a></td>
                         <td><a href="">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>
                     </tr>
