@@ -59,7 +59,7 @@
                     </tr>
                     <tr>
                         <td><a href="">프로필 수정</a></td>
-                        <td><a href="">내 클래스 보기</a></td>
+                        <td><a href="<%=request.getContextPath()%>/views/host/hostClassList.jsp">내 클래스 보기</a></td>
                         <td><a href="">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>
                     </tr>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
-<div id="mainOpacity">
+<div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container">
 		<div class="slides fade">
@@ -49,16 +49,21 @@
 		<div class="h-banner-container">
 			<div class="h-banner-area">
 				<a href="">
-					<h3>신규 가입 10% 쿠폰 지급</h3>
-					<div></div>
-					<button name="enroll" id="enroll">가입하기</button>
+					<div>
+						<h3>신규 가입 5000원 할인 쿠폰 지급</h3>
+						<button name="enroll" id="enroll">가입하기</button>
+					</div>
+					<img src="<%=request.getContextPath()%>/img/main-banner-coupon.svg">
 				</a>
 			</div>
 			<div class="h-banner-area">
 				<a href="">
-					<h3>small us X KB pay</h3>
-					<div></div>
-					<h5>KB Pay로 10만원 이상 결제 시 5천원 할인</h5>
+					<div>
+						<h3>small us X KB pay</h3>
+						<h5>KB Pay로 10만원 이상 결제 시 5천원 할인</h5>						
+					</div>
+					<!-- 아래 쿠폰 이미지는 결제 수단에 따라 이미지 변경 예정 -->
+					<img src="<%=request.getContextPath()%>/img/main-banner-coupon.svg">
 				</a>
 			</div>
 		</div>
