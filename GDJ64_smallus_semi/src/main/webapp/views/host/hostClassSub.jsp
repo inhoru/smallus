@@ -76,4 +76,3 @@
 		</div>
 	</section>
 <%@ include file="/views/host/hostFooter.jsp"%>
-        
