@@ -5,17 +5,17 @@
 	<!-- main 배너 -->
 	<div class="h-main-slide-container">
 		<div class="slides fade">
-			<img src="./img/main-img1.jpg" style="width: 100%">
+			<img src="<%=request.getContextPath() %>/img/main-img1.jpg" style="width: 100%">
 			<div class="slide-text">나의 첫번째 베이킹</div>
 		</div>
 
 		<div class="slides fade">
-			<img src="./img/main-img2.jpg" style="width: 100%">
+			<img src="<%=request.getContextPath() %>/img/main-img2.jpg" style="width: 100%">
 			<div class="slide-text">Making Soap</div>
 		</div>
 
 		<div class="slides fade">
-			<img src="./img/main-img3.jpg" style="width: 100%">
+			<img src="<%=request.getContextPath() %>/img/main-img3.jpg" style="width: 100%">
 			<div class="slide-text">Bouldering</div>
 		</div>
 

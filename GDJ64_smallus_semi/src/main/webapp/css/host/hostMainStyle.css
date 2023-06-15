@@ -137,8 +137,20 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 .fc-button-active {
 	border-color: #ffc107 !important;
 	background-color: #ffc107 !important;
-	color: #000 !important;
+	color: #555555 !important;
 	font-weight: bold !important;
+}
+.fc-toolbar-chunk:nth-child(2){
+	width:40%;
+	display:flex;
+	justify-content: center;
+}
+.fc-toolbar-chunk:nth-child(2) button{
+	width:3rem;
+	height:3rem;
+}
+.fc-toolbar-chunk:nth-child(2) .fc--button {
+	display:none;
 }
 
 #h-main-calendar button {
