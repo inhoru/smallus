@@ -54,16 +54,18 @@
 
     /* 돋보기 누르면 나오는 검색창 */
     #hiddenseach {
+        margin-bottom: 5px;
+        margin-left: 30%;
         display: none;
-        justify-content: space-evenly;
 
     }
 
     /* 검색창 설정 */
-    .menu input {
+    #hiddenseach input {
         width: 650px;
         height: 25px;
         border-radius: 10px;
+        
     }
 
     /* 카테고리 */
@@ -119,11 +121,17 @@
     }
 
 
-    /* 아이콘 */
+    /*헤더 아이콘 */
     .iconContainer {
         display: flex;
         justify-content: space-around;
-        width: 20%;
+        width: 50%;
+    }
+    .i-loginHeadr{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 46%;
     }
 
     /* 알람 아이콘 */

@@ -28,8 +28,11 @@
 				</div>
 			</nav>
 			<div class="iconContainer">
+			 <div class="i-loginHeadr">
+                    <img src="<%=request.getContextPath()%>/img/mypage/기본프로필.png" alt="" width="30px" height="30px"><span>2_no님</span><a href=""><span>로그아웃</span></a>
+                </div>
 				<div class="icon">
-					<img src="<%=request.getContextPath()%>/img/검색.png" alt="" width="25px" height="25px">
+					<div class="icon"><img src="<%=request.getContextPath()%>/img/검색.png" alt="" width="25px" height="25px" class="i-searchIcon"></div>
 				</div>
 				<div class="icon">
 					<a href="<%=request.getContextPath()%>/mypage.html"><img src="<%=request.getContextPath()%>/img/마이페이지.png" alt=""
