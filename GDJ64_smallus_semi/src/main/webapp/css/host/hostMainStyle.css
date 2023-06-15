@@ -163,10 +163,22 @@ div.h-class-list {
 }
 
 /* class list img */
-div.h-class-list-container{
-	display:flexbox;
+section.h-class-list-container{
+	display:flex;
+	flex-direction: column;
 }
-div.h-class-list>img{
+
+div.h-class-list-rowContainer{
+	display: flex;
+}
+div.h-class-list-rowContainer div:first-child{
+	margin-right: 1%;
+}
+
+div.h-class-list{
+	width:49%;
+}
+div.h-class-list img{
 	width: 7rem;
 	height:7rem;
 	object-fit:cover;
@@ -177,13 +189,16 @@ div.h-class-list>img{
 
 /* class table style*/
 div.h-class-list table{
-	width:85%;
+	width:75%;
 	font-size:0.8rem;
 	margin:1rem auto;
-	border: 0px; 
+	border: 1px; 
 }
 div.h-class-list table tr:nth-child(2)>td,div.h-class-list table tr:first-child>th:first-child,div.h-class-list table tr:nth-child(3)>td:first-child{
 	text-align:left;
+}
+div.h-class-list table tr:nth-child(2)>td{
+	font-size: 1rem;
 }
 /* div.h-class-list table tr:first-child{
 	border-bottom: 1px solid #888888;
@@ -193,15 +208,12 @@ div.h-class-list table td, div.h-class-list table th{
 	border:0px;
 	height:1.8rem;
 }
-div.h-class-list-container button{
-	background-color: #F6E9DF;
+div.h-class-list  button{
+	background-color: #E8D6C3;
 	border:0px;
 	border-radius: 0.7rem;
 	padding: 0.4rem 0.6rem;
 	font-size: 0.8rem;
-}
-div.h-button-container{
-	display: block;
 }
 
 

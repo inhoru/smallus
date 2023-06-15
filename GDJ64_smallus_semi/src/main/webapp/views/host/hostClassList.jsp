@@ -10,117 +10,118 @@
                 <div class="h-viewList"><a href="">+</a></div>
         </div><hr>
         <!-- ajax 통해서 넣을 예약 테이블 -->
-        <div class="h-class-list-container">
-	    	<div class="h-class-list">
-	        	<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
-		        <table>
-		        	<tr>
-		        		<th>승인 상태</th>
-		                <th>판매 상태</th>
-		                <th></th>
-		                <th>클래스 ID</th>
-		            </tr>
-		            <tr>
-		            	<td colspan="4">클래스 이름</td>
-		            </tr>
-		            <tr>
-		            	<td>신청 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            	<td>승인 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            </tr>
-		            <!-- <tr>
-		            	<td></td>
-		            	<td><button>수정</button></td>
-		            	<td><button>삭제</button></td>
-		            	<td><button>더보기</button></td>
-			    	</tr> -->
-				</table>
-				<div class="h-button-container">
-					<button>수정</button>
-					<button>삭제</button>
-					<button>더보기</button>
+        <seciton class="h-class-list-container">
+			<div class="h-class-list-rowContainer">
+				<div class="h-class-list">
+					<a href="">
+						<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
+					</a>
+					<table>
+						<tr>
+							<th>승인 상태</th>
+							<th>판매 상태</th>
+							<th></th>
+							<th>클래스 ID</th>
+						</tr>
+						<tr>
+							<td colspan="4">클래스 이름</td>
+						</tr>
+						<tr>
+							<td>신청 일</td>
+							<td>YYYY-MM-DD</td>
+							<td>승인 일</td>
+							<td>YYYY-MM-DD</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><button>수정</button></td>
+							<td><button>삭제</button></td>
+							<td><button>더보기</button></td>
+						</tr>
+					</table>
+				</div>
+				<div class="h-class-list">
+					<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
+					<table>
+						<tr>
+							<th>승인 상태</th>
+							<th>판매 상태</th>
+							<th></th>
+							<th>클래스 ID</th>
+						</tr>
+						<tr>
+							<td colspan="4">클래스 이름</td>
+						</tr>
+						<tr>
+							<td>신청 일</td>
+							<td>YYYY-MM-DD</td>
+							<td>승인 일</td>
+							<td>YYYY-MM-DD</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><button>수정</button></td>
+							<td><button>삭제</button></td>
+							<td><button>더보기</button></td>
+						</tr>
+					</table>
 				</div>
 			</div>
-			<div class="h-class-list">
-	        	<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
-		        <table>
-		        	<tr>
-		        		<th>승인 상태</th>
-		                <th>판매 상태</th>
-		                <th></th>
-		                <th>클래스 ID</th>
-		            </tr>
-		            <tr>
-		            	<td colspan="4">클래스 이름</td>
-		            </tr>
-		            <tr>
-		            	<td>신청 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            	<td>승인 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            </tr>
-		            <tr>
-		            	<td></td>
-		            	<td><button>수정</button></td>
-		            	<td><button>삭제</button></td>
-		            	<td><button>더보기</button></td>
-			    	</tr>
-				</table>
+			<div class="h-class-list-rowContainer">
+				<div class="h-class-list">
+					<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
+					<table>
+						<tr>
+							<th>승인 상태</th>
+							<th>판매 상태</th>
+							<th></th>
+							<th>클래스 ID</th>
+						</tr>
+						<tr>
+							<td colspan="4">클래스 이름</td>
+						</tr>
+						<tr>
+							<td>신청 일</td>
+							<td>YYYY-MM-DD</td>
+							<td>승인 일</td>
+							<td>YYYY-MM-DD</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><button>수정</button></td>
+							<td><button>삭제</button></td>
+							<td><button>더보기</button></td>
+						</tr>
+					</table>
+				</div>
+				<div class="h-class-list">
+					<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
+					<table>
+						<tr>
+							<th>승인 상태</th>
+							<th>판매 상태</th>
+							<th></th>
+							<th>클래스 ID</th>
+						</tr>
+						<tr>
+							<td colspan="4">클래스 이름</td>
+						</tr>
+						<tr>
+							<td>신청 일</td>
+							<td>YYYY-MM-DD</td>
+							<td>승인 일</td>
+							<td>YYYY-MM-DD</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><button>수정</button></td>
+							<td><button>삭제</button></td>
+							<td><button>더보기</button></td>
+						</tr>
+					</table>
+				</div>
 			</div>
-			<div class="h-class-list">
-	        	<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
-		        <table>
-		        	<tr>
-		        		<th>승인 상태</th>
-		                <th>판매 상태</th>
-		                <th></th>
-		                <th>클래스 ID</th>
-		            </tr>
-		            <tr>
-		            	<td colspan="4">클래스 이름</td>
-		            </tr>
-		            <tr>
-		            	<td>신청 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            	<td>승인 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            </tr>
-		            <tr>
-		            	<td></td>
-		            	<td><button>수정</button></td>
-		            	<td><button>삭제</button></td>
-		            	<td><button>더보기</button></td>
-			    	</tr>
-				</table>
-			</div>
-			<div class="h-class-list">
-	        	<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
-		        <table>
-		        	<tr>
-		        		<th>승인 상태</th>
-		                <th>판매 상태</th>
-		                <th></th>
-		                <th>클래스 ID</th>
-		            </tr>
-		            <tr>
-		            	<td colspan="4">클래스 이름</td>
-		            </tr>
-		            <tr>
-		            	<td>신청 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            	<td>승인 일</td>
-		            	<td>YYYY-MM-DD</td>
-		            </tr>
-		            <tr>
-		            	<td></td>
-		            	<td><button>수정</button></td>
-		            	<td><button>삭제</button></td>
-		            	<td><button>더보기</button></td>
-			    	</tr>
-				</table>
-			</div>
-		</div>
+		</section>
 	</section>
         <!-- host-main-calc -->
         <!-- <section class="h-main">
