@@ -3,13 +3,12 @@
 <%@ include file="/views/host/hostHeader.jsp"%>
 <!--main-->
 <div id="mainOpacity h-host-main">
-	 <section class="h-main h-main-rsvList">
+	 <section class="h-main h-rsv">
      	<div class="h-main-title">
-     		<h2>내 클래스 보기</h2>
+     		<h2>클래스 예약 관리</h2>
      			<!-- 예약 내역 상세 페이지로 이동 -->
-                <div class="h-viewList"><a href="">+</a></div>
+                <!-- <div class="h-viewList"><a href="">+</a></div> -->
         </div><hr>
-        <!-- ajax 통해서 넣을 예약 테이블 -->
         <seciton class="h-class-list-container">
 			<div class="h-class-list-rowContainer">
 				<div class="h-class-list">

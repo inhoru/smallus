@@ -126,13 +126,13 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 	border: 1px solid #444444;
 	height: 2.2rem;
 }
-
+/* host-main-chart style */
 #h-main-chart {
 	margin: 0 auto;
 	width: 100%;
 	height: 500px;
 }
-/*  */
+/* host-main-calendar btn style */
 /*month/week/day*/
 .fc-button-active {
 	border-color: #ffc107 !important;
@@ -163,10 +163,22 @@ div.h-class-list {
 }
 
 /* class list img */
-div.h-class-list-container{
-	display:flexbox;
+section.h-class-list-container{
+	display:flex;
+	flex-direction: column;
 }
-div.h-class-list>img{
+
+div.h-class-list-rowContainer{
+	display: flex;
+}
+div.h-class-list-rowContainer div:first-child{
+	margin-right: 1%;
+}
+
+div.h-class-list{
+	width:49%;
+}
+div.h-class-list img{
 	width: 7rem;
 	height:7rem;
 	object-fit:cover;
@@ -177,31 +189,94 @@ div.h-class-list>img{
 
 /* class table style*/
 div.h-class-list table{
-	width:90%;
+	width:75%;
 	font-size:0.8rem;
 	margin:1rem auto;
-	border: 0px; 
+	border: 1px; 
 }
-div.h-class-list table tr:nth-child(2)>td,div.h-class-list table tr:first-child>th:first-child,div.h-class-list table tr:nth-child(3)>td:first-child{
+div.h-class-list table .h-tbl-align-left{
 	text-align:left;
 }
-/* div.h-class-list table tr:first-child{
-	border-bottom: 1px solid #888888;
-} */
-
+div.h-class-list table tr:nth-child(2)>td{
+	font-size: 1rem;
+}
 div.h-class-list table td, div.h-class-list table th{
 	border:0px;
 	height:1.8rem;
 }
-div.h-class-list-container button{
-	background-color: #F6E9DF;
+/* class sub page*/
+section.h-class-sub h2{
+	margin: 3rem 0 2rem 0;
+}
+section.h-class-sub h3{
+	margin: 1rem 0;
+}
+section.h-class-sub .h-class-list{
+	width:100%;
+	align-items:flex-start;
+}
+/* class subpage - table resize */
+section.h-class-sub .h-class-list table {
+	width:80%;
+	font-size:1rem;
+}
+section.h-class-sub .h-class-list table *{
+	height:2rem;
+	text-align: left;
+}
+/* class subpage - img resize */
+section.h-class-sub .h-class-list img{
+	width:12rem;
+	height:12rem;
+	margin-right:3rem;
+}
+/* table 안의 className에 bold 속성 */
+table .h-tbl-className{
+	font-weight:bold;
+}
+/* .h-class-list 내부 button container  */
+div.h-class-list div{
+	margin: auto 0 2rem 3rem;
+	flex-direction:row;
+	width:20%;
+	justify-content: space-around;
+}
+div.h-class-detail>div{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+/* .h-class-sub page 내부 button style */
+div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button{
+	margin-left:2rem;
+	width:4rem;
+	font-weight: bold;
+	background-color: #E8D6C3;
 	border:0px;
-	border-radius: 0.7rem;
+	border-radius: 1rem;
 	padding: 0.4rem 0.6rem;
 	font-size: 0.8rem;
 }
-div.h-button-container{
-	display: block;
+/* CLASS SUB-PAGE */
+.h-insert-class-detail {
+	font-size: 2rem;
+}
+/* class-sub page> h-class-detail */
+div.h-class-detail table td, div.h-class-detail table th{
+	height:2.5rem;
+}
+/* th 아래 밑줄 */
+div.h-class-detail>table th{
+	border-bottom: 1px solid #E8D6C3;
+}
+/* table 첫번째 align-left */
+div.h-class-detail>table tr>th:first-child,  div.h-class-detail>table tr>td:first-child{
+	text-align: left;
+}
+/* 삭제 btn align:right */
+div.h-class-detail table .h-class-tbl-btn{
+	text-align: right;
 }
 
 
