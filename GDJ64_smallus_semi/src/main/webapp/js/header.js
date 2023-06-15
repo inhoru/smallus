@@ -60,8 +60,8 @@ $(document).ready(() => {
 
 //카테고리 클릭시 열리고 닫히고 
 $("#categories").click(() => {
-    $("#categoriesTable").slideToggle(500)
-    
+	//$("#categoriesTable").css("display","block");
+    $("#categoriesTable").slideToggle(500);    
 });
 
 //카테고리 열었을때 다른곳을 클릭해도 닫힘
@@ -72,7 +72,6 @@ $(document).click((e) => {
     const isClickedInsideCategories = categories[0].contains(e.target);
     const isClickedInsideTable = categoriesTable[0].contains(e.target);
     const isnotification=document.getElementsByClassName("notification")[0];
-    console.log(isnotification)
 
     if (isCategoriesTableVisible && !isClickedInsideCategories && !isClickedInsideTable) {
         categoriesTable.slideUp(500);

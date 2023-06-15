@@ -1,19 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.smallus.member.model.vo.Member"%>
-<%
-Member loginMember = (Member) session.getAttribute("loginMember");
-Cookie[] cookies = request.getCookies();
-String saveId = null;
-if (cookies != null) {
-	for (Cookie c : cookies) {
-		if (c.getName().equals("saveId")) {
-	saveId = c.getValue();
-	break;
-		}
-	}
-}
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,12 +32,7 @@ if (cookies != null) {
 			</nav>
 			<div class="iconContainer">
 				<div class="i-loginHeadr">
-					<%
-					if (loginMember == null) {
-					%>
-					
-						<span></span><a
-							href=""><span></span></a>
+						<span></span><a href=""><span></span></a>
 					</div>
 					<div class="icon">
 						<img src="<%=request.getContextPath()%>/img/검색.png" alt=""
@@ -101,83 +82,14 @@ if (cookies != null) {
                                         <span class="i-notType">1:1문의</span>
                                         <a href="">결제오류에대한문의에대한 답변이등록되었습니다.</a></label>
                                         </div>
-                                </p>
 
 							</div>
 						</div>
 					</div>
-						<%
-						} else {
-						%>
-
-						<img src="<%=request.getContextPath()%>/img/mypage/기본프로필.png"
-							alt="" width="30px" height="30px"><span><%=loginMember.getMemberName() %>님</span><a
-							href="<%=request.getContextPath()%>/logout.do"><span>로그아웃</span></a>
-					</div>
-					<div class="icon">
-						<img src="<%=request.getContextPath()%>/img/검색.png" alt=""
-							width="25px" height="25px" class="i-searchIcon">
-					</div>
-					<div class="icon">
-						<a href="<%=request.getContextPath()%>/memberMypage.do"><img
-							src="<%=request.getContextPath()%>/img/마이페이지.png" alt=""
-							width="25px" height="25px"></a>
-					</div>
-					<div class="icon">
-						<a href=""><img src="<%=request.getContextPath()%>/img/하트.png"
-							alt="" width="25px" height="25px"></a>
-					</div>
-
-
-					<div class="notification-icon">
-						<div class="icon i-noticon">
-							<img src="<%=request.getContextPath()%>/img/알림.png" alt=""
-								width="25px" height="25px"> <span class="num-count">13</span>
-						</div>
-						 <div class="notification-container">
-                        <div class="scroll-snap-card">
-                            <div class="slide">
-                                <p class="tip">
-                                    <div class="i-notifcationTotal">
-                                        <input class="checkbox" type="checkbox" id="size_2" value="small" checked /> <label
-                                        class="notification" for="size_2"><span>2023-06-15</span>
-                                        <br />
-                                        <span class="i-notType">Q&A</span>
-                                        <a href="">결제오류에대한문의에대한 답변이등록되었습니다.</a></label>
-                                        <input class="checkbox" type="checkbox" id="size_3" value="small" checked /> <label
-                                        class="notification" for="size_3"><span>2023-06-15</span>
-                                        <br />
-                                        <span class="i-notType">클래스</span>
-                                        <a href="">결제오류에대한문의에대한 답변이등록되었습니다.</a></label>
-                                        <input class="checkbox" type="checkbox" id="size_4" value="small" checked /> <label
-                                        class="notification" for="size_4"><span>2023-06-15</span>
-                                        <br />
-                                        <span class="i-notType">클래스</span>
-                                        <a href="">결제오류에대한문의에대한 답변이등록되었습니다.</a></label>
-                                        <input class="checkbox" type="checkbox" id="size_5" value="small" checked /> <label
-                                        class="notification" for="size_5"><span>2023-06-15</span>
-                                        <br />
-                                        <span class="i-notType">리뷰</span>
-                                        <a href="">결제오류에대한문의에대한 답변이등록되었습니다.</a></label>
-                                        <input class="checkbox" type="checkbox" id="size_6" value="small" checked /> <label
-                                        class="notification" for="size_6"><span>2023-06-15</span>
-                                        <br />
-                                        <span class="i-notType">1:1문의</span>
-                                        <a href="">결제오류에대한문의에대한 답변이등록되었습니다.</a></label>
-                                        </div>
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-  
-
-					<%
-					}
-					%>
 				</div>
 			</div>
 
+			</div>
 			<table id="categoriesTable">
 				<tr>
 					<td class="ca">요리</td>
