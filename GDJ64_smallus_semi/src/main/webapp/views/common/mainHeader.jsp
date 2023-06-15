@@ -1,18 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.smallus.member.model.vo.Member"%>
+<%@ page import="com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host"%>
 <%
-Member loginMember = (Member) session.getAttribute("loginMember");
-Cookie[] cookies = request.getCookies();
-String saveId = null;
-if (cookies != null) {
-	for (Cookie c : cookies) {
-		if (c.getName().equals("saveId")) {
-	saveId = c.getValue();
-	break;
+	Member loginMember = (Member) session.getAttribute("loginMember");
+	Host loginHost=(Host)session.getAttribute("loginHost");
+	Cookie[] cookies = request.getCookies();
+	String saveId = null;
+	String savehostId=null;
+	if (cookies != null) {
+		for (Cookie c : cookies) {
+			if (c.getName().equals("saveId")) {
+				saveId = c.getValue();
+			}
+			if(c.getName().equals("savehostId")){
+				savehostId=c.getValue();
+			}
 		}
 	}
-}
 %>
 <!DOCTYPE html>
 <html>

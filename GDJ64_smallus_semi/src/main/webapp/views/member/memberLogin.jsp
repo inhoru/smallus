@@ -1,20 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/views/common/mainHeader.jsp" %>
-<%@ page import="com.smallus.member.model.vo.Member" %>    
-<%
-	Member loginMember=(Member)session.getAttribute("loginMember");
-	Cookie[] cookies=request.getCookies();
-	String saveId=null;
-	if(cookies!=null){
-		for(Cookie c : cookies){
-			if(c.getName().equals("saveId")){
-				saveId=c.getValue();
-				break;
-			}
-		}
-	}
-%>
+<%@ include file="/views/common/mainHeader.jsp" %>   
 <body>
 <div id="m-bodycontainer">
 	<h1>로그인</h1>
