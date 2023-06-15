@@ -71,15 +71,19 @@ $(document).click((e) => {
     const isCategoriesTableVisible = categoriesTable.is(":visible");
     const isClickedInsideCategories = categories[0].contains(e.target);
     const isClickedInsideTable = categoriesTable[0].contains(e.target);
+    const isnotification=document.getElementsByClassName("notification")[0];
+    console.log(isnotification)
 
     if (isCategoriesTableVisible && !isClickedInsideCategories && !isClickedInsideTable) {
         categoriesTable.slideUp(500);
     }
 });
 // 알람
-$(".notification-icon").on("click", e => {
-    $(".notification-container").slideToggle(300)
+$(".i-noticon").on("click", e => {
+    $(".notification-container").slideToggle(300);
+    
 });
+
   
 
   

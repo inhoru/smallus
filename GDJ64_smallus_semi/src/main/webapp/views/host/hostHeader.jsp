@@ -27,8 +27,7 @@
         <div id="headerContainer">
             <a href="/"><img src="<%=request.getContextPath() %>/img/main.png" alt="" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/마이페이지.png" alt="" >alter 님</a>
-                <!-- <div class="icon"><a href=""><img src="./img/마이페이지.png" alt="" width="25px" height="25px"></a></div>  -->
+                <a href="" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" >alter 님</a>
                 <a href="" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">

@@ -66,23 +66,19 @@
         width: 30%;
         margin-left: 70%;
         align-items: center;
-        border: 1px solid red;
-
     }
 
     .h-iconContainer>a {
         font-size: 1rem;
-        height:2rem;
         align-items: center;
-        border: 1px solid red;
+        margin: 0 auto;
     }
 
     /* 알람 아이콘 */
     .h-notification-icon {
         position: relative;
-        margin-right: 1em;
+        margin: 0 1em;
         align-items: center;
-        border: 1px solid red;
         width:2rem;
         height:2rem;
     }
