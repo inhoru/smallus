@@ -18,7 +18,7 @@
 			<table>
 				<tr>
 					<th>아이디</th>
-					<td><label for=""><input type="text" placeholder="id" value="<%=loginHost.getHostId()%>" readonly></label</td>
+					<td><label for=""><input type="text" placeholder="id" value="<%=loginHost.getHostId()%>" readonly></label></td>
 					<td></td>
 				</tr>
 				<tr>

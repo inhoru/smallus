@@ -1,89 +1,77 @@
-
+//검색창 상태 열린상태 true/닫힌상태 false
+let isSearchFieldActive = false;
 // 검색아이콘 클릭시 발생하는 이벤트
-const $img = document.getElementsByClassName("i-searchIcon")[0];
-let isToggled = false;
+$(".i-searchIcon").click((e) => {
+  const icon = $(".i-iconinfo");
+  const searchField = $(".search");
+  const categories = $("#categories");
+  const form = $("form"); 
 
-$img.addEventListener("click", e => {
-    const nav = document.querySelector("#headerContainer #categories");
-    const nav1 = document.getElementById("hiddenseach");
-    const icon = document.querySelector(".iconContainer").children;
-    const icon2 = document.querySelector(".iconContainer>.icon>input");
-    const searchField = document.getElementById("search");
-    const bodys = document.getElementById("mainOpacity");
-    const searchForm = document.querySelector("#hiddenseach form");
-    const loginHeadr=document.getElementsByClassName("i-loginHeadr")[0];
+  if (isSearchFieldActive) {
+    form.submit();  // 폼을 제출하여 검색을 실행합니다.
+    return;
+  }
 
-    
-    if (isToggled) {
-        searchForm.submit();
-    } else {
-        $img.style.transform = "translateX(-105px)";
-        $img.style.transition = "0.7s";
-        nav.style.display = "none";
-        nav1.style.display = "flex";
-        bodys.style.opacity = "0.5";
-        searchField.value = "";
-        searchField.focus();
-        loginHeadr.style.visibility="hidden";  
+  icon.css("visibility", "hidden");
+  searchField.css("display", "flex");
+  categories.css("visibility", "hidden");
+  $(".i-searchIcon").css("transform", "translateX(-115px)");
+  $(".i-searchIcon").css("transition", "0.7s");
+  $("#mainOpacity").css("opacity", "0.5");
+
+   searchField.focus();
+  isSearchFieldActive = true; 
+
+  // 다른 곳 클릭 시 검색창과 아이콘을 되돌림
+  $(document).one("click", (e) => {
+    const clickedInsideSearchIcon = $(e.target).hasClass("i-searchIcon");
+    const clickedInsideSearchField = $(e.target).is(".search");
+    const searchContainer = $(".iconContainer");
+
+    if (!clickedInsideSearchIcon && !clickedInsideSearchField && !searchContainer.has(e.target).length) {
+      icon.css("visibility", "visible");
+      searchField.css("display", "none");
+      categories.css("visibility", "visible");
+      $(".i-searchIcon").css("transform", "translateX(0)");
+      $(".i-searchIcon").css("transition", "0.4s");
+      $("#mainOpacity").css("opacity", "1.0");
+       isSearchFieldActive = false;
+       searchField.val(""); 
     }
-    isToggled = !isToggled;
+  });
+
+  // 이벤트 전파 방지
+  e.stopPropagation();
 });
 
-// 검색창 활성화 상태에서 다른곳 클릭시 다시돌아가는 이벤트
-document.addEventListener("click", function (e) {
-    const searchIcon = document.getElementsByClassName("icon")[0];
-    const clickedInsideSearch = searchIcon.contains(e.target);
-    const searchField = document.getElementById("search");
-    const clickedInsideField = searchField.contains(e.target);
-    const loginHeadr=document.getElementsByClassName("i-loginHeadr")[0];
-    if (!clickedInsideSearch && !clickedInsideField && isToggled) {
-        const nav = document.querySelector("#headerContainer #categories");
-        const nav1 = document.getElementById("hiddenseach");
-        const icon = document.querySelector(".iconContainer").children;
-        const bodys = document.getElementById("mainOpacity");
-
-        $img.style.transform = "translateX(0px)";
-        $img.style.transition = "0.4s";
-        nav.style.display = "";
-        nav1.style.display = "";
-        bodys.style.opacity = "";
-        searchField.value = "";
-        loginHeadr.style.visibility="";
-        isToggled = false;
-    }
-});
-
-//카테고리 숨긴상태로 시작
+// 카테고리 숨긴 상태로 시작
 $(document).ready(() => {
-    $("#categoriesTable").hide();
+  $("#categoriesTable").hide();
 });
 
-//카테고리 클릭시 열리고 닫히고 
+// 카테고리 클릭시 열리고 닫히는 이벤트
 $("#categories").click(() => {
-	//$("#categoriesTable").css("display","block");
-    $("#categoriesTable").slideToggle(500);    
+  $("#categoriesTable").slideToggle(500);
 });
 
-//카테고리 열었을때 다른곳을 클릭해도 닫힘
+// 카테고리 열었을 때 다른 곳을 클릭해도 닫힘
 $(document).click((e) => {
-    const categoriesTable = $("#categoriesTable");
-    const categories = $("#categories");
-    const isCategoriesTableVisible = categoriesTable.is(":visible");
-    const isClickedInsideCategories = categories[0].contains(e.target);
-    const isClickedInsideTable = categoriesTable[0].contains(e.target);
-    const isnotification=document.getElementsByClassName("notification")[0];
+  const categoriesTable = $("#categoriesTable");
+  const categories = $("#categories");
+  const isCategoriesTableVisible = categoriesTable.is(":visible");
+  const isClickedInsideCategories = categories[0].contains(e.target);
+  const isClickedInsideTable = categoriesTable[0].contains(e.target);
 
-    if (isCategoriesTableVisible && !isClickedInsideCategories && !isClickedInsideTable) {
-        categoriesTable.slideUp(500);
-    }
+  if (isCategoriesTableVisible && !isClickedInsideCategories && !isClickedInsideTable) {
+    categoriesTable.slideUp(500);
+  }
 });
+
 // 알람
-$(".i-noticon").on("click", e => {
-    $(".notification-container").slideToggle(300);
-    
+$(".i-noticon").on("click", () => {
+  $(".notification-container").slideToggle(300);
 });
-
-  
-
-  
-  
+//비로그인시 마이페이지 클릭시 생기는 로그인창
+$(".i-loginPage").on("click",()=>{
+  $(".i-loginMove").slideToggle(300);
+})
