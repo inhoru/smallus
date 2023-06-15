@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.smallus.host.model.vo.Host"%>
+<%
+	Host loginHost=(Host)session.getAttribute("loginHost");
+	Cookie[] cookies = request.getCookies();
+	String savehostId=null;
+	if (cookies != null) {
+		for (Cookie c : cookies) {
+			if(c.getName().equals("savehostId")){
+				savehostId=c.getValue();
+			}
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,15 +33,14 @@
     <!-- 호스트 클래스등록 css 적용(다영) -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClass.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClassSchedule.css"/>
-
 </head>
 <body>
     <header>
         <div id="headerContainer">
-            <a href="/"><img src="<%=request.getContextPath() %>/img/main.png" alt="" id="logo"></a>
+            <a href="<%=request.getContextPath()%>/host/moveHostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" >alter 님</a>
-                <a href="" class="h-logout">로그아웃</a>
+                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
+                <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
                         <span class="h-num-count">13</span>
@@ -61,7 +73,7 @@
                         <th>고객 센터</th>
                     </tr>
                     <tr>
-                        <td><a href="">프로필 수정</a></td>
+                        <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
                         <td><a href="<%=request.getContextPath()%>/views/host/hostClassList.jsp">내 클래스 보기</a></td>
                         <td><a href="">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>

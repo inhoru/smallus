@@ -261,7 +261,7 @@ div.h-class-detail>div{
 	align-items: center;
 }
 /* .h-class-sub page 내부 button style */
-div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button{
+div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, .h-profile button{
 	margin-left:2rem;
 	width:4rem;
 	font-weight: bold;
@@ -293,3 +293,38 @@ div.h-class-detail table .h-class-tbl-btn{
 }
 
 
+/* host-profile page */
+section.h-profile{
+	width:50%;
+	margin: 3rem auto;
+}
+
+section.h-profile .h-edit-pf{
+	width:2.5rem;
+	height:2.5rem;
+	padding: 0.1rem;
+	background-color: #ffffff;
+	border-radius: 10rem;
+	border: 1px solid #555555;
+	position: relative;
+	left:-3rem;
+}
+.h-profile-info {
+	width:100%;
+}
+.h-profile-info table{
+	margin: 8rem 0;
+	border: 1px solid red;
+}
+.h-profile-info table *{
+	height:2rem;
+	margin: 0.5rem 0;
+}
+.h-profile-info>table input{
+	width:35rem;
+	border-radius: 2rem;
+	padding: 0 1rem;
+}
+button.h-submit{
+	margin-left: auto;
+}

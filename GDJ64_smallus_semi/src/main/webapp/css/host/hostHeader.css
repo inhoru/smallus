@@ -34,7 +34,6 @@
     header {
         background-color: #FFFBF5;
         width: 100%;
-        box-shadow: 0 12px rgba(0, 0, 0, 0.3);
     }
 
     .icon :first-child {
@@ -48,14 +47,20 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
+        height: auto;
         
     }
-
+	 #headerContainer>a{
+	 	margin:0;
+	 	padding:0;
+	 	height: auto;
+	 }
     /* 로고 */
     #logo {
         width: 90px;
-        height: 60px;
-        padding: 5px 0 5px 0;
+        /* height: 60px; */
+        padding: 0.5rem 0;
+        border: 1px solid red;
     }
 
 
@@ -155,7 +160,7 @@
     }
 
     .h-move-mypage {
-        width: 10rem;
+        width: auto;
         height: auto;
         align-items: center;
         display: flex;
