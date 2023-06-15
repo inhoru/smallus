@@ -15,7 +15,7 @@
         </section>
         <section class="h-main h-main-rsvList">
             <div>
-                <div class="h-main-title">
+                <div class="h-main-title"> 
                     <h2>새로운 예약 내역</h2>
                     <!-- 예약 내역 상세 페이지로 이동 -->
                     <div class="h-viewList"><a href="">+</a></div>

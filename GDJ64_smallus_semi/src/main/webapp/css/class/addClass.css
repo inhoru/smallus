@@ -1,0 +1,56 @@
+
+
+#d-addClass {
+	width: 70%;
+	margin: 0 auto;
+}
+
+#d-addClass #inputs {
+	margin: 50px;
+}
+
+#d-addClass select {
+	width: 100px;
+	height: 30px;
+	margin: 5px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+}
+
+#d-addClass input {
+	width: 400px;
+	height: 30px;
+	margin: 7px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+}
+
+#d-addClass>button {
+	width: 150px;
+	height: 30px;
+	border-radius: 20px;
+	/* color:#595959; */
+	background-color: #E8D6C3;
+	margin-left: 500px;
+	/* display:flex;
+                    justify-content: center; */
+	/* border:0px; */
+	/* 테가 없어지면 버튼 누르는 효과가 사라짐 */
+}
+
+#d-addClass #inputs button {
+	width: 100px;
+	height: 30px;
+	border-radius: 20px;
+	/* color:#595959; */
+	background-color: #F8D8D8;
+	/* border:0px; */
+}
+
+#d-addClass #inputs textarea {
+	border: 2px solid #595959;
+	border-radius: 20px;
+}
+#inputs img:hover{
+	cursor:pointer;
+} /* 적용안됨.. */
