@@ -1,0 +1,186 @@
+/*폰트 */
+@font-face {
+	font-family: "GmarketSansLight";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "GmarketSansMedium";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "GmarketSansBold";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+hr {
+	margin: 1rem auto;
+}
+/* img slide */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #FFFCF5;
+}
+
+#mainOpacity {
+	background-color: #FFFCF5;
+}
+
+
+/* host-main */
+/* host-menu */
+	div.m-navContainer{    
+	width: 100%;
+    text-align: center;
+    table-layout: fixed;
+    background-color: #FDF7E8;}
+    table.m-nav{
+  	width: 50%;
+    margin: auto;
+    }
+    table.m-nav th{
+    font-size:18px;
+    font-weight:boler;
+    }
+    table.m-nav td{
+    font-size:18px;
+    }
+
+section.h-menu {
+	width: 100%;
+	background-color: #FDF7E8;
+}
+
+section.h-menu>div {
+	width: 70%;
+	margin: 0 auto;
+	display: flex;
+}
+
+section.h-menu>div table {
+	width: 100%;
+	text-align: center;
+	padding: 1rem 0;
+}
+
+section.h-menu>div table * {
+	height: 2rem;
+	font-size: 0.9rem;
+}
+
+section.h-menu>div table th {
+	font-size: 1rem;
+	font-family: "GmarketSansBold";
+}
+
+section.h-menu>div table a:hover {
+	font-family: "GmarketSansBold";
+	border-bottom: 1px solid #555555;
+}
+
+/* host-main section*/
+    div.m-memberListContainer{
+   	display:flex;
+   	justify-content:space-evenly;
+    }
+    table.m-memberList{
+
+   	width: 100%;
+    margin: auto;
+    }
+
+
+
+section.h-main {
+	width: 70%;
+	margin: 2rem auto;
+}
+/* host-main-title */
+div.h-main-title {
+	margin-top: 4rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+div.h-main-title h2 {
+	width: 100%;
+	margin: 0 auto;
+}
+/* + button */
+div.h-viewList {
+	margin-left: auto;
+	font-size: 2rem;
+	font-family: "GmarketSansBold";
+	width: 2rem;
+	height: 2rem;
+	font-weight: bolder;
+}
+/* host class list page */
+div.h-class-list {
+	width:50%;
+	border-top:1px solid #F6E9DF;
+	border-bottom:1px solid #F6E9DF;
+	/* border-radius:1rem; */
+	display:flex;
+	align-items: center;
+}
+
+/* class list img */
+div.h-class-list-container{
+	display:flexbox;
+}
+div.h-class-list>img{
+	width: 7rem;
+	height:7rem;
+	object-fit:cover;
+	margin:1rem 1rem 1rem 0;
+	display:flex;
+	border-radius: 0.5rem;
+}
+
+/* class table style*/
+div.h-class-list table{
+	width:90%;
+	font-size:0.8rem;
+	margin:1rem auto;
+	border: 0px; 
+}
+div.h-class-list table tr:nth-child(2)>td,div.h-class-list table tr:first-child>th:first-child,div.h-class-list table tr:nth-child(3)>td:first-child{
+	text-align:left;
+}
+/* div.h-class-list table tr:first-child{
+	border-bottom: 1px solid #888888;
+} */
+
+div.h-class-list table td, div.h-class-list table th{
+	border:0px;
+	height:1.8rem;
+}
+div.h-class-list-container button{
+	background-color: #F6E9DF;
+	border:0px;
+	border-radius: 0.7rem;
+	padding: 0.4rem 0.6rem;
+	font-size: 0.8rem;
+}
+div.h-button-container{
+	display: block;
+}
