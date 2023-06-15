@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <h2 class="i-reservationh2">예약내역</h2>
+            <h1 class="i-reservationh2">예약내역</h1>
             <div id="i-reservation">
                 <input type="radio" name="slide" id="slide01" checked>
                 <input type="radio" name="slide" id="slide02">
@@ -175,7 +175,7 @@
                 </ul>
             </div>
 
-            <h2 class="i-wishListh2">찜</h2>
+            <h1 class="i-wishListh2">찜</h1>
             <div class="i-wishList">
                 <input type="radio" name="wishslide" id="wishListSlide01" checked>
                 <input type="radio" name="wishslide" id="wishListSlide02">
