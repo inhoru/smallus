@@ -157,12 +157,13 @@
   top: -0.33rem;
   right: -0.66rem;
   box-sizing: border-box;
+  
 }
 
 /* 알람 내용 */
 .notification-container {
     background-color: #FFFBF5;
-display: none;
+  display: none;
   cursor: default;
   position: absolute;
   z-index: 999;
@@ -173,30 +174,45 @@ display: none;
   border-radius: 0.5rem;
   box-sizing: border-box;
   box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+  
 
 }
 
 .notification {
   box-sizing: border-box;
 }
-input.checkbox[type=checkbox] {
-  display: none;
-}
-input.checkbox[type=checkbox] + label {
-  display: block;
-}
+
 /* 알람 세부목록 */
-.notification{
+.notification {
   height: 3.25rem;
-  padding: 1.125rem 4rem 0.75rem 2rem;
-  font-size: 75%;
+  padding: 0.5rem 0.5rem 2.0rem 2.0rem;
+  font-size: 70%;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  
 }
+/* 알람 내용  */
+.notification span{
+margin: 2%;
+position: relative;
+bottom: 5px;
+}
+/* 알림타입 내용 */
+.notification .i-notType{
+position: relative;
+top:0px;
+ }
+    
+
+
 /* 알람 목록 */
-.notification-container:before {
+.notification-container::before {
     content: "";
     position: absolute;
-    top: 1px;
+    top: px;
     right: 0;
     width: 0;
     height: 0;
@@ -204,11 +220,64 @@ input.checkbox[type=checkbox] + label {
     border-left: 0.75rem solid transparent;
     border-right: 0.75rem solid transparent;
     border-bottom: 0.75rem solid white;
+    
+    
 }
+/* 알람타입 */
+.notification span{
+    font-weight: 900;
+    color: black;
+    
+    
+    
+}
+/* 알람스크롤 */
+.scroll-snap-card {
+  margin-bottom: 2%;
+  height: 200px;
+  overflow: scroll;
+  border-radius: 10px;
+}
+/* 알람스크롤바없애기 */
+.scroll-snap-card::-webkit-scrollbar {
+  display: none; 
+}
+/* 알림 체크박스 */
+input.checkbox[type=checkbox] {
+    display: none;
+  }
+  /* 알람체크박스2 */
+  input.checkbox[type=checkbox] + label {
+    display: block;
+  }
+
+
+ /* 삭제 체크박스 */
+  input.checkbox[type=checkbox]:not(:checked) + label {
+    transition: height 0.25s;
+    height: 0;
+    padding: 0;
+    font-size: 0;
+    border: none;
+  }
+  /* 삭제체크박스 숨김 */
+  input.checkbox[type=checkbox]:not(:checked) + label * {
+    display: none;
+  }
+  /* 삭제후 사라지는애니메이션 */
+  input.checkbox[type=checkbox]:checked + label {
+    height: 3.25rem;
+    padding: 1.125rem 4rem 0.75rem 2rem;
+    font-size: 75%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
 .footer {
     width: 100%;
     flex-direction: column;
     background-color: #F3EEE6;
+    
+    
 }
 
 .footer div {
@@ -240,3 +309,7 @@ a {
     color: inherit;
 
 }
+  
+
+  
+  
