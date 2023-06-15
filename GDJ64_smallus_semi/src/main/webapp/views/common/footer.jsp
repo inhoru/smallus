@@ -4,7 +4,7 @@
 	<div class="footer">
 		<div class="usMenu">
 			<ul>
-				<li><a href="">Host Center</a></li>
+				<li><a href="<%=request.getContextPath()%>/views/member/hostLogin.jsp">호스트 로그인</a></li>
 				<li><a href="">Host Center</a></li>
 				<li><a href="">Host Center</a></li>
 			</ul>
