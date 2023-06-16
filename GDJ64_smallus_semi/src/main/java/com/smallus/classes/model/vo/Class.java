@@ -1,4 +1,4 @@
-package com.smallus;
+package com.smallus.classes.model.vo;
 
 import java.util.Date;
 
