@@ -21,113 +21,51 @@
 					<a href="<%=request.getContextPath()%>/views/host/hostClassSub.jsp">
 						<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
 					</a>
-					<!-- <table>
-						<tr>
-							<th class="h-tbl-align-left">승인 상태</th>
-							<th>판매 상태</th>
-							<th></th>
-							<th>클래스 ID</th>
-						</tr>
-						<tr>
-							<td class="h-tbl-align-left" colspan="4">클래스 이름</td>
-						</tr>
-						<tr>
-							<td class="h-tbl-align-left">신청 일</td>
-							<td>YYYY-MM-DD</td>
-							<td>승인 일</td>
-							<td>YYYY-MM-DD</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><button>수정</button></td>
-							<td><button>삭제</button></td>
-							<td><button>더보기</button></td>
-						</tr>
-					</table>
-				</div>
-				<div class="h-class-list">
-					<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
-					<table>
-						<tr>
-							<th>승인 상태</th>
-							<th>판매 상태</th>
-							<th></th>
-							<th>클래스 ID</th>
-						</tr>
-						<tr>
-							<td colspan="4">클래스 이름</td>
-						</tr>
-						<tr>
-							<td>신청 일</td>
-							<td>YYYY-MM-DD</td>
-							<td>승인 일</td>
-							<td>YYYY-MM-DD</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><button>수정</button></td>
-							<td><button>삭제</button></td>
-							<td><button>더보기</button></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			<div class="h-class-list-rowContainer">
-				<div class="h-class-list">
-					<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
-					<table>
-						<tr>
-							<th>승인 상태</th>
-							<th>판매 상태</th>
-							<th></th>
-							<th>클래스 ID</th>
-						</tr>
-						<tr>
-							<td colspan="4">클래스 이름</td>
-						</tr>
-						<tr>
-							<td>신청 일</td>
-							<td>YYYY-MM-DD</td>
-							<td>승인 일</td>
-							<td>YYYY-MM-DD</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><button>수정</button></td>
-							<td><button>삭제</button></td>
-							<td><button>더보기</button></td>
-						</tr>
-					</table>
-				</div>
-				<div class="h-class-list">
-					<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
-					<table>
-						<tr>
-							<th>승인 상태</th>
-							<th>판매 상태</th>
-							<th></th>
-							<th>클래스 ID</th>
-						</tr>
-						<tr>
-							<td colspan="4">클래스 이름</td>
-						</tr>
-						<tr>
-							<td>신청 일</td>
-							<td>YYYY-MM-DD</td>
-							<td>승인 일</td>
-							<td>YYYY-MM-DD</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><button>수정</button></td>
-							<td><button>삭제</button></td>
-							<td><button>더보기</button></td>
-						</tr>
-					</table> -->
+					
 				</div>
 			</div>
 		</section>
 	</section>
+	<section class="h-main h-main-rsvList">
+            <div>
+                <div class="h-main-title"> 
+                    <h2>새로운 예약 내역</h2>
+                    <!-- 예약 내역 상세 페이지로 이동 -->
+                    <div class="h-viewList"><a href="">+</a></div>
+                </div>
+                <hr>
+                <!-- ajax 통해서 넣을 예약 테이블 -->
+                <table>
+                    <tr>
+                        <th>NO</th>
+                        <th>클래스 이름</th>
+                        <th>날짜</th>
+                        <th>시간</th>
+                        <th>예약 인원</th>
+                        <th>잔여 인원</th>
+                        <th>예약자 이름</th>
+                    </tr>
+                    <tr>
+                        <td>r202306130751</td>
+                        <td>구움과자 어쩌구</td>
+                        <td>2023-05-18</td>
+                        <td>15:00 - 17:00</td>
+                        <td>1명</td>
+                        <td>1명</td>
+                        <td>최*호</td>
+                    </tr>
+                    <tr>
+                        <td>r202306130751</td>
+                        <td>구움과자 어쩌구</td>
+                        <td>2023-05-18</td>
+                        <td>15:00 - 17:00</td>
+                        <td>1명</td>
+                        <td>1명</td>
+                        <td>최*호</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
@@ -178,4 +116,6 @@
       }
     </script>        
 <%@ include file="/views/host/hostFooter.jsp"%>
+
+
         
