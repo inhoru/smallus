@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="/views/common/mainHeader.jsp"%>
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/category/category.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>./css/category/category.css"/>
     <div style="text-align: center;" id="img">
         <img src="<%=request.getContextPath()%>/img/category_main/craft1.jpg" alt="re1" width="1300px" height="600px" title="내 손으로 작은 바...">
     </div>
