@@ -39,7 +39,7 @@
         <div id="headerContainer">
             <a href="<%=request.getContextPath()%>/host/moveHostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostName() %>님</a>
+                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
@@ -75,7 +75,7 @@
                     <tr>
                         <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
                         <td><a href="<%=request.getContextPath()%>/views/host/hostClassList.jsp">내 클래스 보기</a></td>
-                        <td><a href="">클래스 예약 관리</a></td>
+                        <td><a href="<%=request.getContextPath()%>/views/host/hostReservation.jsp">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>
                     </tr>
                     <tr>
