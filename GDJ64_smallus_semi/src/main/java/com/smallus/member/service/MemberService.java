@@ -1,10 +1,10 @@
-package com.smallus.member.model.service;
+package com.smallus.member.service;
 
 import static com.smallus.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
-import com.smallus.member.model.dao.MemberDao;
+import com.smallus.member.dao.MemberDao;
 import com.smallus.member.model.vo.Member;
 
 public class MemberService {
@@ -16,5 +16,10 @@ public class MemberService {
 		close(conn);
 		return m; 
 	}
-
+	public int enrollMember(Member m) {
+		Connection conn=getConnection();
+		int result=dao.enrollMember(conn,m);
+		close(conn);
+		return result;
+	}
 }

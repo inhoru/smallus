@@ -1,4 +1,4 @@
-package com.smallus.member.model.dao;
+package com.smallus.member.dao;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -42,7 +42,25 @@ public class MemberDao {
 			close(pstmt);
 		}return m;
 	}
-
+	
+	public int enrollMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("enrollMember"));
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPw());
+			pstmt.setString(3, m.getMemberName());
+			pstmt.setString(4, m.getMemberPhone());
+			pstmt.setString(5, m.getMemberEmail());
+			pstmt.setString(6, m.getMemberNickname());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	
 	
 	public static Member getMember(ResultSet rs) throws SQLException{

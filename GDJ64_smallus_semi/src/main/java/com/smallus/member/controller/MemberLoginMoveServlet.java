@@ -1,4 +1,4 @@
-package com.smallus.member.model.controller;
+package com.smallus.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberMypageServlet
+ * Servlet implementation class MemberLoginMoveServlet
  */
-@WebServlet("/memberMypage.do")
-public class MemberMypageServlet extends HttpServlet {
+@WebServlet("/memberLoginMove.do")
+public class MemberLoginMoveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberMypageServlet() {
+    public MemberLoginMoveServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,7 @@ public class MemberMypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("/views/mypage/mypageMain.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/member/memberLogin.jsp").forward(request, response);
 	}
 
 	/**

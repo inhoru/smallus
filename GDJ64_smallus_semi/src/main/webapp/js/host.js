@@ -4,7 +4,13 @@ google.charts.setOnLoadCallback(drawVisualization);
 function drawVisualization() {
     // Some raw data (not necessarily accurate)
     let data = google.visualization.arrayToDataTable([
-        ['Month', '마들렌 100', '쿠키', '휘낭시에', '스콘', '바나나푸딩', '평균'],
+        /*['Month', 'amount', '마들렌', '쿠키', '휘낭시에', '스콘', '바나나푸딩', '평균'],
+        ['2023/01', 500 ,165, 938, 522, 998, 450, 614.6],
+        ['2023/02', 500 ,135, 1120, 599, 1268, 288, 682],
+        ['2023/03', 500 ,157, 1167, 587, 807, 397, 623],
+        ['2023/04', 500 ,139, 1110, 615, 968, 215, 609.4],
+        ['2023/05', 500 ,136, 691, 629, 1026, 366, 569.6]*/
+        ['Month', '마들렌', '쿠키', '휘낭시에', '스콘', '바나나푸딩', '평균'],
         ['2023/01', 165, 938, 522, 998, 450, 614.6],
         ['2023/02', 135, 1120, 599, 1268, 288, 682],
         ['2023/03', 157, 1167, 587, 807, 397, 623],
@@ -27,6 +33,8 @@ function drawVisualization() {
         },
         backgroundColor: '#FFFCF5'
     };
+    
+    console.log(options.series);
 
     let chart = new google.visualization.ComboChart(document.getElementById('h-main-chart'));
     chart.draw(data, options);
@@ -37,15 +45,18 @@ document.addEventListener('DOMContentLoaded', function() {
 	//let classTime='클래스 시간';
 	//let memberName='회원 이름';
 	//let memberNum='2';
-	
+	//let fcdiv=document.getElementsByClassName('fc-toolbar-chunk');
+	let eventDiv=document.getElementsByClassName('fc-event-title-container');
+	console.log(eventDiv);
     let calendarEl = document.getElementById('h-main-calendar');
     let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
         firstDay: 1,
         headerToolbar : { // 헤더에 표시할 툴 바
-            start : 'prev next today',
-            center : 'title',
-            end : 'dayGridMonth,dayGridWeek,dayGridDay'
+            start : 'today',
+            center : 'prev, title, next',
+            end : 'dayGridMonth,dayGridWeek'
+            /*end : 'dayGridMonth,dayGridWeek,dayGridDay'*/
         },
         titleFormat : function(date) {
             return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
@@ -80,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 알림
 $(".h-notification-icon").on("click", e => {
-	console.log(e);
+	//	console.log(e);
     $(".h-notification-container").slideToggle(300);
 });
   
