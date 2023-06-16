@@ -19,6 +19,7 @@ table#m-ernollMemberTable input[type=button]{
 	text-align:center;
 	font-size: 0.5rem;
 	height:25px;
+	cursor:pointer;
 }
 table#m-ernollMemberTable input[type=submit]{
 	width:24rem;
@@ -29,6 +30,7 @@ table#m-ernollMemberTable input[type=submit]{
 	padding: 0.4rem 0.6rem;
 	font-size: 1rem;
 	height:40px;
+	cursor:pointer;
 }
 </style>
 <body>
@@ -41,7 +43,9 @@ table#m-ernollMemberTable input[type=submit]{
 						<th>아이디</th>
 						<td>
 							<input type="text" placeholder="4글자이상" name="memberId" id="memberId" required>
-							<input type="button" name="memberId_check" id="memberId_check" value="중복확인" onclick="">
+							<input type="button" name="memberId_check" id="memberId_check" 
+							value="중복확인" onclick="idDuplicate();">
+							
 						</td>
 					</tr>
 					<tr>
@@ -53,7 +57,7 @@ table#m-ernollMemberTable input[type=submit]{
 					<tr>
 						<th>비밀번호확인</th>
 						<td>
-							<input type="password" id="password_2"placeholder="영어+숫자 8글자이상">
+							<input type="password" id="password2" placeholder="영어+숫자 8글자이상">
 						</td>
 					</tr>
 					<tr>
@@ -65,8 +69,8 @@ table#m-ernollMemberTable input[type=submit]{
 					<tr>
 						<th>닉네임</th>
 						<td>
-							<input type="text" name="membernickName" id="memberNickname" required>
-							<input type="button" name="nickName_check" id="nickName_check" value="중복확인" onclick="">
+							<input type="text" name="membernickName" id="memberNickname" placeholder="닉네임은 2글자 이상" required>
+							<input type="button" name="nickName_check" id="nickName_check" value="중복확인" onclick="nickDuplicate();">
 						</td>
 					</tr>
 					<tr>
@@ -111,6 +115,44 @@ table#m-ernollMemberTable input[type=submit]{
 	</div>
 </body>
 <script>
+	const idDuplicate=()=>{
+		const memberId=$("#memberId").val();
+		if(memberId.length>=4){
+		open("<%=request.getContextPath()%>/member/idDuplicate.do?memberId="+memberId
+				,"_blank","width=400, height=200, top=300,left=500");		
+		}else{
+			alert('아이디는 4글자 이상 입력하세요!');
+		}
+	}
+	$("#password2").keyup(e=>{
+		const password=$("#password").val();
+		const passwordCheck=$(e.target).val();
+		let color,msg;
+		if(password==passwordCheck){
+			color="green";
+			msg="비밀번호가 일치합니다.";
+		}else{
+			color="red";
+			msg="비밀번호가 일치하지않습니다.";
+		}
+/* 		if($(e.target).parents("tr").next().find("input").length==0){
+			$(e.target).parents("tr").next().remove();
+		}) */
+		const tr=$("<tr>");
+		const td=$("<td colspan='2'>");
+		td.css("color",color).text(msg);
+		const test=$($(e.target).parents("tr"));
+		console.log(test);
+	});
+	const nickDuplicate=()=>{
+		const memberNickname=$("#memberNickname").val();
+		if(memberNickname.length>=2){
+		open("<%=request.getContextPath()%>/member/nicknameDuplicate.do?memberNickname="+memberNickname
+				,"_blank","width=400, height=200, top=300,left=500");		
+		}else{
+			alert('닉네임은 2글자 이상 입력하세요!');
+		}
+	}
 	$(() => {
    		$("#m-marketing_content").hide();
     });
