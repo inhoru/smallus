@@ -46,7 +46,7 @@ public class MemberLoginServlet extends HttpServlet {
 		if(saveId!=null) {
 			Cookie c=new Cookie("saveId",memberId);
 			c.setMaxAge(60*60*24*7);
-			//c.setPath("/");
+			c.setPath("/");
 			response.addCookie(c);
 		}else {
 			Cookie c=new Cookie("saveId","");

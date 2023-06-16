@@ -11,10 +11,10 @@ String savehostId = null;
 if (cookies != null) {
 	for (Cookie c : cookies) {
 		if (c.getName().equals("saveId")) {
-	saveId = c.getValue();
+			saveId = c.getValue();
 		}
 		if (c.getName().equals("savehostId")) {
-	savehostId = c.getValue();
+			savehostId = c.getValue();
 		}
 	}
 }

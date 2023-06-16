@@ -25,7 +25,7 @@ public class MemberDao {
 	public Member memberLogin(Connection conn, String memberId, String password) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Member m=new Member();
+		Member m=null;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("memberLogin"));
 			//SELECT * FROM MEMBER WHERE MEMBER_ID=? AND MEMBER_PW=?
@@ -48,6 +48,7 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("enrollMember"));
+			//INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,DEFAULT,?,DEFAULT)
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
@@ -60,6 +61,45 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	
+	public Member selectByMemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectByMemberId"));
+			//SELECT * FROM MEMBER WHERE MEMBER_ID=?
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=getMember(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}return m;
+	}
+	public Member selectBymemberNickname(Connection conn, String memberNickname) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectBymemberNickname"));
+			//SELECT * FROM MEMBER WHERE MEMBER_ID=?
+			pstmt.setString(1, memberNickname);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=getMember(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}return m;
 	}
 	
 	
