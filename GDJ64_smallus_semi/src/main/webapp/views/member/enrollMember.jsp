@@ -43,9 +43,10 @@ table#m-ernollMemberTable input[type=submit]{
 						<th>아이디</th>
 						<td>
 							<input type="text" placeholder="4글자이상" name="memberId" id="memberId" required>
+						</td>
+						<td>
 							<input type="button" name="memberId_check" id="memberId_check" 
 							value="중복확인" onclick="idDuplicate();">
-							
 						</td>
 					</tr>
 					<tr>
@@ -56,9 +57,14 @@ table#m-ernollMemberTable input[type=submit]{
 					</tr>
 					<tr>
 						<th>비밀번호확인</th>
-						<td>
+						<td colspan="2">
 							<input type="password" id="password2" placeholder="영어+숫자 8글자이상">
 						</td>
+					</tr>
+					<tr style="height:3px;">
+						<td></td>
+						<td><b id="passwordcheck"style="text-align:center; font-size:6px;"></b></td>
+						<td></td>
 					</tr>
 					<tr>
 						<th>이름</th>
@@ -70,6 +76,8 @@ table#m-ernollMemberTable input[type=submit]{
 						<th>닉네임</th>
 						<td>
 							<input type="text" name="membernickName" id="memberNickname" placeholder="닉네임은 2글자 이상" required>
+						</td>
+						<td>
 							<input type="button" name="nickName_check" id="nickName_check" value="중복확인" onclick="nickDuplicate();">
 						</td>
 					</tr>
@@ -77,6 +85,8 @@ table#m-ernollMemberTable input[type=submit]{
 						<th>이메일</th>
 						<td>
 							<input type="email" placeholder="abcde@naver.com"name="memberEmail" id="memberEmail"> 
+						</td>
+						<td>
 							<input type="button" name="memberEmail_check" id="memberEmail_check" value="인증번호발송" onclick="">
 						</td>
 					</tr>
@@ -84,17 +94,19 @@ table#m-ernollMemberTable input[type=submit]{
 						<th>이메일인증번호</th>
 						<td>
 							<input type="text" name="memberEmail_check2" id="memberEmail_check2">
+						</td>
+						<td>
 							<input type="button" name="" value="인증" onclick="">
 						</td>
 					</tr>
 					<tr>
 						<th>휴대폰번호</th>
-						<td>
+						<td colspan="2">
 						<input type="tel" placeholder="(-없이)01012345678" name="memberPhone" id="memberPhone" maxlength="11" required>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
+						<td colspan="3">
 							<legend id="m-marketing">
 							[선택]마케팅 수신동의  <img src="<%=request.getContextPath()%>/img/부등호2.png" alt="왜안나와" id="m-marketingimg">
 							</legend> 
@@ -135,14 +147,7 @@ table#m-ernollMemberTable input[type=submit]{
 			color="red";
 			msg="비밀번호가 일치하지않습니다.";
 		}
-/* 		if($(e.target).parents("tr").next().find("input").length==0){
-			$(e.target).parents("tr").next().remove();
-		}) */
-		const tr=$("<tr>");
-		const td=$("<td colspan='2'>");
-		td.css("color",color).text(msg);
-		const test=$($(e.target).parents("tr"));
-		console.log(test);
+		$("#passwordcheck").css("color",color).text(msg);
 	});
 	const nickDuplicate=()=>{
 		const memberNickname=$("#memberNickname").val();

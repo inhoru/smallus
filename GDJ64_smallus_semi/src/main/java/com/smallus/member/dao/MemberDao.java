@@ -101,6 +101,44 @@ public class MemberDao {
 			close(rs);
 		}return m;
 	}
+	public int KakaoenrollMember(Connection conn, Member m) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("KakaoenrollMember"));
+			//INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,DEFAULT,?,DEFAULT)
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPw());
+			pstmt.setString(3, m.getMemberName());
+			pstmt.setString(4, m.getMemberPhone());
+			pstmt.setString(5, m.getMemberEmail());
+			pstmt.setString(6, m.getMemberNickname());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public Member kakaoLogin(Connection conn,String memberEmail) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("kakaoLogin"));
+			//SELECT * FROM MEMBER WHERE MEMBER_EMAIL=?
+			pstmt.setString(1, memberEmail);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=getMember(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}return m;
+	}
 	
 	
 	public static Member getMember(ResultSet rs) throws SQLException{

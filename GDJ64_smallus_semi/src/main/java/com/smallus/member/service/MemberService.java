@@ -36,4 +36,16 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	public int KakaoenrollMember(Member m) {
+		Connection conn=getConnection();
+		int result=dao.KakaoenrollMember(conn,m);
+		close(conn);
+		return result;
+	}
+	public Member kakaoLogin(String memberEmail) {
+		Connection conn=getConnection();
+		Member m=dao.kakaoLogin(conn,memberEmail);
+		close(conn);
+		return m;
+	}
 }
