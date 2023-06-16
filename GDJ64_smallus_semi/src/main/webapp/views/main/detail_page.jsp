@@ -41,8 +41,123 @@
 				<hr style="margin-right: 20%">
 				<li style="margin: 1%;"><a href="">준비물</a></li>
 				<p style="font-weight: lighter; font-size: 8px; margin:1%;">튼튼한 두 팔과 체력!!!</p>
+				<hr style="margin-right: 20%">
 			</ul>
 		</nav>
+		<nav class="epilogue" style="font-weight:bolder; margin-left: 20%;">
+		<ul>
+		<li style="font-size:16px; margin:1%;" ><a href="">후기</a></li>
+		<hr style="margin-right: 20%">
+		</ul>
+		</nav>
+		<div class="d-review-one">
+			<img src="<%=request.getContextPath()%>/img/img-slide2-1.png"
+				width="150px" height="150px">
+			<div class="d-review-table">
+			<table>
+				<tr>
+					<td>작성자</td>
+				</tr>
+				<tr>
+					<td>2023-06-15 19:50</td>
+				</tr>
+				<tr>
+					<td><h3>부드러운 앙금으로 빚어내는 네리끼리 화과자</h3></td>
+				</tr>
+				<tr>
+					<td><h2>★★★★★</h2></td>
+				</tr>
+				<tr>
+					<td><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
+				</tr>
+			</table>
+			</div>
+			<button>삭제</button>
+		</div>
+		<div class="d-review-list">
+		<hr>
+		<div class="d-review-one">
+			<img src="<%=request.getContextPath()%>/img/img-slide2-1.png"
+				width="150px" height="150px">
+			<div class="d-review-table">
+			<table>
+				<tr>
+					<td>작성자</td>
+				</tr>
+				<tr>
+					<td>2023-06-15 19:50</td>
+				</tr>
+				<tr>
+					<td><h3>부드러운 앙금으로 빚어내는 네리끼리 화과자</h3></td>
+				</tr>
+				<tr>
+					<td><h2>★★★★★</h2></td>
+				</tr>
+				<tr>
+					<td><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
+				</tr>
+			</table>
+			</div>
+			<button>삭제</button>
+		</div>
+		<div class="d-review-list">
+		<hr>
+		<div class="d-review-one">
+			<img src="<%=request.getContextPath()%>/img/img-slide2-1.png"
+				width="150px" height="150px">
+			<div class="d-review-table">
+			<table>
+				<tr>
+					<td>작성자</td>
+				</tr>
+				<tr>
+					<td>2023-06-15 19:50</td>
+				</tr>
+				<tr>
+					<td><h3>부드러운 앙금으로 빚어내는 네리끼리 화과자</h3></td>
+				</tr>
+				<tr>
+					<td><h2>★★★★★</h2></td>
+				</tr>
+				<tr>
+					<td><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
+				</tr>
+			</table>
+			</div>
+			<button>삭제</button>
+			</div>
+		<nav class="epilogue" style="font-weight:bolder; margin-left: 20%;">
+		<ul>
+		<li style="font-size:16px; margin:1%;" ><a href="">Q & A </a></li>
+		<hr style="margin-right: 20%">
+		</ul>
+		</nav>
+		
     </section>
 </div>
+<style>
+	#d-review-page{
+	width:70%;
+	margin: 0 auto;
+	display: flex;
+	}
+	.d-review-list>div{
+	
+	}
+	.d-review-one{
+	display:inline-flex;
+	border:1px solid red;
+	margin-left: 20%
+	}
+	.d-review-table h2{
+	color:gold;
+	}
+	.d-review-table button{
+	justify-content: end;
+	/* 삭제버튼을 오른쪽으로 빼고 싶으나.... */
+	}
+	.d-review-table table{
+	margin-left:20px;
+	}
+</style>
 <%@ include file="/views/common/footer.jsp"%>
