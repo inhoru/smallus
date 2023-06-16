@@ -44,7 +44,7 @@ public class HostLoginServlet extends HttpServlet {
 		if(savehostId!=null) {
 			Cookie c=new Cookie("savehostId",hostId);
 			c.setMaxAge(60*60*24*7);
-			//c.setPath("/");
+			c.setPath("/");
 			response.addCookie(c);
 		}else {
 			Cookie c=new Cookie("savehostId","");

@@ -64,6 +64,8 @@
 	$("#m-enrollmemberbtn").click(e=>{
 		location.assign("<%=request.getContextPath()%>/views/member/enrollMember.jsp");
 	});
+	saveId=<%=saveId%>;
+	console.log(saveId);
 </script>
 <style>
 div#m-bodycontainer{ 
