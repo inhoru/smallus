@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/host/hostHeader.jsp"%>
+<%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
 <!--main-->
+<%
+	List<Payment> payment=(List)request.getAttribute("paymentList");
+%>
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-rsv">
      	<div class="h-main-title">
@@ -9,12 +13,12 @@
      			<!-- 예약 내역 상세 페이지로 이동 -->
                 <!-- <div class="h-viewList"><a href="">+</a></div> -->
         </div><hr>
-		<div id="columnchart_material" style="width: 100%; height: 500px;"></div>
+		<!-- <div id="columnchart_material" style="width: 100%; height: 500px;"></div>
 		send:<br>
 		<input id="sendInput" type="text"><br>
 		response:<br>
 		<input id="responseInput" type="text"><br><br>
-		<button onclick="addData();">add</button> <button onclick="removeData();">remove</button>
+		<button onclick="addData();">add</button> <button onclick="removeData();">remove</button> -->
         <seciton class="h-class-list-container">
 			<div class="h-class-list-rowContainer">
 				<div class="h-class-list">
@@ -35,7 +39,7 @@
                 </div>
                 <hr>
                 <!-- ajax 통해서 넣을 예약 테이블 -->
-                <table>
+                <table id="h-rsvlist-tbl">
                     <tr>
                         <th>NO</th>
                         <th>클래스 이름</th>
@@ -45,24 +49,23 @@
                         <th>잔여 인원</th>
                         <th>예약자 이름</th>
                     </tr>
+                    <%if(!payment.isEmpty()) {
+                    	for(Payment p:payment){%>
+	                    <tr>
+	                        <td><%=p.getPaymentId() %></td>
+	                        <td><%=p.getClassTitle()%></td>
+	                        <td>날짜</td>
+	                        <td>15:00 - 17:00</td>
+	                        <td>1명</td>
+	                        <td>1명</td>
+	                        <td>최*호</td>
+	                    </tr>
+                    	<%}
+                    }else{ %>
                     <tr>
-                        <td>r202306130751</td>
-                        <td>구움과자 어쩌구</td>
-                        <td>2023-05-18</td>
-                        <td>15:00 - 17:00</td>
-                        <td>1명</td>
-                        <td>1명</td>
-                        <td>최*호</td>
+                        <td colspan="7">조회할 예약이 없습니다.</td>
                     </tr>
-                    <tr>
-                        <td>r202306130751</td>
-                        <td>구움과자 어쩌구</td>
-                        <td>2023-05-18</td>
-                        <td>15:00 - 17:00</td>
-                        <td>1명</td>
-                        <td>1명</td>
-                        <td>최*호</td>
-                    </tr>
+                    <%} %>
                 </table>
             </div>
         </section>

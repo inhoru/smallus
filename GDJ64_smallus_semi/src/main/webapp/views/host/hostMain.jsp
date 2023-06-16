@@ -18,11 +18,11 @@
                 <div class="h-main-title"> 
                     <h2>새로운 예약 내역</h2>
                     <!-- 예약 내역 상세 페이지로 이동 -->
-                    <div class="h-viewList"><a href="">+</a></div>
+                    <div class="h-viewList"><a href="<%=request.getContextPath()%>/host/rsrv.do?hostId=<%=loginHost.getHostId()%>" id="h-main-moveTo-rsv">+</a></div>
                 </div>
                 <hr>
                 <!-- ajax 통해서 넣을 예약 테이블 -->
-                <table>
+                <table id="h-main-rsv-tbl">
                     <tr>
                         <th>NO</th>
                         <th>클래스 이름</th>

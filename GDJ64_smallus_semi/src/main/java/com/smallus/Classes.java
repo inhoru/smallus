@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Class {
+public class Classes {
 	private String classId;
 	private Host hostId;
 	private String classTitle;
@@ -30,5 +30,8 @@ public class Class {
 	private String classPassId;
 	private String classThumbnail;
 
-	
+	@Override
+	public String toString() {
+		return classId+","+classTitle+","+classPersonnel;
+	}
 }

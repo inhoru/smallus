@@ -149,4 +149,18 @@ $(".h-notification-icon").on("click", e => {
    //   console.log(e);
     $(".h-notification-container").slideToggle(300);
 });
-  
+
+// + 누르면 reservation 페이지로 이동하기
+
+// $("#h-main-moveTo-rsv").on("click", e=>{
+//     $.ajax({
+//         url:"<%=request.getContextPath()%>/host/rsrv.do?hostId="+loginHost.getHostId(),
+//         method:"get",
+//         success: data=>{
+//             console.log(data);
+//         },
+//         error:(r,m)=>{
+//             console.log(r, m);
+//         }
+//     });
+// });

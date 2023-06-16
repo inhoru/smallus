@@ -20,4 +20,6 @@ public class Payment {
 	private Date paymentDate;
 	private String paymentStatus;
 	private String memberId;
+	private String hostId;
+	private String classTitle;
 }
