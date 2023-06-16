@@ -160,15 +160,20 @@
     padding-bottom: 5%;
     margin-bottom: 3%;
     overflow: hidden;
+    
+    
 }
 
 /* 예약내역 리스트(2개) */
 .i-reservationListTotal {
+    height: 220px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 1200px;
+    margin: auto;
 
+    
 }
 
 /* 슬라이드 체크 */
@@ -179,6 +184,7 @@
 /* 슬라이드 ul */
 #i-reservation .slidelist {
     white-space: nowrap;
+    
 }
 
 /* 슬라이드 li */
@@ -214,6 +220,7 @@
     border: 1px solid #F6E9DF;
     border-radius: 20px;
     padding: 1%;
+    
 
 
 }
@@ -273,70 +280,28 @@
     cursor: pointer;
 }
 
-/* 찜 h2 */
-.i-wishListh2 {
-    margin-bottom: 2%;
-}
 
 /* 찜목록전체 */
 .i-wishList {
     overflow: hidden;
 }
 
-/* 찜목록 1개 */
-.i-wishList1 {
-    border: 2px solid #F6E9DF;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 250px;
 
-}
-
-/* 찜클래스 상세 */
-.i-text {
-    margin: 4%;
-    display: flex;
-    flex-direction: column;
-    white-space: pre-wrap;
-
-
-}
-
-/* 찜이미지 */
-.i-wishList1 img {
-    height: 250px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-
-}
-
-/* 찜목록 3개 */
+/* 찜목록 한페이지전체 */
 .i-wishListTotal {
-    margin: auto;
+   height: 350px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    width: 1200px;
+    margin: auto;
+    
 
 }
 
-/* 왼쪽부등호 */
-.i-wishListSlick2 {
-    position: relative;
-    right: 48px;
-
-}
-
-/* 오른쪽부등호 */
-.i-wishListSlick {
-
-    position: relative;
-    left: 48px;
 
 
-}
-
-/* 부등호이미지 */
+/* 찜부등호이미지 */
 .i-wishListSlick img {
     opacity: 0.6;
     width: 30px;
@@ -345,7 +310,7 @@
     cursor: pointer;
 }
 
-/* 부등호이미지 */
+/* 찜부등호이미지 */
 .i-wishListSlick2 img {
     opacity: 0.6;
     width: 30px;
@@ -386,60 +351,57 @@
     transform: translateX(-200%);
 }
 
+
+
+/* 마이페이지 찜목록 */
+section.h-imgContainer{
+    width:85%;
+    margin-top: 5%;
+    display: flex;
+}
+/* 리스트 4개 */
+.h-img-list{
+    width:25%;
+    margin: 2rem 1rem 2rem 0;
+    height: 20rem;
+    
+    
+
+}
+
+/* 찜 이미지 */
+section.h-imgContainer .h-img-list img{
+    width: 100%;
+    height: 15rem;
+    border-radius: 2rem;
+
+}
+/* 찜 클래스이름 */
+section.h-imgContainer .h-img-list h4{
+    margin-top: 0.5rem;
+    font-family: "GmarketSansMedium";
+ 
+}
+
 /* 하트 더보기  */
-.i-checkboxcontainer {
+.h-wish-container {
     display: flex;
     height: 80px;
-
-}
-
-/* 더보기 버튼 */
-.i-checkboxcontainer button {
     position: relative;
-    top: 17px;
-    margin: auto;
-    background-color: #eee;
-    border: none;
-    padding: 4%;
-    height: 43%;
-    width: 40%;
-    border-radius: 1rem;
-    color: lightcoral;
-
-    cursor: pointer;
-    border: 2px solid red;
+    bottom:30%;
+    left:85%;
 }
-
-/* 더보기 */
-.i-checkboxcontainer button:active {
-    color: white;
-
-    transform: translateY(0.2rem);
-}
-
-/* 더보기 */
-.i-checkboxcontainer button:hover:not(:disabled) {
-    background: lightcoral;
-    color: white;
-}
-
-/* 더보기 */
-.i-checkboxcontainer button:disabled {
-    cursor: auto;
-    color: grey;
-}
-
 
 /* 하트 체크박스 */
-.i-checkboxcontainer input {
+.h-wish-container input {
     display: none;
 }
 
 /* 하트 */
-.i-wishList1 input:checked+label svg {
+.h-wish-container input:checked+label svg {
     cursor: pointer;
-    fill: hsl(0deg 100% 50%);
-    stroke: hsl(0deg 100% 50%);
+    fill: rgb(255, 255, 255);
+    stroke:rgb(255, 255, 255);
     animation: heartButton 1s;
 }
 
@@ -450,7 +412,7 @@
     }
 
     25% {
-        transform: scale(1.3);
+        transform: scale(1.2);
     }
 
     50% {
@@ -458,13 +420,15 @@
     }
 
     75% {
-        transform: scale(1.3);
+        transform: scale(1.2);
     }
 
     100% {
         transform: scale(1);
     }
-}
+} 
+
+
 /* 프로필전체 배경 */
 .i-profiletotal{
     padding-bottom: 3%;
@@ -911,14 +875,4 @@
     margin-top: 1%;
     border-top: 2px solid #efebe5;
 
-}
-/* 마이페이지찜리스트 */
-.i-mypagewishList{
-    margin-top: 2%;
-}
-/* 마이페이지 찜전체 */
-.i-mypagewishListTotal{
-    padding-bottom: 2%;
-    display: flex;
-    justify-content: space-around;
 }
