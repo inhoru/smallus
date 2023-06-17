@@ -68,7 +68,7 @@ public class MemberLoginServlet extends HttpServlet {
 			//로그인 실패 -> 인증못받음
 			//실패 메세지 출력
 			request.setAttribute("msg","아이디,패스워드가 일치하지 않습니다");
-			request.setAttribute("loc","/");
+			request.setAttribute("loc","/views/member/memberLogin.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}

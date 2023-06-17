@@ -10,7 +10,7 @@
                     <td class="i-customerService i-cu">고객센터</td>
                 </tr>
                 <tr>
-                    <td class="i-myInfo"><a href="<%=request.getContextPath()%>/profile.html">프로필관리</a></td>
+                    <td class="i-myInfo"><a href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
                     <td><a href="<%=request.getContextPath()%>/mypagePayment.html">결제내역</a></td>
                     <td class="i-customerService"><a href="">공지사항</a></td>
                 </tr>

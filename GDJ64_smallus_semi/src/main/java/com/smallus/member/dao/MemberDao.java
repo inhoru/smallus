@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import org.eclipse.jdt.core.compiler.CharOperation;
+
 import static com.smallus.common.JDBCTemplate.*;
 import com.smallus.common.JDBCTemplate;
 import com.smallus.member.model.vo.Member;
@@ -100,6 +103,21 @@ public class MemberDao {
 			close(pstmt);
 			close(rs);
 		}return m;
+	}
+	public int updatePassword(Connection conn,String userId,String password) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updatePassword"));
+			pstmt.setString(1, password);
+			pstmt.setString(2, userId);
+			result=pstmt.executeUpdate();			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	
