@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%-- <%@ include file="/views/host/hostHeader.jsp"%> --%>
+
+
 
 <div id="d-review-page">
 	<h2>내 클래스에 등록된 후기</h2>

@@ -45,6 +45,7 @@ public class EnrollMemberServlet extends HttpServlet {
 				memberEmail(memberEmail).
 				memberPhone(memberPhone).
 				build();
+//		System.out.println(m);
 	int result=new MemberService().enrollMember(m);
 	String msg="",loc="";
 	if(result>0) {
@@ -53,15 +54,15 @@ public class EnrollMemberServlet extends HttpServlet {
 		loc="/";
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-		request.getRequestDispatcher("/views/member/memberLogin.jsp").forward(request, response);
+//		request.getRequestDispatcher("/views/member/memberLogin.jsp").forward(request, response);
 	}else {
 		//입력 실패
 		msg="회원가입에 실패하였습니다. :( \n다시시도하세요";
 		loc="/member/enrollMember.do";
 	}
-//	request.setAttribute("msg", msg);
-//	request.setAttribute("loc", loc);
-//	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+	request.setAttribute("msg", msg);
+	request.setAttribute("loc", loc);
+	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 
 
 	}

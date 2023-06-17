@@ -129,7 +129,8 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	width: 50%;
+	width: 60%;
+	
 }
 /* 로그인시 헤더인포 */
 .i-iconinfo{
@@ -137,9 +138,13 @@ width: 40%;
 display: flex;
 align-items: center;
 white-space: nowrap;
+
 }
+
 /* 로그인시프로필사진 */
 .i-iconinfoimg{
+
+border-radius: 100px;
 	margin-right: 3%;
 	
 }

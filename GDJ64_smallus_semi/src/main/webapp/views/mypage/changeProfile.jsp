@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
+
 <div id="mainOpacity">
 	<section class="i-tablecontent">
 		<table class="i-mypageCategories">
@@ -26,15 +27,15 @@
 			</tr>
 		</table>
 	</section>
-	<form id="memberFrm" method="post">
+	<form action="<%=request.getContextPath()%>/member/insertMember.do" id="memberFrm" method="post" enctype="multipart/form-data">
 		<div class="i-profiletotal">
 			<section class="i-proFile">
 				<h2 class="i-proFileh2">프로필 수정</h2>
 				<div class="i-proFileInfo">
-					<img src="<%=request.getContextPath()%>/img/mypage/기본프로필.png"
-						alt=""> <a href=""><img
-						src="<%=request.getContextPath()%>/img/mypage/프로필수정.png" alt=""
-						class="i-proFileInfoimg"></a>
+					<img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>"
+						alt="" class="i-myprofile"> 
+						<img src="<%=request.getContextPath()%>/img/mypage/프로필수정.png" class="i-proFileInfoimg">
+						<input type="file" style="display:none" id="profileInput" name="i-upFile">
 
 				</div>
 				<div class=i-proFileModify>
@@ -46,35 +47,52 @@
 						<h3>휴대폰번호</h3>
 					</div>
 					<div class="i-proFile2">
-						<input type="text" value="<%=loginMember.getMemberId()%>"
-							disabled> <input type="text"
-							value="<%=loginMember.getMemberNickname()%>" readonly> <input
+						<input type="text" value="<%=infoMember.getMemberId()%>"
+						 disabled name="memberId"> <input type="text"
+							value="<%=infoMember.getMemberNickname()%>" id="i-nickName" name="memberNickname" readonly> <input
 							type="text" value="******" readonly> <input type="text"
-							value="<%=loginMember.getMemberEmail()%>" readonly> <input
-							type="text" value="<%=loginMember.getMemberPhone()%>" required>
+							value="<%=infoMember.getMemberEmail()%>" disabled> <input
+							type="text" value="<%=infoMember.getMemberPhone()%>" disabled>
 					</div>
 					<div class="i-proFile3">
 						<button class="i-nonebutton">변경</button>
 						<button onclick="fn_updateNickname();">변경</button>
 						<button onclick="fn_updatePassword();">변경</button>
-						<button >변경</button>
+						<button class="i-nonebutton" >변경</button>
 						<button class="i-nonebutton">변경</button>
 					</div>
 				</div>
-				<a href=""><button class="i-storage">저장</button></a>
+				<button class="i-storage">저장</button>
 			</section>
 		</div>
 	</form>
 </div>
 <script>
-  
   /* 패스워드 변경창 */
     const fn_updatePassword=()=>{
-		window.open("<%=request.getContextPath()%>/member/updatePassword.do?userId=<%=loginMember.getMemberId()%>","_blank",'width=500 , height=330, left=450, top=350');
+		window.open("<%=request.getContextPath()%>/member/updatePassword.do?userId=<%=loginMember.getMemberId()%>","_blank",'width=500 , height=330, left=670, top=300')
+		 event.preventDefault();
 		
 	}
     /* 닉네임 변경창 */
     const fn_updateNickname=()=>{
-		window.open("<%=request.getContextPath()%>/member/updateNickname.do?userId=<%=loginMember.getMemberId()%>","_blank",'width=500 , height=330, left=450, top=350');
+		window.open("<%=request.getContextPath()%>/updatenickname.do","_blank",'width=500 , height=330, left=670, top=300');
+		 event.preventDefault();
+		}
+    
+    /* 프로필사진변경 */
+    $(".i-proFileInfoimg").click(e=>{
+ 		$("#profileInput").click();
+ 	});
+ 	
+ 	$("#profileInput").change(e=>{
+ 		const reader=new FileReader();
+ 		reader.onload=e=>{
+ 			//e.target.result속성에 변경된 file이 나옴.
+ 			$(".i-myprofile").attr({src:e.target.result});
+ 		}
+ 		reader.readAsDataURL(e.target.files[0]);
+ 	});
+ 
     </script>
 <%@ include file="/views/common/footer.jsp"%>

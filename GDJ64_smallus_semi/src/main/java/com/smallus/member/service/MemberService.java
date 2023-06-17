@@ -1,8 +1,12 @@
 package com.smallus.member.service;
 
-import static com.smallus.common.JDBCTemplate.*;
+import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
+import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.smallus.member.dao.MemberDao;
 import com.smallus.member.model.vo.Member;
@@ -36,11 +40,40 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+
 	public int updatePassword(String userId,String password) {
 		Connection conn=getConnection();
 		int result=dao.updatePassword(conn,userId,password);
 		if(result>0)commit(conn);
 		else rollback(conn);
 		return result;
+	}
+
+	public int KakaoenrollMember(Member m) {
+		Connection conn=getConnection();
+		int result=dao.KakaoenrollMember(conn,m);
+		close(conn);
+		return result;
+	}
+	public Member kakaoLogin(String memberEmail) {
+		Connection conn=getConnection();
+		Member m=dao.kakaoLogin(conn,memberEmail);
+		close(conn);
+		return m;
+
+	}
+	public Member selectBynickName(String nickName) {
+		Connection conn=getConnection();
+		Member m=dao.selectBynickName(conn,nickName);
+		close(conn);
+		return m;
+	}
+	public int updateMember(Member b ,String m) {
+		Connection conn=getConnection();
+		int result=dao.updateMember(conn,b,m);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+		
 	}
 }

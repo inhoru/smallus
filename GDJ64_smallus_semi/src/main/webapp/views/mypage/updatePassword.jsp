@@ -83,6 +83,9 @@ div#updatePassword-container table tr:last-of-type td {
 p {
 	font-size: 12px;
 }
+*{
+background-color: #FFFBF5;
+}
 </style>
 
 <body>
@@ -141,7 +144,6 @@ $("#i-password_chk").keyup(e=>{
 		color="#996F51";msg="*비밀번호가 일치하지 않습니다.";
 	}
 	const td=$(e.target).parents("tr").next().find("td").html("");
-	console.log(td)
 	
 	$("<p>").css("color",color).text(msg).appendTo(td);
 });

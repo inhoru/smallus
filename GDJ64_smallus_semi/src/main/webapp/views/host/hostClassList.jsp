@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/host/hostHeader.jsp"%>
+
 <!--main-->
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-main-rsvList">
@@ -12,6 +13,8 @@
         <!-- ajax 통해서 넣을 예약 테이블 -->
         <seciton class="h-class-list-container">
 			<div class="h-class-list-rowContainer">
+				
+				<%if(1==1){ %>
 				<div class="h-class-list">
 					<a href="<%=request.getContextPath()%>/views/host/hostClassSub.jsp">
 						<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
@@ -39,6 +42,7 @@
 							<td><button>더보기</button></td>
 						</tr>
 					</table>
+					<%} %>
 				</div>
 				<div class="h-class-list">
 					<img src="<%=request.getContextPath()%>/img/img-slide2-1.png">
@@ -122,6 +126,9 @@
 				</div>
 			</div>
 		</section>
-	</section>        
+	</section>
+	<script>
+		
+	</script>       
 <%@ include file="/views/host/hostFooter.jsp"%>
         

@@ -75,6 +75,8 @@
     height: 150px;
     margin-top: 1%;
     margin-bottom: 1%;
+    border-radius: 100px;
+
 }
 
 /* 쿠폰 찜 후기  전체*/
@@ -448,8 +450,10 @@ section.h-imgContainer .h-img-list h4{
   
 }
 /*기본프로필사진  */
-.i-proFileInfo :first-child {
-    
+.i-myprofile{
+ 	width: 200px;
+    height: 200px;
+    border-radius: 100px;
     margin-top: 3%;
 }
 /* 기본프로필수정 이미지 */

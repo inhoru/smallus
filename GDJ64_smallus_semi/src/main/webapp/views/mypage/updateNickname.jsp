@@ -1,10 +1,7 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="com.smallus.member.model.vo.Member"%>
-<%
-Member m=(Member)request.getAttribute("result"); 
-%>
+<%@ page import="java.util.List,com.smallus.member.model.vo.Member"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,29 +39,25 @@ Member m=(Member)request.getAttribute("result");
 	font-style: normal;
 }
 
-div#updatePassword-container {
-	margin: 0;
+div#checkId-container {
 	padding: 0;
 	color: #555555;
 	list-style-type: none;
 	text-decoration: none;
 	font-family: 'GmarketSansMedium';
+	margin-top: 10%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-div#updatePassword-container table {
-	margin: 0 auto;
-	border-spacing: 20px;
-	font-size: 16px;
-	font-weight: 900;
+div.checkId-button {
+	display: flex;
+	justify-content: center;
+	margin-top: 5%;
 }
 
-div#updatePassword-container table tr:last-of-type td {
-	text-align: center;
-	font-size: 16px;
-	font-weight: 900;
-}
-
-#i-password, #i-password_new, #i-password_chk {
+#i-nickNameCheck {
 	border-radius: 15px;
 	width: 250px;
 	height: 30px;
@@ -78,35 +71,83 @@ div#updatePassword-container table tr:last-of-type td {
 	background: #E8D6C3;
 	border: none;
 	cursor: pointer;
+	margin-left: 3%;
+	margin-right: 3%;
 }
 
-p {
+.i-userNickname {
+	
+}
+
+.i-nickCheck {
+	font-family: 'GmarketSansMedium';
+	margin-top: 5%;
+	text-align: center;
 	font-size: 12px;
 }
+*{
+background-color: #FFFBF5;
+}
 </style>
-
 <body>
 	<div id="checkId-container">
-	<%if(m==null){ %>
-		[<span><%=request.getParameter("userId") %></span>]는 사용가능합니다.	
-		<br><br>
-		<button type="button">닫기</button>
-	<%}else{ %>
-		[<span id="duplicated"><%=request.getParameter("userId") %></span>]는 사용중입니다.
-		<br><br>
-		<!-- 아이디 재입력창 구성 -->
-		<form action="<%=request.getContextPath() %>/member/idDuplicate.do" method="get">
-			<input type="text" name="userId" id="userId">
-			<input type="submit" value="중복검사" >
-		</form>
-	<%} %>
+		<h4>닉네임을 입력해주세요.</h4>
+		<input type="text" name="nickName" id="i-nickNameCheck">
+	</div>
+	<div class="i-nickCheck"></div>
+	<div class="checkId-button">
+		<input type="button" value="사용하기" class="re">&nbsp; <input
+			type="button" value="취소" class="cl" onclick="fn_close();" />
 	</div>
 	<script>
-		const btn=document.querySelector("button[type=button]");
-		btn.addEventListener("click",e=>{
-			opener.document.querySelector("#userId_").value="<%=request.getParameter("userId")%>";
-			close();
+	/* 닫기창 */
+
+	function fn_close(){
+		window.close();
+	}
+	
+	$("#i-nickNameCheck").keyup(e=>{
+		if(e.target.value.length>=2){	
+				$.ajax({
+			url:"<%=request.getContextPath()%>/member/updateNickname.do",
+			data:{"nickName":$(e.target).val()},
+			success:function(data){
+				console.log(data,typeof data);
+				let msg="",color="";
+				if(data=='true'){
+					msg="사용가능한 닉네임입니다.";
+					color="#996F51";
+					
+				}else{
+					msg="사용불가능한 닉네임입니다.";
+					color="#996F51";
+				}
+				$(".i-nickCheck").text(msg).css("color",color);
+				console.log($("#i-nickNameCheck").val());
+				
+			},error:function(r,m){
+				console.log(r);
+				console.log(m);
+			}
 		});
-	</script>
+		}else{
+		let msg="",color="";
+		msg="두글자이상 입력해주세요.";
+		color="#996F51";
+		$(".i-nickCheck").text(msg).css("color",color);	
+			};
+		
+		});
+	const btn=$(".re")	
+	btn.click(e=>{
+		const ivalue=($("#i-nickNameCheck").val());
+		opener.document.querySelector("#i-nickName").value=ivalue;
+		close();
+	});
+
+	
+
+</script>
+
 </body>
 </html>

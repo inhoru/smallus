@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
+
  <div id="mainOpacity">
         <section class="i-tablecontent">
             <table class="i-mypageCategories">
@@ -30,7 +31,7 @@
         <section id="i-main">
             <div id="i-proFile">
                 <div id="i-proFileImg">
-                    <img src="<%=request.getContextPath()%>/img/mypage/기본프로필.png" alt="">
+                    <img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>" alt="" >
                     <div id="i-proFileInfo">
                         <h1><%=loginMember.getMemberNickname() %></h1>
                         <p><%=loginMember.getMemberEmail() %></p>
@@ -205,7 +206,7 @@
                                 </span>
                                 <section class="h-imgContainer">
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -225,7 +226,7 @@
                                         </div>
                                     </div>
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -245,7 +246,7 @@
                                         </div>
                                     </div>
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -265,7 +266,7 @@
                                         </div>
                                     </div>
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -299,7 +300,7 @@
                                 </span>
                                 <section class="h-imgContainer">
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -319,7 +320,7 @@
                                         </div>
                                     </div>
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -339,7 +340,7 @@
                                         </div>
                                     </div>
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -359,7 +360,7 @@
                                         </div>
                                     </div>
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -393,7 +394,7 @@
                                 </span>
                                 <section class="h-imgContainer">
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
@@ -413,7 +414,7 @@
                                         </div>
                                     </div>
                                     <div class="h-img-list">
-                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-4.png" alt="no img">
+                                        <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>

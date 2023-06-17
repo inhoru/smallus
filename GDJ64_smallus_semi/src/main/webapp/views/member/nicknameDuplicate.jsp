@@ -30,7 +30,7 @@
 		border:0px;
 		border-radius: 1rem;
 		text-align:center;
-		font-size: 0.5rem;
+		font-size: 0.6rem;
 	}
 	div#m-checknicknamecontainer input[type=submit]{
 		width:80px;
@@ -40,13 +40,13 @@
 		border:0px;
 		border-radius: 1rem;
 		text-align:center;
-		font-size: 0.5rem;
+		font-size: 0.6rem;
 	}
 </style>
 </head>
 <body class="m-msgbd">
 	<div id="m-checknicknamecontainer">
-		<%if(m.getMemberNickname()==null){ %>
+		<%if(m==null){ %>
 		[<span><%=request.getParameter("memberNickname") %></span>]님의 닉네임은 사용 가능합니다.	
 		<br><br>
 		<button type="button" id="m-duplicatebtn">사용하기</button>

@@ -1,0 +1,36 @@
+{
+	"folders": {},
+	"connections": {
+		"oracle_thin-188be1469d5-4fb6b7da725a9c80": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "14.36.141.71",
+			"save-password": true,
+			"configuration": {
+				"host": "14.36.141.71",
+				"port": "8877",
+				"database": "XE",
+				"url": "jdbc:oracle:thin:@14.36.141.71:8877:XE",
+				"configurationType": "MANUAL",
+				"home": "C:\\app\\GDJ64\\product\\18.0.0\\dbhomeXE",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-connection-type@": "BASIC",
+					"@dbeaver-sid-service@": "SID"
+				},
+				"auth-model": "oracle_native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

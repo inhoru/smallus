@@ -46,16 +46,6 @@
 					<input type="submit" value="로그인">
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2">
-				<img src="<%=request.getContextPath()%>/img/카카오로그인.png" class="m-socialbtn">
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				<img src="<%=request.getContextPath()%>/img/네이버로그인.png" class="m-socialbtn">
-				</td>
-			</tr>
 			</table>
 		</form>
 	</div>
