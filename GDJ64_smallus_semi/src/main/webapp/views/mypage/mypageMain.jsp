@@ -16,7 +16,7 @@
                     <td class="i-customerService"><a href="">공지사항</a></td>
                 </tr>
                 <tr>
-                    <td class="i-myInfo"><a href="<%=request.getContextPath()%>/withdrawal.html">회원탈퇴</a></td>
+                    <td class="i-myInfo"><a href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
                     <td><a href="<%=request.getContextPath()%>/mypageWishlist.html">찜관리</a></td>
                     <td class="i-customerService"><a href="">1:1 문의</a></td>
                 </tr>

@@ -6,22 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.smallus.member.model.vo.Member;
-import com.smallus.member.service.MemberService;
 
 /**
- * Servlet implementation class MainServlet
+ * Servlet implementation class MemberwithdrawalSerlvet
  */
-@WebServlet("/main.do")
-public class MainServlet extends HttpServlet {
+@WebServlet("/withdrawal.do")
+public class MemberwithdrawalSerlvet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainServlet() {
+    public MemberwithdrawalSerlvet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +26,8 @@ public class MainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		Member m=new MemberService().selectByMemberId(loginMember.getMemberId());
-		request.setAttribute("infoMember",m);
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+		request.getRequestDispatcher("/views/mypage/withdrawal.jsp").forward(request, response);
 	}
 
 	/**

@@ -62,12 +62,9 @@ public class MemberLoginServlet extends HttpServlet {
 			//로그인 성공 -> 인증받음
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember",loginMember);
-			//화면전환시킬방법 2가지중 sendRedirect로 보낸다 이유는 데이터를  session 저장시켰고, url주소에 정보를 남기지 않기 위해서
-//			response.sendRedirect(request.getContextPath());
-			//헤더에 프로필 사진 실시간변경을위한 변경..
-			Member m=new MemberService().selectByMemberId(loginMember.getMemberId());
-			request.setAttribute("infoMember",m);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
+			//수정전
+			response.sendRedirect(request.getContextPath());
+		
 		}else {
 			//로그인 실패 -> 인증못받음
 			//실패 메세지 출력

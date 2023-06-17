@@ -38,7 +38,7 @@ if (cookies != null) {
 <body id="bodys">
 	<header id="scroll">
 		<div id="headerContainer">
-			<a href="<%=request.getContextPath()%>/main.do"><img
+			<a href="<%=request.getContextPath()%>"><img
 				src="<%=request.getContextPath()%>/img/main.png" alt="" id="logo"></a>
 			<%
 			if (loginMember == null) {
