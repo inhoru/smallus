@@ -65,30 +65,14 @@
             </div><hr>
             <div class="h-r-callendar" id="h-main-chart"></div>
         </section>
-        <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
+        
+        <script src="<%=request.getContextPath() %>/js/host.js"></script>
         <script>
- 		let rsvList = '<%=(List)session.getAttribute("rsvList")%>';
-      	console.log(rsvList.length);
-      	console.log(rsvList);
-      	let payments=rsvList.split(",");
-      	console.log(payments[9])
-		/*let payments=rsvList.slice(1,4);
-		console.log(payments);
-		let p=payments.split(",");
-		console.log(p); */
-		/* let rsvLength= rsvList.length;
-		chunk();
-		function chunk(rsvList, size = 5) {
-			  const arr = [];
-			    
-			  for (let i = 0; i < rsvLength; i += size) {
-			    arr.push(rsvList.slice(i, i + size));
-			  }
-
-			  return arr;
-	        console.log(arr);
-		} */
-           
+	 		let rsvList = '<%=(List)session.getAttribute("rsvList")%>';
+	      	console.log(rsvList.length);
+	      	console.log(rsvList);
+	      	let payments=rsvList.split(",");
+	      	console.log(payments[9])
         </script>
 <%@ include file="/views/host/hostFooter.jsp"%>
 

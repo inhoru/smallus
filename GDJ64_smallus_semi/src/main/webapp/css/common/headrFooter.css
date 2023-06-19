@@ -32,7 +32,8 @@ header {
 .icon :first-child {
 	cursor: pointer;
 }
-.i-searchIcon{
+
+.i-searchIcon {
 	cursor: pointer;
 }
 
@@ -55,12 +56,10 @@ header {
 /* 메뉴 */
 .menu {
 	width: 60%;
-	
 }
 
 /* 돋보기 누르면 나오는 검색창 */
 #hiddenseach {
-	
 	margin-left: 30%;
 }
 
@@ -69,7 +68,7 @@ header {
 	width: 140%;
 	height: 25px;
 	border-radius: 10px;
-	margin-bottom:6%;
+	margin-bottom: 6%;
 	display: none;
 }
 
@@ -133,26 +132,22 @@ header {
 	align-items: center;
 	justify-content: space-around;
 	width: 40%;
-	
 }
 /* 로그인시 헤더인포 */
-.i-iconinfo{
-width: 40%;
-display: flex;
-align-items: center;
-white-space: nowrap;
-
+.i-iconinfo {
+	width: 40%;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
 }
 
 /* 로그인시프로필사진 */
-.i-iconinfoimg{
-
-border-radius: 100px;
+.i-iconinfoimg {
+	border-radius: 100px;
 	margin-right: 3%;
-	
 }
 /* 로그인시 유저닉네임 */
-#i-iconinfouser{
+#i-iconinfouser {
 	align-items: center;
 	text-align: end;
 	font-weight: 900;
@@ -161,15 +156,14 @@ border-radius: 100px;
 	text-overflow: ellipsis;
 }
 /* 로그인시 님글자 */
-.i-nim{
+.i-nim {
 	margin-right: 3%;
 }
 /* 로그아웃버튼 */
-.i-logout{
-margin-left: 10%;
-
-font-size: 16px;
-font-weight: 900;
+.i-logout {
+	margin-left: 10%;
+	font-size: 16px;
+	font-weight: 900;
 }
 
 /* 알람 아이콘 */
@@ -205,16 +199,14 @@ font-weight: 900;
 	cursor: default;
 	position: absolute;
 	z-index: 999;
-	margin-left:10px;
-	margin-top:270px;
+	margin-left: 10px;
+	margin-top: 270px;
 	width: 400px;
 	font-weight: 300;
 	border-radius: 0.5rem;
 	box-sizing: border-box;
 	box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
 }
-
-
 
 /* 알람 세부목록 */
 .notification {
@@ -232,13 +224,14 @@ font-weight: 900;
 	height: 80px;
 }
 /* 비로그인시 로그인이동버튼 */
-.i-loginMove{
+.i-loginMove {
 	background-color: #FFFBF5;
 	display: none;
 	cursor: default;
 	z-index: 999;
-	width: 10%;
-	font-size: 16px;
+	
+	width : 10%; 
+	font-size : 16px;
 	text-align: center;
 	font-weight: 300;
 	border-radius: 0.5rem;
@@ -247,44 +240,40 @@ font-weight: 900;
 }
 
 /* 화면 너비가 1800px 이상일 때 */
-@media (min-width: 1200px) {
-  .i-loginMove {
-    margin-left: 73%;
-  }
+@media ( min-width : 1200px) {
+	.i-loginMove {
+		margin-left: 73%;
+	}
 }
 
 /* 화면 너비가 800px 이상 1400px 이하일 때 */
-@media (min-width: 800px) and (max-width: 1440px) {
-  .i-loginMove {
-    margin-left: 73%;
-  }
+@media ( min-width : 800px) and (max-width: 1440px) {
+	.i-loginMove {
+		margin-left: 73%;
+	}
 }
 
 /* 비로그인시 로그인버튼 전체 */
-.i-loginToggle{
+.i-loginToggle {
 	display: flex;
 	flex-direction: column;
-	
 }
 /* 멤버 로그인 글씨 */
-.i-memberLoginMove{
+.i-memberLoginMove {
 	display: flex;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 	justify-content: center;
 	padding-bottom: 3%;
 	padding-top: 3%;
-	
 }
 /* 호스트로그인 글씨 */
-.i-hostLoginMove{
+.i-hostLoginMove {
 	display: flex;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 	justify-content: center;
 	padding-bottom: 3%;
 	padding-top: 3%;
 }
-
-
 
 /* 알림타입 */
 .i-notType {
@@ -311,17 +300,17 @@ font-weight: 900;
 }
 
 /* 화면 너비가 1800px 이상일 때 */
-@media (min-width: 1800px) {
-  .notification-container {
-    margin-left: 3%;
-  }
+@media ( min-width : 1800px) {
+	.notification-container {
+		margin-left: 3%;
+	}
 }
 
 /* 화면 너비가 800px 이상 1400px 이하일 때 */
-@media (min-width: 800px) and (max-width: 1440px) {
-  .notification-container {
-    margin-right: 5%;
-  }
+@media ( min-width : 800px) and (max-width: 1440px) {
+	.notification-container {
+		margin-right: 5%;
+	}
 }
 
 /* 알람스크롤 */

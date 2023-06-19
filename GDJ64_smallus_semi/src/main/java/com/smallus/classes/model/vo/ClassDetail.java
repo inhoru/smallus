@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ClassDetail {
-	private String ClassDetaleId;
-	private Class ClassId;
-	private Date BookingTimeStart;
-	private Date BookingTimeEnd;
+	private String classDetailId;
+	private String classId;
+	private Date bookingTimeStart;
+	private Date bookingTimeEnd;
 
 }
