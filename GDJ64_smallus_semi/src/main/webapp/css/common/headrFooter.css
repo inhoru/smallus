@@ -48,11 +48,13 @@ header {
 	width: 90px;
 	height: 60px;
 	padding: 5px 0 5px 0;
+	border: 1px solid black;
+	
 }
 
 /* 메뉴 */
 .menu {
-	width: 100%;
+	width: 60%;
 }
 
 /* 돋보기 누르면 나오는 검색창 */
@@ -134,10 +136,10 @@ header {
 }
 /* 로그인시 헤더인포 */
 .i-iconinfo{
-width: 40%;
-display: flex;
-align-items: center;
-white-space: nowrap;
+	width: 40%;
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
 
 }
 
@@ -235,8 +237,8 @@ font-weight: 900;
 	cursor: default;
 	position: absolute;
 	z-index: 999;
-	margin-left: 1414px;
-	width: 200px;
+	left:80%;
+	width: 10rem;
 	font-size: 16px;
 	text-align: center;
 	font-weight: 300;

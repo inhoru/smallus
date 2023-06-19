@@ -23,4 +23,10 @@ public class Host {
 	private String hostAccountBank;
 	private String hostAccount;
 	private String hostAccountName;	
+	
+	
+	@Override
+	public String toString() {
+		return hostAccountBank+","+hostAccount+","+hostAccountName;
+	}
 }

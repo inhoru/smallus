@@ -21,14 +21,11 @@ public class HostService {
 		return h;
 	}
 	
-	public List<Classes> selectClassesByHostId(String hostId){
+	public Host updateHostCalc(String hostId) {
 		Connection conn=getConnection();
-		List<Classes> list =dao.selectClassesByHostId(conn,hostId);
+		Host h=dao.updateHostCalc(conn,hostId);
 		close(conn);
-		if(list.size()==1) {
-			System.out.println("service-list");			
-		}
-		return list;
+		return h;
 	}
 
 }
