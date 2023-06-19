@@ -1,6 +1,8 @@
 package com.smallus.member.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +37,8 @@ public class MemberMypageServlet extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		int count=new CouponService().couponCount(loginMember.getMemberId());
 		System.out.println(count);
+		List<Member> m=new MemberService().paymentDetails(loginMember.getMemberId());
+		request.setAttribute("paymentDetails",m);
 		request.setAttribute("countCoupon", count);
 		request.getRequestDispatcher("/views/mypage/mypageMain.jsp").forward(request, response);
 	

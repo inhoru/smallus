@@ -83,4 +83,10 @@ public class MemberService {
 		else rollback(conn);
 		return result;
 	}
+	public List<Member> paymentDetails(String memberId){
+		Connection conn=getConnection();
+		List<Member> list=dao.paymentDetails(conn,memberId);
+		close(conn);
+		return list;
+	}
 }

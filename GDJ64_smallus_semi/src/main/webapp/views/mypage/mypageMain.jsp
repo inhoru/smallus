@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
-<%int coupon=(int)request.getAttribute("countCoupon"); %>
+<%int coupon=(int)request.getAttribute("countCoupon"); 
+List<Member> paymentDetails=(List) request.getAttribute("paymentDetails");
+%>
+
  <div id="mainOpacity">
         <section class="i-tablecontent">
             <table class="i-mypageCategories">
@@ -67,6 +71,7 @@
                                     <label for="slide03" class="left"><img src="<%=request.getContextPath()%>/img/부등호.png" alt="" width="20px"
                                             height="20px"></label>
                                 </span>
+                                
                                 <div class="i-reservationList">
                                     <div class="i-reservation-details">
                                         <div class="bs2"><span class="i-reservation-payment"> 결제완료</span>

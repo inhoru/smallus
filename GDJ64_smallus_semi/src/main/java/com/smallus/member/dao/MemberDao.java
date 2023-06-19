@@ -4,6 +4,7 @@ import static com.smallus.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.KeyStore.ProtectionParameter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -221,6 +222,23 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	public List<Member> paymentDetails(Connection conn, String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList<Member>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("paymentDetails"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) list.add(getMember(rs));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
 
 	public static Member getMember(ResultSet rs) throws SQLException {
