@@ -26,6 +26,7 @@ header {
 	margin: 1 0 1% 0;
 	z-index: 100;
 	height: 77px;
+	box-sizing: border-box;
 }
 
 .icon :first-child {
@@ -41,6 +42,7 @@ header {
 	margin: auto;
 	display: flex;
 	align-items: center;
+	height: auto;
 }
 
 /* 로고 */
@@ -52,21 +54,22 @@ header {
 
 /* 메뉴 */
 .menu {
-	width: 100%;
+	width: 60%;
+	
 }
 
 /* 돋보기 누르면 나오는 검색창 */
 #hiddenseach {
-	margin-bottom: 5px;
+	
 	margin-left: 30%;
 }
 
 /* 검색창 설정 */
 #hiddenseach input {
-	width: 650px;
+	width: 160%;
 	height: 25px;
 	border-radius: 10px;
-	margin-bottom:4%;
+	margin-bottom:6%;
 	display: none;
 }
 
@@ -233,10 +236,9 @@ font-weight: 900;
 	background-color: #FFFBF5;
 	display: none;
 	cursor: default;
-	position: absolute;
 	z-index: 999;
-	margin-left: 1414px;
-	width: 200px;
+	margin-left:73%;
+	width: 15%;
 	font-size: 16px;
 	text-align: center;
 	font-weight: 300;
