@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MemberLoginMoveServlet
+ * Servlet implementation class MemberUpdatePasswordServlet
  */
-@WebServlet("/memberLoginMove.do")
-public class MemberLoginMoveServlet extends HttpServlet {
+@WebServlet("/member/updatePassword.do")
+public class MemberUpdatePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLoginMoveServlet() {
+    public MemberUpdatePasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,7 @@ public class MemberLoginMoveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("/views/member/memberLogin.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/updatePassword.jsp").forward(request, response);
 	}
 
 	/**

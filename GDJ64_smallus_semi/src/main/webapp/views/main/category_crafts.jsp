@@ -73,6 +73,4 @@
         <section id="banner">
         </section>
         
-        <section id="main">
-        </section>
 <%@ include file="/views/common/footer.jsp"%>

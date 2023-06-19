@@ -1,118 +1,205 @@
 package com.smallus.member.dao;
 
+import static com.smallus.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
-import static com.smallus.common.JDBCTemplate.*;
+
 import com.smallus.common.JDBCTemplate;
 import com.smallus.member.model.vo.Member;
 
 public class MemberDao {
-	private Properties sql=new Properties();//final로 선언하면 처리속도 빨라짐
-	
+	private Properties sql = new Properties();// final로 선언하면 처리속도 빨라짐
+
 	{
-		String path=JDBCTemplate.class.getResource("/sql/member.properties").getPath();
+		String path = JDBCTemplate.class.getResource("/sql/member.properties").getPath();
 		try {
 			sql.load(new FileReader(path));
-		}catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 	public Member memberLogin(Connection conn, String memberId, String password) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Member m=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("memberLogin"));
-			//SELECT * FROM MEMBER WHERE MEMBER_ID=? AND MEMBER_PW=?
+			pstmt = conn.prepareStatement(sql.getProperty("memberLogin"));
+			// SELECT * FROM MEMBER WHERE MEMBER_ID=? AND MEMBER_PW=?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, password);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				m=getMember(rs);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				m = getMember(rs);
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			close(rs);
 			close(pstmt);
-		}return m;
+		}
+		return m;
 	}
-	
+
 	public int enrollMember(Connection conn, Member m) {
-		PreparedStatement pstmt=null;
-		int result=0;
+		PreparedStatement pstmt = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("enrollMember"));
-			//INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,DEFAULT,?,DEFAULT)
+			pstmt = conn.prepareStatement(sql.getProperty("enrollMember"));
+			// INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
 			pstmt.setString(4, m.getMemberPhone());
 			pstmt.setString(5, m.getMemberEmail());
 			pstmt.setString(6, m.getMemberNickname());
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
-	
+
 	public Member selectByMemberId(Connection conn, String memberId) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Member m=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectByMemberId"));
-			//SELECT * FROM MEMBER WHERE MEMBER_ID=?
+			pstmt = conn.prepareStatement(sql.getProperty("selectByMemberId"));
+			// SELECT * FROM MEMBER WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				m=getMember(rs);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				m = getMember(rs);
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 			close(rs);
-		}return m;
+		}
+		return m;
 	}
+
 	public Member selectBymemberNickname(Connection conn, String memberNickname) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Member m=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectBymemberNickname"));
-			//SELECT * FROM MEMBER WHERE MEMBER_ID=?
+			pstmt = conn.prepareStatement(sql.getProperty("selectBymemberNickname"));
+			// SELECT * FROM MEMBER WHERE MEMBER_ID=?
 			pstmt.setString(1, memberNickname);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				m=getMember(rs);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				m = getMember(rs);
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 			close(rs);
-		}return m;
+		}
+		return m;
 	}
-	public int KakaoenrollMember(Connection conn, Member m) {
-		PreparedStatement pstmt=null;
-		int result=0;
+
+	public int updatePassword(Connection conn, String userId, String password) {
+		PreparedStatement pstmt = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("KakaoenrollMember"));
-			//INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,DEFAULT,?,DEFAULT)
+			pstmt = conn.prepareStatement(sql.getProperty("updatePassword"));
+			//updatePassword=UPDATE MEMBER SET MEMBER_PW=? WHERE MEMBER_ID=?
+			pstmt.setString(1, password);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+	public int KakaoenrollMember(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("KakaoenrollMember"));
+			// INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)	
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
 			pstmt.setString(4, m.getMemberPhone());
 			pstmt.setString(5, m.getMemberEmail());
 			pstmt.setString(6, m.getMemberNickname());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Member kakaoLogin(Connection conn, String memberEmail) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("kakaoLogin"));
+			// SELECT * FROM MEMBER WHERE MEMBER_EMAIL=?
+			pstmt.setString(1, memberEmail);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				m = getMember(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return m;
+
+	}
+	public Member selectBynickName(Connection conn ,String nickName) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member m = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectBynickName"));
+			pstmt.setString(1, nickName);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				m=(getMember(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return m;
+	}
+	public int updateMember(Connection conn, Member m,String s) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateMember"));
+			//UPDATE MEMBER SET MEMBER_NICKNAME=?,MEMBER_IMG=? WHERE MEMBER_ID=?
+			pstmt.setString(1, m.getMemberNickname());
+			pstmt.setString(2, m.getMemberImg());
+			pstmt.setString(3, s);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -120,38 +207,12 @@ public class MemberDao {
 			close(pstmt);
 		}return result;
 	}
-	public Member kakaoLogin(Connection conn,String memberEmail) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Member m=null;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("kakaoLogin"));
-			//SELECT * FROM MEMBER WHERE MEMBER_EMAIL=?
-			pstmt.setString(1, memberEmail);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				m=getMember(rs);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-			close(rs);
-		}return m;
-	}
-	
-	
-	public static Member getMember(ResultSet rs) throws SQLException{
-		return Member.builder().
-				memberId(rs.getString("member_id")).
-				memberPw(rs.getString("MEMBER_PW")).
-				memberName(rs.getString("MEMBER_NAME")).
-				memberPhone(rs.getString("MEMBER_PHONE")).
-				memberEmail(rs.getString("MEMBER_EMAIL")).
-				memberConsent(rs.getString("MEMBER_CONSENT")).
-				memberImg(rs.getString("MEMBER_IMG")).
-				memberNickname(rs.getString("MEMBER_NICKNAME")).
-				memberSt(rs.getString("MEMBER_ST")).build();
+
+	public static Member getMember(ResultSet rs) throws SQLException {
+		return Member.builder().memberId(rs.getString("member_id")).memberPw(rs.getString("MEMBER_PW"))
+				.memberName(rs.getString("MEMBER_NAME")).memberPhone(rs.getString("MEMBER_PHONE"))
+				.memberEmail(rs.getString("MEMBER_EMAIL")).memberConsent(rs.getString("MEMBER_CONSENT"))
+				.memberImg(rs.getString("MEMBER_IMG")).memberNickname(rs.getString("MEMBER_NICKNAME"))
+				.memberSt(rs.getString("MEMBER_ST")).build();
 	}
 }
-	
