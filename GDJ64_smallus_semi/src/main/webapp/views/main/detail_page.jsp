@@ -3,13 +3,14 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>./css/category/detail.css" />
-<div class="detail">
 	<section id="main">
+<div class="detail">
 		<div class="detail_page">
 			<a style="display: block; padding: 3% 1px 0 20%; font-size: 8px;">공예</a>
 			<h4 style="margin-left: 20%; font-size: 32px;">스테인 글라스로 나만의 소품 만들기</h4>
 			<img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg"
 				width="500" height="500" style="margin: 0 20%;">
+				<div id=calendar>
 				<img  id=img_cd src="<%=request.getContextPath()%>/img/category_main/calendar.png">
 				<p>2023년 06월 23일</p><br>
 				<button>시간 협의</button><br>
@@ -19,6 +20,7 @@
 				<button id=mp>+</button><br>
 				<p>결제 금액  37,000</p>
 				<button>결제하기</button>
+				</div>
 			<div class="detail_page2">
 				<img
 					src="<%=request.getContextPath()%>/img/category_main/craft2.jpg"
@@ -29,7 +31,7 @@
 		</div>
 		<nav class="menu" style="margin: 4%;">
 			<ul
-				style="font-size: 24px; justify-content: space-around; display:flex;">
+				style="font-size: 24px;">
 				<li><a href="">상세 정보</a></li>
 				<hr>
 				<li><a href="">후기</a></li>
@@ -156,8 +158,8 @@
 						<hr style="margin-right: 20%">
 					</ul>
 				</nav>
-	</section>
 </div>
+	</section>
 <style>
 #d-review-page {
 	width: 70%;
