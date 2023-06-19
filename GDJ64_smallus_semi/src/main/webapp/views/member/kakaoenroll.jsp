@@ -29,25 +29,36 @@
 		border-radius: 1rem;
 		text-align:center;
 		font-size: 0.6rem;
+		cursor:pointer;
 	}
 </style>
 </head>
 <body class="m-msgbd">
 	<div id="m-checkidcontainer">
 		<!-- 아이디 재입력창 구성 -->
-		<form action="<%=request.getContextPath()%>/member/KakaoenrollMember.do" method="get" onsubmit="refresh();">
 			<input type="hidden" name="memberEmail" value=<%=email%>>
 			<input type="hidden" name="memberName" value=<%=name%>>
 			휴대폰 번호 <input type="tel" placeholder="(-없이)01012345678" name="memberPhone" id="memberPhone" maxlength="11" required>
-			<input type="submit" value="핸드폰번호 등록하기" onclick="">
-		</form>
+			<button id="m-kakaosubmit">핸드폰번호 등록하기</button>
 	</div>
 	<script>
-	function refresh(){
-	    window.opener.location.reload();
-	    window.close();	
-	})
-	
+	$("#m-kakaosubmit").click(e=>{
+		let memberPhone=$("#memberPhone").val();
+		$.ajax({
+			url:'<%=request.getContextPath()%>/member/KakaoenrollMember.do',
+			type:"get",
+			data:{memberEmail:'<%=email%>',memberName:'<%=name%>',memberPhone:memberPhone},
+			dataType:"text",
+			success: function(data){
+		            window.close();
+					window.opener.location.assign("<%=request.getContextPath()%>/member/KakaoLogin.do?memberEmail=<%=email%>");
+			},
+			error:(r,m,e)=>{
+				console.log(r);
+				console.log(m);
+			}
+		});	
+	});
 	</script>
 </body>
 </html>

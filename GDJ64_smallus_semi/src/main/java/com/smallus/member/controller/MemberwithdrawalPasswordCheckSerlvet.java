@@ -6,23 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.smallus.coupon.service.CouponService;
-import com.smallus.member.model.vo.Member;
-import com.smallus.member.service.MemberService;
 
 /**
- * Servlet implementation class MemberMypageServlet
+ * Servlet implementation class MemberwithdrawalPasswordCheckSerlvet
  */
-@WebServlet("/memberMypage.do")
-public class MemberMypageServlet extends HttpServlet {
+@WebServlet("/withdrawalPassword.do")
+public class MemberwithdrawalPasswordCheckSerlvet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberMypageServlet() {
+    public MemberwithdrawalPasswordCheckSerlvet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +26,8 @@ public class MemberMypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		Member loginMember = (Member) session.getAttribute("loginMember");
-		int count=new CouponService().couponCount(loginMember.getMemberId());
-		System.out.println(count);
-		request.setAttribute("countCoupon", count);
-		request.getRequestDispatcher("/views/mypage/mypageMain.jsp").forward(request, response);
-	
+
+	request.getRequestDispatcher("/views/mypage/withdrawalPassword.jsp").forward(request, response);
 	}
 
 	/**

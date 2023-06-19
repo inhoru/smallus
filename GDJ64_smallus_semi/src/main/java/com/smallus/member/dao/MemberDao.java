@@ -45,7 +45,7 @@ public class MemberDao {
 		} finally {
 			close(rs);
 			close(pstmt);
-		}
+		}	
 		return m;
 	}
 
@@ -200,6 +200,21 @@ public class MemberDao {
 			pstmt.setString(1, m.getMemberNickname());
 			pstmt.setString(2, m.getMemberImg());
 			pstmt.setString(3, s);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int deleteByMember(Connection conn, String memberId,String password) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteByMember"));
+			//UPDATE MEMBER SET MEMBER_ST='N' WHERE MEMBER_ID = ? AND MEMBER_PW=?
+			pstmt.setString(1,memberId);
+			pstmt.setString(2, password);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
