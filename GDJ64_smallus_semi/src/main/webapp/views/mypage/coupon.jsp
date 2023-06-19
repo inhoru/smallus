@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List,com.smallus.coupon.model.vo.Coupon"%>
+<%
+List<Coupon> coupon = (List) request.getAttribute("coupon");
+%>
+<%@ include file="/views/common/mainHeader.jsp"%>
+
+			<form action="<%=request.getContextPath()%>/insertCoupon.do">
+<section class="i-mypagecoupontotal">
+	<div class="i-mypagecoupon">
+		<h2 class="i-mypageh2">쿠폰</h2>
+		<div class="i-couponinput">
+			<h3>쿠폰입력</h3>
+			<input type="text" name="i-insertcoupon">
+			<button>등록</button>
+			</form>
+		</div>
+		<div class="i-possessioncoupon">
+			<h3>보유한 쿠폰</h3>
+		</div>
+		<%
+		if (coupon.isEmpty()) {
+		%>
+		<div class="i-nocoupon">보유한 쿠폰이 없습니다.</div>
+		<%
+		} else {
+		%>
+		<div class="i-coiponcontainer">
+			<%
+			for (Coupon n : coupon) {
+			%>
+			<div class="i-coupon-card">
+				<h2><%=n.getCouponName()%></h2>
+				<p><%=n.getCreated_date()%>~<%=n.getExpiredDate()%></p>
+				<div class="i-circle1"></div>
+				<div class="i-circle2"></div>
+			</div>
+			<%
+			}
+			%>
+		</div>
+		<%
+		}
+		%>
+	
+</section>
+
+<%@ include file="/views/common/footer.jsp"%>

@@ -8,21 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.smallus.coupon.service.CouponService;
 import com.smallus.member.model.vo.Member;
 import com.smallus.member.service.MemberService;
 
 /**
- * Servlet implementation class MemberMypageServlet
+ * Servlet implementation class MemberwithdrawalEndSerlvet
  */
-@WebServlet("/memberMypage.do")
-public class MemberMypageServlet extends HttpServlet {
+@WebServlet("/withdrawalEnd.do")
+public class MemberwithdrawalEndSerlvet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberMypageServlet() {
+    public MemberwithdrawalEndSerlvet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +30,23 @@ public class MemberMypageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
+		HttpSession session=request.getSession(false);
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		int count=new CouponService().couponCount(loginMember.getMemberId());
-		System.out.println(count);
-		request.setAttribute("countCoupon", count);
-		request.getRequestDispatcher("/views/mypage/mypageMain.jsp").forward(request, response);
-	
+		String password=request.getParameter("password");
+		System.out.println(loginMember);
+		System.out.println(password);
+	int result=new MemberService().deleteByMember(loginMember.getMemberId(),password);
+	String msg="탈퇴가 완료되었습니다.",loc="/";
+	if(result==0) {
+		msg="비밀번호가 일치하지않습니다.";
+		loc="/withdrawalPassword.do";
+	}else {		
+		if(session!=null)
+			session.invalidate();
+	}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
