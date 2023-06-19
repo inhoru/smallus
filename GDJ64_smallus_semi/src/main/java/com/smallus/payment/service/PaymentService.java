@@ -6,7 +6,6 @@ import static com.smallus.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.smallus.Classes;
 import com.smallus.payment.dao.PaymentDao;
 import com.smallus.payment.model.vo.Payment;
 
@@ -20,10 +19,10 @@ public class PaymentService {
 		return list;
 	}
 	
-	public List<Classes> selectClassByhostId(String hostId){
-		Connection conn=getConnection();
-		List<Classes> list=dao.selectClassByhostId(conn, hostId);
-		close(conn);
-		return list;
-	}
+//	public Map<String, String> selectRsvByhostId(String hostId){
+//		Connection conn=getConnection();
+//		Map<String, String> list=dao.selectRsvByhostId(conn, hostId);
+//		close(conn);
+//		return list;
+//	}
 }

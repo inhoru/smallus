@@ -1,4 +1,4 @@
-/* 전체페이지 스타일 */
+	/* 전체페이지 스타일 */
     * {
         margin: 0;
         padding: 0;
@@ -34,6 +34,7 @@
     header {
         background-color: #FFFBF5;
         width: 100%;
+        height:auto;
     }
 
     .icon :first-child {
@@ -58,18 +59,16 @@
     /* 로고 */
     #logo {
         width: 90px;
-        /* height: 60px; */
-        padding: 0.5rem 0;
-        border: 1px solid red;
+        height: auto;
     }
 
 
     /* 아이콘 */
-    div.h-iconContainer {
+    .h-iconContainer {
         display: flex;
         justify-content: space-between;
-        width: 30%;
-        margin-left: 70%;
+        /* width: 40%; */
+        margin-left: 45%;
         align-items: center;
     }
 
@@ -77,6 +76,7 @@
         font-size: 1rem;
         align-items: center;
         margin: 0 auto;
+        padding:0 1rem;
     }
 
     /* 알람 아이콘 */
@@ -85,7 +85,6 @@
         margin: 0 1em;
         align-items: center;
         width:2rem;
-        height:2rem;
     }
 
     /* 알람 갯수 */
@@ -175,11 +174,15 @@
     }
 
     /*  */
+    footer{
+    	widtH:100%;	
+    	margin-top:10rem;
+    }
     .footer {
-    width: 100%;
-    flex-direction: column;
-    background-color: #F3EEE6;
-}
+    	width: 100%;
+   		flex-direction: column;
+    	background-color: #F3EEE6;
+	}
 
 .footer div {
     width: 70%;

@@ -3,80 +3,82 @@ google.charts.setOnLoadCallback(drawVisualization);
 // 
 function drawVisualization() {
     // Some raw data (not necessarily accurate)
-    // let data = google.visualization.arrayToDataTable([
-    //     /*['Month', 'amount', '마들렌', '쿠키', '휘낭시에', '스콘', '바나나푸딩', '평균'],
-    //     ['2023/01', 500 ,165, 938, 522, 998, 450, 614.6],
-    //     ['2023/02', 500 ,135, 1120, 599, 1268, 288, 682],
-    //     ['2023/03', 500 ,157, 1167, 587, 807, 397, 623],
-    //     ['2023/04', 500 ,139, 1110, 615, 968, 215, 609.4],
-    //     ['2023/05', 500 ,136, 691, 629, 1026, 366, 569.6]*/
-    //     ['Month', '마들렌', '쿠키', '휘낭시에', '스콘', '바나나푸딩', '평균'],
-    //     ['2023/01', 165, 938, 522, 998, 450, 614.6],
-    //     ['2023/02', 135, 1120, 599, 1268, 288, 682],
-    //     ['2023/03', 157, 1167, 587, 807, 397, 623],
-    //     ['2023/04', 139, 1110, 615, 968, 215, 609.4],
-    //     ['2023/05', 136, 691, 629, 1026, 366, 569.6]
-    // ]);
+    let data = google.visualization.arrayToDataTable([
+        /*['Month', 'amount', '마들렌', '쿠키', '휘낭시에', '스콘', '바나나푸딩', '평균'],
+        ['2023/01', 500 ,165, 938, 522, 998, 450, 614.6],
+        ['2023/02', 500 ,135, 1120, 599, 1268, 288, 682],
+        ['2023/03', 500 ,157, 1167, 587, 807, 397, 623],
+        ['2023/04', 500 ,139, 1110, 615, 968, 215, 609.4],
+        ['2023/05', 500 ,136, 691, 629, 1026, 366, 569.6]*/
+        ['Month', '마들렌', '쿠키', '휘낭시에', '스콘', '바나나푸딩', '평균'],
+        ['2023/01', 165, 938, 522, 998, 450, 614.6],
+        ['2023/02', 135, 1120, 599, 1268, 288, 682],
+        ['2023/03', 157, 1167, 587, 807, 397, 623],
+        ['2023/04', 139, 1110, 615, 968, 215, 609.4],
+        ['2023/05', 136, 691, 629, 1026, 366, 569.6]
+    ]);
 
-    // let options = {
-    //     //title : '월별 클래스 매출 현황',
-    //     //vAxis: {title: '클래스'},
-    //     //hAxis: {title: '브루어스 커피 월별 매출'},
-    //     seriesType: 'bars',
-    //     series: {
-    //         0: { color: '#5D8CAE' },
-    //         1: { color: '#F7B0AD' },
-    //         2: { color: '#f1ca3a' },
-    //         3: { color: '#72AE89' },
-    //         4: { color: '#e67e22' },
-    //         5: { type: 'line' }
-    //     },
-    //     backgroundColor: '#FFFCF5'
-    // };
+    let options = {
+        //title : '월별 클래스 매출 현황',
+        //vAxis: {title: '클래스'},
+        //hAxis: {title: '브루어스 커피 월별 매출'},
+        seriesType: 'bars',
+        series: {
+            0: { color: '#5D8CAE' },
+            1: { color: '#F7B0AD' },
+            2: { color: '#f1ca3a' },
+            3: { color: '#72AE89' },
+            4: { color: '#e67e22' },
+            5: { type: 'line' }
+        },
+        backgroundColor: '#FFFCF5'
+    };
     
-    // console.log(options.series);
+    //console.log(options.series);
 
-    // let chart = new google.visualization.ComboChart(document.getElementById('h-main-chart'));
-    // chart.draw(data, options);
-
-
-    let count = 0;
-	let data;
-	  let chart;
-      let options;
-	  
-      function drawChart() {
-	  data = new google.visualization.DataTable();
-	  data.addColumn('string', 'Dialogue');
-	  data.addColumn('number', 'Send');
-	  data.addColumn('number', 'Resoponse');
-	  data.addRow(['Dialogue 1', 1, 1]);
-	  
-        options = {
-          chart: {
-            title: 'Analysis of Dialogue System',
-            subtitle: '',
-          }
-        };
-
-        chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-      
-      function addData(){
-	    count++;
-		data.addRow(['Dialogue ' + count, Number(document.getElementById('sendInput').value), Number(document.getElementById('responseInput').value)]);
-		chart.draw(data, options)
-      }
-      function removeData(){
-		data.removeRow(0);
-		chart.draw(data, opstions)
-      }
-      
-
-
+    let chart = new google.visualization.ComboChart(document.getElementById('h-main-chart'));
+    chart.draw(data, options);
 }
+
+
+
+  //   let count = 0;
+	// let data;
+	//   let chart;
+  //     let options;
+	  
+  //     function drawChart() {
+	//   data = new google.visualization.DataTable();
+	//   data.addColumn('string', 'Dialogue');
+	//   data.addColumn('number', 'Send');
+	//   data.addColumn('number', 'Resoponse');
+	//   data.addRow(['Dialogue 1', 1, 1]);
+	  
+  //       options = {
+  //         chart: {
+  //           title: 'Analysis of Dialogue System',
+  //           subtitle: '',
+  //         }
+  //       };
+
+  //       chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+  //       chart.draw(data, google.charts.Bar.convertOptions(options));
+  //     }
+      
+  //     function addData(){
+	//     count++;
+	// 	data.addRow(['Dialogue ' + count, Number(document.getElementById('sendInput').value), Number(document.getElementById('responseInput').value)]);
+	// 	chart.draw(data, options)
+  //     }
+  //     function removeData(){
+	// 	data.removeRow(0);
+	// 	chart.draw(data, opstions)
+  //     }
+      
+
+
+
 
 
 
@@ -86,12 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
    //let classTime='클래스 시간';
    //let memberName='회원 이름';
    //let memberNum='2';
-   //let fcdiv=document.getElementsByClassName('fc-toolbar-chunk');
+
+
    let eventDiv=document.getElementsByClassName('fc-event');
-   console.log(eventDiv);
-//    eventDiv.click(e=>{
-//         alert("click");
-//    })
+  //  console.log(eventDiv);
+
    
     let calendarEl = document.getElementById('h-main-calendar');
     let calendar = new FullCalendar.Calendar(calendarEl, {
@@ -108,11 +109,76 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         //initialDate: '2021-07-15', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
         selectable : true, // 달력 일자 드래그 설정가능
-        droppable : true,
-        editable : true,
+        //droppable : true,
+        //editable : true,
         nowIndicator: true, // 현재 시간 마크
         locale: 'ko', // 한국어 설정
-        events: [
+        // 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
+      select: function(arg) {
+    	  console.log(arg);
+
+        var title = prompt('입력할 일정:');
+    // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
+        if (title) {
+          calendar.addEvent({
+            title: title,
+            start: arg.start,
+            end: arg.end,
+            allDay: arg.allDay,
+            backgroundColor:"yellow",
+            textColor:"blue"
+          })
+        }
+        calendar.unselect()
+      },
+      eventClick: function(arg) {
+    	  // 있는 일정 클릭시,
+    	  console.log("#등록된 일정 클릭#");
+    	  console.log(arg.event);
+    	  
+        if (confirm('Are you sure you want to delete this event?')) {
+          arg.event.remove()
+        }
+      },
+      editable: true,
+      dayMaxEvents: true, // allow "more" link when too many events
+      events:[    
+        {
+          title: payments[1], // a property!
+          start: payments[2], // a property!
+          color: '#f2c19d',
+        },
+        {
+          title: payments[7], // a property!
+          start: payments[9], // a property!
+          color: '#f2c19d',
+        }
+      
+      ]
+
+        // events: function(info, successCallback, failureCallback){
+    	  // // ajax 처리로 데이터를 로딩 시킨다.
+    	  // $.ajax({
+    		//  type:"get",
+    		//  url:"<%=request.getContextPath()%>/host/viewCalendar.do",
+    		//  dataType:"json",
+    		//  success:(data)=>{ 
+				// 	// responseText에 저장된 값을 data에 대입한다.
+				// 	console.log(data);
+				// 	//$("<h3>").text(data).css("color","magenta").appendTo($("#container"));
+				// },
+				// error: (e,m)=>{
+				// 	// console.log(e); // element
+				// 	// console.log(m);
+				// 	if(e.status==404) alert("요청한 페이지가 없습니다.");
+				// },
+				// complete:()=>{
+				// 	alert("서버와 통신 끝"); // success나 error가 끝난 뒤에 무조건 complete가 실행 된다
+				// }
+    		
+    	  // 	});
+    	  // },
+        /*events: [
               { // this object will be "parsed" into an Event Object
                 title: '휘낭시에 15:00 김*영님 2명', // a property!
                 start: '2023-06-11', // a property!
@@ -128,14 +194,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: '휘낭시에 15:00 2명', // a property!
                 start: '2023-06-25', // a property!
                 color: '#f2c19d',
+            },{
+                title: '정산 신청 일', // a property!
+                start: '2023-06-01', // a property!
+                color: '#c6e0c1',
             },
             {
                 title: 'Meeting',
                 start: '2023-06-12T10:30:00',
                 end: '2023-06-12T12:30:00'
             },
-        ],
+        ],*/
         
+        /*eventClick: function(info) {
+
+            // 일정 클릭 시 발생할 이벤트
+            //클릭한 일정 Id
+            let id = info.event._def.defId;
+            alert(id+'hi');
+          */
         
         
     });
@@ -150,17 +227,3 @@ $(".h-notification-icon").on("click", e => {
     $(".h-notification-container").slideToggle(300);
 });
 
-// + 누르면 reservation 페이지로 이동하기
-
-// $("#h-main-moveTo-rsv").on("click", e=>{
-//     $.ajax({
-//         url:"<%=request.getContextPath()%>/host/rsrv.do?hostId="+loginHost.getHostId(),
-//         method:"get",
-//         success: data=>{
-//             console.log(data);
-//         },
-//         error:(r,m)=>{
-//             console.log(r, m);
-//         }
-//     });
-// });

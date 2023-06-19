@@ -5,8 +5,8 @@
 	<!-- main 배너 -->
 	<div class="h-main-slide-container">
 		<div class="slides fade">
-			<img src="<%=request.getContextPath() %>/img/main-img1.jpg" style="width: 100%">
-			<div class="slide-text">나의 첫번째 베이킹</div>
+			<img src="<%=request.getContextPath() %>/img/main-img0.jpg" style="width: 100%">
+			<div class="slide-text">하나뿐인</div>
 		</div>
 
 		<div class="slides fade">
@@ -18,6 +18,10 @@
 			<img src="<%=request.getContextPath() %>/img/main-img3.jpg" style="width: 100%">
 			<div class="slide-text">Bouldering</div>
 		</div>
+		<div class="slides fade">
+			<img src="<%=request.getContextPath() %>/img/main-img4.jpg" style="width: 100%">
+			<div class="slide-text">hi small us</div>
+		</div>
 
 		<!-- Next and previous buttons -->
 		<a class="prev" onclick="plusSlides(-1)"><img src="<%=request.getContextPath()%>/img/prev.svg"></a>
@@ -27,7 +31,7 @@
 	<!-- The dots/circles -->
 	<div style="text-align: center">
 		<span class="dot" onclick="currentSlide(1)"></span> <span class="dot" onclick="currentSlide(2)"></span>
-		<span class="dot" onclick="currentSlide(3)"></span>
+		<span class="dot" onclick="currentSlide(3)"></span> <span class="dot" onclick="currentSlide(4)"></span>
 	</div>
 
 	<!-- img-slide 2 -->
@@ -63,7 +67,7 @@
 						<h5>KB Pay로 10만원 이상 결제 시 5천원 할인</h5>						
 					</div>
 					<!-- 아래 쿠폰 이미지는 결제 수단에 따라 이미지 변경 예정 -->
-					<img src="<%=request.getContextPath()%>/img/main-banner-coupon.svg">
+					<img src="<%=request.getContextPath()%>/img/h-event-banner.png" width="100" height="100">
 				</a>
 			</div>
 		</div>
