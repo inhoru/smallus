@@ -78,14 +78,26 @@
 							email=kakao_account.email;
 							name=kakao_account.profile.nickname;
 							console.log(email,name);
-							if(name==null){
-								open("<%=request.getContextPath()%>/views/member/kakaoenroll.jsp?email="+email+"&name="+name
-									,"_blank","width=400, height=200, top=300,left=500");
-							}else{
-								location.assign("<%=request.getContextPath()%>/member/KakaoLogin.do?memberEmail="+email);
-							}
+								$.ajax({
+									url:'<%=request.getContextPath()%>/member/KakaoLoginCheck.do',
+									data:{memberEmail:email,memberName:name},
+									dataType:"text",
+									success: function(data){
+										console.log(data, typeof data);
+											if(data=='null'){
+										           open("<%=request.getContextPath()%>/views/member/kakaoenroll.jsp?email="+email+"&name="+name
+												,"_blank","width=400, height=200, top=300,left=500");
+											}else{
+												location.assign("<%=request.getContextPath()%>/member/KakaoLogin.do?memberEmail="+email);
+											}
+											},
+									error:(r,m,e)=>{
+												console.log(r);
+												console.log(m);
+											}
+								});
 						}
-					})
+					});
 				}
 			});
 		

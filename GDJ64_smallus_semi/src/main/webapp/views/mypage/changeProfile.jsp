@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 
+
 <div id="mainOpacity">
 	<section class="i-tablecontent">
 		<table class="i-mypageCategories">
