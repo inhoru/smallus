@@ -168,11 +168,11 @@
 
 /* 예약내역 리스트(2개) */
 .i-reservationListTotal {
-    height: 220px;
+       height: 220px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
-    width: 1200px;
+    width: 100%;
     margin: auto;
 
     
@@ -211,6 +211,29 @@
 #i-reservation input[id="slide03"]:checked~.slidelist>li {
     transform: translateX(-200%);
 }
+/* 슬라이드 체크된거에따라 li보여줌 */
+#i-reservation input[id="slide04"]:checked~.slidelist>li {
+    transform: translateX(-300%);
+}
+/* 슬라이드 체크된거에따라 li보여줌 */
+#i-reservation input[id="slide05"]:checked~.slidelist>li {
+    transform: translateX(-400%);
+}
+/* 슬라이드 체크된거에따라 li보여줌 */
+#i-reservation input[id="slide06"]:checked~.slidelist>li {
+    transform: translateX(-500%);
+}
+/* 슬라이드 체크된거에따라 li보여줌 */
+#i-reservation input[id="slide07"]:checked~.slidelist>li {
+    transform: translateX(-600%);
+}
+/* 슬라이드 체크된거에따라 li보여줌 */
+#i-reservation input[id="slide08"]:checked~.slidelist>li {
+    transform: translateX(-700%);
+}
+#i-reservation input[id="slide09"]:checked~.slidelist>li {
+    transform: translateX(-800%);
+}
 
 
 /* 예약내역 세부사항 */
@@ -225,6 +248,9 @@
     
 
 
+}
+.i-reservationImg{
+	border-radius: 20px;
 }
 
 /* 예약내역 글씨 */
@@ -295,7 +321,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 1200px;
+    width: 100%;
     margin: auto;
     
 
@@ -305,11 +331,13 @@
 
 /* 찜부등호이미지 */
 .i-wishListSlick img {
+	    margin-bottom: 100%;
     opacity: 0.6;
     width: 30px;
     height: 30px;
     transform: rotate(-0deg);
     cursor: pointer;
+    margin-right: 10px;
 }
 
 /* 찜부등호이미지 */
@@ -336,6 +364,7 @@
     display: inline-block;
     width: 100%;
     transition: all .6s;
+        vertical-align: middle;
 }
 
 /* 찜슬라이드 체크된거에따라 li보여줌 */
@@ -352,18 +381,40 @@
 .i-wishList input[id="wishListSlide03"]:checked~.wishslidelist>li {
     transform: translateX(-200%);
 }
+/* 찜슬라이드 체크된거에따라 li보여줌 */
+.i-wishList input[id="wishListSlide04"]:checked~.wishslidelist>li {
+    transform: translateX(-300%);
+}
+/* 찜슬라이드 체크된거에따라 li보여줌 */
+.i-wishList input[id="wishListSlide05"]:checked~.wishslidelist>li {
+    transform: translateX(-400%);
+}
+/* 찜슬라이드 체크된거에따라 li보여줌 */
+.i-wishList input[id="wishListSlide06"]:checked~.wishslidelist>li {
+    transform: translateX(-500%);
+}
+/* 찜슬라이드 체크된거에따라 li보여줌 */
+.i-wishList input[id="wishListSlide07"]:checked~.wishslidelist>li {
+    transform: translateX(-600%);
+}
+/* 찜슬라이드 체크된거에따라 li보여줌 */
+.i-wishList input[id="wishListSlide08"]:checked~.wishslidelist>li {
+    transform: translateX(-700%);
+}
+.i-wishList input[id="wishListSlide09"]:checked~.wishslidelist>li {
+    transform: translateX(-800%);
+}
 
 
 
 /* 마이페이지 찜목록 */
 section.i-imgContainer{
-    width:85%;
-    margin-top: 5%;
-    display: flex;
+ 
+    
 }
 /* 리스트 4개 */
 .i-img-list{
-    width:25%;
+    width:250px;
     margin: 2rem 1rem 2rem 0;
     height: 20rem;
     
@@ -718,6 +769,22 @@ section.i-imgContainer .i-img-list h4{
   
 }
 .i-nocoupon{
+	font-weight: 900;
+	font-size: 24px;
+	
+text-align: center;
+padding-top: 10%;
+padding-bottom: 10%;
+}
+.i-nopayment{
+	font-weight: 900;
+	font-size: 24px;
+	
+text-align: center;
+padding-top: 10%;
+padding-bottom: 10%;
+}
+.i-nowish{
 	font-weight: 900;
 	font-size: 24px;
 	

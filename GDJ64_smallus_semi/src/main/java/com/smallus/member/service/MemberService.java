@@ -8,6 +8,7 @@ import static com.smallus.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.dao.MemberDao;
 import com.smallus.member.model.vo.Member;
 
@@ -88,5 +89,25 @@ public class MemberService {
 		List<Member> list=dao.paymentDetails(conn,memberId);
 		close(conn);
 		return list;
+	}
+	public List<Classes> wishList(String memberId){
+		Connection conn=getConnection();
+		List<Classes> list=dao.wishList(conn,memberId);
+		close(conn);
+		return list;
+	}
+	public int wishRemove(String memberId,String title) {
+		Connection conn=getConnection();
+		int result=dao.wishRemove(conn,memberId,title);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int wishAdd(String memberId,String title) {
+		Connection conn=getConnection();
+		int result=dao.wishAdd(conn,memberId,title);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
 	}
 }

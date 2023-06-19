@@ -3,6 +3,7 @@ package com.smallus.classes.model.vo;
 import java.util.Date;
 
 import com.smallus.host.model.vo.Host;
+import com.smallus.member.model.vo.Wishlist;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +19,7 @@ public class Classes {
 	private Host hostId;
 	private String classTitle;
 	private String classPersonnel;
+	
 	private String classPrice;
 	private String classAddress;
 	private String classOffer;
@@ -31,6 +33,9 @@ public class Classes {
 	private String classThumbnail;
 	
 	private String categoryTitle;
+	
+	private Wishlist wishlist;
+	private Category Category;
 	
 	@Override
 	public String toString() {

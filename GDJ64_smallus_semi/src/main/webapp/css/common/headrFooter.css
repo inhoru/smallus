@@ -66,7 +66,7 @@ header {
 
 /* 검색창 설정 */
 #hiddenseach input {
-	width: 160%;
+	width: 140%;
 	height: 25px;
 	border-radius: 10px;
 	margin-bottom:6%;
@@ -132,7 +132,7 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	width: 60%;
+	width: 40%;
 	
 }
 /* 로그인시 헤더인포 */
@@ -237,7 +237,6 @@ font-weight: 900;
 	display: none;
 	cursor: default;
 	z-index: 999;
-	margin-left:75%;
 	width: 10%;
 	font-size: 16px;
 	text-align: center;
@@ -246,6 +245,21 @@ font-weight: 900;
 	box-sizing: border-box;
 	box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
 }
+
+/* 화면 너비가 1800px 이상일 때 */
+@media (min-width: 1200px) {
+  .i-loginMove {
+    margin-left: 73%;
+  }
+}
+
+/* 화면 너비가 800px 이상 1400px 이하일 때 */
+@media (min-width: 800px) and (max-width: 1440px) {
+  .i-loginMove {
+    margin-left: 73%;
+  }
+}
+
 /* 비로그인시 로그인버튼 전체 */
 .i-loginToggle{
 	display: flex;
@@ -294,6 +308,20 @@ font-weight: 900;
 	border-left: 0.75rem solid transparent;
 	border-right: 0.75rem solid transparent;
 	border-bottom: 0.75rem solid white;
+}
+
+/* 화면 너비가 1800px 이상일 때 */
+@media (min-width: 1800px) {
+  .notification-container {
+    margin-left: 3%;
+  }
+}
+
+/* 화면 너비가 800px 이상 1400px 이하일 때 */
+@media (min-width: 800px) and (max-width: 1440px) {
+  .notification-container {
+    margin-right: 5%;
+  }
 }
 
 /* 알람스크롤 */

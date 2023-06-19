@@ -13,10 +13,10 @@
 					<li style="font-size: 16px; margin-left: 35%;">클래스 명: 양모펠트로
 						반려동물 만들기</li>
 					<textarea
-						style="margin: 1% 35%; font-size: 8px; border-radius: 20px"
+						style="margin:1% 35% ;padding-left: 10px; font-size: 8px; border-radius: 20px; "
 						cols="100" rows="2" placeholder="   제목을 입력해 주세요"></textarea>
 					<textarea
-						style="margin: 1% 35%; font-size: 8px; border-radius: 20px"
+						style="margin: 1% 35%; font-size: 8px; border-radius: 20px; padding-left:10px"
 						cols="100" rows="20" placeholder="    내용을 입력해 주세요"></textarea>
 					<br>
 					<br>
