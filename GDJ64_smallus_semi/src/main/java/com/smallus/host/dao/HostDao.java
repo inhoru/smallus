@@ -16,7 +16,7 @@ public class HostDao {
 private Properties sql=new Properties();//final로 선언하면 처리속도 빨라짐
 
 	{
-		String path=JDBCTemplate.class.getResource("/sql/host.properties").getPath();
+		String path=HostDao.class.getResource("/sql/host.properties").getPath();
 		try {
 			sql.load(new FileReader(path));
 		}catch(IOException e) {

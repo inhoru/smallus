@@ -6,18 +6,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.smallus.member.model.vo.Member;
+import com.smallus.member.service.MemberService;
 
 /**
- * Servlet implementation class MemberLoginMoveServlet
+ * Servlet implementation class MemberProfileServlet
  */
-@WebServlet("/memberLoginMove.do")
-public class MemberLoginMoveServlet extends HttpServlet {
+@WebServlet("/memberprofile.do")
+public class MemberProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLoginMoveServlet() {
+    public MemberProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +31,7 @@ public class MemberLoginMoveServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("/views/member/memberLogin.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/changeProfile.jsp").forward(request, response);
 	}
 
 	/**

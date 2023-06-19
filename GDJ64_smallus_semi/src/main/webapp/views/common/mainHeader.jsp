@@ -3,6 +3,7 @@
 <%@ page
 	import="com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host"%>
 <%
+Member infoMember = (Member) request.getAttribute("infoMember"); 
 Member loginMember = (Member) session.getAttribute("loginMember");
 Host loginHost = (Host) session.getAttribute("loginHost");
 Cookie[] cookies = request.getCookies();
@@ -100,7 +101,7 @@ if (cookies != null) {
 		</nav>
 		<div class="i-loginHeadr">
 			<div class="i-iconinfo">
-				<img src="<%=request.getContextPath()%>/img/mypage/기본프로필.png" alt=""
+				<img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>" alt=""
 					width="30px" height="30px" class="i-iconinfoimg"><span
 					id="i-iconinfouser"><%=loginMember.getMemberName()%></span><span class="i-nim">님</span> <a
 					href="<%=request.getContextPath()%>/logout.do"><span class="i-logout">로그아웃</span></a>
@@ -185,4 +186,142 @@ if (cookies != null) {
 				<td><a href=""></a></td>
 			</tr>
 		</table>
+	<% if (loginMember == null) { %>
+<script>
+  /* 비로그인 시 작동 */
+  let isSearchFieldActive = false;
+
+  $(document).on("click", (e) => {
+    const clickedInsideSearchIcon = $(e.target).hasClass("i-searchIcon");
+    const clickedInsideSearchField = $(e.target).is(".search");
+    const searchContainer = $(".iconContainer");
+
+    if (isSearchFieldActive && !clickedInsideSearchIcon && !clickedInsideSearchField && !searchContainer.has(e.target).length) {
+      const icon = $(".i-iconinfo");
+      const searchField = $(".search");
+      const categories = $("#categories");
+
+      icon.css("visibility", "visible");
+      searchField.css("display", "none");
+      categories.css("visibility", "visible");
+      $(".i-searchIcon").css("transform", "translateX(0)");
+      $(".i-searchIcon").css("transition", "0.4s");
+      $("#mainOpacity").css("opacity", "1.0");
+      isSearchFieldActive = false;
+      searchField.val("");
+    }
+  });
+
+  $(".i-searchIcon").click((e) => {
+    const icon = $(".i-iconinfo");
+    const searchField = $(".search");
+    const categories = $("#categories");
+
+    if (isSearchFieldActive) {
+      $("form").submit(); 
+      return;
+    }
+
+    icon.css("visibility", "hidden");
+    searchField.css("display", "flex");
+    categories.css("visibility", "hidden");
+    $(".i-searchIcon").css("transform", "translateX(-165px)");
+    $(".i-searchIcon").css("transition", "0.7s");
+    $("#mainOpacity").css("opacity", "0.5");
+
+    searchField.focus();
+    isSearchFieldActive = true;
+
+
+    e.stopPropagation();
+  });
+
+
+  // 검색 필드 이외의 영역을 클릭할 때 검색 필드 숨기기
+  $(document).on("click", (e) => {
+    const searchField = $(".search");
+
+    if (isSearchFieldActive && !searchField.is(e.target) && searchField.has(e.target).length === 0) {
+      searchField.val("");
+      searchField.css("display", "none");
+      $(".i-searchIcon").css("transform", "translateX(0)");
+      $(".i-searchIcon").css("transition", "0.4s");
+      $("#mainOpacity").css("opacity", "1.0");
+      isSearchFieldActive = false;
+    }
+  });
+</script>
+<% } else { %>
+<script>
+  /* 로그인 시 작동 */
+  let isSearchFieldActive = false;
+
+  $(document).on("click", (e) => {
+    const clickedInsideSearchIcon = $(e.target).hasClass("i-searchIcon");
+    const clickedInsideSearchField = $(e.target).is(".search");
+    const searchContainer = $(".iconContainer");
+
+    if (isSearchFieldActive && !clickedInsideSearchIcon && !clickedInsideSearchField && !searchContainer.has(e.target).length) {
+      const icon = $(".i-iconinfo");
+      const searchField = $(".search");
+      const categories = $("#categories");
+
+      icon.css("visibility", "visible");
+      searchField.css("display", "none");
+      categories.css("visibility", "visible");
+      $(".i-searchIcon").css("transform", "translateX(0)");
+      $(".i-searchIcon").css("transition", "0.4s");
+      $("#mainOpacity").css("opacity", "1.0");
+      isSearchFieldActive = false;
+      searchField.val("");
+    }
+  });
+
+  $(".i-searchIcon").click((e) => {
+    const icon = $(".i-iconinfo");
+    const searchField = $(".search");
+    const categories = $("#categories");
+
+    if (isSearchFieldActive) {
+      $("form").submit(); // 폼을 제출하여 검색을 실행합니다.
+      return;
+    }
+
+    icon.css("visibility", "hidden");
+    searchField.css("display", "flex");
+    categories.css("visibility", "hidden");
+    $(".i-searchIcon").css("transform", "translateX(-86px)");
+    $(".i-searchIcon").css("transition", "0.7s");
+    $("#mainOpacity").css("opacity", "0.5");
+
+    searchField.focus();
+    isSearchFieldActive = true;
+
+    // 이벤트 전파 방지
+    e.stopPropagation();
+  });
+
+  // 검색 필드에서 Enter 키를 누를 때 검색 실행
+  $(".search").keydown((e) => {
+    if (e.key === "Enter") {
+      $("form").submit(); // 폼을 제출하여 검색을 실행합니다.
+    }
+  });
+
+  // 검색 필드 이외의 영역을 클릭할 때 검색 필드 숨기기
+  $(document).on("click", (e) => {
+    const searchField = $(".search");
+
+    if (isSearchFieldActive && !searchField.is(e.target) && searchField.has(e.target).length === 0) {
+      searchField.val("");
+      searchField.css("display", "none");
+      $(".i-searchIcon").css("transform", "translateX(0)");
+      $(".i-searchIcon").css("transition", "0.4s");
+      $("#mainOpacity").css("opacity", "1.0");
+      isSearchFieldActive = false;
+    }
+  });
+</script>
+<% } %>
+
 	</header>

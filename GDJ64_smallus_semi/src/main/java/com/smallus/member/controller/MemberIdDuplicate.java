@@ -33,9 +33,9 @@ public class MemberIdDuplicate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId=request.getParameter("memberId");
-//		System.out.println(memberId);
+		System.out.println(memberId);
 		Member m=new MemberService().selectByMemberId(memberId);
-//		System.out.println(m);
+		System.out.println(m);
 		request.setAttribute("memberId", m);
 		request.getRequestDispatcher("/views/member/idDuplicate.jsp").forward(request, response);
 	}

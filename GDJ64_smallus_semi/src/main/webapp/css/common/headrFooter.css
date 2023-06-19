@@ -129,17 +129,22 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	width: 50%;
+	width: 60%;
+	
 }
 /* 로그인시 헤더인포 */
 .i-iconinfo{
-width: 50%;
+width: 40%;
 display: flex;
 align-items: center;
 white-space: nowrap;
+
 }
+
 /* 로그인시프로필사진 */
 .i-iconinfoimg{
+
+border-radius: 100px;
 	margin-right: 3%;
 	
 }
@@ -190,15 +195,15 @@ font-weight: 900;
 	box-sizing: border-box;
 }
 
-/* 알람 내용 */
+/* 알람 전체 */
 .notification-container {
 	background-color: #FFFBF5;
 	display: none;
 	cursor: default;
 	position: absolute;
 	z-index: 999;
-	margin-right:4%;
-	margin-top:15%;
+	margin-left:10px;
+	margin-top:270px;
 	width: 400px;
 	font-weight: 300;
 	border-radius: 0.5rem;
@@ -230,9 +235,9 @@ font-weight: 900;
 	cursor: default;
 	position: absolute;
 	z-index: 999;
-	margin-left: 76%;
+	margin-left: 1414px;
 	width: 200px;
-	font-size: 24px;
+	font-size: 16px;
 	text-align: center;
 	font-weight: 300;
 	border-radius: 0.5rem;
@@ -279,7 +284,7 @@ font-weight: 900;
 .notification-container::before {
 	content: "";
 	position: absolute;
-	top: 20px;
+	top: 0px;
 	right: 0;
 	width: 0;
 	height: 0;
