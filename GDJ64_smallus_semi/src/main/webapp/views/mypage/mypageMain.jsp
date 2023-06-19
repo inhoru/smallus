@@ -205,13 +205,13 @@
                                     <label for="wishListSlide03"><img src="<%=request.getContextPath()%>/img/부등호.png" alt="" width="20px"
                                             height="20px"></label>
                                 </span>
-                                <section class="h-imgContainer">
-                                    <div class="h-img-list">
+                                <section class="i-imgContainer">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite1"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite1" class="i-container">
@@ -226,12 +226,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="h-img-list">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite2"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite2" class="i-container">
@@ -246,12 +246,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="h-img-list">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite3"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite3" class="i-container">
@@ -266,12 +266,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="h-img-list">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite4"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite4" class="i-container">
@@ -299,13 +299,13 @@
                                     <label for="wishListSlide01"><img src="<%=request.getContextPath()%>/img/부등호.png" alt="" width="20px"
                                             height="20px"></label>
                                 </span>
-                                <section class="h-imgContainer">
-                                    <div class="h-img-list">
+                                <section class="i-imgContainer">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite5"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite5" class="i-container">
@@ -320,12 +320,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="h-img-list">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite6"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite6" class="i-container">
@@ -340,12 +340,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="h-img-list">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite7"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite7" class="i-container">
@@ -360,12 +360,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="h-img-list">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite8"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite8" class="i-container">
@@ -393,13 +393,13 @@
                                     <label for="wishListSlide02"><img src="<%=request.getContextPath()%>/img/부등호.png" alt="" width="20px"
                                             height="20px"></label>
                                 </span>
-                                <section class="h-imgContainer">
-                                    <div class="h-img-list">
+                                <section class="i-imgContainer">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite9"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite9" class="i-container">
@@ -414,12 +414,12 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="h-img-list">
+                                    <div class="i-img-list">
                                         <a href=""> <img src="<%=request.getContextPath()%>/img/img-slide2-3.png" alt="no img">
                                             <h4>class-title</h4>
                                             <h5>category | location</h5>
                                         </a>
-                                        <div class="h-wish-container">
+                                        <div class="i-wish-container">
                                             <input type="checkbox" checked="checked" id="i-favorite10"
                                                 name="favorite-checkbox" value="favorite-button">
                                             <label for="i-favorite10" class="i-container">

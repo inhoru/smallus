@@ -356,13 +356,13 @@
 
 
 /* 마이페이지 찜목록 */
-section.h-imgContainer{
+section.i-imgContainer{
     width:85%;
     margin-top: 5%;
     display: flex;
 }
 /* 리스트 4개 */
-.h-img-list{
+.i-img-list{
     width:25%;
     margin: 2rem 1rem 2rem 0;
     height: 20rem;
@@ -372,21 +372,21 @@ section.h-imgContainer{
 }
 
 /* 찜 이미지 */
-section.h-imgContainer .h-img-list img{
+section.i-imgContainer .i-img-list img{
     width: 100%;
     height: 15rem;
     border-radius: 2rem;
 
 }
 /* 찜 클래스이름 */
-section.h-imgContainer .h-img-list h4{
+section.i-imgContainer .i-img-list h4{
     margin-top: 0.5rem;
     font-family: "GmarketSansMedium";
  
 }
 
 /* 하트 더보기  */
-.h-wish-container {
+.i-wish-container {
     display: flex;
     height: 80px;
     position: relative;
@@ -395,12 +395,12 @@ section.h-imgContainer .h-img-list h4{
 }
 
 /* 하트 체크박스 */
-.h-wish-container input {
+.i-wish-container input {
     display: none;
 }
 
 /* 하트 */
-.h-wish-container input:checked+label svg {
+.i-wish-container input:checked+label svg {
     cursor: pointer;
     fill: rgb(255, 255, 255);
     stroke:rgb(255, 255, 255);
