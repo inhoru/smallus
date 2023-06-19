@@ -225,7 +225,7 @@ if (cookies != null) {
     icon.css("visibility", "hidden");
     searchField.css("display", "flex");
     categories.css("visibility", "hidden");
-    $(".i-searchIcon").css("transform", "translateX(-370%)");
+    $(".i-searchIcon").css("transform", "translateX(-290%)");
     $(".i-searchIcon").css("transition", "0.7s");
     $("#mainOpacity").css("opacity", "0.5");
 
@@ -290,7 +290,7 @@ if (cookies != null) {
     icon.css("visibility", "hidden");
     searchField.css("display", "flex");
     categories.css("visibility", "hidden");
-    $(".i-searchIcon").css("transform", "translateX(-185%)");
+    $(".i-searchIcon").css("transform", "translateX(-150%)");
     $(".i-searchIcon").css("transition", "0.7s");
     $("#mainOpacity").css("opacity", "0.5");
 
