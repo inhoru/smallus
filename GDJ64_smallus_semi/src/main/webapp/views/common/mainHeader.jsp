@@ -103,7 +103,7 @@ if (cookies != null) {
 			<div class="i-iconinfo">
 				<img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>" alt=""
 					width="30px" height="30px" class="i-iconinfoimg"><span
-					id="i-iconinfouser"><%=loginMember.getMemberName()%></span><span class="i-nim">님</span> <a
+					id="i-iconinfouser"><%=infoMember.getMemberNickname()%></span><span class="i-nim">님</span> <a
 					href="<%=request.getContextPath()%>/logout.do"><span class="i-logout">로그아웃</span></a>
 			</div>
 			<div class="icon">

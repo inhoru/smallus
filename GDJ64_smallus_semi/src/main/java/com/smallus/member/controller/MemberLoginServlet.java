@@ -62,7 +62,6 @@ public class MemberLoginServlet extends HttpServlet {
 			//로그인 성공 -> 인증받음
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember",loginMember);
-			//수정전
 			response.sendRedirect(request.getContextPath());
 		
 		}else {
