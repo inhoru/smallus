@@ -42,7 +42,7 @@
         <div id="headerContainer">
             <a href="<%=request.getContextPath()%>/host/moveHostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostName() %>님</a>
+                <a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
@@ -65,7 +65,6 @@
             
         </div>
     </header>
-	
 	<div class="m-navContainer">
 	    <table class="m-nav">
 			<tr>
@@ -76,7 +75,7 @@
 			<tr>
 				<td><a href="">일반회원관리</a></td>
 				<td><a href="">클래스승인</a></td>
-				<td><a href="">공지사항</a></td>
+				<td><a href="<%=request.getContextPath()%>/views/admin/adminNotice.jsp">공지사항</a></td>
 			</tr>
 			<tr>
 				<td><a href="">호스트회원관리</a></td>

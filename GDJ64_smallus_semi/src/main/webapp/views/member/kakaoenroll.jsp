@@ -4,6 +4,7 @@
 <%
 	String email=request.getParameter("email");
 	String name=request.getParameter("name");
+	String memberNickname=request.getParameter("memberNickname");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +48,7 @@
 		$.ajax({
 			url:'<%=request.getContextPath()%>/member/KakaoenrollMember.do',
 			type:"get",
-			data:{memberEmail:'<%=email%>',memberName:'<%=name%>',memberPhone:memberPhone},
+			data:{memberEmail:'<%=email%>',memberName:'<%=name%>',memberPhone:memberPhone,memberNickname:'<%=memberNickname%>'},
 			dataType:"text",
 			success: function(data){
 		            window.close();
