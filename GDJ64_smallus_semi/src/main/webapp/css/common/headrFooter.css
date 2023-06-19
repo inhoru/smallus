@@ -38,7 +38,7 @@ header {
 
 /* 헤더 내용 */
 #headerContainer {
-	width: 1280px;
+	width: 70%;
 	margin: auto;
 	display: flex;
 	align-items: center;
@@ -237,8 +237,8 @@ font-weight: 900;
 	display: none;
 	cursor: default;
 	z-index: 999;
-	margin-left:73%;
-	width: 15%;
+	margin-left:75%;
+	width: 10%;
 	font-size: 16px;
 	text-align: center;
 	font-weight: 300;
