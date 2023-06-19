@@ -15,6 +15,7 @@
 	margin: 5px;
 	border: 2px solid #595959;
 	border-radius: 20px;
+	padding-left: 10px
 }
 
 #d-addClass input {
@@ -23,6 +24,7 @@
 	margin: 7px;
 	border: 2px solid #595959;
 	border-radius: 20px;
+	padding: 10px;
 }
 
 #d-addClass>button {
@@ -45,11 +47,13 @@
 	/* color:#595959; */
 	background-color: #F8D8D8;
 	/* border:0px; */
+	margin: 0 auto;
 }
 
 #d-addClass #inputs textarea {
 	border: 2px solid #595959;
 	border-radius: 20px;
+	padding: 10px;
 }
 #inputs img:hover{
 	cursor:pointer;
