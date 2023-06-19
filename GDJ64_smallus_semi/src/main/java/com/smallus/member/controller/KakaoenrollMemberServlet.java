@@ -1,6 +1,8 @@
 package com.smallus.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,10 +38,10 @@ public class KakaoenrollMemberServlet extends HttpServlet {
 		String[] memberIds=memberEmail.split("@");
 		String memberId=memberIds[0];
 		String memberPw="1234";
-		System.out.println(memberEmail);
-		System.out.println(memberName);
-		System.out.println(memberPhone);
-		System.out.println(memberId);
+//		System.out.println(memberEmail);
+//		System.out.println(memberName);
+//		System.out.println(memberPhone);
+//		System.out.println(memberId);
 		Member m=Member.builder().
 				memberId(memberId).
 				memberPw(memberPw).
@@ -56,7 +58,11 @@ public class KakaoenrollMemberServlet extends HttpServlet {
 //			loc="/";
 //			request.setAttribute("msg", msg);
 //			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/member/KakaoLogin.do").forward(request, response);
+//			request.getRequestDispatcher("/member/KakaoLogin.do").forward(request, response);
+			System.out.println(memberEmail);
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out=response.getWriter();
+			out.print(memberEmail);
 			return;
 		}else {
 			//입력 실패

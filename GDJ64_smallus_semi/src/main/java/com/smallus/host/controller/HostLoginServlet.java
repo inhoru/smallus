@@ -1,6 +1,8 @@
 package com.smallus.host.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.HostService;
+import com.smallus.payment.model.vo.Payment;
+import com.smallus.payment.service.PaymentService;
 
 /**
  * Servlet implementation class HostLoginServlet
@@ -60,6 +64,18 @@ public class HostLoginServlet extends HttpServlet {
 			//로그인 성공 -> 인증받음
 			HttpSession session=request.getSession();
 			session.setAttribute("loginHost",loginHost);
+			
+			List<Payment> rsvList=new PaymentService().selectPaymentByhostId(hostId);
+			if(rsvList.isEmpty()) {
+				System.out.println("없");
+			}else {
+				System.out.println("dlT");
+				session.setAttribute("rsvList",rsvList);
+			}
+			
+			
+			
+			
 			//화면전환시킬방법 2가지중 sendRedirect로 보낸다 이유는 데이터를  session 저장시켰고, url주소에 정보를 남기지 않기 위해서
 			response.sendRedirect(request.getContextPath()+"/views/host/hostMain.jsp");
 		}else if(loginHost!=null&&loginHost.getHostId().equals("admin")){

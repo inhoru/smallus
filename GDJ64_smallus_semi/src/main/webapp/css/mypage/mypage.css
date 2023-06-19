@@ -612,7 +612,7 @@ section.h-imgContainer .h-img-list h4{
 }
 /* 회원탈end  */
 .i-withdrawalendh2{
-    margin-top: 2%;
+    padding-top:3%;
     padding-bottom: 1%;
     border-bottom: 2px solid #efebe5;
 }
@@ -652,6 +652,7 @@ section.h-imgContainer .h-img-list h4{
 }
 /* 쿠폰페이지 전체배경 */
 .i-mypagecoupontotal{
+	margin-top:1%;
     background-color: #FFFBF5;
 }
 /* 쿠폰페이지 */
@@ -665,6 +666,7 @@ section.h-imgContainer .h-img-list h4{
     padding-top: 1%;
     padding-bottom: 1%;
     border-bottom: 2px solid #efebe5;
+    	width: 100%;
 }
 /* 쿠폰입력창 */
 .i-mypagecoupon input{
@@ -679,6 +681,8 @@ section.h-imgContainer .h-img-list h4{
     align-items: center;
     margin-left: 15%;
     margin-top: 2%;
+    padding-bottom: 3%;
+
     
 }
 /* 쿠폰등록버튼 */
@@ -692,43 +696,49 @@ section.h-imgContainer .h-img-list h4{
     border: none;
     cursor: pointer;
 }
-/* 보유한쿠폰전체 */
+/* 보유한쿠폰전체 h2*/
 .i-possessioncoupon{
-    margin-top: 2%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    border-top: 2px solid #efebe5;
-    border-bottom: 2px solid #efebe5;
+	border-top: 2px solid #efebe5;
+     border-bottom: 2px solid #efebe5;
+   padding-bottom: 2%;
+   padding-top: 2%;
 }
-/* 보유한쿠폰 목록 */
-.i-possessioncouponlist{
-    margin-top: 5%;
-    display: flex;
-    justify-content: center;
-    
-}
-/* 보유한쿠폰 오른쪽쿠폰 */
-.i-possessioncouponlistright{
-    margin-left: 14%;
- 
-}
-/* 쿠폰상세 */
+
+
+/* 쿠폰목록 */
 .i-coiponcontainer{
     display: flex;
-    align-items: center;
- 
-
+    justify-content:space-between;
+    width: 880px;
+    margin: auto;
+    flex-wrap: wrap;
+    padding-bottom:3%;
+       
+        
+  
 }
+.i-nocoupon{
+	font-weight: 900;
+	font-size: 24px;
+	
+text-align: center;
+padding-top: 10%;
+padding-bottom: 10%;
+}
+
 /* 쿠폰모양 */
 .i-coupon-card{
+	margin-right:3%;
     background: #efebe5;
     color: #fff;
     text-align: center;
-    width:220px;
+    width:230px;
     padding: 40px 80px;
     border-radius: 15px;
     box-shadow: 0 10px 10px 0 rgba(0,0,0,0.1);
     position: relative;
+    margin-top: 3%;
+    
 
 }
 /* 쿠폰 날짜 */

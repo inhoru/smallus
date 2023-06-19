@@ -76,4 +76,11 @@ public class MemberService {
 		return result;
 		
 	}
+	public int deleteByMember(String memberId,String password) {
+		Connection conn=getConnection();
+		int result=dao.deleteByMember(conn,memberId,password);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

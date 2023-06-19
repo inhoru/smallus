@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smallus.host.model.vo.Host"%>
+<%@ page import="com.smallus.host.model.vo.Host,com.smallus.payment.model.vo.Payment, java.util.*"%>
 <%
 	Host loginHost=(Host)session.getAttribute("loginHost");
 	Cookie[] cookies = request.getCookies();
@@ -22,6 +22,7 @@
     <title>Small us ☺</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostHeader.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostMainStyle.css">
+    <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     <!-- fullcalendar css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
@@ -74,8 +75,8 @@
                     </tr>
                     <tr>
                         <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
-                        <td><a href="<%=request.getContextPath()%>/views/host/hostClassList.jsp">내 클래스 보기</a></td>
-                        <td><a href="<%=request.getContextPath()%>/views/host/hostReservation.jsp">클래스 예약 관리</a></td>
+                        <td><a href="<%=request.getContextPath()%>/host/viewClassList.do?hostId=<%=loginHost.getHostId()%>">내 클래스 보기</a></td>
+                        <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>
                     </tr>
                     <tr>

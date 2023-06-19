@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 
+<%int coupon=(int)request.getAttribute("countCoupon"); %>
  <div id="mainOpacity">
         <section class="i-tablecontent">
             <table class="i-mypageCategories">
@@ -21,7 +22,7 @@
                     <td class="i-customerService"><a href="">1:1 문의</a></td>
                 </tr>
                 <tr>
-                    <td class="i-myInfo"><a href="<%=request.getContextPath()%>/mypageCoupon.html">쿠폰관리</a></td>
+                    <td class="i-myInfo"><a href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
                     <td><a href="">후기관리</a></td>
                     <td class="i-customerService"><a href="">Q&A</a></td>
                 </tr>
@@ -33,8 +34,8 @@
                 <div id="i-proFileImg">
                     <img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>" alt="" >
                     <div id="i-proFileInfo">
-                        <h1><%=loginMember.getMemberNickname() %></h1>
-                        <p><%=loginMember.getMemberEmail() %></p>
+                        <h1><%=infoMember.getMemberNickname() %></h1>
+                        <p><%=infoMember.getMemberEmail() %></p>
                     </div>
                 </div>
                 <div id="i-additional">
@@ -49,7 +50,7 @@
                         <span class="i-hs i-hs3">후기</span>
                     </div>
                     <div class="i-additional-a">
-                        <a href="<%=request.getContextPath()%>/mypageCoupon.html" class="i-as1">1</a>
+                        <a href="<%=request.getContextPath()%>/mypageCoupon.do" class="i-as1"><%=coupon %></a>
                         <a href="<%=request.getContextPath()%>/mypageWishlist.html" class="i-as2">2</a>
                         <a href="" class="i-as3">3</a>
                     </div>

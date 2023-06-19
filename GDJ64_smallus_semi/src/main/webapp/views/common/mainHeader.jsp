@@ -3,6 +3,7 @@
 <%@ page
    import="com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host"%>
 <%
+Member infoMember =(Member) request.getAttribute("infoMember");
 Member loginMember = (Member) session.getAttribute("loginMember");
 Host loginHost = (Host) session.getAttribute("loginHost");
 Cookie[] cookies = request.getCookies();

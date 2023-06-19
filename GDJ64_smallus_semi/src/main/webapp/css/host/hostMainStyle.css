@@ -164,32 +164,48 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 	font-size: 1rem;
 }
 
-/* host class list page */
+/* class list page */
+div.h-class-list-container{
+	display:flex;
+	width:100%;
+	flex-wrap: wrap; /*복수의 행*/
+	
+}
+
+/* host-class page select */
+select#selectClassStatus {
+  
+  width: 10rem;
+  height: 35px;
+  background-color:#FFFCF5; 
+  padding: 5px 30px 5px 10px;
+  border-radius: 4px;
+  outline: 0 none;
+}
+select#selectClassStatus option {
+  background: black;
+  color: #fff;
+  padding: 0.5rem 0.2rem;
+}
+/* host class page - class list */
 div.h-class-list {
 	width:50%;
 	border-top:1px solid #F6E9DF;
 	border-bottom:1px solid #F6E9DF;
-	/* border-radius:1rem; */
 	display:flex;
 	align-items: center;
+	margin-bottom:1rem;
 }
 
-/* class list img */
-section.h-class-list-container{
-	display:flex;
-	flex-direction: column;
-}
-
-div.h-class-list-rowContainer{
-	display: flex;
-}
-div.h-class-list-rowContainer div:first-child{
+/* 홀수 번쨰 클래스 리스트에 오른쪽 여백  */
+div.h-class-list:nth-child(odd){
 	margin-right: 1%;
 }
 
 div.h-class-list{
 	width:49%;
 }
+
 div.h-class-list img{
 	width: 7rem;
 	height:7rem;
@@ -217,6 +233,8 @@ div.h-class-list table td, div.h-class-list table th{
 	border:0px;
 	height:1.8rem;
 }
+
+
 /* class sub page*/
 section.h-class-sub h2{
 	margin: 3rem 0 2rem 0;
