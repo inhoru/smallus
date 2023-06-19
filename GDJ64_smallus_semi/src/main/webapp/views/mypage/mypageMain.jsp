@@ -49,7 +49,7 @@
                         <span class="i-hs i-hs3">후기</span>
                     </div>
                     <div class="i-additional-a">
-                        <a href="<%=request.getContextPath()%>/mypageCoupon.html" class="i-as1"><%=coupon %></a>
+                        <a href="<%=request.getContextPath()%>/mypageCoupon.do" class="i-as1"><%=coupon %></a>
                         <a href="<%=request.getContextPath()%>/mypageWishlist.html" class="i-as2">2</a>
                         <a href="" class="i-as3">3</a>
                     </div>

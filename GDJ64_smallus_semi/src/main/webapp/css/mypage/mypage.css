@@ -652,6 +652,7 @@ section.h-imgContainer .h-img-list h4{
 }
 /* 쿠폰페이지 전체배경 */
 .i-mypagecoupontotal{
+	margin-top:1%;
     background-color: #FFFBF5;
 }
 /* 쿠폰페이지 */

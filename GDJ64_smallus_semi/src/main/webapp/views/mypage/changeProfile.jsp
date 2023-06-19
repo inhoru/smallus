@@ -21,7 +21,7 @@
 				<td class="i-customerService"><a href="">1:1 문의</a></td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="./mypageCoupon.html">쿠폰관리</a></td>
+				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
 				<td><a href="">후기관리</a></td>
 				<td class="i-customerService"><a href="">Q&A</a></td>
 			</tr>

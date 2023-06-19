@@ -5,6 +5,31 @@
 List<Coupon> coupon = (List) request.getAttribute("coupon");
 %>
 <%@ include file="/views/common/mainHeader.jsp"%>
+<div id="mainOpacity">
+	<section class="i-tablecontent">
+		<table class="i-mypageCategories">
+			<tr>
+				<td class="i-myInfo i-my">내정보</td>
+				<td class="i-info">클래스정보</td>
+				<td class="i-customerService i-cu">고객센터</td>
+			</tr>
+			<tr>
+				<td class="i-myInfo"><a href="">프로필관리</a></td>
+				<td><a href="./mypagePayment.html">결제내역</a></td>
+				<td class="i-customerService"><a href="">공지사항</a></td>
+			</tr>
+			<tr>
+				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
+				<td><a href="./mypageWishlist.html">찜관리</a></td>
+				<td class="i-customerService"><a href="">1:1 문의</a></td>
+			</tr>
+			<tr>
+				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
+				<td><a href="">후기관리</a></td>
+				<td class="i-customerService"><a href="">Q&A</a></td>
+			</tr>
+		</table>
+	</section>
 
 			<form action="<%=request.getContextPath()%>/insertCoupon.do">
 <section class="i-mypagecoupontotal">
@@ -45,5 +70,5 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 		%>
 	
 </section>
-
+</div>
 <%@ include file="/views/common/footer.jsp"%>

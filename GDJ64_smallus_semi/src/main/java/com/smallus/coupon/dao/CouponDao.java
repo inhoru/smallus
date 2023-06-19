@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.smallus.Classes;
+
 import com.smallus.coupon.model.vo.Coupon;
 
 public class CouponDao {
