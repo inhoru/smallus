@@ -18,6 +18,7 @@
 			url:"<%=request.getContextPath()%>/ajax/qnaTest.do",
 			dataType:"html",
 			success:function(data){
+				console.log(data;)
 				$("#qnacontainer").html(data);
 			}
 		});
