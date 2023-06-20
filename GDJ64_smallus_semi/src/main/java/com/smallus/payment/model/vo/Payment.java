@@ -25,6 +25,7 @@ public class Payment implements Serializable {
 	private Date paymentDate;
 	private String paymentStatus;
 	private String hostId;
+	private int TotalPrice;
 	
 	private String classId;
 	private String classTitle;

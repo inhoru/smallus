@@ -233,6 +233,7 @@ public class MemberDao {
 		List<Member> list=new ArrayList<Member>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentDetails"));
+			//SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL, P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -317,6 +318,23 @@ public class MemberDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int wishListCount(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("wishListCount"));
+			//SELECT COUNT(MEMBER_ID) FROM WISH WHERE MEMBER_ID=? 
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
 			close(pstmt);
 		}return result;
 	}

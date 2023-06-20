@@ -312,6 +312,11 @@ header {
 		margin-right: 5%;
 	}
 }
+@media ( min-width : 1500px) and (max-width: 1700px) {
+	.notification-container {
+		margin-right: 3%;
+	}
+}
 
 /* 알람스크롤 */
 .scroll-snap-card {

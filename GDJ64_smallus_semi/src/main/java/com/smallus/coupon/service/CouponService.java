@@ -13,9 +13,9 @@ public class CouponService {
 	private CouponDao dao= new CouponDao();
 	
 	
-	public List<Coupon> searchByMemberCoupon(String memberId){
+	public List<Coupon> searchByMemberCoupon(String memberId,int cPage,int numPerpage){
 		Connection conn=getConnection();
-		List<Coupon> list=dao.searchByMemberCoupon(conn, memberId);
+		List<Coupon> list=dao.searchByMemberCoupon(conn, memberId,cPage,numPerpage);
 		close(conn);
 		return list;
 	}

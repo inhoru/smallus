@@ -28,13 +28,16 @@ public class CouponDao {
 		}
 	}
 	
-	public List<Coupon> searchByMemberCoupon(Connection conn, String memberId){
+	public List<Coupon> searchByMemberCoupon(Connection conn, String memberId,int cPage,int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Coupon> list=new ArrayList<Coupon>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("searchByMemberCoupon"));
+			//SELECT * FROM COUPON JOIN COUPON_TYPE USING(COUPON_ID) JOIN MEMBER USING(MEMBER_ID) WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
+			pstmt.setInt(2,(cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) list.add(getCoupon(rs));
 		}catch(SQLException e) {

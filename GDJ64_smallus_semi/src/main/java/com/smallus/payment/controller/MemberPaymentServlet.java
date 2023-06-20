@@ -1,4 +1,4 @@
-package com.smallus.coupon.controller;
+package com.smallus.payment.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.smallus.coupon.model.vo.Coupon;
 import com.smallus.coupon.service.CouponService;
 import com.smallus.member.model.vo.Member;
+import com.smallus.payment.model.vo.Payment;
+import com.smallus.payment.service.PaymentService;
 
 /**
- * Servlet implementation class MemberCouponServlet
+ * Servlet implementation class MemberPaymentServlet
  */
-@WebServlet("/mypageCoupon.do")
-public class MemberCouponServlet extends HttpServlet {
+@WebServlet("/memberpayment.do")
+public class MemberPaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberCouponServlet() {
+    public MemberPaymentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,13 +44,13 @@ public class MemberCouponServlet extends HttpServlet {
 		try {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
 		}catch(NumberFormatException e) {
-			numPerpage=4;
+			numPerpage=3;
 		}
 		new CouponService().deleteCoupon();
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		List<Coupon> list=new CouponService().searchByMemberCoupon(loginMember.getMemberId(),cPage,numPerpage);
-		int totalData=new CouponService().couponCount(loginMember.getMemberId());
+		List<Member> list=new PaymentService().searchByMemberPayment(loginMember.getMemberId(),cPage,numPerpage);
+		int totalData=new PaymentService().paymentCount(loginMember.getMemberId());
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -80,10 +81,11 @@ public class MemberCouponServlet extends HttpServlet {
 			+"&numPerpage="+numPerpage+"'>[다음]</a>";
 		}
 		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("countCoupon", totalData);
-		request.setAttribute("coupon", list);
-		request.getRequestDispatcher("/views/mypage/coupon.jsp").forward(request, response);
+		request.setAttribute("paymentCount", totalData);
+		request.setAttribute("payment", list);
+		request.getRequestDispatcher("/views/mypage/payment.jsp").forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
