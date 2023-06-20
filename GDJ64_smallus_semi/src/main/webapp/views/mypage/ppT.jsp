@@ -39,8 +39,15 @@
 	let $td=$("<td>")
 	let $a = $("<a>")
 	$("#h-p").click(e=>{
-			
 		$.ajax({
+			url:"<%=request.getContextPath()%>/payment.do?memberId=<%=loginMember.getMemberId()%>",
+			dataType:"html",
+			success:function(data){
+				console.log(data);
+				$("#mainOpacity").html(data);
+			}
+		})
+		<%-- $.ajax({
 			url:"<%=request.getContextPath()%>/payment.do?memberId=<%=loginMember.getMemberId()%>",
 			type:"get",
 			dataType:"text",
@@ -85,7 +92,7 @@
 			complete:()=>{
 				alert("서버와 통신 끝"); // success나 error가 끝난 뒤에 무조건 complete가 실행 된다
 			}
-		}); 
+		});  --%>
 	});
 </script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -25,6 +25,7 @@ const milliseconds = today.getMilliseconds();
 const makeMerchantUid = hours +  minutes + seconds + milliseconds;
 
 const totalPrice=<%=totalPrice%>;
+console.log("totalPrice : "+totalPrice);
 
 function payment(pg_provider, payment_method){
 	var IMP = window.IMP; 
@@ -47,9 +48,9 @@ const data={
         merchant_uid: "RSV"+makeMerchantUid, // 상점에서 관리하는 주문 번호
         name : '[<%=data.get("classCategoryTitle") %>] [<%=data.get("classCategoryTitle") %>] <%=data.get("classTitle") %>',
         amount : 'totalPrice', 
-        buyer_email : '<%=loginMember.getMemberEmail()%>',
-        buyer_name : '<%=loginMember.getMemberName()%>',
-        buyer_tel : '<%=loginMember.getMemberPhone()%>'
+        buyer_email : '',
+        buyer_name : '',
+        buyer_tel : ''
 };
 IMP.request_pay(data, response => {
 	alert("callback!: "+JSON.stringify(response));
