@@ -25,42 +25,42 @@
         margin: 0 auto;
         display: flex;
         align-items: center;
+        height: auto;
 
     }
-
+  	#headerContainer>a{
+	 	margin:0;
+	 	padding:0;
+	 	height: auto;
+	 }
     /* 로고 */
     #logo {
         width: 90px;
-        height: 60px;
-        padding: 5px 0 5px 0;
+        height: auto;
     }
 
     /* 아이콘 */
     div.h-iconContainer {
         display: flex;
         justify-content: space-between;
-        width: 30%;
-        margin-left: 70%;
+        /* width: 40%; */
+        margin-left: 45%;
         align-items: center;
-        border: 1px solid red;
-
     }
 
     .h-iconContainer>a {
         font-size: 1rem;
-        height:2rem;
         align-items: center;
-        border: 1px solid red;
+        margin: 0 auto;
+        padding:0 1rem;
     }
 
     /* 알람 아이콘 */
     .h-notification-icon {
         position: relative;
-        margin-right: 1em;
+        margin: 0 1em;
         align-items: center;
-        border: 1px solid red;
         width:2rem;
-        height:2rem;
     }
 
     /* 알람 갯수 */
@@ -135,7 +135,7 @@
     }
 
     .h-move-mypage {
-        width: 10rem;
+        width: auto;
         height: auto;
         align-items: center;
         display: flex;
@@ -150,10 +150,15 @@
     }
 
     /*  */
-    .footer {
-    width: 100%;
-    flex-direction: column;
-    background-color: #F3EEE6;
+    footer {
+    	widtH:100%;	
+    	margin-top:10rem;
+	}
+
+	.footer div {
+    	width: 100%;
+   		flex-direction: column;
+    	background-color: #F3EEE6;
 	}
 
 	.footer div {
@@ -162,11 +167,9 @@
 	    display: flex;
 	    /* padding: 1% 0; */
 	}
-
 	.footer>div {
-	    padding: 1% 0;
+    padding: 1% 0;
 	}
-
 	.usMenu ul {
 	    width: 100%;
 	}

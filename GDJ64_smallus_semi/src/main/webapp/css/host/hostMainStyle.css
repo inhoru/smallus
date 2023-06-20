@@ -279,7 +279,7 @@ div.h-class-detail>div{
 	align-items: center;
 }
 /* .h-class-sub page 내부 button style */
-div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, .h-profile button{
+div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, .h-profile button , .h-calc-tbl button{
 	margin-left:2rem;
 	width:4rem;
 	font-weight: bold;
@@ -345,4 +345,17 @@ section.h-profile .h-edit-pf{
 }
 button.h-submit{
 	margin-left: auto;
+}
+
+/* host-calc page */
+table.h-calc-tbl {
+	width: 100%;
+}
+
+table.h-calc-tbl * {
+	height: 2rem;
+}
+
+table.h-calc-tbl th {
+	font-weight: bold;
 }

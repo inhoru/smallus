@@ -58,55 +58,7 @@
                 </table>
             </div>
         </section>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-	  
-	  var count = 0;
-	  var data;
-	  var chart;
-      var options;
-	  
-	  var today = new Date();
-
-		var year = today.getFullYear();
-		var month = ('0' + (today.getMonth() + 1)).slice(-2);
-		var day = ('0' + today.getDate()).slice(-2);
-
-		var dateString = year + '-' + month;
-
-		console.log(dateString);
-
-      function drawChart() {
-	  data = new google.visualization.DataTable();
-	  data.addColumn('string', 'host-name');
-	  data.addColumn('number', 'class-name');
-	  data.addColumn('number', 'class-name2');
-	  data.addRow([dateString, 1, 1]);
-	  
-        options = {
-          chart: {
-            title: 'Analysis of Dialogue System',
-            subtitle: '',
-          }
-        };
-
-        chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-      
-      function addData(){
-	    count++;
-		data.addRow([year+'-'+(month + count), Number(document.getElementById('sendInput').value), Number(document.getElementById('responseInput').value)]);
-		chart.draw(data, options)
-      }
-      function removeData(){
-		data.removeRow(0);
-		chart.draw(data, opstions)
-      }
-    </script>        
+    <script src="<%=request.getContextPath() %>/js/host.js"></script>
 <%@ include file="/views/host/hostFooter.jsp"%>
 
 

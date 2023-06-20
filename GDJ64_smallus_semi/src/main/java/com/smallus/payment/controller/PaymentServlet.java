@@ -17,7 +17,7 @@ import com.smallus.payment.model.vo.Payment;
 /**
  * Servlet implementation class PaymentServlet
  */
-@WebServlet("/payment.do")
+@WebServlet("/host/payment.do")
 public class PaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

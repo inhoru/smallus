@@ -223,7 +223,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 알림
 $(".h-notification-icon").on("click", e => {
-   //   console.log(e);
     $(".h-notification-container").slideToggle(300);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -12,8 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smallus.classes.model.vo.Category;
+import com.smallus.classes.model.vo.ClassDetail;
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.common.JDBCTemplate;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Wishlist;
+import com.smallus.payment.model.vo.Payment;
 
 public class MemberDao {
 	private Properties sql = new Properties();// final로 선언하면 처리속도 빨라짐
@@ -222,6 +227,102 @@ public class MemberDao {
 			close(pstmt);
 		}return result;
 	}
+	public List<Member> paymentDetails(Connection conn, String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList<Member>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("paymentDetails"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Classes c=new Classes();
+				Payment p=new Payment();
+				ClassDetail d=new ClassDetail();
+				p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				c.setClassTitle(rs.getString("CLASS_TITLE"));
+				c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				p.setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				d.setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				d.setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				Member m = new Member();
+				m.setClasses(c);
+				m.setPayment(p);
+				m.setClassDetail(d);
+				list.add(m);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	public List<Classes> wishList(Connection conn, String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Classes> list=new ArrayList<Classes>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("wishList"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Wishlist w = new Wishlist();
+				w.setMemberId(rs.getString("MEMBER_ID"));
+				Category g=new Category();
+				g.setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				Classes c=new Classes();
+				c.setClassTitle(rs.getString("CLASS_TITLE"));
+				c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				c.setWishlist(w);
+				c.setCategory(g);
+				list.add(c);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	public int wishRemove(Connection conn, String memberId,String title) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("wishRemove"));
+			//wishRemove=DELETE FROM WISH WHERE MEMBER_ID = ? AND CLASS_ID=(SELECT CLASS_ID FROM CLASS WHERE CLASS_TITLE=?)
+			pstmt.setString(1,memberId);
+			pstmt.setString(2, title);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int wishAdd(Connection conn, String memberId,String title) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("wishAdd"));
+			//INSERT INTO WISH VALUES('WIS'||SEQ_WISH_ID.NEXTVAL,?,(SELECT CLASS_ID FROM CLASS WHERE CLASS_TITLE=?));
+			pstmt.setString(1,memberId);
+			pstmt.setString(2, title);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	
+
 
 	public static Member getMember(ResultSet rs) throws SQLException {
 		return Member.builder().memberId(rs.getString("member_id")).memberPw(rs.getString("MEMBER_PW"))

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.smallus.classes.model.vo.Classes" %>
-<%List<Classes> classList=(List)request.getAttribute("classList"); %>
+<%
+	List<Classes> classList=(List)request.getAttribute("classList"); 
+	List<Classes> classListPass=(List)request.getAttribute("classListPass");
+%>
 <%@ include file="/views/host/hostHeader.jsp"%>
 
 <!--main-->
@@ -12,7 +15,7 @@
      		<h2>내 클래스 보기</h2>
                 <!-- <div class="h-viewList"><a href="">+</a></div> -->
                 <select name="selectClassStatus" id="selectClassStatus" onchange="selectOption()">
-                	<option disabled selected>승인 상태</option>
+                	<option>승인 상태(전체)</option>
                 	<option value="W">승인 대기</option>
                 	<option value="Y">승인 완료</option>
                 	<option value="N">승인 거절</option>
@@ -23,9 +26,9 @@
         <div class="h-class-list-container">
 			<%if(classList!=null&&!classList.isEmpty()) {
 				for(Classes c:classList){%>
-				<div class="h-class-list">
+				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
-					<a href="<%=request.getContextPath()%>/host/viewClassDetail.do?classId=<%=c.getClassId() %>" class="h-class-list-img">
+					<a href="<%=request.getContextPath()%>/class//viewClassDetail.do?hostId=<%=loginHost.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
 						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
 					</a>
 					<table>
@@ -35,9 +38,65 @@
 										승인 대기
 								</th>
 								<th></th>
-							<%}else if(c.getClassPassId().equals("N")) {%>
-								<th class="h-tbl-align-left" class="h-class-pass-N">
+							<%}else if(c.getClassPassId().equals("N1") || c.getClassPassId().equals("N2") || c.getClassPassId().equals("N3")) {
+								if(c.getClassPassId().equals("N1")){%>
+									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부실</th>
+									<%}else if(c.getClassPassId().equals("N2")){%>
+									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부적절</th>
+									<%}else if(c.getClassPassId().equals("N3")){%>
+									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>중복 등록</th>
+									<%}%>
+								<!-- <th class="h-tbl-align-left" class="h-class-pass-N">
 										승인 거절
+								</th>
+								<th></th> -->
+							<%} else if(c.getClassPassId().equals("Y")){%>
+								<th class="h-tbl-align-left" class="h-class-pass-Y">
+										승인 완료
+								<th>
+								<th>판매 중</th>
+								<%} %> 
+						<th colspan="2"><%=c.getClassId() %></th>
+						</tr>
+						<tr>
+							<td class="h-tbl-align-left" colspan="4"><%=c.getClassTitle() %></td>
+						</tr>
+						<tr>
+							<td class="h-tbl-align-left">신청 일</td>
+							<td><%=c.getClassUpLoadDate() %></td>
+							<td>승인 일</td>
+								<%if(c.getClassPassId().equals("Y")){ %>
+							<td>								
+								<%= c.getClassPassDate()%>
+							</td>
+							<%}else{%>
+							<td>-</td>
+							<%} %>
+						</tr>
+						<tr>
+							<td></td>
+							<td><button>수정</button></td>
+							<td><button>삭제</button></td>
+							<!--이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
+							<td><button>더보기</button></td>
+						</tr>
+					</table>
+				</div>
+				<%}
+				}else{ %>
+			<%} %>
+			<%if(classListPass!=null&&!classListPass.isEmpty()) {
+				for(Classes c:classListPass){%>
+				<div class="h-class-list h-class-pass-list">
+					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
+					<a href="" class="h-class-list">
+						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
+					</a>
+					<table>
+						<tr>
+							<%if(c.getClassPassId().equals("W")){ %>
+								<th class="h-tbl-align-left" class="h-class-pass-W">
+										승인 대기
 								</th>
 								<th></th>
 							<%} else if(c.getClassPassId().equals("Y")){%>
@@ -45,16 +104,16 @@
 										승인 완료
 								<th>
 								<th>판매 중</th>
-								<%} %> 
-<%-- 								<%if(c.getClassPassId().equals("W")){ %>
-									<th class="h-tbl-align-left" class="h-class-pass-W">승인 대기</th>
-									<th class="h-class-pass-W"></th>
-									<th class="h-tbl-align-left" class="h-class-pass-N" display="none">승인 거절</th>
-									<th class="h-class-pass-N" display="none"></th>
-									<th class="h-tbl-align-left" class="h-class-pass-Y" display="hidden">승인 완료<th>
-									<th class="h-class-pass-Y"display="hidden" >판매 중</th>
-								<%} %>
- --%>							<th colspan="2"><%=c.getClassId() %></th>
+							<%}else if(c.getClassPassId().equals("N1") || c.getClassPassId().equals("N2") || c.getClassPassId().equals("N3")) {
+									if(c.getClassPassId().equals("N1")){%>
+									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부실</th>
+									<%}else if(c.getClassPassId().equals("N2")){%>
+									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부적절</th>
+									<%}else if(c.getClassPassId().equals("N3")){%>
+									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>중복 등록</th>
+									<%} 
+								} %> 
+ 						<th colspan="2"><%=c.getClassId() %></th>
 						</tr>
 						<tr>
 							<td class="h-tbl-align-left" colspan="4"><%=c.getClassTitle() %></td>
@@ -84,50 +143,29 @@
 				}else{ %>
 			<%} %>
         </div>
-        <div id="gg">gg</div>
 	</section>
 	<script>
-	
-		let viewClassSub=$(".h-class-list-img");
-		console.log(viewClassSub);
-		// select 옵션 변경하면 옵션의 값 가져오는 함수
+		
+		// T_T select 옵션 변경하면 유지되는 것 수정 중
+		// select 옵션 변경하면 이동하는 함
 		function selectOption(){
 			let index = $("#selectClassStatus option").index($("#selectClassStatus option:selected"));
+			let div=$("#selectClassStatus option")
 			// index =1 -> W / 2:Y/3:N
-			
-			let classList= $(".h-class-list");
-			let classPassW=$(".h-class-pass-W");
 			//console.log(index);
-			if(index==1){
-				i.css('backgroundColor','red');
-				//if()
-				console.log(i)
-				console.log(classList);
-				console.log(classPassW);
+			if(index==0){
+				location.replace('<%=request.getContextPath()%>/host/hostClassList.jsp');
+			}else if(index==1){
+				location.assign('<%=request.getContextPath()%>/class/sortingClassByPass.do?hostId=<%=loginHost.getHostId()%>&passStatus=W');
+
+			}else if(index==2){
+				location.assign('<%=request.getContextPath()%>/class/sortingClassByPass.do?hostId=<%=loginHost.getHostId()%>&passStatus=Y');
+			}else if(index==3){
+				location.assign('<%=request.getContextPath()%>/class/sortingClassByPass.do?hostId=<%=loginHost.getHostId()%>&passStatus=N');
 			}
-			
-			
+				$(".h-class-list-n").css('display','none');
+				$(".h-class-pass-list").css('display','flex');
 		}
-		/* function selectOption(){
-			let select=document.getElementById("selectClassStatus");
-			var selectValue = select.options[select.selectedIndex].value;
-			let classPassWDiv=$(".h-class-pass-W");
-			let classPassDivW=document.querySelectorAll('div.h-class-list-container div.h-class-pass-W');
-			let gg=document.getElementById('gg');
-			if(selectValue=='W'){
-				alert("W");
-				//classPassWDiv.parents().find('div.h-class-list').css('display','none')
-				classPassWDiv.parent().css('backgroundColor','red');
-				console.log(classPassWDiv.parents());
-				//console.log(classPassDivW.parentNode);
-				//classList.indexOf('승인 대기')
-				//classList.style.display ='none';
-				gg.style.display='none';
-			}else if(selectValue=='Y'){
-				alert('Y')
-			}	
-				
-		} */
 			
 	</script>       
 <%@ include file="/views/host/hostFooter.jsp"%>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/admin/adminHeader.jsp"%>
 <body>
+ 
 
 </body>
-<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/host/hostFooter.jsp"%>
