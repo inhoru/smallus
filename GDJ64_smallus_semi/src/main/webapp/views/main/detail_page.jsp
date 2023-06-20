@@ -1,26 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
-<link rel="stylesheet" type="text/css"
-   href="<%=request.getContextPath()%>./css/category/detail.css" />
-<div class="detail">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>./css/category/detail.css" />
    <section id="main">
       <div class="detail_page">
-         <a style="display: block; padding: 3% 0 0 20%; font-size: 8px;">공예</a>
-         <h4 style="margin-left: 20%; font-size: 32px;">스테인 글라스로 나만의 소품 만들기</h4>
          <img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg"
-            width="500" height="500" style="margin: 0 0 10% 20%; float: left;">
+            width="400" height="400" style="margin: 0 0 10% 20%; float: left;">
+         <a style="display: block; padding: 0 5% 0 42%; font-size: 8px;">공예</a>
+         <h4 style="margin-left% 42%; font-size: 24px;">스테인 글라스로 나만의 소품 만들기</h4>
             <img  id=img_cd src="<%=request.getContextPath()%>/img/category_main/calendar.png">
-            <span>
-            <p class="text">2023년 06월 23일</p>
-            <button id=but>12:00 ~ 14:00</button><br>
-            <button id=but> 15:00 ~ 17:00</button><br>
-            <p>인원수</p>
-            <button id=but>-</button>
-            <button id=but>+</button><br>
-            <p>결제 금액  37,000</p>
-            <button id=but>결제하기</button>
-            </span>
+      </div>
          <div class="detail_page2">
             <img class="imgs"
                src="<%=request.getContextPath()%>/img/category_main/craft2.jpg"
@@ -29,18 +18,35 @@
                src="<%=request.getContextPath()%>/img/category_main/craft8.png"
               >
          </div>
-      </div>
-      <nav class="menu" style="margin: 4%;">
-         <ul
-            style="font-size: 24px; justify-content: space-around; display:flex;">
+	<div class="detail">
+	<span>
+            <p>2023년 06월 23일</p>
+            <button id=but>12:00 ~ 14:00</button><br>
+            <button id=but> 15:00 ~ 17:00</button><br>
+	</span>
+	<span>
+            <p>인원수</p>
+            <button id=pm>-</button>
+            <button id=pm>+</button><br>
+	</span>
+	<span>
+            <p>결제 금액  37,000</p>
+            <button id=pm>결제하기</button>
+	</span>
+    </div>
+         <div class="menu">
+      <nav >
+         <ul>
             <li><a href="">상세 정보</a></li>
             <hr>
             <li><a href="">후기</a></li>
             <hr>
             <li><a href="">Q & A</a></li>
          </ul>
-         <hr style="margin: 1% 10%;">
+         <hr style="margin: 1% 20%;">
       </nav>
+      </div>
+      <div>
       <nav class="detail_info"
          style="font-size: 16px; font-weight: bolder; margin-left: 20%;">
          <ul>
@@ -67,6 +73,7 @@
            <hr style="margin-right:20%">
          </ul>
       </nav>
+      </div>
       <nav class="epilogue" style="font-weight: bolder; margin-left: 20%;">
          <ul>
             <li style="font-size: 16px; margin: 1%;"><a href="">후기</a></li>
@@ -76,6 +83,7 @@
       <div class="d-review-one">
          <img src="<%=request.getContextPath()%>/img/img-slide2-1.png"
             width="150px" height="150px">
+            
          <div class="d-review-table">
             <table>
                <tr>
@@ -191,27 +199,51 @@
 }
 img#img_cd{
 margin: 3% auto;
-width: 300px;
-height: 250px;
+width: 200px;
+height: 150px;
 float:left;
 }
 img.imgs{
 width: 245px;
 height: 245px;
-float:inherit;
-
+position: relative;
+}
+div.detail{
+position: absolute;
+left: 42%;
+top:40%;
 }
 span{
-float: right;}
-
+display: inline;
+float: inherit;
+}
+div.detail_page2{
+display:inline;
+justify-content: flex-start;
+float:left;
+}
+div.menu{
+margin: 4%;
+font-size:24px;
+display: flex;
+justify-content:space-around;
+text-align:justify;
+}
 button{
 width: 100px;
 height: 25px;
 }
 #but{
-margin-left:25%;
-width:100px;
+margin:0 0 0 65% ;
+width:250px;
 height:25px;
+text-align: center;
+border-radius: 20px;
+}
+#pm{
+margin-left:25% ;
+width: 100px;
+height: 25px;
 text-align: center;
 border-radius: 20px;
 }
