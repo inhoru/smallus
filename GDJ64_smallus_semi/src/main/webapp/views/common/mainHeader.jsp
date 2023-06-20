@@ -188,7 +188,7 @@ if (cookies != null) {
       </table>
    </header>
 
-	<% if (loginMember == null) { %>
+   <% if (loginMember == null) { %>
 <script>
   /* 비로그인 시 작동 */
   let isSearchFieldActive = false;
@@ -215,34 +215,34 @@ if (cookies != null) {
   });
 
   $(".i-searchIcon").click((e) => {
-	    const icon = $(".i-iconinfo");
-	    const searchField = $(".search");
-	    const categories = $("#categories");
-	    const windowWidth = $(window).innerWidth();
+       const icon = $(".i-iconinfo");
+       const searchField = $(".search");
+       const categories = $("#categories");
+       const windowWidth = $(window).innerWidth();
 
-	    if (isSearchFieldActive) {
-	      $("form").submit(); 
-	      return;
-	    }
+       if (isSearchFieldActive) {
+         $("form").submit(); 
+         return;
+       }
 
-	    icon.css("visibility", "hidden");
-	    searchField.css("display", "flex");
-	    categories.css("visibility", "hidden");
-	    
-	    /* 화면크기에따른 돋보기위치이동 */
-	    if(windowWidth > 1800) {
-	        $(".i-searchIcon").css("transform", "translateX(-125px)");
-	    } else if(windowWidth > 1400) {
-	        $(".i-searchIcon").css("transform", "translateX(-80px)");
-	    }
+       icon.css("visibility", "hidden");
+       searchField.css("display", "flex");
+       categories.css("visibility", "hidden");
+       
+       /* 화면크기에따른 돋보기위치이동 */
+       if(windowWidth > 1800) {
+           $(".i-searchIcon").css("transform", "translateX(-125px)");
+       } else if(windowWidth > 1400) {
+           $(".i-searchIcon").css("transform", "translateX(-90px)");
+       }
 
-	    $(".i-searchIcon").css("transition", "0.7s");
-	    $("#mainOpacity").css("opacity", "0.5");
+       $(".i-searchIcon").css("transition", "0.7s");
+       $("#mainOpacity").css("opacity", "0.5");
 
-	    searchField.focus();
-	    isSearchFieldActive = true;
-	    e.stopPropagation();
-	});
+       searchField.focus();
+       isSearchFieldActive = true;
+       e.stopPropagation();
+   });
 
 
 
@@ -340,4 +340,3 @@ $(".i-searchIcon").click((e) => {
   });
 </script>
 <% } %>
-
