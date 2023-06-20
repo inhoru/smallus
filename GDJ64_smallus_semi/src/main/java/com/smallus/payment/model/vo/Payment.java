@@ -24,6 +24,7 @@ public class Payment {
 	private Date paymentDate;
 	private String paymentStatus;
 	private String hostId;
+	private int TotalPrice;
 	
 	private String classId;
 	private String classTitle;

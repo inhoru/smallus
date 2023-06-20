@@ -233,7 +233,7 @@ if (cookies != null) {
 	    if(windowWidth > 1800) {
 	        $(".i-searchIcon").css("transform", "translateX(-125px)");
 	    } else if(windowWidth > 1400) {
-	        $(".i-searchIcon").css("transform", "translateX(-80px)");
+	        $(".i-searchIcon").css("transform", "translateX(-90px)");
 	    }
 
 	    $(".i-searchIcon").css("transition", "0.7s");

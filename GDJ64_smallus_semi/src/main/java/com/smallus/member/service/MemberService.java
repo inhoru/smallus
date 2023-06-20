@@ -110,4 +110,12 @@ public class MemberService {
 		else rollback(conn);
 		return result;
 	}
+	
+	public int wishListCount(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.wishListCount(conn,memberId);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

@@ -1,461 +1,426 @@
 /* 마이페이지전체 */
-#i-main{
-    
-    width: 1280px;
-    margin: auto;
-
+#i-main {
+	width: 70%;
+	margin: auto;
 }
 /* 마이페이지전체배경 */
-.i-mypagetotal{
-    padding-bottom: 3%;
-    background-color: #FFFBF5;
+.i-mypagetotal {
+	padding-bottom: 3%;
+	background-color: #FFFBF5;
 }
 /* 카테고리테이블 */
 .i-mypageCategories {
-    width: 50%;
-    margin: auto;
-
+	width: 50%;
+	margin: auto;
 }
 /* 카테고리 전체 */
-.i-tablecontent{
-    width: 100%;
-    text-align: center;
-    table-layout: fixed;
-    background-color: #FDF7E8;
-
+.i-tablecontent {
+	width: 100%;
+	text-align: center;
+	table-layout: fixed;
+	background-color: #FDF7E8;
 }
 
 /* 카테고리 대분류 */
-.i-my,
-.i-info,
-.i-cu {
-    font-size: 18px;
-    font-weight: bolder;
+.i-my, .i-info, .i-cu {
+	font-size: 18px;
+	font-weight: bolder;
 }
-
-
 
 /* 프로필 전체 */
 #i-proFile {
-    
-    padding-top: 1%;
-    padding-bottom: 1%;
-    margin-bottom: 3%;
-    display: flex;
-    width: 100%;
-    border-bottom: 1px solid #efebe5;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	margin-bottom: 3%;
+	display: flex;
+	width: 100%;
+	border-bottom: 1px solid #efebe5;
 }
 
 /* 프로필 이미지 &&인포 */
 #i-proFileImg {
-    width: 40%;
-    display: flex;
-    align-items: center;
+	width: 40%;
+	display: flex;
+	align-items: center;
 }
 
 /* 프로필 인포 */
 #i-proFileInfo {
-    position: relative;
-    top: 35px;
-    margin-left: 5%;
-
-
+	position: relative;
+	top: 35px;
+	margin-left: 5%;
 }
 
 /* 프로필 이메일 */
 #i-proFileInfo p {
-    position: relative;
-    top: 15px;
-    color: #55555586;
+	position: relative;
+	top: 15px;
+	color: #55555586;
 }
 
 /* 프로필 이미지 */
 #i-proFileImg img {
-    width: 150PX;
-    height: 150px;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    border-radius: 100px;
-
+	width: 150PX;
+	height: 150px;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	border-radius: 100px;
 }
 
 /* 쿠폰 찜 후기  전체*/
 .i-additional-item {
-    margin-top: 10%;
-    display: flex;
-    justify-content: space-evenly;
-    width: 700px;
-
-
+	margin-top: 10%;
+	display: flex;
+	justify-content: space-evenly;
+	width: 700px;
 }
 
 /* 쿠폰 후기 찜 글씨 */
 .i-additional-span {
-    display: flex;
-    width: 700px;
-    justify-content: space-evenly;
-
-
+	display: flex;
+	width: 700px;
+	justify-content: space-evenly;
 }
 
 /*  쿠폰 후기 찜 갯수 */
 .i-additional-a {
-    display: flex;
-    width: 700px;
-    justify-content: space-evenly;
+	display: flex;
+	width: 700px;
+	justify-content: space-evenly;
 }
 
 /* 쿠폰 후기 찜 이미지 */
 .i-cs {
-    height: 25px;
-    width: 32px;
-    margin-bottom: 2%;
+	height: 25px;
+	width: 32px;
+	margin-bottom: 2%;
 }
 
 /* 쿠폰후기 찜 글씨 */
 .i-hs {
-    margin-bottom: 1%;
+	margin-bottom: 1%;
 }
 
 /* 쿠폰 글씨 */
 .i-hs1 {
-    position: relative;
-    right: 5px;
+	position: relative;
+	right: 5px;
 }
 
 /* 찜 글씨 */
-.i-hs2 {}
+.i-hs2 {
+	
+}
 
 /* 후기글씨*/
 .i-hs3 {
-    position: relative;
-    left: 5px;
-
+	position: relative;
+	left: 5px;
 }
 
 /* 쿠폰 갯수 */
 .i-as1 {
-    position: relative;
-    right: 5px;
+	position: relative;
+	left: -10px;
 }
 
 /* 찜갯수 */
 .i-as2 {
-    position: relative;
-    left: 2px;
+	position: relative;
+	left: -2px;
 }
 
 /* 후기 갯수 */
 .i-as3 {
-    position: relative;
-    left: 5px;
+	position: relative;
+	left: 5px;
 }
 
 /* 예약내역 h2 */
 .i-reservationh2 {
-    margin-bottom: 2%;
+	margin-bottom: 2%;
 }
 
 /* 예약내역 전체 */
 #i-reservation {
-    border-bottom: 1px solid #efebe5;
-    padding-bottom: 5%;
-    margin-bottom: 3%;
-    overflow: hidden;
-    
-    
+	border-bottom: 1px solid #efebe5;
+	padding-bottom: 5%;
+	margin-bottom: 3%;
+	overflow: hidden;
 }
 
 /* 예약내역 리스트(2개) */
 .i-reservationListTotal {
-       height: 220px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    margin: auto;
-
-    
+	height: 220px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+	margin: auto;
 }
 
 /* 슬라이드 체크 */
 #i-reservation input[id*="slide"] {
-    display: none;
+	display: none;
 }
 
 /* 슬라이드 ul */
 #i-reservation .slidelist {
-    white-space: nowrap;
-    
+	white-space: nowrap;
 }
 
 /* 슬라이드 li */
 #i-reservation .slidelist>li {
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-    transition: all .6s;
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	transition: all .6s;
 }
 
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide01"]:checked~.slidelist>li {
-    transform: translateX(0%);
+#i-reservation input[id="slide01"]:checked ~.slidelist>li {
+	transform: translateX(0%);
 }
 
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide02"]:checked~.slidelist>li {
-    transform: translateX(-100%);
+#i-reservation input[id="slide02"]:checked ~.slidelist>li {
+	transform: translateX(-100%);
 }
 
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide03"]:checked~.slidelist>li {
-    transform: translateX(-200%);
+#i-reservation input[id="slide03"]:checked ~.slidelist>li {
+	transform: translateX(-200%);
 }
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide04"]:checked~.slidelist>li {
-    transform: translateX(-300%);
+#i-reservation input[id="slide04"]:checked ~.slidelist>li {
+	transform: translateX(-300%);
 }
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide05"]:checked~.slidelist>li {
-    transform: translateX(-400%);
+#i-reservation input[id="slide05"]:checked ~.slidelist>li {
+	transform: translateX(-400%);
 }
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide06"]:checked~.slidelist>li {
-    transform: translateX(-500%);
+#i-reservation input[id="slide06"]:checked ~.slidelist>li {
+	transform: translateX(-500%);
 }
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide07"]:checked~.slidelist>li {
-    transform: translateX(-600%);
+#i-reservation input[id="slide07"]:checked ~.slidelist>li {
+	transform: translateX(-600%);
 }
 /* 슬라이드 체크된거에따라 li보여줌 */
-#i-reservation input[id="slide08"]:checked~.slidelist>li {
-    transform: translateX(-700%);
-}
-#i-reservation input[id="slide09"]:checked~.slidelist>li {
-    transform: translateX(-800%);
+#i-reservation input[id="slide08"]:checked ~.slidelist>li {
+	transform: translateX(-700%);
 }
 
+#i-reservation input[id="slide09"]:checked ~.slidelist>li {
+	transform: translateX(-800%);
+}
 
 /* 예약내역 세부사항 */
 .i-reservationList {
-    width: 40%;
-    height: 70%;
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid #F6E9DF;
-    border-radius: 20px;
-    padding: 1%;
-    
-
-
+	width: 40%;
+	height: 70%;
+	display: flex;
+	justify-content: space-around;
+	border: 1px solid #F6E9DF;
+	border-radius: 20px;
+	padding: 1%;
+	font-size: 14px;
 }
-.i-reservationImg{
+
+.i-reservationImg {
 	border-radius: 20px;
 }
 
 /* 예약내역 글씨 */
 .i-reservation-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 /* 예약내역 결제 */
 .i-reservation-payment {
-    color: #929292;
-    word-spacing: 1.0em;
+	color: #929292;
+	word-spacing: 1.0em;
 }
 
 /* 예약내역 날짜 */
 .i-reservation-day {
-    margin-left: 4%;
+	margin-left: 4%;
 }
 
 /* 예약내역 제목 */
 .i-reservation-title {
-    font-size: 24px;
-    font-weight: bold;
-    display: flex;
+	font-size: 18px;
+	font-weight: bold;
+	white-space: normal;
+	width: 200px;
 }
 
 /* 에약내역 인원수 */
 .i-reservation-peopleNum {
-    color: #929292;
-
+	color: #929292;
 }
 
 /* 예약내역 진행일자 */
 .i-reservation-reservationDay {
-    display: flex;
+	display: flex;
 }
-
 
 /* 오르쪽부등호이미지 */
 #i-reservationSlick2 img {
-    opacity: 0.6;
-    width: 30px;
-    height: 30px;
-    transform: rotate(180deg);
-    cursor: pointer;
+	opacity: 0.6;
+	width: 30px;
+	height: 30px;
+	transform: rotate(180deg);
+	cursor: pointer;
 }
 
 /* 왼쪽부등호 이미지 */
 #i-reservationSlick img {
-    opacity: 0.6;
-    width: 30px;
-    height: 30px;
-    transform: rotate(-0deg);
-    cursor: pointer;
+	opacity: 0.6;
+	width: 30px;
+	height: 30px;
+	transform: rotate(-0deg);
+	cursor: pointer;
 }
-
 
 /* 찜목록전체 */
 .i-wishList {
-    overflow: hidden;
+	overflow: hidden;
 }
-
 
 /* 찜목록 한페이지전체 */
 .i-wishListTotal {
-   height: 350px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 100%;
-    margin: auto;
-    
-
+	height: 350px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+	margin: auto;
 }
-
-
 
 /* 찜부등호이미지 */
 .i-wishListSlick img {
-	    margin-bottom: 100%;
-    opacity: 0.6;
-    width: 30px;
-    height: 30px;
-    transform: rotate(-0deg);
-    cursor: pointer;
-    margin-right: 10px;
+	margin-bottom: 100%;
+	opacity: 0.6;
+	width: 30px;
+	height: 30px;
+	transform: rotate(-0deg);
+	cursor: pointer;
+	margin-right: 10px;
 }
 
 /* 찜부등호이미지 */
 .i-wishListSlick2 img {
-    opacity: 0.6;
-    width: 30px;
-    height: 30px;
-    transform: rotate(180deg);
-    cursor: pointer;
+	opacity: 0.6;
+	width: 30px;
+	height: 30px;
+	transform: rotate(180deg);
+	cursor: pointer;
 }
 
 /* 찜슬라이드 체크 */
 .i-wishList input[id*="wishListSlide"] {
-    display: none;
+	display: none;
 }
 
 /* 찜슬라이드 ul */
 .i-wishList .wishslidelist {
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
 /* 찜슬라이드 li */
 .i-wishList .wishslidelist>li {
-    display: inline-block;
-    width: 100%;
-    transition: all .6s;
-        vertical-align: middle;
+	display: inline-block;
+	width: 100%;
+	transition: all .6s;
+	vertical-align: middle;
 }
 
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide01"]:checked~.wishslidelist>li {
-    transform: translateX(0%);
+.i-wishList input[id="wishListSlide01"]:checked ~.wishslidelist>li {
+	transform: translateX(0%);
 }
 
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide02"]:checked~.wishslidelist>li {
-    transform: translateX(-100%);
+.i-wishList input[id="wishListSlide02"]:checked ~.wishslidelist>li {
+	transform: translateX(-100%);
 }
 
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide03"]:checked~.wishslidelist>li {
-    transform: translateX(-200%);
+.i-wishList input[id="wishListSlide03"]:checked ~.wishslidelist>li {
+	transform: translateX(-200%);
 }
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide04"]:checked~.wishslidelist>li {
-    transform: translateX(-300%);
+.i-wishList input[id="wishListSlide04"]:checked ~.wishslidelist>li {
+	transform: translateX(-300%);
 }
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide05"]:checked~.wishslidelist>li {
-    transform: translateX(-400%);
+.i-wishList input[id="wishListSlide05"]:checked ~.wishslidelist>li {
+	transform: translateX(-400%);
 }
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide06"]:checked~.wishslidelist>li {
-    transform: translateX(-500%);
+.i-wishList input[id="wishListSlide06"]:checked ~.wishslidelist>li {
+	transform: translateX(-500%);
 }
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide07"]:checked~.wishslidelist>li {
-    transform: translateX(-600%);
+.i-wishList input[id="wishListSlide07"]:checked ~.wishslidelist>li {
+	transform: translateX(-600%);
 }
 /* 찜슬라이드 체크된거에따라 li보여줌 */
-.i-wishList input[id="wishListSlide08"]:checked~.wishslidelist>li {
-    transform: translateX(-700%);
-}
-.i-wishList input[id="wishListSlide09"]:checked~.wishslidelist>li {
-    transform: translateX(-800%);
+.i-wishList input[id="wishListSlide08"]:checked ~.wishslidelist>li {
+	transform: translateX(-700%);
 }
 
-
+.i-wishList input[id="wishListSlide09"]:checked ~.wishslidelist>li {
+	transform: translateX(-800%);
+}
 
 /* 마이페이지 찜목록 */
-section.i-imgContainer{
- 
-    
+section.i-imgContainer {
+	
 }
 /* 리스트 4개 */
-.i-img-list{
-    width:250px;
-    margin: 2rem 1rem 2rem 0;
-    height: 20rem;
-    
-    
-
+.i-img-list {
+	width: 250px;
+	margin: 2rem 1rem 2rem 0;
+	height: 20rem;
 }
 
 /* 찜 이미지 */
-section.i-imgContainer .i-img-list img{
-    width: 100%;
-    height: 15rem;
-    border-radius: 2rem;
-
+section.i-imgContainer .i-img-list img {
+	width: 100%;
+	height: 15rem;
+	border-radius: 2rem;
 }
 /* 찜 클래스이름 */
-section.i-imgContainer .i-img-list h4{
-    margin-top: 0.5rem;
-    font-family: "GmarketSansMedium";
- 
+section.i-imgContainer .i-img-list h4 {
+	margin-top: 0.5rem;
+	font-family: "GmarketSansMedium";
 }
 
 /* 하트 더보기  */
 .i-wish-container {
-    display: flex;
-    height: 80px;
-    position: relative;
-    bottom:30%;
-    left:85%;
+	display: flex;
+	height: 80px;
+	position: relative;
+	bottom: 30%;
+	left: 85%;
 }
 
 /* 하트 체크박스 */
 .i-wish-container input {
-    display: none;
+	display: none;
 }
 
 /* 하트 */
 .i-wish-container input:checked+label svg {
-    cursor: pointer;
-    fill: rgb(255, 255, 255);
-    stroke:rgb(255, 255, 255);
-    animation: heartButton 1s;
+	cursor: pointer;
+	fill: rgb(255, 255, 255);
+	stroke: rgb(255, 255, 255);
+	animation: heartButton 1s;
 }
 
 /* 하트애니메이션 */
@@ -481,479 +446,511 @@ section.i-imgContainer .i-img-list h4{
     }
 } 
 
-
 /* 프로필전체 배경 */
-.i-profiletotal{
-    padding-bottom: 3%;
-    background-color: #FFFBF5;
+.i-profiletotal {
+	padding-bottom: 3%;
+	background-color: #FFFBF5;
 }
 /* 프로필수정 전체 */
 .i-proFile {
-    margin: auto;
-    width: 1280px;
-    
+	margin: auto;
+	width: 70%;
 }
 /* 프로필수정h2*/
 .i-proFileh2 {
-    padding-top: 1%;
-    padding-bottom: 1%;
-    border-bottom: 2px solid #efebe5;
-  
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
 }
 /*기본프로필사진  */
-.i-myprofile{
- 	width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    margin-top: 3%;
+.i-myprofile {
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+	margin-top: 3%;
 }
 /* 기본프로필수정 이미지 */
-.i-proFileInfoimg{
-    width: 40px;
-    height: 40px;
-    position: relative;
-    right: 50px;
-    bottom: 10px;
-    background-color: transparent;
+.i-proFileInfoimg {
+	width: 40px;
+	height: 40px;
+	position: relative;
+	right: 50px;
+	bottom: 10px;
+	background-color: transparent;
 }
 
 /* 기본프로필수정 전체 */
 .i-proFileInfo {
-    margin-left: 23%;
-    margin-bottom: 2%;
+	margin-left: 23%;
+	margin-bottom: 2%;
 }
 /* 기본정보인풋 */
 .i-proFileModify input {
-    width: 400px;
-    height: 40px;
-    border-radius: 20px;
-    padding-left: 3%;
-    border: 2px solid #5555;
-    margin: 6%;
-
+	width: 400px;
+	height: 40px;
+	border-radius: 20px;
+	padding-left: 3%;
+	border: 2px solid #5555;
+	margin: 6%;
 }
 /* 기본프로필정보 전체 */
 .i-proFileModify {
-    display: flex;
-    justify-content: center;
-
-
+	display: flex;
+	justify-content: center;
 }
 /* 인풋창 */
 .i-proFile2 {
-    margin-left: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
+	margin-left: 1%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 /* 인풋창타입 */
 .i-proFile1 {
-    margin-top: 32px;
-    margin-bottom: 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
+	margin-top: 32px;
+	margin-bottom: 32px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 /* 인풋창타입 h3 */
 .i-proFileId h3 {
-    margin-top: 35%;
-    margin-bottom: 35%;
+	margin-top: 35%;
+	margin-bottom: 35%;
 }
 /* 변경버튼 */
-.i-proFile3{
-    margin-left: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.i-proFile3 {
+	margin-left: 5%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }
 /* 변경버튼상세 */
-.i-proFile3 button{
-    font-weight: bolder;
-    width: 100px;
-    height: 50px;
-    border-radius: 60px;
-    background: #E8D6C3;
-    border: none;
-    cursor: pointer;
+.i-proFile3 button {
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
 }
 /* 변경버튼숨김 */
-.i-nonebutton{
-    visibility : hidden;
-    
+.i-nonebutton {
+	visibility: hidden;
 }
 /* 저장버튼 전체 */
-.i-storage{
-    margin-top: 5%;
-    margin-left: 45%;
-    font-weight: bolder;
-    width: 100px;
-    height: 50px;
-    border-radius: 60px;
-    background: #E8D6C3;
-    border: none;
-    cursor: pointer;
+.i-storage {
+	margin-top: 5%;
+	margin-left: 45%;
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
 }
 /* 회원탈퇴전체배경 */
-.i-withdrawaltotal{
-    padding-bottom: 3%;
-    background-color: #FFFBF5;
+.i-withdrawaltotal {
+	padding-bottom: 3%;
+	background-color: #FFFBF5;
 }
 
 /* 탈퇴 전체 */
 .i-withdrawal {
-    margin: auto;
-    width: 1280px;
-    
+	margin: auto;
+	width: 70%;
 }
 /* 회원탈퇴h2*/
 .i-withdrawalh2 {
-    padding-top: 1%;
-    padding-bottom: 1%;
-    border-bottom: 2px solid #efebe5;
-   
-    /* 회워탈퇴전체 */
-}
-.i-withdrawalcontent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
 
+	/* 회워탈퇴전체 */
+}
+
+.i-withdrawalcontent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 /* 떠나실건가요? */
-.i-withdrawalcontent h1{
-    margin-top: 2%;
-    
+.i-withdrawalcontent h1 {
+	margin-top: 2%;
 }
 /* 회원탈퇴전 확인 */
-.i-withdrawalcontent h3{
-    margin-top: 2%;
-    
-
+.i-withdrawalcontent h3 {
+	margin-top: 2%;
 }
 /* 탈퇴조약 */
-.i-withdrawalcontent-span{
-
-    margin-top: 5%;
-    display: flex;
-    flex-direction: column;
+.i-withdrawalcontent-span {
+	margin-top: 5%;
+	display: flex;
+	flex-direction: column;
 }
 /* 탈퇴조약 상세 */
-.i-withdrawalcontent-span span{
-    margin-bottom: 5%;
+.i-withdrawalcontent-span span {
+	margin-bottom: 5%;
 }
 /* 회원탈퇴버튼 */
-.i-withdrawalbutton{
-    margin-left: 46%;
-    
-    margin-top: 5%;
-    font-weight: bolder;
-    width: 100px;
-    height: 50px;
-    border-radius: 60px;
-    background: #E8D6C3;
-    border: none;
-    cursor: pointer;
+.i-withdrawalbutton {
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
 }
 /* 회원탈퇴end배경 */
-.i-withdrawalendtotal{
-    padding-bottom: 3%;
-    background-color: #FFFBF5;
+.i-withdrawalendtotal {
+	padding-bottom: 3%;
+	background-color: #FFFBF5;
 }
 /* 회원탈end  */
-.i-withdrawalendh2{
-    padding-top:3%;
-    padding-bottom: 1%;
-    border-bottom: 2px solid #efebe5;
+.i-withdrawalendh2 {
+	padding-top: 3%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
 }
 /* 회원탈퇴end입력 상세 */
-.i-withdrawalendcontent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2%;  
+.i-withdrawalendcontent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 2%;
 }
 /* 회원탈퇴비밀번호입력end h2 */
-.i-withdrawalendcontent h2{
-    
-    margin-top: 10%;
-    
+.i-withdrawalendcontent h2 {
+	margin-top: 10%;
 }
 /* 회원탈퇴비밀번호입력창end */
-.i-withdrawalendcontent input{
-    margin-top: 4%;
-    width: 400px;
-    height: 40px;
-    border-radius: 20px;
-    padding-left: 3%;
-    border: 2px solid #5555;
-
+.i-withdrawalendcontent input {
+	margin-top: 4%;
+	width: 400px;
+	height: 40px;
+	border-radius: 20px;
+	padding-left: 3%;
+	border: 2px solid #5555;
 }
 /* 회원탈퇴버튼end */
-.i-withdrawalendbutton{
-    margin-top: 5%;
-    font-weight: bolder;
-    width: 100px;
-    height: 50px;
-    border-radius: 60px;
-    background: #E8D6C3;
-    border: none;
-    cursor: pointer;
+.i-withdrawalendbutton {
+	margin-top: 5%;
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
 }
 /* 쿠폰페이지 전체배경 */
-.i-mypagecoupontotal{
-	margin-top:1%;
-    background-color: #FFFBF5;
+.i-mypagecoupontotal {
+	margin-top: 1%;
+	background-color: #FFFBF5;
 }
 /* 쿠폰페이지 */
-.i-mypagecoupon{
-    margin: auto;
-    width: 1280px;
-    
+.i-mypagecoupon {
+	margin: auto;
+	width: 70%;
 }
 /* 전체 마이페이지 상단 h2 */
-.i-mypageh2{
-    padding-top: 1%;
-    padding-bottom: 1%;
-    border-bottom: 2px solid #efebe5;
-    	width: 100%;
+.i-mypageh2 {
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
+	width: 100%;
 }
 /* 쿠폰입력창 */
-.i-mypagecoupon input{
-    width: 630px;
-    height: 40px;
-    border-radius: 20px;
-    margin-left: 5%;
+.i-mypagecoupon input {
+	width: 630px;
+	height: 40px;
+	border-radius: 20px;
+	margin-left: 5%;
 }
 /* 쿠폰입력전체 */
-.i-couponinput{
-    display: flex;
-    align-items: center;
-    margin-left: 15%;
-    margin-top: 2%;
-    padding-bottom: 3%;
-
-    
+.i-couponinput {
+	display: flex;
+	align-items: center;
+	margin-left: 15%;
+	margin-top: 2%;
+	padding-bottom: 3%;
 }
 /* 쿠폰등록버튼 */
-.i-mypagecoupon button{
-    margin-left: 5%;
-    font-weight: bolder;
-    width: 100px;
-    height: 50px;
-    border-radius: 60px;
-    background: #E8D6C3;
-    border: none;
-    cursor: pointer;
+.i-mypagecoupon button {
+	margin-left: 5%;
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
 }
 /* 보유한쿠폰전체 h2*/
-.i-possessioncoupon{
+.i-possessioncoupon {
 	border-top: 2px solid #efebe5;
-     border-bottom: 2px solid #efebe5;
-   padding-bottom: 2%;
-   padding-top: 2%;
+	border-bottom: 2px solid #efebe5;
+	padding-bottom: 2%;
+	padding-top: 2%;
 }
-
 
 /* 쿠폰목록 */
-.i-coiponcontainer{
-    display: flex;
-    justify-content:space-between;
-    width: 880px;
-    margin: auto;
-    flex-wrap: wrap;
-    padding-bottom:3%;
-       
-        
-  
+.i-coiponcontainer {
+	display: flex;
+	justify-content: space-between;
+	width: 880px;
+	margin: auto;
+	flex-wrap: wrap;
+	padding-bottom: 3%;
 }
-.i-nocoupon{
+
+.i-nocoupon {
 	font-weight: 900;
 	font-size: 24px;
-	
-text-align: center;
-padding-top: 10%;
-padding-bottom: 10%;
+	text-align: center;
+	padding-top: 10%;
+	padding-bottom: 10%;
 }
-.i-nopayment{
+
+.i-nopayment {
 	font-weight: 900;
 	font-size: 24px;
-	
-text-align: center;
-padding-top: 10%;
-padding-bottom: 10%;
+	text-align: center;
+	padding-top: 10%;
+	padding-bottom: 10%;
 }
-.i-nowish{
+
+.i-nowish {
 	font-weight: 900;
 	font-size: 24px;
-	
-text-align: center;
-padding-top: 10%;
-padding-bottom: 10%;
+	text-align: center;
+	padding-top: 10%;
+	padding-bottom: 10%;
 }
 
 /* 쿠폰모양 */
-.i-coupon-card{
-	margin-right:3%;
-    background: #efebe5;
-    color: #fff;
-    text-align: center;
-    width:230px;
-    padding: 40px 80px;
-    border-radius: 15px;
-    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.1);
-    position: relative;
-    margin-top: 3%;
-    
+.i-coupon-card {
+	margin-right: 3%;
+	background: #efebe5;
+	color: #fff;
+	text-align: center;
+	width: 230px;
+	padding: 40px 80px;
+	border-radius: 15px;
+	box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+	position: relative;
+	margin-top: 5%;
+}
 
+.i-coupon-card span {
+	position: relative;
+	top: 10px;
 }
 /* 쿠폰 날짜 */
-.i-coupon-card p{
-    position: relative;
-    top: 30px;
+.i-coupon-card p {
+	position: relative;
+	top: 30px;
+	color: #929292;
 }
 /* 쿠폰 양옆원 */
-.i-circle1, .i-circle2{
-    background-color: #FFFBF5;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
+.i-circle1, .i-circle2 {
+	background-color: #FFFBF5;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 }
 /* 쿠폰 양옆원 */
-.i-circle1{
-    left: -25px;
+.i-circle1 {
+	left: -25px;
 }
 /* 쿠폰 양옆원 */
-.i-circle2{
-    right: -25px;
+.i-circle2 {
+	right: -25px;
 }
 /* 결제내역 전체배경 */
-.i-mypageCommonbackground{
-    background-color: #FFFBF5;
-    
+.i-mypageCommonbackground {
+	background-color: #FFFBF5;
+}
+/*부킹 시간 */
+.i-booking{
+	width: 220px;
 }
 /* 결제내역 전체영역 */
-.i-mypageCommon{
-    margin: auto;
-    width: 1280px;
+.i-mypageCommon {
+	margin: auto;
+	width: 70%;
 }
 /* 결제내역 결제타입및 결제시간 */
-.i-paymentTypeDate{
-    
-    margin-top: 1%;
-    margin-bottom: 1%;
-
+.i-paymentTypeDate {
+	margin-top: 1%;
+	margin-bottom: 1%;
 }
 /* 결제타입 날짜 글씨 */
-.i-paymentTypeDate span{
-    color: #929292;
+.i-paymentTypeDate span {
+	color: #929292;
 }
 /*결제내역클래스 이미지  */
-.i-mypageCommon img{
-    border-radius: 20px;
+.i-mypageCommon img {
+	border-radius: 20px;
 }
 /* 결제내역 리스트 */
-.i-paymentList{
-    padding-bottom: 1%;
-    border-bottom: 2px solid #efebe5;
-    margin: auto;
-    width: 100%;
+.i-paymentList {
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
+	margin: auto;
+	width: 100%;
+}
+
+.i-paymenttotal {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	margin-left: 2%;
+	margin-bottom: 1%;
+	width: 30%;
 }
 /* 결제내역상세 */
-.i-paymentimg{
-    border-bottom: 1px;
-    display: flex;
+.i-paymentimg {
+	border-bottom: 1px;
+	display: flex;
 }
 /* 결제내역 클래스 이름 */
-.i-paymentimg h3{
-    
-    width:300px;
-    white-space: pre-wrap;
+.i-paymentimg h3 {
+	margin-bottom: 20%;
+	white-space: pre-wrap;
 }
 /* 결제내역 클래스 예약상세 */
-.i-patmentcontent{
-    margin-left: 2%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.i-patmentcontent {
+	margin-left: 2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }
 /* 결제내역 인원및 날짜글씨 */
-.i-patmentcontent span{
-     color: #929292;
+.i-patmentcontent span {
+	color: #929292;
 }
 
 /* 예약취소 후기작성버튼 */
-.i-paymentbutton{
-    display: flex;
-    margin-top: 7%;
-    margin-left: 43%;
+.i-paymentbutton {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 9em;
+	width: 360px;
+}
+/* 화면 너비가 1800px 이상일 때 */
+@media ( min-width : 1800px) {
+	.i-paymentbutton {
+		margin-left: 50%;
+		width: 440px;
+	}
+}
+
+/* 화면 너비가 800px 이상 1400px 이하일 때 */
+@media ( min-width : 800px) and (max-width: 1600px) {
+	.i-paymentbutton {
+		margin-left: 37%;
+	}
 }
 /* 예약취소 가능 할떄 버튼 */
-.i-reservationcancellation{
-    margin-left: 15%;
+.i-reservationcancellation1 {
+	background: #e8d6c369;
 }
-/* 예약취소 불가능할때 버튼 */
-.i-reservationcancellation1{
-    background: #e8d6c369;
-    margin-left: 15%;
+
+/* 후기작성및 예약취소불가능할때 버튼 */
+.i-writingreview1 {
+	background: #e8d6c337;
 }
-/* 후기작성불가능할때 버튼 */
-.i-writingreview1{
-    background: #e8d6c369;
+/* 가능할때버튼 */
+i-writingreview {
+	background: #E8D6C3;
 }
 /* 결제상세내역 */
-.i-paymentCompletedList{
-    padding-top: 1%;
-    padding-bottom: 1%;
-    border-bottom: 2px solid #efebe5;
-    margin: auto;
-    width: 100%;
+.i-paymentCompletedList {
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
+	margin: auto;
+	width: 100%;
 }
 /* 결제상세내역 결제완료 */
-.i-completed :first-child{
-    margin-right: 1%;
-    
+.i-completed :first-child {
+	margin-right: 1%;
 }
 /* 결제상세내역 결제시간 */
-.i-completed :last-child{
-    margin-left: 1%;
+.i-completed :last-child {
+	margin-left: 1%;
 }
+
 /* 결제상세내역  수량 가격*/
-.i-paymentPrice{
-    margin-top: 5%;
-    padding-bottom: 1%;
-    display: flex;
-    justify-content:space-between;
-    border-bottom: 2px solid #efebe5;
-    
+.i-paymentPrice {
+	margin-top: 5%;
+	padding-bottom: 1%;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 2px solid #efebe5;
 }
-.i-paymentInformation{
-    margin-top: 1%;
+/* 결제내역클래스타이틀 */
+.i-patmenth3{
+
+cursor: pointer;
+}
+.i-paymentInformation {
+	margin-top: 1%;
+	
+}
+/* 결제완료상세내역 결제정보 */
+.i-paymentInfo{
+	padding-bottom:1%;
+	border-bottom: 2px solid #efebe5;
 }
 
 /* 결제상세내역 결제정보 */
-.i-paymentInformation{
-    display: flex;
-    flex-direction: column;
+.i-paymentInformation {
+	display: flex;
+	flex-direction: column;
 }
 /* 결제상세내역 결제타입 */
-.i-paymentInformation span{
-    margin-top: 2%;
+.i-paymentInformation span {
+	margin-top: 2%;
 }
 /* 결제상세내역 타입별 상세 */
-.i-paymentInformationDetails{
-    display: flex;
-    justify-content: space-between;
+.i-paymentInformationDetails {
+	display: flex;
+	justify-content: space-between;
 }
 /* 결제취소 환불정보 */
-.i-Cancellation{
-    padding-top: 1%;
-    margin-top: 1%;
-    border-top: 2px solid #efebe5;
-
+.i-Cancellation {
+	padding-top: 1%;
+	margin-top: 1%;
+	border-top: 2px solid #efebe5;
+}
+/* 페이징처리전체 */
+div.pageBar {
+	padding-top: 2%;
+	text-align: center;
+	width: 70%;
+	margin: auto;
+	margin-left: 13%;
+	padding-bottom: 2%;
+}
+/* 페이징처리 a태그 */
+div.pageBar a {
+	font-size: 24px;
+	margin-left: 2%;
+}
+/*페이징처리 클릭안됨  */
+div.pageBar span {
+	font-size: 24px;
+	margin-left: 2%;
+}
+/* 페이징처리 호버 */
+div.pageBar a:hover {
+	color: gray;
 }
