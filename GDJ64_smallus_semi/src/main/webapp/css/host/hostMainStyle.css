@@ -131,6 +131,7 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 	margin: 0 auto;
 	width: 100%;
 	height: 500px;
+	border: 1px solid red;
 }
 /* host-main-calendar btn style */
 /*month/week/day*/
@@ -350,12 +351,45 @@ button.h-submit{
 /* host-calc page */
 table.h-calc-tbl {
 	width: 100%;
+	border-collapse : collapse;
 }
 
-table.h-calc-tbl * {
+table.h-calc-tbl td {
 	height: 2rem;
+	text-align:center;
+	font-size:1rem;
+	border-collapse : collapse;
 }
 
-table.h-calc-tbl th {
+table.h-calc-tbl td:nth-child(odd) {
+	font-family: "GmarketSansBold";
+}
+table.h-calc-tbl td:last-child{
+	text-align:right;
+}
+table.h-calc-tbl button {
+	margin-left:0;
+}
+
+/* host page paging bar*/
+#pageBar {
+	width: 50%;
+	margin: 2rem 0 2rem auto;
+	text-align: right;
+}
+
+#pageBar * {
+	margin: 0.3rem;
+}
+
+#pageBar .h-pageBar-txt {
+	padding: 0.5rem 0.8rem;
+	background-color: #FBEFD3;
+	border-radius: 1rem;
+	font-size: 0.9rem;
+}
+
+#pageBar .h-pageBar-now {
 	font-weight: bold;
 }
+

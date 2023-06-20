@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%-- <%@ include file="/views/host/hostHeader.jsp"%> --%>
+<%@ include file="/views/common/mainHeader.jsp"%>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClassSchedule.css"/>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <div id="mainOpacity">
 	<section id="d-addClass">
@@ -10,6 +17,10 @@
 		<div id="inputs">
 			<p>스케쥴 등록</p>
 			<div id="AddSchedule-calendar">
+				<input type="text" name="datetimes"/><button>추가</button><button>삭제</button> <br>
+				<input type="text" name="datetimes"/><button>추가</button><button>삭제</button>  <br>
+				<input type="text" name="datetimes"/><button>추가</button><button>삭제</button> <br>
+				<input type="text" name="datetimes"/><button>추가</button><button>삭제</button> <br>
 			
 			</div>
 			<br> <br> <br> <br>
@@ -43,11 +54,71 @@
 		<br> <br><br> <br> <br> <br>
 		<button>등록하기 (2/2)</button>
 		<br> <br> <br> <br>
+		
+<style>
+div#AddSchedule-calendar{
+	width: 1000px;
+	height: 500px;
+	margin: 10px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+	padding:10px;
+}
+
+div#AllSchedule{
+	width: 600px;
+	height: 400px;
+	margin: 10px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+}
+
+div.schedule-table{
+	margin:15px;
+}
+
+.schedule-table button{
+	width:250px;
+	margin: 5px;
+	/* 너비설정은 기존 css와의 충돌로 적용안됨 */
+}
+
+#AddSchedule-calendar>input{
+	width:250px;
+	height:30px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+	margin: 5px;
+	text-align:center;
+}
+
+
+</style>		
+		
+
+<script>
+$(function() {
+	  $('input[name="datetimes"]').daterangepicker({
+		  singleDatePicker: true,
+		  showDropdowns: true,
+	    timePicker: true,
+	    startDate: moment().startOf('hour'),
+	    endDate: moment().startOf('hour').add(32, 'hour'),
+	    locale: {
+	      format: 'M/DD hh:mm A',
+	      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
+		    "applyLabel": "확인",                    // 확인 버튼 텍스트
+		    "cancelLabel": "취소",                   // 취소 버튼 텍스트
+		    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+		    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+	    }
+	  });
+	});
+</script>
 
 
 
 
-
-
-
-		<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>
+		<%-- <%@ include file="/views/host/hostFooter.jsp"%> --%>
+		

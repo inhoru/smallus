@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.smallus.email.*"  %>
 <%@ include file="/views/common/mainHeader.jsp"%>
+
 <style>
 div#m-ernollMember{
 	display: flex;
@@ -87,7 +89,8 @@ table#m-ernollMemberTable input[type=submit]{
 							<input type="email" placeholder="abcde@naver.com"name="memberEmail" id="memberEmail"> 
 						</td>
 						<td>
-							<input type="button" name="memberEmail_check" id="memberEmail_check" value="인증번호발송" onclick="">
+							<input type="button" name="memberEmail_check" id="memberEmail_check" value="인증번호발송" onclick="mailSend();">
+							<span style="display:none; color:red" id="m-timer">180</span>
 						</td>
 					</tr>
 					<tr>
@@ -96,7 +99,8 @@ table#m-ernollMemberTable input[type=submit]{
 							<input type="text" name="memberEmail_check2" id="memberEmail_check2">
 						</td>
 						<td>
-							<input type="button" name="" value="인증" onclick="">
+							<input type="button" name="" value="인증" onclick="emailcheck();">
+							<input type="hidden" name="memberEmail_check3" id="memberEmail_check3">
 						</td>
 					</tr>
 					<tr>
@@ -118,7 +122,7 @@ table#m-ernollMemberTable input[type=submit]{
 					</tr>
 					<tr>
 						<td colspan="2" style="text-align: center;">
-							<input type="submit" value="회원가입" onclick="fn_validate2();">
+							<input type="submit" value="회원가입" onclick="return emailcheck2();">
 						</td>
 					</tr>
 				</table>
@@ -127,6 +131,7 @@ table#m-ernollMemberTable input[type=submit]{
 	</div>
 </body>
 <script>
+let epw;
 	const idDuplicate=()=>{
 		const memberId=$("#memberId").val();
 		if(memberId.length>=4){
@@ -158,6 +163,65 @@ table#m-ernollMemberTable input[type=submit]{
 			alert('닉네임은 2글자 이상 입력하세요!');
 		}
 	}
+/* 	const timecheck=setInterval(()=>{
+		$("#memberEmail_check").css("display","none");
+		$("#m-timer").css("display","inline");
+		let timer=$("#m-timer").val();
+		console.log(timer);
+		$("#m-timer").text(--timer);
+		if(timer==0){
+			clearInterval(timecheck);
+			$("#memberEmail_check").css("display","inline");
+			alert("인증시간이 종료되었습니다. 다시 시도해주세요");
+		}
+	},1000); */
+	const mailSend=()=>{
+		let memberEmail=$("#memberEmail").val();
+		//timecheck();
+		$.ajax({
+			url:'<%=request.getContextPath()%>/MailSendServlet.do',
+			data:{memberEmail:memberEmail},
+			dataType:"text",
+			success: function(data){
+				console.log(data);
+				if(data!='null'){
+					epw=data;
+					$("memberEmail_check2").focus();
+				}else{
+					alert("유효하지 않은 메일주소입니다. 다시 시도하세요");
+				}
+			},
+			error:(r,m,e)=>{
+				console.log(r);
+				console.log(m);
+			}
+		});
+	}
+	
+	function emailcheck(){
+		let emailcheck=$("#memberEmail_check2").val();
+		console.log(emailcheck, typeof emailcheck)
+		console.log(epw, typeof epw);
+		if(epw==emailcheck){
+			$("#memberEmail_check3").val('Y');
+			alert("인증성공하셨습니다.");
+		}else{
+			$("#memberEmail_check3").val('N');
+			alert("인증번호를 다시 확인해주세요.");
+		}
+	}
+	
+	const emailcheck2=()=>{
+		let val=$("#memberEmail_check3").val();
+		console.log(val);
+		if(val=='Y'){
+			return true;
+		}else{
+			alert("이메일 인증을 진행해주세요^^");
+			return false;
+		}
+	}
+	
 	$(() => {
    		$("#m-marketing_content").hide();
     });

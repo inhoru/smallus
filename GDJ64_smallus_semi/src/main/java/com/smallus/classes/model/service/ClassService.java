@@ -21,9 +21,9 @@ public class ClassService {
 		return list;
 	}
 	
-	public List<Classes> selectAllClassesByHostId(String hostId){
+	public List<Classes> selectAllClassesByHostId(String hostId, int cPage, int numPerpage){
 		Connection conn=getConnection();
-		List<Classes> list =dao.selectAllClassesByHostId(conn,hostId);
+		List<Classes> list =dao.selectAllClassesByHostId(conn,hostId,cPage,numPerpage);
 		close(conn);
 		if(list.size()==1) {
 			System.out.println("service-list");			
@@ -31,9 +31,9 @@ public class ClassService {
 		return list;
 	}
 	
-	public List<Classes> selectClassListByPassStatus(String hostId, String passStatus){
+	public List<Classes> selectClassListByPassStatus(String hostId, String passStatus,int cPage, int numPerpage){
 		Connection conn= getConnection();
-		List<Classes> list=dao.selectClassListByPassStatus(conn, hostId, passStatus);
+		List<Classes> list=dao.selectClassListByPassStatus(conn, hostId, passStatus,cPage,numPerpage);
 		close(conn);
 		return list;
 	}
@@ -45,5 +45,18 @@ public class ClassService {
 		return list;
 	}
 	
+	public int selectClassCount(String hostId) {
+		Connection conn=getConnection();
+		int result=dao.selectClassCount(conn, hostId);
+		close(conn);
+		return result;
+	}
+	
+	public int selectClassCountByStatus(String hostId, String passStatus) {
+		Connection conn=getConnection();
+		int result=dao.selectClassCountByStatus(conn, hostId, passStatus);
+		close(conn);
+		return result;
+	}
 	
 }	

@@ -1,0 +1,79 @@
+@charset "UTF-8";
+#mainOpacity {
+		background-color:#FFFCF5;
+	}
+	section.h-payment-container{
+		width:50%;
+		margin: 3rem auto;
+	}
+	div.h-payment {
+		width:100%;
+		padding: 1rem;
+		margin:2rem 0;
+	}
+	.h-payment-title {
+		margin: 1rem 0;
+	}
+	
+	.h-payClass-list {
+		display: flex;
+		margin: 1rem 0;
+	}
+	
+	.h-payClass-list img {
+		width: 10rem;
+		height: 10rem;
+		border-radius: 1rem;
+	}
+	.h-payClass-list table{
+		width: 100%;
+		border-collapse : collapse;
+		border-spacing : 0;
+	}
+	.h-payClass-list table * {
+		text-align: left;
+		margin-left:0;
+		height: 2rem;
+	}
+	.h-payClass-member {
+		width: 100%;
+		border-collapse : collapse;
+		border-spacing : 0;
+	}
+	.h-payClass-member tr td:last-child,  .h-payClass-member tr th:last-child{
+		text-align: right;
+	}
+	div.h-payment-coupon {
+		width: 100%;
+		display:flex;
+		justify-content:space-between;
+		align-items:center;
+	}
+	
+	select#h-selectCoupon {
+  
+	  width: 40rem;
+	  height: 35px;
+	  background-color:#FFFCF5; 
+	  padding: 5px 30px 5px 10px;
+	  border-radius: 4px;
+	  outline: 0 none;
+	}
+	select#h-selectCoupon option {
+	  background: #FBEFD3;
+	  padding: 0.5rem 0.2rem;
+	}
+	
+	button{
+		margin-left:2rem;
+		width:6rem;
+		font-weight: bold;
+		background-color: #E8D6C3;
+		border:0px;
+		border-radius: 1rem;
+		padding: 0.4rem 0.6rem;
+		font-size: 0.8rem;
+	}
+	.h-class-list-n>table {
+	margin-left: 3rem;
+	}

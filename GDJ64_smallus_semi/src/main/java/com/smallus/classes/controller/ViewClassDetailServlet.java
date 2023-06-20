@@ -32,24 +32,34 @@ public class ViewClassDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		// 클래스 아이디를 기준으로 클래스리스트를 가져옴
 		String classId=request.getParameter("classId");
+		// 호스트 아이디를 기준으로 클래스 세부 내용을 가져옴
 		String hostId=request.getParameter("hostId");
-		System.out.println(classId);
-		List<Classes> classList=new ClassService().selectClassesByHostId(classId);
-		List<ClassDetail> classDetailList = new ClassService().selectClassDetailByClassId(hostId);
+		List<Classes> classList=new ClassService().selectClassesByHostId(hostId);
+		List<ClassDetail> classDetailList = new ClassService().selectClassDetailByClassId(classId);
+		System.out.println("classDetailList size "+classDetailList.size());
+		System.out.println("classList size "+classList.size());
+		// 분기처리 후 클래스 상세 페이지로 전송
 		
-		
-		if(classList!=null&&!classList.isEmpty()&&classDetailList!=null&&!classDetailList.isEmpty()) {
-			request.setAttribute("classList", classList);
-			request.setAttribute("classDetailList", classDetailList);
-			request.getRequestDispatcher("/views/host/hostClassDetail.jsp").forward(request, response);
-		}else {
-			System.out.println("클래스 djqt음 ");
-			request.setAttribute("msg", "조회할 클래스가 없습니다.");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		if(classDetailList!=null&&!classDetailList.isEmpty()){
+			System.out.println("classDetailList 있음");
+		}else if(classDetailList==null||classDetailList.isEmpty()){
+			System.out.println("classDetailList 없음");
 		}
+		
+//		if(classList!=null&&!classList.isEmpty()&&classDetailList!=null&&!classDetailList.isEmpty()) {
+//			request.setAttribute("classList", classList);
+//			request.setAttribute("classDetailList", classDetailList);
+//			request.getRequestDispatcher("/views/host/hostClassDetail.jsp").forward(request, response);
+//			System.out.println("세부클래스있음");
+//		}else {
+//			request.setAttribute("msg", "조회할 클래스가 없습니다.");
+//			System.out.println("세부클래스없음");
+//			request.setAttribute("loc", "/views/host/hostMain.jsp");
+//			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+//		}
 	}
 
 	/**
