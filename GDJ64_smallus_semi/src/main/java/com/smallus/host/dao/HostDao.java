@@ -28,26 +28,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		}
 	}
 
-	public Host hostLogin(Connection conn,String hostId,String password) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Host h=new Host();
-		try {
-			//hostLogin=SELECT * FROM HOST WHERE HOST_ID=? AND HOST_PW=?
-			pstmt=conn.prepareStatement(sql.getProperty("hostLogin"));
-			pstmt.setString(1, hostId);
-			pstmt.setString(2, password);
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				h=getHost(rs);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return h;
-	}
 	public static Host getHost(ResultSet rs) throws SQLException{
 		return Host.builder().
 				hostId(rs.getString("HOST_ID")).
@@ -64,11 +44,88 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 				hostAccount(rs.getString("HOST_ACCOUNT")).
 				hostAccountName(rs.getString("HOST_ACCOUNT_NAME")).build();
 	}
-	
+	public Host hostLogin(Connection conn,String hostId,String password) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Host h=null;
+		try {
+			//hostLogin=SELECT * FROM HOST WHERE HOST_ID=? AND HOST_PW=?
+			pstmt=conn.prepareStatement(sql.getProperty("hostLogin"));
+			pstmt.setString(1, hostId);
+			pstmt.setString(2, password);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				h=getHost(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return h;
+	}
+	public Host selectByhostId(Connection conn,String hostId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Host h=null;
+		try {
+			//selectByhostId=SELECT * FROM HOST WHERE HOST_ID=? AND HOST_ST='Y'
+			pstmt=conn.prepareStatement(sql.getProperty("selectByhostId"));
+			pstmt.setString(1, hostId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				h=getHost(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return h;
+	}
+	public Host selectByhostNickname(Connection conn,String hostNickname) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Host h=null;
+		try {
+			//selectByhostNickname=SELECT * FROM HOST WHERE HOST_NICKNAME=? AND HOST_ST='Y'
+			pstmt=conn.prepareStatement(sql.getProperty("selectByhostNickname"));
+			pstmt.setString(1, hostNickname);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				h=getHost(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return h;
+	}
+	public int enrollHost(Connection conn, Host h) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("enrollHost"));
+			//enrollHost=INSERT INTO MEMBER VALUES(?,?,?,?,?,?,DEFAULT,DEFAULT,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT)
+			pstmt.setString(1, h.getHostId());
+			pstmt.setString(2, h.getHostPw());
+			pstmt.setString(3, h.getHostName());
+			pstmt.setString(4, h.getHostPhone());
+			pstmt.setString(5, h.getHostHomephone());
+			pstmt.setString(6, h.getHostEmail());
+			pstmt.setString(7, h.getHostNickname());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}return result;
+	}
 	public Host updateHostCalc(Connection conn, String hostId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Host h=new Host();
+		Host h=null;
 		try {
 			//updateHostCalc=SELECT HOST_ACCOUNT_BANK, HOST_ACCOUNT, HOST_ACCOUNT_NAME FROM HOST WHERE HOST_ID=?
 			pstmt=conn.prepareStatement(sql.getProperty("updateHostCalc"));

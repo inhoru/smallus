@@ -38,7 +38,7 @@
 					<input type="button" id="m-enrollmemberbtn" value="일반회원가입"> 
 				</td>
 				<td>
-					<input type="button" id="" value="호스트회원가입"> 
+					<input type="button" id="m-enrollhostbtn" value="호스트회원가입"> 
 				</td>
 			</tr>
 			<tr>
@@ -119,6 +119,9 @@
 	$("#m-enrollmemberbtn").click(e=>{
 		location.assign("<%=request.getContextPath()%>/views/member/enrollMember.jsp");
 	});
+	$("#m-enrollhostbtn").click(e=>{
+		location.assign("<%=request.getContextPath()%>/views/host/enrollHost.jsp");
+	})
 </script>
 <style>
 div#m-bodycontainer{ 

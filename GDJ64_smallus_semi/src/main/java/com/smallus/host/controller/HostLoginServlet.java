@@ -38,11 +38,11 @@ public class HostLoginServlet extends HttpServlet {
 		//1.클라이언트가 보낸 데이터를 가져옴(userId,password)
 		String hostId=request.getParameter("hostId");
 		String password=request.getParameter("password");
-		System.out.println(hostId+" : "+password);
+		//System.out.println(hostId+" : "+password);
 
 		//아이디 저장 로직처리 (*로직처리 순서 페이지 전환하는 response가 응답하기전에 쿠기를 먼저 저장시켜줘야한다!)
 		String savehostId=request.getParameter("savehostId");
-		System.out.println(savehostId);
+		//System.out.println(savehostId);
 		//checkbox에 check가 되면 on
 		//checkbox에 check가 안되면 null
 		if(savehostId!=null) {
@@ -58,7 +58,7 @@ public class HostLoginServlet extends HttpServlet {
 
 		//2. DB접속해서 id와 password와 일치하는 회원이 있는지 확인 후 데이터 가져오기
 		Host loginHost=new HostService().hostLogin(hostId, password);
-		System.out.println(loginHost);
+		//System.out.println(loginHost+"너니?");
 		//loginMember가 null을 기준으로 로그인 처리여부를 결정할 수 있음.
 		if(loginHost!=null&&!loginHost.getHostId().equals("admin")) {
 			//로그인 성공 -> 인증받음
