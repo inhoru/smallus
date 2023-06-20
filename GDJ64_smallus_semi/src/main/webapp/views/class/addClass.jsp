@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%-- <%@ include file="/views/host/hostHeader.jsp"%> 헤더 오류로 인해 css 따로 적음--%>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClass.css"/>
 
 <div id="mainOpacity">
 	<section id="d-addClass">
@@ -10,7 +11,7 @@
 		<hr>
 		<div id="inputs">
 			<p>클래스 이름</p>
-			<input type="text" placeholder="    등록하실 클래스명을 입력해주세요.">
+			<input type="text" placeholder="등록하실 클래스명을 입력해주세요.">
 			<p>등록할 사진</p> 
 			<img
 				src="https://img.freepik.com/free-icon/add-button-with-plus-symbol-in-a-black-circle_318-48599.jpg"
@@ -26,22 +27,22 @@
 				<option value="운동">운동</option>
 			</select>
 			<p>클래스 회당 인원제한</p>
-			<input type="number" placeholder="    최대 인원수를 입력해주세요.">명
+			<input type="number" placeholder="최대 인원수를 입력해주세요.">명
 			<p>1인당 클래스 금액</p>
-			<input type="number" placeholder="    금액을 입력해주세요.">원
+			<input type="number" placeholder="금액을 입력해주세요.">원
 			<p>주소</p>
-			<input type="text" placeholder="    버튼으로 주소 입력" readonly>
+			<input type="text" placeholder="버튼으로 주소 입력" readonly>
 			<button>주소 찾기</button>
-			<br> <input type="text" placeholder="    상세 주소를 입력해주세요.">
+			<br> <input type="text" placeholder="상세 주소를 입력해주세요.">
 			<p>제공사항</p>
-			<input type="text" placeholder="    제공사항을 입력해주세요.">
+			<input type="text" placeholder="제공사항을 입력해주세요.">
 			<p>유의사항</p>
-			<input type="text" placeholder="    유의사항을 입력해주세요.">
+			<input type="text" placeholder="유의사항을 입력해주세요.">
 			<p>준비물</p>
-			<input type="text" placeholder="    준비물을 입력해주세요.">
+			<input type="text" placeholder="준비물을 입력해주세요.">
 			<p>상세 내용</p>
 			<textarea name="" id="" cols="80" rows="10"
-				placeholder="    글자는 최대 500자까지 작성 가능합니다."></textarea>
+				placeholder="글자는 최대 500자까지 작성 가능합니다."></textarea>
 		</div>
 		<br>
 		<br>
