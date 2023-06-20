@@ -36,6 +36,7 @@ public class EnrollHostServlet extends HttpServlet {
 		String hostEmail=request.getParameter("hostEmail");
 		String hostPhone=request.getParameter("hostPhone");
 		String hostHomePhone=request.getParameter("hostHomePhone");
+		
 		Host h=Host.builder().
 				hostId(hostId).
 				hostPw(hostPw).
