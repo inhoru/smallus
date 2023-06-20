@@ -1,4 +1,4 @@
-package com.smallus.host.controller;
+package com.smallus.classes.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smallus.classes.model.service.ClassService;
 import com.smallus.classes.model.vo.Classes;
-import com.smallus.host.service.HostService;
 
 /**
  * Servlet implementation class ViewClassListServlet
  */
-@WebServlet("/host/viewClassList.do")
+@WebServlet("/class/viewClassList.do")
 public class ViewClassListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,7 +34,7 @@ public class ViewClassListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String hostId=request.getParameter("hostId");
 		System.out.println(hostId);
-		List<Classes> classList=new HostService().selectClassesByHostId(hostId);
+		List<Classes> classList=new ClassService().selectAllClassesByHostId(hostId);
 		if(classList!=null&&!classList.isEmpty()) {
 			request.setAttribute("classList", classList);
 			request.getRequestDispatcher("/views/host/hostClassList.jsp").forward(request, response);

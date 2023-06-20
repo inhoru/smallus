@@ -65,35 +65,27 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 				hostAccountName(rs.getString("HOST_ACCOUNT_NAME")).build();
 	}
 	
-	
-	public List<Classes> selectClassesByHostId(Connection conn, String hostId){
+	public Host updateHostCalc(Connection conn, String hostId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Classes> list=new ArrayList<Classes>();
+		Host h=new Host();
 		try {
-			// selectClassesByHostId=SELECT CLASS_ID, CATEGORY_TITLE, CLASS_TITLE, CLASS_UPLOAD_DATE, CLASS_PASS_DATE, CLASS_PASS_ID, CLASS_THUMBNAIL 
-			// FROM CLASS LEFT JOIN CATEGORY USING(CATEGORY_ID) WHERE HOST_ID=?
-			//return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail;
-			pstmt=conn.prepareStatement(sql.getProperty("selectClassesByHostId"));
+			//updateHostCalc=SELECT HOST_ACCOUNT_BANK, HOST_ACCOUNT, HOST_ACCOUNT_NAME FROM HOST WHERE HOST_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("updateHostCalc"));
 			pstmt.setString(1, hostId);
 			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				Classes c=new Classes();
-				c.setClassId(rs.getString("CLASS_ID"));
-				c.setCategoryTitle(rs.getString("CATEGORY_TITLE"));
-				c.setClassTitle(rs.getString("CLASS_TITLE"));
-				c.setClassUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE"));
-				c.setClassPassDate(rs.getDate("CLASS_PASS_DATE"));
-				c.setClassPassId(rs.getString("CLASS_PASS_ID"));
-				c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
-				list.add(c);
+			if(rs.next()) {
+				h.setHostAccount(rs.getString("HOST_ACCOUNT"));
+				h.setHostAccountBank(rs.getString("HOST_ACCOUNT_BANK"));
+				h.setHostAccountName(rs.getString("HOST_ACCOUNT_NAME"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return list;
+		}return h;
 	}
+	
 	
 }
