@@ -16,19 +16,18 @@
                 <!-- <div class="h-viewList"><a href="">+</a></div> -->
                 <select name="selectClassStatus" id="selectClassStatus" onchange="selectOption()">
                 	<option>승인 상태(전체)</option>
-                	<option value="W">승인 대기</option>
-                	<option value="Y">승인 완료</option>
-                	<option value="N">승인 거절</option>
+                	<option value="W" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>승인 대기</option>
+                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>승인 완료</option>
+                	<option value="N" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("N")?"selected":""%>>승인 거절</option>
                 </select>
         </div><hr>
-       
         <!-- hostId를 통해서 가지고 온 클래스 리스트  -->
         <div class="h-class-list-container">
 			<%if(classList!=null&&!classList.isEmpty()) {
 				for(Classes c:classList){%>
 				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
-					<a href="<%=request.getContextPath()%>/class//viewClassDetail.do?hostId=<%=loginHost.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
+					<a href="<%=request.getContextPath()%>/class/viewClassDetail.do?hostId=<%=loginHost.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
 						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
 					</a>
 					<table>
@@ -140,9 +139,11 @@
 					</table>
 				</div>
 				<%}
-				}else{ %>
-			<%} %>
+				} %>
         </div>
+        <div id="pageBar">
+			<%=request.getAttribute("pageBar") %>
+		</div>
 	</section>
 	<script>
 		
@@ -154,7 +155,7 @@
 			// index =1 -> W / 2:Y/3:N
 			//console.log(index);
 			if(index==0){
-				location.replace('<%=request.getContextPath()%>/host/hostClassList.jsp');
+				location.replace('<%=request.getContextPath()%>/class/viewClassList.do?hostId=<%=loginHost.getHostId()%>');
 			}else if(index==1){
 				location.assign('<%=request.getContextPath()%>/class/sortingClassByPass.do?hostId=<%=loginHost.getHostId()%>&passStatus=W');
 

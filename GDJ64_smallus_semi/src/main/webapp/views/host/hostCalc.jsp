@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%List<Payment> rsvList =(List)session.getAttribute("rsvList"); %>
-<style>
-	
-	
-</style>
 <%@ include file="/views/host/hostHeader.jsp"%>
 <%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
 <!--main-->
@@ -22,13 +18,13 @@
 					<td><!-- <%=h.getAccountName()%> --></td>
 					<th>정산 일</th>
 					<td><!-- <%=c.getCalcReqDate()%> --></td> --%>
-					<th>은행 명</th>
+					<td>은행 명</td>
 					<td>카카오뱅크</td>
-					<th>계좌 번호</th>
+					<td>계좌 번호</td>
 					<td>3333-11-2222222</td>
-					<th>예금주 명</th>
+					<td>예금주 명</td>
 					<td>예금주</td>
-					<th>정산 일</th>
+					<td>정산 일</td>
 					<td>매달 1일</td>
 					<td><button name="h-updateAccountBtn" id="h-updateAccountBtn">수정</button></td>
 				</tr>
@@ -42,8 +38,8 @@
 	<section class="h-main h-main-rsvList">
 		<div class="h-main-title">
 			<h2>새로운 예약 내역</h2>
-	        <hr>
 	    </div>
+	        <hr>
 			<div class="h-r-callendar" id="h-main-chart"></div>
                 <table id="h-main-rsv-tbl">
                     <tr>
@@ -80,7 +76,7 @@
         </section>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <%-- <script type="text/javascript">
     $("#h-updateAccountBtn").click(e=>{
     	$.get("<%=request.getContextPath()%>/host/updateHostCalc.do?hostId=<%=loginHost.getHostId()%>",function(data){
 			console.log(data);
@@ -122,7 +118,7 @@
 	        chart.draw(data, options);
 	      }
     }
-    </script>
+    </script> --%>
     <script src="<%=request.getContextPath() %>/js/host.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <%@ include file="/views/host/hostFooter.jsp"%>

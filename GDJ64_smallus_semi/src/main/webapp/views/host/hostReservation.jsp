@@ -2,11 +2,9 @@
     pageEncoding="UTF-8"%>
 <%List<Payment> rsvList =(List)session.getAttribute("rsvList"); %>
 <%@ include file="/views/host/hostHeader.jsp"%>
+<script src="<%=request.getContextPath() %>/js/calendar.js"></script>
 <%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
 <!--main-->
-<%-- <%
-	List<Payment> rsvList=(List)request.getAttribute("rsvList");
-%> --%>
 <div id="mainOpacity h-host-main">
 	<section class="h-main h-rsv">
      	<div class="h-main-title">
@@ -58,7 +56,7 @@
                 </table>
             </div>
         </section>
-    <script src="<%=request.getContextPath() %>/js/host.js"></script>
+    
 <%@ include file="/views/host/hostFooter.jsp"%>
 
 

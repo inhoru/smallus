@@ -30,17 +30,6 @@ public class PaymentDao {
 		}
 	}
 	
-//	private Payment getPayment(ResultSet rs) throws SQLException {
-//		return Payment.builder().paymentId(rs.getString("PAYMENT_ID")).paymentType(rs.getString("PAYMENT_TYPE")).classDetailId(rs.getString("CLASS_DETAIL_ID"))
-//				.couponId(rs.getString("COUPON_ID")).amount(rs.getInt("AMOUNT")).finalPrice(rs.getInt("FINAL_PRICE")).paymentDate(rs.getDate("PAYMENT_DATE"))
-//				.memberId(rs.getString("MEMBER_ID")).hostId(rs.getString("HOST_ID")).build();
-//	}
-//	
-//	private Classes getClasses(ResultSet rs) throws SQLException {
-//		return Classes.builder().classId(rs.getString("CLASS_ID")).classTitle(rs.getString("CLASS_TITLE")).classPersonnel(rs.getString(rs.getString("CLASS_PERSONNEL")))
-//				.build();
-//				
-//	}
     //P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.MEMBER_NAME
 	public List<Payment> selectPaymentByhostId(Connection conn, String hostId){
 		PreparedStatement pstmt=null;
