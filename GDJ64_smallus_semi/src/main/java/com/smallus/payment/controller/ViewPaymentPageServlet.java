@@ -58,10 +58,10 @@ public class ViewPaymentPageServlet extends HttpServlet {
 		
 		//gson.toJson(couponList,response.getWriter());
 		//gson.toJson(data,response.getWriter()); // list 보낼 때는 바로 list 보내도 됨 ㅠㅠ
-		System.out.println(gson.toJson(data));
+		//System.out.println(gson.toJson(data));
 		request.setAttribute("data", data);
 		request.setAttribute("couponList", couponList);
-		request.getRequestDispatcher("/views/mypage/ppTest.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/payment/paymentClass.jsp").forward(request, response);
 		
 	}
 
