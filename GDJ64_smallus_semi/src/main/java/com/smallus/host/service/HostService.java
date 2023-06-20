@@ -27,5 +27,23 @@ public class HostService {
 		close(conn);
 		return h;
 	}
+	public Host selectByhostId(String hostId) {
+		Connection conn=getConnection();
+		Host h=dao.selectByhostId(conn,hostId);
+		close(conn);
+		return h;
+	}
+	public Host selectByhostNickname(String hostNickname) {
+		Connection conn=getConnection();
+		Host h=dao.selectByhostId(conn,hostNickname);
+		close(conn);
+		return h;
+	}
+	public int enrollHost(Host h) {
+		Connection conn=getConnection();
+		int result=dao.enrollHost(conn,h);
+		close(conn);
+		return result;
+	}
 
 }
