@@ -1,23 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- jQuery -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<!-- iamport.payment.js -->
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
-<script>
         const today = new Date();   
         const hours = today.getHours(); // 시
         const minutes = today.getMinutes();  // 분
         const seconds = today.getSeconds();  // 초
         const milliseconds = today.getMilliseconds();
         const makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
         
 		function payment(pg_provider, payment_method){
         	var IMP = window.IMP; 
@@ -38,11 +26,11 @@
 				pg : pg_mid, //pg : 'html5_inicis',
 				pay_method : 'card',
     	        merchant_uid: "RSV"+makeMerchantUid, // 상점에서 관리하는 주문 번호
-    	        name : '[클래스이름] 날짜 시간 인원수',
-    	        amount : 14000, // 가
-    	        buyer_email : 'iamport@siot.do',
-    	        buyer_name : '구매자이름',
-    	        buyer_tel : '010-1234-5678'
+    	        name : '[<%=data.get("classCategoryTitle") %>] [<%=data.get("classCategoryTitle") %>] <%=data.get("classTitle") %>',
+    	        amount : totalPrice, 
+    	        buyer_email : '<%=loginMember.getMemberEmail()%>',
+    	        buyer_name : '<%=loginMember.getMemberName()%>',
+    	        buyer_tel : '<%=loginMember.getMemberPhone()%>'
 		};
     	IMP.request_pay(data, response => {
     		alert("callback!: "+JSON.stringify(response));
@@ -172,23 +160,3 @@
 		
 		
 				
-</script>
-<meta charset="UTF-8">
-<title>Sample Payment</title>
-</head>
-<body>
-	<button onclick="payment('kcp','card')">kcp 결제하기</button>
-	<button onclick="payment('inicis','card')">inicis 결제하기</button>
-	<button onclick="payment('kakaopay','card')">kakaopay 결제하기</button>
-	<!-- 결제하기 버튼 생성 -->
-</body>
-</html>
-
-
-
-
-
-
-
-
-

@@ -5,7 +5,7 @@
 	<!-- main 배너 -->
 	<div class="h-main-slide-container">
 		<div class="slides fade">
-			<img src="<%=request.getContextPath() %>/img/main-img0.jpg" style="width: 100%">
+			<img src="<%=request.getContextPath() %>/img/main-img0.jpg" style="width:100%">
 			<div class="slide-text">하나뿐인</div>
 		</div>
 

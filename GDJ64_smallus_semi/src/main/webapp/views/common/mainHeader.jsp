@@ -18,7 +18,11 @@ if (cookies != null) {
    savehostId = c.getValue();
       }
    }
+   
 }
+String memberName=loginMember.getMemberName();
+String memberEmail=loginMember.getMemberEmail();
+String memberPhone=loginMember.getMemberPhone();
 %>
 <!DOCTYPE html>
 <html>

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var title = prompt('입력할 일정:');
     // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
         if (title) {
-          calendar.addEvent({
+          	calendar.addEvent({
             title: title,
             start: arg.start,
             end: arg.end,
