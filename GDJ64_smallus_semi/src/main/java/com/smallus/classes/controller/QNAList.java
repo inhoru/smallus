@@ -53,7 +53,7 @@ public class QNAList extends HttpServlet {
 				);
 		request.setAttribute("qnas", qnas);
 		
-		request.getRequestDispatcher("/views/qna/qnaAjax.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/qna/qnaListAjax.jsp").forward(request, response);
 	}
 
 	/**
