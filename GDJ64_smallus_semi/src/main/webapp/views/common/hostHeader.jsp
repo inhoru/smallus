@@ -77,11 +77,7 @@
                     </tr>
                     <tr>
                         <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
-
                         <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>" id="h-viewCLassList">내 클래스 보기</a></td>
-
-  
-
                         <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>
                     </tr>
