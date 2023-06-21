@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%List<Payment> rsvList =(List)session.getAttribute("rsvList"); %>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
 <!--main-->
@@ -18,7 +17,7 @@
 					<td>예금주</td>
 					<td>정산 일</td>
 					<td>매달 1일</td>
-					<td><button onclick="updateAccountBtn()" id="h-updateAccountBtn">수정</button></td>
+					<td><button onclick="location.assign('<%=request.getContextPath() %>/host/updateAccount.do')">수정</button></td>
 				</tr>
 			</table>
 	</section>
@@ -39,48 +38,18 @@
                         <th>예약 인원</th>
                     </tr>
                     <!-- P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.MEMBER_ID -->
-                    <%if(rsvList!=null && !rsvList.isEmpty()){
-                    	int count=1;
-                    	for(Payment p: rsvList){
-                        %>
 		                    <tr>
-		                    	<td><%=count %></td>
-		                        <td><%=p.getPaymentId()%></td>
-		                        <td><%=p.getClassTitle()%></td>
-		                        <td><%=p.getBookingTimeStart()%> - <%=p.getBookingTimeEnd()%></td>
-		                        <td><%=p.getMemberId()%></td>
-                                <td><%=p.getClassPersonnel()%></td>
 	                   		</tr>
-	                    <%count++;
-	                    }
                     
-                    }else{ %>
                     <tr>
                         <td colspan="5">조회된 예약이 없습니다.</td>
                     </tr>
-                    <%} %>
                 </table>
             </div>
         </section>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-    function updateAccountBtn(){
-	    $.ajax({
-			type:"get",
-			url:"<%=request.getContextPath()%>/host/updateHostCalc.do",
-			data: { hostId:'<%=loginHost.getHostId()%>'},
-			success:data=>{
-				console.log(data)
-		    	alert("hi")
-			},
-			error:(r,m)=>{
-				console.log(r);
-				console.log(m);
-				if(e.status==404) alert("요청한 페이지가 없습니다");
-			}
-		})
-    }
     
     </script>
     <script src="<%=request.getContextPath() %>/js/host.js"></script>

@@ -48,9 +48,9 @@ public class LoginHostFilter extends HttpFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		Host loginHost = (Host) session.getAttribute("loginHost");
 		if (loginHost != null) {
-		Host h=new HostService().selectByhostId(loginHost.getHostId());
-		request.setAttribute("hostInfo",h);
-		}
+			Host h=new HostService().selectByhostId(loginHost.getHostId());
+			request.setAttribute("hostInfo",h);
+								}
 		chain.doFilter(request, response);
 	
 	}
