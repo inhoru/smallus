@@ -41,7 +41,7 @@
 				<li><h4 id="debut">상세 정보</h4></li>
 				<div id="decontainer"></div>
 	<script>
-	$("#debut").click(e=>{		
+	$("#debut").click(e=>{
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/detailTest.do",
 		//dataType:"html",
