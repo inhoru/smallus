@@ -1,4 +1,4 @@
-package com.smallus.classes.controller;
+package com.smallus.qna.controller;
 
 import java.io.IOException;
 import java.text.ParseException;

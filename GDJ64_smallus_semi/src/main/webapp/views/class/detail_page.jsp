@@ -38,13 +38,43 @@
 	<div class="menu">
 		<nav>
 			<ul >
-				<li><a href="<%=request.getContextPath()%>/views/class/detail_page.jsp">상세 정보</a></li>
+				<li><h4 id="debut">상세 정보</h4></li>
+				<div id="decontainer"></div>
+	<script>
+	$("#debut").click(e=>{		
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/detailTest.do",
+		//dataType:"html",
+		success:function(data){
+			console.log(data);
+			$("#decontainer").html(data);
+			},
+			error:(e,m)=>{
+				console.log(e)
+			}
+		});
+	});
+	</script>
 				<hr>
-				<li><a
-					href="<%=request.getContextPath()%>/views/review/reviewList.jsp">후기</a></li>
+				<li><h4 id="rebut">후기</h4></li>
+					<div id="recontainer"></div>
+	<script>
+	$("#rebut").click(e=>{	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/reviewTest.do",
+		//dataType:"html",
+		success:function(data){
+			console.log(data);
+			$("#recontainer").html(data);
+			},
+			error:(e,m)=>{
+				console.log(e)
+			}
+		});
+	});
+	</script>
 				<hr>
-				<li><h2 id="qnaAjax">Q &
-						A</h2></li>
+				<li><h4 id="qnaAjax">Q & A</h4></li>
 						<!-- <button id="btnqna">qna 페이지 받아오기</button> -->
 	<div id="qnacontainer"></div>
 	<script>
