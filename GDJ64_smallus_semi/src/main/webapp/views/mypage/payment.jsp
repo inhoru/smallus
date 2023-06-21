@@ -4,6 +4,7 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%
 List<Member> payment = (List) request.getAttribute("payment");
+int cPage=(int)request.getAttribute("cPage");
 
 %>
 <div id="mainOpacity">
@@ -74,23 +75,23 @@ List<Member> payment = (List) request.getAttribute("payment");
 							<%
 							if (paymentStatus.equals("결제완료") && startDate.after(today)) {
 							%>
-							<button class="i-withdrawalbutton i-writingreview">예약취소</button>
+							<button class="i-withdrawalbutton1 i-writingreview">예약취소</button>
 							<%
 							} else {
 							%>
-							<button class="i-withdrawalbutton i-writingreview1 ">예약취소</button>
+							<button class="i-withdrawalbutton1 i-writingreview1 ">예약취소</button>
 							<%
 							}
 							%>
 							<%
 							if (paymentStatus.equals("결제취소") || endDate.after(today)) {
 							%>
-							<button class="i-withdrawalbutton i-writingreview1 ">후기
+							<button class="i-withdrawalbutton1 i-writingreview1 ">후기
 								작성</button>
 							<%
 							} else {
 							%>
-							<button class="i-withdrawalbutton i-writingreview">후기 작성</button>
+							<button class="i-withdrawalbutton1 i-writingreview">후기 작성</button>
 							<%
 							}
 							%>
@@ -118,13 +119,13 @@ List<Member> payment = (List) request.getAttribute("payment");
 	const paymentId=$(e.target).closest(".i-paymentList").find(".i-paymentId").val();
 	
 	console.log(paymentId);
-		if(statu=="결제완료"){
+	console.log(statu);
+		if(statu=='결제완료'){
 			$.ajax({
 				type:"get",
 				url:"<%=request.getContextPath()%>/paymentCompleted.do",
-				 data: {id:paymentId},
+				 data: {id:paymentId,cPage:<%=cPage%>},
 				success:data=>{
-					console.log(data);
 					$("#mainOpacity").html(data);
 				},
 				error:(r,m)=>{
@@ -136,10 +137,10 @@ List<Member> payment = (List) request.getAttribute("payment");
 		}else{
 			$.ajax({
 				type:"get",
-				url:"<%=request.getContextPath()%>",
-				data: {},
+				url:"<%=request.getContextPath()%>/memberCancellation.do",
+				data: {id:paymentId,cPage:<%=cPage%>},
 				success:data=>{
-					
+					$("#mainOpacity").html(data);
 				},
 				error:(r,m)=>{
 					console.log(r);

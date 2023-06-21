@@ -35,6 +35,7 @@ if (cookies != null) {
 <link rel="stylesheet"
    href="<%=request.getContextPath()%>/css/mypage/mypage.css">
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
+
 </head>
 <body id="bodys">
    <header id="scroll">
@@ -226,7 +227,6 @@ if (cookies != null) {
          return;
        }
 
-
        icon.css("visibility", "hidden");
        searchField.css("display", "flex");
        categories.css("visibility", "hidden");
@@ -237,8 +237,6 @@ if (cookies != null) {
        } else if(windowWidth > 1400) {
            $(".i-searchIcon").css("transform", "translateX(-90px)");
        }
-
-
        $(".i-searchIcon").css("transition", "0.7s");
        $("#mainOpacity").css("opacity", "0.5");
 

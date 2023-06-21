@@ -83,6 +83,8 @@ public class MemberPaymentServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("paymentCount", totalData);
 		request.setAttribute("payment", list);
+		request.setAttribute("cPage", cPage);
+		
 		request.getRequestDispatcher("/views/mypage/payment.jsp").forward(request, response);
 	}
 	

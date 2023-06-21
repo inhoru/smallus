@@ -2,50 +2,66 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>./css/category/detail.css" />
+	href="<%=request.getContextPath()%>./css/category/detail.css">
 <section id="main">
 	<div class="detail_page">
 		<img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg"
-			width="400" height="400" style="margin: 0 0 10% 20%; float: left;">
-		<a style="display: block; padding: 0 5% 0 42%; font-size: 8px;">공예</a>
-		<h4 style="font-size: 24px;">스테인 글라스로 나만의 소품 만들기</h4>
+			width="400" height="400" style="margin: 5% 0 10% 20%; float: left;">
+		<a style="display: block; padding: 5% 0 0 42%; font-size: 8px;">공예</a>
+		<h4 style="font-size: 24px; ">스테인 글라스로 나만의 소품 만들기</h4>
 		<img id=img_cd
 			src="<%=request.getContextPath()%>/img/category_main/calendar.png">
 	</div>
-	<div class="detail_page2">
-		<img class="imgs"
-			src="<%=request.getContextPath()%>/img/category_main/craft2.jpg"
-			style="margin-left: 20%"> <img class="imgs"
-			src="<%=request.getContextPath()%>/img/category_main/craft8.png">
+	<div class="detail_page2" style="margin:0 20%">
+		<img class="imgs" src="<%=request.getContextPath()%>/img/category_main/craft2.jpg">
+		<img class="imgs" src="<%=request.getContextPath()%>/img/category_main/craft8.png">
 	</div>
 	<div class="detail">
 		<span>
 			<p>2023년 06월 23일</p>
-			<button id=but>12:00 ~ 14:00</button>
+			<button id=but>12:00 ~ 14:00</button><p>잔여</p>
 			<br>
 			<button id=but>15:00 ~ 17:00</button>
 			<br>
-		</span> <span>
+		</span> 
+		<span>
 			<p>인원수</p>
 			<button id=pm>-</button>
 			<button id=pm>+</button>
 			<br>
-		</span> <span>
+		</span>
+		<span>
 			<p>결제 금액 37,000</p>
 			<button id=pm>결제하기</button>
 		</span>
 	</div>
 	<div class="menu">
 		<nav>
-			<ul>
-				<li><a href="">상세 정보</a></li>
+			<ul >
+				<li><a href="<%=request.getContextPath()%>/views/class/detail_page.jsp">상세 정보</a></li>
 				<hr>
 				<li><a
 					href="<%=request.getContextPath()%>/views/review/reviewList.jsp">후기</a></li>
 				<hr>
-				<li><a
-					href="<%=request.getContextPath()%>/views/qna/qnalist.jsp">Q &
-						A</a></li>
+				<li><h2 id="qnaAjax">Q &
+						A</h2></li>
+						<!-- <button id="btnqna">qna 페이지 받아오기</button> -->
+	<div id="qnacontainer"></div>
+	<script>
+	$("#qnaAjax").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/qnaTest.do",
+			//dataType:"html",
+			success:function(data){
+				console.log(data);
+				$("#qnacontainer").html(data);
+			},
+			error:(e,m)=>{
+				console.log(e);
+			}
+		});
+	});
+	</script>
 			</ul>
 			<hr style="margin: 1% 20%;">
 		</nav>
@@ -169,7 +185,31 @@
 				<ul>
 					<li style="font-size: 16px; margin: 1%;"><a href="">Q & A
 					</a></li>
-					<hr style="margin-right: 20%">
+					<div id="table">
+					<table id=relist>
+						<tr>
+							<th>상태</th>
+							<th>클래스 이름</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>작성자</th>
+						</tr>
+						<tr>
+							<td>답변 대기</td>
+							<td>이거 맞나?</td>
+							<td>잘 되고 있나..?</td>
+							<td>2023.06.20</td>
+							<td>나sms 유저다</td>
+						</tr>
+						<tr>
+							<td>답변 완료</td>
+							<td>2번째</td>
+							<td>잘 되고 있나..?</td>
+							<td>2023.06.20</td>
+							<td>나sms 유저2다</td>
+						</tr>
+					</table>
+					</div>
 				</ul>
 			</nav>
 </section>
@@ -217,19 +257,21 @@ img.imgs {
 }
 
 div.detail {
-	position: absolute;
+	/* position: absolute */;
+	display: inline;
+	text-align: left;
 	left: 42%;
-	top: 40%;
+	top: 45%;
 }
 
-span {
+/* span {
 	display: inline;
 	float: inherit;
-}
+} */
 
 div.detail_page2 {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	float: left;
 }
 
@@ -238,7 +280,7 @@ div.menu {
 	font-size: 24px;
 	display: flex;
 	justify-content: space-around;
-	text-align: justify;
+	text-align: center;s
 }
 
 button {
@@ -260,6 +302,17 @@ button {
 	height: 25px;
 	text-align: center;
 	border-radius: 20px;
+}
+table#relist{
+width:75%;
+border-collapse: collapse;
+border-top: 1px solid #444444;
+text-align: center;
+margin-right:100%
+}
+table#relist th, table#relist td{
+border-bottom: 1px solid #444444;
+padding: 1% auto;
 }
 </style>
 <%@ include file="/views/common/footer.jsp"%>

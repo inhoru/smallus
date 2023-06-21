@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
+<script src="<%=request.getContextPath()%>/js/main.js"></script>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%
 int coupon = (int) request.getAttribute("countCoupon");
