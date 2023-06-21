@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class PaymentEndServlet
@@ -31,17 +32,6 @@ public class PaymentEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String data=request.getParameter("data");
-		request.setAttribute("data", data);
-		Gson gson= new Gson();
-		gson.toJson(data,response.getWriter());
-		response.setContentType("application/json; charset=UTF-8");
-		if(data!=null&&!data.isEmpty()) {
-			System.out.println("data O");
-		}else {
-			System.out.println("data X");
-		}
-		request.getRequestDispatcher("/views/payment/paymentResult.jsp").forward(request, response);
 	}
 
 	/**
@@ -53,15 +43,18 @@ public class PaymentEndServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String data=request.getParameter("data");
-		
-		//int age=Integer.parseInt(request.getParameter("age"));
+		//String rsp=request.getParameter("response");
 		System.out.println("post 방식으로 요청");
-		System.out.println(data);
+		//System.out.println(rsp.length());
+		//System.out.println(data.length());
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		out.print(data);
-		out.print(" 사용자가 post 방식으로 보낸 데이터");
+		//out.print(rsp);
+		//out.print(" 사용자가 post 방식으로 보낸 데이터");
+		Gson gson= new Gson();
+		Member requestData=gson.fromJson(data,Member.class);
 		
 	}
 

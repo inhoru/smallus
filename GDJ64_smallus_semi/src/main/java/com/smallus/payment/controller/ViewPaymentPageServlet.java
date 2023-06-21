@@ -40,7 +40,7 @@ public class ViewPaymentPageServlet extends HttpServlet {
 		String memberId= request.getParameter("memberId");
 		
 		Classes c=new Classes();
-		List<Coupon> couponList= new CouponService().searchByMemberCoupon(memberId);
+		List<Coupon> couponList= new CouponService().searchByMemberCoupon(memberId, 1,100);
 		Gson gson= new GsonBuilder().create();
 		
 		Map<String, String> data= new HashMap<String, String>();
@@ -52,6 +52,7 @@ public class ViewPaymentPageServlet extends HttpServlet {
 		data.put("classPersonnel", "2");
 		data.put("classPrice", "30000");
 		data.put("classThumbnail", "main-img1.jpg");
+		data.put("hostNickname", "brewerscoffee");
 		
 		
 		response.setContentType("application/json; charset=UTF-8");
