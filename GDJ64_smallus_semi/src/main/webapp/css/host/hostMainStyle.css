@@ -131,7 +131,6 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 	margin: 0 auto;
 	width: 100%;
 	height: 500px;
-	border: 1px solid red;
 }
 /* host-main-calendar btn style */
 /*month/week/day*/
@@ -333,7 +332,6 @@ section.h-profile .h-edit-pf{
 }
 .h-profile-info table{
 	margin: 8rem 0;
-	border: 1px solid red;
 }
 .h-profile-info table *{
 	height:2rem;
