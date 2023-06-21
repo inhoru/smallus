@@ -5,6 +5,11 @@
 <%
 List<Member> memberList=(List)request.getAttribute("MemberList"); 
 %>
+<style>
+	#pageBar{
+		align-items:center;
+	}
+</style>
 <body>
 	<div id="mainOpacity h-host-main">
 		<section class="h-main">
@@ -25,16 +30,20 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<th>회원상태</th>
 						<th></th>
 					</tr>
+				<%if(memberList!=null&&!memberList.isEmpty()) {
+					for(Member m:memberList){%>
 					<tr>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
-						<th></th>
+						<th><%=m.getMemberId()%></th>
+						<th><%=m.getMemberName()%></th>
+						<th><%=m.getMemberNickname()%></th>
+						<th><%=m.getMemberPhone()%></th>
+						<th><%=m.getMemberEmail()%></th>
+						<th><%=m.getMemberConsent()%></th>
+						<th><%=m.getMemberSt()%></th>
 						<td><button>삭제</button></td>
 					</tr>
+					<%} %>
+				<%} %>
 				</table>
 			</div>
 		</section>
