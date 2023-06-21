@@ -16,5 +16,6 @@ public class ClassDetail {
 	private String classId;
 	private Date bookingTimeStart;
 	private Date bookingTimeEnd;
+	private int remainingPersonnel;
 
 }

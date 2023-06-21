@@ -24,5 +24,4 @@ public class Host {
 	private String hostAccount;
 	private String hostAccountName;	
 	
-	
 }

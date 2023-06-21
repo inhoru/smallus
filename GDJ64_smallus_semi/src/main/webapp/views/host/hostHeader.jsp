@@ -64,6 +64,7 @@
         </div>
     </header>
     <!-- menu-category -->
+    <%if(!loginHost.getHostId().equals("admin")){ %>
         <section class="h-menu">
             <div>
                 <table>
@@ -98,3 +99,6 @@
                 </table>
             </div>            
         </section>
+	<%}else {%>
+		
+	<%}%>
