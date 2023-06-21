@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List,com.smallus.coupon.model.vo.Coupon"%>
 <%
-List<Coupon> coupon = (List) request.getAttribute("coupon");
+List<Classes> wish = (List) request.getAttribute("wishList");
 %>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <div id="mainOpacity">
@@ -37,24 +37,45 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 		<h2 class="i-mypageh2">찜</h2>
 		
 		<%
-		if (coupon.isEmpty()) {
+		if (wish.isEmpty()) {
 		%>
 		<div class="i-nocoupon">찜 목록이 없습니다.</div>
 		<%
 		} else {
 		%>
-		<div class="i-coiponcontainer">
 			<%
-			for (Coupon n : coupon) {
+			int wcount = 0;
+			for (Classes w : wish) {
 			%>
-			<div class="i-coupon-card">
-				<h2><%=n.getCouponName()%></h2>
-				<span><%=n.getCouponPrice() %>원 할인쿠폰</span>
-				<p><%=n.getCreated_date()%>~<%=n.getExpiredDate()%></p>
-				<div class="i-circle1"></div>
-				<div class="i-circle2"></div>
-			</div>
+		<section class="i-imgContainer">
+								<div class="i-img-list">
+									<a href=""> <img
+										src="<%=request.getContextPath()%>/img/<%=w.getClassThumbnail()%>"
+										alt="no img">
+										<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
+										<h5>
+											category |
+											<%=w.getCategoryTitle()%></h5>
+									</a>
+									<div class="i-wish-container">
+										<input type="checkbox" checked="checked"
+											id="i-favorite<%=wcount%>" name="favorite-checkbox"
+											value="favorite-button" class="i-wishCheck"> <label
+											for="i-favorite<%=wcount%>" class="i-container"> <svg
+												xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+												viewBox="0 0 24 24" fill="none" stroke="white"
+												stroke-width="2" stroke-linecap="round"
+												stroke-linejoin="round" class="feather feather-heart">
+                                                    <path
+													d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                                    </path>
+                                                </svg>
+										</label>
+									</div>
+								</div>
+							</section>
 			<%
+			wcount++;
 			}
 			%>
 		</div>
@@ -63,11 +84,55 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 		%>
 		
 </section>
-
- <div class="pageBar">
+<%if(wish.isEmpty()){ %>
+ 
+        <%}else{ %>
+        <div class="pageBar">
         	<%=request.getAttribute("pageBar") %>
         </div>
+        <%} %>
 </div>
+<script>
+$(".i-wishCheck").change(e=>{
+	var classTitle = $(e.target).closest('.i-imgContainer').find('.i-classTitle').text();
+	var isChecked = $(e.target).is(':checked');
+	if(isChecked){
+		$.ajax({
+			type:"get",
+			url:"<%=request.getContextPath()%>/member/wishCheckAdd.do",
+			 data: { title:classTitle},
+			success:data=>{
+				
+			},
+			error:(r,m)=>{
+				console.log(r);
+				console.log(m);
+				if(e.status==404) alert("요청한 페이지가 없습니다");
+			}
+		})
+	}else{
+		$.ajax({
+			type:"get",
+			url:"<%=request.getContextPath()%>/member/wishCheckRemove.do",
+			data: { title:classTitle},
+			success:data=>{
+				
+			},
+			error:(r,m)=>{
+				console.log(r);
+				console.log(m);
+				if(e.status==404) alert("요청한 페이지가 없습니다");
+			}
+		})
+	}
+})
+
+
+
+
+
+
+</script>
 
 
 <%@ include file="/views/common/footer.jsp"%>

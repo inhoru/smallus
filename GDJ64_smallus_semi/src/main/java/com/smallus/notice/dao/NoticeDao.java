@@ -6,10 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Properties;
 
 import com.smallus.common.JDBCTemplate;
+import com.smallus.host.model.vo.Host;
 import com.smallus.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -23,7 +26,17 @@ public class NoticeDao {
 			e.printStackTrace();
 		}
 	}
-	
+	public static Notice getNotice(ResultSet rs) throws SQLException{
+		return Notice.builder().
+				noticeId(rs.getString("NOTICE_ID")).
+				hostId(rs.getString("HOST_ID")).
+				noticeType(rs.getString("NOTICE_TYPE")).
+				noticeTitle(rs.getString("NOTICE_TITLE")).
+				noticeRdate(rs.getDate("NOTICE_RDATE")).
+				noticeContent(rs.getString("NOTICE_CONTENT")).
+				build();
+		
+	}
 	public int enrollNotice(Connection conn, Notice n) {
 		PreparedStatement pstmt=null;
 		int result=0;

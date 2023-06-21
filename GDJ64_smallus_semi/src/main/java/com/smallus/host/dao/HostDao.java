@@ -142,6 +142,7 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
    }
    
    public int updateHostCalc(Connection conn, String accountBank, String account, String accountName,String hostId) {
+<<<<<<< HEAD
 		PreparedStatement pstmt=null;
 		int result=0;
 		Host h=null;
@@ -159,5 +160,24 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 			close(pstmt);
 		}return result;
 	}
+=======
+      PreparedStatement pstmt=null;
+      int result=0;
+      Host h=null;
+      try {
+         //updateHostCalc=UPDATE HOST SET HOST_ACCOUNT_BANK=?, HOST_ACCOUNT=?, HOST_ACCOUNT_NAME=? WHERE HOST_ID=?
+         pstmt=conn.prepareStatement(sql.getProperty("updateHostCalc"));
+         pstmt.setString(1, accountBank);
+         pstmt.setString(2, account);
+         pstmt.setString(3, accountName);
+         pstmt.setString(4, hostId);
+         result=pstmt.executeUpdate();
+      }catch(SQLException e) {
+         e.printStackTrace();
+      }finally {
+         close(pstmt);
+      }return result;
+   }
+>>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
    
 }

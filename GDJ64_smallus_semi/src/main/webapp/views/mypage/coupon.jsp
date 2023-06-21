@@ -70,11 +70,15 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 		}
 		%>
 		
-</section>
-
- <div class="pageBar">
+<%if(coupon.isEmpty()){ %>
+ 
+        <%}else{ %>
+        <div class="pageBar">
         	<%=request.getAttribute("pageBar") %>
         </div>
+        <%} %>
+</section>
+
 </div>
 
 

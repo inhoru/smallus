@@ -71,25 +71,31 @@ public class PageBarStyleServlet extends HttpServlet {
 		
 		
 		/* host page paging bar style */
-//		#pageBar {
-//			width: 50%;
-//			margin: 2rem 0 2rem auto;
-//			text-align: right;
+//		.pageBar {
+//		display: flex;
+//	    align-items: center;
+//	    justify-content: center;
+//	    width: 70%;
+//	    margin: auto;
+//	    padding: 3% 0;
 //		}
 //
-//		#pageBar * {
+//		.pageBar * {
 //			margin: 0.3rem;
 //		}
 //
-//		#pageBar .h-pageBar-txt {
+//		.pageBar .h-pageBar-txt {
 //			padding: 0.5rem 0.8rem;
 //			background-color: #FBEFD3;
 //			border-radius: 1rem;
 //			font-size: 0.9rem;
 //		}
 //
-//		#pageBar .h-pageBar-now {
+//		.pageBar .h-pageBar-now {
 //			font-weight: bold;
+//		}
+//		.pageBar a:hover {
+//			color: gray;
 //		}
 	}
 

@@ -108,9 +108,13 @@ int cPage=(int)request.getAttribute("cPage");
 			%>
 
 		</section>
-		<div class="pageBar">
-			<%=request.getAttribute("pageBar")%>
-		</div>
+		<%if(payment.isEmpty()){ %>
+ 
+        <%}else{ %>
+        <div class="pageBar">
+        	<%=request.getAttribute("pageBar") %>
+        </div>
+        <%} %>
 	</div>
 	<script>
 	

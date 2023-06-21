@@ -4,7 +4,7 @@
    import="com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,com.smallus.classes.model.vo.Classes"%>
 <%
 Member infoMember =(Member) request.getAttribute("infoMember");
-Member loginMember = (Member) session.getAttribute("loginMember");
+
 Host loginHost = (Host) session.getAttribute("loginHost");
 Host hostInfo=(Host) request.getAttribute("hostInfo");
 Cookie[] cookies = request.getCookies();
@@ -44,7 +44,7 @@ if (cookies != null) {
          <a href="<%=request.getContextPath()%>"><img
             src="<%=request.getContextPath()%>/img/main.png" alt="" id="logo"></a>
          <%
-         if (loginMember == null) {
+         if (infoMember == null) {
          %>
          <nav class="menu">
             <div id="categories">
@@ -191,7 +191,7 @@ if (cookies != null) {
       </table>
    </header>
 
-   <% if (loginMember == null) { %>
+   <% if (infoMember == null) { %>
 <script>
   /* 비로그인 시 작동 */
   let isSearchFieldActive = false;

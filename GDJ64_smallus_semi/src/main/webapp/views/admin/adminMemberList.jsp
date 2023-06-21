@@ -40,16 +40,23 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<th><%=m.getMemberEmail()%></th>
 						<th><%=m.getMemberConsent()%></th>
 						<th><%=m.getMemberSt()%></th>
-						<td><button>삭제</button></td>
+						<td><button id=m-deletememberbtn>삭제</button></td>
 					</tr>
 					<%} %>
 				<%} %>
 				</table>
 			</div>
 		</section>
-		<div id="pageBar">
-			<%=request.getAttribute("pageBar")%>
+		<div class="pageBar">
+		<%if(request.getAttribute("pageBar")!=null){%>
+				<%=request.getAttribute("pageBar")%>
+			<%} %>
 		</div>
 </div>
 </body>
+<script>
+	$("#m-deletememberbtn").click(e=>{
+		
+	})
+</script>
 <%@ include file="/views/common/footer.jsp"%>

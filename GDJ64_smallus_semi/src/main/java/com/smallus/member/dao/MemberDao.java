@@ -59,13 +59,14 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("enrollMember"));
-			// INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)
+			// INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,DEFAULT,DEFAULT)
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
 			pstmt.setString(4, m.getMemberPhone());
 			pstmt.setString(5, m.getMemberEmail());
-			pstmt.setString(6, m.getMemberNickname());
+			pstmt.setString(6, m.getMemberConsent());
+			pstmt.setString(7, m.getMemberNickname());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -262,13 +263,15 @@ public class MemberDao {
 		}
 		return list;
 	}
-	public List<Classes> wishList(Connection conn, String memberId){
+	public List<Classes> wishList(Connection conn, String memberId,int cPage,int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Classes> list=new ArrayList<Classes>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("wishList"));
 			pstmt.setString(1, memberId);
+			pstmt.setInt(2,(cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Wishlist w = new Wishlist();
