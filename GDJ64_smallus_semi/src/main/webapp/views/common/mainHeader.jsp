@@ -226,18 +226,7 @@ if (cookies != null) {
          return;
        }
 
-<<<<<<< HEAD
-	    icon.css("visibility", "hidden");
-	    searchField.css("display", "flex");
-	    categories.css("visibility", "hidden");
-	    
-	    /* 화면크기에따른 돋보기위치이동 */
-	    if(windowWidth > 1800) {
-	        $(".i-searchIcon").css("transform", "translateX(-125px)");
-	    } else if(windowWidth > 1400) {
-	        $(".i-searchIcon").css("transform", "translateX(-90px)");
-	    }
-=======
+
        icon.css("visibility", "hidden");
        searchField.css("display", "flex");
        categories.css("visibility", "hidden");
@@ -248,7 +237,7 @@ if (cookies != null) {
        } else if(windowWidth > 1400) {
            $(".i-searchIcon").css("transform", "translateX(-90px)");
        }
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
+
 
        $(".i-searchIcon").css("transition", "0.7s");
        $("#mainOpacity").css("opacity", "0.5");
