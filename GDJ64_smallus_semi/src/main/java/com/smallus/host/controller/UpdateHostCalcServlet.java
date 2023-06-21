@@ -17,7 +17,7 @@ import com.smallus.member.model.vo.Member;
 /**
  * Servlet implementation class UpdateHostCalcServlet
  */
-@WebServlet(name = "/host/updateHostCalc.do", urlPatterns = { "//host/updateHostCalc.do" })
+@WebServlet(name = "/host/updateAccount.do", urlPatterns = { "/host/updateAccount.do" })
 public class UpdateHostCalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

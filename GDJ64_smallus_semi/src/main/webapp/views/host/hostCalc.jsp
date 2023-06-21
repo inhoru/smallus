@@ -18,7 +18,7 @@
 					<td>예금주</td>
 					<td>정산 일</td>
 					<td>매달 1일</td>
-					<td><button onclick="updateAccountBtn()" id="h-updateAccountBtn">수정</button></td>
+					<td><button onclick="location.assign('<%=request.getContextPath() %>/host/updateAccount.do')">수정</button></td>
 				</tr>
 			</table>
 	</section>
@@ -65,22 +65,6 @@
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-    function updateAccountBtn(){
-	    $.ajax({
-			type:"get",
-			url:"<%=request.getContextPath()%>/host/updateHostCalc.do",
-			data: { hostId:'<%=loginHost.getHostId()%>'},
-			success:data=>{
-				console.log(data)
-		    	alert("hi")
-			},
-			error:(r,m)=>{
-				console.log(r);
-				console.log(m);
-				if(e.status==404) alert("요청한 페이지가 없습니다");
-			}
-		})
-    }
     
     </script>
     <script src="<%=request.getContextPath() %>/js/host.js"></script>
