@@ -100,5 +100,23 @@
             </div>            
         </section>
 	<%}else {%>
-		
+	<div class="m-navContainer">
+	    <table class="m-nav">
+			<tr>
+				<th><b>회원관리</b></th>
+				<th><b>승인관리</b></th>
+				<th><b>고객센터</b></th>
+			</tr>
+			<tr>
+				<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
+				<td><a href="">클래스승인</a></td>
+				<td><a href="<%=request.getContextPath()%>/views/admin/NoticeList.jsp">공지사항</a></td>
+			</tr>
+			<tr>
+				<td><a href="">호스트회원관리</a></td>
+				<td><a href="">정산승인</a></td>
+				<td><a href="">1:1문의</a></td>
+			</tr>
+	    </table>
+	</div>
 	<%}%>
