@@ -15,14 +15,14 @@ import com.smallus.classes.model.vo.Classes;
 /**
  * Servlet implementation class ViewClassListServlet
  */
-@WebServlet("/class/viewClassList.do")
-public class ViewClassListServlet extends HttpServlet {
+@WebServlet("/class/viewHostClassList.do")
+public class ViewHostClassListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewClassListServlet() {
+    public ViewHostClassListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -86,7 +86,7 @@ public class ViewClassListServlet extends HttpServlet {
 //			System.out.println(classList.size());
 //			System.out.println(cPage+" "+ numPerpage);
 			request.setAttribute("classList", classList);
-			request.getRequestDispatcher("/views/host/hostClassList.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/host/viewHostClassList.jsp").forward(request, response);
 		}else {
 			System.out.println("클래스 없음");
 			request.setAttribute("msg", "조회할 클래스가 없습니다.");
