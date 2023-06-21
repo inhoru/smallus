@@ -12,13 +12,17 @@
 .i-mypageCategories {
 	width: 50%;
 	margin: auto;
+	margin-left: 24%;
 }
 /* 카테고리 전체 */
 .i-tablecontent {
 	width: 100%;
+	margin:auto;
 	text-align: center;
 	table-layout: fixed;
 	background-color: #FDF7E8;
+	
+	
 }
 
 /* 카테고리 대분류 */
@@ -943,25 +947,26 @@ cursor: pointer;
 	margin-top: 1%;
 	border-top: 2px solid #efebe5;
 }
-/* 페이징처리전체 */
-div.pageBar {
-	padding-top: 2%;
-	text-align: center;
-	width: 70%;
-	margin: auto;
-	margin-left: 13%;
-	padding-bottom: 2%;
-}
-/* 페이징처리 a태그 */
-div.pageBar a {
-	font-size: 24px;
-	margin-left: 2%;
-}
-/*페이징처리 클릭안됨  */
-div.pageBar span {
-	font-size: 24px;
-	margin-left: 2%;
-}
+#pageBar {
+			width: 50%;
+			margin: 2rem 0 2rem auto;
+			text-align: right;
+		}
+
+		#pageBar * {
+			margin: 0.3rem;
+		}
+
+		#pageBar .h-pageBar-txt {
+			padding: 0.5rem 0.8rem;
+			background-color: #FBEFD3;
+			border-radius: 1rem;
+			font-size: 0.9rem;
+		}
+
+		#pageBar .h-pageBar-now {
+			font-weight: bold;
+		}
 /* 페이징처리 호버 */
 div.pageBar a:hover {
 	color: gray;
