@@ -13,16 +13,16 @@ import com.smallus.payment.model.vo.PaymentCompleted;
 import com.smallus.payment.service.PaymentService;
 
 /**
- * Servlet implementation class MemberPaymentCompletedServlet
+ * Servlet implementation class MemberPaymentCancellationServlet
  */
-@WebServlet("/paymentCompleted.do")
-public class MemberPaymentCompletedServlet extends HttpServlet {
+@WebServlet("/memberCancellation.do")
+public class MemberPaymentCancellationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberPaymentCompletedServlet() {
+    public MemberPaymentCancellationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +31,14 @@ public class MemberPaymentCompletedServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String paymentId=request.getParameter("id");
 		System.out.println(paymentId);
 		List<PaymentCompleted> list=new PaymentService().paymentCompleted(paymentId);
 		request.setAttribute("paymentList", list);
 		String cPage=request.getParameter("cPage");
 		request.setAttribute("cPage", cPage);
-		 request.getRequestDispatcher("/views/mypage/paymentCompleted.jsp").forward(
+		 request.getRequestDispatcher("/views/mypage/paymentCancellation.jsp").forward(
 		  request, response);
-		 
 	}
 
 	/**

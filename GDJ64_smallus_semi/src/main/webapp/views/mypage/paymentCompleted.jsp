@@ -4,6 +4,7 @@
 	import="java.util.List,com.smallus.payment.model.vo.PaymentCompleted"%>
 <%
 List<PaymentCompleted> payment = (List) request.getAttribute("paymentList");
+String cPage=(String)request.getAttribute("cPage");
 %>
 <div id="mainOpacity">
 	<div class="i-withdrawalendtotal">
@@ -42,6 +43,7 @@ List<PaymentCompleted> payment = (List) request.getAttribute("paymentList");
 					<div class="i-paymentimg">
 						<%
 						for (PaymentCompleted p : payment) {
+							
 						%>
 						<img
 							src="<%=request.getContextPath()%>/img/<%=p.getClasses().getClassThumbnail()%>"
@@ -66,7 +68,7 @@ List<PaymentCompleted> payment = (List) request.getAttribute("paymentList");
 						<span>할인 쿠폰</span><span><%=p.getCoupon().getCouponPrice()%>원</span>
 					</div>
 					<div class="i-paymentInformationDetails">
-						<span><%=p.getPaymentType().getPaymentName()%></span><span><%=p.getClasses().getClassPrice() * p.getPayment().getClassPersonnel()%>원</span>
+						<span><%=p.getPaymentType().getPaymentName()%>결제</span><span><%=p.getClasses().getClassPrice() * p.getPayment().getClassPersonnel()%>원</span>
 					</div>
 					<div class="i-paymentInformationDetails">
 						<span>총 결제금액</span><span><%=p.getPayment().getTotalPrice()%>원</span>
@@ -78,7 +80,7 @@ List<PaymentCompleted> payment = (List) request.getAttribute("paymentList");
 			<%
 			}
 			%>
-				<button class="i-storage" onclick=location.assign("<%=request.getContextPath()%>/memberpayment.do")>목록</button>
+				<button class="i-storage" onclick=location.assign("<%=request.getContextPath()%>/memberpayment.do?cPage=<%=cPage %>")>목록</button>
 			</div>
 
 		</section>
