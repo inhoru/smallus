@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/mainHeader.jsp"%>
+    pageEncoding="UTF-8"%>
 <style>
 div#select_container {
 	margin-right: 21%;
@@ -74,4 +73,3 @@ table#list th, table#list td {
 		</table>
 	</div>
 </section>
-<%@ include file="/views/common/footer.jsp"%>
