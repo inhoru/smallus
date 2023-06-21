@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <div>
-		<!-- <div>
+		 <div>
 		<a href="">상세 정보</a>
-		</div> -->
+		</div>
 		<nav class="detail_info">
 			<!-- style="font-size: 16px; font-weight: bolder; margin-left: 20%;" -->
 			<ul>
