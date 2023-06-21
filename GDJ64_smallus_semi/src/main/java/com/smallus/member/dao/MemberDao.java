@@ -59,13 +59,14 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("enrollMember"));
-			// INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)
+			// INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,DEFAULT,DEFAULT)
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
 			pstmt.setString(4, m.getMemberPhone());
 			pstmt.setString(5, m.getMemberEmail());
-			pstmt.setString(6, m.getMemberNickname());
+			pstmt.setString(6, m.getMemberConsent());
+			pstmt.setString(7, m.getMemberNickname());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

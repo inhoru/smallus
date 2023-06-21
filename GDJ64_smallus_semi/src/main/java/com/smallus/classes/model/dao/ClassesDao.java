@@ -38,7 +38,7 @@ public class ClassesDao {
 	
 	
 	// builder 패턴을 이용해서 Classes 객체 가져오기
-	public Classes getClasses(ResultSet rs) throws SQLException {
+	public static Classes getClasses(ResultSet rs) throws SQLException {
 		return Classes.builder().classId(rs.getString("CLASS_ID")).hostId(rs.getString("HOST_ID")).categoryId(rs.getString("CATEGORY_ID"))
 				.categoryTitle(rs.getString("CATEGORY_TITLE")).classTitle(rs.getString("CLASS_TITLE")).classPersonnel(rs.getInt("CLASS_PERSONNEL"))
 				.classPrice(rs.getInt("CLASS_PRICE")).classAddress(rs.getString("CLASS_ADDRESS")).classOffer(rs.getString("CLASS_OFFER")).classSupplies(rs.getString("CLASS_SUPPLIES"))
