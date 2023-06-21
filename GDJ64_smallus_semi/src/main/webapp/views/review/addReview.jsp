@@ -18,7 +18,8 @@
 			<!-- 첫번째 별을 클릭시 텍스트가 ★☆☆☆☆이 되고 이렇게 걸어야하나 -->
 		</div>
 	</div>
-	<textarea rows="20" cols="100" placeholder="내용을 입력하여 주세요."></textarea>
+	<input type="text" placeholder="제목을 입력해주세요.">
+	<textarea rows="20" cols="100" placeholder="내용을 입력해주세요."></textarea>
 	<br><br><br>
 	<input type="submit" value="등록">
 </div>
@@ -52,6 +53,15 @@
 		padding: 10px;
 	}
 	.d-add-review-page>input{
+		width: 100%;
+		max-width:600px;
+		border: 2px solid #595959;
+		border-radius: 20px;
+		padding: 10px;
+		margin-bottom:10px;
+	
+	}
+	.d-add-review-page>input[type="submit"]{
 		width: 100px;
 		height: 30px;
 		border-radius: 20px;

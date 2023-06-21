@@ -17,8 +17,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Review {
 	private String reviewId;
-	private String memberId;
-	private String classId;
 	private String paymentId;
 	private String reviewTitle;
 	private String reviewContent;

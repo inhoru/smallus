@@ -6,6 +6,7 @@
 Member infoMember =(Member) request.getAttribute("infoMember");
 
 Host loginHost = (Host) session.getAttribute("loginHost");
+Host hostInfo=(Host) request.getAttribute("hostInfo");
 Cookie[] cookies = request.getCookies();
 String saveId = null;
 String savehostId = null;

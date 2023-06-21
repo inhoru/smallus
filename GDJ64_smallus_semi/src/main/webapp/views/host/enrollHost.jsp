@@ -59,7 +59,7 @@ table#m-ernollhostTable input[type=submit]{
 					</tr>
 					<tr>
 						<th>비밀번호확인</th>
-						<td colspan="2">
+						<td>
 							<input type="password" id="password2" placeholder="영어+숫자 8글자이상">
 						</td>
 					</tr>
@@ -105,13 +105,13 @@ table#m-ernollhostTable input[type=submit]{
 					</tr>
 					<tr>
 						<th>휴대폰번호</th>
-						<td colspan="2">
+						<td>
 						<input type="tel" placeholder="(-없이)01012345678" name="hostPhone" id="hostPhone" maxlength="11" required>
 						</td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td colspan="2">
+						<td>
 						<input type="tel" placeholder="(-없이)02-456-7891" name="hostHomePhone" id="hostHomePhone"> 
 						</td>
 					</tr>

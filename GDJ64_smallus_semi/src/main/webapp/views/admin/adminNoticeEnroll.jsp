@@ -72,4 +72,4 @@ section.h-main table {
 		location.assign('<%=request.getContextPath()%>/notice/enrollNotice.do?hostId=<%=loginHost.getHostId()%>&noticeType='+noticeType+'&noticeTitle='+noticeTitle+'&noticeContent='+noticeContent);
 	});
 </script>
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>

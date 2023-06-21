@@ -41,4 +41,4 @@
             </div>
         </section>
 </body>
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>

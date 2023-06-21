@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 <!--main-->
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-profile">
@@ -54,5 +54,5 @@
 			<button class="h-submit">등록</button>
 		</div>        
 	</section>        
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
         

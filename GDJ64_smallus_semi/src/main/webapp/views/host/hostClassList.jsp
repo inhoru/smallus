@@ -5,7 +5,7 @@
 	List<Classes> classList=(List)request.getAttribute("classList"); 
 	List<Classes> classListPass=(List)request.getAttribute("classListPass");
 %>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 
 <!--main-->
 <div id="mainOpacity h-host-main">
@@ -168,5 +168,5 @@
 		}
 			
 	</script>       
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
         
