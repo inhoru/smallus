@@ -18,6 +18,10 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mypage/test.css"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<style>
+	th#h-pay-classTitle{
+	text-align:left;}
+</style>
 <!-- iamport.payment.js -->
 <!-- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script> -->
@@ -33,10 +37,10 @@
 		    		<img src="<%=request.getContextPath()%>/img/main-img2.jpg" >
 				</a>
 				<table>
+					<tr><th>[<%=data.get("hostNickname") %>]</th></tr>
 					<tr>
-						<th>[<%=data.get("classCategoryTitle") %>]</th>
-						<th>[<%=data.get("classCategoryTitle") %>]</th>
-						<th colspan="3"><%=data.get("classTitle") %></th>
+						<th>[<%=data.get("classCategoryTitle") %>]&nbsp;&nbsp;[<%=data.get("classAddress") %>]</th>
+						<th colspan="4" id="h-pay-classTitle"><%=data.get("classTitle") %></th>
 					</tr>
 					<tr>
 						<td><%=data.get("bookingTimeStart") %></td>
@@ -76,11 +80,16 @@
 			<div class="h-payment-title h-payment-coupon">
 				<h4>쿠폰</h4>
 			    <select id="h-selectCoupon" name="h-selectCoupon">
-			    	<option selected disabled>쿠폰 선택</option>
-			    	<option value="10000">ㅊㅋㅊㅋ&nbsp;&nbsp;(할인 금액 : 10,000원)</option>
-			    	<option value="3000">평양냉면&nbsp;&nbsp;(할인 금액 : 3,000원)</option>
+				    <option selected disabled>쿠폰 선택</option>
+			    	<%if(couponList!=null&&!couponList.isEmpty()){
+			    		for(Coupon c: couponList){%>
+				    	<option value="<%=c.getCouponPrice()%>"><%=c.getCouponName() %>&nbsp;&nbsp;(할인 금액 : <%=c.getCouponPrice()%>원)</option>
+			    	<%}
+			    	}else{ %>
+				    	<option value="0">보유한 쿠폰이 없습니다.</option>
+			    	<%} %>
 			    </select>
-		    	<button>쿠폰 적용</button>
+		    	<button onclick="selectOption()">쿠폰 적용</button>
 		    </div>
 		    <div class="h-payClass-list h-payClass-member">
 				<table>
@@ -92,12 +101,12 @@
 					<tr>
 						<th>쿠폰 적용 금액</th>
 						<td></td>
-						<th><%=couponPrice %> 원</th>
+						<th id="h-couponPrice"></th>
 					</tr>
 					<tr>
 						<th>최종 결제 금액</th>
 						<td></td>
-						<th><%=totalPrice %> 원</th>
+						<th id="h-totalPrice"> 원</th>
 					</tr>
 				</table>
 			</div>
@@ -112,6 +121,16 @@
 	</section>
 </div>
 <script>
+//select 옵션 변경하면 이동하는 함
+function selectOption(){
+	let coupon=$("#h-selectCoupon option:selected").val();
+	$("#h-couponPrice").text("- "+coupon+" 원")
+	let sum='<%=sumPrice %>';
+	let total=sum-coupon;
+	$("#h-totalPrice").text(total+" 원")
+	// index =1 -> W / 2:Y/3:N
+	//console.log($("#h-couponPrice"));
+}
 const today = new Date();   
 const hours = today.getHours(); // 시
 const minutes = today.getMinutes();  // 분
@@ -152,29 +171,43 @@ const data={
 };
 IMP.request_pay(data, response => {
 	alert("callback!: "+JSON.stringify(response));
+	console.log(response)
+	console.log(data)
 	
     //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-jQuery.ajax({
-		url: "/payments/callback_receive.do", //cross-domain error가 발생하지 않도록 주의해주세요
-        type: 'POST',
-        header:{'Content-Type':'application/json'},
-        data: JSON.stringify(response)
-	}).done(function (data){
-		alert('Please, Check your payment result page');
-		 $( "#mainOpacity" ).html(data);
-	    if (rsp.success) {
-	      var msg = '결제가 완료되었습니다.';
-	      alert(msg);
-	      location.href = "결제 완료 후 이동할 페이지 url"
-	    } else {
-	      var msg = '결제에 실패하였습니다.';
-	      msg += '에러내용 : ' + response.error_msg;
-	      alert(msg);
-	    }
-	})
+	jQuery.ajax({
+			url: "<%=request.getContextPath()%>/payments/callback_receive.do", /* //cross-domain error가 발생하지 않도록 주의해주세요 */
+	        type: 'POST',
+	        header:{'Content-Type':'application/json'},
+	        data: {"data":JSON.stringify(response)}
+		}).done(function (data){
+			const rsp=JSON.parse(data);
+//			alert('Please, Check your payment result page');
+			if ( everythings_fine ) {
+               var msg = '결제가 완료되었습니다.';
+                msg += '\n고유ID : ' + rsp.imp_uid;
+                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+                msg += '\결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+                
+                alert(msg);
+            } else {
+            	var msg = '결제에 실패하였습니다.';
+	  		    msg += '에러내용 : ' + response.error_msg;
+	  		    alert(msg);
+            }
+		})
 	});
 }
-<%-- function(rsp) {
+<%--		    if (rsp.success) {
+		      var msg = '결제가 완료되었습니다.';
+		      alert(msg);
+		    } else {
+		      var msg = '결제에 실패하였습니다.';
+		      msg += '에러내용 : ' + response.error_msg;
+		      alert(msg);
+		    }
+ function(rsp) {
     if ( rsp.success ) {
         //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
         jQuery.ajax({
