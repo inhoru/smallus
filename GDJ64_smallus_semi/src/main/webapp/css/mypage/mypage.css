@@ -603,7 +603,9 @@ section.i-imgContainer .i-img-list h4 {
 	background: #E8D6C3;
 	border: none;
 	cursor: pointer;
+	margin-left: 45%;
 }
+
 /* 회원탈퇴end배경 */
 .i-withdrawalendtotal {
 	padding-bottom: 3%;
@@ -776,6 +778,16 @@ section.i-imgContainer .i-img-list h4 {
 /* 결제내역 전체배경 */
 .i-mypageCommonbackground {
 	background-color: #FFFBF5;
+}
+/* 결제내역 버튼 */
+.i-withdrawalbutton1{
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
 }
 /*부킹 시간 */
 .i-booking{
