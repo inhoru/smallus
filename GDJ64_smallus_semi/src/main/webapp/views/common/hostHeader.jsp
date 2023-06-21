@@ -3,6 +3,7 @@
 <%@ page import="com.smallus.host.model.vo.Host,com.smallus.payment.model.vo.Payment, java.util.*"%>
 <%
 	Host loginHost=(Host)session.getAttribute("loginHost");
+	Host hostInfo=(Host) request.getAttribute("hostInfo");
 	Cookie[] cookies = request.getCookies();
 	String savehostId=null;
 	if (cookies != null) {
