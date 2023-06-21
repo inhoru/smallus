@@ -36,14 +36,14 @@ public class UpdateHostCalcServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		HttpSession session=request.getSession();
-		Host loginHost = (Host) session.getAttribute("hostInfo");
+		Host hostInfo = (Host) session.getAttribute("hostInfo");
 		//String hostId=loginHost.getHostId();
 		
 		//Host host= new HostService().updateHostCalc(hostId);
-		System.out.println(loginHost);
+		System.out.println(hostInfo);
 		Gson gson= new Gson();
 		response.setContentType("application/json; charset=UTF-8");
-		gson.toJson(loginHost,response.getWriter()); 
+		gson.toJson(hostInfo,response.getWriter()); 
 		
 	}
 
