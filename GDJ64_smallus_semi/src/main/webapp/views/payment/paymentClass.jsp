@@ -162,8 +162,8 @@ alert(pg_mid);
 const data={
 		pg : pg_mid, //pg : 'html5_inicis',
 		pay_method : 'card',
-        merchant_uid: payment_id, // 상점에서 관리하는 주문 번호
-        name : '[<%=data.get("classCategoryTitle") %>] [<%=data.get("classCategoryTitle") %>] <%=data.get("classTitle") %>',
+        merchant_uid: 'RSV'+makeMerchantUid, // 상점에서 관리하는 주문 번호
+        name : '<%=data.get("classTitle") %>',
         amount : amount, 
         buyer_email : email,
         buyer_name : name,
@@ -171,8 +171,8 @@ const data={
 };
 IMP.request_pay(data, response => {
 	alert("callback!: "+JSON.stringify(response));
-	console.log(response)
-	console.log(data)
+	//console.log(response)
+	//console.log(data)
 	
     //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	jQuery.ajax({
@@ -181,19 +181,21 @@ IMP.request_pay(data, response => {
 	        header:{'Content-Type':'application/json'},
 	        data: {"data":JSON.stringify(response)}
 		}).done(function (data){
-			const rsp=JSON.parse(data);
+			//const rsp=JSON.parse(data);
+			//console.log(rsp);
 //			alert('Please, Check your payment result page');
-			if ( everythings_fine ) {
+			if ( response.success ) {
                var msg = '결제가 완료되었습니다.';
-                msg += '\n고유ID : ' + rsp.imp_uid;
-                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                msg += '\결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-                
+                msg += '\n고유ID : ' + response.imp_uid;
+                msg += '\n상점 거래ID : ' + response.merchant_uid;
+                msg += '\결제 금액 : ' + response.paid_amount;
+                msg += '카드 승인번호 : ' + response.apply_num;
+				console.log(response);
                 alert(msg);
             } else {
             	var msg = '결제에 실패하였습니다.';
 	  		    msg += '에러내용 : ' + response.error_msg;
+	  		 	console.log(response);
 	  		    alert(msg);
             }
 		})
