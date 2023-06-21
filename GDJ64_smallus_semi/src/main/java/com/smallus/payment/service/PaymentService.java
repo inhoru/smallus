@@ -41,12 +41,32 @@ public class PaymentService {
 		close(conn);
 		return result;
 	}
+	public int paymentdetailCount(String memberId,String completed) {
+		Connection conn=getConnection();
+		int result=dao.paymentdetailCount(conn,memberId,completed);
+		close(conn);
+		return result;
+	}
 	public  List<PaymentCompleted> paymentCompleted(String paymentId){
 		Connection conn=getConnection();
 		List<PaymentCompleted>  pc=dao.paymentCompleted(conn, paymentId);
 		close(conn);
 		return pc;
 	}
+	public List<Member> MemberCompletedpayment(String memberId,int cPage,int numPerpage,String completed){
+		Connection conn=getConnection();
+		List<Member> list=dao.MemberCompletedpayment(conn, memberId,cPage,numPerpage,completed);
+		close(conn);
+		return list;
+	}
+
+	public List<Member> Membercancellationpayment(String memberId,int cPage,int numPerpage,String completed){
+		Connection conn=getConnection();
+		List<Member> list=dao.Membercancellationpayment(conn, memberId,cPage,numPerpage,completed);
+		close(conn);
+		return list;
+	}
+	
 	
 	
 	
