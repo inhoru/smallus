@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class PaymentEndServlet
@@ -31,37 +32,33 @@ public class PaymentEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String data=request.getParameter("data");
-		request.setAttribute("data", data);
-		Gson gson= new Gson();
-		gson.toJson(data,response.getWriter());
-		response.setContentType("application/json; charset=UTF-8");
-		if(data!=null&&!data.isEmpty()) {
-			System.out.println("data O");
-		}else {
-			System.out.println("data X");
-		}
-		request.getRequestDispatcher("/views/payment/paymentResult.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		
+
+		// 결제 후 보낸 데이터를 json으로 받는 서블릿
 		request.setCharacterEncoding("UTF-8");
-		String data=request.getParameter("data");
+		Gson gson= new Gson();
 		
-		//int age=Integer.parseInt(request.getParameter("age"));
+		// front에서 보낸 데이터를 data로 가져옴 
+		String data=request.getParameter("data");
+		System.out.println("data : "+data);
+		//data : {"success":true,"imp_uid":"imp_182519379256","pay_method":"point","merchant_uid":"RSV1004",
+		//"name":"[베이킹] [베이킹] 휘낭시에 굽기","paid_amount":50000,"currency":"KRW","pg_provider":"kakaopay","pg_type":"payment",
+		//"pg_tid":"T4926c0f62ea0baecb0a","apply_num":"","buyer_name":"김세미","buyer_email":"test@naver.com",
+		//"buyer_tel":"01057111106","buyer_addr":"","buyer_postcode":"","custom_data":null,"status":"paid","paid_at":1687317530,
+		//"receipt_url":"https://mockup-pg-web.kakao.com/v1/confirmation/p/T4926c0f62ea0baecb0a/3930989aadf75ac385d920f5f158cb649d11b26ceed1571a2fcd93d2dfc74b0c",
+		//"card_name":null,"bank_name":null,"card_quota":0,"card_number":""}
+
+		Member requestData=gson.fromJson(data,Member.class);
 		System.out.println("post 방식으로 요청");
-		System.out.println(data);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		out.print(data);
-		out.print(" 사용자가 post 방식으로 보낸 데이터");
 		
 	}
 

@@ -12,13 +12,17 @@
 .i-mypageCategories {
 	width: 50%;
 	margin: auto;
+	margin-left: 24%;
 }
 /* 카테고리 전체 */
 .i-tablecontent {
 	width: 100%;
+	margin:auto;
 	text-align: center;
 	table-layout: fixed;
 	background-color: #FDF7E8;
+	
+	
 }
 
 /* 카테고리 대분류 */
@@ -603,7 +607,9 @@ section.i-imgContainer .i-img-list h4 {
 	background: #E8D6C3;
 	border: none;
 	cursor: pointer;
+	margin-left: 45%;
 }
+
 /* 회원탈퇴end배경 */
 .i-withdrawalendtotal {
 	padding-bottom: 3%;
@@ -777,6 +783,16 @@ section.i-imgContainer .i-img-list h4 {
 .i-mypageCommonbackground {
 	background-color: #FFFBF5;
 }
+/* 결제내역 버튼 */
+.i-withdrawalbutton1{
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
+}
 /*부킹 시간 */
 .i-booking{
 	width: 220px;
@@ -931,26 +947,36 @@ cursor: pointer;
 	margin-top: 1%;
 	border-top: 2px solid #efebe5;
 }
-/* 페이징처리전체 */
-div.pageBar {
-	padding-top: 2%;
-	text-align: center;
-	width: 70%;
-	margin: auto;
-	margin-left: 13%;
-	padding-bottom: 2%;
+/* 페이지바 */
+.pageBar {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    padding: 3% 0;
 }
-/* 페이징처리 a태그 */
-div.pageBar a {
-	font-size: 24px;
-	margin-left: 2%;
+
+
+.pageBar * {
+	margin: 0.3rem;
 }
-/*페이징처리 클릭안됨  */
-div.pageBar span {
-	font-size: 24px;
-	margin-left: 2%;
+
+.pageBar .h-pageBar-txt {
+	padding: 0.5rem 0.8rem;
+	background-color: #FBEFD3;
+	border-radius: 1rem;
+	font-size: 0.9rem;
+}
+
+.pageBar .h-pageBar-now {
+	font-weight: bold;
 }
 /* 페이징처리 호버 */
-div.pageBar a:hover {
+.pageBar a:hover {
 	color: gray;
+}
+/* 쿠폰페이지 페이징 */
+.counponPageBar{
+	margin-right: 2%;
 }

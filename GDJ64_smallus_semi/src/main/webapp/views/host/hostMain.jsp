@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% List<Payment> rsvList =(List)session.getAttribute("rsvList"); %>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 
     <!--main-->
     <div id="mainOpacity h-host-main">
@@ -74,7 +74,7 @@
 	      	let payments=rsvList.split(",");
 	      	console.log(payments[9])
         </script>
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
 
 
 

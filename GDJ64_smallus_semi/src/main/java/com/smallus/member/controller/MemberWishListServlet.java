@@ -1,4 +1,4 @@
-package com.smallus.coupon.controller;
+package com.smallus.member.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,21 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.coupon.model.vo.Coupon;
 import com.smallus.coupon.service.CouponService;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.service.MemberService;
 
 /**
- * Servlet implementation class MemberCouponServlet
+ * Servlet implementation class MemberWishListServlet
  */
-@WebServlet("/mypageCoupon.do")
-public class MemberCouponServlet extends HttpServlet {
+@WebServlet("/memberWishList.do")
+public class MemberWishListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberCouponServlet() {
+    public MemberWishListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,11 +46,10 @@ public class MemberCouponServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			numPerpage = 5;
 		}
-		new CouponService().deleteCoupon();
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		List<Coupon> list=new CouponService().searchByMemberCoupon(loginMember.getMemberId(),cPage,numPerpage);
-		int totalData=new CouponService().couponCount(loginMember.getMemberId());
+		int totalData=new MemberService().wishListCount(loginMember.getMemberId());
+		List<Classes> list=new MemberService().wishList(loginMember.getMemberId(),cPage,numPerpage);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -72,10 +73,10 @@ public class MemberCouponServlet extends HttpServlet {
 		} else {
 			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
-		request.setAttribute("pageBar", pageBar);
-		request.setAttribute("countCoupon", totalData);
-		request.setAttribute("coupon", list);
-		request.getRequestDispatcher("/views/mypage/coupon.jsp").forward(request, response);
+		
+		request.setAttribute("pageBar",pageBar);
+		request.setAttribute("wishList",list);
+		request.getRequestDispatcher("/views/mypage/wishList.jsp").forward(request, response);
 	}
 
 	/**

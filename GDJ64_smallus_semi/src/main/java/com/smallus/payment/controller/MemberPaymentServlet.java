@@ -34,19 +34,18 @@ public class MemberPaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cPage;
+		// 페이징 처리
+		int cPage, numPerpage;
 		try {
-			cPage=Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
-			cPage=1;
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage = 1;
 		}
-		int numPerpage;
 		try {
-			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
-		}catch(NumberFormatException e) {
-			numPerpage=3;
+			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+		} catch (NumberFormatException e) {
+			numPerpage = 5;
 		}
-		new CouponService().deleteCoupon();
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		List<Member> list=new PaymentService().searchByMemberPayment(loginMember.getMemberId(),cPage,numPerpage);
@@ -56,33 +55,29 @@ public class MemberPaymentServlet extends HttpServlet {
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		String pageBar="";
-		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
-		}else {
-			pageBar+="<a href='"+request.getRequestURI()
-			+"?cPage="+(pageNo-1)
-			+"&numPerpage="+numPerpage+"'>[이전]</a>";
+		if (pageNo == 1) {
+			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
 		}
-		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(pageNo==cPage) {
-				pageBar+="<span>"+pageNo+"</span>";
-			}else {
-				pageBar+="<a href='"+request.getRequestURI()
-				+"?cPage="+pageNo
-				+"&numPerpage="+numPerpage+"'>"+pageNo+"</a>";
+		while (!(pageNo > pageEnd || pageNo > totalPage)) {
+			if (pageNo == cPage) {
+				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
+			} else {
+				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "'> " + pageNo + " </a>";
 			}
 			pageNo++;
 		}
-		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
-		}else {
-			pageBar+="<a href='"+request.getRequestURI()
-			+"?cPage="+pageNo
-			+"&numPerpage="+numPerpage+"'>[다음]</a>";
+		if (pageNo > totalPage) {
+			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("paymentCount", totalData);
 		request.setAttribute("payment", list);
+		request.setAttribute("cPage", cPage);
+		
 		request.getRequestDispatcher("/views/mypage/payment.jsp").forward(request, response);
 	}
 	

@@ -39,7 +39,7 @@ public class MemberMypageServlet extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		int count=new CouponService().couponCount(loginMember.getMemberId());
 		List<Member> m=new MemberService().paymentDetails(loginMember.getMemberId());
-		List<Classes> w=new MemberService().wishList(loginMember.getMemberId());
+		List<Classes> w=new MemberService().wishList(loginMember.getMemberId(),1,100);
 		int wishCount=new  MemberService().wishListCount(loginMember.getMemberId());
 	request.setAttribute("wishCount", wishCount);
 		request.setAttribute("wishList", w);

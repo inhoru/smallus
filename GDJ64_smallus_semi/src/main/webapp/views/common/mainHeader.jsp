@@ -4,8 +4,9 @@
    import="com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,com.smallus.classes.model.vo.Classes"%>
 <%
 Member infoMember =(Member) request.getAttribute("infoMember");
-Member loginMember = (Member) session.getAttribute("loginMember");
+
 Host loginHost = (Host) session.getAttribute("loginHost");
+Host hostInfo=(Host) request.getAttribute("hostInfo");
 Cookie[] cookies = request.getCookies();
 String saveId = null;
 String savehostId = null;
@@ -35,6 +36,7 @@ if (cookies != null) {
 <link rel="stylesheet"
    href="<%=request.getContextPath()%>/css/mypage/mypage.css">
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
+
 </head>
 <body id="bodys">
    <header id="scroll">
@@ -42,7 +44,7 @@ if (cookies != null) {
          <a href="<%=request.getContextPath()%>"><img
             src="<%=request.getContextPath()%>/img/main.png" alt="" id="logo"></a>
          <%
-         if (loginMember == null) {
+         if (infoMember == null) {
          %>
          <nav class="menu">
             <div id="categories">
@@ -189,7 +191,7 @@ if (cookies != null) {
       </table>
    </header>
 
-   <% if (loginMember == null) { %>
+   <% if (infoMember == null) { %>
 <script>
   /* 비로그인 시 작동 */
   let isSearchFieldActive = false;
@@ -226,18 +228,6 @@ if (cookies != null) {
          return;
        }
 
-<<<<<<< HEAD
-	    icon.css("visibility", "hidden");
-	    searchField.css("display", "flex");
-	    categories.css("visibility", "hidden");
-	    
-	    /* 화면크기에따른 돋보기위치이동 */
-	    if(windowWidth > 1800) {
-	        $(".i-searchIcon").css("transform", "translateX(-125px)");
-	    } else if(windowWidth > 1400) {
-	        $(".i-searchIcon").css("transform", "translateX(-90px)");
-	    }
-=======
        icon.css("visibility", "hidden");
        searchField.css("display", "flex");
        categories.css("visibility", "hidden");
@@ -248,8 +238,6 @@ if (cookies != null) {
        } else if(windowWidth > 1400) {
            $(".i-searchIcon").css("transform", "translateX(-90px)");
        }
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
-
        $(".i-searchIcon").css("transition", "0.7s");
        $("#mainOpacity").css("opacity", "0.5");
 

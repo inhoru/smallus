@@ -29,7 +29,7 @@
     <!-- fullcalendar 언어 설정관련 script -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    
+    <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     <!-- 호스트 클래스등록 css 적용(다영) -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClass.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClassSchedule.css"/>
@@ -73,9 +73,9 @@
 				<th><b>고객센터</b></th>
 			</tr>
 			<tr>
-				<td><a href="">일반회원관리</a></td>
+				<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
 				<td><a href="">클래스승인</a></td>
-				<td><a href="<%=request.getContextPath()%>/views/admin/adminNotice.jsp">공지사항</a></td>
+				<td><a href="<%=request.getContextPath()%>/views/admin/NoticeList.jsp">공지사항</a></td>
 			</tr>
 			<tr>
 				<td><a href="">호스트회원관리</a></td>

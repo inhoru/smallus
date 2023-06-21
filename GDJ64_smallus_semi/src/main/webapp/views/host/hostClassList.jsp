@@ -5,7 +5,7 @@
 	List<Classes> classList=(List)request.getAttribute("classList"); 
 	List<Classes> classListPass=(List)request.getAttribute("classListPass");
 %>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 
 <!--main-->
 <div id="mainOpacity h-host-main">
@@ -147,7 +147,6 @@
 	</section>
 	<script>
 		
-		// T_T select 옵션 변경하면 유지되는 것 수정 중
 		// select 옵션 변경하면 이동하는 함
 		function selectOption(){
 			let index = $("#selectClassStatus option").index($("#selectClassStatus option:selected"));
@@ -169,5 +168,5 @@
 		}
 			
 	</script>       
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
         

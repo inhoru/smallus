@@ -344,5 +344,9 @@ table#relist th, table#relist td{
 border-bottom: 1px solid #444444;
 padding: 1% auto;
 }
+
+.detail_page *{
+border: 1px solid red;
+}
 </style>
 <%@ include file="/views/common/footer.jsp"%>
