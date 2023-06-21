@@ -1,6 +1,6 @@
 package com.smallus.notice.model.vo;
 
-import com.smallus.host.model.vo.Host;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Notice {
+	private String noticeId;
 	private String hostId;
 	private String noticeType;
 	private String noticeTitle;
+	private Date noticeRdate;
 	private String noticeContent;
 }

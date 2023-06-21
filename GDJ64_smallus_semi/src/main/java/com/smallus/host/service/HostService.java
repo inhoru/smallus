@@ -1,18 +1,18 @@
 package com.smallus.host.service;
 
 import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
 import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.util.List;
 
-import com.smallus.classes.model.vo.Classes;
 import com.smallus.host.dao.HostDao;
 import com.smallus.host.model.vo.Host;
 
 public class HostService {
 
-	HostDao dao=new HostDao();
+   HostDao dao=new HostDao();
 
 	public Host hostLogin(String hostId,String password) {
 		Connection conn=getConnection();
@@ -21,11 +21,14 @@ public class HostService {
 		return h;
 	}
 	
-	public Host updateHostCalc(String hostId) {
+	
+	public int updateHostCalc(String accountBank, String account, String accountName, String hostId) {
 		Connection conn=getConnection();
-		Host h=dao.updateHostCalc(conn,hostId);
+		int result=dao.updateHostCalc(conn, accountBank, account, accountName, hostId);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
-		return h;
+		return result;
 	}
 	public Host selectByhostId(String hostId) {
 		Connection conn=getConnection();

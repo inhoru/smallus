@@ -67,9 +67,7 @@ public class HostLoginServlet extends HttpServlet {
 			
 			List<Payment> rsvList=new PaymentService().selectPaymentByhostId(hostId);
 			if(rsvList.isEmpty()) {
-				System.out.println("없");
 			}else {
-				System.out.println("dlT");
 				session.setAttribute("rsvList",rsvList);
 			}
 			

@@ -947,27 +947,36 @@ cursor: pointer;
 	margin-top: 1%;
 	border-top: 2px solid #efebe5;
 }
-#pageBar {
-			width: 50%;
-			margin: 2rem 0 2rem auto;
-			text-align: right;
-		}
+/* 페이지바 */
+.pageBar {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    padding: 3% 0;
+}
 
-		#pageBar * {
-			margin: 0.3rem;
-		}
 
-		#pageBar .h-pageBar-txt {
-			padding: 0.5rem 0.8rem;
-			background-color: #FBEFD3;
-			border-radius: 1rem;
-			font-size: 0.9rem;
-		}
+.pageBar * {
+	margin: 0.3rem;
+}
 
-		#pageBar .h-pageBar-now {
-			font-weight: bold;
-		}
+.pageBar .h-pageBar-txt {
+	padding: 0.5rem 0.8rem;
+	background-color: #FBEFD3;
+	border-radius: 1rem;
+	font-size: 0.9rem;
+}
+
+.pageBar .h-pageBar-now {
+	font-weight: bold;
+}
 /* 페이징처리 호버 */
-div.pageBar a:hover {
+.pageBar a:hover {
 	color: gray;
+}
+/* 쿠폰페이지 페이징 */
+.counponPageBar{
+	margin-right: 2%;
 }

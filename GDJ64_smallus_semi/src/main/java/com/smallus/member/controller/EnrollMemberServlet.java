@@ -36,6 +36,14 @@ public class EnrollMemberServlet extends HttpServlet {
 		String memberName=request.getParameter("memberName");
 		String memberNickname=request.getParameter("membernickName");
 		String memberEmail=request.getParameter("memberEmail");
+		String memberConsent=request.getParameter("memberConsent");
+		if(memberConsent.equals("on")) {
+			memberConsent="Y";
+		}else {
+			memberConsent="N";
+		}
+		//checkbox에 check가 되면 on
+		//checkbox에 check가 안되면 null
 		String memberPhone=request.getParameter("memberPhone");
 		Member m=Member.builder().
 				memberId(memberId).
@@ -43,6 +51,7 @@ public class EnrollMemberServlet extends HttpServlet {
 				memberName(memberName).
 				memberNickname(memberNickname).
 				memberEmail(memberEmail).
+				memberConsent(memberConsent).
 				memberPhone(memberPhone).
 				build();
 //		System.out.println(m);

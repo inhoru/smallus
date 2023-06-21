@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%List<Payment> rsvList =(List)session.getAttribute("rsvList"); %>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 <%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
 <!--main-->
 <div id="mainOpacity h-host-main">
@@ -10,31 +10,24 @@
 			<h2>정산 정보 관리</h2><hr>
 			<table class="h-calc-tbl">
 				<tr>
-					<%-- <th>은행 명</th>
-					<td><!-- <!-- <%=h.getAccountBank()%> --> --></td>
-					<th>계좌 번호</th>
-					<td><!-- <%=h.getAccount()%> --></td>
-					<th>예금주 명</th>
-					<td><!-- <%=h.getAccountName()%> --></td>
-					<th>정산 일</th>
-					<td><!-- <%=c.getCalcReqDate()%> --></td> --%>
+				<%if(hostInfo.getHostAccountBank()!=null&&!hostInfo.getHostAccountBank().isEmpty()){ %>
 					<td>은행 명</td>
-					<td>카카오뱅크</td>
+					<td><%=hostInfo.getHostAccountBank() %></td>
 					<td>계좌 번호</td>
-					<td>3333-11-2222222</td>
+					<td><%=hostInfo.getHostAccount() %></td>
 					<td>예금주 명</td>
-					<td>예금주</td>
+					<td><%=hostInfo.getHostAccountName() %></td>
 					<td>정산 일</td>
 					<td>매달 1일</td>
-					<td><button name="h-updateAccountBtn" id="h-updateAccountBtn">수정</button></td>
+					<td><button id="updateAccountBtn">수정</button></td>
+					<%-- <td><button id="updateAccountBtn"onclick="location.assign('<%=request.getContextPath() %>/host/updateAccount.do')">수정</button></td> --%>
+					<%}else{ %>
+						<td colspan="8">입력한 정산 정보가 없습니다.</td>
+					<%} %>
 				</tr>
 			</table>
-<!-- 					<td><input type="text" name="account_bank"></td> -->
-     			<!-- 예약 내역 상세 페이지로 이동 -->
-                <!-- <div class="h-viewList"><a href="">+</a></div> -->
-        <!-- </div> -->
-        
 	</section>
+	<!-- main -->
 	<section class="h-main h-main-rsvList">
 		<div class="h-main-title">
 			<h2>새로운 예약 내역</h2>
@@ -76,52 +69,20 @@
         </section>
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <%-- <script type="text/javascript">
-    $("#h-updateAccountBtn").click(e=>{
-    	$.get("<%=request.getContextPath()%>/host/updateHostCalc.do?hostId=<%=loginHost.getHostId()%>",function(data){
-			console.log(data);
-		});
-    })
-    
-    document.addEventListener('DOMContentLoaded', function() {
-    	
-	      // Load the Visualization API and the corechart package.
-	      google.charts.load('current', {'packages':['corechart']});
-	
-	      // Set a callback to run when the Google Visualization API is loaded.
-	      google.charts.setOnLoadCallback(drawChart);
-	
-	      // Callback that creates and populates a data table,
-	      // instantiates the pie chart, passes in the data and
-	      // draws it.
-	      function drawChart() {
-	
-	        // Create the data table.
-	        var data = new google.visualization.DataTable();
-	        data.addColumn('string', 'Topping');
-	        data.addColumn('number', 'Slices');
-	        data.addRows([
-	          ['Mushrooms', 3],
-	          ['Onions', 1],
-	          ['Olives', 1],
-	          ['Zucchini', 1],
-	          ['Pepperoni', 2]
-	        ]);
-	
-	        // Set chart options
-	        var options = {'title':'How Much Pizza I Ate Last Night',
-	                       'width':400,
-	                       'height':300};
-	
-	        // Instantiate and draw our chart, passing in some options.
-	        var chart = new google.visualization.PieChart(document.getElementById('h-main-chart'));
-	        chart.draw(data, options);
-	      }
-    }
-    </script> --%>
+    <script type="text/javascript">
+    	$("#updateAccountBtn").click(e=>{
+    		// 수정 버튼 누르면 아래 div 사라지고 정산 정보 수정하기
+    		$(".h-calc-tbl").css('display','none');
+    		$(".h-main-rsvList").css('display','none');
+    		
+    		$.get("<%=request.getContextPath()%>/host/updateHostCalc.do?hostId=<%=hostInfo.getHostId()%>",function(data){
+				console.log(data);
+			});
+    	});
+    </script>
     <script src="<%=request.getContextPath() %>/js/host.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
 
 
         

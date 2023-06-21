@@ -17,13 +17,13 @@ import com.smallus.member.model.vo.Member;
  * Servlet implementation class memberListServlet
  */
 @WebServlet("/admin/memberListServlet.do")
-public class memberListServlet extends HttpServlet {
+public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public memberListServlet() {
+    public MemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,7 +49,7 @@ public class memberListServlet extends HttpServlet {
 		//3. 페이지바를 구성
 		// 1) DB에 저장된 전체 데이터의 수를 가져오기
 		int totalData=new AdminService().selectMemberCount();
-		System.out.println(totalData);
+		//System.out.println(totalData);
 		// 2) 전체페이지수를 계산하기
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		//(double)로 형변환 해서 소수점 계산 해주고 Math.ceil을 이용해서 올림처리 한 후 (int)로 형변환

@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.smallus.host.model.vo.Host"%>
+<%@ page import="com.smallus.host.model.vo.Host,com.smallus.payment.model.vo.Payment, java.util.*"%>
 <%
 	Host loginHost=(Host)session.getAttribute("loginHost");
+	Host hostInfo=(Host) request.getAttribute("hostInfo");
 	Cookie[] cookies = request.getCookies();
 	String savehostId=null;
 	if (cookies != null) {
@@ -22,6 +23,7 @@
     <title>Small us ☺</title>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostHeader.css">
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostMainStyle.css">
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     <!-- fullcalendar css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
@@ -29,20 +31,17 @@
     <!-- fullcalendar 언어 설정관련 script -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
+    
     <!-- 호스트 클래스등록 css 적용(다영) -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClass.css"/>
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClassSchedule.css"/>
-    
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminHeader.css"/>
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/admin/adminMainStyle.css"/>
 </head>
 <body>
     <header>
         <div id="headerContainer">
-            <a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
+            <a href="<%=request.getContextPath()%>/host/moveHostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
+                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=hostInfo.getHostNickname() %>님</a>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
@@ -65,25 +64,66 @@
             
         </div>
     </header>
-	<div class="m-navContainer">
-	    <table class="m-nav">
-			<tr>
-				<th><b>회원관리</b></th>
-				<th><b>승인관리</b></th>
-				<th><b>고객센터</b></th>
-			</tr>
-			<tr>
-				<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
-				<td><a href="">클래스승인</a></td>
-				<td><a href="<%=request.getContextPath()%>/views/admin/NoticeList.jsp">공지사항</a></td>
-			</tr>
-			<tr>
-				<td><a href="">호스트회원관리</a></td>
-				<td><a href="">정산승인</a></td>
-				<td><a href="">1:1문의</a></td>
-			</tr>
-	    </table>
-	</div>
-
-</body>
-</html>
+    <!-- menu-category -->
+    <%if(!hostInfo.getHostId().equals("admin")){ %>
+        <section class="h-menu">
+            <div>
+                <table>
+                    <tr>
+                        <th>호스트 관리</th>
+                        <th>클래스 관리</th>
+                        <th>예약 관리</th>
+                        <th>고객 센터</th>
+                    </tr>
+                    <tr>
+                        <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
+<<<<<<< HEAD
+                        <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>" id="h-viewCLassList">내 클래스 보기</a></td>
+=======
+                        <td><a href="<%=request.getContextPath()%>/class/viewClassList.do?hostId=<%=hostInfo.getHostId()%>" id="h-viewCLassList">내 클래스 보기</a></td>
+>>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
+                        <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
+                        <td><a href="">공지사항</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="">회원 탈퇴</a></td>
+                        <td><a href="">클래스 등록하기</a></td>
+                        <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do?hostId=<%=hostInfo.getHostId() %>">정산 정보 관리</a></td>
+                        <td><a href="">1:1 문의</a></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href="">Q&A 관리</a></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href="">후기 관리</a></td>
+                    </tr>
+                </table>
+            </div>            
+        </section>
+	<%}else {%>
+	<section class="h-menu">
+		<div>
+		    <table>
+				<tr>
+					<th><b>회원관리</b></th>
+					<th><b>승인관리</b></th>
+					<th><b>고객센터</b></th>
+				</tr>
+				<tr>
+					<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
+					<td><a href="<%=request.getContextPath()%>//admin/ClassesListServlet.do">클래스승인</a></td>
+					<td><a href="<%=request.getContextPath()%>/noticeListServlet.do">공지사항</a></td>
+				</tr>
+				<tr>
+					<td><a href="">호스트회원관리</a></td>
+					<td><a href="">정산승인</a></td>
+					<td><a href="">1:1문의</a></td>
+				</tr>
+		    </table>
+		</div>
+	</section>
+	<%}%>

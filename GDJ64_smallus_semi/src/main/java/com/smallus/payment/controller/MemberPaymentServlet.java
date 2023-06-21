@@ -46,7 +46,6 @@ public class MemberPaymentServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			numPerpage = 5;
 		}
-		new CouponService().deleteCoupon();
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		List<Member> list=new PaymentService().searchByMemberPayment(loginMember.getMemberId(),cPage,numPerpage);

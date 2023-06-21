@@ -295,7 +295,7 @@ $(".i-wishCheck").change(e=>{
 
 
 $("#h-go-paypage").click(e=>{
-	location.assign('<%=request.getContextPath()%>/paymentTest.do?memberId=<%=loginMember.getMemberId()%>');
+	location.assign('<%=request.getContextPath()%>/paymentTest.do?memberId=<%=infoMember.getMemberId()%>');
 })
 
 

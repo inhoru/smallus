@@ -36,6 +36,14 @@ public class EnrollHostServlet extends HttpServlet {
 		String hostEmail=request.getParameter("hostEmail");
 		String hostPhone=request.getParameter("hostPhone");
 		String hostHomePhone=request.getParameter("hostHomePhone");
+		String hostConsent=request.getParameter("hostConsent");
+		if(hostConsent.equals("on")) {
+			hostConsent="Y";
+		}else {
+			hostConsent="N";
+		}
+		//checkbox에 check가 되면 on
+		//checkbox에 check가 안되면 null
 		
 		Host h=Host.builder().
 				hostId(hostId).
@@ -45,6 +53,7 @@ public class EnrollHostServlet extends HttpServlet {
 				hostEmail(hostEmail).
 				hostPhone(hostPhone).
 				hostHomephone(hostHomePhone).
+				hostConsent(hostConsent).
 				build();
 //		System.out.println(h);
 	int result=new HostService().enrollHost(h);

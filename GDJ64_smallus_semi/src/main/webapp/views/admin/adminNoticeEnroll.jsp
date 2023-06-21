@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/admin/adminHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 <%@ page import="com.smallus.host.model.vo.Host"%>
 
 <style>
@@ -72,4 +72,4 @@ section.h-main table {
 		location.assign('<%=request.getContextPath()%>/notice/enrollNotice.do?hostId=<%=loginHost.getHostId()%>&noticeType='+noticeType+'&noticeTitle='+noticeTitle+'&noticeContent='+noticeContent);
 	});
 </script>
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>

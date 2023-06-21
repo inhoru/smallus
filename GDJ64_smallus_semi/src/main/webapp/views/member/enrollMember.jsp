@@ -59,7 +59,7 @@ table#m-ernollMemberTable input[type=submit]{
 					</tr>
 					<tr>
 						<th>비밀번호확인</th>
-						<td colspan="2">
+						<td>
 							<input type="password" id="password2" placeholder="영어+숫자 8글자이상">
 						</td>
 					</tr>
@@ -105,7 +105,7 @@ table#m-ernollMemberTable input[type=submit]{
 					</tr>
 					<tr>
 						<th>휴대폰번호</th>
-						<td colspan="2">
+						<td>
 						<input type="tel" placeholder="(-없이)01012345678" name="memberPhone" id="memberPhone" maxlength="11" required>
 						</td>
 					</tr>
@@ -117,7 +117,7 @@ table#m-ernollMemberTable input[type=submit]{
 							<textarea name="m-marketing_content" id="m-marketing_content"cols="50" rows="10">
 							할인쿠폰 및 혜택, 이벤트, 신상품 소식 등 원데이클래스에서 제공하는 유익한 클래스정보를 SMS나 이메일로 받아보실 수 있습니다. 단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다. 선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 회원정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.
       						</textarea><br>
-      						<label><input type="checkbox" placeholder=""name="memberConsent" id="memberConsent">마케팅 수신동의</label>
+      						<label><input type="checkbox" name="memberConsent" id="memberConsent">마케팅 수신동의</label>
       					</td>
 					</tr>
 					<tr>

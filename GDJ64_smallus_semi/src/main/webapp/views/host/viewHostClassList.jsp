@@ -5,7 +5,7 @@
 	List<Classes> classList=(List)request.getAttribute("classList"); 
 	List<Classes> classListPass=(List)request.getAttribute("classListPass");
 %>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 
 <!--main-->
 <div id="mainOpacity h-host-main">
@@ -27,7 +27,7 @@
 				for(Classes c:classList){%>
 				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
-					<a href="<%=request.getContextPath()%>/class/viewClassDetail.do?hostId=<%=loginHost.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
+					<a href="<%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=loginHost.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
 						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
 					</a>
 					<table>
@@ -168,5 +168,5 @@
 		}
 			
 	</script>       
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
         
