@@ -1,28 +1,26 @@
-package com.smallus.payment.controller;
+package com.smallus.member.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.smallus.payment.model.vo.PaymentCompleted;
-import com.smallus.payment.service.PaymentService;
+import com.smallus.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberPaymentCompletedServlet
+ * Servlet implementation class MemberWishListServlet
  */
-@WebServlet("/paymentCompleted.do")
-public class MemberPaymentCompletedServlet extends HttpServlet {
+@WebServlet("/memberWishList.do")
+public class MemberWishListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberPaymentCompletedServlet() {
+    public MemberWishListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,16 +29,9 @@ public class MemberPaymentCompletedServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String paymentId=request.getParameter("id");
-		System.out.println(paymentId);
-		List<PaymentCompleted> list=new PaymentService().paymentCompleted(paymentId);
-		request.setAttribute("paymentList", list);
-		String cPage=request.getParameter("cPage");
-		request.setAttribute("cPage", cPage);
-		 request.getRequestDispatcher("/views/mypage/paymentCompleted.jsp").forward(
-		  request, response);
-		 
+		HttpSession session=request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		request.getRequestDispatcher("/views/mypage/wishList.jsp").forward(request, response);
 	}
 
 	/**

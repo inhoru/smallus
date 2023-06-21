@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/admin/adminHeader.jsp"%>
+<%@ page import="com.smallus.host.model.vo.Host"%>
+
 <style>
-table#h-main-rsv-tbl input[type=submit]{
+table#h-main-rsv-tbl button{
 	margin-top:10px;
 	margin-bottom:10px;	
 	width:24rem;
@@ -37,28 +39,37 @@ section.h-main table {
 			<table id="h-main-rsv-tbl">
 				<tr>
 					<td>카테고리 종류</td>
-					<td><select name="notice_type" id="" style="">
-							<option>공지사항</option>
-							<option>이벤트</option>
-							<option>기타</option>
+					<td><select name="noticeType" id="noticeType" style="">
+							<option value="1">공지사항</option>
+							<option value="2">이벤트</option>
+							<option value="3">기타</option>
 					</select></td>
 				</tr>
 				<tr>
 					<td>카테고리 제목</td>
-					<td><input type="text" name="notice_title" id="notice_title" style="width:500px;"></td>
+					<td><input type="text" name="noticeTitle" id="noticeTitle" style="width:500px;"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
 						<legend>상세내용</legend>
-							<textarea name="notice_content" id="notice_content" cols="100" rows="20"></textarea>
+							<textarea name="noticeContent" id="noticeContent" cols="100" rows="20"></textarea>
 						</td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="공지사항 등록">
+					<td colspan="2"><button id="m-noticeEnrollbtn">공지사항 등록</button>
 					</td>
 				</tr>
 			</table>
 		</div>
 	</section>
 </body>
+<script>
+	$("#m-noticeEnrollbtn").click(e=>{
+		let noticeType=$("#noticeType").val();
+		let noticeTitle=$("#noticeTitle").val();
+		let noticeContent=$("#noticeContent").val();
+		console.log(noticeType,noticeTitle,noticeContent);
+		location.assign('<%=request.getContextPath()%>/notice/enrollNotice.do?hostId=<%=loginHost.getHostId()%>&noticeType='+noticeType+'&noticeTitle='+noticeTitle+'&noticeContent='+noticeContent);
+	});
+</script>
 <%@ include file="/views/host/hostFooter.jsp"%>

@@ -183,6 +183,7 @@ let epw;
 	},1000); */
 	const mailSend=()=>{
 		let hostEmail=$("#hostEmail").val();
+		alert("인증번호를 발송했습니다.");
 		//timecheck();
 		$.ajax({
 			url:'<%=request.getContextPath()%>/MailSendServlet2.do',

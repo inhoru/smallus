@@ -13,7 +13,7 @@
 			</tr>
 			<tr>
 				<td class="i-myInfo"><a href="">프로필관리</a></td>
-				<td><a href="./mypagePayment.html">결제내역</a></td>
+				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
 				<td class="i-customerService"><a href="">공지사항</a></td>
 			</tr>
 			<tr>

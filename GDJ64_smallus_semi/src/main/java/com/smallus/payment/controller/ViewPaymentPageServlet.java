@@ -52,6 +52,7 @@ public class ViewPaymentPageServlet extends HttpServlet {
 		data.put("classPersonnel", "2");
 		data.put("classPrice", "30000");
 		data.put("classThumbnail", "main-img1.jpg");
+		data.put("hostNickname", "brewerscoffee");
 		
 		
 		response.setContentType("application/json; charset=UTF-8");

@@ -34,20 +34,12 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 			<form action="<%=request.getContextPath()%>/insertCoupon.do">
 <section class="i-mypagecoupontotal">
 	<div class="i-mypagecoupon">
-		<h2 class="i-mypageh2">쿠폰</h2>
-		<div class="i-couponinput">
-			<h3>쿠폰입력</h3>
-			<input type="text" name="i-insertcoupon">
-			<button>등록</button>
-			</form>
-		</div>
-		<div class="i-possessioncoupon">
-			<h3>보유한 쿠폰</h3>
-		</div>
+		<h2 class="i-mypageh2">찜</h2>
+		
 		<%
 		if (coupon.isEmpty()) {
 		%>
-		<div class="i-nocoupon">보유한 쿠폰이 없습니다.</div>
+		<div class="i-nocoupon">찜 목록이 없습니다.</div>
 		<%
 		} else {
 		%>
