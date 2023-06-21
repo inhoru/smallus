@@ -90,9 +90,9 @@ public class MemberService {
 		close(conn);
 		return list;
 	}
-	public List<Classes> wishList(String memberId){
+	public List<Classes> wishList(String memberId,int cPage,int numPerpage){
 		Connection conn=getConnection();
-		List<Classes> list=dao.wishList(conn,memberId);
+		List<Classes> list=dao.wishList(conn,memberId, cPage,numPerpage);
 		close(conn);
 		return list;
 	}
