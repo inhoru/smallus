@@ -67,7 +67,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 					<div class="i-additional-a">
 						<a href="<%=request.getContextPath()%>/mypageCoupon.do"
 							class="i-as1"><%=coupon%></a> <a
-							href="<%=request.getContextPath()%>/mypageWishlist.html"
+							href="<%=request.getContextPath()%>/memberWishList.do"
 							class="i-as2"><%=wishCount %></a> <a href="" class="i-as3">3</a>
 					</div>
 				</div>
@@ -175,7 +175,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 				<%
 				if (wishList.isEmpty()) {
 				%>
-				<div class="i-nopayment">예약내역이 없습니다.</div>
+				<div class="i-nopayment">찜 내역이 없습니다.</div>
 				<%
 				} else {
 				%>
@@ -208,9 +208,10 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 										src="<%=request.getContextPath()%>/img/<%=w.getClassThumbnail()%>"
 										alt="no img">
 										<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
+										<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">
 										<h5>
 											category |
-											<%=w.getCategoryTitle()%></h5>
+											<%=w.getCategory().getCategoryTitle()%></h5>
 									</a>
 									<div class="i-wish-container">
 										<input type="checkbox" checked="checked"
@@ -260,7 +261,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 </div>
 <script>
 $(".i-wishCheck").change(e=>{
-	var classTitle = $(e.target).closest('.i-imgContainer').find('.i-classTitle').text();
+	var classTitle = $(e.target).closest('.i-imgContainer').find('.i-classId').val();
 	var isChecked = $(e.target).is(':checked');
 	if(isChecked){
 		$.ajax({

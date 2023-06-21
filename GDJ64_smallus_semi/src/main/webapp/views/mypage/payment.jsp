@@ -4,8 +4,7 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%
 List<Member> payment = (List) request.getAttribute("payment");
-int cPage=(int)request.getAttribute("cPage");
-
+int cPage = (int) request.getAttribute("cPage");
 %>
 <div id="mainOpacity">
 	<div class="i-withdrawalendtotal">
@@ -25,8 +24,7 @@ int cPage=(int)request.getAttribute("cPage");
 				<tr>
 					<td class="i-myInfo"><a
 						href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
-					<td><a
-						href="<%=request.getContextPath()%>/mypageWishlist.html">찜관리</a></td>
+					<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
 					<td class="i-customerService"><a href="">1:1 문의</a></td>
 				</tr>
 				<tr>
@@ -39,7 +37,12 @@ int cPage=(int)request.getAttribute("cPage");
 		</section>
 		<section class="i-mypageCommonbackground">
 			<div class="i-mypageCommon">
-				<h2 class="i-mypageh2">결제내역</h2>
+				<div class="i-paymentContainer">
+					<h2 class="i-mypageh2">결제내역</h2>
+					<div class="i-paymenclick">
+					<span class="i-completedList">결제완료</span><span class="i-cancellationList">결제취소</span>
+					</div>
+				</div>
 				<%
 				if (payment.isEmpty()) {
 				%>
@@ -59,8 +62,8 @@ int cPage=(int)request.getAttribute("cPage");
 						<span class="i-paymentStatus"><%=p.getPayment().getPaymentStatus()%>
 						</span><span><%=p.getPayment().getPaymentDate()%></span>
 					</div>
-				<input type="hidden" value="<%=p.getPayment().getPaymentId()%>"
-					name="paymentId" class="i-paymentId">
+					<input type="hidden" value="<%=p.getPayment().getPaymentId()%>"
+						name="paymentId" class="i-paymentId">
 					<div class="i-paymentimg">
 						<img
 							src="<%=request.getContextPath()%>/img/<%=p.getClasses().getClassThumbnail()%>"
@@ -91,7 +94,8 @@ int cPage=(int)request.getAttribute("cPage");
 							<%
 							} else {
 							%>
-							<button class="i-withdrawalbutton1 i-writingreview">후기 작성</button>
+							<button class="i-withdrawalbutton1 i-writingreview">후기
+								작성</button>
 							<%
 							}
 							%>
@@ -108,13 +112,19 @@ int cPage=(int)request.getAttribute("cPage");
 			%>
 
 		</section>
-		<%if(payment.isEmpty()){ %>
- 
-        <%}else{ %>
-        <div class="pageBar">
-        	<%=request.getAttribute("pageBar") %>
-        </div>
-        <%} %>
+		<%
+		if (payment.isEmpty()) {
+		%>
+
+		<%
+		} else {
+		%>
+		<div class="pageBar">
+			<%=request.getAttribute("pageBar")%>
+		</div>
+		<%
+		}
+		%>
 	</div>
 	<script>
 	
@@ -154,7 +164,38 @@ int cPage=(int)request.getAttribute("cPage");
 			})
 		}
 	})
-		
+$(".i-completedList").click(e=>{
+const completed=$(e.target).text();
+if(completed=='결제완료'){
+	$.ajax({
+		type:"get",
+		url:"<%=request.getContextPath()%>/paymentCompleted.do",
+		 data: {},
+		success:data=>{
+			
+		},
+		error:(r,m)=>{
+			console.log(r);
+			console.log(m);
+			if(e.status==404) alert("요청한 페이지가 없습니다");
+		}
+	})
+}else if(completed=='결제취소'){
+	$.ajax({
+		type:"get",
+		url:"<%=request.getContextPath()%>/memberCancellation.do",
+		data: {},
+		success:data=>{
+			
+		},
+		error:(r,m)=>{
+			console.log(r);
+			console.log(m);
+			if(e.status==404) alert("요청한 페이지가 없습니다");
+		}
+	})
+}
+})		
 
 
 

@@ -44,7 +44,7 @@ public class MemberWishListServlet extends HttpServlet {
 		try {
 			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
 		} catch (NumberFormatException e) {
-			numPerpage = 5;
+			numPerpage = 4;
 		}
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
