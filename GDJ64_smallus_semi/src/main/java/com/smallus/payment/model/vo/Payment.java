@@ -1,5 +1,6 @@
 package com.smallus.payment.model.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Payment {
+public class Payment implements Serializable {
 	private String paymentId;
 	private String classDetailId;
 	private String memberId;
@@ -24,6 +25,7 @@ public class Payment {
 	private Date paymentDate;
 	private String paymentStatus;
 	private String hostId;
+	private int TotalPrice;
 	
 	private String classId;
 	private String classTitle;

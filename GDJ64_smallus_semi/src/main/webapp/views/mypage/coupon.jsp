@@ -14,7 +14,7 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 				<td class="i-customerService i-cu">고객센터</td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="">프로필관리</a></td>
+				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
 				<td><a href="./mypagePayment.html">결제내역</a></td>
 				<td class="i-customerService"><a href="">공지사항</a></td>
 			</tr>
@@ -57,6 +57,7 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 			%>
 			<div class="i-coupon-card">
 				<h2><%=n.getCouponName()%></h2>
+				<span><%=n.getCouponPrice() %>원 할인쿠폰</span>
 				<p><%=n.getCreated_date()%>~<%=n.getExpiredDate()%></p>
 				<div class="i-circle1"></div>
 				<div class="i-circle2"></div>
@@ -68,7 +69,13 @@ List<Coupon> coupon = (List) request.getAttribute("coupon");
 		<%
 		}
 		%>
-	
+		
 </section>
+
+ <div class="pageBar">
+        	<%=request.getAttribute("pageBar") %>
+        </div>
 </div>
+
+
 <%@ include file="/views/common/footer.jsp"%>

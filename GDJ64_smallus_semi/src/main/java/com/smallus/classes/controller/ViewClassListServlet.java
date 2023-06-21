@@ -31,19 +31,66 @@ public class ViewClassListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		// queryString으로 보낸 hostId를 parameter로 받아서 변수에 저장 
 		String hostId=request.getParameter("hostId");
-		System.out.println(hostId);
-		List<Classes> classList=new ClassService().selectAllClassesByHostId(hostId);
+		
+		// 페이징 처리
+		int cPage, numPerpage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		try {
+			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
+		}catch(NumberFormatException e) {
+			numPerpage=6;
+		}
+		
+		String pageBar="";
+		int totalData=new ClassService().selectClassCount(hostId);
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		
+		if(pageNo==1) {
+			pageBar+="<span class='h-pageBar-txt'> 이전 </span>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURI()+"?hostId="+hostId+"&cPage="+(pageNo-1)+"&numPerpage="+numPerpage+"' class='h-pageBar-txt'> 이전 </a>";
+		}
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span class='h-pageBar-now'> "+pageNo+" </span>";
+			}else {
+				pageBar+="<a href='"+request.getRequestURI()+"?hostId="+hostId+"&cPage="+pageNo+"&numPerpage="+numPerpage+"'> "+pageNo+" </a>";
+			}
+			pageNo++;
+		}
+		if(pageNo>totalPage) {
+			pageBar+="<span class='h-pageBar-txt'> 다음 </span>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURI()+"?hostId="+hostId+"&cPage="+pageNo+"&numPerpage="+numPerpage+"' class='h-pageBar-txt'> 다음 </a>";
+		}
+		
+		request.setAttribute("pageBar", pageBar);
+		
+		// 호스트 아이디를 기준으로 클래스 리스트를 db에서 가져옴 
+		//List<Classes> classList=new ClassService().selectAllClassesByHostId(hostId);
+		List<Classes> classList=new ClassService().selectAllClassesByHostId(hostId,cPage,numPerpage);
+		// 분기처리해서 hostClassList페이지로 전달
 		if(classList!=null&&!classList.isEmpty()) {
+//			System.out.println("클래스 있음");
+//			System.out.println(classList.size());
+//			System.out.println(cPage+" "+ numPerpage);
 			request.setAttribute("classList", classList);
 			request.getRequestDispatcher("/views/host/hostClassList.jsp").forward(request, response);
-			System.out.println("클래스 있음 ");
-			System.out.println(classList.size());
 		}else {
-			System.out.println("클래스 djqt음 ");
+			System.out.println("클래스 없음");
 			request.setAttribute("msg", "조회할 클래스가 없습니다.");
-			request.setAttribute("loc", "/");
+			request.setAttribute("loc", "/views/host/hostMain.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 		

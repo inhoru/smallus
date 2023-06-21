@@ -6,8 +6,10 @@ import static com.smallus.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
+import com.smallus.member.model.vo.Member;
 import com.smallus.payment.dao.PaymentDao;
 import com.smallus.payment.model.vo.Payment;
+import com.smallus.payment.model.vo.PaymentCompleted;
 
 public class PaymentService {
 	private PaymentDao dao= new PaymentDao();
@@ -25,6 +27,26 @@ public class PaymentService {
 //		close(conn);
 //		return list;
 //	}
+	
+	
+	public List<Member> searchByMemberPayment(String memberId,int cPage,int numPerpage){
+		Connection conn=getConnection();
+		List<Member> list=dao.searchByMemberPayment(conn, memberId,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public int paymentCount(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.paymentCount(conn,memberId);
+		close(conn);
+		return result;
+	}
+	public  List<PaymentCompleted> paymentCompleted(String paymentId){
+		Connection conn=getConnection();
+		List<PaymentCompleted>  pc=dao.paymentCompleted(conn, paymentId);
+		close(conn);
+		return pc;
+	}
 	
 	
 	

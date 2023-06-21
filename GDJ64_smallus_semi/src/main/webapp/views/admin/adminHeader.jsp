@@ -40,7 +40,7 @@
 <body>
     <header>
         <div id="headerContainer">
-            <a href="<%=request.getContextPath()%>/host/moveHostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
+            <a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
                 <a href="<%=request.getContextPath()%>/views/admin/adminMain.jsp" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
@@ -68,9 +68,9 @@
 	<div class="m-navContainer">
 	    <table class="m-nav">
 			<tr>
-				<th><a href="">회원관리</a></th>
-				<th><a href="">승인관리</a></th>
-				<th><a href="">고객센터</a></th>
+				<th><b>회원관리</b></th>
+				<th><b>승인관리</b></th>
+				<th><b>고객센터</b></th>
 			</tr>
 			<tr>
 				<td><a href="">일반회원관리</a></td>

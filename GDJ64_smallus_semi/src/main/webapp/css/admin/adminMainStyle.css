@@ -55,8 +55,11 @@ body {
     margin: auto;
     }
     table.m-nav th{
-    font-size:18px;
+    font-size:24px;
     font-weight:boler;
+    }
+    table.m-nav tr{
+    height:30px;
     }
     table.m-nav td{
     font-size:18px;

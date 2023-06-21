@@ -4,6 +4,8 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%
 int coupon = (int) request.getAttribute("countCoupon");
+int wishCount = (int) request.getAttribute("wishCount");
+
 List<Member> paymentDetails = (List) request.getAttribute("paymentDetails");
 List<Classes> wishList = (List) request.getAttribute("wishList");
 %>
@@ -19,7 +21,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 			<tr>
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
-				<td><a href="<%=request.getContextPath()%>/mypagePayment.html">결제내역</a></td>
+				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
 				<td class="i-customerService"><a href="">공지사항</a></td>
 			</tr>
 			<tr>
@@ -42,7 +44,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 				<div id="i-proFileImg">
 					<img
 						src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>"
-						alt="">
+						alt="" id="h-go-paypage">
 					<div id="i-proFileInfo">
 						<h1><%=infoMember.getMemberNickname()%></h1>
 						<p><%=infoMember.getMemberEmail()%></p>
@@ -65,7 +67,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 						<a href="<%=request.getContextPath()%>/mypageCoupon.do"
 							class="i-as1"><%=coupon%></a> <a
 							href="<%=request.getContextPath()%>/mypageWishlist.html"
-							class="i-as2">2</a> <a href="" class="i-as3">3</a>
+							class="i-as2"><%=wishCount %></a> <a href="" class="i-as3">3</a>
 					</div>
 				</div>
 			</div>
@@ -119,7 +121,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 										<span class="i-reservation-day"><%=m.getPayment().getPaymentDate()%></span>
 									</div>
 									<div class="i-bs">
-										<a href=""><span class="i-reservation-title"><%=m.getClasses().getClassTitle()%></span></a>
+										<a href=""><div class="i-reservation-title"><%=m.getClasses().getClassTitle()%></div></a>
 									</div>
 									<div class="i-bs1">
 										<span class="i-reservation-reservationDay"><%=m.getClassDetail().getBookingTimeStart()%>||<%=m.getClassDetail().getBookingTimeEnd()%></span>
@@ -289,6 +291,12 @@ $(".i-wishCheck").change(e=>{
 		})
 	}
 })
+
+
+$("#h-go-paypage").click(e=>{
+	location.assign('<%=request.getContextPath()%>/paymentTest.do?memberId=<%=loginMember.getMemberId()%>');
+})
+
 
 </script>
 

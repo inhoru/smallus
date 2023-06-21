@@ -33,13 +33,55 @@ public class MemberCouponServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int cPage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		int numPerpage;
+		try {
+			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
+		}catch(NumberFormatException e) {
+			numPerpage=4;
+		}
+		new CouponService().deleteCoupon();
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		new CouponService().deleteCoupon();
-		int count=new CouponService().couponCount(loginMember.getMemberId());
-		List<Coupon> c=new CouponService().searchByMemberCoupon(loginMember.getMemberId());
-		request.setAttribute("countCoupon", count);
-		request.setAttribute("coupon", c);
+		List<Coupon> list=new CouponService().searchByMemberCoupon(loginMember.getMemberId(),cPage,numPerpage);
+		int totalData=new CouponService().couponCount(loginMember.getMemberId());
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
+		if(pageNo==1) {
+			pageBar+="<span>[이전]</span>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURI()
+			+"?cPage="+(pageNo-1)
+			+"&numPerpage="+numPerpage+"'>[이전]</a>";
+		}
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getRequestURI()
+				+"?cPage="+pageNo
+				+"&numPerpage="+numPerpage+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURI()
+			+"?cPage="+pageNo
+			+"&numPerpage="+numPerpage+"'>[다음]</a>";
+		}
+		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("countCoupon", totalData);
+		request.setAttribute("coupon", list);
 		request.getRequestDispatcher("/views/mypage/coupon.jsp").forward(request, response);
 	}
 

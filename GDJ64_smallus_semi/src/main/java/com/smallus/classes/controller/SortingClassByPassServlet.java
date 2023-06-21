@@ -31,19 +31,63 @@ public class SortingClassByPassServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		// 쿼리스트링으로 보낸 passStatus, hostId를 기준으로 패스 상태에 다른 정렬
 		String passStatus=request.getParameter("passStatus");
 		String hostId=request.getParameter("hostId");
-		System.out.println(passStatus);
-		List<Classes> classListPass = new ClassService().selectClassListByPassStatus(hostId, passStatus);
-		request.setAttribute("classListPass", classListPass);
-		if(classListPass!=null&&!classListPass.isEmpty()) {
-			
-			System.out.println("classListPass있음 ");
-		}else {
-			System.out.println("classListPass 없 음 ");
+
+		// 페이징 처리
+		int cPage, numPerpage;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage = 1;
 		}
-		request.getRequestDispatcher("/views/host/hostClassList.jsp").forward(request, response);
+		try {
+			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+		} catch (NumberFormatException e) {
+			numPerpage = 6;
+		}
+
+		String pageBar = "";
+		int totalData = new ClassService().selectClassCountByStatus(hostId, passStatus);
+		System.out.println(totalData);
+		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
+		int pageBarSize = 5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		if(pageNo==1) {
+			pageBar+="<span class='h-pageBar-txt'> 이전 </span>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURI()+"?hostId="+hostId+"&passStatus="+passStatus+"&cPage="+(pageNo-1)+"&numPerpage="+numPerpage+"' class='h-pageBar-txt'> 이전 </a>";
+		}
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span class='h-pageBar-now'> "+pageNo+" </span>";
+			}else {
+				pageBar+= "<a href='"+request.getRequestURI()+"?hostId="+hostId+"&passStatus="+passStatus+"&cPage="+pageNo+"&numPerpage="+numPerpage+"'> "+pageNo+" </a>";
+			}
+			pageNo++;
+		}
+		if(pageNo>totalPage) {
+			pageBar+="<span class='h-pageBar-txt'> 다음 </span>";
+		}else {
+			pageBar+="<a href='"+request.getRequestURI()+"?hostId="+hostId+"&passStatus="+passStatus+"&cPage="+pageNo+"&numPerpage="+numPerpage+"' class='h-pageBar-txt'> 다음 </a>";
+		}
+
+		request.setAttribute("pageBar", pageBar);
+
+		List<Classes> classListPass = new ClassService().selectClassListByPassStatus(hostId, passStatus,cPage,numPerpage);
+		
+		if(classListPass!=null&&!classListPass.isEmpty()) {
+			request.setAttribute("classListPass", classListPass);
+			request.getRequestDispatcher("/views/host/hostClassList.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "조회할 클래스가 없습니다.");
+			request.setAttribute("loc", "/views/host/hostMain.jsp");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 	/**

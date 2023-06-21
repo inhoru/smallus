@@ -3,6 +3,7 @@ package com.smallus.member.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.print.DocFlavor.READER;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,8 @@ public class MemberMypageServlet extends HttpServlet {
 		int count=new CouponService().couponCount(loginMember.getMemberId());
 		List<Member> m=new MemberService().paymentDetails(loginMember.getMemberId());
 		List<Classes> w=new MemberService().wishList(loginMember.getMemberId());
+		int wishCount=new  MemberService().wishListCount(loginMember.getMemberId());
+	request.setAttribute("wishCount", wishCount);
 		request.setAttribute("wishList", w);
 		request.setAttribute("paymentDetails",m);
 		request.setAttribute("countCoupon", count);
