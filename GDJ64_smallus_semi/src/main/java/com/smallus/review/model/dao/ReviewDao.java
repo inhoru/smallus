@@ -27,18 +27,16 @@ public class ReviewDao {
 		}
 	}
 	
-	private Review getReview(ResultSet rs) throws SQLException{
-	return Review.builder()
-			.reviewId(rs.getString("riview_id"))
-			.memberId(rs.getString("member_id"))
-			.classId(rs.getString("class_id"))
-			.paymentId(rs.getString("payment_id"))
-			.reviewTitle(rs.getString("review_title"))
-			.reviewContent(rs.getString("review_content"))
-			.reviewRating(rs.getInt("review_Rating"))
-			.reviewDate(rs.getDate("review_date"))
-			.build();
-}
+	/*
+	 * private Review getReview(ResultSet rs) throws SQLException{ return
+	 * Review.builder() .reviewId(rs.getString("riview_id"))
+	 * .memberId(rs.getString("member_id")) .classId(rs.getString("class_id"))
+	 * .paymentId(rs.getString("payment_id"))
+	 * .reviewTitle(rs.getString("review_title"))
+	 * .reviewContent(rs.getString("review_content"))
+	 * .reviewRating(rs.getInt("review_Rating"))
+	 * .reviewDate(rs.getDate("review_date")) .build(); }
+	 */
 //	public List<Review> selectReview(Connection conn, int cPage, int numPerpage) {
 //		PreparedStatement pstmt = null;
 //		ResultSet rs = null;
