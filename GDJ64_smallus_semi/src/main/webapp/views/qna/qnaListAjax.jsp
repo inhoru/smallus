@@ -15,7 +15,6 @@ section#main {
 div#qna a {
 	display: block;
 	margin: 3% 20%;
-	font-size: 24px
 }
 
 table#list {
