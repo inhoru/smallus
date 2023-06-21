@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/views/admin/adminHeader.jsp"%>
 <%@ page import="com.smallus.host.model.vo.Host"%>
-
-<%@ include file="/views/common/mainHeader.jsp"%>
-
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostHeader.css">
-    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostMainStyle.css">
+<%	
+	Host h=(Host)session.getAttribute("loginHost");
+	String hostId=h.getHostId();
+%>
 <body>
 <div id="mainOpacity h-host-main">
         <section class="h-main">
             <div class="h-main-title">
                 <h2>공지사항</h2>
                 <!-- 공지사항 추가페이지로 이동 -->
-                <%if(loginHost.getHostId().equals("admin")){ %>
+                <%if(hostId.equals("admin")){ %>
                 <div class="h-viewList"><a href="<%=request.getContextPath()%>/views/admin/adminNoticeEnroll.jsp">+</a></div>
                 <%}%>
             </div>
@@ -41,4 +41,4 @@
             </div>
         </section>
 </body>
-<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>

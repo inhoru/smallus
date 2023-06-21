@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, com.smallus.member.model.vo.Member"%>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 <%
 List<Member> memberList=(List)request.getAttribute("MemberList"); 
 %>

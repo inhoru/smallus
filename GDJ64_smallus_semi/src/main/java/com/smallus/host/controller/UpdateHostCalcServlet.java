@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.smallus.host.model.vo.Host;
@@ -33,13 +34,16 @@ public class UpdateHostCalcServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String hostId=request.getParameter("hostId");
-		System.out.println(hostId);
-		Host host= new HostService().updateHostCalc(hostId);
 		
+		HttpSession session=request.getSession();
+		Host hostInfo = (Host) session.getAttribute("hostInfo");
+		//String hostId=loginHost.getHostId();
+		
+		//Host host= new HostService().updateHostCalc(hostId);
+		System.out.println(hostInfo);
 		Gson gson= new Gson();
 		response.setContentType("application/json; charset=UTF-8");
-		gson.toJson(host,response.getWriter()); 
+		gson.toJson(hostInfo,response.getWriter()); 
 		
 	}
 
