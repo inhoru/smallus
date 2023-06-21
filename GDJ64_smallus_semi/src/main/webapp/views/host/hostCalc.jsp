@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%List<Payment> rsvList =(List)session.getAttribute("rsvList"); %>
-<%@ include file="/views/host/hostHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
 <%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
 <!--main-->
 <div id="mainOpacity h-host-main">
@@ -18,7 +18,7 @@
 					<td>예금주</td>
 					<td>정산 일</td>
 					<td>매달 1일</td>
-					<td><button name="h-updateAccountBtn" id="h-updateAccountBtn">수정</button></td>
+					<td><button onclick="updateAccountBtn()" id="h-updateAccountBtn">수정</button></td>
 				</tr>
 			</table>
 	</section>
@@ -65,14 +65,14 @@
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-    $("#h-updateAccountBtn").click(e=>{
-    	console.log($("#h-updateAccountBtn"))
+    function updateAccountBtn(){
 	    $.ajax({
 			type:"get",
 			url:"<%=request.getContextPath()%>/host/updateHostCalc.do",
-			data: { hostId:<%=loginHost.getHostId()%>},
+			data: { hostId:'<%=loginHost.getHostId()%>'},
 			success:data=>{
 				console.log(data)
+		    	alert("hi")
 			},
 			error:(r,m)=>{
 				console.log(r);
@@ -80,12 +80,12 @@
 				if(e.status==404) alert("요청한 페이지가 없습니다");
 			}
 		})
-    })
+    }
     
     </script>
     <script src="<%=request.getContextPath() %>/js/host.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<%@ include file="/views/host/hostFooter.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
 
 
         
