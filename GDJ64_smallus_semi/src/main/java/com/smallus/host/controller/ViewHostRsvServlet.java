@@ -46,7 +46,7 @@ public class ViewHostRsvServlet extends HttpServlet {
 		System.out.println(hostId);
 		System.out.println(rsvList);
 		
-		response.sendRedirect(request.getContextPath()+"/views/host/hostReservation.jsp");
+		response.sendRedirect(request.getContextPath()+"/views/host/viewHostReservation.jsp");
 		
 		
 //		// Gson 라이브러리 이용해서 json parsing하기

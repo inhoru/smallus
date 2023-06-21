@@ -12,12 +12,11 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.HostService;
-import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class UpdateHostCalcServlet
  */
-@WebServlet(name = "/host/updateAccount.do", urlPatterns = { "/host/updateAccount.do" })
+@WebServlet("/host/updateAccount.do")
 public class UpdateHostCalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,16 +33,17 @@ public class UpdateHostCalcServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		HttpSession session=request.getSession();
 		Host hostInfo = (Host) session.getAttribute("hostInfo");
-		//String hostId=loginHost.getHostId();
-		
-		//Host host= new HostService().updateHostCalc(hostId);
-		System.out.println(hostInfo);
+		String hostId=hostInfo.getHostId();
+		String accountBank="" ,account="", accountName="";
+		int result= new HostService().updateHostCalc(accountBank, account, accountName, hostId);
+//		System.out.println(hostInfo);
 		Gson gson= new Gson();
 		response.setContentType("application/json; charset=UTF-8");
 		gson.toJson(hostInfo,response.getWriter()); 
+		//request.getRequestDispatcher("/views/host/updateHostCalc.jsp").forward(request, response);
 		
 	}
 
