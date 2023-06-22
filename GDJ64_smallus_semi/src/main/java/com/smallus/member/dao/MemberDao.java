@@ -59,8 +59,6 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("enrollMember"));
-			// INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,DEFAULT,DEFAULT)
-<<<<<<< HEAD
 			// INSERT INTO MEMBER VALUES(?,?,?,?,?,?,DEFAULT,?,DEFAULT)
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
