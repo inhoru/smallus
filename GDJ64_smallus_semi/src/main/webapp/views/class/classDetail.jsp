@@ -1,0 +1,235 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
+<%
+	Classes classInfo=(Classes)request.getAttribute("infoClass");
+	List<ClassDetail> classSchedule=(List)request.getAttribute("schedule");
+%>
+<%!
+	// public int personnelCount=1;
+	int wishNum=110;
+	double starPoint=4.5;
+	int classPrice=37000;
+%>
+
+<%@ include file="/views/common/mainHeader.jsp"%>
+
+<div class="d-class-detail">
+	<div class="d-detail-header">
+		<div class="d-detail-img">
+			<img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg" width=400px height=400px>
+		</div>
+		<div class="d-detail-main">
+			<div id="d-detail-top">
+				<p>공예</p>
+				<p>♥ 찜 <%=wishNum%> </p>
+				<p>★ <%=starPoint %>점</p>
+			</div>
+			<h3>스테인 글라스로 나만의 소품 만들기</h3>
+			<h4>1인 <%=classPrice %>원</h4>
+			<div class="d-detail-schedule">
+				<div id="d-detail-date">
+					<select>
+					<%for(ClassDetail c : classSchedule){ %>
+						<option>c</option>
+					<%} %>
+					</select> 
+					<img src="<%=request.getContextPath()%>/img/category_main/calendar.png" width="300" height="200">
+				</div>
+				<div id="d-detail-personnel">
+					<p>인원수</p>
+					<button onclick="personMinus();">-</button>
+					<p id="personnel">1명</p>
+					<button onclick="personPlus();">+</button>
+				</div>
+				<div id="d-payment">
+					<p id="d-payment-price">결제금액 <%=classPrice %>원</p>
+					<input type="submit" value="결제하기">
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="d-detail-menu">
+		<nav>
+			<ul>
+				<li><h3 id="infoAjax">상세 정보</h3></li>
+				<hr>
+				<li><h3 id="reviewAjax">후기</h3></li>
+				<hr>
+				<li><h3 id="qnaAjax">Q & A</h3></li>
+			</ul>
+		</nav>
+	</div>
+	<div class="d-dtail-ajax">
+		<nav class="detail_info">
+			<!-- style="font-size: 16px; font-weight: bolder; margin-left: 20%;" -->
+			<ul>
+				<li id="info"><p>상세 정보</p></li>
+				<p id="text">상세정보로 넣은 이미지, 정보</p>
+				<hr>
+				<li id="info"><p>주소</p></li>
+				<img  id="address" src="<%=request.getContextPath()%>/img/category_main/map.png">
+				<p style="font-size: 8px">서울시 노원구 월계동 광운로 2나길</p>
+				<hr>
+				<li id="info"><p>제공 사항</p></li>
+				<p id="text">스테인 글라스 만들 때 사용하는 재료</p>
+				<hr>
+				<li id="info"><p>유의 사항</p></li>
+				<p id="text">미세한 유리조각이 날릴 수 있으니 주의</p>
+				<hr>
+				<li id="info"><p>준비물</p></li>
+				<p id="text">튼튼한 두 팔과 체력!!!</p>
+				<!-- <hr style="margin-right: 20%"> -->
+			</ul>
+		</nav>
+	</div>
+</div>
+
+<script>
+	let personnelCount=1;
+	let payment=<%=classPrice %>*personnelCount;
+	
+	const personMinus=()=>{
+		personnelCount=personnelCount-1;
+		if(personnelCount<=0){
+			alert("1명 이상만 선택 가능합니다!");
+			personnelCount=1;
+		}
+		paymentcalcul();
+	}
+	const personPlus=()=>{
+		personnelCount=personnelCount+1;
+		paymentcalcul();
+	}
+	const paymentcalcul=()=>{
+		document.getElementById("personnel").innerHTML=personnelCount+"명";
+		payment=<%=classPrice %>*personnelCount;
+		document.getElementById("d-payment-price").innerHTML="결제금액 "+payment+"원";
+	}
+	
+	
+	$("#infoAjax").click(e=>{
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/detailTest.do",
+			//dataType:"html",
+			success:function(data){
+				console.log(data);
+				$(".d-dtail-ajax").html(data);
+				},
+				error:(e,m)=>{
+					console.log(e)
+				}
+			});
+		});
+	
+		$("#qnaAjax").click(e=>{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/ajax/qnaTest.do",
+				success:function(data){
+					console.log(data);
+					$(".d-dtail-ajax").html(data);
+				},
+				error:(e,m)=>{
+					console.log(e);
+				}
+			});
+		});
+		
+		$("#reviewAjax").click(e=>{	
+			$.ajax({
+				url:"<%=request.getContextPath()%>/ajax/reviewTest.do",
+				//dataType:"html",
+				success:function(data){
+					console.log(data);
+					$(".d-dtail-ajax").html(data);
+					},
+					error:(e,m)=>{
+						console.log(e)
+					}
+				});
+			});
+</script>
+
+<style>
+/* 기본상세정보 CSS : 상세페이지 접근때부터 있어야해서 여기도 있음 */
+	nav.detail_info{
+	font-size:16px;
+	font-weight: bolder;
+	margin-left: 20%;
+	}
+	#info{
+	margin: 1%;
+	}
+	#text{
+	font-weight: lighter;
+	font-size: 8px;
+	margin: 1%
+	}
+	#address{
+	width: 750px;
+	height: 300px;
+	margin: 1% 2%}
+	hr{
+	margin-right: 20%;
+	}
+
+
+/* 상세페이지 전체 */
+	.d-class-detail{
+		width:70%;
+		margin : 0 auto;
+	}
+	.d-detail-header{
+		display:flex;
+		margin : 15px;
+	}
+	.d-detail-header>*{
+		padding: 15px;
+	}
+	.d-detail-header div{
+		margin:5px 0;
+	}
+	#d-detail-top{
+		display:flex;
+	}
+	#d-detail-personnel{
+		display:flex;
+	}
+	#d-detail-personnel button{
+		width:30px;
+		background-color:#F8D8D8;
+		border-radius: 20px;
+	}
+	#d-payment{
+		display:flex;
+	}
+	#d-payment> input{
+		width:100px;
+		background-color:#F8D8D8;
+		border-radius: 20px;
+	}
+	.d-class-detail div{
+		/* border:1px solid red; */
+	}
+	.d-detail-menu{
+		display:flex;
+		justify-content: space-around;
+		text-align: center;
+	}
+	.d-detail-menu li{
+
+		justify-content: space-around;
+		text-align: center;
+	}
+	
+</style>
+
+
+
+
+
+
+
+<%@ include file="/views/common/footer.jsp"%>
+

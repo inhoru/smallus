@@ -1,0 +1,16 @@
+/* 메인 */
+    #main {
+        margin:auto;
+        padding-top: 3%;
+        width: 1280px;
+        height: 700px;
+    }
+    /* 미리보기(?) 수평 정렬 */
+    
+    .s_category_crafts{
+        display:flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-right:1%;
+        margin-left: 1%;
+    }

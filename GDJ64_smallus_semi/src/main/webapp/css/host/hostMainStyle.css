@@ -1,0 +1,422 @@
+/*폰트 */
+@font-face {
+	font-family: "GmarketSansLight";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "GmarketSansMedium";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "GmarketSansBold";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+hr {
+	margin: 1rem auto;
+}
+/* img slide */
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #FFFCF5;
+}
+
+#mainOpacity {
+	background-color: #FFFCF5;
+}
+
+
+/* host -main */
+/* host-menu */
+section.h-menu {
+	width: 100%;
+	background-color: #FDF7E8;
+}
+
+section.h-menu>div {
+	width: 70%;
+	margin: 0 auto;
+	display: flex;
+}
+
+section.h-menu>div table {
+	width: 100%;
+	text-align: center;
+	padding: 1rem 0;
+}
+
+section.h-menu>div table * {
+	height: 2rem;
+	font-size: 0.9rem;
+}
+
+section.h-menu>div table th {
+	font-size: 1rem;
+	font-family: "GmarketSansBold";
+}
+
+section.h-menu>div table a:hover {
+	font-family: "GmarketSansBold";
+	border-bottom: 1px solid #555555;
+}
+
+/* host-main section*/
+section.h-main {
+	width: 70%;
+	margin: 2rem auto;
+}
+/* host-main-title */
+div.h-main-title {
+	margin-top: 4rem;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+div.h-main-title h2 {
+	width: 100%;
+	margin: 0 auto;
+}
+/* + button */
+div.h-viewList {
+	margin-left: auto;
+	font-size: 2rem;
+	font-family: "GmarketSansBold";
+	width: 2rem;
+	height: 2rem;
+	font-weight: bolder;
+}
+/* 달력 넣기 */
+.h-r-callendar {
+	width: 100%;
+	margin: 2rem auto;
+}
+
+section.h-main table {
+	width: 100%;
+	text-align: center;
+	margin: 1rem auto;
+}
+
+section.h-main-rsvList table {
+	border: 1px solid #444444;
+	border-collapse: collapse;
+	clear: both;
+}
+
+section.h-main-rsvList table th, section.h-main-rsvList table td {
+	border: 1px solid #444444;
+	height: 2.2rem;
+}
+/* host-main-chart style */
+#h-main-chart {
+	margin: 0 auto;
+	width: 100%;
+	height: 500px;
+}
+/* host-main-calendar btn style */
+/*month/week/day*/
+.fc-button-active {
+	border-color: #ffc107 !important;
+	background-color: #ffc107 !important;
+	color: #555555 !important;
+	font-weight: bold !important;
+}
+.fc-toolbar-chunk:nth-child(2){
+	width:40%;
+	display:flex;
+	justify-content: center;
+}
+.fc-toolbar-chunk:nth-child(2) button{
+	width:3rem;
+	height:3rem;
+}
+.fc-toolbar-chunk:nth-child(2) .fc--button {
+	display:none;
+}
+
+#h-main-calendar button {
+	border: 0;
+	color: #555555;
+	background-color: #FBEFD3;
+	border-radius: 2rem;
+}
+
+.fc-toolbar-title {
+	font-size: 1rem;
+}
+
+/* class list page */
+div.h-class-list-container{
+	display:flex;
+	width:100%;
+	flex-wrap: wrap; /*복수의 행*/
+	
+}
+
+/* host-class page select */
+select#selectClassStatus {
+  
+  width: 10rem;
+  height: 35px;
+  background-color:#FFFCF5; 
+  padding: 5px 30px 5px 10px;
+  border-radius: 4px;
+  outline: 0 none;
+}
+select#selectClassStatus option {
+  background: black;
+  color: #fff;
+  padding: 0.5rem 0.2rem;
+}
+/* host class page - class list */
+div.h-class-list {
+	width:50%;
+	border-top:1px solid #F6E9DF;
+	border-bottom:1px solid #F6E9DF;
+	display:flex;
+	align-items: center;
+	margin-bottom:1rem;
+}
+
+/* 홀수 번쨰 클래스 리스트에 오른쪽 여백  */
+div.h-class-list:nth-child(odd){
+	margin-right: 1%;
+}
+
+div.h-class-list{
+	width:49%;
+}
+
+div.h-class-list img{
+	width: 7rem;
+	height:7rem;
+	object-fit:cover;
+	margin:1rem 1rem 1rem 0;
+	display:flex;
+	border-radius: 0.5rem;
+}
+
+/* class table style*/
+div.h-class-list table{
+
+	width:75%;
+	font-size:0.8rem;
+	margin:1rem auto;
+	border: 1px; 
+}
+div.h-class-list table .h-tbl-align-left{
+	text-align:left;
+}
+div.h-class-list table tr:nth-child(2)>td{
+	font-size: 1rem;
+}
+div.h-class-list table td, div.h-class-list table th{
+	border:0px;
+	height:1.8rem;
+}
+
+
+/* class sub page*/
+section.h-class-sub h2{
+	margin: 3rem 0 2rem 0;
+}
+section.h-class-sub h3{
+	margin: 1rem 0;
+}
+section.h-class-sub .h-class-list{
+	width:100%;
+	align-items:flex-start;
+}
+/* class subpage - table resize */
+section.h-class-sub .h-class-list table {
+	width:80%;
+	font-size:1rem;
+}
+section.h-class-sub .h-class-list table *{
+	height:2rem;
+	text-align: left;
+}
+/* class subpage - img resize */
+section.h-class-sub .h-class-list img{
+	width:12rem;
+	height:12rem;
+	margin-right:3rem;
+}
+/* table 안의 className에 bold 속성 */
+table .h-tbl-className{
+	font-weight:bold;
+}
+/* .h-class-list 내부 button container  */
+div.h-class-list div{
+	margin: auto 0 2rem 3rem;
+	flex-direction:row;
+	width:20%;
+	justify-content: space-around;
+}
+div.h-class-detail>div{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+/* .h-class-sub page 내부 button style */
+div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, 
+.h-profile button , section.h-calc button, .h-updateAccInfo button{
+	margin-left:2rem;
+	width:4rem;
+	font-weight: bold;
+	background-color: #F5E7D2;
+	border:0px;
+	border-radius: 1rem;
+	padding: 0.4rem 0.6rem;
+	font-size: 0.8rem;
+}
+/* CLASS SUB-PAGE */
+.h-insert-class-detail {
+	font-size: 2rem;
+}
+/* class-sub page> h-class-detail */
+div.h-class-detail table td, div.h-class-detail table th{
+	height:2.5rem;
+}
+/* th 아래 밑줄 */
+div.h-class-detail>table th{
+	border-bottom: 1px solid #E8D6C3;
+}
+/* table 첫번째 align-left */
+div.h-class-detail>table tr>th:first-child,  div.h-class-detail>table tr>td:first-child{
+	text-align: left;
+}
+/* 삭제 btn align:right */
+div.h-class-detail table .h-class-tbl-btn{
+	text-align: right;
+}
+
+
+/* host-profile page */
+section.h-profile{
+	width:50%;
+	margin: 3rem auto;
+}
+
+section.h-profile .h-edit-pf{
+	width:2.5rem;
+	height:2.5rem;
+	padding: 0.1rem;
+	background-color: #ffffff;
+	border-radius: 10rem;
+	border: 1px solid #555555;
+	position: relative;
+	left:-3rem;
+}
+.h-profile-info {
+	width:100%;
+}
+.h-profile-info table{
+	margin: 8rem 0;
+}
+.h-profile-info table *{
+	height:2rem;
+	margin: 0.5rem 0;
+}
+.h-profile-info>table input{
+	width:35rem;
+	border-radius: 2rem;
+	padding: 0 1rem;
+}
+button.h-submit{
+	margin-left: auto;
+}
+
+/* host-calc page */
+table.h-calc-tbl {
+	width: 100%;
+	border-collapse : collapse;
+}
+
+table.h-calc-tbl td {
+	height: 2rem;
+	text-align:center;
+	font-size:1rem;
+	border-collapse : collapse;
+}
+
+table.h-calc-tbl tr:nth-child(odd) {
+	font-family: "GmarketSansBold";
+	border-bottom: 1px solid #F6E9DF;
+}
+
+section.h-calc>div{
+	text-align: right;
+}
+section.h-calc button {
+	margin-left:0;
+	margin-right:auto;
+} 
+
+
+/* host page paging bar*/
+#pageBar {
+	width: 50%;
+	margin: 2rem 0 2rem auto;
+	text-align: right;
+}
+
+#pageBar * {
+	margin: 0.3rem;
+}
+
+#pageBar .h-pageBar-txt {
+	padding: 0.5rem 0.8rem;
+	background-color: #FBEFD3;
+	border-radius: 1rem;
+	font-size: 0.9rem;
+}
+
+#pageBar .h-pageBar-now {
+	font-weight: bold;
+}
+
+/* updateCalc page*/
+section.h-updateAccInfo {
+	width: 100%;
+}
+
+section.h-updateAccInfo>div {
+	display: flex;
+	justify-content: space-between;
+}
+
+section.h-updateAccInfo>div:last-child {
+	display: block;
+	text-align: right;
+	margin-top: 2rem;
+}
+
+section.h-updateAccInfo span {
+	font-size: 0.8rem;
+}
+
+.h-updateAccInfo button {
+	margin-right: auto;
+}
+

@@ -1,0 +1,31 @@
+div#AddSchedule-calendar{
+	width: 1000px;
+	height: 500px;
+	margin: 10px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+}
+
+div#AllSchedule{
+	width: 600px;
+	height: 400px;
+	margin: 10px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+}
+
+div.schedule-table{
+	margin:15px;
+}
+
+.schedule-table>button{
+	width:250px;
+	margin: 5px;
+	/* 너비설정은 기존 css와의 충돌로 적용안됨 */
+}
+
+#AddSchedule-calendar>input{
+	width:300px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+}
