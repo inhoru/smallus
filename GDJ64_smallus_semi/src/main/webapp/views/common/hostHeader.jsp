@@ -111,8 +111,8 @@
 				</tr>
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
-					<td><a href="<%=request.getContextPath()%>//admin/ClassesListServlet.do">클래스승인</a></td>
-					<td><a href="<%=request.getContextPath()%>/noticeListServlet.do">공지사항</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/ClaasesListServlet.do">클래스승인</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 				</tr>
 				<tr>
 					<td><a href="">호스트회원관리</a></td>

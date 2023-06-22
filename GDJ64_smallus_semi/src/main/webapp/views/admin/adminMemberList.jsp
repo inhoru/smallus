@@ -43,6 +43,10 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<td><button id=m-deletememberbtn>삭제</button></td>
 					</tr>
 					<%} %>
+				<%}else{ %>
+			        <tr>
+                        <td colspan="8">조회된 회원이 없습니다.</td>
+                    </tr>
 				<%} %>
 				</table>
 			</div>

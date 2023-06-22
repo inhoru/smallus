@@ -3,6 +3,7 @@ package com.smallus.admin.dao;
 import static com.smallus.common.JDBCTemplate.close;
 import static com.smallus.member.dao.MemberDao.getMember;
 import static com.smallus.notice.dao.NoticeDao.getNotice;
+import static com.smallus.classes.model.dao.ClassesDao.getClasses;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.common.JDBCTemplate;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
@@ -29,6 +31,7 @@ public class AdminDao {
 			e.printStackTrace();
 		}
 	}
+
 	public int selectMemberCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -42,8 +45,7 @@ public class AdminDao {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
-		}
-		return totalData;
+		}return totalData;
 	}
 	public List<Member> checkMemberAll(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
@@ -77,8 +79,7 @@ public class AdminDao {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
-		}
-		return totalData;
+		}return totalData;
 	}
 	public List<Notice> checkNoticeAll(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
@@ -90,7 +91,7 @@ public class AdminDao {
 			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				list.add(getNotice(rs)); //getMember는 MemberDao에 있는 메소드를 스태틱으로 선언해서 불러옴
+				list.add(getNotice(rs));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -99,5 +100,39 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
-
+	public int selectConfirmClassesCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectConfirmClassesCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public List<Classes> checkConfirmClasses(Connection conn,int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Classes> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("checkConfirmClasses"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getClasses(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
 }
