@@ -5,7 +5,8 @@
 	Classes classInfo=(Classes)request.getAttribute("infoClass");
 	List<ClassDetail> classScedule=(List)request.getAttribute("schedule");
 %>
-    
+<%! public int personnelCount=1; %>
+
 <%@ include file="/views/common/mainHeader.jsp"%>
 
 <div class="d-class-detail">
@@ -28,7 +29,7 @@
 				<div id="d-detail-personnel">
 					<p>인원수</p>
 					<button>-</button>
-					<p>1명</p>
+					<p><%=personnelCount %>명</p>
 					<button>+</button>
 				</div>
 				<div id="d-payment">
@@ -51,6 +52,8 @@
 		</nav>
 	</div>
 	<div class="d-dtail-ajax">
+		
+	
 	</div>
 </div>
 
