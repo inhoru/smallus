@@ -1,5 +1,4 @@
 package com.smallus.review.model.dao;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -90,20 +89,20 @@ public class ReviewDao {
 			close(pstmt);
 		}return result;
 	}
-	public Review selectReviewByNo(Connection conn, int no) {
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		Review r = null;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectReviewByNo"));
-			pstmt.setInt(1,no);
-			rs=pstmt.executeQuery();
-			if(rs.next()) r=getReview(rs);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return r;
-	}
+//	public Review selectReviewByNo(Connection conn, int no) {
+//		PreparedStatement pstmt=null;
+//		ResultSet rs = null;
+//		Review r = null;
+//		try {
+//			pstmt=conn.prepareStatement(sql.getProperty("selectReviewByNo"));
+//			pstmt.setInt(1,no);
+//			rs=pstmt.executeQuery();
+//			if(rs.next()) r=getReview(rs);
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return r;
+//	}
 	}
