@@ -21,16 +21,16 @@ justify-content: space_evenly;
         <div class="craft">
             <img src="<%=request.getContextPath()%>/img/cooking_main/cooking1.png" alt="" width="300px" height="300px" title="내 손으로 작은 바...""
             onclick="location.href='<%=request.getContextPath()%>/views/class/classDetail.jsp'">
-            <h5>내 손으로 작은 바다 만들기</h5>
-            <p style="font-size: 8px">공예 | 서울시 광진구</p>
-            <p style="font-size: 8px">유리구슬 | 2023.06.15</p>
+            <h5>쉽게 만드는 초코크림 케이크</h5>
+            <p style="font-size: 8px">요리 | 서울시 광진구</p>
+            <p style="font-size: 8px">초코나무숲 | 2023.06.15</p>
         </div>
         <div class="craft">
             <img src="<%=request.getContextPath()%>/img/cooking_main/cooking2.jpg" alt="" width="300px" height="300px" title="우리 집 반려동물..."
             onclick="location.href='<%=request.getContextPath()%>/views/class/classDetail.jsp'">
-            <h5>우리 집 반려동물 만들기</h5>
-            <p style="font-size: 8px">공예 | 경기도 수원시</p>
-            <p style="font-size: 8px">야니얀 | 2023.06.15</p>
+            <h5>플레인 마들렌 만들기</h5>
+            <p style="font-size: 8px">요리 | 경기도 수원시</p>
+            <p style="font-size: 8px">마드레느 | 2023.06.15</p>
         </div>
         <div class="craft">
             <img src="<%=request.getContextPath()%>/img/cooking_main/cooking3.jpg" alt="" width="300px" height="300px" title="나만의 썬캐쳐 만들..."
