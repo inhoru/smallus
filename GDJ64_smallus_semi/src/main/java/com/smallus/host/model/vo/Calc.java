@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Calc {
 	private String calcId;
-	private String paymentId;
 	private String hostId;
 	private String calcStatus;
 	private Date calcReqDate;

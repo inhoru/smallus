@@ -27,7 +27,7 @@ public class CalcDao {
 		}
 	}
 	public static Calc getCalc(ResultSet rs) throws SQLException {
-		return Calc.builder().calcId(rs.getString("CALC_ID")).paymentId(rs.getString("PAYMENT_ID")).hostId(rs.getString("HOST_ID")).calcStatus(rs.getString("CALC_STATUS"))
+		return Calc.builder().calcId(rs.getString("CALC_ID")).hostId(rs.getString("HOST_ID")).calcStatus(rs.getString("CALC_STATUS"))
 				.calcReqDate(rs.getDate("CALC_REQ_DATE")).calcPassDate(rs.getDate("CALC_PASS_DATE")).calcPrice(rs.getInt("CALC_PRICE")).calcFinalPrice(rs.getInt("CALC_FINAL_PRICE")).build();
 	}
 	
