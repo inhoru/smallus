@@ -44,9 +44,9 @@ public class MainToClassDetailServlet extends HttpServlet {
 		List<ClassDetail> classSchedule=new ClassService().selectClassDetailByClassId(classId);
 		
 		request.setAttribute("classinfo",classInfo);
-		request.setAttribute("classSchedult", classSchedule);
+		request.setAttribute("classSchedule", classSchedule);
 		
-		request.getRequestDispatcher("/views/class/ClassDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/class/classDetail.jsp").forward(request, response);
 	}
 
 	/**

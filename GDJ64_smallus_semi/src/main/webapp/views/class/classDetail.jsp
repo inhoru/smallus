@@ -3,7 +3,7 @@
 <%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
 <%
 	Classes info=(Classes)request.getAttribute("classinfo");
-	List<ClassDetail> schedule=(List)request.getAttribute("schedule");
+	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
 %>
 <%!
 	// public int personnelCount=1;
