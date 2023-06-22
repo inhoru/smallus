@@ -33,15 +33,20 @@ public class MainToClassDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 메인(카테고리별, 검색결과 포함) 에서 상세페이지로 이동하는 서블릿
 		
-		String classId=request.getParameter("classId");
+		// 메인(카테고리별, 검색결과 등) 에서 상세페이지로 이동하는 서블릿
+		// '단일 클래스'의 정보와 스케쥴을 같이 가져옴
 		
-		List<Classes> classDetailPage= new ClassService2().selectClassByClassId(classId);
+		/* String classId=request.getParameter("classId"); */
+		String classId="CLS20230622-2"; //임시 클래스아이디 정보
+		
+		Classes classInfo= new ClassService2().selectClassByClassId(classId);
 		List<ClassDetail> classSchedule=new ClassService().selectClassDetailByClassId(classId);
 		
-		request.getRequestDispatcher("/views/class/ClassDetail.jsp").forward(request, response);
+		request.setAttribute("classinfo",classInfo);
+		request.setAttribute("classSchedult", classSchedule);
 		
+		request.getRequestDispatcher("/views/class/ClassDetail.jsp").forward(request, response);
 	}
 
 	/**
