@@ -1,17 +1,14 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.List,com.smallus.Inquiry.model.vo.Faq,com.smallus.Inquiry.model.vo.Inquiry"%>
-<%@ include file="/views/common/mainHeader.jsp"%>
-<%
-List<Faq> faqList = (List) request.getAttribute("faqList");
-List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
-List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
-%>
+    pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List,com.smallus.Inquiry.model.vo.Faq,com.smallus.Inquiry.model.vo.Inquiry"%>
 
+ <%
+ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
+ List<Faq> faqList = (List) request.getAttribute("faqList");
+List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
+%>
 <div id="mainOpacity">
-	<section class="i-tablecontent">
+ 	<section class="i-tablecontent">
 		<table class="i-mypageCategories">
 			<tr>
 				<td class="i-myInfo i-my">내정보</td>
@@ -41,18 +38,16 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 	<div class="i-personalinquiry">
 		<h3 class="i-faqTitle">자주 묻는 질문</h3>
 		<div class="i-faqCategories">
-			<span class="i-faqCategoriesDetails">이용안내</span> <span
+			<span
+				class="i-faqCategoriesDetails">이용안내</span> <span
 				class="i-faqCategoriesDetails">회원정보</span> <span
 				class="i-faqCategoriesDetails">결제/환불</span> <span
 				class="i-faqCategoriesDetails">호스트신청</span>
 
 		</div>
+
 		<%
-		int count = 0;
-		for (Faq f : faqList) {
-			if (count == 4) {
-				break; 
-			}
+		for (Faq f : faqcategorie) {
 		%>
 		<ul>
 			<li><input type="hidden" value="<%=f.getFaqId()%>" name="faqId"
@@ -61,14 +56,12 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<div class="i-faqContent"><%=f.getFaqContent()%></div></li>
 		</ul>
 		<%
-		count++;
 		}
 		%>
+		
 
 
-
-
-		<h3 class="i-inquiryTitle">1:1 문의</h3>
+<h3 class="i-inquiryTitle">1:1 문의</h3>
 		<%
 				if (inquiryList.isEmpty()) {
 				%>
@@ -112,15 +105,15 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 		</table>
 
 
-
-
-
 	</div>
-	<div class="pageBar">
-		<%=request.getAttribute("pageBar")%>
-	</div>
+		<div class="pageBar">
+			<%=request.getAttribute("pageBar")%>
+		</div>
+			
 </div>
+
 <script>
+
 	$(".i-faqContentTitle").click(e => {
 		$(e.target).next().slideToggle(0);
 	
@@ -128,7 +121,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 	})
 	$(".i-inquiryremovebutton").click(e => {
 		const remove = $(e.target).closest('tr').find('.i-boardId').val();
-		console.log(remove);
+			
 		$.ajax({
 			type:"get",
 			url:"<%=request.getContextPath()%>/Inquiryremove.do?categorie=호스트신청",
@@ -175,4 +168,3 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 
 </script>
-<%@ include file="/views/common/footer.jsp"%>

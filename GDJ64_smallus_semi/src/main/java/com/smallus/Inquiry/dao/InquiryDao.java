@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.smallus.Inquiry.model.vo.Faq;
+import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.coupon.dao.CouponDao;
 
 public class InquiryDao {
@@ -26,16 +27,13 @@ private Properties sql= new Properties();
 			e.printStackTrace();
 		}
 	}
-	
-	public List<Faq> selectAllFaq(Connection conn,int cPage,int numPerpage){
+	public List<Faq> selectAllFaq(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Faq> list=new ArrayList<Faq>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectAllFaq"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM FAQ)B) WHERE RNUM BETWEEN ? AND ?
-			pstmt.setInt(1,(cPage-1)*numPerpage+1);
-			pstmt.setInt(2, cPage*numPerpage);
+			//SELECT * FROM FAQ
 			rs=pstmt.executeQuery();
 			while(rs.next()) list.add(getFaq(rs));
 		}catch(SQLException e) {
@@ -45,13 +43,32 @@ private Properties sql= new Properties();
 			close(pstmt);
 		}return list;
 	}
-	public int selectFaqCount(Connection conn) {
+	
+	public List<Faq> selectCategorie(Connection conn,String categorie){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Faq> list=new ArrayList<Faq>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectCategorie"));
+			//SELECT * FROM FAQ WHERE FAQ_TYPE=?
+			pstmt.setString(1, categorie);
+			rs=pstmt.executeQuery();
+			while(rs.next()) list.add(getFaq(rs));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public int selectInquiryCount(Connection conn,String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectFaqCount"));
-			//SELECT COUNT(FAQ_ID) FROM FAQ
+			pstmt=conn.prepareStatement(sql.getProperty("selectInquiryCount"));
+			//SELECT COUNT(MEMBER_ID) FROM BOARD WHERE MEMBER_ID=?
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
 		}catch(SQLException e) {
@@ -63,18 +80,19 @@ private Properties sql= new Properties();
 		return result;
 	}
 	
-	public List<Faq> selectCategorie(Connection conn,int cPage,int numPerpage,String categorie){
+
+	public List<Inquiry> selectAllInquiry(Connection conn,int cPage,int numPerpage,String memberId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Faq> list=new ArrayList<Faq>();
+		List<Inquiry> list=new ArrayList<Inquiry>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectCategorie"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM FAQ WHERE FAQ_TYPE=?)B) WHERE RNUM BETWEEN ? AND ?
-			pstmt.setString(1, categorie);
+			pstmt=conn.prepareStatement(sql.getProperty("selectAllInquiry"));
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD WHERE MEMBER_ID=? )B) WHERE RNUM BETWEEN ? AND ?
+			pstmt.setString(1, memberId);
 			pstmt.setInt(2,(cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
-			while(rs.next()) list.add(getFaq(rs));
+			while(rs.next()) list.add(getInquiry(rs));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -82,23 +100,25 @@ private Properties sql= new Properties();
 			close(pstmt);
 		}return list;
 	}
-	public int selectCategorieCount(Connection conn,String categorie) {
+	public int InquiryRemove(Connection conn,String memberId,String remove) {
 		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectCategorieCount"));
-			//SELECT COUNT(FAQ_ID) FROM FAQ WHERE FAQ_TYPE=?
-			pstmt.setString(1, categorie);
-			rs=pstmt.executeQuery();
-			if(rs.next())result=rs.getInt(1);
+			pstmt=conn.prepareStatement(sql.getProperty("inquiryRemove"));
+			//DELETE FROM BOARD WHERE MEMBER_ID = ? AND BOARD_ID=?
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, remove);
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(rs);
 			close(pstmt);
 		}
+		System.out.println(result);
 		return result;
+	}
+	private Inquiry getInquiry(ResultSet rs) throws SQLException {
+		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).build();
 	}
 	
 	private Faq getFaq(ResultSet rs) throws SQLException {

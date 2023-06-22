@@ -1,41 +1,55 @@
 package com.smallus.Inquiry.model.service;
 
 import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
 import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.smallus.Inquiry.dao.InquiryDao;
 import com.smallus.Inquiry.model.vo.Faq;
+import com.smallus.Inquiry.model.vo.Inquiry;
 
 public class InquiryService {
 	private InquiryDao dao = new InquiryDao();
-
-	public List<Faq> selectAllFaq(int cPage, int numPerpage) {
+	
+	
+	public List <Faq> selectAllFaq() {
 		Connection conn = getConnection();
-		List<Faq> list = dao.selectAllFaq(conn, cPage, numPerpage);
+		List<Faq> list = dao.selectAllFaq(conn);
 		close(conn);
 		return list;
 	}
 
-	public int selectFaqCount() {
+	
+	public List<Faq> selectCategorie(String categorie) {
 		Connection conn = getConnection();
-		int result = dao.selectFaqCount(conn);
+		List<Faq> list = dao.selectCategorie(conn, categorie);
+		close(conn);
+		return list;
+	}
+
+	
+	public List<Inquiry>selectAllInquiry(int cPage,int numPerpage,String memberId){
+		Connection conn = getConnection();
+		List<Inquiry> result = dao.selectAllInquiry(conn,cPage,numPerpage,memberId);
 		close(conn);
 		return result;
 	}
-	public List<Faq> selectCategorie(int cPage, int numPerpagem,String categorie) {
+	public int selectInquiryCount(String memberId) {
 		Connection conn = getConnection();
-		List<Faq> list = dao.selectCategorie(conn, cPage,numPerpagem, categorie);
+		int result = dao.selectInquiryCount(conn,memberId);
 		close(conn);
-		return list;
+		return result;
 	}
-
-	public int selectCategorieCount(String categorie) {
+	
+	public int InquiryRemove(String memberId,String remove) {
 		Connection conn = getConnection();
-		int result = dao.selectCategorieCount(conn,categorie);
-		close(conn);
+		int result = dao.InquiryRemove(conn,memberId,remove);
+		if(result>0)commit(conn);
+		else rollback(conn);
 		return result;
 	}
 }
