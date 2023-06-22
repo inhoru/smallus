@@ -6,7 +6,7 @@ import java.util.List;
 import com.smallus.review.model.dao.ReviewDao;
 import com.smallus.review.model.vo.Review;
 
-import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.*;
 public class ReviewService {
 
 	private ReviewDao dao = new ReviewDao();
@@ -23,13 +23,14 @@ public class ReviewService {
 		close(conn);
 		return list;
 	}
-//	public int insertReview(Review r) {
-//		Connection conn=getConnection();
-//		if(result>0) commit(conn);
-//		else rollback(conn);
-//		close(conn);
-//		return result;
-//	}
+	public int insertReview(Review r) {
+		Connection conn=getConnection();
+		int result=dao.insertReview(conn, r);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 //	public Review selectReviewByNo(int no) {
 //		Connection conn=getConnection();
 //		Review r = dao.selectReviewByNo(conn,no);

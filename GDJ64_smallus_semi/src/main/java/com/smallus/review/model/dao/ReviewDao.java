@@ -1,5 +1,4 @@
 package com.smallus.review.model.dao;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -73,16 +72,15 @@ public class ReviewDao {
 			close(pstmt);
 		}return list;
 	}
-	public int insertReviwe(Connection conn, Review r) {
+	public int insertReview(Connection conn, Review r) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertReview"));
-			pstmt.setString(1, r.getReviewId());
-			pstmt.setString(2, r.getPaymentId());
-			pstmt.setString(3, r.getReviewTitle());
-			pstmt.setString(4, r.getReviewContent());
-			pstmt.setInt(5, r.getReviewRating());
+			pstmt.setString(1, r.getPaymentId());
+			pstmt.setString(2, r.getReviewTitle());
+			pstmt.setString(3, r.getReviewContent());
+			pstmt.setInt(4, r.getReviewRating());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -90,20 +88,20 @@ public class ReviewDao {
 			close(pstmt);
 		}return result;
 	}
-	public Review selectReviewByNo(Connection conn, int no) {
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		Review r = null;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectReviewByNo"));
-			pstmt.setInt(1,no);
-			rs=pstmt.executeQuery();
-			if(rs.next()) r=getReview(rs);
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return r;
-	}
+//	public Review selectReviewByNo(Connection conn, int no) {
+//		PreparedStatement pstmt=null;
+//		ResultSet rs = null;
+//		Review r = null;
+//		try {
+//			pstmt=conn.prepareStatement(sql.getProperty("selectReviewByNo"));
+//			pstmt.setInt(1,no);
+//			rs=pstmt.executeQuery();
+//			if(rs.next()) r=getReview(rs);
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return r;
+//	}
 	}

@@ -45,17 +45,12 @@
 									<%}else if(c.getClassPassId().equals("N3")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>중복 등록</th>
 									<%}%>
-								<!-- <th class="h-tbl-align-left" class="h-class-pass-N">
-										승인 거절
-								</th>
-								<th></th> -->
 							<%} else if(c.getClassPassId().equals("Y")){%>
 								<th class="h-tbl-align-left" class="h-class-pass-Y">
 										승인 완료
 								<th>
-								<th>판매 중</th>
 								<%} %> 
-						<th colspan="2"><%=c.getClassId() %></th>
+						<th colspan="3"><%=c.getClassId() %></th>
 						</tr>
 						<tr>
 							<td class="h-tbl-align-left" colspan="4"><%=c.getClassTitle() %></td>
@@ -139,7 +134,9 @@
 					</table>
 				</div>
 				<%}
-				} %>
+				}else{ %>
+					<span>조회할 클래스가 없습니다</span>
+				<%} %>
         </div>
         <div id="pageBar">
 			<%=request.getAttribute("pageBar") %>

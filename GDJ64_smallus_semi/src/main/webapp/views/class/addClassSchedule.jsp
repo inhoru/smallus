@@ -84,7 +84,7 @@ div.schedule-table{
 }
 
 #AddSchedule-calendar>input{
-	width:250px;
+	width:300px;
 	height:30px;
 	border: 2px solid #595959;
 	border-radius: 20px;
@@ -99,13 +99,13 @@ div.schedule-table{
 <script>
 $(function() {
 	  $('input[name="datetimes"]').daterangepicker({
-		  singleDatePicker: true,
+//		  singleDatePicker: true,
 		  showDropdowns: true,
 	    timePicker: true,
 	    startDate: moment().startOf('hour'),
 	    endDate: moment().startOf('hour').add(32, 'hour'),
 	    locale: {
-	      format: 'M/DD hh:mm A',
+	      format: 'YYYY-MM-DD HH:mm',
 	      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
 		    "applyLabel": "확인",                    // 확인 버튼 텍스트
 		    "cancelLabel": "취소",                   // 취소 버튼 텍스트

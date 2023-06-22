@@ -31,7 +31,6 @@ table#list th, table#list td {
 }
 </style>
 <div id="qna">
-	<a href="">Q & A</a>
 </div>
 <div id="select_container">
 	<select>

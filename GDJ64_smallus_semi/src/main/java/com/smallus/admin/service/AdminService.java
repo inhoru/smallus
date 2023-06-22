@@ -1,12 +1,16 @@
 package com.smallus.admin.service;
 
 import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
 import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.smallus.admin.dao.AdminDao;
+import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
 public class AdminService {
@@ -26,6 +30,18 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	public int selectHostCount() {
+		Connection conn=getConnection();
+		int totalData=dao.selectHostCount(conn);
+		close(conn);
+		return totalData;
+	}
+	public List<Host>checkHostAll(int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Host> list=dao.checkHostAll(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
 	
 	public int selectNoticeCount() {
 		Connection conn=getConnection();
@@ -40,5 +56,35 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	
+	public int selectConfirmClassesCount() {
+		Connection conn=getConnection();
+		int totalData=dao.selectConfirmClassesCount(conn);
+		close(conn);
+		return totalData;
+	}
 
+	public List<Classes> checkConfirmClasses(int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Classes> list=dao.checkConfirmClasses(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	public int classReject(String classPassId,String classId) {
+		Connection conn=getConnection();
+		int result=dao.classReject(conn,classPassId,classId);
+		close(conn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int classConfirm(String classId) {
+		Connection conn=getConnection();
+		int result=dao.classConfirm(conn,classId);
+		close(conn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }

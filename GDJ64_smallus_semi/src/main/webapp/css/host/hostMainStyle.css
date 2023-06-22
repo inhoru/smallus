@@ -279,11 +279,12 @@ div.h-class-detail>div{
 	align-items: center;
 }
 /* .h-class-sub page 내부 button style */
-div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, .h-profile button , .h-calc-tbl button{
+div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, 
+.h-profile button , section.h-calc button, .h-updateAccInfo button{
 	margin-left:2rem;
 	width:4rem;
 	font-weight: bold;
-	background-color: #E8D6C3;
+	background-color: #F5E7D2;
 	border:0px;
 	border-radius: 1rem;
 	padding: 0.4rem 0.6rem;
@@ -359,15 +360,19 @@ table.h-calc-tbl td {
 	border-collapse : collapse;
 }
 
-table.h-calc-tbl td:nth-child(odd) {
+table.h-calc-tbl tr:nth-child(odd) {
 	font-family: "GmarketSansBold";
+	border-bottom: 1px solid #F6E9DF;
 }
-table.h-calc-tbl td:last-child{
-	text-align:right;
+
+section.h-calc>div{
+	text-align: right;
 }
-table.h-calc-tbl button {
+section.h-calc button {
 	margin-left:0;
-}
+	margin-right:auto;
+} 
+
 
 /* host page paging bar*/
 #pageBar {
@@ -389,5 +394,29 @@ table.h-calc-tbl button {
 
 #pageBar .h-pageBar-now {
 	font-weight: bold;
+}
+
+/* updateCalc page*/
+section.h-updateAccInfo {
+	width: 100%;
+}
+
+section.h-updateAccInfo>div {
+	display: flex;
+	justify-content: space-between;
+}
+
+section.h-updateAccInfo>div:last-child {
+	display: block;
+	text-align: right;
+	margin-top: 2rem;
+}
+
+section.h-updateAccInfo span {
+	font-size: 0.8rem;
+}
+
+.h-updateAccInfo button {
+	margin-right: auto;
 }
 

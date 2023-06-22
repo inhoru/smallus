@@ -38,7 +38,9 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
             hostSt(rs.getString("HOST_ST")).
             hostAccountBank(rs.getString("HOST_ACCOUNT_BANK")).
             hostAccount(rs.getString("HOST_ACCOUNT")).
-            hostAccountName(rs.getString("HOST_ACCOUNT_NAME")).build();
+            hostAccountName(rs.getString("HOST_ACCOUNT_NAME")).
+            calcReqDate(rs.getInt("CALC_REQ_DATE")).
+            build();
    }
    public Host hostLogin(Connection conn,String hostId,String password) {
       PreparedStatement pstmt=null;
