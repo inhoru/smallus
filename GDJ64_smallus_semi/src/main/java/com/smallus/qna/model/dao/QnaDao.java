@@ -39,12 +39,12 @@ public class QnaDao {
 				.qnaFinishYn(rs.getString("qna_finish_yn"))
 				.build();
 	}
-	public List<Qna> selectQna(Connection conn){
+	public List<Qna> detailQnaList(Connection conn){
 		PreparedStatement pstmt = null;
 		ResultSet rs=null;
 		List<Qna> list = new ArrayList();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectQna"));
+			pstmt=conn.prepareStatement(sql.getProperty("detailQnaList"));
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				list.add(getQna(rs));
