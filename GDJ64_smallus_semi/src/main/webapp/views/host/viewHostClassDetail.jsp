@@ -71,10 +71,13 @@
 					<button>추가</button>
 				</div>
 			</div>
-			<%if(classDetailList!=null&&!classDetailList.isEmpty()){ %>
+			<%if(classDetailList!=null&&!classDetailList.isEmpty()){
+				int count=0;
+				for(ClassDetail cd: classDetailList){%>
 			<table class="h-class-detailTbl">
 				<tr>
 					<th>NO</th>
+					<th>클레스 세부 번호</th>
 					<th>날짜</th>
 					<th>시간</th>
 					<th>예약 인원</th>
@@ -95,7 +98,8 @@
 					<td class="h-class-tbl-btn"><button>삭제</button></td>
 				</tr>
 			</table>
-			<%} %>
+			<%count++;} 
+			}%>
 		</div>
 	</section>
 <%@ include file="/views/common/hostFooter.jsp"%>

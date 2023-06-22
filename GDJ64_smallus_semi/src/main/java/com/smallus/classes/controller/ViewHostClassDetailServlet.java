@@ -50,7 +50,7 @@ public class ViewHostClassDetailServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg", "조회할 클래스가 없습니다.");
 			System.out.println("세부클래스없음");
-			request.setAttribute("loc", "/views/host/hostMain.jsp");
+			request.setAttribute("loc", "/views/host/viewHostClassList.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}
