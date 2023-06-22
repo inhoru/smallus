@@ -3,13 +3,13 @@
 <%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
 <%
 	Classes info=(Classes)request.getAttribute("classinfo");
-	List<ClassDetail> schedule=(List)request.getAttribute("schedule");
+	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
 %>
 <%!
 	// public int personnelCount=1;
+	// int classPrice=37000;
 	int wishNum=110;
 	double starPoint=4.5;
-	int classPrice=37000;
 %>
 
 <%@ include file="/views/common/mainHeader.jsp"%>
@@ -18,6 +18,7 @@
 	<div class="d-detail-header">
 		<div class="d-detail-img">
 			<img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg" width=400px height=400px>
+			<!-- 이미지 등록한것 있으면 수정예정 -->
 		</div>
 		<div class="d-detail-main">
 			<div id="d-detail-top">
@@ -26,6 +27,7 @@
 				<p>♥ 찜 <%=wishNum%> </p>
 				<!-- if분기로 찜 여부 표시 -->
 				<p>★ <%=starPoint %>점</p>
+				<!-- 리뷰 조회해서 평균내기 -->
 			</div>
 			<h3><%=info.getClassTitle() %></h3>
 			<h4>1인 <%=info.getClassPrice() %>원</h4>
@@ -33,7 +35,7 @@
 				<div id="d-detail-date">
 					<select>
 					<%for(ClassDetail cd : schedule){ %>
-						<option><%=cd.getBookingTimeStart() %> 인원수:<%=cd.getRemainingPersonnel() %></option>
+						<option><%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %>인원수:<%=cd.getRemainingPersonnel() %></option>
 					<%} %>
 					</select> 
 					<%-- <img src="<%=request.getContextPath()%>/img/category_main/calendar.png" width="300" height="200"> --%>
@@ -45,7 +47,7 @@
 					<button onclick="personPlus();">+</button>
 				</div>
 				<div id="d-payment">
-					<p id="d-payment-price">결제금액 <%=classPrice %>원</p>
+					<p id="d-payment-price">결제금액 <%=info.getClassPrice() %>원</p>
 					<input type="submit" value="결제하기">
 				</div>
 			</div>
@@ -107,7 +109,7 @@
 	}
 	const paymentcalcul=()=>{
 		document.getElementById("personnel").innerHTML=personnelCount+"명";
-		payment=<%=classPrice %>*personnelCount;
+		payment=<%=info.getClassPrice() %>*personnelCount;
 		document.getElementById("d-payment-price").innerHTML="결제금액 "+payment+"원";
 	}
 	

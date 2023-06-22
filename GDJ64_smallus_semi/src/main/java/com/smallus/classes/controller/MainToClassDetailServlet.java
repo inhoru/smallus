@@ -38,15 +38,15 @@ public class MainToClassDetailServlet extends HttpServlet {
 		// '단일 클래스'의 정보와 스케쥴을 같이 가져옴
 		
 		/* String classId=request.getParameter("classId"); */
-		String classId="CLS20230622-2"; //임시 클래스아이디 정보
+		String classId="CLS20230622-2"; // 스케쥴 등록된 임시 클래스아이디 정보
 		
 		Classes classInfo= new ClassService2().selectClassByClassId(classId);
 		List<ClassDetail> classSchedule=new ClassService().selectClassDetailByClassId(classId);
 		
 		request.setAttribute("classinfo",classInfo);
-		request.setAttribute("classSchedult", classSchedule);
+		request.setAttribute("classSchedule", classSchedule);
 		
-		request.getRequestDispatcher("/views/class/ClassDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/class/classDetail.jsp").forward(request, response);
 	}
 
 	/**
