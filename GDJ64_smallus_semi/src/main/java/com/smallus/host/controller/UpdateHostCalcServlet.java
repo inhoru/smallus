@@ -48,13 +48,20 @@ public class UpdateHostCalcServlet extends HttpServlet {
 		String hostAccountName=request.getParameter("hostAccountName");
 		int calcReqDate=Integer.parseInt(request.getParameter("calcReqDate"));
 		int result= new HostService().updateHostCalc(hostAccountBank, hostAccount, hostAccountName, calcReqDate, hostId);
-		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out=response.getWriter();
-		out.print(hostAccountBank);
-		out.print(hostAccount);
-		out.print(hostAccountName);
-		out.print(calcReqDate);
+		//System.out.println(hostId+" "+hostAccountBank+""+hostAccount+""+hostAccountName+""+calcReqDate);
+		//System.out.println("calcReqDate : "+calcReqDate+" result : "+result);
+		if(result>0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.print(hostAccountBank);
+			out.print(hostAccount);
+			out.print(hostAccountName);
+			out.print(calcReqDate);
+		}else {
+			request.setAttribute("msg", "저장에 실패 했습니다 ;(");
+			request.setAttribute("loc", "/views/host/viewHostCalc.jsp");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 
 }

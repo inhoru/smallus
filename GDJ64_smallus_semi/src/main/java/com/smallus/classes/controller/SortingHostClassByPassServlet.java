@@ -85,7 +85,7 @@ public class SortingHostClassByPassServlet extends HttpServlet {
 			request.getRequestDispatcher("/views/host/viewHostClassList.jsp").forward(request, response);
 		}else {
 			request.setAttribute("msg", "조회할 클래스가 없습니다.");
-			request.setAttribute("loc", "/views/host/hostMain.jsp");
+			request.setAttribute("loc", "/views/host/viewHostClassList.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
 	}

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.smallus.member.model.vo.Member"%>
+<%@ page import="java.util.List, com.smallus.host.model.vo.Host"%>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <%
-List<Member> memberList=(List)request.getAttribute("MemberList"); 
+List<Host> HostList=(List)request.getAttribute("HostList"); 
 %>
 <style>
 	#pageBar{
@@ -14,7 +14,7 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 	<div id="mainOpacity h-host-main">
 		<section class="h-main">
 			<div class="h-main-title">
-				<h2>일반회원관리</h2>
+				<h2>호스트회원관리</h2>
 			</div>
 		</section>
 		<section class="h-main h-main-rsvList">
@@ -30,22 +30,22 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<th>회원상태</th>
 						<th></th>
 					</tr>
-				<%if(memberList!=null&&!memberList.isEmpty()) {
-					for(Member m:memberList){%>
+				<%if(HostList!=null&&!HostList.isEmpty()) {
+					for(Host h:HostList){%>
 					<tr>
-						<td><%=m.getMemberId()%></td>
-						<td><%=m.getMemberName()%></td>
-						<td><%=m.getMemberNickname()%></td>
-						<td><%=m.getMemberPhone()%></td>
-						<td><%=m.getMemberEmail()%></td>
-						<td><%=m.getMemberConsent()%></td>
-						<td><%=m.getMemberSt()%></td>
+						<td><%=h.getHostId()%></td>
+						<td><%=h.getHostName()%></td>
+						<th><%=h.getHostNickname()%></th>
+						<td><%=h.getHostPhone()%></td>
+						<td><%=h.getHostEmail()%></td>
+						<td><%=h.getHostConsent()%></td>
+						<td><%=h.getHostSt()%></td>
 						<td><button id=m-deletememberbtn>삭제</button></td>
 					</tr>
 					<%} %>
 				<%}else{ %>
 			        <tr>
-                        <td colspan="8">조회된 회원이 없습니다.</td>
+                        <td colspan="8">조회된 호스트가 없습니다.</td>
                     </tr>
 				<%} %>
 				</table>

@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.admin.service.AdminService;
-import com.smallus.notice.model.vo.Notice;
-
+import com.smallus.host.model.vo.Host;
 
 /**
- * Servlet implementation class memberListServlet
+ * Servlet implementation class HostListServlet
  */
-@WebServlet("/admin/noticeListServlet.do")
-public class NoticeListServlet extends HttpServlet {
+@WebServlet("/admin/HostListServlet.do")
+public class HostListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListServlet() {
+    public HostListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +31,6 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//DB의 member테이블에 저장된 전체 회원을 가져와 화면에 출력해주는 기능
-		
-		//페이징 처리하기
 		int cPage,numPerpage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -48,7 +44,7 @@ public class NoticeListServlet extends HttpServlet {
 		}
 		//3. 페이지바를 구성
 		// 1) DB에 저장된 전체 데이터의 수를 가져오기
-		int totalData=new AdminService().selectNoticeCount();
+		int totalData=new AdminService().selectHostCount();
 		//System.out.println(totalData);
 		// 2) 전체페이지수를 계산하기
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
@@ -80,17 +76,19 @@ public class NoticeListServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
+		
 		//1. DB에서 member테이블에 있는 데이터 가져오기
-		List<Notice> list=new AdminService().checkNoticeAll(cPage,numPerpage);
+		List<Host> list=new AdminService().checkHostAll(cPage,numPerpage);
 //		list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);
-		request.setAttribute("NoticeList", list);
-		request.getRequestDispatcher("/views/admin/NoticeList.jsp").forward(request, response);
+		request.setAttribute("HostList", list);
+		request.getRequestDispatcher("/views/admin/adminHostList.jsp").forward(request, response);
 		}else {
-		request.getRequestDispatcher("/views/admin/NoticeList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminHostList.jsp").forward(request, response);
 		}
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
