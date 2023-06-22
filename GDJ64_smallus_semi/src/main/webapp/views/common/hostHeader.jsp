@@ -115,7 +115,7 @@
 					<td><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 				</tr>
 				<tr>
-					<td><a href="">호스트회원관리</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/HostListServlet.do">호스트회원관리</a></td>
 					<td><a href="">정산승인</a></td>
 					<td><a href="">1:1문의</a></td>
 				</tr>

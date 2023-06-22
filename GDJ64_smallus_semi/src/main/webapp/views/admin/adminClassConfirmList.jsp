@@ -32,13 +32,13 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 				<%if(ClassesConfirmList!=null&&!ClassesConfirmList.isEmpty()) {
 					for(Classes c:ClassesConfirmList){%>
 					<tr>
-						<th><%=c.getClassTitle()%></th>
-						<th><%=c.getClassTitle()%></th>
-						<th><%=c.getHostId()%></th>
-						<th><%=c.getClassUpLoadDate()%></th>
-						<th><%=c.getClassPassId()%></th>
-						<td><button id=m-classconfirmbtn>승인</button></td>
-						<td><button id=m-classrejectbtn>거절</button></td>
+						<td><%=c.getCategoryTitle()%></td>
+						<td><%=c.getClassTitle()%></td>
+						<td><%=c.getHostId()%></td>
+						<td><%=c.getClassUpLoadDate()%></td>
+						<td><%=c.getClassPassId()%></td>
+						<td><button id=m-classconfirmbtn onclick="classconfirm('<%=c.getClassId()%>');">승인</button></td>
+						<td><button id=m-classrejectbtn onclick="classreject('<%=c.getClassId()%>');">거절</button></td>
 					</tr>
 					<%} %>
 				<%}else{ %>
@@ -57,11 +57,15 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 </div>
 </body>
 <script>
-	$("#m-classconfirmbtn").click(e=>{
-		
-	})
-	$("#m-classrejectbtn").click(e=>{
-		
-	})
+	const classreject=(classId)=>{
+		/* let classId=$("#m-classId").val(); */
+		open("<%=request.getContextPath()%>/views/admin/classReject.jsp?classId="+classId
+				,"_blank","width=600, height=200, top=300,left=500");
+	}
+
+	
+	const classconfirm=(classId)=>{
+		location.assign("<%=request.getContextPath()%>/admin/ClassesConfirm.do?classId="+classId);
+	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

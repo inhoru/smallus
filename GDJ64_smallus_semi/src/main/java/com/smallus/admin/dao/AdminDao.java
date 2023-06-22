@@ -1,9 +1,10 @@
 package com.smallus.admin.dao;
 
+import static com.smallus.classes.model.dao.ClassesDao.getClasses;
 import static com.smallus.common.JDBCTemplate.close;
 import static com.smallus.member.dao.MemberDao.getMember;
 import static com.smallus.notice.dao.NoticeDao.getNotice;
-import static com.smallus.classes.model.dao.ClassesDao.getClasses;
+import static com.smallus.host.dao.HostDao.getHost;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.util.Properties;
 
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.common.JDBCTemplate;
+import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
 
@@ -57,7 +59,7 @@ public class AdminDao {
 			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				list.add(getMember(rs)); //getMember는 MemberDao에 있는 메소드를 스태틱으로 선언해서 불러옴
+				list.add(getMember(rs));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -66,6 +68,42 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
+	public List<Host> checkHostAll(Connection conn, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Host> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("checkHostAll"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getHost(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public int selectHostCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectHostCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	
 	public int selectNoticeCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -135,4 +173,34 @@ public class AdminDao {
 		}return list;
 	}
 	
+	public int classReject(Connection conn,String classPassId,String classId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//UPDATE CLASS SET CLASS_PASS_ID=? WHERE CLASS_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("classReject"));
+			pstmt.setString(1, classPassId);
+			pstmt.setString(2, classId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int classConfirm(Connection conn,String classId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//UPDATE CLASS SET CLASS_PASS_ID='Y' WHERE CLASS_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("classConfirm"));
+			pstmt.setString(1, classId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }
