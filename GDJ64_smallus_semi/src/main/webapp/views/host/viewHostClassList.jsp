@@ -27,7 +27,7 @@
 				for(Classes c:classList){%>
 				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
-					<a href="<%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=loginHost.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
+					<a href="<%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=hostInfo.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
 						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
 					</a>
 					<table>
@@ -154,14 +154,14 @@
 			// index =1 -> W / 2:Y/3:N
 			//console.log(index);
 			if(index==0){
-				location.replace('<%=request.getContextPath()%>/class/viewClassList.do?hostId=<%=loginHost.getHostId()%>');
+				location.replace('<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>');
 			}else if(index==1){
-				location.assign('<%=request.getContextPath()%>/class/sortingClassByPass.do?hostId=<%=loginHost.getHostId()%>&passStatus=W');
+				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?hostId=<%=hostInfo.getHostId()%>&passStatus=W');
 
 			}else if(index==2){
-				location.assign('<%=request.getContextPath()%>/class/sortingClassByPass.do?hostId=<%=loginHost.getHostId()%>&passStatus=Y');
+				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?hostId=<%=hostInfo.getHostId()%>&passStatus=Y');
 			}else if(index==3){
-				location.assign('<%=request.getContextPath()%>/class/sortingClassByPass.do?hostId=<%=loginHost.getHostId()%>&passStatus=N');
+				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?hostId=<%=hostInfo.getHostId()%>&passStatus=N');
 			}
 				$(".h-class-list-n").css('display','none');
 				$(".h-class-pass-list").css('display','flex');

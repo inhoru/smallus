@@ -1,60 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/views/common/hostHeader.jsp"%>
-<%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
-<!--main-->
-<div id="mainOpacity h-host-main">
-	<section class="h-main h-calc">
-     	<!-- 호스트 테이블의 정산 정보 -->
-			<h2>정산 정보 관리</h2><hr>
-			<table class="h-calc-tbl">
-				<tr>
-					<td>은행 명</td>
-					<td>카카오뱅크</td>
-					<td>계좌 번호</td>
-					<td>3333-11-2222222</td>
-					<td>예금주 명</td>
-					<td>예금주</td>
-					<td>정산 일</td>
-					<td>매달 1일</td>
-					<td><button onclick="location.assign('<%=request.getContextPath() %>/host/updateAccount.do')">수정</button></td>
-				</tr>
-			</table>
-	</section>
-	<!-- main -->
-	<section class="h-main h-main-rsvList">
-		<div class="h-main-title">
-			<h2>새로운 예약 내역</h2>
-	    </div>
-	        <hr>
-			<div class="h-r-callendar" id="h-main-chart"></div>
-                <table id="h-main-rsv-tbl">
-                    <tr>
-                    	<th>NO</th>
-                        <th>결제 번호</th>
-                        <th>클래스 이름</th>
-                        <th>날짜</th>
-                        <th>예약자 아이디</th>
-                        <th>예약 인원</th>
-                    </tr>
-                    <!-- P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.MEMBER_ID -->
-		                    <tr>
-	                   		</tr>
-                    
-                    <tr>
-                        <td colspan="5">조회된 예약이 없습니다.</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-    
-    </script>
-    <script src="<%=request.getContextPath() %>/js/host.js"></script>
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<%@ include file="/views/common/hostFooter.jsp"%>
-
-
+			<div id="h-updateAccInfo">
+				<h4>은행 명</h4>
+				<select id="h-selectAccountBank">
+					<option selected disabled>은행 선택
+					<option value="카카오뱅크" name="hostAccountBank">카카오뱅크
+					<option value="국민은행" name="hostAccountBank">국민은행
+					<option value="기업은행" name="hostAccountBank">기업은행
+					<option value="농협은행" name="hostAccountBank">농협은행
+					<option value="신한은행" name="hostAccountBank">신한은행
+					<option value="산업은행" name="hostAccountBank">산업은행
+					<option value="우리은행" name="hostAccountBank">우리은행
+					<option value="한국씨티은행" name="hostAccountBank">한국씨티은행
+					<option value="하나은행" name="hostAccountBank">하나은행
+					<option value="SC제일은행" name="hostAccountBank">SC제일은행
+				</select>
+				<h4>계좌 번호</h4>
+				<input type="text" placeholder="계좌번호" name="hostAccount">
+				<h4>예금주 명</h4>
+				<input type="text" placeholder="정산 받을 예금 주 이름을 입력하세요" name="hostAccountName">
+				<h4>정산 일자</h4>
+				<input type="number" placeholder="정산은 신청 후 24시간 이내에 승인됩니다." name="calcReqDate">
+				<button id="h-hostAccountUpdateBtn">수정</button>
+			</div>
         

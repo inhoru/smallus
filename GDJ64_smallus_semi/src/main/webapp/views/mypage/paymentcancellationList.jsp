@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,java.util.Date"%>
-<%@ include file="/views/common/mainHeader.jsp"%>
+<%@ page
+	import="java.util.List,com.smallus.member.model.vo.Member,java.util.Date"%>
+	<%@ include file="/views/common/mainHeader.jsp"%>
 <%
-List<Member> payment = (List) request.getAttribute("payment");
+
+List<Member> payment = (List) request.getAttribute("cancellation");
 int cPage = (int) request.getAttribute("cPage");
 %>
+
 <div id="mainOpacity">
 	<div class="i-withdrawalendtotal">
 		<section class="i-tablecontent">
@@ -167,22 +170,19 @@ int cPage = (int) request.getAttribute("cPage");
 	});
 	
 	
-$(".i-completedList").click(e=>{
-const completed=$(e.target).text();
-location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+completed)
-});
+	$(".i-completedList").click(e=>{
+		const completed=$(e.target).text();
+		location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+completed)
+		});
 
-$(".i-cancellationList").click(e=>{	
-	const cancellation=$(e.target).text();
-	
-	location.assign("<%=request.getContextPath()%>/paymentajaxcancellation.do?status="+cancellation)
-});
-	
+		$(".i-cancellationList").click(e=>{	
+			const cancellation=$(e.target).text();
+			
+			location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+cancellation)
+		});
 
 
 
 
 </script>
-
-
-	<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>

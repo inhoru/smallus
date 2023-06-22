@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.smallus.member.model.vo.Member;
 import com.smallus.member.service.MemberService;
 
@@ -44,17 +45,18 @@ public class MemberUpdateprofilServlet extends HttpServlet {
 		String path=getServletContext().getRealPath("/upload/mypageprofile");
 		int maxSize=1024*1024*100;
 		String encode="UTF-8";
-		MultipartRequest mr=new MultipartRequest(request,path,maxSize,encode);
+		DefaultFileRenamePolicy dfr=new DefaultFileRenamePolicy();
+		MultipartRequest mr=new MultipartRequest(request,path,maxSize,encode,dfr);
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		Member infoMember = (Member) request.getAttribute("infoMember");
 		String memberId=loginMember.getMemberId();
 		String memberNickname=mr.getParameter("memberNickname");
-		String upFile=mr.getOriginalFileName("i-upFile");
+		String renamefilename=mr.getFilesystemName("i-upFile");
 		
 		
-		if(upFile!=null) {
-			Member m=Member.builder().memberNickname(memberNickname).memberImg(upFile).build();
+		if(renamefilename!=null) {
+			Member m=Member.builder().memberNickname(memberNickname).memberImg(renamefilename).build();
 			int result=new MemberService().updateMember(m,memberId);
 			String msg="수정이 완료되었습니다.",loc="/memberprofile.do";
 			if(result==0) {

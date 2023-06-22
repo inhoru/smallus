@@ -77,11 +77,7 @@
                     </tr>
                     <tr>
                         <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
-<<<<<<< HEAD
                         <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>" id="h-viewCLassList">내 클래스 보기</a></td>
-=======
-                        <td><a href="<%=request.getContextPath()%>/class/viewClassList.do?hostId=<%=hostInfo.getHostId()%>" id="h-viewCLassList">내 클래스 보기</a></td>
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
                         <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>
                     </tr>
@@ -115,8 +111,8 @@
 				</tr>
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
-					<td><a href="<%=request.getContextPath()%>//admin/ClassesListServlet.do">클래스승인</a></td>
-					<td><a href="<%=request.getContextPath()%>/noticeListServlet.do">공지사항</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/ClaasesListServlet.do">클래스승인</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 				</tr>
 				<tr>
 					<td><a href="">호스트회원관리</a></td>
