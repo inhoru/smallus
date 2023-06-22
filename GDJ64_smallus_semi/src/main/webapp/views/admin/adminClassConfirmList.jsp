@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.smallus.member.model.vo.Member"%>
+<%@ page import="java.util.List, com.smallus.classes.model.vo.Classes"%>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <%
-List<Member> memberList=(List)request.getAttribute("MemberList"); 
+List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"); 
 %>
 <style>
 	#pageBar{
@@ -29,19 +29,22 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<th></th>
 						<th></th>
 					</tr>
-				<%if(memberList!=null&&!memberList.isEmpty()) {
-					for(Member m:memberList){%>
+				<%if(ClassesConfirmList!=null&&!ClassesConfirmList.isEmpty()) {
+					for(Classes c:ClassesConfirmList){%>
 					<tr>
-						<th><%=m.getMemberId()%></th>
-						<th><%=m.getMemberName()%></th>
-						<th><%=m.getMemberNickname()%></th>
-						<th><%=m.getMemberPhone()%></th>
-						<th><%=m.getMemberEmail()%></th>
-						<th><%=m.getMemberConsent()%></th>
-						<th><%=m.getMemberSt()%></th>
-						<td><button id=m-deletememberbtn>삭제</button></td>
+						<th><%=c.getClassTitle()%></th>
+						<th><%=c.getClassTitle()%></th>
+						<th><%=c.getHostId()%></th>
+						<th><%=c.getClassUpLoadDate()%></th>
+						<th><%=c.getClassPassId()%></th>
+						<td><button id=m-classconfirmbtn>승인</button></td>
+						<td><button id=m-classrejectbtn>거절</button></td>
 					</tr>
 					<%} %>
+				<%}else{ %>
+		        	<tr>
+                        <td colspan="7">승인할 클래스가 없습니다.</td>
+                    </tr>
 				<%} %>
 				</table>
 			</div>
@@ -54,7 +57,10 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 </div>
 </body>
 <script>
-	$("#m-deletememberbtn").click(e=>{
+	$("#m-classconfirmbtn").click(e=>{
+		
+	})
+	$("#m-classrejectbtn").click(e=>{
 		
 	})
 </script>

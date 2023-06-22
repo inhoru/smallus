@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.smallus.admin.dao.AdminDao;
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
 public class AdminService {
@@ -40,5 +41,18 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	
+	public int selectConfirmClassesCount() {
+		Connection conn=getConnection();
+		int totalData=dao.selectConfirmClassesCount(conn);
+		close(conn);
+		return totalData;
+	}
 
+	public List<Classes> checkConfirmClasses(int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Classes> list=dao.checkConfirmClasses(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
 }

@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="button" id="m-enrollmemberbtn" value="일반회원가입"> 
+					<input type="button" id="m-enrollmemberbtn" value="회원가입"> 
 				</td>
 				<td>
 					<input type="button" id="m-enrollhostbtn" value="호스트회원가입"> 
@@ -98,6 +98,7 @@ table#loginTable input[type=button]{
 	padding: 0.4rem 0.6rem;
 	font-size: 0.8rem;
 	height:25px;
+	cursor:pointer;
 }
 table#loginTable input[type=submit]{
 	width:24rem;
@@ -108,6 +109,7 @@ table#loginTable input[type=submit]{
 	padding: 0.4rem 0.6rem;
 	font-size: 0.8rem;
 	height:25px;
+	cursor:pointer;
 }
 img.m-socialbtn{
 	width:24rem;
