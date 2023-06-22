@@ -3,9 +3,13 @@
 <%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
 <%
 	Classes classInfo=(Classes)request.getAttribute("infoClass");
-	List<ClassDetail> classScedule=(List)request.getAttribute("schedule");
+	List<ClassDetail> classScedule=(List)request.getAttribute("schedule")
 %>
-<%! public int personnelCount=1; %>
+<%!
+	public int personnelCount=1;
+	int like=110;
+	double starPoint=4.5;
+%>
 
 <%@ include file="/views/common/mainHeader.jsp"%>
 
