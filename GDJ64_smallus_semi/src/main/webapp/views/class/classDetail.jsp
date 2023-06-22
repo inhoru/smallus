@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
 <%
-	Classes classInfo=(Classes)request.getAttribute("infoClass");
-	List<ClassDetail> classSchedule=(List)request.getAttribute("schedule");
+	Classes info=(Classes)request.getAttribute("classinfo");
+	List<ClassDetail> schedule=(List)request.getAttribute("schedule");
 %>
 <%!
 	// public int personnelCount=1;
@@ -22,19 +22,21 @@
 		<div class="d-detail-main">
 			<div id="d-detail-top">
 				<p>공예</p>
+				<!-- 카테고리명 조인해서 가져와야함 -->
 				<p>♥ 찜 <%=wishNum%> </p>
+				<!-- if분기로 찜 여부 표시 -->
 				<p>★ <%=starPoint %>점</p>
 			</div>
-			<h3>스테인 글라스로 나만의 소품 만들기</h3>
-			<h4>1인 <%=classPrice %>원</h4>
+			<h3><%=info.getClassTitle() %></h3>
+			<h4>1인 <%=info.getClassPrice() %>원</h4>
 			<div class="d-detail-schedule">
 				<div id="d-detail-date">
 					<select>
-					<%for(ClassDetail c : classSchedule){ %>
-						<option>c</option>
+					<%for(ClassDetail cd : schedule){ %>
+						<option><%=cd.getBookingTimeStart() %> 인원수:<%=cd.getRemainingPersonnel() %></option>
 					<%} %>
 					</select> 
-					<img src="<%=request.getContextPath()%>/img/category_main/calendar.png" width="300" height="200">
+					<%-- <img src="<%=request.getContextPath()%>/img/category_main/calendar.png" width="300" height="200"> --%>
 				</div>
 				<div id="d-detail-personnel">
 					<p>인원수</p>
@@ -88,7 +90,7 @@
 
 <script>
 	let personnelCount=1;
-	let payment=<%=classPrice %>*personnelCount;
+	let payment=<%=info.getClassPrice() %>*personnelCount;
 	
 	const personMinus=()=>{
 		personnelCount=personnelCount-1;
@@ -100,6 +102,7 @@
 	}
 	const personPlus=()=>{
 		personnelCount=personnelCount+1;
+		// 분기문으로 : 선택한 일정의 인원수를 넘어갈 수 없음
 		paymentcalcul();
 	}
 	const paymentcalcul=()=>{
