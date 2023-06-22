@@ -126,9 +126,9 @@
 		height: 30px;
 		border-radius: 20px;
 	}
-	.d-review-one>*{
+	/* .d-review-one>*{
 	border: 1px solid orange;
-	}
+	} */
 	
 	
 	

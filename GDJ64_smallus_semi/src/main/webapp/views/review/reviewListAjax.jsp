@@ -6,7 +6,6 @@
 	<br>
 
 	<div class="d-review-header">
-		<a href="">후기</a>
 		<!-- <select>
 			<option value="전체보기">전체보기</option>
 			<option value="작성일순">작성일순</option>
@@ -122,9 +121,9 @@
 
 }
 
-.d-review-one>* {
+/* .d-review-one>* {
 	border: 1px solid orange;
-}
+} */
 
 p {
 	margin-bottom: 2%
