@@ -93,6 +93,83 @@ public class PaymentDao {
 			close(pstmt);
 		}return list;
 	}
+	public List<Member> MemberCompletedpayment(Connection conn, String memberId,int cPage,int numPerpage,String completed){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList<Member>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("memberCompletedpayment"));
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) WHERE MEMBER_ID=? AND PAYMENT_STATUS=? ORDER BY PAYMENT_DATE DESC)B) WHERE RNUM BETWEEN ? AND ?
+			pstmt.setString(1, memberId);
+			pstmt.setString(2,completed);
+			pstmt.setInt(3,(cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+			Classes c=new Classes();
+			Payment p=new Payment();
+			ClassDetail d=new ClassDetail();
+			p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+			p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
+			c.setClassTitle(rs.getString("CLASS_TITLE"));
+			c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+			p.setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+			d.setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+			d.setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+			p.setPaymentId(rs.getString("PAYMENT_ID"));
+			Member m = new Member();
+			m.setClasses(c);
+			m.setPayment(p);
+			m.setClassDetail(d);
+			list.add(m);
+		}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	public List<Member> Membercancellationpayment(Connection conn, String memberId,int cPage,int numPerpage,String completed){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList<Member>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("membercancellationpayment"));
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) WHERE MEMBER_ID=? AND PAYMENT_STATUS=? ORDER BY PAYMENT_DATE DESC)B) WHERE RNUM BETWEEN ? AND ?
+			pstmt.setString(1, memberId);
+			pstmt.setString(2,completed);
+			pstmt.setInt(3,(cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+			Classes c=new Classes();
+			Payment p=new Payment();
+			ClassDetail d=new ClassDetail();
+			p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+			p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
+			c.setClassTitle(rs.getString("CLASS_TITLE"));
+			c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+			p.setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+			d.setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+			d.setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+			p.setPaymentId(rs.getString("PAYMENT_ID"));
+			Member m = new Member();
+			m.setClasses(c);
+			m.setPayment(p);
+			m.setClassDetail(d);
+			list.add(m);
+		}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	
 	public int paymentCount(Connection conn ,String memberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -101,6 +178,25 @@ public class PaymentDao {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentCount"));
 			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	public int paymentdetailCount(Connection conn ,String memberId,String completed) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("paymentdetailCount"));
+			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, completed);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
 		}catch(SQLException e) {

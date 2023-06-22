@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="button" id="m-enrollmemberbtn" value="일반회원가입"> 
+					<input type="button" id="m-enrollmemberbtn" value="회원가입"> 
 				</td>
 				<td>
 					<input type="button" id="m-enrollhostbtn" value="호스트회원가입"> 

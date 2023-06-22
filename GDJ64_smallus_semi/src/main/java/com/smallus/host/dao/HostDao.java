@@ -119,39 +119,19 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
          close(pstmt);
       }return result;
    }
-   public Host updateHostCalc(Connection conn, String hostId) {
-      PreparedStatement pstmt=null;
-      ResultSet rs=null;
-      Host h=null;
-      try {
-         //updateHostCalc=SELECT HOST_ACCOUNT_BANK, HOST_ACCOUNT, HOST_ACCOUNT_NAME FROM HOST WHERE HOST_ID=?
-         pstmt=conn.prepareStatement(sql.getProperty("updateHostCalc"));
-         pstmt.setString(1, hostId);
-         rs=pstmt.executeQuery();
-         if(rs.next()) {
-            h.setHostAccount(rs.getString("HOST_ACCOUNT"));
-            h.setHostAccountBank(rs.getString("HOST_ACCOUNT_BANK"));
-            h.setHostAccountName(rs.getString("HOST_ACCOUNT_NAME"));
-         }
-      }catch(SQLException e) {
-         e.printStackTrace();
-      }finally {
-         close(rs);
-         close(pstmt);
-      }return h;
-   }
    
-   public int updateHostCalc(Connection conn, String accountBank, String account, String accountName,String hostId) {
+   public int updateHostCalc(Connection conn, String accountBank, String account, String accountName, int calcReqDate, String hostId) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		Host h=null;
 		try {
-			//updateHostCalc=UPDATE HOST SET HOST_ACCOUNT_BANK=?, HOST_ACCOUNT=?, HOST_ACCOUNT_NAME=? WHERE HOST_ID=?
+			//updateHostCalc=UPDATE HOST SET HOST_ACCOUNT_BANK=?, HOST_ACCOUNT=?, HOST_ACCOUNT_NAME=? CALC_REQ_DATE=? WHERE HOST_ID=?
 			pstmt=conn.prepareStatement(sql.getProperty("updateHostCalc"));
 			pstmt.setString(1, accountBank);
 			pstmt.setString(2, account);
 			pstmt.setString(3, accountName);
-			pstmt.setString(4, hostId);
+			pstmt.setInt(4, calcReqDate);
+			pstmt.setString(5, hostId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

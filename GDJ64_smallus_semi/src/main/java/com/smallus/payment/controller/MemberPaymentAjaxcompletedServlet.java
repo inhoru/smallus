@@ -1,4 +1,4 @@
-package com.smallus.member.controller;
+package com.smallus.payment.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,23 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.smallus.classes.model.vo.Classes;
-import com.smallus.coupon.model.vo.Coupon;
-import com.smallus.coupon.service.CouponService;
 import com.smallus.member.model.vo.Member;
-import com.smallus.member.service.MemberService;
+import com.smallus.payment.service.PaymentService;
 
 /**
- * Servlet implementation class MemberWishListServlet
+ * Servlet implementation class MemberPaymentAjaxcompletedServlet
  */
-@WebServlet("/memberWishList.do")
-public class MemberWishListServlet extends HttpServlet {
+@WebServlet("/paymentajaxcompleted.do")
+public class MemberPaymentAjaxcompletedServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberWishListServlet() {
+    public MemberPaymentAjaxcompletedServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,12 +41,13 @@ public class MemberWishListServlet extends HttpServlet {
 		try {
 			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
 		} catch (NumberFormatException e) {
-			numPerpage = 4;
+			numPerpage = 5;
 		}
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		int totalData=new MemberService().wishListCount(loginMember.getMemberId());
-		List<Classes> list=new MemberService().wishList(loginMember.getMemberId(),cPage,numPerpage);
+		String completed=request.getParameter("status");
+		List<Member> list=new PaymentService().MemberCompletedpayment(loginMember.getMemberId(),cPage,numPerpage,completed);
+		int totalData=new PaymentService().paymentdetailCount(loginMember.getMemberId(),completed);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -73,10 +71,12 @@ public class MemberWishListServlet extends HttpServlet {
 		} else {
 			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
+		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("paymentCount", totalData);
+		request.setAttribute("completedPayment", list);
+		request.setAttribute("cPage", cPage);
 		
-		request.setAttribute("pageBar",pageBar);
-		request.setAttribute("wishList",list);
-		request.getRequestDispatcher("/views/mypage/wishList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/mypage/paymentcompletedList.jsp").forward(request, response);
 	}
 
 	/**
