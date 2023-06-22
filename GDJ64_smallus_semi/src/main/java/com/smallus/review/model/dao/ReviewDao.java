@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.smallus.review.model.vo.Review;
+import static com.smallus.common.JDBCTemplate.close;
 
 public class ReviewDao {
 	
@@ -27,24 +28,82 @@ public class ReviewDao {
 		}
 	}
 	
-	/*
-	 * private Review getReview(ResultSet rs) throws SQLException{ return
-	 * Review.builder() .reviewId(rs.getString("riview_id"))
-	 * .memberId(rs.getString("member_id")) .classId(rs.getString("class_id"))
-	 * .paymentId(rs.getString("payment_id"))
-	 * .reviewTitle(rs.getString("review_title"))
-	 * .reviewContent(rs.getString("review_content"))
-	 * .reviewRating(rs.getInt("review_Rating"))
-	 * .reviewDate(rs.getDate("review_date")) .build(); }
-	 */
-//	public List<Review> selectReview(Connection conn, int cPage, int numPerpage) {
+	private Review getReview(ResultSet rs) throws SQLException{
+	return Review.builder()
+			.reviewId(rs.getString("riview_id"))
+			.paymentId(rs.getString("payment_id"))
+			.reviewTitle(rs.getString("review_title"))
+			.reviewContent(rs.getString("review_content"))
+			.reviewRating(rs.getInt("review_Rating"))
+			.reviewDate(rs.getDate("review_date"))
+			.build();
+}
+//	public List<Review> selectReview(Connection conn,String classId) {
 //		PreparedStatement pstmt = null;
 //		ResultSet rs = null;
 //		List<Review> list = new ArrayList();
 //		try {
-//		//	pstmt=conn.prepareStatment(sql.getProperty("selectReview"));
-//			pstmt.setInt(1, (cPage-1)*numPerpage+1);
-//		//	pstmt.setInt(2,cPage)
-		//}
+//			pstmt=conn.prepareStatement(sql.getProperty("selectReview"));
+//			pstmt.setString(1, classId);
+//			rs=pstmt.executeQuery();
+//			while(rs.next()) {
+//				list.add(getReview(rs));
+//			}
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return list;
 //	}
+	public List<Review> selectReview(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Review> list = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectReview"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getReview(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public int insertReviwe(Connection conn, Review r) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertReview"));
+			pstmt.setString(1, r.getReviewId());
+			pstmt.setString(2, r.getPaymentId());
+			pstmt.setString(3, r.getReviewTitle());
+			pstmt.setString(4, r.getReviewContent());
+			pstmt.setInt(5, r.getReviewRating());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public Review selectReviewByNo(Connection conn, int no) {
+		PreparedStatement pstmt=null;
+		ResultSet rs = null;
+		Review r = null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectReviewByNo"));
+			pstmt.setInt(1,no);
+			rs=pstmt.executeQuery();
+			if(rs.next()) r=getReview(rs);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return r;
+	}
 	}

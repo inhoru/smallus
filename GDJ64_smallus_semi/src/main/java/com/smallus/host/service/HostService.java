@@ -22,9 +22,9 @@ public class HostService {
 	}
 	
 	
-	public int updateHostCalc(String accountBank, String account, String accountName, String hostId) {
+	public int updateHostCalc(String accountBank, String account, String accountName, int calcReqDate, String hostId) {
 		Connection conn=getConnection();
-		int result=dao.updateHostCalc(conn, accountBank, account, accountName, hostId);
+		int result=dao.updateHostCalc(conn, accountBank, account, accountName, calcReqDate, hostId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

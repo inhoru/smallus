@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
+<%
+	Classes classInfo=(Classes)request.getAttribute("infoClass");
+	List<ClassDetail> classScedule=(List)request.getAttribute("schedule");
+%>
+    
 <%@ include file="/views/common/mainHeader.jsp"%>
 
 <div class="d-class-detail">
@@ -32,19 +38,41 @@
 			</div>
 		</div>
 	</div>
+	<br>
 	<div class="d-detail-menu">
-	
+		<nav>
+			<ul>
+				<li><a href="">상세 정보</a></li>
+				<hr>
+				<li><a href="<%=request.getContextPath()%>/views/review/reviewList.jsp">후기</a></li>
+				<hr>
+				<li><h2 id="qnaAjax">Q & A</h2></li>
+			</ul>
+		</nav>
 	</div>
 	<div class="d-dtail-ajax">
-	
 	</div>
 </div>
 
+<script>
+	let personnel=1;
+		$("#qnaAjax").click(e=>{
+			$.ajax({
+				url:"<%=request.getContextPath()%>/ajax/qnaTest.do",
+				success:function(data){
+					console.log(data);
+					$(".d-dtail-ajax").html(data);
+				},
+				error:(e,m)=>{
+					console.log(e);
+				}
+			});
+		});
+</script>
 
 <style>
 	.d-class-detail{
 		width:70%;
-		display:flex;
 		margin : 0 auto;
 	}
 	.d-detail-header{
@@ -55,7 +83,6 @@
 		padding: 15px;
 	}
 	.d-detail-header div{
-		border:1px solid red;
 		margin:5px 0;
 	}
 	#d-detail-top{
@@ -77,6 +104,20 @@
 		background-color:#F8D8D8;
 		border-radius: 20px;
 	}
+	.d-class-detail div{
+		/* border:1px solid red; */
+	}
+	.d-detail-menu{
+		display:flex;
+		justify-content: space-around;
+		text-align: center;
+	}
+	.d-detail-menu li{
+
+		justify-content: space-around;
+		text-align: center;
+	}
+	
 </style>
 
 

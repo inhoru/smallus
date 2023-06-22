@@ -281,6 +281,8 @@ public class MemberDao {
 				Classes c=new Classes();
 				c.setClassTitle(rs.getString("CLASS_TITLE"));
 				c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				g.setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				c.setClassId(rs.getString("CLASS_ID"));
 				c.setWishlist(w);
 				c.setCategory(g);
 				list.add(c);

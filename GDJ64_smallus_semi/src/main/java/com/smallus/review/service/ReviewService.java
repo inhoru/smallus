@@ -1,4 +1,4 @@
-package com.smallus.review.model.service;
+package com.smallus.review.service;
 
 import java.sql.Connection;
 import java.util.List;
@@ -6,16 +6,23 @@ import java.util.List;
 import com.smallus.review.model.dao.ReviewDao;
 import com.smallus.review.model.vo.Review;
 
+import static com.smallus.common.JDBCTemplate.close;
 public class ReviewService {
 
 	private ReviewDao dao = new ReviewDao();
 	
-//	public List<Review> selectNotice(int cPage, int nemPerpage){
+//	public List<Review> selectReview(String classId){
 //		Connection conn = getConnection();
-//		List<Review> list = dao.selectNotice(conn,cPage,numPerpage);
+//		List<Review> list = dao.selectReview(conn,classId);
 //		close(conn);
 //		return list;
 //	}
+	public List<Review> selectReview(){
+		Connection conn = getConnection();
+		List<Review> list = dao.selectReview(conn);
+		close(conn);
+		return list;
+	}
 //	public int insertReview(Review r) {
 //		Connection conn=getConnection();
 //		if(result>0) commit(conn);
@@ -29,4 +36,9 @@ public class ReviewService {
 //		close(conn);
 //		return r;
 //	}
+
+	private Connection getConnection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

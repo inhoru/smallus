@@ -1,6 +1,7 @@
 package com.smallus.host.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ import com.smallus.host.service.HostService;
 /**
  * Servlet implementation class UpdateHostCalcServlet
  */
-@WebServlet("/host/updateAccount.do")
+@WebServlet("/host/updateHostAccount.do")
 public class UpdateHostCalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,18 +34,6 @@ public class UpdateHostCalcServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		HttpSession session=request.getSession();
-		Host hostInfo = (Host) session.getAttribute("hostInfo");
-		String hostId=hostInfo.getHostId();
-		String accountBank="" ,account="", accountName="";
-		int result= new HostService().updateHostCalc(accountBank, account, accountName, hostId);
-//		System.out.println(hostInfo);
-		Gson gson= new Gson();
-		response.setContentType("application/json; charset=UTF-8");
-		gson.toJson(hostInfo,response.getWriter()); 
-		//request.getRequestDispatcher("/views/host/updateHostCalc.jsp").forward(request, response);
-		
 	}
 
 	/**
@@ -52,7 +41,20 @@ public class UpdateHostCalcServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		String hostId=request.getParameter("hostId");
+		String hostAccountBank=request.getParameter("hostAccountBank");
+		String hostAccount=request.getParameter("hostAccount");
+		String hostAccountName=request.getParameter("hostAccountName");
+		int calcReqDate=Integer.parseInt(request.getParameter("calcReqDate"));
+		int result= new HostService().updateHostCalc(hostAccountBank, hostAccount, hostAccountName, calcReqDate, hostId);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.print(hostAccountBank);
+		out.print(hostAccount);
+		out.print(hostAccountName);
+		out.print(calcReqDate);
 	}
 
 }

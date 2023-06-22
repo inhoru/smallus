@@ -23,5 +23,5 @@ public class Host {
 	private String hostAccountBank;
 	private String hostAccount;
 	private String hostAccountName;	
-	
+	private int calcReqDate;
 }
