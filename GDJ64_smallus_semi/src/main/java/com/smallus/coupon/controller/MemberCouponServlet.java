@@ -77,7 +77,7 @@ public class MemberCouponServlet extends HttpServlet {
 		request.setAttribute("coupon", list);
 		request.getRequestDispatcher("/views/mypage/coupon.jsp").forward(request, response);
 	}
-
+	//
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
