@@ -165,28 +165,28 @@ if (cookies != null) {
       </div>
       <table id="categoriesTable">
          <tr>
-            <td class="ca">요리</td>
-            <td class="ca">공예</td>
-            <td class="ca">뷰티</td>
-            <td class="ca">운동</td>
+            <td class="ca"><a href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">요리<a></a></td>
+            <td class="ca"><a href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">공예</a></td>
+            <td class="ca"><a href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">뷰티</a></td>
+            <td class="ca"><a href="<%=request.getContextPath()%>/views/main/category_activity.jsp">운동</a></td>
          </tr>
          <tr>
-            <td><a href="">제과</a></td>
-            <td><a href="">레진</a></td>
-            <td><a href="">비누</a></td>
-            <td><a href="">실내스포츠</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">제과</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">레진</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">비누</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_activity.jsp">실내스포츠</a></td>
          </tr>
          <tr>
-            <td><a href="">제빵</a></td>
-            <td><a href="">가죽</a></td>
-            <td><a href="">향수</a></td>
-            <td><a href="">야외스포츠</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">제빵</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">가죽</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">향수</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_activity.jsp">야외스포츠</a></td>
          </tr>
          <tr>
-            <td><a href="">음료</a></td>
-            <td><a href="">스테인 글라스</a></td>
-            <td><a href="">천연 화장품</a></td>
-            <td><a href=""></a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">음료</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">스테인 글라스</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">천연 화장품</a></td>
+            <td><a href="<%=request.getContextPath()%>/views/main/category_activity.jsp"></a></td>
          </tr>
       </table>
    </header>
