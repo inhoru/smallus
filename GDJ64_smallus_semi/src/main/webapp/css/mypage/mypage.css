@@ -568,6 +568,7 @@ section.i-imgContainer .i-img-list h4 {
 	background: #E8D6C3;
 	border: none;
 	cursor: pointer;
+	margin-bottom: 5%;
 }
 /* 회원탈퇴전체배경 */
 .i-withdrawaltotal {
@@ -1037,6 +1038,10 @@ cursor: pointer;
     width: 100%;
     padding: 0px 20px;
 	
+	
+	
+	
+	
     min-height: 1px;
 }
 /* 자주묻는질문제목 */
@@ -1096,7 +1101,9 @@ cursor: pointer;
     font-size: 24px;
     font-weight: bold;
 	padding-bottom: 2%;
-	border-bottom: 1px solid #595959
+	border-bottom: 1px solid #595959;
+	margin-top:8%;
+	
 }
 /* 1:1질문테이블 */
 .i-ca{
@@ -1141,6 +1148,17 @@ cursor: pointer;
 }
 /* 1:1문의 삭제버튼 */
 .i-inquiryremovebutton{
+	width:4rem;
+	font-weight: bold;
+	background-color: #E8D6C3;
+	border:0px;
+	border-radius: 1rem;
+	padding: 0.4rem 0.6rem;
+	font-size: 0.8rem;
+	cursor: pointer;
+}
+.i-inquirybutton{
+	margin-left: 77%;
 	width:4rem;
 	font-weight: bold;
 	background-color: #E8D6C3;

@@ -202,5 +202,28 @@ public class ClassesDao {
 		}return result;
 	}
 	
-
+//	selectClassByCalendar=SELECT CLASS_TITLE, BOOKING_TIME_START, BOOKING_TIME_END, MEMBER_ID, P.CLASS_PERSONNEL 
+//	FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) JOIN PAYMENT P USING(CLASS_DETAIL_ID) WHERE HOST_ID=?
+	public List<Classes> selectClassByCalendar(Connection conn, String hostId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Classes> list=new ArrayList<Classes>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectClassByCalendar"));
+			pstmt.setString(1, hostId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Classes c=new Classes();
+				list.add(getClasses(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
+	
+	
 }

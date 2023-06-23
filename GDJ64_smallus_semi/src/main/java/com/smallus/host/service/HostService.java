@@ -48,5 +48,12 @@ public class HostService {
 		close(conn);
 		return result;
 	}
+	
+	public int deleteHostByhostId(String hostId, String password) {
+		Connection conn=getConnection();
+		int result=dao.deleteHostByhostId(conn,hostId, password);
+		close(conn);
+		return result;
+	}
 
 }

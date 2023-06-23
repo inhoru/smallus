@@ -30,6 +30,16 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	
+	public int deleteByMember(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.deleteByMember(conn,memberId);
+		close(conn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
 	public int selectHostCount() {
 		Connection conn=getConnection();
 		int totalData=dao.selectHostCount(conn);

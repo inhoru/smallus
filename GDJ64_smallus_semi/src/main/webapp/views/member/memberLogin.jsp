@@ -76,16 +76,16 @@
 							const kakao_account=res.kakao_account;
 							console.log(kakao_account);
 							email=kakao_account.email;
-							name=kakao_account.profile.nickname;
+							nickname=kakao_account.profile.nickname;
 							console.log(email,name);
 								$.ajax({
 									url:'<%=request.getContextPath()%>/member/KakaoLoginCheck.do',
-									data:{memberEmail:email,memberName:name},
+									data:{memberEmail:email,memberNickname:nickname},
 									dataType:"text",
 									success: function(data){
 										console.log(data, typeof data);
 											if(data=='null'){
-										           open("<%=request.getContextPath()%>/views/member/kakaoenroll.jsp?email="+email+"&name="+name
+										           open("<%=request.getContextPath()%>/views/member/kakaoenroll.jsp?email="+email+"&memberNickname="+nickname
 												,"_blank","width=400, height=200, top=300,left=500");
 											}else{
 												location.assign("<%=request.getContextPath()%>/member/KakaoLogin.do?memberEmail="+email);

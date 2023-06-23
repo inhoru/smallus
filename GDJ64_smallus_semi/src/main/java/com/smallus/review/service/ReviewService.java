@@ -37,9 +37,15 @@ public class ReviewService {
 //		close(conn);
 //		return r;
 //	}
-
-	private Connection getConnection() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public int countReviewByhostId(String hostId) {
+		Connection conn=getConnection();
+		int count=dao.countReviewByhostId(conn,hostId);
+		if(count>0) commit(conn);
+		else rollback(conn);
+		return count;
 	}
+	
+	
+	
 }
