@@ -5,17 +5,17 @@
 <%
 List<Host> HostList=(List)request.getAttribute("HostList"); 
 %>
-<style>
-	#pageBar{
-		align-items:center;
-	}
-</style>
 <body>
 	<div id="mainOpacity h-host-main">
 		<section class="h-main">
 			<div class="h-main-title">
 				<h2>호스트회원관리</h2>
 			</div>
+			<select id="m-selectHost" onchange="selectHost();">
+				<option value="A">전체호스트회원</option>
+				<option value="Y" <%=request.getParameter("hostSt")!=null&&request.getParameter("hostSt").equals("Y")?"selected":""%>>일반호스트회원</option>
+				<option value="N" <%=request.getParameter("hostSt")!=null&&request.getParameter("hostSt").equals("N")?"selected":""%>>탈퇴한호스트회원</option>
+			</select>
 		</section>
 		<section class="h-main h-main-rsvList">
 			<div>
@@ -40,7 +40,11 @@ List<Host> HostList=(List)request.getAttribute("HostList");
 						<td><%=h.getHostEmail()%></td>
 						<td><%=h.getHostConsent()%></td>
 						<td><%=h.getHostSt()%></td>
-						<td><button id=m-deletememberbtn>삭제</button></td>
+						<%if(h.getHostSt().equals("Y")){ %>
+						<td><button onclick="deleteHost('<%=h.getHostId()%>');">삭제</button></td>
+						<%}else{%>
+							<td></td>
+						<%}%>
 					</tr>
 					<%} %>
 				<%}else{ %>
@@ -59,8 +63,21 @@ List<Host> HostList=(List)request.getAttribute("HostList");
 </div>
 </body>
 <script>
-	$("#m-deletememberbtn").click(e=>{
-		
-	})
+	const selectHost=()=>{
+		let index = $("#m-selectHost option").index($("#m-selectHost option:selected"));
+		let hostSt=$("#m-selectHost").val();
+		if(index==0){
+			location.replace('<%=request.getContextPath()%>/admin/HostListServlet.do');
+		}else if(index==1){
+			location.assign('<%=request.getContextPath()%>/admin/HostListSortServlet.do?hostSt='+hostSt);
+		}else if(index==2){
+			location.assign('<%=request.getContextPath()%>/admin/HostListSortServlet.do?hostSt='+hostSt);
+		}
+	}
+	
+	
+	const deleteHost=(hostId)=>{
+		location.assign("<%=request.getContextPath()%>/admin/HostDelete.do?hostId="+hostId);
+	} 
 </script>
 <%@ include file="/views/common/footer.jsp"%>
