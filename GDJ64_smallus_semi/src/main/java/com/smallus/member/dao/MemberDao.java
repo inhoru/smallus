@@ -59,7 +59,7 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("enrollMember"));
-			// INSERT INTO MEMBER VALUES(?,?,?,?,?,?,?,DEFAULT,DEFAULT)
+			// INSERT INTO MEMBER VALUES(?,?,?,?,?,?,DEFAULT,?,DEFAULT)
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
@@ -141,7 +141,7 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("KakaoenrollMember"));
-			// INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,?,DEFAULT,DEFAULT)	
+			// INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,DEFAULT,?,'K')
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
@@ -348,7 +348,7 @@ public class MemberDao {
 
 
 	public static Member getMember(ResultSet rs) throws SQLException {
-		return Member.builder().memberId(rs.getString("member_id")).memberPw(rs.getString("MEMBER_PW"))
+		return Member.builder().memberId(rs.getString("MEMBER_ID")).memberPw(rs.getString("MEMBER_PW"))
 				.memberName(rs.getString("MEMBER_NAME")).memberPhone(rs.getString("MEMBER_PHONE"))
 				.memberEmail(rs.getString("MEMBER_EMAIL")).memberConsent(rs.getString("MEMBER_CONSENT"))
 				.memberImg(rs.getString("MEMBER_IMG")).memberNickname(rs.getString("MEMBER_NICKNAME"))

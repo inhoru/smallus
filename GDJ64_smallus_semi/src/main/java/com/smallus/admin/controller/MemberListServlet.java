@@ -10,19 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.admin.service.AdminService;
-import com.smallus.classes.model.vo.Classes;
+import com.smallus.member.model.vo.Member;
+
 
 /**
- * Servlet implementation class ClaasesListServlet
+ * Servlet implementation class memberListServlet
  */
-@WebServlet("/admin/ClaasesListServlet.do")
-public class ClaasesListServlet extends HttpServlet {
+@WebServlet("/admin/memberListServlet.do")
+public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClaasesListServlet() {
+    public MemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,9 +32,6 @@ public class ClaasesListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//DB의 member테이블에 저장된 전체 회원을 가져와 화면에 출력해주는 기능
-		
-		//페이징 처리하기
 		int cPage,numPerpage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -46,10 +44,10 @@ public class ClaasesListServlet extends HttpServlet {
 			numPerpage=10;
 		}
 		//3. 페이지바를 구성
-		 //1) DB에 저장된 전체 데이터의 수를 가져오기
-		int totalData=new AdminService().selectConfirmClassesCount();
-		System.out.println(totalData);
-		 //2) 전체페이지수를 계산하기
+		// 1) DB에 저장된 전체 데이터의 수를 가져오기
+		int totalData=new AdminService().selectMemberCount();
+		//System.out.println(totalData);
+		// 2) 전체페이지수를 계산하기
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		//(double)로 형변환 해서 소수점 계산 해주고 Math.ceil을 이용해서 올림처리 한 후 (int)로 형변환
 		//+1을 하면은 페이지가 더 생기긴하나 소수점이 아닐경우 빈페이지 생성된다.
@@ -79,14 +77,16 @@ public class ClaasesListServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
-		request.setAttribute("pageBar",pageBar);
-		List<Classes> list=new AdminService().checkConfirmClasses(cPage,numPerpage);
-		list.forEach(e->System.out.println(e)); //list불러온값 확인
+		
+		//1. DB에서 member테이블에 있는 데이터 가져오기
+		List<Member> list=new AdminService().checkMemberAll(cPage,numPerpage);
+//		list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
-		request.setAttribute("ClassesConfirmList", list);
-		request.getRequestDispatcher("/views/admin/adminClassConfirmList.jsp").forward(request, response);
+		request.setAttribute("pageBar",pageBar);
+		request.setAttribute("MemberList", list);
+		request.getRequestDispatcher("/views/admin/adminMemberList.jsp").forward(request, response);
 		}else {
-			System.out.println("승일한 클래스 없음");
+		request.getRequestDispatcher("/views/admin/adminMemberList.jsp").forward(request, response);
 		}
 	}
 

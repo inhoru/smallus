@@ -33,13 +33,13 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 				<%if(memberList!=null&&!memberList.isEmpty()) {
 					for(Member m:memberList){%>
 					<tr>
-						<th><%=m.getMemberId()%></th>
-						<th><%=m.getMemberName()%></th>
-						<th><%=m.getMemberNickname()%></th>
-						<th><%=m.getMemberPhone()%></th>
-						<th><%=m.getMemberEmail()%></th>
-						<th><%=m.getMemberConsent()%></th>
-						<th><%=m.getMemberSt()%></th>
+						<td><%=m.getMemberId()%></td>
+						<td><%=m.getMemberName()%></td>
+						<td><%=m.getMemberNickname()%></td>
+						<td><%=m.getMemberPhone()%></td>
+						<td><%=m.getMemberEmail()%></td>
+						<td><%=m.getMemberConsent()%></td>
+						<td><%=m.getMemberSt()%></td>
 						<td><button id=m-deletememberbtn>삭제</button></td>
 					</tr>
 					<%} %>

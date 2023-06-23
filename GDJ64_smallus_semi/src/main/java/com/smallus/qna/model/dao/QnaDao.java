@@ -56,5 +56,22 @@ public class QnaDao {
 			close(pstmt);
 		}return list;
 	}
+	
+	public int insertQna(Connection conn, Qna q) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertDetailQna"));
+			pstmt.setString(1,q.getMemberId());
+			pstmt.setString(2,q.getClassId());
+			pstmt.setString(3,q.getQnaTitle());
+			pstmt.setString(4,q.getQndContent());
+			pstmt.setString(5,q.getQnaFinishYn());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 
 }

@@ -80,15 +80,15 @@ public class NoticeListServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
-		request.setAttribute("pageBar",pageBar);
 		//1. DB에서 member테이블에 있는 데이터 가져오기
 		List<Notice> list=new AdminService().checkNoticeAll(cPage,numPerpage);
 //		list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
+		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("NoticeList", list);
 		request.getRequestDispatcher("/views/admin/NoticeList.jsp").forward(request, response);
 		}else {
-			System.out.println("공지사항 없음");
+		request.getRequestDispatcher("/views/admin/NoticeList.jsp").forward(request, response);
 		}
 	}
 
