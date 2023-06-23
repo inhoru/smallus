@@ -1,28 +1,25 @@
-package com.smallus.member.controller;
+package com.smallus.admin.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smallus.member.model.vo.Member;
-import com.smallus.member.service.MemberService;
+import com.smallus.admin.service.AdminService;
 
 /**
- * Servlet implementation class KakaoLoginCheckServlet
+ * Servlet implementation class MemberDeleteServlet
  */
-@WebServlet("/member/KakaoLoginCheck.do")
-public class KakaoLoginCheckServlet extends HttpServlet {
+@WebServlet("/admin/MemberDelete.do")
+public class MemberDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KakaoLoginCheckServlet() {
+    public MemberDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +28,20 @@ public class KakaoLoginCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberEmail=request.getParameter("memberEmail");
-		String[] memberIds=memberEmail.split("@");
-		String memberId=memberIds[0];
+		String memberId=request.getParameter("memberId");
 		System.out.println(memberId);
-		Member m=new MemberService().selectByMemberId(memberId);
-		System.out.println(m);
-//		if(m==null) {
-//			request.getRequestDispatcher("/views/member/kakaoenroll.jsp?email="+memberEmail+"&name="+memberName+"&memberNickname="+memberName).forward(request, response);
-//		}else {
-//			request.getRequestDispatcher("/member/KakaoLogin.do").forward(request, response);
-//		}
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();
-		out.print(m);
+		int result=new AdminService().deleteByMember(memberId);
+		String msg,loc;
+		if(result>0) {
+			msg="회원추방을 완료했습니다.";
+			loc="/admin/memberListServlet.do";
+		}else {
+			msg="회원추방을 실패했습니다.";
+			loc="/admin/memberListServlet.do";
+		}
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc",loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**

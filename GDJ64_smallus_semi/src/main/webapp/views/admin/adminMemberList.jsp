@@ -40,7 +40,7 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<td><%=m.getMemberEmail()%></td>
 						<td><%=m.getMemberConsent()%></td>
 						<td><%=m.getMemberSt()%></td>
-						<td><button id=m-deletememberbtn>삭제</button></td>
+						<td><button onclick="deletemember('<%=m.getMemberId()%>');">삭제</button></td>
 					</tr>
 					<%} %>
 				<%}else{ %>
@@ -59,8 +59,8 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 </div>
 </body>
 <script>
-	$("#m-deletememberbtn").click(e=>{
-		
-	})
+	const deletemember=(memberId)=>{
+		location.assign("<%=request.getContextPath()%>/admin/MemberDelete.do?memberId="memberId);
+	} 
 </script>
 <%@ include file="/views/common/footer.jsp"%>

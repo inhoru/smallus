@@ -39,7 +39,7 @@ section.h-main table {
 			<table id="h-main-rsv-tbl">
 				<tr>
 					<td>카테고리 종류</td>
-					<td><select name="noticeType" id="noticeType" style="">
+					<td style="padding-left: 10px;text-align: left;"><select name="noticeType" id="noticeType">
 							<option value="1">공지사항</option>
 							<option value="2">이벤트</option>
 							<option value="3">기타</option>
@@ -47,7 +47,7 @@ section.h-main table {
 				</tr>
 				<tr>
 					<td>카테고리 제목</td>
-					<td><input type="text" name="noticeTitle" id="noticeTitle" style="width:500px;"></td>
+					<td style="padding-left:10px; text-align:left;"><input type="text" name="noticeTitle" id="noticeTitle" style="width:500px;"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
