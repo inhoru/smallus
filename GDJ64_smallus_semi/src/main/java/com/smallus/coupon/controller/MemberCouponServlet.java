@@ -42,7 +42,7 @@ public class MemberCouponServlet extends HttpServlet {
 		try {
 			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
 		} catch (NumberFormatException e) {
-			numPerpage = 5;
+			numPerpage = 4;
 		}
 		new CouponService().deleteCoupon();
 		HttpSession session=request.getSession();
