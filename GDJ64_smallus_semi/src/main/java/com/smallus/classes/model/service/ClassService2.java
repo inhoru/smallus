@@ -10,11 +10,11 @@ import com.smallus.classes.model.vo.Classes;
 
 public class ClassService2 {
 	
-	private ClassesDao2 dao=new ClassesDao2();
+	private ClassesDao2 dao2=new ClassesDao2();
 	
 	public Classes selectClassByClassId(String classId){
 		Connection conn=getConnection();
-		Classes classData=dao.selectClassByClassId(conn,classId);
+		Classes classData=dao2.selectClassByClassId(conn,classId);
 		close(conn);
 		return classData;
 	}

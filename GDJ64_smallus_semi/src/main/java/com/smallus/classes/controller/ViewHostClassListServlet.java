@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.service.ClassService;
 import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.model.vo.Host;
 
 /**
  * Servlet implementation class ViewClassListServlet
@@ -32,8 +34,9 @@ public class ViewHostClassListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// queryString으로 보낸 hostId를 parameter로 받아서 변수에 저장 
-		String hostId=request.getParameter("hostId");
+		HttpSession session= request.getSession();
+		Host host=(Host)session.getAttribute("loginHost");
+		String hostId=host.getHostId();
 		
 		// 페이징 처리
 		int cPage, numPerpage;

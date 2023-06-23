@@ -71,9 +71,6 @@
 					<button>추가</button>
 				</div>
 			</div>
-			<%if(classDetailList!=null&&!classDetailList.isEmpty()){
-				int count=0;
-				for(ClassDetail cd: classDetailList){%>
 			<table class="h-class-detailTbl">
 				<tr>
 					<th>NO</th>
@@ -84,10 +81,14 @@
 					<th></th>
 				</tr>
 				<tr>
-					<td>r202306130751</td>
-					<td>2023-05-18</td>
-					<td>15:00 - 17:00</td>
-					<td>1명</td>
+			<%if(classDetailList!=null&&!classDetailList.isEmpty()){
+				int count=1;
+				for(ClassDetail cd: classDetailList){%>
+					<td><%=count %></td>
+					<td><%=cd.getClassDetailId() %></td>
+					<td><%=cd.getBookingTimeStart()%></td>
+					<td><%=cd.getBookingTimeEnd()%></td>
+					<td><%= %>명</td>
 					<td class="h-class-tbl-btn"><button>삭제</button></td>
 				</tr>
 				<tr>

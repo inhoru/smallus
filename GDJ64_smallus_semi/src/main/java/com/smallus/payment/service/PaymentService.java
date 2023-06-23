@@ -1,7 +1,6 @@
 package com.smallus.payment.service;
 
-import static com.smallus.common.JDBCTemplate.close;
-import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -10,6 +9,7 @@ import com.smallus.member.model.vo.Member;
 import com.smallus.payment.dao.PaymentDao;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCompleted;
+import com.smallus.payment.model.vo.PaymentCalc;
 
 public class PaymentService {
 	private PaymentDao dao= new PaymentDao();
@@ -20,14 +20,6 @@ public class PaymentService {
 		close(conn);
 		return list;
 	}
-	
-//	public Map<String, String> selectRsvByhostId(String hostId){
-//		Connection conn=getConnection();
-//		Map<String, String> list=dao.selectRsvByhostId(conn, hostId);
-//		close(conn);
-//		return list;
-//	}
-	
 	
 	public List<Member> searchByMemberPayment(String memberId,int cPage,int numPerpage){
 		Connection conn=getConnection();
@@ -67,7 +59,39 @@ public class PaymentService {
 		return list;
 	}
 	
+	// 페이징 처리를 위한 전체 데이터 수 찾기
+	public int selectRsvCount(String hostId) {
+		Connection conn=getConnection();
+		int count=dao.selectRsvCount(conn,hostId);
+		if(count>0) commit(conn);
+		else rollback(conn);
+		return count;
+	}
 	
+	// 전체 예약 내역 불러오기
+	public List<PaymentCalc> selectAllpaymentByhostId(String hostId,int cPage,int numPerpage){
+		Connection conn=getConnection();
+		List<PaymentCalc> list=dao.selectAllpaymentByhostId(conn, hostId,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	
+	//전체예약내역 중 필터링
+	public List<PaymentCalc> sortingPaymentByStatus(String hostId,String passStatus, int cPage,int numPerpage){
+		Connection conn=getConnection();
+		List<PaymentCalc> list=dao.sortingPaymentByStatus(conn, hostId, passStatus,cPage,numPerpage);
+		System.out.println(list);
+		close(conn);
+		return list;
+	}
+	
+	//새로운 예약 내역불러오기
+	public List<PaymentCalc> selectNewPaymentByhostId(String hostId){
+		Connection conn=getConnection();
+		List<PaymentCalc> list=dao.selectNewPaymentByhostId(conn, hostId);
+		close(conn);
+		return list;
+	}
 	
 	
 	

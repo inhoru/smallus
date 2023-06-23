@@ -8,9 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.service.ClassService;
 import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.model.vo.Host;
 
 /**
  * Servlet implementation class SortingClassByPassServlet
@@ -33,8 +35,11 @@ public class SortingHostClassByPassServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// 쿼리스트링으로 보낸 passStatus, hostId를 기준으로 패스 상태에 다른 정렬
+		HttpSession session= request.getSession();
+		Host host=(Host)session.getAttribute("loginHost");
+		String hostId=host.getHostId();
+		
 		String passStatus=request.getParameter("passStatus");
-		String hostId=request.getParameter("hostId");
 
 		// 페이징 처리
 		int cPage, numPerpage;

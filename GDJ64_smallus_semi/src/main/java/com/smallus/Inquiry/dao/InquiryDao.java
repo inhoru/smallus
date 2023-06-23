@@ -87,7 +87,7 @@ private Properties sql= new Properties();
 		List<Inquiry> list=new ArrayList<Inquiry>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectAllInquiry"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD WHERE MEMBER_ID=? )B) WHERE RNUM BETWEEN ? AND ?
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD WHERE MEMBER_ID=? ORDER BY BOARD_RDATE DESC)B) WHERE RNUM BETWEEN ? AND ?
 			pstmt.setString(1, memberId);
 			pstmt.setInt(2,(cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
@@ -117,6 +117,25 @@ private Properties sql= new Properties();
 		System.out.println(result);
 		return result;
 	}
+	public int InsertInquiry(Connection conn, String memberId,String boardType, String boardTitle, String boardContent) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//INSERT INTO BOARD VALUES('BAD'||SEQ_BAD.NEXTVAL,?,?,?,?,DEFAULT,DEFAULT)
+			pstmt=conn.prepareStatement(sql.getProperty("insertInquiry"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, boardType);
+			pstmt.setString(3, boardTitle);
+			pstmt.setString(4, boardContent);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	private Inquiry getInquiry(ResultSet rs) throws SQLException {
 		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).build();
 	}

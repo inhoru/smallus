@@ -37,6 +37,7 @@ public class ClassesDao2 {
 			pstmt = conn.prepareStatement(sql.getProperty("selectClassInfo"));
 			pstmt.setString(1, classId);
 			rs = pstmt.executeQuery();
+			if(rs.next()) classData=oriDao.getClasses(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
