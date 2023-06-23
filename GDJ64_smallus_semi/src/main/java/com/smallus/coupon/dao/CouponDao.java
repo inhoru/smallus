@@ -49,7 +49,7 @@ public class CouponDao {
 	}
 	private Coupon getCoupon(ResultSet rs) throws SQLException {
 		return Coupon.builder().couponId(rs.getString("COUPON_ID")).couponName(rs.getString("COUPON_NAME")).couponPrice(rs.getInt("COUPON_PRICE"))
-				.created_date(rs.getDate("CREATED_DATE")).expiredDate(rs.getDate("EXPIRED_DATE")).build();
+				.created_date(rs.getDate("CREATED_DATE")).expiredDate(rs.getDate("EXPIRED_DATED")).build();
 	}
 	public int insertCoupon(Connection conn, String coupon, String memberId) {
 		PreparedStatement pstmt=null;

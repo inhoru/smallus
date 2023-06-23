@@ -18,13 +18,13 @@ import com.smallus.review.model.vo.Review;
  * Servlet implementation class reviewList
  */
 @WebServlet("/ajax/reviewTest.do")
-public class reviewList extends HttpServlet {
+public class reviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewList() {
+    public reviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
