@@ -52,4 +52,11 @@ public class InquiryService {
 		else rollback(conn);
 		return result;
 	}
+	public int InsertInquiry(String memberId,String boardType,String boardTitle,String boardContent) {
+		Connection conn = getConnection();
+		int result = dao.InsertInquiry(conn,memberId,boardType,boardTitle,boardContent);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 }
