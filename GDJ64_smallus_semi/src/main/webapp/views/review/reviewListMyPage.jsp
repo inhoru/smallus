@@ -8,7 +8,7 @@
 	<br><br>
 
 	<div class="d-review-header">
-		<h2>내 클래스에 등록된 후기</h2>
+		<h2>후기</h2>
 		<select>
 			<option value="클래스명">클래스명</option>
 			<option value="작성일순">작성일순</option>
@@ -27,7 +27,6 @@
 			<div class="d-review-table">
 				<table>
 					<tr>
-						<td  id="tr">작성자</td>
 					<td id="td">2023-06-15 19:50</td>
 					</tr>
 					<tr>
@@ -40,7 +39,7 @@
 						<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
 					</tr>
 				</table>
-			<button>삭제</button>
+			<!-- <button>삭제</button> -->
 			</div>
 		</div>
 		
@@ -51,7 +50,6 @@
 			<div class="d-review-table">
 			<table>
 				<tr>
-					<td  id="tr">작성자</td>
 					<td id="td">2023-06-15 19:50</td>
 					</tr>
 				<tr>
@@ -64,7 +62,7 @@
 					<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
 				</tr>
 			</table>
-			<button>삭제</button>
+			<!-- <button>삭제</button> -->
 			</div>
 		</div>
 		
@@ -75,7 +73,6 @@
 			<div class="d-review-table">
 			<table>
 				<tr>
-					<td  id="tr">작성자</td>
 					<td id="td">2023-06-15 19:50</td>
 					</tr>
 				<tr>
@@ -88,7 +85,7 @@
 					<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
 				</tr>
 			</table>
-			<button>삭제</button>
+			<!-- <button>삭제</button> -->
 			</div>
 		</div>
 		
@@ -107,12 +104,12 @@
 	.d-review-table h2{
 	color:gold;
 	}
-	.d-review-table button{
+	/* .d-review-table button{
 	justify-content: end;
 	margin-left: 95%; 
 	width: 80px;
 	/* 삭제버튼을 오른쪽으로 빼고 싶으나.... */
-	}
+	} */
 	.d-review-table table{
 	margin-left:20px;
 	}
@@ -132,7 +129,7 @@
 	display: flex;
 	}
 	#td{
-	text-align: center;
+	text-align: left;
 	/* .d-review-one>*{
 	border: 1px solid orange;
 	} */
