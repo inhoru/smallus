@@ -20,11 +20,11 @@
 			<p>※첫번째 사진이 썸네일로 등록됩니다.</p>
 			<br>
 			<p>카테고리</p>
-			<select>
-				<option value="요리">요리</option>
-				<option value="공예">공예</option>
-				<option value="뷰티">뷰티</option>
-				<option value="운동">운동</option>
+			<select name="classCategory">
+				<option value="COO">요리</option>
+				<option value="CRA">공예</option>
+				<option value="BEA">뷰티</option>
+				<option value="EXE">운동</option>
 			</select>
 			<p>클래스 회당 인원제한</p>
 			<input type="number" placeholder="최대 인원수를 입력해주세요.">명

@@ -46,4 +46,33 @@ public class ClassesDao2 {
 		}
 		return classData;
 	}
+	
+	// 클래스 db 등록
+	// addClass=INSERT INTO CLASS VALUES('CLA'||SEQ_CLASS_ID.NEXTVAL,?,?,?,?,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)
+	public int addClass(Connection conn, Classes nc) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("addClass"));
+			
+			pstmt.setString(1, nc.getHostId());
+			pstmt.setString(2, nc.getCategoryId());
+			pstmt.setString(3, nc.getClassTitle());
+			pstmt.setInt(4, nc.getClassPersonnel());
+			pstmt.setInt(5, nc.getClassPrice());
+			pstmt.setString(6, nc.getClassAddress());
+			pstmt.setString(7, nc.getClassOffer());
+			pstmt.setString(8, nc.getClassSupplies());
+			pstmt.setString(9, nc.getClassNotice());
+			pstmt.setString(10, nc.getClassDetail());
+			pstmt.setString(11, nc.getClassThumbnail());
+			
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }
