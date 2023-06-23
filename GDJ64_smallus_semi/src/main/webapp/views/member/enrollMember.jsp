@@ -133,34 +133,46 @@ table#m-ernollMemberTable input[type=submit]{
 <script>
 let epw;
 	const idDuplicate=()=>{
+		let memberIdReg=/[\da-zA-Z]{4,}/;
 		const memberId=$("#memberId").val();
-		if(memberId.length>=4){
+		if(memberIdReg.test(memberId)){
 		open("<%=request.getContextPath()%>/member/idDuplicate.do?memberId="+memberId
 				,"_blank","width=400, height=200, top=300,left=500");		
 		}else{
-			alert('아이디는 4글자 이상 입력하세요!');
+			alert('아이디는 영문자 또는 숫자로 4글자 이상 입력해주세요');
 		}
 	}
 	$("#password2").keyup(e=>{
+		let passwordReg=/(?=.*[\d])(?=.*[a-zA-z])[\da-zA-z]{7,}/;
 		const password=$("#password").val();
 		const passwordCheck=$(e.target).val();
 		let color,msg;
-		if(password==passwordCheck){
-			color="green";
-			msg="비밀번호가 일치합니다.";
+		if(passwordReg.test(password)){
+			if(password==passwordCheck){
+				color="green";
+				msg="비밀번호가 일치합니다.";
+			}else{
+				color="red";
+				msg="비밀번호가 일치하지않습니다.";
+			}
 		}else{
 			color="red";
-			msg="비밀번호가 일치하지않습니다.";
+			msg="비밀번호 양식이 잘못됐습니다. 영어+숫자8글자 이상입력해주세요";
 		}
+		if(password==""||$(e.target).val()==""){
+		$("#passwordcheck").text("");			
+		}else{
 		$("#passwordcheck").css("color",color).text(msg);
+		}
 	});
 	const nickDuplicate=()=>{
+		let memberNicknameReg=/[\da-zA-Z가-힣]{2,}/;
 		const memberNickname=$("#memberNickname").val();
-		if(memberNickname.length>=2){
+		if(memberNicknameReg.test(memberNickname)){
 		open("<%=request.getContextPath()%>/member/nicknameDuplicate.do?memberNickname="+memberNickname
 				,"_blank","width=400, height=200, top=300,left=500");		
 		}else{
-			alert('닉네임은 2글자 이상 입력하세요!');
+			alert('닉네임은 양식이 잘못됐습니다. 2글자 이상 입력하세요!');
 		}
 	}
 /* 	const timecheck=setInterval(()=>{
@@ -176,27 +188,32 @@ let epw;
 		}
 	},1000); */
 	const mailSend=()=>{
+		let memberEmailReg=/\S+@\S+\.\S+/;
 		let memberEmail=$("#memberEmail").val();
-		alert("인증번호를 발송했습니다.");
 		//timecheck();
-		$.ajax({
-			url:'<%=request.getContextPath()%>/MailSendServlet.do',
-			data:{memberEmail:memberEmail},
-			dataType:"text",
-			success: function(data){
-				console.log(data);
-				if(data!='null'){
-					epw=data;
-					$("memberEmail_check2").focus();
-				}else{
-					alert("유효하지 않은 메일주소입니다. 다시 시도하세요");
+		if(memberEmailReg.test(memberEmail)){
+			alert("인증번호를 발송했습니다.");
+			$.ajax({
+				url:'<%=request.getContextPath()%>/MailSendServlet.do',
+				data:{memberEmail:memberEmail},
+				dataType:"text",
+				success: function(data){
+					console.log(data);
+					if(data!='null'){
+						epw=data;
+						$("memberEmail_check2").focus();
+					}else{
+						alert("유효하지 않은 메일주소입니다. 다시 시도하세요");
+					}
+				},
+				error:(r,m,e)=>{
+					console.log(r);
+					console.log(m);
 				}
-			},
-			error:(r,m,e)=>{
-				console.log(r);
-				console.log(m);
-			}
-		});
+			});
+		}else{
+			alert("이메일 형식이 잘못됐습니다. 메일양식을 확인해주세요");
+		}
 	}
 	
 	function emailcheck(){

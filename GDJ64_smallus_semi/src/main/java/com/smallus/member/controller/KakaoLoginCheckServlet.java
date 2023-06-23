@@ -32,7 +32,6 @@ public class KakaoLoginCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberEmail=request.getParameter("memberEmail");
-		String memberName=request.getParameter("memberName");
 		String[] memberIds=memberEmail.split("@");
 		String memberId=memberIds[0];
 		System.out.println(memberId);

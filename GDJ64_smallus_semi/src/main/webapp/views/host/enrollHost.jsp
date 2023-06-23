@@ -139,34 +139,46 @@ table#m-ernollhostTable input[type=submit]{
 <script>
 let epw;
 	const idDuplicate=()=>{
+		let hostIdReg=/[\da-zA-Z]{4,}/;
 		const hostId=$("#hostId").val();
-		if(hostId.length>=4){
+		if(hostIdReg.test(hostId)){
 		open("<%=request.getContextPath()%>/host/idDuplicate.do?hostId="+hostId
 				,"_blank","width=400, height=200, top=300,left=500");		
 		}else{
-			alert('아이디는 4글자 이상 입력하세요!');
+			alert('아이디는 영문자 또는 숫자로 4글자 이상 입력해주세요');
 		}
 	}
 	$("#password2").keyup(e=>{
+		let passwordReg=/(?=.*[\d])(?=.*[a-zA-z])[\da-zA-z]{7,}/;
 		const password=$("#password").val();
 		const passwordCheck=$(e.target).val();
 		let color,msg;
-		if(password==passwordCheck){
-			color="green";
-			msg="비밀번호가 일치합니다.";
+		if(passwordReg.test(password)){
+			if(password==passwordCheck){
+				color="green";
+				msg="비밀번호가 일치합니다.";
+			}else{
+				color="red";
+				msg="비밀번호가 일치하지않습니다.";
+			}
 		}else{
 			color="red";
-			msg="비밀번호가 일치하지않습니다.";
+			msg="비밀번호 양식이 잘못됐습니다. 영어+숫자8글자 이상입력해주세요";
 		}
+		if(password==""||$(e.target).val()==""){
+		$("#passwordcheck").text("");			
+		}else{
 		$("#passwordcheck").css("color",color).text(msg);
+		}
 	});
 	const nickDuplicate=()=>{
+		let hostNicknameReg=/[\da-zA-Z가-힣]{2,}/;
 		const hostNickname=$("#hostNickname").val();
-		if(hostNickname.length>=2){
+		if(hostNicknameReg.test(hostNickname)){
 		open("<%=request.getContextPath()%>/host/nicknameDuplicate.do?hostNickname="+hostNickname
 				,"_blank","width=400, height=200, top=300,left=500");		
 		}else{
-			alert('닉네임은 2글자 이상 입력하세요!');
+			alert('닉네임은 양식이 잘못됐습니다. 2글자 이상 입력하세요!');
 		}
 	}
 /* 	const timecheck=setInterval(()=>{
@@ -182,27 +194,30 @@ let epw;
 		}
 	},1000); */
 	const mailSend=()=>{
+		let hostEmailReg=/\S+@\S+\.\S+/;
 		let hostEmail=$("#hostEmail").val();
-		alert("인증번호를 발송했습니다.");
 		//timecheck();
-		$.ajax({
-			url:'<%=request.getContextPath()%>/MailSendServlet2.do',
-			data:{hostEmail:hostEmail},
-			dataType:"text",
-			success: function(data){
-				console.log(data);
-				if(data!='null'){
-					epw=data;
-					$("hostEmail_check2").focus();
-				}else{
-					alert("유효하지 않은 메일주소입니다. 다시 시도하세요");
+			if(hostEmailReg.test(hostEmail)){
+			alert("인증번호를 발송했습니다.");
+			$.ajax({
+				url:'<%=request.getContextPath()%>/MailSendServlet2.do',
+				data:{hostEmail:hostEmail},
+				dataType:"text",
+				success: function(data){
+					console.log(data);
+					if(data!='null'){
+						epw=data;
+						$("hostEmail_check2").focus();
+					}else{
+						alert("유효하지 않은 메일주소입니다. 다시 시도하세요");
+					}
+				},
+				error:(r,m,e)=>{
+					console.log(r);
+					console.log(m);
 				}
-			},
-			error:(r,m,e)=>{
-				console.log(r);
-				console.log(m);
-			}
-		});
+			});
+		}
 	}
 	
 	function emailcheck(){

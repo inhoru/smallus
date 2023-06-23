@@ -33,7 +33,7 @@ public class KakaoenrollMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberEmail=request.getParameter("memberEmail");
 		String memberName=request.getParameter("memberName");
-		String memberNickname=request.getParameter("memberName");
+		String memberNickname=request.getParameter("memberNickname");
 		String memberPhone=request.getParameter("memberPhone");
 		String[] memberIds=memberEmail.split("@");
 		String memberId=memberIds[0];
