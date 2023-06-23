@@ -34,7 +34,7 @@ public class MainToClassDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 메인(카테고리별, 검색결과 등) 에서 상세페이지로 이동하는 서블릿
+		// 메인(카테고리별, 검색결과 등) 에서 상세페이지로 이동하는 서블릿 (추후 로그인정보 추가)
 		// '단일 클래스'의 정보와 스케쥴을 같이 가져옴
 		
 		/* String classId=request.getParameter("classId"); */

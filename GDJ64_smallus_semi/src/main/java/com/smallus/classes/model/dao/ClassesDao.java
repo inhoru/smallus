@@ -50,6 +50,7 @@ public class ClassesDao {
 	public ClassDetail getClassDetail(ResultSet rs) throws SQLException {
 		return ClassDetail.builder().classDetailId(rs.getString("CLASS_DETAIL_ID")).classId(rs.getString("CLASS_ID"))
 				.bookingTimeStart(rs.getDate("BOOKING_TIME_START")).bookingTimeEnd(rs.getDate("BOOKING_TIME_END"))
+				.remainingPersonnel(rs.getInt("REMAINING_PERSONNEL"))
 				.build();
 	}
 

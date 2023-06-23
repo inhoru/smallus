@@ -23,8 +23,7 @@
 		</div>
 		<div class="d-detail-main">
 			<div id="d-detail-top">
-				<p>공예</p>
-				<!-- 카테고리명 조인해서 가져와야함 -->
+				<p><%=info.getCategoryTitle() %></p>
 				<p>♥ 찜 <%=wishNum%> </p>
 				<!-- if분기로 찜 여부 표시 -->
 				<p>★ <%=starPoint %>점</p>
@@ -36,10 +35,9 @@
 				<div id="d-detail-date">
 					<select>
 					<%for(ClassDetail cd : schedule){ %>
-						<option><%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %> 인원수:<%=cd.getRemainingPersonnel() %></option>
+						<option><%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %></option>
 					<%} %>
 					</select> 
-					<%-- <img src="<%=request.getContextPath()%>/img/category_main/calendar.png" width="300" height="200"> --%>
 				</div>
 				<div id="d-detail-personnel">
 					<p>인원수</p>
@@ -105,7 +103,14 @@
 	}
 	const personPlus=()=>{
 		personnelCount=personnelCount+1;
-		// 분기문으로 : 선택한 일정의 인원수를 넘어갈 수 없음
+		let select=$("#d-detail-date>select option:selected").val();
+		console.log(select);
+		let maxPersonnel=select.substr(29);
+		console.log(maxPersonnel);
+		if(personnelCount>maxPersonnel){
+			alert("신청 가능한 인원이 초과되었습니다.");
+			personnelCount=maxPersonnel;
+		}
 		paymentcalcul();
 	}
 	const paymentcalcul=()=>{
@@ -113,6 +118,10 @@
 		payment=<%=info.getClassPrice() %>*personnelCount;
 		document.getElementById("d-payment-price").innerHTML="결제금액 "+payment+"원";
 	}
+	document.getElementById("d-detail-date").addEventListener("change",e=>{
+		personnelCount=1;
+		paymentcalcul();
+	})
 	
 	
 	$("#infoAjax").click(e=>{
