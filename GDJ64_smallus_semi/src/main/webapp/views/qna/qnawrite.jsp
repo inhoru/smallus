@@ -30,6 +30,7 @@
 			</nav>
 		</div>
 	</section>
-	<div class="footer">
-		<div class="usMenu"></div>
+	</div>
+	<!-- <div class="footer">
+		<div class="usMenu"></div> -->
 		<%@ include file="/views/common/footer.jsp"%>

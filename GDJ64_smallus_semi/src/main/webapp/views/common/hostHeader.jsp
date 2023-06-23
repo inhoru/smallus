@@ -107,16 +107,19 @@
 		    <table>
 				<tr>
 					<th><b>회원관리</b></th>
+					<th><b>호스트관리</b></th>
 					<th><b>승인관리</b></th>
 					<th><b>고객센터</b></th>
 				</tr>
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
+					<td><a href="">호스트클래스</a></td>
 					<td><a href="<%=request.getContextPath()%>/admin/ClaasesListServlet.do">클래스승인</a></td>
 					<td><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 				</tr>
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/admin/HostListServlet.do">호스트회원관리</a></td>
+					<td><a href="">호스트정산</a></td>
 					<td><a href="">정산승인</a></td>
 					<td><a href="">1:1문의</a></td>
 				</tr>

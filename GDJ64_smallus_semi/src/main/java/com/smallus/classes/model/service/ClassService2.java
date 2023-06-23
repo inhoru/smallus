@@ -1,7 +1,6 @@
 package com.smallus.classes.model.service;
 
-import static com.smallus.common.JDBCTemplate.getConnection;
-import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
@@ -17,6 +16,15 @@ public class ClassService2 {
 		Classes classData=dao2.selectClassByClassId(conn,classId);
 		close(conn);
 		return classData;
+	}
+	
+	public int addClass(Classes newClass) {
+		Connection conn=getConnection();
+		int result=dao2.addClass(conn,newClass);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 
 }

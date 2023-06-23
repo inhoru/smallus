@@ -23,10 +23,21 @@ public class AdminService {
 		close(conn);
 		return totalData;
 	}
-	
+	public int selectMemberSortCount(String memberSt) {
+		Connection conn=getConnection();
+		int totalData=dao.selectMemberSortCount(conn,memberSt);
+		close(conn);
+		return totalData;
+	}
 	public List<Member>checkMemberAll(int cPage, int numPerpage){
 		Connection conn=getConnection();
 		List<Member> list=dao.checkMemberAll(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public List<Member>checkMemberSort(String memberSt,int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Member> list=dao.checkMemberSort(conn,memberSt,cPage,numPerpage);
 		close(conn);
 		return list;
 	}
@@ -39,6 +50,14 @@ public class AdminService {
 		else rollback(conn);
 		return result;
 	}
+	public int deleteByHost(String hostId) {
+		Connection conn=getConnection();
+		int result=dao.deleteByHost(conn,hostId);
+		close(conn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 	public int selectHostCount() {
 		Connection conn=getConnection();
@@ -46,9 +65,21 @@ public class AdminService {
 		close(conn);
 		return totalData;
 	}
+	public int selectHostSortCount(String hostSt) {
+		Connection conn=getConnection();
+		int totalData=dao.selectHostSortCount(conn,hostSt);
+		close(conn);
+		return totalData;
+	}
 	public List<Host>checkHostAll(int cPage, int numPerpage){
 		Connection conn=getConnection();
 		List<Host> list=dao.checkHostAll(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public List<Host>checkHostSort(String hostSt,int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Host> list=dao.checkHostSort(conn,hostSt,cPage,numPerpage);
 		close(conn);
 		return list;
 	}
