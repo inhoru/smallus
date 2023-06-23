@@ -114,15 +114,16 @@ section.h-main table {
 	width: 100%;
 	text-align: center;
 	margin: 1rem auto;
+	font-size: 0.8rem;
 }
 
-section.h-main-rsvList table {
+section.h-main-rsvList table, table#h-main-calc-tbl{
 	border: 1px solid #444444;
 	border-collapse: collapse;
 	clear: both;
 }
 
-section.h-main-rsvList table th, section.h-main-rsvList table td {
+section.h-main-rsvList table th, section.h-main-rsvList table td, table#h-main-calc-tbl th, table#h-main-calc-tbl td{
 	border: 1px solid #444444;
 	height: 2.2rem;
 }
@@ -133,6 +134,11 @@ section.h-main-rsvList table th, section.h-main-rsvList table td {
 	height: 500px;
 }
 /* host-main-calendar btn style */
+/* calendar title */
+.fc .fc-toolbar-title {
+    font-size: 1.2em;
+    margin: 0;
+  }
 /*month/week/day*/
 .fc-button-active {
 	border-color: #ffc107 !important;
@@ -375,24 +381,24 @@ section.h-calc button {
 
 
 /* host page paging bar*/
-#pageBar {
-	width: 50%;
-	margin: 2rem 0 2rem auto;
+.pageBar {
+	width: 100%;
+	margin: 2rem auto;
 	text-align: right;
 }
 
-#pageBar * {
+.pageBar * {
 	margin: 0.3rem;
 }
 
-#pageBar .h-pageBar-txt {
+.pageBar .h-pageBar-txt {
 	padding: 0.5rem 0.8rem;
 	background-color: #FBEFD3;
 	border-radius: 1rem;
 	font-size: 0.9rem;
 }
 
-#pageBar .h-pageBar-now {
+.pageBar .h-pageBar-now {
 	font-weight: bold;
 }
 
@@ -420,3 +426,101 @@ section.h-updateAccInfo span {
 	margin-right: auto;
 }
 
+
+/* 회원탈퇴전체배경 */
+.i-withdrawaltotal {
+	padding-bottom: 3%;
+	background-color: #FFFBF5;
+}
+
+/* 탈퇴 전체 */
+.i-withdrawal {
+	margin: auto;
+	width: 70%;
+}
+/* 회원탈퇴h2*/
+.i-withdrawalh2 {
+	padding-top: 1%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
+
+	/* 회워탈퇴전체 */
+}
+
+.i-withdrawalcontent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+/* 떠나실건가요? */
+.i-withdrawalcontent h1 {
+	margin-top: 2%;
+}
+/* 회원탈퇴전 확인 */
+.i-withdrawalcontent h3 {
+	margin-top: 2%;
+}
+/* 탈퇴조약 */
+.i-withdrawalcontent-span {
+	margin-top: 5%;
+	display: flex;
+	flex-direction: column;
+}
+/* 탈퇴조약 상세 */
+.i-withdrawalcontent-span span {
+	margin-bottom: 5%;
+}
+/* 회원탈퇴버튼 */
+.i-withdrawalbutton {
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
+	margin-left: 45%;
+}
+
+/* 회원탈퇴end배경 */
+.i-withdrawalendtotal {
+	padding-bottom: 3%;
+	background-color: #FFFBF5;
+}
+/* 회원탈end  */
+.i-withdrawalendh2 {
+	padding-top: 3%;
+	padding-bottom: 1%;
+	border-bottom: 2px solid #efebe5;
+}
+/* 회원탈퇴end입력 상세 */
+.i-withdrawalendcontent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 2%;
+}
+/* 회원탈퇴비밀번호입력end h2 */
+.i-withdrawalendcontent h2 {
+	margin-top: 10%;
+}
+/* 회원탈퇴비밀번호입력창end */
+.i-withdrawalendcontent input {
+	margin-top: 4%;
+	width: 400px;
+	height: 40px;
+	border-radius: 20px;
+	padding-left: 3%;
+	border: 2px solid #5555;
+}
+/* 회원탈퇴버튼end */
+.i-withdrawalendbutton {
+	margin-top: 5%;
+	font-weight: bolder;
+	width: 100px;
+	height: 50px;
+	border-radius: 60px;
+	background: #E8D6C3;
+	border: none;
+	cursor: pointer;
+}

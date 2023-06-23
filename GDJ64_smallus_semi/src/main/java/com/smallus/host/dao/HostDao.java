@@ -142,4 +142,20 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		}return result;
 	}
    
+   public int deleteHostByhostId(Connection conn, String hostId, String password) {
+	   PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteHostByhostId"));
+			//deleteHostByhostId=UPDATE MEMBER SET MEMBER_ST='N' WHERE MEMBER_ID = ? AND MEMBER_PW=?
+			pstmt.setString(1,hostId);
+			pstmt.setString(2, password);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+   }
+   
 }

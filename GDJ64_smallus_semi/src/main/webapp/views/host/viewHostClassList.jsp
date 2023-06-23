@@ -12,9 +12,9 @@
 	<!-- 내 클래스 보기 페이지 -->
 	 <section class="h-main h-main-rsvList">
      	<div class="h-main-title">
-     		<h2>내 클래스 보기</h2>
+     		<h3>내 클래스 보기</h3>
                 <!-- <div class="h-viewList"><a href="">+</a></div> -->
-                <select name="selectClassStatus" id="selectClassStatus" onchange="selectOption()">
+                <select name="h-selectClassStatus" id="h-selectClassStatus" onchange="selectOption()">
                 	<option>승인 상태(전체)</option>
                 	<option value="W" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>승인 대기</option>
                 	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>승인 완료</option>
@@ -23,11 +23,11 @@
         </div><hr>
         <!-- hostId를 통해서 가지고 온 클래스 리스트  -->
         <div class="h-class-list-container">
-			<%if(classList!=null&&!classList.isEmpty()) {
+			<%if((classList!=null&&!classList.isEmpty())||(classListPass!=null&&!classListPass.isEmpty())) {
 				for(Classes c:classList){%>
 				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
-					<a href="<%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=hostInfo.getHostId()%>&classId=<%=c.getClassId() %>" class="h-class-list-img">
+					<a href="" class="h-class-list-img" onclick="h-viewDetail(<%=c.getClassId()%>)">
 						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
 					</a>
 					<table>
@@ -135,10 +135,9 @@
 				</div>
 				<%}
 				}else{ %>
-					<span>조회할 클래스가 없습니다</span>
 				<%} %>
         </div>
-        <div id="pageBar">
+        <div class="pageBar">
 			<%=request.getAttribute("pageBar") %>
 		</div>
 	</section>
@@ -146,24 +145,30 @@
 		
 		// select 옵션 변경하면 이동하는 함
 		function selectOption(){
-			let index = $("#selectClassStatus option").index($("#selectClassStatus option:selected"));
-			let div=$("#selectClassStatus option")
+			let index = $("#h-selectClassStatus option").index($("#h-selectClassStatus option:selected"));
+			let div=$("#h-selectClassStatus option")
 			// index =1 -> W / 2:Y/3:N
 			//console.log(index);
 			if(index==0){
 				location.replace('<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>');
 			}else if(index==1){
-				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?hostId=<%=hostInfo.getHostId()%>&passStatus=W');
+				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?passStatus=W');
 
 			}else if(index==2){
-				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?hostId=<%=hostInfo.getHostId()%>&passStatus=Y');
+				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?passStatus=Y');
 			}else if(index==3){
-				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?hostId=<%=hostInfo.getHostId()%>&passStatus=N');
+				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?passStatus=N');
 			}
 				$(".h-class-list-n").css('display','none');
 				$(".h-class-pass-list").css('display','flex');
 		}
-			
+		
+		<%-- <%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=hostInfo.getHostId()%>&classId=<%=c.getClassId() %> --%>
+		$("h-class-list-img").click(e)=>{
+			console.log($(e.target));
+		}
+		
+		
 	</script>       
 <%@ include file="/views/common/hostFooter.jsp"%>
         

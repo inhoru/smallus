@@ -77,14 +77,15 @@
                     </tr>
                     <tr>
                         <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
-                        <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>" id="h-viewCLassList">내 클래스 보기</a></td>
+                        <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do" id="h-viewCLassList">내 클래스 보기</a></td>
                         <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>
                     </tr>
                     <tr>
-                        <td><a href="">회원 탈퇴</a></td>
+                        <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원 탈퇴</a></td>
+                        <%-- <td><a href="<%=request.getContextPath()%>/host/withdrawalPasswordCheck.do">회원 탈퇴</a></td> --%>
                         <td><a href="">클래스 등록하기</a></td>
-                        <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do?hostId=<%=hostInfo.getHostId() %>">정산 정보 관리</a></td>
+                        <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산 정보 관리</a></td>
                         <td><a href="">1:1 문의</a></td>
                     </tr>
                     <tr>

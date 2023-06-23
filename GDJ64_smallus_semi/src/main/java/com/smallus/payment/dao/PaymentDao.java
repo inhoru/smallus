@@ -16,6 +16,7 @@ import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
 import com.smallus.payment.model.vo.Payment;
+import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.model.vo.PaymentCompleted;
 
 public class PaymentDao {
@@ -31,7 +32,9 @@ public class PaymentDao {
 		}
 	}
 	
-    //P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.MEMBER_NAME
+    //SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, 
+	//CL.CALC_PASS_DATE FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) 
+	//LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 	public List<Payment> selectPaymentByhostId(Connection conn, String hostId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -242,9 +245,138 @@ public class PaymentDao {
 		}
 		return list;
 	}
-
+	
+	//selectAllpaymentByhostId=SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL AND PAYMENT_DATE BETWEEN TO_DATE(?) and TO_DATE(?)
+	
+	public int selectRsvCount(Connection conn,String hostId) {
+		int count=0;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectRsvCount"));
+			//SELECT COUNT(*) FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
+			//LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
+			pstmt.setString(1, hostId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START,
+	// CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, P.PAYMENT_STATUS 
+	// FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT
+	// JOIN PAYMENT P USING(CLASS_DETAIL_ID)
+	// LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
+	public List<PaymentCalc> selectAllpaymentByhostId(Connection conn, String hostId,int cPage, int numPerpage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PaymentCalc> list = new ArrayList<PaymentCalc>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectAllpaymentByhostId"));
+			pstmt.setString(1, hostId);
+			pstmt.setInt(2,(cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PaymentCalc p = new PaymentCalc();
+				p.getPayment().setPaymentId(rs.getString("PAYMENT_ID"));
+				p.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				p.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				p.getPayment().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				p.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				p.getPayment().setMemberId(rs.getString("MEMBER_ID"));
+				p.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	// SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START,
+	// CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, P.PAYMENT_STATUS 
+	// FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT
+	// JOIN PAYMENT P USING(CLASS_DETAIL_ID)
+	// LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID=? 
+	
+	public List<PaymentCalc> sortingPaymentByStatus(Connection conn, String hostId,String passStatus,int cPage, int numPerpage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PaymentCalc> list = new ArrayList<PaymentCalc>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("sortingPaymentByStatus"));
+			pstmt.setString(1, hostId);
+			pstmt.setString(2, passStatus);
+			pstmt.setInt(3,(cPage-1)*numPerpage+1);
+			pstmt.setInt(4, cPage*numPerpage);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PaymentCalc p = new PaymentCalc();
+				p.getPayment().setPaymentId(rs.getString("PAYMENT_ID"));
+				p.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				p.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				p.getPayment().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				p.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				p.getPayment().setMemberId(rs.getString("MEMBER_ID"));
+				p.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+//	selectNewPaymentByhostId=SELECT * FROM (SELECT ROWNUM AS RNUM, B.* 	FROM 
+//	(SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE 
+//	FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
+//	LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) 
+//	LEFT JOIN CALC CL USING(HOST_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL)B) 
+//	WHERE RNUM BETWEEN 1 AND 5 ORDER BY PAYMENT_DATE DESC
+	public List<PaymentCalc> selectNewPaymentByhostId(Connection conn, String hostId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<PaymentCalc> list = new ArrayList<PaymentCalc>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectNewPaymentByhostId"));
+			pstmt.setString(1, hostId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				PaymentCalc p = new PaymentCalc();
+				p.getPayment().setPaymentId(rs.getString("PAYMENT_ID"));
+				p.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				p.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				p.getPayment().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				p.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				p.getPayment().setMemberId(rs.getString("MEMBER_ID"));
+				p.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 	
-	
-
 }

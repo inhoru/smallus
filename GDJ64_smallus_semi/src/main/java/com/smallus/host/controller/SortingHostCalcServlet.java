@@ -20,14 +20,14 @@ import com.smallus.payment.service.PaymentService;
 /**
  * Servlet implementation class ViewHostCalcServlet
  */
-@WebServlet("/host/viewHostCalc.do")
-public class ViewHostCalcServlet extends HttpServlet {
+@WebServlet("/host/sortingHostCalc.do")
+public class SortingHostCalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewHostCalcServlet() {
+    public SortingHostCalcServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +39,7 @@ public class ViewHostCalcServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session= request.getSession();
 		Host host=(Host)session.getAttribute("loginHost");
-		String hostId=(host.getHostId());
+		String hostId=host.getHostId();
 		// 페이징 처리
 		int cPage, numPerpage;
 		try {
@@ -84,12 +84,17 @@ public class ViewHostCalcServlet extends HttpServlet {
 					+ numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
-		
-		List<Calc> calcList=new CalcService().selectAllcalcByhostId(hostId, cPage, numPerpage);
+
+		//		정산 대기','처리 중','정산 완료
+		String calcStatus=request.getParameter("calcStatus");
+		if(calcStatus.equals("Y")) calcStatus="정산완료";
+		else if(calcStatus.equals("W")) calcStatus="정산대기";
+		else if(calcStatus.equals("N"))calcStatus="정산거절";
+		List<Calc> calcList=new CalcService().sortingByCalcStatus(hostId, calcStatus, cPage, numPerpage);
 		if(calcList.isEmpty()||calcList==null) {
-			System.out.println("selectAllcalcByhostId 없음없");
+			System.out.println("calcList 없음없");
 		}else {
-			System.out.println("selectAllcalcByhostId 있음있");
+			System.out.println("calcList 있음있");
 			request.setAttribute("calcList",calcList);				
 		}
 		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);

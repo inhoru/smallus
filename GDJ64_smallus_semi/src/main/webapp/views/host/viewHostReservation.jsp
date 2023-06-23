@@ -1,14 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%List<Payment> rsvList =(List)session.getAttribute("rsvList"); %>
+<%
+	List<PaymentCalc> rsvList =(List)request.getAttribute("rsvList"); 
+	List<PaymentCalc> sortStatusList=(List)request.getAttribute("sortStatusList");
+%>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <script src="<%=request.getContextPath() %>/js/calendar.js"></script>
-<%@ page import="java.util.List, com.smallus.payment.model.vo.Payment" %>
+<%@ page import="java.util.List, 
+				com.smallus.payment.model.vo.PaymentCalc,
+				com.smallus.payment.model.vo.Payment,
+				com.smallus.classes.model.vo.Classes,
+				com.smallus.classes.model.vo.ClassDetail,
+				com.smallus.host.model.vo.Calc
+" %>
 <!--main-->
 <div id="mainOpacity h-host-main">
 	<section class="h-main h-rsv">
      	<div class="h-main-title">
-			<h2>5월 예약 내역</h2><hr>
+			<h3>5월 예약 내역</h3><hr>
      			<!-- 예약 내역 상세 페이지로 이동 -->
                 <!-- <div class="h-viewList"><a href="">+</a></div> -->
         </div><hr>
@@ -18,11 +27,14 @@
 	<section class="h-main h-main-rsvList">
             <div>
                 <div class="h-main-title"> 
-                    <h2>새로운 예약 내역</h2>
+                    <h2>전체 예약 내역</h2>
                     <!-- 예약 내역 상세 페이지로 이동 -->
-                    <!-- <div class="h-viewList"><a href="">+</a></div> -->
                 </div>
-                <!-- ajax 통해서 넣을 예약 테이블 -->
+                <select name="h-selectPaymentStatus" id="h-selectPaymentStatus" onchange="selectOption()">
+                	<option>결제 상태(전체)</option>
+                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 완료</option>
+                	<option value="N" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>결제 취소</option>
+                </select>
                 <table id="h-main-rsv-tbl">
                     <tr>
                     	<th>NO</th>
@@ -31,32 +43,71 @@
                         <th>날짜</th>
                         <th>예약자 아이디</th>
                         <th>예약 인원</th>
+                        <th>결제 일</th>
+                        <th>결제 상태</th>
                     </tr>
-                    <!-- P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.MEMBER_ID -->
+                    <!-- //P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, 
+					//P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE -->
                     <%if(rsvList!=null && !rsvList.isEmpty()){
                     	int count=1;
-                    	for(Payment p: rsvList){
+                    	for(PaymentCalc p: rsvList){
                         %>
 		                    <tr>
 		                    	<td><%=count %></td>
-		                        <td><%=p.getPaymentId()%></td>
-		                        <td><%=p.getClassTitle()%></td>
-		                        <td><%=p.getBookingTimeStart()%> - <%=p.getBookingTimeEnd()%></td>
-		                        <td><%=p.getMemberId()%></td>
-                                <td><%=p.getClassPersonnel()%></td>
+		                        <td><%=p.getPayment().getPaymentId()%></td>
+		                        <td><%=p.getClasses().getClassTitle()%></td>
+		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
+		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
+		                        <td><%=p.getPayment().getMemberId()%> 님 예약</td>
+		                        <td><%=p.getPayment().getPaymentDate()%></td>
+		                        <td><%=p.getPayment().getPaymentStatus()%></td>
 	                   		</tr>
 	                    <%count++;
 	                    }
-                    
                     }else{ %>
                     <tr>
-                        <td colspan="5">조회된 예약이 없습니다.</td>
+                        <td colspan="8">조회된 예약이 없습니다.</td>
                     </tr>
                     <%} %>
+                    <%if(sortStatusList!=null && !sortStatusList.isEmpty()){
+                    	int count=1;
+                    	for(PaymentCalc p: sortStatusList){%>
+                        <tr>
+		                    	<td><%=count %></td>
+		                        <td><%=p.getPayment().getPaymentId()%></td>
+		                        <td><%=p.getClasses().getClassTitle()%></td>
+		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
+		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
+		                        <td><%=p.getPayment().getMemberId()%> 님 예약</td>
+		                        <td><%=p.getPayment().getPaymentDate()%></td>
+		                        <td><%=p.getPayment().getPaymentStatus()%></td>
+	                   		</tr>
+	                    <%count++;
+	                    }
+                    }%>
                 </table>
             </div>
+            <div class="pageBar">
+            	<%=request.getAttribute("pageBar") %>
+            </div>
         </section>
-    
+<script>
+//select 옵션 변경하면 이동하는 함
+function selectOption(){
+	let index = $("#h-selectPaymentStatus option").index($("#h-selectPaymentStatus option:selected"));
+	let div=$("#h-selectPaymentStatus option")
+	// index =1 -> W / 2:Y/3:N
+	//console.log(index);
+	if(index==0){
+		location.replace('<%=request.getContextPath()%>/host/viewHostRsv.do');
+	}else if(index==1){
+		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y');
+
+	}else if(index==2){
+		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
+	}
+}
+</script>
 <%@ include file="/views/common/hostFooter.jsp"%>
 
 

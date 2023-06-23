@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+import com.smallus.classes.model.service.ClassService;
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.HostService;
-import com.smallus.payment.model.vo.Payment;
+import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.service.PaymentService;
 
 /**
@@ -65,12 +68,20 @@ public class HostLoginServlet extends HttpServlet {
 			HttpSession session=request.getSession();
 			session.setAttribute("loginHost",loginHost);
 			
-			List<Payment> rsvList=new PaymentService().selectPaymentByhostId(hostId);
-			if(rsvList.isEmpty()) {
+			List<PaymentCalc> newList=new PaymentService().selectNewPaymentByhostId(hostId);
+			List<Classes> calendarList=new ClassService().selectClassByCalendar(hostId);
+			if(newList.isEmpty()||newList==null||calendarList.isEmpty()||calendarList==null) {
+				System.out.println("newList 없음없");
 			}else {
-				session.setAttribute("rsvList",rsvList);
+				System.out.println("newList 있음있"+newList.size());
+				session.setAttribute("newList",newList);	
+				session.setAttribute("calendarList", calendarList);
+				Gson gson= new Gson();
+				response.setContentType("application/json; charset=UTF-8");
+				gson.toJson(calendarList,response.getWriter()); // list 보낼 때는 바로 list 보내도 됨 ㅠㅠ
+				
 			}
-			
+
 			
 			
 			

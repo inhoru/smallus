@@ -1,4 +1,4 @@
-package com.smallus.host.controller;
+package com.smallus.payment.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,24 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
-import com.smallus.host.service.CalcService;
 import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.service.PaymentService;
 
 /**
- * Servlet implementation class ViewHostCalcServlet
+ * Servlet implementation class SortingHostRsvServlet
  */
-@WebServlet("/host/viewHostCalc.do")
-public class ViewHostCalcServlet extends HttpServlet {
+@WebServlet("/host/sortingHostRsv.do")
+public class SortingHostRsvServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewHostCalcServlet() {
+    public SortingHostRsvServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +36,16 @@ public class ViewHostCalcServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session= request.getSession();
 		Host host=(Host)session.getAttribute("loginHost");
-		String hostId=(host.getHostId());
+		String hostId=host.getHostId();
+		
+		String paymentStatus=request.getParameter("paymentStatus");
+		if(paymentStatus.equals("Y")) {
+			paymentStatus="결제완료";
+		}else if(paymentStatus.equals("N")) {
+			paymentStatus="결제취소";
+		}
+		
+		
 		// 페이징 처리
 		int cPage, numPerpage;
 		try {
@@ -54,10 +60,9 @@ public class ViewHostCalcServlet extends HttpServlet {
 		}
 
 		String pageBar = "";
-		int totalData = new CalcService().selectCalcCount(hostId);
-		System.out.println(totalData+" "+hostId);
+		int totalData = new PaymentService().selectRsvCount(hostId);
+		System.out.println(totalData);
 		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
-		System.out.println(hostId+" "+totalData);
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageNo + pageBarSize - 1;
@@ -85,15 +90,15 @@ public class ViewHostCalcServlet extends HttpServlet {
 		}
 		request.setAttribute("pageBar", pageBar);
 		
-		List<Calc> calcList=new CalcService().selectAllcalcByhostId(hostId, cPage, numPerpage);
-		if(calcList.isEmpty()||calcList==null) {
-			System.out.println("selectAllcalcByhostId 없음없");
+		List<PaymentCalc> sortStatusList=new PaymentService().sortingPaymentByStatus(hostId,paymentStatus,cPage,numPerpage);
+		if(sortStatusList.isEmpty()||sortStatusList==null) {
+			System.out.println("sortStatusList없음없");
 		}else {
-			System.out.println("selectAllcalcByhostId 있음있");
-			request.setAttribute("calcList",calcList);				
+			System.out.println("sortStatusList있음있");
+			request.setAttribute("sortStatusList",sortStatusList);				
 		}
-		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);
 		
+		request.getRequestDispatcher("/views/host/viewHostReservation.jsp").forward(request, response);
 	}
 
 	/**
