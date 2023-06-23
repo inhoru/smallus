@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
+import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.model.vo.PaymentCompleted;
@@ -378,5 +379,40 @@ public class PaymentDao {
 		return list;
 	}
 	
+	
+//	selectClassDetailByClassId=SELECT CATEGORY_TITLE, CLASS_TITLE, CLASS_ADDRESS, CLASS_ID, CLASS_DETAIL_ID, 
+//			BOOKING_TIME_START, BOOKING_TIME_END,  CLASS_PERSONNEL, REMAINING_PERSONNEL, CLASS_PRICE 
+//			FROM CLASS_DETAIL LEFT JOIN CLASS USING(CLASS_ID) LEFT JOIN CATEGORY USING(CATEGORY_ID)
+//			WHERE CLASS_ID=? AND CLASS_STATUS='Y'
+	public List<ClassPayment> selectClassDetailByClassId(Connection conn, String classId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<ClassPayment> list = new ArrayList<ClassPayment>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectClassDetailByClassId"));
+			pstmt.setString(1, classId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ClassPayment p = new ClassPayment();
+				p.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				p.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				p.getClasses().setClassAddress(rs.getString("CLASS_ADDRESS"));
+				p.getClasses().setClassId(rs.getString("CLASS_ID"));
+				p.getClassDetail().setClassDetailId(rs.getString("CLASS_DETAIL_ID"));
+				p.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				p.getClasses().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				p.getClassDetail().setRemainingPersonnel(rs.getInt("REMAINING_PERSONNEL"));
+				p.getClasses().setClassPrice(rs.getInt("CLASS_PRICE"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 }

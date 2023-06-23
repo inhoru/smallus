@@ -84,13 +84,15 @@ public class ViewHostCalcServlet extends HttpServlet {
 					+ numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
-		
+		Gson gson= new Gson();
 		List<Calc> calcList=new CalcService().selectAllcalcByhostId(hostId, cPage, numPerpage);
 		if(calcList.isEmpty()||calcList==null) {
 			System.out.println("selectAllcalcByhostId 없음없");
 		}else {
 			System.out.println("selectAllcalcByhostId 있음있");
 			request.setAttribute("calcList",calcList);				
+			request.setAttribute("cPage", cPage);
+			gson.toJson(calcList,response.getWriter());
 		}
 		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);
 		

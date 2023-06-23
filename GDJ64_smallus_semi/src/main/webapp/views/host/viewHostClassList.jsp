@@ -27,8 +27,10 @@
 				for(Classes c:classList){%>
 				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
-					<a href="" class="h-class-list-img" onclick="h-viewDetail(<%=c.getClassId()%>)">
+					<a href="" id="h-class-list">
+					<%-- <a href="#" class="h-class-list-img" onclick="viewDetail(<%=c.getClassId()%>); return false"> --%>
 						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
+						<input type="hidden" name="classId" class="h-classId" value="<%=c.getClassId()%>">
 					</a>
 					<table>
 						<tr>
@@ -83,8 +85,10 @@
 				for(Classes c:classListPass){%>
 				<div class="h-class-list h-class-pass-list">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
-					<a href="" class="h-class-list">
+					<a href="" id="h-class-list">
+					<%-- <a href="" id="h-class-list" onclick="viewDetail('<%=c.getClassId()%>')"> --%>
 						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
+						<input type="hidden" name="classId" class="h-classId" value="<%=c.getClassId()%>">
 					</a>
 					<table>
 						<tr>
@@ -137,11 +141,22 @@
 				}else{ %>
 				<%} %>
         </div>
+	            <div class="pageBar">
+	            	<%=request.getAttribute("pageBar") %>
+	            </div>
+        </section>
         <div class="pageBar">
 			<%=request.getAttribute("pageBar") %>
 		</div>
 	</section>
 	<script>
+		
+		$(".h-class-list").click(e=>{
+			const $classId=$(e.target).children('.h-classId')
+			console.log($classId)
+			location.assign('<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=$classId');
+			
+		});		
 		
 		// select 옵션 변경하면 이동하는 함
 		function selectOption(){
@@ -162,11 +177,9 @@
 				$(".h-class-pass-list").css('display','flex');
 		}
 		
-		<%-- <%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=hostInfo.getHostId()%>&classId=<%=c.getClassId() %> --%>
-		$("h-class-list-img").click(e)=>{
-			console.log($(e.target));
-		}
-		
+		/* $("#h-class-list-img").click(e=>{
+		    console.log($(e).val());
+		}) */ 
 		
 	</script>       
 <%@ include file="/views/common/hostFooter.jsp"%>

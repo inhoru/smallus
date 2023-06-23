@@ -39,4 +39,11 @@ public class CouponService {
 		return result;
 	}
 	
+	public List<Coupon> selectCouponByMemberId(String memberId){
+		Connection conn=getConnection();
+		List<Coupon> list=dao.selectCouponByMemberId(conn, memberId);
+		close(conn);
+		return list;
+	}
+	
 }

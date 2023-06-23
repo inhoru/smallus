@@ -1,15 +1,19 @@
 package com.smallus.payment.service;
 
-import static com.smallus.common.JDBCTemplate.*;
+import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
+import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.smallus.member.model.vo.Member;
 import com.smallus.payment.dao.PaymentDao;
+import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
-import com.smallus.payment.model.vo.PaymentCompleted;
 import com.smallus.payment.model.vo.PaymentCalc;
+import com.smallus.payment.model.vo.PaymentCompleted;
 
 public class PaymentService {
 	private PaymentDao dao= new PaymentDao();
@@ -89,6 +93,13 @@ public class PaymentService {
 	public List<PaymentCalc> selectNewPaymentByhostId(String hostId){
 		Connection conn=getConnection();
 		List<PaymentCalc> list=dao.selectNewPaymentByhostId(conn, hostId);
+		close(conn);
+		return list;
+	}
+	
+	public List<ClassPayment> selectClassDetailByClassId(String classId){
+		Connection conn=getConnection();
+		List<ClassPayment> list=dao.selectClassDetailByClassId(conn, classId);
 		close(conn);
 		return list;
 	}

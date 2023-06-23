@@ -86,9 +86,9 @@
                     }%>
                 </table>
             </div>
-            <div class="pageBar">
-            	<%=request.getAttribute("pageBar") %>
-            </div>
+	            <div class="pageBar">
+	            	<%=request.getAttribute("pageBar") %>
+	            </div>
         </section>
 <script>
 //select 옵션 변경하면 이동하는 함

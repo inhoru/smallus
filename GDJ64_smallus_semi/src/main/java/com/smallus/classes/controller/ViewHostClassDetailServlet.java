@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.service.ClassService;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.model.vo.Host;
 
 /**
  * Servlet implementation class VewClassDetailServlet
@@ -32,11 +34,14 @@ public class ViewHostClassDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		// 호스트 아이디를 기준으로 클래스 세부 내용을 가져옴
+		HttpSession session= request.getSession();
+		Host host=(Host)session.getAttribute("loginHost");
+		String hostId=host.getHostId();
+		
 		// 클래스 아이디를 기준으로 클래스리스트를 가져옴
 		String classId=request.getParameter("classId");
-		// 호스트 아이디를 기준으로 클래스 세부 내용을 가져옴
-		String hostId=request.getParameter("hostId");
 		List<Classes> classList=new ClassService().selectClassesByHostId(hostId);
 		List<ClassDetail> classDetailList = new ClassService().selectClassDetailByClassId(classId);
 		// 분기처리 후 클래스 상세 페이지로 전송

@@ -111,13 +111,16 @@ public class CalcDao {
 		}return calcList;
 	}
 	
+	
 	//sortingByCalcStatusSELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM (SELECT * FROM CALC WHERE HOST_ID=? AND CALC_STATUS=? )C) WHERE RNUM BETWEEN ? AND ?
 	public List<Calc> sortingByCalcStatus(Connection conn, String hostId, String calcStatus, int cPage, int numPerpage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Calc> calcList=new ArrayList<Calc>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("sortingByCalcStatus"));
+			
+			pstmt=conn.prepareStatement("SELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM (SELECT * FROM CALC WHERE HOST_ID=? AND CALC_STATUS=? )C) WHERE RNUM BETWEEN ? AND ?");
+			//pstmt=conn.prepareStatement(sql.getProperty("sortingByCalcStatus"));
 			pstmt.setString(1, hostId);
 			pstmt.setString(2, calcStatus);
 			pstmt.setInt(3, (cPage-1)*numPerpage+1);
