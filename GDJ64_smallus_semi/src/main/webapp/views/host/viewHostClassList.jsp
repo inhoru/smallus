@@ -153,7 +153,6 @@
 				location.replace('<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>');
 			}else if(index==1){
 				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?passStatus=W');
-
 			}else if(index==2){
 				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?passStatus=Y');
 			}else if(index==3){

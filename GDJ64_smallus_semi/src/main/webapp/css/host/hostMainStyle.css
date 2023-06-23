@@ -91,7 +91,7 @@ div.h-main-title {
 	justify-content: space-around;
 }
 
-div.h-main-title h2 {
+div.h-main-title h3 {
 	width: 100%;
 	margin: 0 auto;
 }
@@ -179,7 +179,7 @@ div.h-class-list-container{
 }
 
 /* host-class page select */
-select#selectClassStatus {
+select#selectClassStatus, select#h-selecCalcStatus, select#h-selectPaymentStatus{
   
   width: 10rem;
   height: 35px;
@@ -188,9 +188,8 @@ select#selectClassStatus {
   border-radius: 4px;
   outline: 0 none;
 }
-select#selectClassStatus option {
-  background: black;
-  color: #fff;
+select#selectClassStatus option, select#h-selecCalcStatus option, select#h-selectPaymentStatus option{
+  background: #ffc107 ;
   padding: 0.5rem 0.2rem;
 }
 /* host class page - class list */
@@ -381,11 +380,16 @@ section.h-calc button {
 
 
 /* host page paging bar*/
+/* 페이지바 */
 .pageBar {
-	width: 100%;
-	margin: 2rem auto;
-	text-align: right;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    padding: 3% 0;
 }
+
 
 .pageBar * {
 	margin: 0.3rem;
@@ -401,7 +405,10 @@ section.h-calc button {
 .pageBar .h-pageBar-now {
 	font-weight: bold;
 }
-
+/* 페이징처리 호버 */
+.pageBar a:hover {
+	color: gray;
+}
 /* updateCalc page*/
 section.h-updateAccInfo {
 	width: 100%;

@@ -27,14 +27,13 @@
 	<section class="h-main h-main-rsvList">
             <div>
                 <div class="h-main-title"> 
-                    <h2>전체 예약 내역</h2>
-                    <!-- 예약 내역 상세 페이지로 이동 -->
+                    <h3>전체 예약 내역</h3>
+	                <select name="h-selectPaymentStatus" id="h-selectPaymentStatus" onchange="selectOption()">
+	                	<option>결제 상태(전체)</option>
+	                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 완료</option>
+	                	<option value="N" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>결제 취소</option>
+	                </select>
                 </div>
-                <select name="h-selectPaymentStatus" id="h-selectPaymentStatus" onchange="selectOption()">
-                	<option>결제 상태(전체)</option>
-                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 완료</option>
-                	<option value="N" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>결제 취소</option>
-                </select>
                 <table id="h-main-rsv-tbl">
                     <tr>
                     	<th>NO</th>
@@ -57,8 +56,8 @@
 		                        <td><%=p.getPayment().getPaymentId()%></td>
 		                        <td><%=p.getClasses().getClassTitle()%></td>
 		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
-		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
 		                        <td><%=p.getPayment().getMemberId()%> 님 예약</td>
+		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
 		                        <td><%=p.getPayment().getPaymentDate()%></td>
 		                        <td><%=p.getPayment().getPaymentStatus()%></td>
 	                   		</tr>

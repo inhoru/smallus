@@ -1,4 +1,4 @@
-package com.smallus.host.controller;
+package com.smallus.review.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,24 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
-import com.smallus.host.service.CalcService;
 import com.smallus.payment.model.vo.PaymentCalc;
-import com.smallus.payment.service.PaymentService;
+import com.smallus.review.service.ReviewService;
 
 /**
- * Servlet implementation class ViewHostCalcServlet
+ * Servlet implementation class ViewHostReviewServlet
  */
-@WebServlet("/host/sortingHostCalc.do")
-public class SortingHostCalcServlet extends HttpServlet {
+@WebServlet("/review/viewHostReview.do")
+public class ViewHostReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortingHostCalcServlet() {
+    public ViewHostReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,6 +37,7 @@ public class SortingHostCalcServlet extends HttpServlet {
 		HttpSession session= request.getSession();
 		Host host=(Host)session.getAttribute("loginHost");
 		String hostId=host.getHostId();
+		
 		// 페이징 처리
 		int cPage, numPerpage;
 		try {
@@ -54,10 +52,9 @@ public class SortingHostCalcServlet extends HttpServlet {
 		}
 
 		String pageBar = "";
-		int totalData = new CalcService().selectCalcCount(hostId);
-		System.out.println(totalData+" "+hostId);
+		int totalData = new ReviewService().countReviewByhostId(hostId);
+		System.out.println(totalData);
 		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
-		System.out.println(hostId+" "+totalData);
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageNo + pageBarSize - 1;
@@ -84,20 +81,16 @@ public class SortingHostCalcServlet extends HttpServlet {
 					+ numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
-
-		//		정산 대기','처리 중','정산 완료
-		String calcStatus=request.getParameter("calcStatus");
-		if(calcStatus.equals("Y")) calcStatus="정산완료";
-		else if(calcStatus.equals("W")) calcStatus="정산대기";
-		else if(calcStatus.equals("N"))calcStatus="정산거절";
-		List<Calc> cSortList=new CalcService().sortingByCalcStatus(hostId, calcStatus, cPage, numPerpage);
-		if(cSortList.isEmpty()||cSortList==null) {
-			System.out.println("cSortList 없음없");
-		}else {
-			System.out.println("cSortList 있음있");
-			request.setAttribute("cSortList",cSortList);				
-		}
-		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);
+		
+		//List<PaymentCalc> sortStatusList=new ReviewService().viewAllReviewByHostId(hostId,cPage,numPerpage);
+//		if(sortStatusList.isEmpty()||sortStatusList==null) {
+//			System.out.println("sortStatusList없음없");
+//		}else {
+//			System.out.println("sortStatusList있음있");
+//			request.setAttribute("sortStatusList",sortStatusList);				
+//		}
+		
+		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response);
 		
 	}
 

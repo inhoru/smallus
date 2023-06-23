@@ -104,4 +104,35 @@ public class ReviewDao {
 //			close(pstmt);
 //		}return r;
 //	}
+	
+	public int countReviewByhostId(Connection conn, String hostId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("countReviewByhostId"));
+			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
+			pstmt.setString(1, hostId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}

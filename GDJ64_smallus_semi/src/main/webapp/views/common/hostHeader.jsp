@@ -96,7 +96,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><a href="">후기 관리</a></td>
+                        <td><a href="<%=request.getContextPath()%>/review/viewHostReview.do">후기 관리</a></td>
                     </tr>
                 </table>
             </div>            

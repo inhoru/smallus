@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%List<Calc> calcList =(List)request.getAttribute("calcList"); %>
+<%
+	List<Calc> calcList =(List)request.getAttribute("calcList");
+	List<Calc> cSortList =(List)request.getAttribute("cSortList");
+%>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <%@ page import="java.util.List, com.smallus.host.model.vo.Calc" %>
 <!--main-->
@@ -34,13 +37,13 @@
 		<div class="h-r-callendar" id="h-main-chart"></div>
 		<div class="h-main-title">
 			<h3>전체 정산 내역</h3>
-	    </div>
 			<select name="h-selecCalcStatus" id="h-selecCalcStatus" onchange="selectOption()">
                	<option>정산 상태(전체)</option>
                	<option value="Y" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("Y")?"selected":""%>>정산 완료</option>
                	<option value="W" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("W")?"selected":""%>>정산 대기</option>
                	<option value="N" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("N")?"selected":""%>>정산 거절</option>
             </select>
+	    </div>
             <table id="h-main-calc-tbl">
             	<tr>
                    	<th>NO</th>
@@ -54,8 +57,7 @@
                     <!-- P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.MEMBER_ID5 -->
                     <%if(calcList!=null && !calcList.isEmpty()){
                     	int count=1;
-                    	for(Calc c: calcList){
-                        %>
+                    	for(Calc c: calcList){%>
 		                    <tr>
 		                    	<td><%=count %></td>
 		                        <td><%=c.getCalcId()%></td>
@@ -66,13 +68,26 @@
 		                        <td><%=c.getCalcStatus()%></td>
 	                   		</tr>
 	                    <%count++;
-	                    }
-                    
-                    }else{ %>
-                    <tr>
+	                    }%>
+                    <%}else{ %>
+                 	<tr>
                         <td colspan="7">조회된 정산 정보가 없습니다.</td>
                     </tr>
-                    <%} %>
+                    <%} if(cSortList!=null && !cSortList.isEmpty()){
+                    	int count=1;
+                    	for(Calc c: calcList){%>
+		                    <tr>
+		                    	<td><%=count %></td>
+		                        <td><%=c.getCalcId()%></td>
+		                        <td><%=c.getCalcReqDate()%></td>
+		                        <td><%=c.getCalcPassDate()%></td>
+                                <td><%=c.getCalcPrice()%> 원</td>
+                                <td><%=c.getCalcFinalPrice()%> 원</td>
+		                        <td><%=c.getCalcStatus()%></td>
+	                   		</tr>
+	                    <%count++;
+                    		}
+	                }%>
                 </table>
 	            <div class="pageBar">
 					<%=request.getAttribute("pageBar") %>
