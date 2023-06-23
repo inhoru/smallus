@@ -33,10 +33,10 @@ public class MemberDeleteServlet extends HttpServlet {
 		int result=new AdminService().deleteByMember(memberId);
 		String msg,loc;
 		if(result>0) {
-			msg="회원추방을 완료했습니다.";
+			msg="회원삭제를 완료했습니다.";
 			loc="/admin/memberListServlet.do";
 		}else {
-			msg="회원추방을 실패했습니다.";
+			msg="회원삭제를 실패했습니다.";
 			loc="/admin/memberListServlet.do";
 		}
 		request.setAttribute("msg",msg);

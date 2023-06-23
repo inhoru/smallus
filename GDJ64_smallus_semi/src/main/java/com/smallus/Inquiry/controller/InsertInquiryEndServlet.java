@@ -56,20 +56,14 @@ public class InsertInquiryEndServlet extends HttpServlet {
 		String boardTitle=mr.getParameter("boardTitle");
 		String boardContent=mr.getParameter("boardContent");
 		String boardType=mr.getParameter("boardType");
-		List<String> files=new ArrayList();
-		Enumeration<String> names= mr.getFileNames();
+		  List<String> files=new ArrayList();
+			Enumeration<String> names= mr.getFileNames();
+	     while(names.hasMoreElements()) {
+				String imgs=names.nextElement();
+				files.add(mr.getFilesystemName(imgs));		
+			}
+		int result=new InquiryService().InsertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent,files);		
 		
-		while(names.hasMoreElements()) {
-			String imgs=names.nextElement();
-			files.add(mr.getFilesystemName(imgs));		
-		}
-		
-		
-   
-		
-	
-	
-	     int result=new InquiryService().InsertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent);
 	 	String msg="",loc="";
 	     if(result>0) {
 				msg="게시글이 등록 되었습니다.";
@@ -81,6 +75,9 @@ public class InsertInquiryEndServlet extends HttpServlet {
 				msg="게시글등록에 실패하였습니다.";
 				loc="/memberInquiry.do";
 			}
+	   
+				
+			
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

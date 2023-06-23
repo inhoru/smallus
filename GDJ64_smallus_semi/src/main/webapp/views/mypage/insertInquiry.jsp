@@ -97,9 +97,8 @@
 				</tr>
 			
 			</table>
-			<!-- <button class="i-storage" onclick="fn_upload")>등록</button> -->
-		</form>
 			<button class="i-storage">등록</button>
+		</form>
 	</div>
 <script>
 function dateForm(e) {
@@ -146,7 +145,7 @@ $(".i-storage").click(e=>{
 		processData:false,
 		contentType:false,
 		success:data=>{
-			alert("업로드가 완료되었습니다.")
+			
 		},error:(r,m)=>{
 			alert("업로드실패했습니다."+m);
 		},complete:()=>{

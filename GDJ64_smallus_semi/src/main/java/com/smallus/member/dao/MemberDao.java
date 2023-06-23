@@ -304,6 +304,7 @@ public class MemberDao {
 			//wishRemove=DELETE FROM WISH WHERE MEMBER_ID = ? AND CLASS_ID=(SELECT CLASS_ID FROM CLASS WHERE CLASS_TITLE=?)
 			pstmt.setString(1,memberId);
 			pstmt.setString(2, title);
+			
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

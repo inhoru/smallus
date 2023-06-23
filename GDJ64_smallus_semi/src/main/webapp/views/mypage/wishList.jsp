@@ -34,7 +34,6 @@ List<Classes> wish = (List) request.getAttribute("wishList");
 		</table>
 	</section>
 
-	<form action="<%=request.getContextPath()%>/insertCoupon.do">
 		<section class="i-mypagecoupontotal">
 			<div class="i-mypagecoupon">
 				<h2 class="i-mypageh2">찜</h2>

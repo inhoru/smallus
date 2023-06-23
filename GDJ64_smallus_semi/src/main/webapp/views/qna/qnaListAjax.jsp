@@ -42,7 +42,7 @@ table#list th, table#list td {
 </div>
 <section id="main">
 	<div id="table">
-		<table id="list">
+		<table>
 			<tr>
 				<th>상태</th>
 				<th>클래스 이름</th>
@@ -69,5 +69,10 @@ table#list th, table#list td {
 			<tr>
 			</tr>
 		</table>
+		<script type="text/javascript">
+		$("#toggle").click(e=>{
+			$("views/qna/qnaListAjax.jsp").slideToggle(1000);
+		});
+		</script>
 	</div>
 </section>
