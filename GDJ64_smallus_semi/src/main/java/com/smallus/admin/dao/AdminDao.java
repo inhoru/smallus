@@ -39,8 +39,25 @@ public class AdminDao {
 		ResultSet rs=null;
 		int totalData=0;
 		try {
-			//SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ST IN('Y','K')
+			//SELECT COUNT(*) FROM MEMBER
 			pstmt=conn.prepareStatement(sql.getProperty("selectMemberCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public int selectMemberSortCount(Connection conn, String memberSt) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			//SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ST=?
+			pstmt=conn.prepareStatement(sql.getProperty("selectMemberSortCount"));
+			pstmt.setString(1, memberSt);
 			rs=pstmt.executeQuery();
 			if(rs.next()) 
 				totalData=rs.getInt(1);
@@ -55,10 +72,31 @@ public class AdminDao {
 		ResultSet rs=null;
 		List<Member> list=new ArrayList();
 		try {
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM MEMBER WHERE MEMBER_ST IN('Y','K'))M) WHERE RNUM BETWEEN ? AND ?
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM MEMBER)M) WHERE RNUM BETWEEN ? AND ?
 			pstmt=conn.prepareStatement(sql.getProperty("checkMemberAll"));
 			pstmt.setInt(1, (cPage-1)*numPerpage+1);
 			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getMember(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public List<Member> checkMemberSort(Connection conn, String memberSt,int cPage,int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Member> list=new ArrayList();
+		try {
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM MEMBER WHERE MEMBER_ST=?)M) WHERE RNUM BETWEEN ? AND ?
+			pstmt=conn.prepareStatement(sql.getProperty("checkMemberSort"));
+			pstmt.setString(1, memberSt);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				list.add(getMember(rs));
@@ -77,6 +115,20 @@ public class AdminDao {
 			//UPDATE MEMBER SET MEMBER_ST='N' WHERE MEMBER_ID = ?
 			pstmt=conn.prepareStatement(sql.getProperty("deleteByMember"));
 			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int deleteByHost(Connection conn,String hostId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteByHost"));
+			pstmt.setString(1, hostId);
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -104,6 +156,26 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
+	public List<Host> checkHostSort(Connection conn, String hostSt, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Host> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("checkHostSort"));
+			pstmt.setString(1, hostSt);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getHost(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	
 	public int selectHostCount(Connection conn) {
 		PreparedStatement pstmt=null;
@@ -112,6 +184,22 @@ public class AdminDao {
 		try {
 			//selectHostCount=SELECT COUNT(*) FROM HOST WHERE HOST_ST IN('Y')
 			pstmt=conn.prepareStatement(sql.getProperty("selectHostCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public int selectHostSortCount(Connection conn,String hostSt) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectHostSortCount"));
+			pstmt.setString(1, hostSt);
 			rs=pstmt.executeQuery();
 			if(rs.next()) 
 				totalData=rs.getInt(1);
