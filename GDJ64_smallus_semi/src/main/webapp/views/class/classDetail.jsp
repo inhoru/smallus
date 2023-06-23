@@ -8,6 +8,7 @@
 <%!
 	// public int personnelCount=1;
 	// int classPrice=37000;
+	// 이 자료를 자바로 저장해야하는지? 자바스크립트로 저장해도 넘길수있는지?
 	int wishNum=110;
 	double starPoint=4.5;
 %>
@@ -35,7 +36,7 @@
 				<div id="d-detail-date">
 					<select>
 					<%for(ClassDetail cd : schedule){ %>
-						<option><%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %>인원수:<%=cd.getRemainingPersonnel() %></option>
+						<option><%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %> 인원수:<%=cd.getRemainingPersonnel() %></option>
 					<%} %>
 					</select> 
 					<%-- <img src="<%=request.getContextPath()%>/img/category_main/calendar.png" width="300" height="200"> --%>
