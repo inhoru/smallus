@@ -52,9 +52,28 @@ public class InquiryService {
 		else rollback(conn);
 		return result;
 	}
-	public int InsertInquiry(String memberId,String boardType,String boardTitle,String boardContent) {
+	public int InsertInquiry(String memberId,String boardType,String boardTitle,String boardContent,List<String> files) {
 		Connection conn = getConnection();
+		int result2=0;
 		int result = dao.InsertInquiry(conn,memberId,boardType,boardTitle,boardContent);
+		if(result>0) {
+			commit(conn);
+		}else{
+			rollback(conn);
+		};
+		if(result==1) {
+			for(int i=0;i<files.size();i++) {				
+				result2+=dao.Insertupfiles(conn,files.get(i));
+			}
+			if(result2==files.size()) {
+				commit(conn);
+			}else rollback(conn);
+		}
+		return result;
+	}
+	public int Insertupfiles(String files) {
+		Connection conn = getConnection();
+		int result = dao.Insertupfiles(conn,files);
 		if(result>0)commit(conn);
 		else rollback(conn);
 		return result;

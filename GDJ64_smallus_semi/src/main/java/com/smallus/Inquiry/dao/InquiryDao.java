@@ -135,6 +135,22 @@ private Properties sql= new Properties();
 		}
 		return result;
 	}
+	public int Insertupfiles(Connection conn,String files) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//INSERT INTO BOARD_IMAGE VALUES('BDE'||SEQ_BOARD_IMG.NEXTVAL,'BAD'||SEQ_BAD.CURRVAL,?);
+			pstmt=conn.prepareStatement(sql.getProperty("insertupfiles"));
+			pstmt.setString(1, files);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
 	
 	private Inquiry getInquiry(ResultSet rs) throws SQLException {
 		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).build();
