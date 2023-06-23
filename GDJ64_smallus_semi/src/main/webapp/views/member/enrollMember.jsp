@@ -143,7 +143,7 @@ let epw;
 		}
 	}
 	$("#password2").keyup(e=>{
-		let passwordReg=/(?=.*[\d])(?=.*[a-zA-z])[\da-zA-z]{7,}/;
+		let passwordReg=/(?=.*[\d])(?=.*[a-zA-z])[\da-zA-z]{8,}/;
 		const password=$("#password").val();
 		const passwordCheck=$(e.target).val();
 		let color,msg;
