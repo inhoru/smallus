@@ -59,4 +59,11 @@ public class ClassService {
 		return result;
 	}
 	
+	public List<Classes >selectClassByCalendar(String hostId){
+		Connection conn= getConnection();
+		List<Classes> list=dao.selectClassesByHostId(conn,hostId);
+		close(conn);
+		return list;
+	}
+	
 }	

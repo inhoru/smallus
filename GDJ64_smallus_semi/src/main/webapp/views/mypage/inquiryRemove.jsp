@@ -61,7 +61,7 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 		
 
 
-<h3 class="i-inquiryTitle">1:1 문의</h3>
+<h3 class="i-inquiryTitle">1:1 문의<button class="i-inquirybutton" onclick="location.assign('<%=request.getContextPath()%>/board/insertForm.do')">글쓰기</button></h3>
 		<%
 				if (inquiryList.isEmpty()) {
 				%>
@@ -106,10 +106,13 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 
 
 	</div>
+		<% if(inquiryList.isEmpty()) {%>
+	
+	<%}else{ %>
 		<div class="pageBar">
-			<%=request.getAttribute("pageBar")%>
-		</div>
-			
+		<%=request.getAttribute("pageBar")%>
+	</div>
+	<%} %>
 </div>
 
 <script>

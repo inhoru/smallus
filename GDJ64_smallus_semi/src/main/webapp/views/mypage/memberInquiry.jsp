@@ -68,7 +68,8 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 
 
-		<h3 class="i-inquiryTitle">1:1 문의</h3>
+		
+		<h3 class="i-inquiryTitle">1:1 문의<button class="i-inquirybutton" onclick="location.assign('<%=request.getContextPath()%>/insertInquiry.do')">글쓰기</button></h3>
 		<%
 				if (inquiryList.isEmpty()) {
 				%>
@@ -116,9 +117,13 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 
 	</div>
-	<div class="pageBar">
+	<% if(inquiryList.isEmpty()) {%>
+	
+	<%}else{ %>
+		<div class="pageBar">
 		<%=request.getAttribute("pageBar")%>
 	</div>
+	<%} %>
 </div>
 <script>
 	$(".i-faqContentTitle").click(e => {
