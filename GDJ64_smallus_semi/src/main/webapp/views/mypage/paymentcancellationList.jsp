@@ -28,7 +28,7 @@ int cPage = (int) request.getAttribute("cPage");
 					<td class="i-myInfo"><a
 						href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
 					<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
-					<td class="i-customerService"><a href="">1:1 문의</a></td>
+					<td class="i-customerService"><a href="<%=request.getContextPath()%>/memberInquiry.do">1:1 문의</a></td>
 				</tr>
 				<tr>
 					<td class="i-myInfo"><a
@@ -86,15 +86,15 @@ int cPage = (int) request.getAttribute("cPage");
 							<%
 							} else {
 							%>
-							<button class="i-withdrawalbutton1 i-writingreview1 ">예약취소</button>
+							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">예약취소</button> -->
 							<%
 							}
 							%>
 							<%
 							if (paymentStatus.equals("결제취소") || endDate.after(today)) {
 							%>
-							<button class="i-withdrawalbutton1 i-writingreview1 ">후기
-								작성</button>
+							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">후기
+								작성</button> -->
 							<%
 							} else {
 							%>

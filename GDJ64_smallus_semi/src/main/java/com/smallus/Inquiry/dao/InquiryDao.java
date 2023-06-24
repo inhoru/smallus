@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
+import com.smallus.Inquiry.model.vo.InquiryComment;
 import com.smallus.coupon.dao.CouponDao;
 
 public class InquiryDao {
@@ -94,7 +95,6 @@ private Properties sql= new Properties();
 		
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				
 				list.add(getInquiry(rs));
 			}
 		}catch(SQLException e) {
@@ -158,10 +158,13 @@ private Properties sql= new Properties();
 	
 	
 	private Inquiry getInquiry(ResultSet rs) throws SQLException {
-		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).comment_conent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getString("COMMENT_RDATE")).comment_id(rs.getString("COMMENT_ID")).build();
+		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).build();
 	}
 	
 	private Faq getFaq(ResultSet rs) throws SQLException {
 		return Faq.builder().faqId(rs.getString("FAQ_ID")).hostId(rs.getString("HOST_ID")).faqTitle(rs.getString("FAQ_TITLE")).faqContent(rs.getString("FAQ_CONTENT")).faqType(rs.getString("FAQ_TYPE")).build();
+	}
+	private InquiryComment getComment(ResultSet rs) throws SQLException {
+		return InquiryComment.builder().commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).build();
 	}
 }

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.smallus.member.model.vo.Member;
-import com.smallus.payment.model.vo.Payment;
 
 /**
  * Servlet implementation class PaymentEndServlet

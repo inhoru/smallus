@@ -19,20 +19,17 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<td class="i-customerService i-cu">고객센터</td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a
-					href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
+				<td class="i-myInfo"><a href="">프로필관리</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
 				<td class="i-customerService"><a href="">공지사항</a></td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a
-					href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
+				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
-				<td class="i-customerService"><a href="">1:1 문의</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/memberInquiry.do">1:1 문의</a></td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a
-					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
+				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
 				<td><a href="">후기관리</a></td>
 				<td class="i-customerService"><a href="">Q&A</a></td>
 			</tr>
@@ -51,7 +48,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 		int count = 0;
 		for (Faq f : faqList) {
 			if (count == 4) {
-				break; 
+				break;
 			}
 		%>
 		<ul>
@@ -68,15 +65,19 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 
 
-		
-		<h3 class="i-inquiryTitle">1:1 문의<button class="i-inquirybutton" onclick="location.assign('<%=request.getContextPath()%>/insertInquiry.do')">글쓰기</button></h3>
+
+		<h3 class="i-inquiryTitle">
+			1:1 문의
+			<button class="i-inquirybutton"
+				onclick="location.assign('<%=request.getContextPath()%>/insertInquiry.do')">글쓰기</button>
+		</h3>
 		<%
-				if (inquiryList.isEmpty()) {
-				%>
-				<div class="i-nopayment">문의 내역이 없습니다.</div>
-				<%
-				} else {
-				%>
+		if (inquiryList.isEmpty()) {
+		%>
+		<div class="i-nopayment">문의 내역이 없습니다.</div>
+		<%
+		} else {
+		%>
 		<table class="i-inquiryTable">
 			<tr>
 				<th>유형</th>
@@ -84,33 +85,43 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<th>작성일</th>
 				<th>처리상태</th>
 			</tr>
-	
+
 			<%
 			for (Inquiry i : inquiryList) {
 			%>
-			<tr>				
+			<tr>
 				<td class="i-inquiryContent"><%=i.getBoardType()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardTitle()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardRdate()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardCheck()%></td>
 				<td>
-				<button class="i-inquiryremovebutton">삭제</button>
-				<input type="hidden" value="<%=i.getBoardId()%>" name="boardId" class="i-boardId">
+					<button class="i-inquiryremovebutton">삭제</button> <input
+					type="hidden" value="<%=i.getBoardId()%>" name="boardId"
+					class="i-boardId">
 				</td>
 			</tr>
 
 			<tr class="i-inquiryContentAnswer">
 				<td colspan="5"><div class="i-ca">질문</div> <br /><%=i.getBoardContent()%></div></td>
 			</tr>
-			<%if(i.getComment_conent()!=null) {%>
+			<%
+			if (i.getCommentConent() != null) {
+			%>
 			<tr class="i-tds">
-				<td colspan="5"><div class="i-ca">답변</div> <br /><%=i.getComment_conent() %>
-					</div></td>
+				<td colspan="5">
+				<div class="i-ca">답변</div> <br /> <%=i.getCommentConent() %>
+				</td>
 			</tr>
-			<%} %>
+			<%
+			}else{
+				
+			}
+			%>
+
+
 			<%
 			}
-				}
+			}
 			%>
 		</table>
 
@@ -119,13 +130,19 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 
 	</div>
-	<% if(inquiryList.isEmpty()) {%>
-	
-	<%}else{ %>
-		<div class="pageBar">
+	<%
+	if (inquiryList.isEmpty()) {
+	%>
+
+	<%
+	} else {
+	%>
+	<div class="pageBar">
 		<%=request.getAttribute("pageBar")%>
 	</div>
-	<%} %>
+	<%
+	}
+	%>
 </div>
 <script>
 	$(".i-faqContentTitle").click(e => {

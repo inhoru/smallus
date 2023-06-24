@@ -21,8 +21,8 @@ public class Inquiry {
 	private Date boardRdate;
 	private String boardCheck;
 	
-	private String comment_conent;
-	private String commentRdate;
-	private String comment_id;
+	private String commentConent;
+	private Date commentRdate;
+	private String commentId;
 
 }

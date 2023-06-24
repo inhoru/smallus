@@ -60,11 +60,17 @@ public class InsertInquiryEndServlet extends HttpServlet {
 		Enumeration<String> files= mr.getFileNames();
 		List<String> filesName = new ArrayList();
 	     while(files.hasMoreElements()) {
+	    	 
 				String fileName=files.nextElement();
 				filesName.add(mr.getFilesystemName(fileName));
+				
 			}
-	     int result=new InquiryService().InsertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent,filesName);		
-	String msg="",loc="";
+	   
+
+	    
+		int result=new InquiryService().insertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent,filesName);		
+		
+	 	String msg="",loc="";
 	     if(result>0) {
 				msg="게시글이 등록 되었습니다.";
 				loc="/memberInquiry.do";

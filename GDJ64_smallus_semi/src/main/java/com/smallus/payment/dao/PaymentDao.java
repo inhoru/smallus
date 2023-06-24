@@ -197,7 +197,7 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentdetailCount"));
-			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
+			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=? AND PAYMENT_STATUS=?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, completed);
 			rs=pstmt.executeQuery();

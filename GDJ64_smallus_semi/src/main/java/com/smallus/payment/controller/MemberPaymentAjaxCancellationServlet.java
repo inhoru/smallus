@@ -41,7 +41,7 @@ public class MemberPaymentAjaxCancellationServlet extends HttpServlet {
 		try {
 			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
 		} catch (NumberFormatException e) {
-			numPerpage = 5;
+			numPerpage = 4;
 		}
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
@@ -56,20 +56,20 @@ public class MemberPaymentAjaxCancellationServlet extends HttpServlet {
 		if (pageNo == 1) {
 			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "&status="+completed+"' class='h-pageBar-txt'> 이전 </a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (pageNo == cPage) {
 				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
 			} else {
-				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "'> " + pageNo + " </a>";
+				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "&status="+completed+ "'> " + pageNo + " </a>";
 			}
 			pageNo++;
 		}
 		if (pageNo > totalPage) {
 			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "&status="+completed+"' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("paymentCount", totalData);
