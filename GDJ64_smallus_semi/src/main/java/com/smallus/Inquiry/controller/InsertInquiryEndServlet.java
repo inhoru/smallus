@@ -50,21 +50,21 @@ public class InsertInquiryEndServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		String path=getServletContext().getRealPath("/img/inquiry");
+		String path=getServletContext().getRealPath("/upload/inquiry");
 		
-		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*10,"utf-8",new DefaultFileRenamePolicy());
+		MultipartRequest mr=new MultipartRequest(request,path,1024*1024*50,"utf-8",new DefaultFileRenamePolicy());
 		String boardTitle=mr.getParameter("boardTitle");
 		String boardContent=mr.getParameter("boardContent");
 		String boardType=mr.getParameter("boardType");
-		  List<String> files=new ArrayList();
-			Enumeration<String> names= mr.getFileNames();
-	     while(names.hasMoreElements()) {
-				String imgs=names.nextElement();
-				files.add(mr.getFilesystemName(imgs));		
-			}
-		int result=new InquiryService().InsertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent,files);		
 		
-	 	String msg="",loc="";
+		Enumeration<String> files= mr.getFileNames();
+		List<String> filesName = new ArrayList();
+	     while(files.hasMoreElements()) {
+				String fileName=files.nextElement();
+				filesName.add(mr.getFilesystemName(fileName));
+			}
+	     int result=new InquiryService().InsertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent,filesName);		
+	String msg="",loc="";
 	     if(result>0) {
 				msg="게시글이 등록 되었습니다.";
 				loc="/memberInquiry.do";

@@ -87,12 +87,16 @@ private Properties sql= new Properties();
 		List<Inquiry> list=new ArrayList<Inquiry>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectAllInquiry"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD WHERE MEMBER_ID=? ORDER BY BOARD_RDATE DESC)B) WHERE RNUM BETWEEN ? AND ?
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD JOIN BOARD_COMMENT USING(BOARD_ID) WHERE MEMBER_ID=? ORDER BY BOARD_RDATE DESC)B) WHERE RNUM BETWEEN ? AND ?
 			pstmt.setString(1, memberId);
 			pstmt.setInt(2,(cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
+		
 			rs=pstmt.executeQuery();
-			while(rs.next()) list.add(getInquiry(rs));
+			while(rs.next()) {
+				
+				list.add(getInquiry(rs));
+			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -118,6 +122,7 @@ private Properties sql= new Properties();
 		return result;
 	}
 	public int InsertInquiry(Connection conn, String memberId,String boardType, String boardTitle, String boardContent) {
+		
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
@@ -153,7 +158,7 @@ private Properties sql= new Properties();
 	
 	
 	private Inquiry getInquiry(ResultSet rs) throws SQLException {
-		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).build();
+		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).comment_conent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getString("COMMENT_RDATE")).comment_id(rs.getString("COMMENT_ID")).build();
 	}
 	
 	private Faq getFaq(ResultSet rs) throws SQLException {

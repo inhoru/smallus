@@ -88,7 +88,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 			<%
 			for (Inquiry i : inquiryList) {
 			%>
-			<tr>
+			<tr>				
 				<td class="i-inquiryContent"><%=i.getBoardType()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardTitle()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardRdate()%></td>
@@ -102,10 +102,12 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 			<tr class="i-inquiryContentAnswer">
 				<td colspan="5"><div class="i-ca">질문</div> <br /><%=i.getBoardContent()%></div></td>
 			</tr>
+			<%if(i.getComment_conent()!=null) {%>
 			<tr class="i-tds">
-				<td colspan="5"><div class="i-ca">답변</div> <br />ㅏㅁ너아ㅣㄴ머ㅣ어마ㅣㅓㅇㄴ마ㅓ아너마언마ㅓ아너마언마ㅓ안머ㅏ언마ㅣ어ㅏㄴ미ㅓ아ㅣㄴ머ㅏ인머ㅏㅣㅇ너마ㅣㅓㅇㄴ마ㅣ어ㅣㅁ
+				<td colspan="5"><div class="i-ca">답변</div> <br /><%=i.getComment_conent() %>
 					</div></td>
 			</tr>
+			<%} %>
 			<%
 			}
 				}
@@ -156,6 +158,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 	er=$(e.target).parent().next().slideToggle(0);
 	er=$(e.target).parent().next().next().slideToggle(0);
 	console.log(er);
+	
 	
 	})
 	

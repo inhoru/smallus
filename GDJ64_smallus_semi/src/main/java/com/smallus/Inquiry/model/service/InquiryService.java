@@ -67,7 +67,9 @@ public class InquiryService {
 			}
 			if(result2==files.size()) {
 				commit(conn);
-			}else rollback(conn);
+			}else {
+				rollback(conn);
+			}
 		}
 		return result;
 	}

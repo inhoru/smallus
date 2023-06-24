@@ -20,5 +20,9 @@ public class Inquiry {
 	private String boardContent;
 	private Date boardRdate;
 	private String boardCheck;
+	
+	private String comment_conent;
+	private String commentRdate;
+	private String comment_id;
 
 }
