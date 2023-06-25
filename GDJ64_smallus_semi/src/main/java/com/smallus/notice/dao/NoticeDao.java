@@ -8,12 +8,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Properties;
 
 import com.smallus.common.JDBCTemplate;
-import com.smallus.host.model.vo.Host;
 import com.smallus.notice.model.vo.Notice;
+import com.smallus.notice.model.vo.NoticeImage;
 
 public class NoticeDao {
 	private Properties sql = new Properties();// final로 선언하면 처리속도 빨라짐
@@ -37,6 +36,35 @@ public class NoticeDao {
 				build();
 		
 	}
+	
+	public static NoticeImage getNoticeImage(ResultSet rs) throws SQLException{
+		return NoticeImage.builder()
+				.noticeImageId(rs.getString("NOTICE_IMAGE_ID"))
+				.noticeId(rs.getString("NOTICE_ID"))
+				.noticeImageOrignal(rs.getString("NOTICE_IMAGE_ORIGNAL"))
+				.noticeImageRename(rs.getString("NOTICE_IMAGE_RENAME"))
+				.build();
+	}
+	public Notice selectNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Notice notice=null;
+		try {
+			//SELECT * FROM NOTICE WHERE NOTICE_CONTENT=?
+			pstmt=conn.prepareStatement(sql.getProperty("selectNotice"));
+			pstmt.setString(1,n.getNoticeContent());
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				notice=getNotice(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return notice;
+	}
+	
 	public int enrollNotice(Connection conn, Notice n) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -47,6 +75,38 @@ public class NoticeDao {
 			pstmt.setString(2, n.getNoticeType());
 			pstmt.setString(3, n.getNoticeTitle());
 			pstmt.setString(4, n.getNoticeContent());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int enrollNoticeImg(Connection conn, NoticeImage ni) {
+		PreparedStatement pstmt=null;
+		int result2=0;
+		try {
+			//enrollNoticeImg=INSERT INTO NOTICE_IMAGE VALUES(SEQ_NOTICE_IMAGE_ID.NEXTVAL,?,?,?)
+			pstmt=conn.prepareStatement(sql.getProperty("enrollNoticeImg"));
+			pstmt.setString(1, ni.getNoticeId());
+			pstmt.setString(2, ni.getNoticeImageOrignal());
+			pstmt.setString(3, ni.getNoticeImageRename());
+			result2=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result2;
+	}
+	
+	public int deleteNotice(Connection conn, String noticeId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//deleteNotice=DELETE FROM NOTICE WHERE NOTICE_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("deleteNotice"));
+			pstmt.setString(1,noticeId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
