@@ -9,24 +9,27 @@ int cPage = (int) request.getAttribute("cPage");
 <div id="mainOpacity">
 	<div class="i-withdrawalendtotal">
 		<section class="i-tablecontent">
-			<table class="i-mypageCategories">
+		<table class="i-mypageCategories">
 			<tr>
 				<td class="i-myInfo i-my">내정보</td>
 				<td class="i-info">클래스정보</td>
 				<td class="i-customerService i-cu">고객센터</td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="">프로필관리</a></td>
+				<td class="i-myInfo"><a
+					href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
 				<td class="i-customerService"><a href="">공지사항</a></td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
+				<td class="i-myInfo"><a
+					href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
 				<td class="i-customerService"><a href="<%=request.getContextPath()%>/memberInquiry.do">1:1 문의</a></td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
+				<td class="i-myInfo"><a
+					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
 				<td><a href="">후기관리</a></td>
 				<td class="i-customerService"><a href="">Q&A</a></td>
 			</tr>

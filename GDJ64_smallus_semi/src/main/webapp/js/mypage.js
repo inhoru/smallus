@@ -12,6 +12,11 @@ const memberId=$(".i-memberId").val();
 		window.open(context+"/updatenickname.do","_blank",'width=500 , height=330, left=670, top=300');
 		 event.preventDefault();
 		}
+		/*이메일 변경창*/
+		const fn_updateEmail=()=>{
+		window.open(context+"/updateEmail.do","_blank",'width=550 , height=330, left=670, top=300');
+		 event.preventDefault();
+		}
     
     /* 프로필사진변경 */
     $(".i-proFileInfoimg").click(e=>{
