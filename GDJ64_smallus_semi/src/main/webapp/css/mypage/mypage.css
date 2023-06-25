@@ -1096,14 +1096,15 @@ cursor: pointer;
 }
 /* 1:1질문 제목 */
 .i-inquiryTitle{
-	margin: 30px 0px 20px;
+    margin: 30px 0px 20px;
     line-height: 24px;
     font-size: 24px;
     font-weight: bold;
-	padding-bottom: 2%;
-	border-bottom: 1px solid #595959;
-	margin-top:8%;
-	
+    padding-bottom: 2%;
+    border-bottom: 1px solid #595959;
+    margin-top: 8%;
+    display: flex;
+    justify-content: space-between;
 }
 /* 1:1질문테이블 */
 .i-ca{
@@ -1111,6 +1112,9 @@ cursor: pointer;
 	margin-left: 1%;
 	font-size: 16px;
 	font-weight: bold;
+}
+.i-inquiryTable1{
+	display:none;
 }
 /* 1:1문의 게시판 질문내용 */
 .i-inquiryTable td{
@@ -1156,8 +1160,8 @@ cursor: pointer;
 	cursor: pointer;
 }
 .i-inquirybutton{
-	margin-left: 77%;
-	width:4rem;
+
+	width:5rem;
 	font-weight: bold;
 	background-color: #E8D6C3;
 	border:0px;

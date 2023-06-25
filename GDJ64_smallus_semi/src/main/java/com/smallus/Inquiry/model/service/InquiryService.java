@@ -11,6 +11,7 @@ import java.util.List;
 import com.smallus.Inquiry.dao.InquiryDao;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
+import com.smallus.Inquiry.model.vo.InquiryImg;
 
 public class InquiryService {
 	private InquiryDao dao = new InquiryDao();
@@ -58,18 +59,19 @@ public class InquiryService {
 	    
 	    if (result > 0) {
 	        int fileResult = 0;
-	        for (int i = 0; i < files.size(); i++) {
-	            fileResult = dao.Insertupfiles(conn, files.get(i));
-	            if (fileResult <= 0) {
-	                break; 
+	        if (files != null && !files.isEmpty()) {
+	            for (int i = 0; i < files.size(); i++) {
+	                fileResult = dao.Insertupfiles(conn, files.get(i));
+	                if (fileResult <= 0) {
+	                    break; 
+	                }
 	            }
 	        }
 	        
-	        if (fileResult > 0) { 
+	        if (fileResult > 0 || (files != null && files.isEmpty())) { 
 	            commit(conn);
 	        } else {
 	            rollback(conn);
-	          
 	        }
 	    } else {
 	        rollback(conn);
@@ -79,6 +81,7 @@ public class InquiryService {
 	}
 
 
+
 	public int Insertupfiles(String files) {
 		Connection conn = getConnection();
 		int result = dao.Insertupfiles(conn,files);
@@ -86,4 +89,6 @@ public class InquiryService {
 		else rollback(conn);
 		return result;
 	}
+	
+	
 }

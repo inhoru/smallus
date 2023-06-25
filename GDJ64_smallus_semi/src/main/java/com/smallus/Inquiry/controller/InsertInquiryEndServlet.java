@@ -2,10 +2,8 @@ package com.smallus.Inquiry.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
+import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.smallus.Inquiry.model.service.InquiryService;
@@ -68,28 +67,13 @@ public class InsertInquiryEndServlet extends HttpServlet {
 	   
 
 	    
-		int result=new InquiryService().insertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent,filesName);		
+		int result=new InquiryService().insertInquiry(loginMember.getMemberId(),boardType,boardTitle,boardContent,filesName);
+		System.out.println(result);
 		
-	 	String msg="",loc="";
-	     if(result>0) {
-				msg="게시글이 등록 되었습니다.";
-				loc="/memberInquiry.do";
-				request.setAttribute("msg", msg);
-				request.setAttribute("loc", loc);
-			}else {
-				//입력 실패
-				msg="게시글등록에 실패하였습니다.";
-				loc="/memberInquiry.do";
-			}
-	   
-				
-			
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(result>0?true:false,response.getWriter());
+
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

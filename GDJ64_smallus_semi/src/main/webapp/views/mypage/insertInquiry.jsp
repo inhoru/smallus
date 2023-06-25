@@ -56,7 +56,7 @@ table#tbl-board td {
 </style>
 	<div class="i-personalinquiry">
 		<h3 class="i-inquiryTitle">1:1 문의</h3>
-		<form action="<%=request.getContextPath()%>/insertInquiryEnd.do" onsubmit="return dateForm();" method="post" enctype="multipart/form-data">
+		
 			<table id='tbl-board'>
 				<tr>
 					<th>회원정보</th>
@@ -88,13 +88,13 @@ table#tbl-board td {
 				</tr>
 				<tr>
 					<th>첨부파일</th>
-					<td><input type="file" id="i-upfile" multiple>
+					<td><input type="file" id="i-upfile" >
 						<div id="uploadpreview"></div></td>
 				</tr>
 
 			</table>
 			<button class="i-storage" onclick="uploadFile();">등록</button>
-		</form>
+		
 	</div>
 	<script>
 function dateForm(e) {
@@ -138,19 +138,27 @@ function uploadFile() {
   formData.append("boardType",$(".boardType :selected").val());
   formData.append("boardTitle",$(".boardTitle").val());
   formData.append("boardContent",$(".boardContent").val());
+  
  
   $.ajax({
     url: "<%=request.getContextPath()%>/insertInquiryEnd.do",
     type: "post",
     data: formData,
+    dataType: 'json',
     processData: false,
     contentType: false,
-    success: data => {
-    
+    success:function(result) {
+    	if(result){
+    	alert("게시글 등록성공");		
+  		location.replace("<%=request.getContextPath()%>/memberInquiry.do")
+    	}else{
+    		alert("게시글 등록실패");		
+      		location.replace("<%=request.getContextPath()%>/memberInquiry.do")
+    	}
 
     },
     error: (r, m) => {
-
+    	console.log("dsa");
     },
     complete: () => { 
 

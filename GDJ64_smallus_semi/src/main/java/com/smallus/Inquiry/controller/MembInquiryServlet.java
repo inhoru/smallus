@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.smallus.Inquiry.model.service.InquiryService;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
+import com.smallus.Inquiry.model.vo.InquiryImg;
 import com.smallus.member.model.vo.Member;
 
 /**
@@ -53,6 +54,8 @@ public class MembInquiryServlet extends HttpServlet {
 		List<Faq> faqcategorie = new InquiryService().selectCategorie(categorie);
         List<Faq> faqList = new InquiryService().selectAllFaq();
         List<Inquiry> list = new InquiryService().selectAllInquiry(cPage, numPerpage, loginMember.getMemberId());
+
+
         int totalData = new InquiryService().selectInquiryCount(loginMember.getMemberId());
         
         

@@ -24,5 +24,9 @@ public class Inquiry {
 	private String commentConent;
 	private Date commentRdate;
 	private String commentId;
+	
+	private String sfId;
+	
+	private String sfRename;
 
 }

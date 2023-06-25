@@ -96,16 +96,27 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<td class="i-inquiryContent"><%=i.getBoardType()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardTitle()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardRdate()%></td>
+				<%if(i.getCommentConent()==null) {%>
 				<td class="i-inquiryContent"><%=i.getBoardCheck()%></td>
+				<%}else{ %>
+				<td class="i-inquiryContent">답변완료</td>
+				<%} %>
 				<td>
-					<button class="i-inquiryremovebutton">삭제</button> <input
-					type="hidden" value="<%=i.getBoardId()%>" name="boardId"
-					class="i-boardId">
+					<button class="i-inquiryremovebutton">삭제</button> 
+					<input
+							type="hidden" value="<%=i.getBoardId()%>" name="boardId"
+							class="i-boardId">
 				</td>
 			</tr>
 
 			<tr class="i-inquiryContentAnswer">
-				<td colspan="5"><div class="i-ca">질문</div> <br /><%=i.getBoardContent()%></div></td>
+				<td colspan="5"><div class="i-ca">질문</div> 
+				
+				<%if(i.getSfRename()!=null){%>
+				<img width="80px" height="80px" style=" margin-right: 90%;     margin-top: 3%;" src="<%=request.getContextPath()%>/upload/inquiry/<%=i.getSfRename() %>">	
+				<%}else{%>
+				<%} %>
+				<br /><%=i.getBoardContent()%></div></td>
 			</tr>
 			<%
 			if (i.getCommentConent() != null) {
@@ -148,6 +159,8 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 	%>
 </div>
 <script>
+   
+
 	$(".i-faqContentTitle").click(e => {
 		$(e.target).next().slideToggle(0);
 	

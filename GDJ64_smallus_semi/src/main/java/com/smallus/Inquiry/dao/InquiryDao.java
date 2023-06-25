@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.Inquiry.model.vo.InquiryComment;
+import com.smallus.Inquiry.model.vo.InquiryImg;
 import com.smallus.coupon.dao.CouponDao;
 
 public class InquiryDao {
@@ -88,7 +89,7 @@ private Properties sql= new Properties();
 		List<Inquiry> list=new ArrayList<Inquiry>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectAllInquiry"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD JOIN BOARD_COMMENT USING(BOARD_ID) WHERE MEMBER_ID=? ORDER BY BOARD_RDATE DESC)B) WHERE RNUM BETWEEN ? AND ?
+			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID) LEFT JOIN BOARD_COMMENT USING(BOARD_ID) WHERE MEMBER_ID=? ORDER BY BOARD_RDATE DESC)B) WHERE RNUM BETWEEN ? AND ?
 			pstmt.setString(1, memberId);
 			pstmt.setInt(2,(cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
@@ -157,8 +158,9 @@ private Properties sql= new Properties();
 	}
 	
 	
+	
 	private Inquiry getInquiry(ResultSet rs) throws SQLException {
-		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).build();
+		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).boardId(rs.getString("BOARD_ID")).sfId(rs.getString("SF_ID")).sfRename(rs.getString("SF_RENAME")).build();
 	}
 	
 	private Faq getFaq(ResultSet rs) throws SQLException {
@@ -166,5 +168,8 @@ private Properties sql= new Properties();
 	}
 	private InquiryComment getComment(ResultSet rs) throws SQLException {
 		return InquiryComment.builder().commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).build();
+	}
+	private InquiryImg getImg(ResultSet rs) throws SQLException {
+		return InquiryImg.builder().boardId(rs.getString("BOARD_ID")).sfId(rs.getString("SF_ID")).sfRename(rs.getString("SF_RENAME")).build();
 	}
 }
