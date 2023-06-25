@@ -15,7 +15,7 @@ import java.util.Properties;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.Inquiry.model.vo.InquiryComment;
-import com.smallus.Inquiry.model.vo.InquiryImg;
+
 import com.smallus.coupon.dao.CouponDao;
 
 public class InquiryDao {
@@ -168,8 +168,5 @@ private Properties sql= new Properties();
 	}
 	private InquiryComment getComment(ResultSet rs) throws SQLException {
 		return InquiryComment.builder().commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).build();
-	}
-	private InquiryImg getImg(ResultSet rs) throws SQLException {
-		return InquiryImg.builder().boardId(rs.getString("BOARD_ID")).sfId(rs.getString("SF_ID")).sfRename(rs.getString("SF_RENAME")).build();
 	}
 }

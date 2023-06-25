@@ -11,7 +11,7 @@ import java.util.List;
 import com.smallus.Inquiry.dao.InquiryDao;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
-import com.smallus.Inquiry.model.vo.InquiryImg;
+
 
 public class InquiryService {
 	private InquiryDao dao = new InquiryDao();

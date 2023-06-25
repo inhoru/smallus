@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.smallus.Inquiry.model.service.InquiryService;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
-import com.smallus.Inquiry.model.vo.InquiryImg;
+
 import com.smallus.member.model.vo.Member;
 
 /**
