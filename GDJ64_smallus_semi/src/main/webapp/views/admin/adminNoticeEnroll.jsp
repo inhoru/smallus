@@ -4,7 +4,7 @@
 <%@ page import="com.smallus.host.model.vo.Host"%>
 
 <style>
-table#h-main-rsv-tbl button{
+table#h-main-rsv-tbl input[type=submit]{
 	margin-top:10px;
 	margin-bottom:10px;	
 	width:24rem;
@@ -36,18 +36,25 @@ section.h-main table {
 	</section>
 	<section class="h-main h-main-rsvList">
 		<div>
+		<form action='<%=request.getContextPath()%>/notice/enrollNotice.do' method="post" enctype="multipart/form-data">
 			<table id="h-main-rsv-tbl">
 				<tr>
-					<td>카테고리 종류</td>
-					<td style="padding-left: 10px;text-align: left;"><select name="noticeType" id="noticeType">
+					<th>카테고리 종류</th>
+					<td style="padding-left: 10px;text-align: left;">
+					<select name="noticeType" id="noticeType">
 							<option value="1">공지사항</option>
 							<option value="2">이벤트</option>
 							<option value="3">기타</option>
 					</select></td>
+					<td><input type="hidden" name="hostId" value="<%=loginHost.getHostId()%>"></td>
 				</tr>
 				<tr>
-					<td>카테고리 제목</td>
+					<th>카테고리 제목</th>
 					<td style="padding-left:10px; text-align:left;"><input type="text" name="noticeTitle" id="noticeTitle" style="width:500px;"></td>
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td style="padding-left:10px; text-align:left;"><input type="file" name="m-upFile" id="m-upFile"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -56,7 +63,7 @@ section.h-main table {
 						</td>
 				</tr>
 				<tr>
-					<td colspan="2"><button id="m-noticeEnrollbtn">공지사항 등록</button>
+					<td colspan="2"><input type="submit" value="공지사항 등록" onclick="return enrollcheck();">
 					</td>
 				</tr>
 			</table>
@@ -64,12 +71,13 @@ section.h-main table {
 	</section>
 </body>
 <script>
-	$("#m-noticeEnrollbtn").click(e=>{
-		let noticeType=$("#noticeType").val();
-		let noticeTitle=$("#noticeTitle").val();
-		let noticeContent=$("#noticeContent").val();
-		console.log(noticeType,noticeTitle,noticeContent);
-		location.assign('<%=request.getContextPath()%>/notice/enrollNotice.do?hostId=<%=loginHost.getHostId()%>&noticeType='+noticeType+'&noticeTitle='+noticeTitle+'&noticeContent='+noticeContent);
-	});
+function enrollcheck(){
+	const content=$("#boardContent").val();
+	if(content==""){
+		return false;
+	}else{
+		return true;
+	}
+}
 </script>
 <%@ include file="/views/common/hostFooter.jsp"%>
