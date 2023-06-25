@@ -1,7 +1,6 @@
 package com.smallus.classes.model.service;
 
-import static com.smallus.common.JDBCTemplate.close;
-import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -48,6 +47,8 @@ public class ClassService {
 	public int selectClassCount(String hostId) {
 		Connection conn=getConnection();
 		int result=dao.selectClassCount(conn, hostId);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}
@@ -55,6 +56,8 @@ public class ClassService {
 	public int selectClassCountByStatus(String hostId, String passStatus) {
 		Connection conn=getConnection();
 		int result=dao.selectClassCountByStatus(conn, hostId, passStatus);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}
@@ -64,6 +67,22 @@ public class ClassService {
 		List<Classes> list=dao.selectClassesByHostId(conn,hostId);
 		close(conn);
 		return list;
+	}
+	
+	public Classes selectClassByClassId(String hostId, String classId) {
+		Connection conn= getConnection();
+		Classes list=dao.selectClassByClassId(conn, hostId, classId);
+		close(conn);
+		return list;
+	}
+	
+	public int updateRemainPersonnel(int updateRemainPersonnel, String classDetailId) {
+		Connection conn=getConnection();
+		int result=dao.updateRemainPersonnel(conn, updateRemainPersonnel,classDetailId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 }	

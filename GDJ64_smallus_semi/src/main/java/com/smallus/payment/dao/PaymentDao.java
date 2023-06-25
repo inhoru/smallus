@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.smallus.classes.model.vo.ClassDetail;
@@ -415,4 +417,140 @@ public class PaymentDao {
 		return list;
 	}
 	
+	
+	public int insertPayment(Connection conn, Map<String,String> dataMap) {
+		PreparedStatement pstmt=null;
+		int result=0;
+//		for (Map.Entry<String, String> entry : dataMap.entrySet()) {
+//		    String key = entry.getKey();
+//		    Object value = entry.getValue();
+
+//		private String paymentId;
+//		private String classDetailId;
+//		private String memberId;
+//		private String couponId;
+//		private int price;
+//		private int classPersonnel;
+//		private int TotalPrice;
+//		private String impUid;
+//		private String request;
+//		private String paymentType;
+//		private Date paymentDate;
+//		private String paymentStatus;
+		
+//		Key: buyer_email, Value: inhoru126@gmail.com
+//		Key: buyer_postcode, Value: 
+//		Key: card_number, Value: 5433330000006209
+//		Key: buyer_addr, Value: 
+//		Key: buyer_name, Value: 테스트11
+//		Key: pay_method, Value: card
+//		Key: pg_type, Value: payment
+//		Key: pg_tid, Value: 23426996122073
+//		Key: receipt_url, Value: https://admin8.kcp.co.kr/assist/bill.BillActionNew.do?cmd=card_bill&tno=23426996122073&order_no=imp_837301481343&trade_mony=64000
+//		Key: buyer_tel, Value: 101231231
+//		Key: imp_uid, Value: imp_837301481343
+//		Key: name, Value: *초보가능*마들렌 만들기
+//		Key: card_name, Value: 현대카드
+//		Key: apply_num, Value: 55283725
+//		Key: currency, Value: KRW
+//		Key: pg_provider, Value: kcp
+//		Key: merchant_uid, Value: RSV790
+//		Key: status, Value: paid
+//		디테일아이디 ; CLD1005쿠폰아이디 : 0인원수 : 2총 금액 : 64000금액 : 32000
+		//insertPayment=INSERT INTO PAYMENT VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,?)
+		String paymentStatus="";
+		if((boolean)dataMap.get("status").equals("paid")) {
+			paymentStatus="결제완료";
+		}
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertPayment"));
+//			pstmt.setString(1, (String)dataMap.get("merchant_uid"));
+//			pstmt.setString(2, (String)dataMap.get("classDetailId"));
+//			pstmt.setString(3, (String)dataMap.get("memberId"));
+//			pstmt.setString(4, (String)dataMap.get("couponId"));
+//			pstmt.setInt(5, Integer.parseInt(String.valueOf(dataMap.get("price"))));
+//			pstmt.setInt(6, Integer.parseInt(String.valueOf(dataMap.get("classPersonnel"))));
+//			pstmt.setInt(7, Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
+//			pstmt.setString(8, (String)dataMap.get("pg_provider"));
+//			pstmt.setString(9,(String)dataMap.get("status"));
+			
+			pstmt.setString(1, dataMap.get("merchant_uid"));
+			pstmt.setString(2, dataMap.get("classDetailId"));
+			pstmt.setString(3, dataMap.get("memberId"));
+			pstmt.setString(4, dataMap.get("couponId"));
+			pstmt.setInt(5, Integer.parseInt(dataMap.get("price")));
+			pstmt.setInt(6, Integer.parseInt(dataMap.get("classPersonnel")));
+			pstmt.setInt(7, Integer.parseInt(dataMap.get("totalPrice")));
+			pstmt.setString(8, dataMap.get("pg_provider"));
+			pstmt.setString(9, dataMap.get("status"));
+			
+//			System.out.println("payment_id : "+(String)dataMap.get("merchant_uid"));
+//			System.out.println("classDetail_id : "+(String)dataMap.get("classDetailId"));
+//			System.out.println("member_id : "+(String)dataMap.get("memberId"));
+//			System.out.println("coupon_id : "+(String)dataMap.get("couponId"));
+//			System.out.println("price : "+ Integer.parseInt(dataMap.get("price")));
+//			System.out.println("personnel : "+ Integer.parseInt(String.valueOf(dataMap.get("classPersonnel"))));
+//			System.out.println("totalPrice : "+ Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
+//			System.out.println("receipt_url : "+(String)dataMap.get("pg_tid"));
+//			System.out.println("receipt_url : "+(String)dataMap.get("receipt_url"));
+//			System.out.println("pg_tid : "+(String)dataMap.get("pg_provider"));
+//			System.out.println("pg_provider : "+(String)dataMap.get("status"));
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public PaymentCompleted paymentResult(Connection conn, String paymentId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		PaymentCompleted p = new PaymentCompleted();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("paymentCompleted"));
+			pstmt.setString(1, paymentId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+//SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END ,HOST_NAME, CLASS_PRICE, PAYMENT_NAME, TOTAL_PRICE,COUPON_PRICE FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) JOIN HOST USING(HOST_ID) JOIN PAYMENT_TYPE USING(PAYMENT_TYPE) JOIN COUPON_TYPE USING(COUPON_ID) WHERE PAYMENT_ID=?
+				PaymentCompleted pc=new PaymentCompleted();
+				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				pc.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				pc.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				pc.getPayment().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				pc.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				pc.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				pc.getPaymentType().setPaymentName(rs.getString("PAYMENT_NAME"));
+				pc.getClasses().setClassPrice(rs.getInt("CLASS_PRICE"));
+				pc.getHost().setHostName(rs.getString("HOST_NAME"));
+				pc.getCoupon().setCouponPrice(rs.getInt("COUPON_PRICE"));
+				pc.getPayment().setTotalPrice(rs.getInt("TOTAL_PRICE"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return p;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

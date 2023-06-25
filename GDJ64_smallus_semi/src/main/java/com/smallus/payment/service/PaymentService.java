@@ -7,6 +7,7 @@ import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.smallus.member.model.vo.Member;
 import com.smallus.payment.dao.PaymentDao;
@@ -104,6 +105,20 @@ public class PaymentService {
 		return list;
 	}
 	
+	public int insertPayment(Map dataMap) {
+		Connection conn=getConnection();
+		int count=dao.insertPayment(conn,dataMap);
+		if(count>0) commit(conn);
+		else rollback(conn);
+		return count;
+	}
+	
+	public PaymentCompleted paymentResult(String paymentId){
+		Connection conn=getConnection();
+		PaymentCompleted pc=dao.paymentResult(conn, paymentId);
+		close(conn);
+		return pc;
+	}
 	
 	
 }

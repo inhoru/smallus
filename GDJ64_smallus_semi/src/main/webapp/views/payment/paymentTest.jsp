@@ -15,61 +15,68 @@
 <div id="mainOpacity">
  <!-- CATEGORY_TITLE, CLASS_TITLE, CLASS_ADDRESS, CLASS_ID, CLASS_DETAIL_ID, 
  BOOKING_TIME_START, BOOKING_TIME_END,  CLASS_PERSONNEL, REMAINING_PERSONNEL, CLASS_PRICE -->
- 	<table>
- 		<tr>
- 			<th>카테고리 이름</th>
-			<th>클래스 이름</th>
-			<th>주소</th>
-			<th>클래스 아이디</th>
-		</tr>
-		<tr>
-		<%if(list!=null&&!list.isEmpty()){ 
-			for(ClassPayment cp:list){%>
-				<td><%=cp.getCategory().getCategoryTitle()%></td>
-				<td><%=cp.getClasses().getClassTitle()%></td>
-				<td><%=cp.getClasses().getClassAddress()%></td>
-				<td><%=cp.getClasses().getClassId()%></td>
-			<%} 
-		}%>
-		</tr>
- 	</table>
-	<table>
-		<tr>
-			<th>detail id</th>
-			<th>시작 시간</th>
-			<th>종료 시간</th>
-			<th>인원 수</th>
-			<th>잔여 인원 수</th>
-			<th>금액</th>
-		</tr>
-		<%if(list!=null&&!list.isEmpty()){ 
-			for(ClassPayment cp:list){%>
-			<tr>
-				<td><%=cp.getClassDetail().getClassDetailId()%></td>
-				<td><%=cp.getClassDetail().getBookingTimeStart()%></td>
-				<td><%=cp.getClassDetail().getBookingTimeEnd()%></td>
-				<td><%=cp.getClasses().getClassPersonnel() %></td>
-				<td><%=cp.getClassDetail().getRemainingPersonnel() %></td>
-				<td><%=cp.getClasses().getClassPrice()%></td>
-			</tr>
-			<%} 
-		}%>
-	</table>
-			<div class="h-payment-title" id="h-hide">
-		    	<button id="h-p">다음</button>
-		    </div>
+	<div class="h-payment-title" id="h-hide">
+		<button id="h-p">다음</button>
+	</div>
+	<div class="h-payment-title" id="h-hide">
+		<button id="hhhhhhhh">payment</button>
+	</div>
+</div>
 </div>
 <script>
 	// 결제로 넘어가는 연습페이지
 	$("#h-p").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/payment.do?memberId=<%=loginMember.getMemberId()%>",
-			dataType:"html",
+			url:"<%=request.getContextPath()%>/host/payment.do",
+			/* header:{'Content-Type':'application/json'}, */
+			//dataType:"html",
+			dataType:"json",
 			success:function(data){
-				console.log(data);
-				$("#mainOpacity").html(data);
+				console.log(data, typeof data);
+				/* console.log(data[0],data[0].category.categoryTitle); */
+				//$("#mainOpacity").html(data);
+				let arr;
+				let classA;
+				let category;
+				for(arr of data){
+		            console.log(arr, typeof arr);
+		            classA=[arr.category,arr.classDetail, arr.classes];
+		            category=arr.category.categoryTitle;
+		            classDetail=arr.classDetail;
+		            /* $("#tesst").html(arr); */
+		        }
+				/* console.log(classA, typeof classA, category);
+				console.log(classDetail); */
+				
+				let a=Object.values(classDetail);
+				//let a= Object.entries(classDetail); key;value 형식으로 출
+				console.log(a);
+		            let p=$("<p>").text(a);
+		            $("#tesst").append(p);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("에러 발생: " + textStatus, errorThrown);
 			}
 		})
 	});
+	$("#hhhhhhhh").click(e=>{
+		<%-- $.ajax({
+			url:"<%=request.getContextPath()%>/paymentTest.do",
+			/* header:{'Content-Type':'application/json'}, */
+			//dataType:"html",
+			dataType:"json",
+			data:{"classDetail":classDetail}
+			success:function(data){
+				console.log(data, typeof data);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("에러 발생: " + textStatus, errorThrown);
+			}
+		}) --%>
+		location.assign('<%=request.getContextPath()%>/paymentTest.do');
+	});
+	
+	
+	
 </script>
 <%@ include file="/views/common/footer.jsp"%>

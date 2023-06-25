@@ -26,7 +26,6 @@
 					</tr>
 				</table>
 				<div><button id="h-UpdateHostAccount">수정</button><hr></div>
-				
 	</section>
 	<!-- main -->
 	<section class="h-main h-main-calcList">
@@ -67,9 +66,18 @@
 				            <td><%=c.getCalcPassDate()%></td>
 		                    <td><%=c.getCalcPrice()%> 원</td>
 		                    <td><%=c.getCalcFinalPrice()%> 원</td>
-				            <td><%=c.getCalcStatus()%></td>
+				            <td>
+				           		<%if(c.getCalcStatus().equals("N")){ %>
+				           			정산 거절
+				           		<%}else if(c.getCalcStatus().equals("Y")) {%>
+				           			정산 완료
+				           		<%}else if(c.getCalcStatus().equals("W")){ %>
+				           			정산 대기
+				           		<%} %>
+				            </td>
 			           </tr>
-		           <%count++;}
+		           		<%count++;
+		           		}
            			}else if(cSortList!=null&&!cSortList.isEmpty()){
                     	int count=1;
                     	for(Calc c: cSortList){%>
@@ -84,7 +92,7 @@
 	                   		</tr>
 	                    <%count++;
                     } %>
-                <%  }else{ %>
+                <%  }else if(calcList==null || calcList.isEmpty()||cSortList==null ||cSortList.isEmpty()){ %>
 	                <tr><td colspan="7">조회된 정산 정보가 없습니다</td></tr>
                 <%} %>
                	</table>

@@ -158,4 +158,64 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		}return result;
    }
    
+   
+   public int updateHostNickname(Connection conn,String hostNickname, String hostId) {
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      int result=0;
+	      try {
+	         //updateHostNickname=UPDATE HOST SET HOST_NICKNAME=? WHERE HOST_ID=? AND HOST_ST='Y'
+	         pstmt=conn.prepareStatement(sql.getProperty("updateHostNickname"));
+	         pstmt.setString(1, hostNickname);
+	         pstmt.setString(2, hostId);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) result=rs.getInt(1);
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }return result;
+	}
+   
+   public int updateHostProfile(Connection conn,String hostId,String hostNickname,String hostPw,String hostHomePhone,String hostImg) {
+	      PreparedStatement pstmt=null;
+	      int result=0;
+	      try {
+	         pstmt=conn.prepareStatement(sql.getProperty("updateHostProfile"));
+	         pstmt.setString(1, hostId);
+	         pstmt.setString(2, hostNickname);
+	         pstmt.setString(3, hostPw);
+	         pstmt.setString(4, hostHomePhone);
+	         pstmt.setString(5, hostImg);
+	         result=pstmt.executeUpdate();
+	         System.out.println(result);
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(pstmt);
+	      }return result;
+	}
+   
+   
+   
+   public int updateHostImg(Connection conn,String renameFile, String hostId) {
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      int result=0;
+	      try {
+	         pstmt=conn.prepareStatement(sql.getProperty("updateHostImg"));
+	         pstmt.setString(1, renameFile);
+	         pstmt.setString(2, hostId);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) result=rs.getInt(1);
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }return result;
+	}
+   
+   
 }

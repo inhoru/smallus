@@ -45,6 +45,8 @@ public class HostService {
 	public int enrollHost(Host h) {
 		Connection conn=getConnection();
 		int result=dao.enrollHost(conn,h);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}
@@ -52,8 +54,53 @@ public class HostService {
 	public int deleteHostByhostId(String hostId, String password) {
 		Connection conn=getConnection();
 		int result=dao.deleteHostByhostId(conn,hostId, password);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}
+	
+	public int updateHostNickname(String nickname,String hostId) {
+		Connection conn=getConnection();
+		int result=dao.updateHostNickname(conn,nickname,hostId);
+		if(result>0) {
+			commit(conn);
+			System.out.println("service nick O");
+		}else {
+			rollback(conn);
+			System.out.println("service nick x");
+		}
+		close(conn);
+		return result;
+	}
+	public int updateHostProfile(String hostId,String hostNickname,String hostPw,String hostHomePhone, String hostImg) {
+		Connection conn=getConnection();
+		int result=dao.updateHostProfile(conn,hostId,hostNickname,hostPw,hostHomePhone,hostImg);
+		if(result>0) {
+			commit(conn);
+			System.out.println("service hostPf O");
+		}else {
+			rollback(conn);
+			System.out.println("service hostPf  X");
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int updateHostImg(String renameFile, String hostId) {
+		Connection conn=getConnection();
+		int result=dao.updateHostNickname(conn,renameFile,hostId);
+		if(result>0) {
+			commit(conn);
+			System.out.println("service updateImg O");
+		}else {
+			rollback(conn);
+			System.out.println("service updateImg x");
+		}
+		close(conn);
+		return result;
+	}
+	
+	
 
 }

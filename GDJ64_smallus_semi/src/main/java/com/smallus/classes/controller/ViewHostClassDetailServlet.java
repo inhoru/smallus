@@ -42,13 +42,14 @@ public class ViewHostClassDetailServlet extends HttpServlet {
 		
 		// 클래스 아이디를 기준으로 클래스리스트를 가져옴
 		String classId=request.getParameter("classId");
-		List<Classes> classList=new ClassService().selectClassesByHostId(hostId);
+		System.out.println(hostId+""+classId);
+		Classes list =new ClassService().selectClassByClassId(hostId, classId);
 		List<ClassDetail> classDetailList = new ClassService().selectClassDetailByClassId(classId);
 		// 분기처리 후 클래스 상세 페이지로 전송
+		System.out.println(list+""+classDetailList);
 		
-		
-		if(classList!=null&&!classList.isEmpty()&&classDetailList!=null&&!classDetailList.isEmpty()) {
-			request.setAttribute("classList", classList);
+		if(list!=null||(classDetailList!=null&&!classDetailList.isEmpty())) {
+			request.setAttribute("list", list);
 			request.setAttribute("classDetailList", classDetailList);
 			request.getRequestDispatcher("/views/host/viewHostClassDetail.jsp").forward(request, response);
 			System.out.println("세부클래스있음");

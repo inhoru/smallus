@@ -1,8 +1,7 @@
 package com.smallus.payment.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.smallus.coupon.model.vo.Coupon;
 import com.smallus.coupon.service.CouponService;
 import com.smallus.member.model.vo.Member;
 import com.smallus.payment.model.vo.ClassPayment;
-import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.service.PaymentService;
 
 /**
@@ -45,17 +44,29 @@ public class PaymentServlet extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		// memberId를 매개변수로 하는 쿠폰 가격 가져오기 
-		List<Coupon> coupons=new CouponService().selectCouponByMemberId(loginMember.getMemberId());
+		List<Coupon> coupon=new CouponService().selectCouponByMemberId(loginMember.getMemberId());
 		
 		//CATEGORY_TITLE, CLASS_TITLE, CLASS_ADDRESS, CLASS_ID, CLASS_DETAIL_ID,
 		//BOOKING_TIME_START, BOOKING_TIME_END,  CLASS_PERSONNEL, REMAINING_PERSONNEL, CLASS_PRICE
 		//String classId=request.getParameter("classId");
 		String classId="CLA1000"; // 현재는 임의로 하나의 클래스아이디를 가져왔음 
 		List<ClassPayment> list= new PaymentService().selectClassDetailByClassId(classId);
+		System.out.println(coupon+" "+list.size());
+		Gson gson = new Gson();
+//		response.setContentType("text/html;charset=utf-8"); // html
 		if(list!=null&&!list.isEmpty()) {
-			request.setAttribute("list", list);
-			request.setAttribute("coupons", coupons);
-			request.getRequestDispatcher("/views/host/test.jsp").forward(request, response);
+			System.out.println("classpayment list 있음");
+//			gson.toJson(list,response.getWriter()); //html
+//			gson.toJson(coupon,response.getWriter()); //html
+			
+			// GSON을 사용하여 List를 JSON 형식의 문자열로 변환
+			String json = gson.toJson(list);
+			
+			// JSON 데이터를 클라이언트로 전송 (예: HttpServletResponse)
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+			
 		}else {
 			request.setAttribute("msg", "잘못된 접근입니다.");
 			request.setAttribute("loc", "/");
