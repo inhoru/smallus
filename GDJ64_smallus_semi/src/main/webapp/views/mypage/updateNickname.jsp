@@ -106,45 +106,55 @@ background-color: #FFFBF5;
 		window.close();
 	}
 	
-	$("#i-nickNameCheck").keyup(e=>{
-		if(e.target.value.length>=2){	
-				$.ajax({
-			url:"<%=request.getContextPath()%>/member/updateNickname.do",
-			data:{"nickName":$(e.target).val()},
-			success:function(data){
-				console.log(data,typeof data);
-				let msg="",color="";
-				if(data=='true'){
-					msg="사용가능한 닉네임입니다.";
-					color="#996F51";
-					
-				}else{
-					msg="사용불가능한 닉네임입니다.";
-					color="#996F51";
-				}
-				$(".i-nickCheck").text(msg).css("color",color);
-				console.log($("#i-nickNameCheck").val());
-				
-			},error:function(r,m){
-				console.log(r);
-				console.log(m);
-			}
-		});
-		}else{
-		let msg="",color="";
-		msg="두글자이상 입력해주세요.";
-		color="#996F51";
-		$(".i-nickCheck").text(msg).css("color",color);	
-			};
-		
-		});
-	const btn=$(".re")	
-	btn.click(e=>{
-		const ivalue=($("#i-nickNameCheck").val());
-		opener.document.querySelector("#i-nickName").value=ivalue;
-		close();
+	$("#i-nickNameCheck").keyup(e => {
+	    let memberNicknameReg = /^[a-zA-Z0-9가-힣]{2,}$/;
+	    if (e.target.value.trim().length === 0) {
+	        let msg = "두 글자 이상 입력하세요!";
+	        let color = "#996F51";
+	        $(".i-nickCheck").text(msg).css("color", color);
+	        return; 
+	    }
+	    if (e.target.value.length >= 2 && memberNicknameReg.test(e.target.value)) {
+	        $.ajax({
+	            url: "<%=request.getContextPath()%>/member/updateNickname.do",
+	            data: { "nickName": $(e.target).val() },
+	            success: function (data) {
+	                console.log(data, typeof data);
+	                let msg = "", color = "";
+	                if (data === 'true') {
+	                    msg = "사용 가능한 닉네임입니다.";
+	                    color = "#996F51";
+	                } else {
+	                    msg = "사용 불가능한 닉네임입니다.";
+	                    color = "#996F51";
+	                }
+	                $(".i-nickCheck").text(msg).css("color", color);
+	                console.log($("#i-nickNameCheck").val());
+	            },
+	            error: function (xhr, textStatus, errorThrown) {
+	                console.log(xhr);
+	                console.log(textStatus);
+	                console.log(errorThrown);
+	            }
+	        });
+	    } else {
+	        let msg = "잘못된 닉네임 양식입니다. 영문, 숫자, 한글로만 입력하세요!";
+	        let color = "#996F51";
+	        $(".i-nickCheck").text(msg).css("color", color);
+	    }
 	});
 
+
+	const btn = $(".re");
+	btn.click(e => {
+	    const ivalue = $("#i-nickNameCheck").val();
+	    if ($(".i-nickCheck").text() === "잘못된 닉네임 양식입니다. 영문, 숫자, 한글로만 입력하세요!") {
+	        alert("잘못된 닉네임 양식입니다. 영문, 숫자, 한글로만 입력하세요!");
+	        return;
+	    }
+	    opener.document.querySelector("#i-nickName").value = ivalue;
+	    close();
+	});
 	
 
 </script>

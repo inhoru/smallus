@@ -34,10 +34,10 @@ public class MemberDeleteServlet extends HttpServlet {
 		String msg,loc;
 		if(result>0) {
 			msg="회원삭제를 완료했습니다.";
-			loc="/admin/memberListServlet.do";
+			loc="/admin/noticeListServlet.do";
 		}else {
 			msg="회원삭제를 실패했습니다.";
-			loc="/admin/memberListServlet.do";
+			loc="/admin/noticeListServlet.do";
 		}
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc",loc);

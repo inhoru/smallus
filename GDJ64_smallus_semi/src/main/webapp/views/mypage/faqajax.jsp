@@ -25,7 +25,7 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
-				<td class="i-customerService"><a href="">1:1 문의</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/memberInquiry.do">1:1 문의</a></td>
 			</tr>
 			<tr>
 				<td class="i-myInfo"><a
@@ -61,14 +61,18 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 		
 
 
-<h3 class="i-inquiryTitle">1:1 문의<button class="i-inquirybutton" onclick="location.assign('<%=request.getContextPath()%>/board/insertForm.do')">글쓰기</button></h3>
+<h3 class="i-inquiryTitle">
+			1:1 문의
+			<button class="i-inquirybutton"
+				onclick="location.assign('<%=request.getContextPath()%>/insertInquiry.do')">글쓰기</button>
+		</h3>
 		<%
-				if (inquiryList.isEmpty()) {
-				%>
-				<div class="i-nopayment">문의 내역이 없습니다.</div>
-				<%
-				} else {
-				%>
+		if (inquiryList.isEmpty()) {
+		%>
+		<div class="i-nopayment">문의 내역이 없습니다.</div>
+		<%
+		} else {
+		%>
 		<table class="i-inquiryTable">
 			<tr>
 				<th>유형</th>
@@ -76,7 +80,7 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 				<th>작성일</th>
 				<th>처리상태</th>
 			</tr>
-	
+
 			<%
 			for (Inquiry i : inquiryList) {
 			%>
@@ -86,39 +90,56 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 				<td class="i-inquiryContent"><%=i.getBoardRdate()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardCheck()%></td>
 				<td>
-				<button class="i-inquiryremovebutton">삭제</button>
-				<input type="hidden" value="<%=i.getBoardId()%>" name="boardId" class="i-boardId">
+					<button class="i-inquiryremovebutton">삭제</button> <input
+					type="hidden" value="<%=i.getBoardId()%>" name="boardId"
+					class="i-boardId">
 				</td>
 			</tr>
 
 			<tr class="i-inquiryContentAnswer">
 				<td colspan="5"><div class="i-ca">질문</div> <br /><%=i.getBoardContent()%></div></td>
 			</tr>
+			<%
+			if (i.getCommentConent() != null) {
+			%>
 			<tr class="i-tds">
-				<td colspan="5"><div class="i-ca">답변</div> <br />ㅏㅁ너아ㅣㄴ머ㅣ어마ㅣㅓㅇㄴ마ㅓ아너마언마ㅓ아너마언마ㅓ안머ㅏ언마ㅣ어ㅏㄴ미ㅓ아ㅣㄴ머ㅏ인머ㅏㅣㅇ너마ㅣㅓㅇㄴ마ㅣ어ㅣㅁ
-					</div></td>
+				<td colspan="5">
+				<div class="i-ca">답변</div> <br /> <%=i.getCommentConent() %>
+				</td>
 			</tr>
 			<%
+			}else{
+				
 			}
-				}
+			%>
+
+
+			<%
+			}
+			}
 			%>
 		</table>
 
 
 
+
+
 	</div>
-	<% if(inquiryList.isEmpty()) {%>
-	
-	<%}else{ %>
-		<div class="pageBar">
+	<%
+	if (inquiryList.isEmpty()) {
+	%>
+
+	<%
+	} else {
+	%>
+	<div class="pageBar">
 		<%=request.getAttribute("pageBar")%>
 	</div>
-	<%} %>
-			
+	<%
+	}
+	%>
 </div>
-
 <script>
-
 	$(".i-faqContentTitle").click(e => {
 		$(e.target).next().slideToggle(0);
 	
@@ -126,7 +147,7 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 	})
 	$(".i-inquiryremovebutton").click(e => {
 		const remove = $(e.target).closest('tr').find('.i-boardId').val();
-			
+		console.log(remove);
 		$.ajax({
 			type:"get",
 			url:"<%=request.getContextPath()%>/Inquiryremove.do?categorie=호스트신청",
@@ -150,11 +171,11 @@ List<Faq> faqcategorie = (List) request.getAttribute("faqcategoie");
 	er=$(e.target).parent().next().next().slideToggle(0);
 	console.log(er);
 	
+	
 	})
 	
 	$(".i-faqCategoriesDetails").click(e=>{
 		const categorie=$(e.target).text();
-		console.log(categorie);
 	
 			$.ajax({
 				type:"get",

@@ -73,7 +73,8 @@ if (cookies != null) {
                   width="25px" height="25px" class="i-loginPage">
             </div>
             <div class="icon">
-               <a href="<%=request.getContextPath()%>/memberLoginMove.do"><img
+               <a href="<%=request.getContextPath()%>/memberLoginMove.do">
+               <img
                   src="<%=request.getContextPath()%>/img/하트.png" alt="" width="25px"
                   height="25px"></a>
             </div>
@@ -119,7 +120,7 @@ if (cookies != null) {
                width="25px" height="25px"></a>
          </div>
          <div class="icon">
-            <a href=""><img src="<%=request.getContextPath()%>/img/하트.png"
+            <a href="<%=request.getContextPath()%>/memberWishList.do"><img src="<%=request.getContextPath()%>/img/하트.png"
                alt="" width="25px" height="25px"></a>
          </div>
          <div class="notification-icon">

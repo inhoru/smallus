@@ -12,17 +12,20 @@
 				<td class="i-customerService i-cu">고객센터</td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="">프로필관리</a></td>
+				<td class="i-myInfo"><a
+					href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
 				<td class="i-customerService"><a href="">공지사항</a></td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
+				<td class="i-myInfo"><a
+					href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
-				<td class="i-customerService"><a href="">1:1 문의</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/memberInquiry.do">1:1 문의</a></td>
 			</tr>
 			<tr>
-				<td class="i-myInfo"><a href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
+				<td class="i-myInfo"><a
+					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
 				<td><a href="">후기관리</a></td>
 				<td class="i-customerService"><a href="">Q&A</a></td>
 			</tr>
@@ -52,14 +55,14 @@
 						 disabled name="memberId" class="i-memberId"> <input type="text"
 							value="<%=infoMember.getMemberNickname()%>" id="i-nickName" name="memberNickname" readonly> <input
 							type="text" value="******" readonly> <input type="text"
-							value="<%=infoMember.getMemberEmail()%>" disabled> <input
+							value="<%=infoMember.getMemberEmail()%>" id="i-email" name="memberEmail"> <input
 							type="text" value="<%=infoMember.getMemberPhone()%>" disabled>
 					</div>
 					<div class="i-proFile3">
 						<button class="i-nonebutton">변경</button>
 						<button onclick="fn_updateNickname();">변경</button>
 						<button onclick="fn_updatePassword();">변경</button>
-						<button class="i-nonebutton" >변경</button>
+						<button onclick="fn_updateEmail();" >변경</button>
 						<button class="i-nonebutton">변경</button>
 					</div>
 				</div>

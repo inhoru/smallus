@@ -20,5 +20,13 @@ public class Inquiry {
 	private String boardContent;
 	private Date boardRdate;
 	private String boardCheck;
+	
+	private String commentConent;
+	private Date commentRdate;
+	private String commentId;
+	
+	private String sfId;
+	
+	private String sfRename;
 
 }

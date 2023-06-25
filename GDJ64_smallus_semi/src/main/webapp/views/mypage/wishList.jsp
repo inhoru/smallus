@@ -23,7 +23,7 @@ List<Classes> wish = (List) request.getAttribute("wishList");
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
-				<td class="i-customerService"><a href="">1:1 문의</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/memberInquiry.do">1:1 문의</a></td>
 			</tr>
 			<tr>
 				<td class="i-myInfo"><a

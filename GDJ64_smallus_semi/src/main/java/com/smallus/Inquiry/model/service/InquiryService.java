@@ -12,6 +12,7 @@ import com.smallus.Inquiry.dao.InquiryDao;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
 
+
 public class InquiryService {
 	private InquiryDao dao = new InquiryDao();
 	
@@ -52,25 +53,35 @@ public class InquiryService {
 		else rollback(conn);
 		return result;
 	}
-	public int InsertInquiry(String memberId,String boardType,String boardTitle,String boardContent,List<String> files) {
-		Connection conn = getConnection();
-		int result2=0;
-		int result = dao.InsertInquiry(conn,memberId,boardType,boardTitle,boardContent);
-		if(result>0) {
-			commit(conn);
-		}else{
-			rollback(conn);
-		};
-		if(result==1) {
-			for(int i=0;i<files.size();i++) {				
-				result2+=dao.Insertupfiles(conn,files.get(i));
-			}
-			if(result2==files.size()) {
-				commit(conn);
-			}else rollback(conn);
-		}
-		return result;
+	public int insertInquiry(String memberId, String boardType, String boardTitle, String boardContent, List<String> files) {
+	    Connection conn = getConnection();
+	    int result = dao.InsertInquiry(conn, memberId, boardType, boardTitle, boardContent);
+	    
+	    if (result > 0) {
+	        int fileResult = 0;
+	        if (files != null && !files.isEmpty()) {
+	            for (int i = 0; i < files.size(); i++) {
+	                fileResult = dao.Insertupfiles(conn, files.get(i));
+	                if (fileResult <= 0) {
+	                    break; 
+	                }
+	            }
+	        }
+	        
+	        if (fileResult > 0 || (files != null && files.isEmpty())) { 
+	            commit(conn);
+	        } else {
+	            rollback(conn);
+	        }
+	    } else {
+	        rollback(conn);
+	    }
+	    
+	    return result;
 	}
+
+
+
 	public int Insertupfiles(String files) {
 		Connection conn = getConnection();
 		int result = dao.Insertupfiles(conn,files);
@@ -78,4 +89,6 @@ public class InquiryService {
 		else rollback(conn);
 		return result;
 	}
+	
+	
 }

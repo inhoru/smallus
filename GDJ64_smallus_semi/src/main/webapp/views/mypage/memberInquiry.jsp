@@ -12,7 +12,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 <div id="mainOpacity">
 	<section class="i-tablecontent">
-		<table class="i-mypageCategories">
+	<table class="i-mypageCategories">
 			<tr>
 				<td class="i-myInfo i-my">내정보</td>
 				<td class="i-info">클래스정보</td>
@@ -28,7 +28,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/withdrawal.do">회원탈퇴</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberWishList.do">찜관리</a></td>
-				<td class="i-customerService"><a href="">1:1 문의</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/memberInquiry.do">1:1 문의</a></td>
 			</tr>
 			<tr>
 				<td class="i-myInfo"><a
@@ -51,7 +51,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 		int count = 0;
 		for (Faq f : faqList) {
 			if (count == 4) {
-				break; 
+				break;
 			}
 		%>
 		<ul>
@@ -68,15 +68,19 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 
 
-		
-		<h3 class="i-inquiryTitle">1:1 문의<button class="i-inquirybutton" onclick="location.assign('<%=request.getContextPath()%>/insertInquiry.do')">글쓰기</button></h3>
+
+		<h3 class="i-inquiryTitle">
+			1:1 문의
+			<button class="i-inquirybutton"
+				onclick="location.assign('<%=request.getContextPath()%>/insertInquiry.do')">글쓰기</button>
+		</h3>
 		<%
-				if (inquiryList.isEmpty()) {
-				%>
-				<div class="i-nopayment">문의 내역이 없습니다.</div>
-				<%
-				} else {
-				%>
+		if (inquiryList.isEmpty()) {
+		%>
+		<div class="i-nopayment">문의 내역이 없습니다.</div>
+		<%
+		} else {
+		%>
 		<table class="i-inquiryTable">
 			<tr>
 				<th>유형</th>
@@ -84,7 +88,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<th>작성일</th>
 				<th>처리상태</th>
 			</tr>
-	
+
 			<%
 			for (Inquiry i : inquiryList) {
 			%>
@@ -92,23 +96,46 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<td class="i-inquiryContent"><%=i.getBoardType()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardTitle()%></td>
 				<td class="i-inquiryContent"><%=i.getBoardRdate()%></td>
+				<%if(i.getCommentConent()==null) {%>
 				<td class="i-inquiryContent"><%=i.getBoardCheck()%></td>
+				<%}else{ %>
+				<td class="i-inquiryContent">답변완료</td>
+				<%} %>
 				<td>
-				<button class="i-inquiryremovebutton">삭제</button>
-				<input type="hidden" value="<%=i.getBoardId()%>" name="boardId" class="i-boardId">
+					<button class="i-inquiryremovebutton">삭제</button> 
+					<input
+							type="hidden" value="<%=i.getBoardId()%>" name="boardId"
+							class="i-boardId">
 				</td>
 			</tr>
 
 			<tr class="i-inquiryContentAnswer">
-				<td colspan="5"><div class="i-ca">질문</div> <br /><%=i.getBoardContent()%></div></td>
-			</tr>
-			<tr class="i-tds">
-				<td colspan="5"><div class="i-ca">답변</div> <br />ㅏㅁ너아ㅣㄴ머ㅣ어마ㅣㅓㅇㄴ마ㅓ아너마언마ㅓ아너마언마ㅓ안머ㅏ언마ㅣ어ㅏㄴ미ㅓ아ㅣㄴ머ㅏ인머ㅏㅣㅇ너마ㅣㅓㅇㄴ마ㅣ어ㅣㅁ
-					</div></td>
+				<td colspan="5"><div class="i-ca">질문</div> 
+				
+				<%if(i.getSfRename()!=null){%>
+				<img width="80px" height="80px" style=" margin-right: 90%;     margin-top: 3%;" src="<%=request.getContextPath()%>/upload/inquiry/<%=i.getSfRename() %>">	
+				<%}else{%>
+				<%} %>
+				<br /><%=i.getBoardContent()%></div></td>
 			</tr>
 			<%
+			if (i.getCommentConent() != null) {
+			%>
+			<tr class="i-tds">
+				<td colspan="5">
+				<div class="i-ca">답변</div> <br /> <%=i.getCommentConent() %>
+				</td>
+			</tr>
+			<%
+			}else{
+				
 			}
-				}
+			%>
+
+
+			<%
+			}
+			}
 			%>
 		</table>
 
@@ -117,15 +144,23 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 
 
 	</div>
-	<% if(inquiryList.isEmpty()) {%>
-	
-	<%}else{ %>
-		<div class="pageBar">
+	<%
+	if (inquiryList.isEmpty()) {
+	%>
+
+	<%
+	} else {
+	%>
+	<div class="pageBar">
 		<%=request.getAttribute("pageBar")%>
 	</div>
-	<%} %>
+	<%
+	}
+	%>
 </div>
 <script>
+   
+
 	$(".i-faqContentTitle").click(e => {
 		$(e.target).next().slideToggle(0);
 	
@@ -156,6 +191,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 	er=$(e.target).parent().next().slideToggle(0);
 	er=$(e.target).parent().next().next().slideToggle(0);
 	console.log(er);
+	
 	
 	})
 	
