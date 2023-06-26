@@ -6,10 +6,10 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 <%
 	String include;
 	//Member infoMember=(Member)request.getAttribute("infoMember");
-	Host hostInfo=(Host)request.getAttribute("hostInfo");
+	Host loginHost=(Host)session.getAttribute("loginHost");
 	List<Notice> NoticeLists=(List)request.getAttribute("NoticeList");
 	List<NoticeImage> NoticeImages=(List)request.getAttribute("NoticeImage");
-	if(hostInfo!=null){
+	if(loginHost!=null){
 		include="/views/common/hostHeader.jsp";
 	}else{
 		include="/views/common/mainHeader.jsp";
@@ -36,7 +36,7 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
             <div class="h-main-title">
                 <h2>공지사항</h2>
                 <!-- 공지사항 추가페이지로 이동 -->
-                <%if(hostInfo.getHostId().equals("admin")){ %>
+                <%if(loginHost.getHostId().equals("admin")){ %>
                 <div class="h-viewList"><a href="<%=request.getContextPath()%>/views/admin/adminNoticeEnroll.jsp">+</a></div>
                 <%}else{%>
                 	
@@ -51,7 +51,7 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
                         <th>제목</th>
                         <th>작성일</th>
                         <th>작성자</th>
-                       	<%if(hostInfo.getHostId().equals("admin")){ %>
+                       	<%if(loginHost.getHostId().equals("admin")){ %>
                         <th></th>
                         <%}%>
                     </tr>
@@ -68,7 +68,7 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 	                    	<td><%=n.getNoticeRdate()%></td>
 	                    	<td><%=n.getHostId()%></td>
 	                    	<td>
-	                    	 <%if(hostInfo.getHostId().equals("admin")){ %>
+	                    	 <%if(loginHost.getHostId().equals("admin")){ %>
 	                    	<button id="deleteNoticebtn" style="cursor:pointer;" onclick="deleteNotice('<%=n.getNoticeId()%>');">삭제</button>
 	                    	<%}%>
 	                    	</td>

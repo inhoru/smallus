@@ -32,8 +32,8 @@ public class UpdateHostProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session= request.getSession();
-		Host host=(Host)session.getAttribute("loginHost");
-		String hostId=(host.getHostId());
+		Host hostInfo = (Host) session.getAttribute("hostInfo");
+		String hostId=(hostInfo.getHostId());
 		
 		String hostNickname=request.getParameter("hostNickname");
 		String hostPw=request.getParameter("hostPw");
@@ -48,6 +48,8 @@ public class UpdateHostProfileServlet extends HttpServlet {
 		System.out.println(hostId+" "+hostNickname+" "+hostPw+" "+hostHomePhone+" "+hostImg);
 		
 		int data=new HostService().updateHostProfile(hostId,hostNickname,hostPw,hostHomePhone,hostImg);
+		Host host=new HostService().selectByhostId(hostId);
+		session.setAttribute("hostInfo", host);
 		System.out.println(data);
 		//response.setContentType("text/csv;charset=utf-8");
 		response.setContentType("text/html;charset=utf-8");

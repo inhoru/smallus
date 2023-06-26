@@ -47,7 +47,7 @@
 				</div>
 				<div id="d-payment">
 					<p id="d-payment-price">결제금액 <%=info.getClassPrice() %>원</p>
-					<input type="submit" value="결제하기">
+					<input type="submit" value="결제하기" id="h-moveToPay">
 				</div>
 			</div>
 		</div>
@@ -164,6 +164,31 @@
 					}
 				});
 			});
+		let loginMember='<%=(Member) session.getAttribute("loginMember")%>';
+		// 결제하기 버튼 클릭하면 로그인 분기처리 
+		$("#h-moveToPay").click(e=>{
+			console.log(loginMember);
+			if(loginMember==null){
+				location.assign('<%=request.getContextPath()%>/memberLoginMove.do');
+			}else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/host/payment.do",
+					/* header:{'Content-Type':'application/json'}, */
+					//dataType:"html",
+					dataType:"json",
+					data:{
+						
+					},
+					success:function(data){
+						console.log(data, typeof data);
+				        }
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log("에러 발생: " + textStatus, errorThrown);
+					}
+				})
+			}
+		})
 </script>
 
 <style>

@@ -77,28 +77,22 @@ int cPage = (int) request.getAttribute("cPage");
 						</div>
 						<div class="i-paymentbutton">
 							<%
-							if (paymentStatus.equals("결제완료") && startDate.after(today)) {
+							if (paymentStatus.equals("결제완료")) {
 							%>
 							<button class="i-withdrawalbutton1 i-writingreview">예약취소</button>
 							<%
-							} else {
+							} else if(paymentStatus.equals("수강완료")){
 							%>
-							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">예약취소</button> -->
+							<button class="i-withdrawalbutton1 i-writingreview">후기
+								작성</button>
 							<%
 							}
 							%>
 							<%
 							if (paymentStatus.equals("결제취소") || endDate.after(today)) {
 							%>
-							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">후기
-								작성</button> -->
 							<%
-							} else {
-							%>
-							<button class="i-withdrawalbutton1 i-writingreview">후기
-								작성</button>
-							<%
-							}
+							} 
 							%>
 						</div>
 					</div>

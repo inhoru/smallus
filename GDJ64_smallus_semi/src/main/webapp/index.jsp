@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
-
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container">
@@ -223,4 +222,34 @@
 			</div>
 		</div>
 	</section>
+	<script>
+		let slideIndex = 1;
+	    showSlides(slideIndex);
+	
+	    // Next/previous controls
+	    function plusSlides(n) {
+	        showSlides(slideIndex += n);
+	    }
+	
+	    // Thumbnail image controls
+	    function currentSlide(n) {
+	        showSlides(slideIndex = n);
+	    }
+	
+	    function showSlides(n) {
+	    	let i;
+	    	let slides = document.getElementsByClassName("slides");
+	    	let dots = document.getElementsByClassName("dot");
+	    	if (n > slides.length) {slideIndex = 1}
+	   		if (n < 1) {slideIndex = slides.length}
+	        for (i = 0; i < slides.length; i++) {
+	            slides[i].style.display = "none";
+	        }
+	        for (i = 0; i < dots.length; i++) {
+	            dots[i].className = dots[i].className.replace(" active", "");
+	        }
+	        slides[slideIndex-1].style.display = "block";
+	        dots[slideIndex-1].className += " active";
+	    }
+	</script>
 	<%@ include file="/views/common/footer.jsp"%>

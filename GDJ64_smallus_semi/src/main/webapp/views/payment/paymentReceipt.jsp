@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-   import="java.util.*, com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,com.smallus.classes.model.vo.Classes"%>
+   import="java.util.*, com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,com.smallus.classes.model.vo.Classes
+   com.smallus.payment.model.vo.PaymentCompleted"%>
  <%
 	Member m= (Member) session.getAttribute("loginMember");
- 	PaymentCompleted p = (List)request.getAttribute("payment");
+	PaymentCompleted p = (List)request.getAttribute("payment");
 	
 	String memberName=m.getMemberName();
 	String memberEmail=m.getMemberEmail();
