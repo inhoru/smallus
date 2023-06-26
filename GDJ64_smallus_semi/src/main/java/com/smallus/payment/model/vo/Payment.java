@@ -30,6 +30,11 @@ public class Payment implements Serializable {
 	private Date bookingTimeStart;
 	private Date bookingTimeEnd; 
 	
+	private Date createdDate;
+	private Date expiredDated;
+	
+	
+	
 	
 //	PAYMENT_ID	VARCHAR2(30) PRIMARY KEY,	
 //	CLASS_DETAIL_ID	VARCHAR2(20)	NOT NULL	REFERENCES CLASS_DETAIL(CLASS_DETAIL_ID),

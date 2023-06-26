@@ -56,7 +56,7 @@ public class CouponDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertCoupon"));
-			//INSERT INTO COUPON VALUES((SELECT COUPON_ID FROM COUPON_TYPE WHERE COUPON_ID='?'),'?');
+			//INSERT INTO COUPON VALUES((SELECT COUPON_ID FROM COUPON_TYPE WHERE COUPON_ID=?),?,DEFAULT,ADD_MONTHS(SYSDATE,3))
 			pstmt.setString(1, coupon);
 			pstmt.setString(2, memberId);
 			result=pstmt.executeUpdate();

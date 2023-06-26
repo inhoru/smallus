@@ -108,7 +108,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 							class="i-boardId">
 				</td>
 			</tr>
-
+		
 			<tr class="i-inquiryContentAnswer">
 				<td colspan="5"><div class="i-ca">질문</div> 
 				
@@ -116,7 +116,8 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<img width="80px" height="80px" style=" margin-right: 90%;     margin-top: 3%;" src="<%=request.getContextPath()%>/upload/inquiry/<%=i.getSfRename() %>">	
 				<%}else{%>
 				<%} %>
-				<br /><%=i.getBoardContent()%></div></td>
+				<br /><%=i.getBoardContent()%></div><br/>
+				</td>
 			</tr>
 			<%
 			if (i.getCommentConent() != null) {
@@ -126,6 +127,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<div class="i-ca">답변</div> <br /> <%=i.getCommentConent() %>
 				</td>
 			</tr>
+		
 			<%
 			}else{
 				
@@ -188,10 +190,10 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 	
 	
 	$(".i-inquiryContent").click(e=>{
-	er=$(e.target).parent().next().slideToggle(0);
-	er=$(e.target).parent().next().next().slideToggle(0);
-	console.log(er);
+	$(e.target).parent().next().slideToggle(0);
 	
+	$(e.target).parent().next().next().slideToggle(0);
+
 	
 	})
 	
