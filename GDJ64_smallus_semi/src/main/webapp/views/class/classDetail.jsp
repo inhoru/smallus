@@ -36,6 +36,7 @@
 					<select>
 					<%for(ClassDetail cd : schedule){ %>
 						<option><%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %></option>
+						<!-- 현재 인원 추출방식은 문자열 자르기 -->
 					<%} %>
 					</select> 
 				</div>
