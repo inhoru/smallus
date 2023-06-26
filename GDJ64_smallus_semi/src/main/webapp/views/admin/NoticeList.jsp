@@ -16,6 +16,14 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 	}
 %>
 <jsp:include page="<%=include%>"/>
+<link rel="stylesheet"
+   href="<%=request.getContextPath()%>/css/common/headrFooter.css">
+<link rel="stylesheet"
+   href="<%=request.getContextPath()%>/css/common/main.css">
+<link rel="stylesheet"
+   href="<%=request.getContextPath()%>/css/mypage/mypage.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostHeader.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostMainStyle.css">
 <style>
 	button#deleteNoticebtn {
 	width:4rem;
@@ -36,7 +44,7 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
             <div class="h-main-title">
                 <h2>공지사항</h2>
                 <!-- 공지사항 추가페이지로 이동 -->
-                <%if(loginHost.getHostId().equals("admin")){ %>
+                <%if(loginHost!=null&&loginHost.getHostId().equals("admin")){ %>
                 <div class="h-viewList"><a href="<%=request.getContextPath()%>/views/admin/adminNoticeEnroll.jsp">+</a></div>
                 <%}else{%>
                 	
@@ -51,9 +59,10 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
                         <th>제목</th>
                         <th>작성일</th>
                         <th>작성자</th>
-                       	<%if(loginHost.getHostId().equals("admin")){ %>
+                       	<%if(loginHost!=null&&loginHost.getHostId().equals("admin")){ %>
                         <th></th>
-                        <%}%>
+                        <%}else{%>
+                        <%} %>
                     </tr>
                     <%if(NoticeLists!=null&&!NoticeLists.isEmpty()) {
 						for(Notice n:NoticeLists){%>
@@ -68,16 +77,18 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 	                    	<td><%=n.getNoticeRdate()%></td>
 	                    	<td><%=n.getHostId()%></td>
 	                    	<td>
-	                    	 <%if(loginHost.getHostId().equals("admin")){ %>
+	                    	 <%if(loginHost!=null&&loginHost.getHostId().equals("admin")){ %>
 	                    	<button id="deleteNoticebtn" style="cursor:pointer;" onclick="deleteNotice('<%=n.getNoticeId()%>');">삭제</button>
 	                    	<%}%>
 	                    	</td>
 	                    </tr>
-	                    <tr>
-	                    	<td colspan="5" class="m-noticedetailcontainer<%=n.getNoticeId()%>" style="display:none;">
+	                    <tr class="m-noticedetailcontainer<%=n.getNoticeId()%>" style="display:none;">
+	                    	<td colspan="5">
 	                    	<div>
-	                    	<img src="<%=request.getContextPath()%>/upload/notice/<%=n.getNoticeImageRename()%>"alt="이게왜안떠?" style="height:500px; width:400px;">
-	                    	<p style="width: 1350px; "><%=n.getNoticeContent()%></p>
+	                    	<%if(n.getNoticeFilepath()!=null){ %>
+	                    	<img src="<%=request.getContextPath()%>/upload/notice/<%=n.getNoticeFilepath()%>"alt="이게왜안떠?" style="height: 300px; width: 200px;">
+	                    	<%} %>
+	                    	<pre style="width: 1350px; "><%=n.getNoticeContent()%></pre>
 	                    	</div>
 	                    	</td>
 	                    </tr>

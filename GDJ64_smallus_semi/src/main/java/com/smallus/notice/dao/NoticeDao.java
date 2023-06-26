@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.smallus.common.JDBCTemplate;
@@ -33,8 +34,10 @@ public class NoticeDao {
 				noticeTitle(rs.getString("NOTICE_TITLE")).
 				noticeRdate(rs.getDate("NOTICE_RDATE")).
 				noticeContent(rs.getString("NOTICE_CONTENT")).
-				noticeImageOrignal(rs.getString("NOTICE_IMAGE_ORIGNAL")).
-				noticeImageRename(rs.getString("NOTICE_IMAGE_RENAME")).build();
+				noticeFilepath(rs.getString("NOTICE_FILEPATH")).
+				build();
+//				noticeImageOrignal(rs.getString("NOTICE_IMAGE_ORIGNAL")).
+//				noticeImageRename(rs.getString("NOTICE_IMAGE_RENAME")).build();
 	}
 	
 	public static NoticeImage getNoticeImage(ResultSet rs) throws SQLException{
@@ -45,16 +48,35 @@ public class NoticeDao {
 				.noticeImageRename(rs.getString("NOTICE_IMAGE_RENAME"))
 				.build();
 	}
+	
+	public int enrollNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//enrollNotice=INSERT INTO NOTICE VALUES(SEQ_NOTICE_ID.NEXTVAL,?,?,?,?,DEFAULT,?)
+			pstmt=conn.prepareStatement(sql.getProperty("enrollNotice"));
+			pstmt.setString(1, n.getHostId());
+			pstmt.setString(2, n.getNoticeType());
+			pstmt.setString(3, n.getNoticeTitle());
+			pstmt.setString(4, n.getNoticeContent());
+			pstmt.setString(5, n.getNoticeFilepath());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	public Notice selectNotice(Connection conn, Notice n) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		Notice notice=null;
 		try {
-			//SELECT * FROM NOTICE WHERE NOTICE_CONTENT=?
+			//SELECT * FROM NOTICE WHERE NOTICE_TITLE=?
 			pstmt=conn.prepareStatement(sql.getProperty("selectNotice"));
-			pstmt.setString(1,n.getNoticeContent());
+			pstmt.setString(1,n.getNoticeTitle());
 			rs=pstmt.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 				notice=getNotice(rs);
 			}
 		}catch(SQLException e) {
@@ -63,24 +85,6 @@ public class NoticeDao {
 			close(rs);
 			close(pstmt);
 		}return notice;
-	}
-	
-	public int enrollNotice(Connection conn, Notice n) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			//enrollNotice=INSERT INTO NOTICE VALUES(SEQ_NOTICE_ID.NEXTVAL,?,?,?,DEFAULT,?)
-			pstmt=conn.prepareStatement(sql.getProperty("enrollNotice"));
-			pstmt.setString(1, n.getHostId());
-			pstmt.setString(2, n.getNoticeType());
-			pstmt.setString(3, n.getNoticeTitle());
-			pstmt.setString(4, n.getNoticeContent());
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
 	}
 	
 	public int enrollNoticeImg(Connection conn, NoticeImage ni) {

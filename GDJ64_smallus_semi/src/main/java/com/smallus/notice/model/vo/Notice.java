@@ -18,7 +18,7 @@ public class Notice {
 	private String noticeTitle;
 	private Date noticeRdate;
 	private String noticeContent;
-	
-	private String noticeImageOrignal;
-	private String noticeImageRename;
+	private String noticeFilepath;
+//	private String noticeImageOrignal;
+//	private String noticeImageRename;
 }
