@@ -43,9 +43,8 @@ public class UpdateHostProfileImgServlet extends HttpServlet {
 				1024*1024*10,"UTf-8",new DefaultFileRenamePolicy());
 		
 		HttpSession session = request.getSession();
-		Host hostInfo = (Host) session.getAttribute("hostInfo");
-		String hostId= hostInfo.getHostId();
-		
+		Host loginHost = (Host) session.getAttribute("loginHost");
+		String hostId= loginHost.getHostId();
 		String renameFile=mr.getFilesystemName("h-upFile");
 		String msg; String loc = null;
 		
@@ -54,7 +53,8 @@ public class UpdateHostProfileImgServlet extends HttpServlet {
 		if(renameFile!=null&& result>0) {
 			msg="수정 성공 :)";
 			loc="/host/moveHostProfile.do";
-			session.setAttribute("hostInfo", host);
+			Host h= new HostService().selectByhostId(hostId);
+			session.setAttribute("loginHost",h);
 		}else {
 			msg="수정 실패 :<";
 		}

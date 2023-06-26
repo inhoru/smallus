@@ -32,7 +32,6 @@ public class ViewHostMainpageServlet extends HttpServlet {
 		// move host main page
 		HttpSession session=request.getSession();
 		Host loginHost = (Host) session.getAttribute("loginHost");
-		session.setAttribute("loginHost",loginHost);
 		String hostId=loginHost.getHostId();
 		
 		List<PaymentCalc> newList=new PaymentService().selectNewPaymentByhostId(hostId);

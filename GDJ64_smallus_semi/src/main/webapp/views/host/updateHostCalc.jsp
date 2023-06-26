@@ -52,7 +52,7 @@
 			//type:"get",
 			type:"post",
 			data:{
-				hostId:'<%=hostInfo.getHostId()%>',
+				hostId:'<%=loginHost.getHostId()%>',
 				hostAccountBank:accountbank,
 				hostAccount:account,
 				hostAccountName:accountName,
@@ -69,7 +69,7 @@
 				if(e.status==404) alert("요청한 페이지가 없습니다.");
 			},
 			complete:()=>{
-				location.assign('<%=request.getContextPath()%>/host/viewHostCalc.do?hostId=<%=hostInfo.getHostId() %>')
+				location.assign('<%=request.getContextPath()%>/host/viewHostCalc.do?hostId=<%=loginHost.getHostId() %>')
 			}
 		});
 	})
