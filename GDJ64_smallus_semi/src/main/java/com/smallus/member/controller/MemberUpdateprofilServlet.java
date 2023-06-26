@@ -49,16 +49,20 @@ public class MemberUpdateprofilServlet extends HttpServlet {
 		MultipartRequest mr=new MultipartRequest(request,path,maxSize,encode,dfr);
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		Member infoMember = (Member) request.getAttribute("infoMember");
 		String memberId=loginMember.getMemberId();
 		String memberNickname=mr.getParameter("memberNickname");
+		String memberEmail=mr.getParameter("memberEmail");
+		System.out.println(memberEmail);
 		String renamefilename=mr.getFilesystemName("i-upFile");
 		
 		
 		if(renamefilename!=null) {
-			Member m=Member.builder().memberNickname(memberNickname).memberImg(renamefilename).build();
+			Member m=Member.builder().memberNickname(memberNickname).memberImg(renamefilename).memberEmail(memberEmail).build();
 			int result=new MemberService().updateMember(m,memberId);
+			Member m1=new MemberService().selectByMemberId(loginMember.getMemberId());
 			String msg="수정이 완료되었습니다.",loc="/memberprofile.do";
+			session.setAttribute("loginMember",m1);
+		
 			if(result==0) {
 				msg="수정을 실패하였습니다.";
 			}
@@ -67,8 +71,10 @@ public class MemberUpdateprofilServlet extends HttpServlet {
 			
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}else {			
-			Member m=Member.builder().memberNickname(memberNickname).memberImg(infoMember.getMemberImg()).build();
+			Member m=Member.builder().memberNickname(memberNickname).memberImg(loginMember.getMemberImg()).memberEmail(memberEmail).build();
 			int result=new MemberService().updateMember(m,memberId);
+			Member m1=new MemberService().selectByMemberId(loginMember.getMemberId());
+			session.setAttribute("loginMember",m1);
 			String msg="수정이 완료되었습니다.",loc="/memberprofile.do";
 			if(result==0) {
 				msg="수정을 실패하였습니다.";

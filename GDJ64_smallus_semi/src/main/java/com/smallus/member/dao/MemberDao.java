@@ -199,13 +199,15 @@ public class MemberDao {
 	}
 	public int updateMember(Connection conn, Member m,String s) {
 		PreparedStatement pstmt=null;
+		
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("updateMember"));
-			//UPDATE MEMBER SET MEMBER_NICKNAME=?,MEMBER_IMG=? WHERE MEMBER_ID=?
+			//UPDATE MEMBER SET MEMBER_NICKNAME=?,MEMBER_IMG=?, MEMBER_EMAIL=? WHERE MEMBER_ID=? AND MEMBER_ST='Y'
 			pstmt.setString(1, m.getMemberNickname());
 			pstmt.setString(2, m.getMemberImg());
-			pstmt.setString(3, s);
+			pstmt.setString(3, m.getMemberEmail());
+			pstmt.setString(4, s);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -304,6 +306,7 @@ public class MemberDao {
 			//wishRemove=DELETE FROM WISH WHERE MEMBER_ID = ? AND CLASS_ID=(SELECT CLASS_ID FROM CLASS WHERE CLASS_TITLE=?)
 			pstmt.setString(1,memberId);
 			pstmt.setString(2, title);
+			
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

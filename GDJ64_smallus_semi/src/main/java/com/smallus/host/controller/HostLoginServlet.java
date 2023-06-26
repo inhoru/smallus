@@ -68,25 +68,9 @@ public class HostLoginServlet extends HttpServlet {
 			HttpSession session=request.getSession();
 			session.setAttribute("loginHost",loginHost);
 			
-			List<PaymentCalc> newList=new PaymentService().selectNewPaymentByhostId(hostId);
-			List<Classes> calendarList=new ClassService().selectClassByCalendar(hostId);
-			if(newList.isEmpty()||newList==null||calendarList.isEmpty()||calendarList==null) {
-				System.out.println("newList 없음없");
-			}else {
-				System.out.println("newList 있음있"+newList.size());
-				session.setAttribute("newList",newList);	
-				session.setAttribute("calendarList", calendarList);
-				Gson gson= new Gson();
-				response.setContentType("application/json; charset=UTF-8");
-				gson.toJson(calendarList,response.getWriter()); // list 보낼 때는 바로 list 보내도 됨 ㅠㅠ
-				
-			}
-
-			
-			
-			
 			//화면전환시킬방법 2가지중 sendRedirect로 보낸다 이유는 데이터를  session 저장시켰고, url주소에 정보를 남기지 않기 위해서
-			response.sendRedirect(request.getContextPath()+"/views/host/hostMain.jsp");
+			response.sendRedirect(request.getContextPath()+"/hostMain.do");
+			
 		}else if(loginHost!=null&&loginHost.getHostId().equals("admin")){
 			HttpSession session=request.getSession();
 			session.setAttribute("loginHost",loginHost);

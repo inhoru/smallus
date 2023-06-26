@@ -44,11 +44,11 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 			<div id="i-proFile">
 				<div id="i-proFileImg">
 					<img
-						src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>"
+						src="<%=request.getContextPath()%>/upload/mypageprofile/<%=loginMember.getMemberImg()%>"
 						alt="" id="h-go-paypage">
 					<div id="i-proFileInfo">
-						<h1><%=infoMember.getMemberNickname()%></h1>
-						<p><%=infoMember.getMemberEmail()%></p>
+						<h1><%=loginMember.getMemberNickname()%></h1>
+						<p><%=loginMember.getMemberEmail()%></p>
 					</div>
 				</div>
 				<div id="i-additional">
@@ -296,7 +296,7 @@ $(".i-wishCheck").change(e=>{
 
 
 $("#h-go-paypage").click(e=>{
-	location.assign('<%=request.getContextPath()%>/paymentTest.do?memberId=<%=infoMember.getMemberId()%>');
+	location.assign('<%=request.getContextPath()%>/paymentTest.do?memberId=<%=loginMember.getMemberId()%>');
 })
 
 

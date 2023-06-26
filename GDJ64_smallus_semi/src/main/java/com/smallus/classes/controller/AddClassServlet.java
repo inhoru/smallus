@@ -50,6 +50,8 @@ public class AddClassServlet extends HttpServlet {
 		int result=new ClassService2().addClass(newClass);
 		
 		
+		
+		
 		if(result>0) {
 			// 성공
 		}else {

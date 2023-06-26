@@ -134,18 +134,28 @@ window.close();
 
 
 /* 비밀번호 확인 */
-$("#i-password_chk").keyup(e=>{
-	const password=$("#i-password_new").val();
-	const passwordCheck=$(e.target).val();
-	let color,msg;
-	if(password==passwordCheck){
-		color="#996F51";msg="*비밀번호가 일치합니다.";
-	}else{
-		color="#996F51";msg="*비밀번호가 일치하지 않습니다.";
-	}
-	const td=$(e.target).parents("tr").next().find("td").html("");
-	
-	$("<p>").css("color",color).text(msg).appendTo(td);
+
+const passwordReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+$("#i-password_chk").keyup(e => {
+    const password = $("#i-password_new").val();
+    const passwordCheck = $(e.target).val();
+    let color, msg;
+    if (password !== passwordCheck) {
+        color = "#996F51";
+        msg = "*비밀번호가 일치하지 않습니다.";
+        e.preventDefault();
+    } else if (!passwordReg.test(password)) {
+        color = "#996F51";
+        msg = "*비밀번호는 영문과 숫자로 이루어진 8글자 이상이어야 합니다.";
+        e.preventDefault();
+    } else {
+        color = "#996F51";
+        msg = "*비밀번호가 일치합니다.";
+    }
+    const td = $(e.target).parents("tr").next().find("td").html("");
+    $("<p>").css("color", color).text(msg).appendTo(td);
+
 });
+
 </script>
 </html>

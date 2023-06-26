@@ -33,6 +33,7 @@ public class MemberWishRemove extends HttpServlet {
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		String title=request.getParameter("title");
+		System.out.println(title);
 		new MemberService().wishRemove(loginMember.getMemberId(),title);
 	}
 

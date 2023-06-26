@@ -34,6 +34,6 @@
 <!-- 페이지가모두 로드 된후 실행 -->
 <script src="<%=request.getContextPath()%>/js/header.js"></script>
 <script src="<%=request.getContextPath()%>/js/mypage.js"></script>
-<script src="<%=request.getContextPath()%>/js/main.js"></script>
+<%-- <script src="<%=request.getContextPath()%>/js/main.js"></script> --%>
 </body>
 </html>

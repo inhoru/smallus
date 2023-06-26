@@ -47,7 +47,7 @@
 				</div>
 				<div id="d-payment">
 					<p id="d-payment-price">결제금액 <%=info.getClassPrice() %>원</p>
-					<input type="submit" value="결제하기">
+					<input type="submit" value="결제하기" id="h-moveToPay">
 				</div>
 			</div>
 		</div>
@@ -69,20 +69,20 @@
 			<!-- style="font-size: 16px; font-weight: bolder; margin-left: 20%;" -->
 			<ul>
 				<li id="info"><p>상세 정보</p></li>
-				<p id="text">상세정보로 넣은 이미지, 정보</p>
+				<p id="text"><%=info.getClassDetail() %></p>
 				<hr>
 				<li id="info"><p>주소</p></li>
 				<img  id="address" src="<%=request.getContextPath()%>/img/category_main/map.png">
-				<p style="font-size: 8px">서울시 노원구 월계동 광운로 2나길</p>
+				<p style="font-size: 8px"><%=info.getClassAddress() %></p>
 				<hr>
 				<li id="info"><p>제공 사항</p></li>
-				<p id="text">스테인 글라스 만들 때 사용하는 재료</p>
+				<p id="text"><%=info.getClassOffer() %></p>
 				<hr>
 				<li id="info"><p>유의 사항</p></li>
-				<p id="text">미세한 유리조각이 날릴 수 있으니 주의</p>
+				<p id="text"><%=info.getClassNotice() %></p>
 				<hr>
 				<li id="info"><p>준비물</p></li>
-				<p id="text">튼튼한 두 팔과 체력!!!</p>
+				<p id="text"><%=info.getClassSupplies() %></p>
 				<!-- <hr style="margin-right: 20%"> -->
 			</ul>
 		</nav>
@@ -164,6 +164,31 @@
 					}
 				});
 			});
+		let loginMember='<%=(Member) session.getAttribute("loginMember")%>';
+		// 결제하기 버튼 클릭하면 로그인 분기처리 
+		$("#h-moveToPay").click(e=>{
+			console.log(loginMember);
+			if(loginMember==null){
+				location.assign('<%=request.getContextPath()%>/memberLoginMove.do');
+			}else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/host/payment.do",
+					/* header:{'Content-Type':'application/json'}, */
+					//dataType:"html",
+					dataType:"json",
+					data:{
+						
+					},
+					success:function(data){
+						console.log(data, typeof data);
+				        }
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log("에러 발생: " + textStatus, errorThrown);
+					}
+				})
+			}
+		})
 </script>
 
 <style>
@@ -227,15 +252,15 @@
 	.d-class-detail div{
 		/* border:1px solid red; */
 	}
-	.d-detail-menu{
-		display:flex;
-		justify-content: space-around;
+	.d-detail-menu nav{
+	display:flex;
+	justify-content: space-around;
 		text-align: center;
 	}
-	.d-detail-menu li{
+	
+	.d-detail-menu ul{
 
-		justify-content: space-around;
-		text-align: center;
+		
 	}
 	
 </style>

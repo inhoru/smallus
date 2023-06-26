@@ -2,10 +2,10 @@ package com.smallus.admin.dao;
 
 import static com.smallus.classes.model.dao.ClassesDao.getClasses;
 import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.host.dao.HostDao.getHost;
 import static com.smallus.member.dao.MemberDao.getMember;
 import static com.smallus.notice.dao.NoticeDao.getNotice;
-import static com.smallus.host.dao.HostDao.getHost;
-
+import static com.smallus.notice.dao.NoticeDao.getNoticeImage;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -21,6 +21,7 @@ import com.smallus.common.JDBCTemplate;
 import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
+import com.smallus.notice.model.vo.NoticeImage;
 
 public class AdminDao {
 	private Properties sql = new Properties();// final로 선언하면 처리속도 빨라짐
@@ -246,6 +247,25 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
+	public List<NoticeImage> checkNoticeImageAll(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<NoticeImage> list2=new ArrayList();
+		try {
+			//checkNoticeImageAll=SELECT * FROM NOTICE_IMAGE
+			pstmt=conn.prepareStatement(sql.getProperty("checkNoticeImageAll"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list2.add(getNoticeImage(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list2;
+	}
+	
 	public int selectConfirmClassesCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

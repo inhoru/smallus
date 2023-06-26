@@ -101,6 +101,25 @@ public class CouponDao {
 		return result;
 	}
 	
+	// 결제 시 회원이 가지고 있는 쿠폰 조회
+	public List<Coupon> selectCouponByMemberId(Connection conn, String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Coupon> list=new ArrayList<Coupon>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectCouponByMemberId"));
+			//SELECT * FROM COUPON JOIN COUPON_TYPE USING(COUPON_ID) JOIN MEMBER USING(MEMBER_ID) WHERE MEMBER_ID=? ORDER BY CREATED_DATE DESC
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) list.add(getCoupon(rs));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
 	
 	
 

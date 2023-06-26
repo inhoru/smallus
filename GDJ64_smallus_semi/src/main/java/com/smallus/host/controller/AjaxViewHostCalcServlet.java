@@ -1,6 +1,7 @@
 package com.smallus.host.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -39,14 +40,16 @@ public class AjaxViewHostCalcServlet extends HttpServlet {
 		Host host=(Host)session.getAttribute("loginHost");
 		String hostId=host.getHostId();
 		
-		Gson gson= new Gson();
+		//Gson gson= new Gson();
 		List<Calc> calcList=new CalcService().selectAllcalcByhostId(hostId, 1, 10);
 		if(calcList.isEmpty()||calcList==null) {
-			System.out.println("없음없");
+			System.out.println("ajax calcList 없음없");
 		}else {
-			System.out.println("있음있");
-			response.setContentType("application/json; charset=UTF-8");
-			gson.toJson(calcList,response.getWriter());
+			System.out.println("ajax calcList 있음있");
+			response.setContentType("text/html;charset=utf-8");
+			//gson.toJson(data,response.getWriter());
+			PrintWriter out=response.getWriter();
+			out.print(calcList);
 //			request.setAttribute("calcList",calcList);				
 		}
 		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);

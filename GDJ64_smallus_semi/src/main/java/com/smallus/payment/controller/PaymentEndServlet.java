@@ -1,17 +1,20 @@
 package com.smallus.payment.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.smallus.classes.model.service.ClassService;
 import com.smallus.member.model.vo.Member;
-import com.smallus.payment.model.vo.Payment;
+import com.smallus.payment.service.PaymentService;
 
 /**
  * Servlet implementation class PaymentEndServlet
@@ -39,14 +42,16 @@ public class PaymentEndServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		HttpSession session=request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
 		// 결제 후 보낸 데이터를 json으로 받는 서블릿
 		request.setCharacterEncoding("UTF-8");
 		Gson gson= new Gson();
 		
 		// front에서 보낸 데이터를 data로 가져옴 
 		String data=request.getParameter("data");
-		System.out.println("data : "+data);
 		//data : {"success":true,"imp_uid":"imp_182519379256","pay_method":"point","merchant_uid":"RSV1004",
 		//"name":"[베이킹] [베이킹] 휘낭시에 굽기","paid_amount":50000,"currency":"KRW","pg_provider":"kakaopay","pg_type":"payment",
 		//"pg_tid":"T4926c0f62ea0baecb0a","apply_num":"","buyer_name":"김세미","buyer_email":"test@naver.com",
@@ -54,27 +59,47 @@ public class PaymentEndServlet extends HttpServlet {
 		//"receipt_url":"https://mockup-pg-web.kakao.com/v1/confirmation/p/T4926c0f62ea0baecb0a/3930989aadf75ac385d920f5f158cb649d11b26ceed1571a2fcd93d2dfc74b0c",
 		//"card_name":null,"bank_name":null,"card_quota":0,"card_number":""}
 		
-//		PAYMENT_ID	VARCHAR2(30) PRIMARY KEY,	
-//		CLASS_DETAIL_ID	VARCHAR2(20)	NOT NULL	REFERENCES CLASS_DETAIL(CLASS_DETAIL_ID),
-//	  MEMBER_ID VARCHAR2(16) REFERENCES MEMBER(MEMBER_ID),
-//		COUPON_ID	VARCHAR2(100) REFERENCES COUPON_TYPE(COUPON_ID),
-//		PRICE	NUMBER	NOT NULL,
-//	  CLASS_PERSONNEL NUMBER,
-//		TOTAL_PRICE	NUMBER	NOT NULL,    
-//		IMP_UID VARCHAR2(30), -- api 결제 번호
-//		--HOST_ID VARCHAR2(100) REFERENCES HOST(HOST_ID), 
-//	  REQUEST VARCHAR2(2000),    
-//	  PAYMENT_TYPE	VARCHAR2(20) REFERENCES PAYMENT_TYPE(PAYMENT_TYPE),
-//	  PAYMENT_DATE DATE DEFAULT SYSDATE,
-//		PAYMENT_STATUS	VARCHAR2(20) NOT NULL
+		//String jsonData = request.getParameter("jsonData");
+		Map<String, String> dataMap = new HashMap<>();
+		//Map<String, String> newPayment= new HashMap<String,String>();
+		dataMap = gson.fromJson(data, dataMap.getClass());
 		
+		// callback으로 받은 함수 중 빠진 데이터를 ajax로 가져와서 map에 넣어줌 
+		String classDetailId=request.getParameter("classDetailId");
+		String couponId=request.getParameter("couponId");
+		String classPersonnel=request.getParameter("classPersonnel");
+		String price=request.getParameter("price");
+		String totalPrice=request.getParameter("totalPrice");
 		
-		Member requestData=gson.fromJson(data,Member.class);
-		System.out.println("post 방식으로 요청");
+		dataMap.put("memberId", loginMember.getMemberId());
+		dataMap.put("classDetailId", classDetailId);
+		dataMap.put("classPersonnel", classPersonnel);
+		dataMap.put("price", price);
+		dataMap.put("totalPrice", totalPrice);
 		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out=response.getWriter();
-		out.print(data);
+		if(!couponId.isEmpty()||couponId!=null) {
+			dataMap.put("couponId", couponId);
+		}else dataMap.put("couponId", "NONE");
+		
+		if((boolean)dataMap.get("status").equals("paid")) {
+			dataMap.put("status", "결제완료");
+		}
+		
+//		System.out.println("payment_id : "+(String)dataMap.get("merchant_uid"));
+//		System.out.println("classDetail_id : "+(String)dataMap.get("classDetailId"));
+//		System.out.println("member_id : "+(String)dataMap.get("memberId"));
+//		System.out.println("coupon_id : "+(String)dataMap.get("couponId"));
+//		System.out.println("price : "+ Integer.parseInt(dataMap.get("price")));
+//		System.out.println("personnel : "+ Integer.parseInt(String.valueOf(dataMap.get("classPersonnel"))));
+//		System.out.println("totalPrice : "+ Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
+//		System.out.println("pg_provider : "+(String)dataMap.get("pg_provider"));
+//		System.out.println("status : "+(String)dataMap.get("status"));
+		int remainingPersonnel= Integer.parseInt(classPersonnel);
+		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
+		int result=new PaymentService().insertPayment(dataMap);
+		if(result>0) System.out.println("입력 완료");
+		else System.out.println("error T_T");
+		
 		
 	}
 

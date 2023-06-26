@@ -1,66 +1,79 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+      .h-modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    </style>
 <%@ page import="com.smallus.classes.model.vo.ClassDetail, com.smallus.classes.model.vo.Classes" %>
 <%
 	List<ClassDetail> classDetailList=(List)request.getAttribute("classDetailList");
-	List<Classes> classList=(List)request.getAttribute("classList");
-	
+	Classes list=(Classes)request.getAttribute("list");
 %>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <!--main-->
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-class-sub">
      	<h2>내 클래스 보기</h2>
-        <!-- ajax 통해서 넣을 class 테이블 -->
 		<h3>클래스 기본 정보 관리하기</h3>
-		<%if(classList!=null&&!classList.isEmpty()){
-			for(Classes c:classList){%>
+		<div>
+			<button class="h-moveToClassList" onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassList.do')">클래스 목록으로</button>
+		</div>
 			<div class="h-class-list">
 				<a href="">
-					<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail() %>.png">
+					<img src="<%=request.getContextPath()%>/img/<%=list.getClassThumbnail() %>">
 				</a>
 				<table>
 					<tr>
-						<%if(c.getClassPassId().equals("Y")){%>
+						<%if(list.getClassPassId().equals("Y")){%>
 							<th class="h-tbl-align-left">승인 완료</th>
 							<th>판매 상태</th>
-						<%}else if(c.getClassPassId().equals("W")){%>
+						<%}else if(list.getClassPassId().equals("W")){%>
 							<th class="h-tbl-align-left">승인 대기 중</th>
 							<th></th>
-						<%}else if(c.getClassPassId().contains("N")){ %>
+						<%}else if(list.getClassPassId().contains("N")){ %>
 							<th class="h-tbl-align-left">승인 거절</th>
-							<%switch(c.getClassPassId()) {
+							<%switch(list.getClassPassId()) {
 								case "N1" :%><th>거절 사유 1</th><%break; 
 								case "N2" :%><th>거절 사유 2</th><%break; 
 								case "N3" :%><th>거절 사유 3</th><%break; 
 							}
 						}%>
-						<th colspan="2"><%=c.getClassId() %></th>
+						<th colspan="2"><%=list.getClassId() %></th>
 					</tr>
 					<tr>
-						<th class="h-tbl-align-left">카테고리</th>
-						<th colspan=3>지역</th>
+						<th class="h-tbl-align-left"><%=list.getCategoryTitle() %></th>
+						<th colspan=3><%=list.getClassAddress() %></th>
 					</tr>
 					<tr>
-						<td class="h-tbl-align-left h-tbl-className" colspan="4" >클래스 이름</td>
+						<td class="h-tbl-align-left h-tbl-className" colspan="4" ><%=list.getClassTitle() %></td>
 					</tr>
 					<tr>
 						<td class="h-tbl-align-left">신청 일</td>
-						<td>YYYY-MM-DD</td>
+						<td><%=list.getClassUpLoadDate() %></td>
 						<td>승인 일</td>
-						<td>YYYY-MM-DD</td>
+						<td><%=list.getClassPassDate() %></td>
 					</tr>
 					<tr>
 						<td class="h-tbl-align-left">금액</td>
-						<td>38,000</td>
+						<td><%=list.getClassPrice() %></td>
 					</tr>
 				</table>
 				<div>
-					<button>수정</button><button>삭제</button>
+					<button>수정</button><br>
+					<button>삭제</button>
 				</div>				
 			</div><!--end .h-class list-->
-			<%}
-		} %>
 	</section>
 	<!-- section class detile info  -->
 	<section class="h-main h-class-sub">
@@ -68,39 +81,43 @@
 			<div>
 				<h3>클래스 상세 정보 관리하기</h3>
 				<div>
-					<button>추가</button>
+					<button id="h-insertClassDetail">추가</button>
 				</div>
 			</div>
 			<table class="h-class-detailTbl">
 				<tr>
 					<th>NO</th>
-					<th>클레스 세부 번호</th>
-					<th>날짜</th>
+					<th>클래스 세부 번호</th>
 					<th>시간</th>
 					<th>예약 인원</th>
-					<th></th>
 				</tr>
-				<tr>
 			<%if(classDetailList!=null&&!classDetailList.isEmpty()){
 				int count=1;
 				for(ClassDetail cd: classDetailList){%>
+				<tr>
 					<td><%=count %></td>
 					<td><%=cd.getClassDetailId() %></td>
-					<td><%=cd.getBookingTimeStart()%></td>
-					<td><%=cd.getBookingTimeEnd()%></td>
-					<td><%= %>명</td>
+					<td><%=cd.getBookingTimeStart()%> - <%=cd.getBookingTimeEnd()%></td>
+					<td><%=list.getClassPersonnel()%>명</td>
 					<td class="h-class-tbl-btn"><button>삭제</button></td>
 				</tr>
-				<tr>
-					<td>r202306130751</td>
-					<td>2023-05-18</td>
-					<td>15:00 - 17:00</td>
-					<td>1명</td>
-					<td class="h-class-tbl-btn"><button>삭제</button></td>
-				</tr>
-			</table>
 			<%count++;} 
-			}%>
+			}else{%>
+				<tr>
+					<td colspan="4">조회할 세부 클래스가 없습니다.</td>
+				</tr>
+			<%} %>
+			</table>
 		</div>
 	</section>
+	<div class="h-modal">
+		<div class="h-modal_body">Modal</div>
+	</div>
+<script>
+	$("#h-insertClassDetail").click(e=>{
+		window
+		location.assign('<%=request.getContextPath()%>/class/insertClassDetail.do?classId=<%=list.getClassId()%>');
+	})
+	
+</script>
 <%@ include file="/views/common/hostFooter.jsp"%>

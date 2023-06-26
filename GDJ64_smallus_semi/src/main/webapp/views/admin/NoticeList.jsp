@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,
-com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice, java.util.List"%>
+com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.smallus.notice.model.vo.NoticeImage, java.util.List"%>
 <%
 	String include;
-	Member infoMember=(Member)request.getAttribute("infoMember");
-	Host hostInfo=(Host)request.getAttribute("hostInfo");
+	//Member infoMember=(Member)request.getAttribute("infoMember");
+	Host loginHost=(Host)session.getAttribute("loginHost");
 	List<Notice> NoticeLists=(List)request.getAttribute("NoticeList");
-	if(hostInfo!=null){
+	List<NoticeImage> NoticeImages=(List)request.getAttribute("NoticeImage");
+	if(loginHost!=null){
 		include="/views/common/hostHeader.jsp";
 	}else{
 		include="/views/common/mainHeader.jsp";
@@ -23,9 +24,11 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice, java.u
             <div class="h-main-title">
                 <h2>공지사항</h2>
                 <!-- 공지사항 추가페이지로 이동 -->
-                <%if(hostInfo.getHostId().equals("admin")){ %>
+                <%if(loginHost.getHostId().equals("admin")){ %>
                 <div class="h-viewList"><a href="<%=request.getContextPath()%>/views/admin/adminNoticeEnroll.jsp">+</a></div>
-                <%}%>
+                <%}else{%>
+                	
+                <%} %>
             </div>
         </section>
         <section class="h-main h-main-rsvList">
@@ -36,13 +39,13 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice, java.u
                         <th>제목</th>
                         <th>작성일</th>
                         <th>작성자</th>
-                       	<%if(hostInfo.getHostId().equals("admin")){ %>
+                       	<%if(loginHost.getHostId().equals("admin")){ %>
                         <th></th>
                         <%}%>
                     </tr>
                     <%if(NoticeLists!=null&&!NoticeLists.isEmpty()) {
 						for(Notice n:NoticeLists){%>
-	                    <tr id="m-noticedetail" style="cursor:pointer;">
+	                    <tr style="cursor:pointer;" onclick="noticedetail('<%=n.getNoticeId()%>');">
 	                    	<%if(n.getNoticeType().equals("1")){%>
 	                    	<td>공지사항</td>
 	                    	<%}else if(n.getNoticeType().equals("2")){%>
@@ -53,9 +56,15 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice, java.u
 	                    	<td><%=n.getNoticeRdate()%></td>
 	                    	<td><%=n.getHostId()%></td>
 	                    	<td>
-	                    	 <%if(hostInfo.getHostId().equals("admin")){ %>
-	                    	<button id="deleteNoticebtn" style="cursor:pointer;">삭제</button>
+	                    	 <%if(loginHost.getHostId().equals("admin")){ %>
+	                    	<button id="deleteNoticebtn" style="cursor:pointer;" onclick="deleteNotice('<%=n.getNoticeId()%>');">삭제</button>
 	                    	<%}%>
+	                    	</td>
+	                    </tr>
+	                    <tr>
+	                    	<td colspan="5" class="m-noticedetailcontainer<%=n.getNoticeId()%>" style="display:none;">
+	                    	<%-- <img src="<%=request.getContextPath()%>/upload/notice/"alt="">  --%>
+	                    	<textarea style="width: 1350px; height: 250px;"><%=n.getNoticeContent()%></textarea>
 	                    	</td>
 	                    </tr>
 	                    <%}%>
@@ -74,12 +83,17 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice, java.u
 		</div>
 </body>
 <script>
-$("#m-noticedetail").click(e=>{
-	location.assign("<%=request.getContextPath()%>/")
-	
-	})
-$("#deleteNoticebtn").click(e=>{
-	location.assign("<%=request.getContextPath()%>/")
-})
+
+$(() => {
+		$(".m-noticedetailcontainer").hide();
+});
+
+function noticedetail(noticeId){
+	$(".m-noticedetailcontainer"+noticeId).slideToggle();
+}
+
+function deleteNotice(noticeId){
+	location.assign("<%=request.getContextPath()%>/notice/DeleteNotice.do?noticeId="+noticeId);
+}
 </script>
 <%@ include file="/views/common/hostFooter.jsp"%>

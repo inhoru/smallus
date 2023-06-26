@@ -54,7 +54,6 @@ public class ClassesDao {
 				.build();
 	}
 
-	//selectClassDetailByClassId=SELECT * FROM CLASS_DETAIL WHERE CLASS_ID=?
 	public List<ClassDetail> selectClassDetailByClassId(Connection conn, String classId) {
 		List<ClassDetail> list = new ArrayList<ClassDetail>();
 		PreparedStatement pstmt = null;
@@ -76,11 +75,6 @@ public class ClassesDao {
 	}
 	
 	// Classes vo에서 toString override 한 객체를 가져온다.
-	
-	//selectAllClassesByHostId=SELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM 
-	//(SELECT CLASS_ID, CATEGORY_TITLE, CLASS_TITLE, CLASS_UPLOAD_DATE, CLASS_PASS_DATE, CLASS_PASS_ID, CLASS_THUMBNAIL 
-	//FROM CLASS LEFT JOIN CATEGORY USING(CATEGORY_ID) WHERE HOST_ID=? )C) WHERE RNUM BETWEEN ? AND ?
-	
 	//return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail;
 	public List<Classes> selectAllClassesByHostId(Connection conn, String hostId, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
@@ -95,14 +89,6 @@ public class ClassesDao {
 			while(rs.next()) {
 				Classes c=new Classes();
 				list.add(getClass(rs));
-//				c.setClassId(rs.getString("CLASS_ID"));
-//				c.setCategoryTitle(rs.getString("CATEGORY_TITLE"));
-//				c.setClassTitle(rs.getString("CLASS_TITLE"));
-//				c.setClassUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE"));
-//				c.setClassPassDate(rs.getDate("CLASS_PASS_DATE"));
-//				c.setClassPassId(rs.getString("CLASS_PASS_ID"));
-//				c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
-//				list.add(c);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -113,10 +99,6 @@ public class ClassesDao {
 	}
 	
 	// Classes vo에서 toString override 한 객체를 가져온다.
-	// selectClassesByHostId=SELECT CLASS_ID, CATEGORY_TITLE, CLASS_TITLE, CLASS_UPLOAD_DATE, CLASS_PASS_DATE, CLASS_PASS_ID, CLASS_THUMBNAIL 
-	// FROM CLASS LEFT JOIN CATEGORY USING(CATEGORY_ID) WHERE HOST_ID=? AND CLASS_PASS_ID=?
-	// return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail;
-	
 	public List<Classes> selectClassListByPassStatus(Connection conn, String hostId, String passStatus,int cPage, int numPerpage) {
 		List<Classes> list = new ArrayList<Classes>();
 		PreparedStatement pstmt = null;
@@ -164,7 +146,6 @@ public class ClassesDao {
 	}
 	
 	// 페이징 처리를 위한 totalData 구하는 로직
-	//selectClassCount=SELECT COUNT(*) AS RN FROM CLASS
 	public int selectClassCount(Connection conn, String hostId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -182,8 +163,6 @@ public class ClassesDao {
 		}return result;
 	}
 	
-	
-	//selectClassCountByStatus=SELECT COUNT(*) FROM CLASS WHERE HOST_ID=? AND CLASS_PASS_ID LIKE ?
 	public int selectClassCountByStatus(Connection conn, String hostId, String passStatus) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -202,8 +181,6 @@ public class ClassesDao {
 		}return result;
 	}
 	
-//	selectClassByCalendar=SELECT CLASS_TITLE, BOOKING_TIME_START, BOOKING_TIME_END, MEMBER_ID, P.CLASS_PERSONNEL 
-//	FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) JOIN PAYMENT P USING(CLASS_DETAIL_ID) WHERE HOST_ID=?
 	public List<Classes> selectClassByCalendar(Connection conn, String hostId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -225,5 +202,44 @@ public class ClassesDao {
 	}
 	
 	
+
+	public Classes selectClassByClassId(Connection conn, String hostId, String classId){
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			Classes c=new Classes();
+			try {
+				pstmt=conn.prepareStatement(sql.getProperty("selectClassByClassId"));
+				pstmt.setString(1, hostId);
+				pstmt.setString(2, classId);
+				rs=pstmt.executeQuery();
+				while(rs.next()) {
+					c=getClasses(rs);
+				}
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(pstmt);
+			}return c;
+		}
+	
+	
+	public int updateRemainPersonnel(Connection conn, int updateRemainPersonnel, String classDetailId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updateRemainPersonnel"));
+			pstmt.setInt(1, updateRemainPersonnel);
+			pstmt.setString(2, classDetailId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt("RN");
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 }
