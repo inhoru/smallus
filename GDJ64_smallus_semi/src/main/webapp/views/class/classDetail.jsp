@@ -18,7 +18,7 @@
 <div class="d-class-detail">
 	<div class="d-detail-header">
 		<div class="d-detail-img">
-			<img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg" width=400px height=400px>
+			<img src="<%=request.getContextPath()%>/upload/class/<%=info.getClassThumbnail() %>" width=400px height=400px>
 			<!-- 이미지 등록한것 있으면 수정예정 -->
 		</div>
 		<div class="d-detail-main">
