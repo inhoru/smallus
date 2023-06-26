@@ -254,6 +254,7 @@ margin:0.2rem 0; font-size: 0.6rem;}
 		
 		// 닉네임 중복 체크 
 		$("#h-checkNickname").keyup(e=>{
+			let hostrNicknameReg = /^[a-zA-Z0-9가-힣]{2,}$/;
 			console.log(e.target.value.length)
 			if(e.target.value.length>2 && e.target.value.length<21){
 				$.ajax({

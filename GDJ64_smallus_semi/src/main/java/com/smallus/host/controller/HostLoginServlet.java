@@ -66,7 +66,7 @@ public class HostLoginServlet extends HttpServlet {
 		if(loginHost!=null&&!loginHost.getHostId().equals("admin")) {
 			//로그인 성공 -> 인증받음
 			HttpSession session=request.getSession();
-			session.setAttribute("loginHost",loginHost);
+			session.setAttribute("hostInfo",loginHost);
 			
 			//화면전환시킬방법 2가지중 sendRedirect로 보낸다 이유는 데이터를  session 저장시켰고, url주소에 정보를 남기지 않기 위해서
 			response.sendRedirect(request.getContextPath()+"/hostMain.do");
