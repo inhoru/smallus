@@ -7,21 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.HostService;
 
 /**
- * Servlet implementation class DuplicateHostNicknameServlet
+ * Servlet implementation class UpdatePasswordServlet
  */
-@WebServlet("/host/duplicateNickname.do")
-public class DuplicateHostNicknameServlet extends HttpServlet {
+@WebServlet("/host/updatePassword.do")
+public class UpdatePasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DuplicateHostNicknameServlet() {
+    public UpdatePasswordServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +32,11 @@ public class DuplicateHostNicknameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String nickname=request.getParameter("nickname");
-		System.out.println(nickname);
-		Host h=new HostService().selectByhostNickname(nickname);
-		System.out.println(h);
-//		response.setContentType("text/csv;charset=utf-8");
-//		response.getWriter().print(h==null?0:1);
+		HttpSession session = request.getSession();
+		Host loginHost = (Host) session.getAttribute("loginHost");
+		String hostId= loginHost.getHostId();
+		String hostPw=request.getParameter("hostPw");
+		Host h= new HostService().hostLogin(hostId,hostPw);
 	}
 
 	/**

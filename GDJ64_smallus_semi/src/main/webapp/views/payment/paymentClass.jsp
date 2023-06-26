@@ -213,7 +213,8 @@ function payment(pg_provider, payment_method){
 		        	"couponId":"NONE", 
 		        	"price":"32000",
 		        	"classPersonnel":"2",
-		        	"totalPrice":"64000"
+		        	"totalPrice":"64000",
+		        	"remainingPersonnel":"12"
 		        }
 			}).done(function (data){
 				//const rsp=JSON.parse(data);

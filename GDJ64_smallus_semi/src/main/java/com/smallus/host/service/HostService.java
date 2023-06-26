@@ -89,7 +89,7 @@ public class HostService {
 	
 	public int updateHostImg(String renameFile, String hostId) {
 		Connection conn=getConnection();
-		int result=dao.updateHostNickname(conn,renameFile,hostId);
+		int result=dao.updateHostImg(conn,renameFile,hostId);
 		if(result>0) {
 			commit(conn);
 			System.out.println("service updateImg O");

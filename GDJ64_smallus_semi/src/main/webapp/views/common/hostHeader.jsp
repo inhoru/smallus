@@ -29,7 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
     <!-- fullcalendar 언어 설정관련 script -->
-    <script src="<%=request.getContextPath() %>/js/calendar.js"></script>
+    <%-- <script src="<%=request.getContextPath() %>/js/calendar.js"></script> --%>
     <script src="<%=request.getContextPath() %>/js/chart.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
@@ -41,9 +41,9 @@
 <body>
     <header>
         <div id="headerContainer">
-            <a href="<%=request.getContextPath()%>/hostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
+            <a href="<%=request.getContextPath()%>/hostMain.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
+                <a href="<%=request.getContextPath()%>/hostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
@@ -78,7 +78,7 @@
                         <th>고객 센터</th>
                     </tr>
                     <tr>
-                        <td><a href="<%=request.getContextPath()%>/host/moveHostProfile.do">프로필 수정</a></td>
+                        <td><a href="<%=request.getContextPath()%>/hostProfile.do">프로필 수정</a></td>
                         <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do" id="h-viewCLassList">내 클래스 보기</a></td>
                         <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
                         <td><a href="">공지사항</a></td>

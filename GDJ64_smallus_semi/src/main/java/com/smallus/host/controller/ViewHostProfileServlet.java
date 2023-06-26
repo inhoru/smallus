@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MoveHostProfileServlet
  */
-@WebServlet("/host/moveHostProfile.do")
-public class MoveHostProfileServlet extends HttpServlet {
+@WebServlet("/hostProfile.do")
+public class ViewHostProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MoveHostProfileServlet() {
+    public ViewHostProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

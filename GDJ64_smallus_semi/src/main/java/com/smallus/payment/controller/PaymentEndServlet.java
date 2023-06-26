@@ -94,7 +94,9 @@ public class PaymentEndServlet extends HttpServlet {
 //		System.out.println("totalPrice : "+ Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
 //		System.out.println("pg_provider : "+(String)dataMap.get("pg_provider"));
 //		System.out.println("status : "+(String)dataMap.get("status"));
-		int remainingPersonnel= Integer.parseInt(classPersonnel);
+		int personnel=Integer.parseInt(classPersonnel);
+		int remainingPersonnel= Integer.parseInt(request.getParameter("classPersonnel"));
+		remainingPersonnel=remainingPersonnel-personnel;
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
 		int result=new PaymentService().insertPayment(dataMap);
 		if(result>0) System.out.println("입력 완료");
