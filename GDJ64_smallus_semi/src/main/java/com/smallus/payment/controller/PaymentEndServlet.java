@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.smallus.classes.model.service.ClassService;
 import com.smallus.member.model.vo.Member;
+import com.smallus.payment.model.vo.PaymentCompleted;
 import com.smallus.payment.service.PaymentService;
 
 /**
@@ -94,9 +95,15 @@ public class PaymentEndServlet extends HttpServlet {
 //		System.out.println("totalPrice : "+ Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
 //		System.out.println("pg_provider : "+(String)dataMap.get("pg_provider"));
 //		System.out.println("status : "+(String)dataMap.get("status"));
+		
 		int personnel=Integer.parseInt(classPersonnel);
-		int remainingPersonnel= Integer.parseInt(request.getParameter("classPersonnel"));
+		//int remainingPersonnel= Integer.parseInt(request.getParameter("classPersonnel"));
+		int remainingPersonnel= new PaymentService().selectRemainPer(classDetailId);
+		System.out.println("personnel :"+personnel);
+		System.out.println("remainingPersonnel :"+remainingPersonnel);
+		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
 		remainingPersonnel=remainingPersonnel-personnel;
+//		
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
 		int result=new PaymentService().insertPayment(dataMap);
 		if(result>0) System.out.println("입력 완료");

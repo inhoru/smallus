@@ -15,6 +15,7 @@ import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.model.vo.PaymentCompleted;
+import com.smallus.payment.model.vo.PaymentInfo;
 
 public class PaymentService {
 	private PaymentDao dao= new PaymentDao();
@@ -118,6 +119,22 @@ public class PaymentService {
 		PaymentCompleted pc=dao.paymentResult(conn, paymentId);
 		close(conn);
 		return pc;
+	}
+	
+	public PaymentInfo selectPaymentInfo(String classDetailId) {
+		Connection conn=getConnection();
+		PaymentInfo pinfo=dao.selectPaymentInfo(conn, classDetailId);
+		close(conn);
+		return pinfo;
+	}
+	
+	public int selectRemainPer(String classDetailId) {
+		Connection conn=getConnection();
+		int result=dao.selectRemainPer(conn, classDetailId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 	

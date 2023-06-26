@@ -77,3 +77,22 @@
 	.h-class-list-n>table {
 	margin-left: 3rem;
 	}
+	
+	.h-payment-title{
+		display: flex;
+	}
+	#h-kakaoPay{
+		width: 105px;
+		background-image:url('./img/pay.png');
+		object-fit:contain;
+		border-radius:2rem;
+	}
+	#h-kakaoPay button{
+		background-color:rgba(0,0,0,0)
+	}
+	th#h-pay-classTitle{
+	text-align:left;}
+	
+	#h-kakaoButton{
+		background-color:#FFEB00;
+	}

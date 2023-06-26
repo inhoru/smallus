@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PaymentCompleted {
 	 private Payment payment = new Payment();
-	    private Classes classes = new Classes();
+	 private Classes classes = new Classes();
 	    private ClassDetail classDetail = new ClassDetail();
 	    private Host host=  new Host();
 	    private Coupon coupon=new Coupon();
