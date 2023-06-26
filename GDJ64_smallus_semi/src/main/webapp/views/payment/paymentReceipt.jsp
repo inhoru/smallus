@@ -5,7 +5,7 @@
    com.smallus.payment.model.vo.PaymentCompleted"%>
  <%
 	Member m= (Member) session.getAttribute("loginMember");
- 	PaymentCompleted p = (List)request.getAttribute("payment");
+	PaymentCompleted p = (List)request.getAttribute("payment");
 	
 	String memberName=m.getMemberName();
 	String memberEmail=m.getMemberEmail();

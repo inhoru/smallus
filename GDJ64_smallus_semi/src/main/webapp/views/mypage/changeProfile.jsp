@@ -36,7 +36,7 @@
 			<section class="i-proFile">
 				<h2 class="i-proFileh2">프로필 수정</h2>
 				<div class="i-proFileInfo">
-					<img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>"
+					<img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=loginMember.getMemberImg()%>"
 						alt="" class="i-myprofile" name="i-mypageImg"> 
 						<img src="<%=request.getContextPath()%>/img/mypage/프로필수정.png" class="i-proFileInfoimg">
 						<input type="file" style="display:none" id="profileInput" name="i-upFile">
@@ -51,12 +51,12 @@
 						<h3>휴대폰번호</h3>
 					</div>
 					<div class="i-proFile2">
-						<input type="text" value="<%=infoMember.getMemberId()%>"
+						<input type="text" value="<%=loginMember.getMemberId()%>"
 						 disabled name="memberId" class="i-memberId"> <input type="text"
-							value="<%=infoMember.getMemberNickname()%>" id="i-nickName" name="memberNickname" readonly> <input
+							value="<%=loginMember.getMemberNickname()%>" id="i-nickName" name="memberNickname" readonly> <input
 							type="text" value="******" readonly> <input type="text"
-							value="<%=infoMember.getMemberEmail()%>" id="i-email" name="memberEmail"> <input
-							type="text" value="<%=infoMember.getMemberPhone()%>" disabled>
+							value="<%=loginMember.getMemberEmail()%>" id="i-email" name="memberEmail"> <input
+							type="text" value="<%=loginMember.getMemberPhone()%>" disabled>
 					</div>
 					<div class="i-proFile3">
 						<button class="i-nonebutton">변경</button>

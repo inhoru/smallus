@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.smallus.coupon.service.CouponService;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.service.MemberService;
 
 /**
  * Servlet implementation class MemberInsertCouponServlet
@@ -32,9 +33,10 @@ public class MemberInsertCouponServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String coupon=request.getParameter("i-insertcoupon");
 		HttpSession session = request.getSession();
-		Member infoMember = (Member) request.getAttribute("infoMember");
-		int result=new CouponService().insertCoupon(coupon,infoMember.getMemberId());
-		
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		int result=new CouponService().insertCoupon(coupon,loginMember.getMemberId());
+		Member m=new MemberService().selectByMemberId(loginMember.getMemberId());
+		session.setAttribute("loginMember",m);
 		String msg="",loc="";
 		if(result>0) {
 		
