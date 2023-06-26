@@ -41,9 +41,15 @@
 <body>
     <header>
         <div id="headerContainer">
-            <a href="<%=request.getContextPath()%>/hostMain.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
+        	<%if(loginHost!=null&&!loginHost.getHostId().equals("admin")){%>
+            <a href="<%=request.getContextPath()%>/hostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
+            <%}else{ %>
+            <a href="<%=request.getContextPath()%>/admin/AdminMainServlet.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="admin 메인페이지로 이동" id="logo"></a>
+            <%} %>
             <div class="h-iconContainer">
-                <a href="<%=request.getContextPath()%>/hostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
+            <%if(loginHost!=null) {%>
+                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
+                <%} %>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
@@ -67,7 +73,7 @@
         </div>
     </header>
     <!-- menu-category -->
-    <%if(!loginHost.getHostId().equals("admin")){ %>
+    <%if(loginHost!=null&&!loginHost.getHostId().equals("admin")){ %>
         <section class="h-menu">
             <div>
                 <table>
@@ -81,7 +87,7 @@
                         <td><a href="<%=request.getContextPath()%>/hostProfile.do">프로필 수정</a></td>
                         <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do" id="h-viewCLassList">내 클래스 보기</a></td>
                         <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
-                        <td><a href="">공지사항</a></td>
+                        <td><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
                     </tr>
                     <tr>
                         <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원 탈퇴</a></td>
@@ -115,14 +121,14 @@
 				</tr>
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/admin/memberListServlet.do">일반회원관리</a></td>
-					<td><a href="">호스트클래스</a></td>
-					<td><a href="<%=request.getContextPath()%>/admin/ClaasesListServlet.do">클래스승인</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/ClassesListServlet.do">호스트클래스</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/ClassesConfirmListServlet.do">클래스승인</a></td>
 					<td><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 				</tr>
 				<tr>
 					<td><a href="<%=request.getContextPath()%>/admin/HostListServlet.do">호스트회원관리</a></td>
 					<td><a href="">호스트정산</a></td>
-					<td><a href="">정산승인</a></td>
+					<td><a href="<%=request.getContextPath()%>/admin/ClacListServlet.do">정산승인</a></td>
 					<td><a href="">1:1문의</a></td>
 				</tr>
 		    </table>

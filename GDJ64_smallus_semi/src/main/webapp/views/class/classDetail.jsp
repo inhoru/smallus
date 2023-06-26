@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
+<%@ page import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat" %>
 <%
 	Classes info=(Classes)request.getAttribute("classinfo");
 	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
@@ -18,7 +18,7 @@
 <div class="d-class-detail">
 	<div class="d-detail-header">
 		<div class="d-detail-img">
-			<img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg" width=400px height=400px>
+			<img src="<%=request.getContextPath()%>/upload/class/<%=info.getClassThumbnail() %>" width=400px height=400px>
 			<!-- 이미지 등록한것 있으면 수정예정 -->
 		</div>
 		<div class="d-detail-main">
@@ -35,17 +35,22 @@
 					<div id="d-detail-date">
 						<select id="h-pselectClassDetailOption" onchange="selectClassDetailOption()">
 							<option>시간 선택</option>
-						<%for(ClassDetail cd : schedule){ 
-							if(cd.getRemainingPersonnel()!=0){%>
-							<option name="classDetailOption" value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart() %>_<%=cd.getBookingTimeEnd() %>_<%=cd.getRemainingPersonnel() %>">
-								<%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %>
-							</option>
-						<%}
-							}%>
+						<%if(schedule!=null&&!schedule.isEmpty()){
+							for(ClassDetail cd : schedule){ 
+								if(cd.getRemainingPersonnel()!=0){%>
+									<option name="classDetailOption" value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart() %>_<%=cd.getBookingTimeEnd() %>_<%=cd.getRemainingPersonnel() %>">
+										<%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %>
+									</option>
+									<!-- 현재 인원 추출방식은 문자열 자르기 -->
+									<%}
+								}
+							}else{%>
+								<option>사용 가능한 쿠폰이 없습니다</option>
+							<%}%>
 						</select> 
 					</div>
 					<div id="d-detail-personnel">
-						<p>인원수</p>
+						<p>인원 수</p>
 						<button onclick="personMinus();">-</button>
 						<p id="personnel" name="personnel">1명</p>
 						<button onclick="personPlus();">+</button>
@@ -218,9 +223,15 @@
 						"classBookingTimeEnd":classBookingTimeEnd,
 						"remainingPersonnel":remainingPersonnel */
 					},
+<<<<<<< HEAD
 					/*succ ess:function(data){
 						console.log(data);
 					}, */
+=======
+					success:function(data){
+						console.log(data, typeof data);
+				        },
+>>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
 					error: function(jqXHR, textStatus, errorThrown) {
 						console.log("에러 발생: " + textStatus, errorThrown);
 					}

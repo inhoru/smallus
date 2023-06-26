@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
+
 <style>
 #qnatext {
 	border: 1px solid #444444;
@@ -33,6 +34,12 @@
 	height: 25px;
 	border-radius: 20px;
 	margin-top: 15%;
+}
+#but2{
+	width: 100px;
+	height: 25px;
+	border-radius: 20px;
+	margin-left: 50%
 }
 textarea {
 	margin: 1% 35%;
@@ -76,6 +83,7 @@ textarea {
 					<div id="to">
 						<a id="a">답변</a>
 						<textarea cols="100" rows="20" placeholder="내용을 입력해 주세요"></textarea>
+					<button id="but2" type="button" onclick="alert('답변등록 완료');">등록하기</button>
 					</div>
 					<br>
 					<br>
@@ -89,9 +97,8 @@ textarea {
 	</section>
 	<script>
 		function toreplyopen(e){
-			$("#to").show();
+			$("#to").toggle();
 		}
-	
 	</script>
 </div>
 <!-- <div class="footer">

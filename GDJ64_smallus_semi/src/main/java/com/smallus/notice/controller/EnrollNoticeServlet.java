@@ -52,30 +52,32 @@ public class EnrollNoticeServlet extends HttpServlet {
 		String noticeType=mr.getParameter("noticeType");
 		String noticeTitle=mr.getParameter("noticeTitle");
 		String noticeContent=mr.getParameter("noticeContent");
-		String noticeImageOrignal=mr.getOriginalFileName("m-upFile");
-		String noticeImageRename=mr.getFilesystemName("m-upFile");
-		System.out.println(hostId+noticeType+noticeTitle+noticeContent+noticeImageOrignal);
-		Notice n=Notice.builder().hostId(hostId).noticeType(noticeType).noticeTitle(noticeTitle).noticeContent(noticeContent).build();
+		//String noticeFilepath=mr.getOriginalFileName("m-upFile");
+		String noticeFilepath=mr.getFilesystemName("m-upFile");
+		System.out.println(hostId+noticeType+noticeTitle+noticeContent+noticeFilepath);
+		Notice n=Notice.builder().hostId(hostId).noticeType(noticeType).noticeTitle(noticeTitle).noticeContent(noticeContent).noticeFilepath(noticeFilepath).build();
 		int result=new NoticeService().enrollNotice(n);
-		Notice notice=new NoticeService().selectNotice(n);
-		String noticeId=notice.getNoticeId();
-		System.out.println(noticeId);
-		String msg,loc;
-		if(noticeId==null) {
-			msg="공지사항 등록을 실패하였습니다. :( \n다시시도하세요";
-			loc="/admin/noticeListServlet.do";
-			request.setAttribute("msg", msg);
-			request.setAttribute("loc", loc);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-			return;
-		}
-		NoticeImage ni=NoticeImage.builder().noticeId(noticeId).noticeImageOrignal(noticeImageOrignal).noticeImageRename(noticeImageRename).build();
-		int result2=new NoticeService().enrollNoticeImg(ni);
+//		System.out.println(n);
+//		Notice notice=new NoticeService().selectNotice(n);
+//		System.out.println(notice.getNoticeId());
+//		String noticeId=notice.getNoticeId();
+//		System.out.println(noticeId);
+//		if(noticeId==null) {
+//			msg="공지사항 등록을 실패하였습니다. :( \n다시시도하세요";
+//			loc="/admin/noticeListServlet.do";
+//			request.setAttribute("msg", msg);
+//			request.setAttribute("loc", loc);
+//			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+//			return;
+//		}
+//		NoticeImage ni=NoticeImage.builder().noticeId(noticeId).noticeImageOrignal(noticeImageOrignal).noticeImageRename(noticeImageRename).build();
+//		int result2=new NoticeService().enrollNoticeImg(ni);
 		
-		if(result>0&&result2>0) {
+		String msg,loc;
+		if(result>0) {
 			//입력 성공
 			msg="새 공지사항을 등록했습니다.";
-			loc="/views/admin/adminMain.jsp";
+			loc="/admin/noticeListServlet.do";
 			request.setAttribute("msg", msg);
 			request.setAttribute("loc", loc);
 //			request.getRequestDispatcher("/views/host/hostLogin.jsp").forward(request, response);

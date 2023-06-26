@@ -13,16 +13,16 @@ import com.smallus.admin.service.AdminService;
 import com.smallus.classes.model.vo.Classes;
 
 /**
- * Servlet implementation class ClaasesListServlet
+ * Servlet implementation class ClassesListSortServlet
  */
-@WebServlet("/admin/ClassesListServlet.do")
-public class ClassesListServlet extends HttpServlet {
+@WebServlet("/admin/ClassesListSortServlet.do")
+public class ClassesListSortServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassesListServlet() {
+    public ClassesListSortServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,6 +31,7 @@ public class ClassesListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String categoryId=request.getParameter("categoryId");
 		int cPage,numPerpage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -42,8 +43,7 @@ public class ClassesListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			numPerpage=10;
 		}
-		int totalData=new AdminService().selectClassesCount();
-		//System.out.println(totalData);
+		int totalData=new AdminService().selectClassSortCount(categoryId);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -67,9 +67,8 @@ public class ClassesListServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
-		
-		List<Classes> list=new AdminService().checkClassesAll(cPage,numPerpage);
-		//list.forEach(e->System.out.println(e)); //list불러온값 확인
+		List<Classes> list=new AdminService().checkClassSort(categoryId,cPage,numPerpage);
+//		list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("ClassesList", list);

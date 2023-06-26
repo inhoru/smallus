@@ -5,6 +5,19 @@
 <%
 List<Host> HostList=(List)request.getAttribute("HostList"); 
 %>
+<style>
+	button#m-deleteHost {
+	width:4rem;
+	font-weight: bold;
+	background-color: #E8D6C3;
+	border:0px;
+	border-radius: 1rem;
+	text-align:center;
+	font-size: 0.5rem;
+	height:25px;
+	cursor:pointer;
+}
+</style>
 <body>
 	<div id="mainOpacity h-host-main">
 		<section class="h-main">
@@ -42,7 +55,7 @@ List<Host> HostList=(List)request.getAttribute("HostList");
 						<td><%=h.getHostConsent()%></td>
 						<td><%=h.getHostSt()%></td>
 						<%if(h.getHostSt().equals("Y")){ %>
-						<td><button onclick="deleteHost('<%=h.getHostId()%>');">삭제</button></td>
+						<td><button id="m-deleteHost"onclick="deleteHost('<%=h.getHostId()%>');">삭제</button></td>
 						<%}else{%>
 							<td></td>
 						<%}%>

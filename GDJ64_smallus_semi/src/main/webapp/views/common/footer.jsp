@@ -4,7 +4,7 @@
 	<div class="footer">
 		<div class="usMenu">
 			<ul>
-				<li><a href="" id="h-go-payment">호스트 로그인</a></li>
+				<li><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do" id="h-go-payment">공지사항</a></li>
 				<li><a href="">Host Center</a></li>
 				<li><a href="">Host Center</a></li>
 			</ul>
