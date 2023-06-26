@@ -42,7 +42,7 @@
 						<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
 					</tr>
 				</table>
-			<!-- <button>삭제</button> -->
+			<button>삭제</button>
 			</div>
 		</div>
 		
@@ -69,7 +69,7 @@
 					<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
 				</tr>
 			</table>
-			<!-- <button>삭제</button> -->
+			<button>삭제</button>
 			</div>
 		</div>
 		
@@ -95,7 +95,7 @@
 					<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
 				</tr>
 			</table>
-			<!-- <button>삭제</button> -->
+			<button>삭제</button>
 			</div>
 		</div>
 		
