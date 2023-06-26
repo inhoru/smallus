@@ -74,7 +74,7 @@ public class HostLoginServlet extends HttpServlet {
 		}else if(loginHost!=null&&loginHost.getHostId().equals("admin")){
 			HttpSession session=request.getSession();
 			session.setAttribute("loginHost",loginHost);
-			response.sendRedirect(request.getContextPath()+"/views/admin/adminMain.jsp");
+			response.sendRedirect(request.getContextPath()+"/admin/AdminMainServlet.do");
 		}else {
 			//로그인 실패 -> 인증못받음
 			//실패 메세지 출력

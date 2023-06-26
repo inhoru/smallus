@@ -46,7 +46,11 @@ section.h-main table {
 							<option value="2">이벤트</option>
 							<option value="3">기타</option>
 					</select></td>
+					<%if(loginHost!=null){ %>
 					<td><input type="hidden" name="hostId" value="<%=loginHost.getHostId()%>"></td>
+					<%}else{ %>
+					<td><input type="hidden" name="hostId" value="admin"></td>
+					<%} %>
 				</tr>
 				<tr>
 					<th>카테고리 제목</th>

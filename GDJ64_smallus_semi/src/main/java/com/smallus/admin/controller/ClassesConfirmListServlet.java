@@ -15,14 +15,14 @@ import com.smallus.classes.model.vo.Classes;
 /**
  * Servlet implementation class ClaasesListServlet
  */
-@WebServlet("/admin/ClassesListServlet.do")
-public class ClassesListServlet extends HttpServlet {
+@WebServlet("/admin/ClassesConfirmListServlet.do")
+public class ClassesConfirmListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassesListServlet() {
+    public ClassesConfirmListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class ClassesListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			numPerpage=10;
 		}
-		int totalData=new AdminService().selectClassesCount();
+		int totalData=new AdminService().selectConfirmClassesCount();
 		//System.out.println(totalData);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
@@ -68,14 +68,14 @@ public class ClassesListServlet extends HttpServlet {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
-		List<Classes> list=new AdminService().checkClassesAll(cPage,numPerpage);
+		List<Classes> list=new AdminService().checkConfirmClasses(cPage,numPerpage);
 		//list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);
-		request.setAttribute("ClassesList", list);
-		request.getRequestDispatcher("/views/admin/adminClassList.jsp").forward(request, response);
+		request.setAttribute("ClassesConfirmList", list);
+		request.getRequestDispatcher("/views/admin/adminClassConfirmList.jsp").forward(request, response);
 		}else {
-		request.getRequestDispatcher("/views/admin/adminClassList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminClassConfirmList.jsp").forward(request, response);
 		}
 	}
 

@@ -51,11 +51,6 @@
 				<img src="<%=request.getContextPath()%>/img/카카오로그인.png" class="m-socialbtn" id="m-kakaobtn">
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2">
-				<img src="<%=request.getContextPath()%>/img/네이버로그인.png" class="m-socialbtn" onclick="kakaologout();">
-				</td>
-			</tr>
 			</table>
 		</form>
 	</div>

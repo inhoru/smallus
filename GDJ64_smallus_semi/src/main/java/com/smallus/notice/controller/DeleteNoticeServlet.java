@@ -31,8 +31,9 @@ public class DeleteNoticeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String noticeId=request.getParameter("noticeId");
 		int result=new NoticeService().deleteNotice(noticeId);
+		int result2=new NoticeService().deleteNoticeImage(noticeId);
 		String msg,loc;
-		if(result>0) {
+		if(result>0&&result2>0) {
 			msg="공지사항을 삭제했습니다.";
 			loc="/admin/noticeListServlet.do";
 		}else {

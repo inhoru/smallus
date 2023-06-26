@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.admin.service.AdminService;
-import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.model.vo.Calc;
 
 /**
- * Servlet implementation class ClaasesListServlet
+ * Servlet implementation class ClacListServlet
  */
-@WebServlet("/admin/ClassesListServlet.do")
-public class ClassesListServlet extends HttpServlet {
+@WebServlet("/admin/ClacListServlet.do")
+public class ClacListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassesListServlet() {
+    public ClacListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class ClassesListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			numPerpage=10;
 		}
-		int totalData=new AdminService().selectClassesCount();
+		int totalData=new AdminService().selectConfirmCalcCount();
 		//System.out.println(totalData);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
@@ -68,14 +68,14 @@ public class ClassesListServlet extends HttpServlet {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
-		List<Classes> list=new AdminService().checkClassesAll(cPage,numPerpage);
+		List<Calc> list=new AdminService().checkConfirmCalc(cPage,numPerpage);
 		//list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);
-		request.setAttribute("ClassesList", list);
-		request.getRequestDispatcher("/views/admin/adminClassList.jsp").forward(request, response);
+		request.setAttribute("CalcList", list);
+		request.getRequestDispatcher("/views/admin/adminCalcList.jsp").forward(request, response);
 		}else {
-		request.getRequestDispatcher("/views/admin/adminClassList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminCalcList.jsp").forward(request, response);
 		}
 	}
 
