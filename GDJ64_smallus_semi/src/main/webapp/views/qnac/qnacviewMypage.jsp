@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%-- <%@ include file="/views/common/mainHeader.jsp"%> --%>
-<
+<%@ include file="/views/common/mainHeader.jsp"%>
 <style>
 #qnatext {
    border: 1px solid #444444;
-   margin: 1% 35%;
+   margin:0 35%;
    border-radius: 20px;
    width: 650px;
    display: flex;
@@ -25,13 +24,13 @@
    padding-left: 5px;
 }
 
-/* #a {
+#q {
    display: block;
    padding: 3% 25%;
    font-size: 24px;
 }
 
- li {
+/* li {
    font-size: 16px;
    margin-left: 35%;
 }
@@ -59,7 +58,9 @@
 </style>
 <div class="qna_page">
    <section id="main">
-
+   <div class="qna">
+			<a id="q">Q & A</a>
+		</div>
       <div id="qnatext">
          <table>
             <tr>
@@ -84,16 +85,11 @@
                             <td id="l">저희 매장이 좀 협소한 관계로 최대 10분만 받고있어요:)</td>
                      </tr>
                   </table>
-       <button id="but" type="submit" onclick="but">답변하기</button>
+     <!--   <button id="but" type="submit" onclick="but">답변하기</button> -->
                </div>
          
       </div>
    </section>
-      <script>
-   function but() {
-      alert("답변이 등록되었습니다".);
-   }
-      </script>
 </div>
 <!-- <div class="footer">
       <div class="usMenu"></div> -->

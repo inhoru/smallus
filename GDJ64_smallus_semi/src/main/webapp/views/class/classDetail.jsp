@@ -181,8 +181,7 @@
 					},
 					success:function(data){
 						console.log(data, typeof data);
-				        }
-					},
+				        },
 					error: function(jqXHR, textStatus, errorThrown) {
 						console.log("에러 발생: " + textStatus, errorThrown);
 					}
