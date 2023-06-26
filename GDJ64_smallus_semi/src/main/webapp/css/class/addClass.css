@@ -58,3 +58,20 @@
 #inputs img:hover{
 	cursor:pointer;
 } /* 적용안됨.. */
+
+#AddSchedule-calendar{
+	width: 1000px;
+	height: 500px;
+	margin: 10px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+	padding:10px;
+}
+#AddSchedule-calendar>input{
+	width:300px;
+	height:30px;
+	border: 2px solid #595959;
+	border-radius: 20px;
+	margin: 5px;
+	text-align:center;
+}
