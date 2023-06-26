@@ -26,7 +26,6 @@ public class Inquiry {
 	private String commentId;
 	
 	private String sfId;
-	
 	private String sfRename;
 
 }

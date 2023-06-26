@@ -19,6 +19,7 @@ List<Host> HostList=(List)request.getAttribute("HostList");
 		</section>
 		<section class="h-main h-main-rsvList">
 			<div>
+			
 				<table id="h-main-rsv-tbl">
 					<tr>
 						<th>아이디 </th>

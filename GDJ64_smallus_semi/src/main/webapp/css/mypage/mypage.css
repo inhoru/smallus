@@ -876,6 +876,7 @@ section.i-imgContainer .i-img-list h4 {
 	/* justify-content: space-between; */
 	margin-top: 9em;
 	/* width: 360px; */
+	
 }
 /* 화면 너비가 1800px 이상일 때 */
 @media ( min-width : 1800px) {
@@ -888,7 +889,7 @@ section.i-imgContainer .i-img-list h4 {
 /* 화면 너비가 800px 이상 1400px 이하일 때 */
 @media ( min-width : 800px) and (max-width: 1600px) {
 	.i-paymentbutton {
-		margin-left: 37%;
+		margin-left: 40%;
 	}
 }
 /* 예약취소 가능 할떄 버튼 */

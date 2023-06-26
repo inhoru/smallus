@@ -69,10 +69,5 @@ table#list th, table#list td {
 			<tr>
 			</tr>
 		</table>
-		<script type="text/javascript">
-		$("#toggle").click(e=>{
-			$("views/qna/qnaListAjax.jsp").slideToggle(1000);
-		});
-		</script>
 	</div>
 </section>

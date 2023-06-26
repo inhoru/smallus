@@ -61,7 +61,7 @@ table#tbl-board td {
 				<tr>
 					<th>회원정보</th>
 					<td><input type="text" name="memberId"
-						value="<%=infoMember.getMemberId()%>" disabled></td>
+						value="<%=loginMember.getMemberId()%>" disabled></td>
 				</tr>
 				<tr>
 					<th>문의유형</th>

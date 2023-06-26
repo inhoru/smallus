@@ -33,8 +33,8 @@ public class UpdateHostNickname extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session= request.getSession();
-		Host host=(Host)session.getAttribute("loginHost");
-		String hostId=(host.getHostId());
+		Host hostInfo = (Host) session.getAttribute("hostInfo");
+		String hostId=(hostInfo.getHostId());
 		
 		String nickname=request.getParameter("nickname");
 		System.out.println(nickname);
@@ -43,7 +43,9 @@ public class UpdateHostNickname extends HttpServlet {
 			System.out.println("nick change Ok");
 		}
 		System.out.println("nickname "+result);
-		response.setContentType("text/csv;charset=utf-8");
+		//response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().print(result);
 	}
 

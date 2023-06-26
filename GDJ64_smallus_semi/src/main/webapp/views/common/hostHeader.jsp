@@ -3,7 +3,7 @@
 <%@ page import="com.smallus.host.model.vo.Host,com.smallus.payment.model.vo.Payment, java.util.*"%>
 <%
 	Host loginHost=(Host)session.getAttribute("loginHost");
-	Host hostInfo=(Host) request.getAttribute("hostInfo");
+	
 	Cookie[] cookies = request.getCookies();
 	String savehostId=null;
 	if (cookies != null) {
@@ -25,12 +25,14 @@
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostMainStyle.css">
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     <!-- fullcalendar css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
     <!-- fullcalendar 언어 설정관련 script -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+    <script src="<%=request.getContextPath() %>/js/calendar.js"></script>
+    <script src="<%=request.getContextPath() %>/js/chart.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     
     <!-- 호스트 클래스등록 css 적용(다영) -->
     <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClass.css"/>
@@ -39,9 +41,9 @@
 <body>
     <header>
         <div id="headerContainer">
-            <a href="<%=request.getContextPath()%>/host/moveHostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
+            <a href="<%=request.getContextPath()%>/hostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=hostInfo.getHostNickname() %>님</a>
+                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
@@ -65,7 +67,7 @@
         </div>
     </header>
     <!-- menu-category -->
-    <%if(!hostInfo.getHostId().equals("admin")){ %>
+    <%if(!loginHost.getHostId().equals("admin")){ %>
         <section class="h-menu">
             <div>
                 <table>
