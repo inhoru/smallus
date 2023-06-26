@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, com.smallus.classes.model.vo.*" %>
+<%@ page import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat" %>
 <%
 	Classes info=(Classes)request.getAttribute("classinfo");
 	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
@@ -18,7 +18,7 @@
 <div class="d-class-detail">
 	<div class="d-detail-header">
 		<div class="d-detail-img">
-			<img src="<%=request.getContextPath()%>/img/category_main/craft3.jpg" width=400px height=400px>
+			<img src="<%=request.getContextPath()%>/upload/class/<%=info.getClassThumbnail() %>" width=400px height=400px>
 			<!-- 이미지 등록한것 있으면 수정예정 -->
 		</div>
 		<div class="d-detail-main">
@@ -35,7 +35,8 @@
 				<div id="d-detail-date">
 					<select>
 					<%for(ClassDetail cd : schedule){ %>
-						<option><%=cd.getBookingTimeStart() %> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %></option>
+						<option><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %></option>
+						<!-- 현재 인원 추출방식은 문자열 자르기 -->
 					<%} %>
 					</select> 
 				</div>

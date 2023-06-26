@@ -1,10 +1,15 @@
 package com.smallus.classes.model.service;
 
-import static com.smallus.common.JDBCTemplate.*;
+import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
+import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.smallus.classes.model.dao.ClassesDao2;
+import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 
 public class ClassService2 {
@@ -26,5 +31,13 @@ public class ClassService2 {
 		close(conn);
 		return result;
 	}
-
+	
+	public int addClassSchedule(List<ClassDetail> schedule) {
+		Connection conn=getConnection();
+		int result=dao2.addClassSchedule(conn,schedule);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 }
