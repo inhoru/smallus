@@ -16,10 +16,10 @@
 						<td>정산 일</td>
 					</tr>
 					<tr>
-						<td><%=hostInfo.getHostAccountBank()!=null&&!hostInfo.getHostAccountBank().isEmpty()?hostInfo.getHostAccountBank():"-"%></td>
-						<td><%=hostInfo.getHostAccount()!=null&&!hostInfo.getHostAccount().isEmpty()?hostInfo.getHostAccount():"-"%></td>
-						<td><%=hostInfo.getHostAccountName()!=null&&!hostInfo.getHostAccountName().isEmpty()?hostInfo.getHostAccountName():"-"%></td>
-						<td>매달 <%=hostInfo.getCalcReqDate()%>일</td>
+						<td><%=loginHost.getHostAccountBank()!=null&&!loginHost.getHostAccountBank().isEmpty()?loginHost.getHostAccountBank():"-"%></td>
+						<td><%=loginHost.getHostAccount()!=null&&!loginHost.getHostAccount().isEmpty()?loginHost.getHostAccount():"-"%></td>
+						<td><%=loginHost.getHostAccountName()!=null&&!loginHost.getHostAccountName().isEmpty()?loginHost.getHostAccountName():"-"%></td>
+						<td>매달 <%=loginHost.getCalcReqDate()%>일</td>
 					</tr>
 				</table>
 				<div><button id="asdgsdgs">수정</button><hr></div>

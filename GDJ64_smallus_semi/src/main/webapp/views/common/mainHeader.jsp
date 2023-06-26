@@ -3,10 +3,9 @@
 <%@ page
    import="com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,com.smallus.classes.model.vo.Classes"%>
 <%
-Member infoMember =(Member) request.getAttribute("infoMember");
-
+Member loginMember = (Member) session.getAttribute("loginMember");
 Host loginHost = (Host) session.getAttribute("loginHost");
-Host hostInfo=(Host) request.getAttribute("hostInfo");
+
 Cookie[] cookies = request.getCookies();
 String saveId = null;
 String savehostId = null;
@@ -44,7 +43,7 @@ if (cookies != null) {
          <a href="<%=request.getContextPath()%>"><img
             src="<%=request.getContextPath()%>/img/main.png" alt="" id="logo"></a>
          <%
-         if (infoMember == null) {
+         if (loginMember == null) {
          %>
          <nav class="menu">
             <div id="categories">
@@ -105,9 +104,9 @@ if (cookies != null) {
       </nav>
       <div class="i-loginHeadr">
          <div class="i-iconinfo">
-            <img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=infoMember.getMemberImg()%>" alt=""
+            <img src="<%=request.getContextPath()%>/upload/mypageprofile/<%=loginMember.getMemberImg()%>" alt=""
                width="30px" height="30px" class="i-iconinfoimg"><span
-               id="i-iconinfouser"><%=infoMember.getMemberNickname()%></span><span class="i-nim">님</span> <a
+               id="i-iconinfouser"><%=loginMember.getMemberNickname()%></span><span class="i-nim">님</span> <a
                href="<%=request.getContextPath()%>/logout.do"><span class="i-logout">로그아웃</span></a>
          </div>
          <div class="icon">
@@ -192,7 +191,7 @@ if (cookies != null) {
       </table>
    </header>
 
-   <% if (infoMember == null) { %>
+   <% if (loginMember == null) { %>
 <script>
   /* 비로그인 시 작동 */
   let isSearchFieldActive = false;

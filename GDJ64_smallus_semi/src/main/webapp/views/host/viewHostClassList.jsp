@@ -150,7 +150,7 @@
 			// index =1 -> W / 2:Y/3:N
 			//console.log(index);
 			if(index==0){
-				location.replace('<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=hostInfo.getHostId()%>');
+				location.replace('<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=loginHost.getHostId()%>');
 			}else if(index==1){
 				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?passStatus=W');
 			}else if(index==2){
@@ -162,7 +162,7 @@
 				$(".h-class-pass-list").css('display','flex');
 		}
 		
-		<%-- <%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=hostInfo.getHostId()%>&classId=<%=c.getClassId() %> --%>
+		<%-- <%=request.getContextPath()%>/class/viewHostClassDetail.do?hostId=<%=loginHost.getHostId()%>&classId=<%=c.getClassId() %> --%>
 		$("h-class-list-img").click(e)=>{
 			console.log($(e.target));
 		}

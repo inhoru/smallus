@@ -79,7 +79,7 @@
 	</section>
 	<%-- <script src="<%=request.getContextPath() %>/js/host.js"></script> --%>
 	<script>
-		let hostCalcDate= <%=hostInfo.getCalcReqDate()%>;
+		let hostCalcDate= <%=loginHost.getCalcReqDate()%>;
 		var date= new Date();
 		let year=date.getFullYear();
 		let month=date.getMonth();

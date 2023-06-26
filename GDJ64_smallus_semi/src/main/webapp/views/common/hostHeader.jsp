@@ -3,7 +3,6 @@
 <%@ page import="com.smallus.host.model.vo.Host,com.smallus.payment.model.vo.Payment, java.util.*"%>
 <%
 	Host loginHost=(Host)session.getAttribute("loginHost");
-	Host hostInfo=(Host) request.getAttribute("hostInfo");
 	Cookie[] cookies = request.getCookies();
 	String savehostId=null;
 	if (cookies != null) {
@@ -41,7 +40,7 @@
         <div id="headerContainer">
             <a href="<%=request.getContextPath()%>/host/moveHostMainpage.do"><img src="<%=request.getContextPath() %>/img/main.png" alt="호스트 메인페이지로 이동" id="logo"></a>
             <div class="h-iconContainer">
-                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=hostInfo.getHostNickname() %>님</a>
+                <a href="<%=request.getContextPath()%>/host/moveHostProfile.do" class="h-move-mypage"><img src="<%=request.getContextPath() %>/img/mypage/기본프로필.png" alt="" ><%=loginHost.getHostNickname() %>님</a>
                 <a href="<%=request.getContextPath() %>/host/hostLogout.do" class="h-logout">로그아웃</a>
                 <div class="h-notification-icon">
                     <div class="icon"><img src="<%=request.getContextPath() %>/img/알림.png" alt="">
@@ -65,7 +64,7 @@
         </div>
     </header>
     <!-- menu-category -->
-    <%if(!hostInfo.getHostId().equals("admin")){ %>
+    <%if(!loginHost.getHostId().equals("admin")){ %>
         <section class="h-menu">
             <div>
                 <table>
