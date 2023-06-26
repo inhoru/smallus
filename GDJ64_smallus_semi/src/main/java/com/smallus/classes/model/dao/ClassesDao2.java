@@ -8,8 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
+import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 
 public class ClassesDao2 {
@@ -28,7 +30,7 @@ public class ClassesDao2 {
 	}
 	
 	// 상세페이지 전용. classId로 Classes 단일정보 가져오기
-	// selectClassInfo=SELECT * FROM CLASS WHERE CLASS_ID=?
+	// selectClassInfo=SELECT * FROM CLASS WHERE CLASS_ID=? ORDER BY BOOKING_TIME_START
 	public Classes selectClassByClassId(Connection conn, String classId) {
 		Classes classData=new Classes();
 		PreparedStatement pstmt = null;
@@ -75,4 +77,24 @@ public class ClassesDao2 {
 			close(pstmt);
 		}return result;
 	}
+	
+	// 클래스디테일 db 등록
+	// addClassScheduld=INSERT INTO CLASS_DATAIL VALUES('CLD'||SEQ_CLASS_DETAIL.NEXTVAL,(SELECT 'CLA'||SEQ_CLASS_ID.CURRVAL FROM DUAL),?,?,(SELECT CLASS_PERSONNEL WHERE CLASS_ID='CLA'||SEQ_CLASS_ID.CURRVAL))
+	public int addClassSchedule(Connection conn, List<ClassDetail> schedule) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			for(ClassDetail sc:schedule) {
+				pstmt=conn.prepareStatement(sql.getProperty("addClassSchedule"));
+				pstmt.setDate(1, sc.getBookingTimeStart());
+				pstmt.setDate(2, sc.getBookingTimeEnd());
+				result=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 }
