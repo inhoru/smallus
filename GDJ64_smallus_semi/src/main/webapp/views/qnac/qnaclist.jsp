@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <
@@ -15,7 +15,7 @@
 #l {
 	text-align: left;
 	padding-left: 5px;
-	}
+}
 
 #a {
 	display: block;
@@ -68,7 +68,8 @@ li {
 								<th id="l">살짝 어려운 거 같았는데 너무 재미있었어요:)</th>
 							</tr>
 							<tr>
-								<td id="l">qnac를 아예 만들지 않아 css를 그만하고 싶어도 그만 둘 수가 없어요..진심으로 죄송합니다.</td>
+								<td id="l">qnac를 아예 만들지 않아 css를 그만하고 싶어도 그만 둘 수가 없어요..진심으로
+									죄송합니다.</td>
 							</tr>
 						</table>
 					</div>
@@ -77,7 +78,10 @@ li {
 					<textarea id="c" cols="100" rows="20" placeholder="내용을 입력해 주세요"></textarea>
 					<br>
 					<br>
-					<button id="but" type="sumbit">답변하기</button>
+					<div id="button">
+						<button id="but" type="sumbit" onclick="alert('답변이 등록되었습니다')">답변하기</button>
+						<!-- <button id="but" type="remove" onclick="alert('답변이 삭제되었습니다')")"">삭제하기</button> -->
+					</div>
 					<br>
 					<br>
 					<br>
@@ -90,4 +94,4 @@ li {
 </div>
 <!-- <div class="footer">
 		<div class="usMenu"></div> -->
-<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/footer.jsp"%> --%>
