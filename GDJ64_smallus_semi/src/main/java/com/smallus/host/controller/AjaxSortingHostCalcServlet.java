@@ -1,6 +1,7 @@
 package com.smallus.host.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,13 +22,13 @@ import com.smallus.payment.service.PaymentService;
  * Servlet implementation class ViewHostCalcServlet
  */
 @WebServlet("/host/sortingHostCalc.do")
-public class SortingHostCalcServlet extends HttpServlet {
+public class AjaxSortingHostCalcServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortingHostCalcServlet() {
+    public AjaxSortingHostCalcServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -57,22 +58,22 @@ public class SortingHostCalcServlet extends HttpServlet {
 		int totalData = new CalcService().selectCalcCount(hostId);
 		System.out.println(totalData+" "+hostId);
 		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
-		System.out.println(hostId+" "+totalData);
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageNo + pageBarSize - 1;
+		String calcStatus=request.getParameter("calcStatus");
 
 		if (pageNo == 1) {
 			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + (pageNo - 1)
+			pageBar += "<a href='" + request.getRequestURI() +"?calcStatus="+calcStatus+"&cPage="  + (pageNo - 1)
 					+ "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (pageNo == cPage) {
 				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
 			} else {
-				pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo
+				pageBar += "<a href='" + request.getRequestURI() +  "?calcStatus="+calcStatus+"&cPage=" + pageNo
 						+ "&numPerpage=" + numPerpage + "'> " + pageNo + " </a>";
 			}
 			pageNo++;
@@ -80,22 +81,18 @@ public class SortingHostCalcServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo + "&numPerpage="
+			pageBar += "<a href='" + request.getRequestURI() + "?calcStatus="+calcStatus+"&cPage=" + pageNo + "&numPerpage="
 					+ numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
 
-		//		정산 대기','처리 중','정산 완료
-		String calcStatus=request.getParameter("calcStatus");
-		if(calcStatus.equals("Y")) calcStatus="정산완료";
-		else if(calcStatus.equals("W")) calcStatus="정산대기";
-		else if(calcStatus.equals("N"))calcStatus="정산거절";
+		
 		List<Calc> cSortList=new CalcService().sortingByCalcStatus(hostId, calcStatus, cPage, numPerpage);
 		if(cSortList.isEmpty()||cSortList==null) {
 			System.out.println("cSortList 없음없");
 		}else {
-			System.out.println("cSortList 있음있");
-			request.setAttribute("cSortList",cSortList);				
+			System.out.println("calcList 있음있");
+			request.setAttribute("cSortList",cSortList);		
 		}
 		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);
 		

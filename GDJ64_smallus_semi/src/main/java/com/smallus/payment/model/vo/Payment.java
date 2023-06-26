@@ -18,14 +18,12 @@ public class Payment implements Serializable {
 	private String couponId;
 	private int price;
 	private int classPersonnel;
-	private int finalPrice;
+	private int TotalPrice;
 	private String impUid;
 	private String request;
 	private String paymentType;
 	private Date paymentDate;
 	private String paymentStatus;
-	private String hostId;
-	private int TotalPrice;
 	
 	private String classId;
 	private String classTitle;

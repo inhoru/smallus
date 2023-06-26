@@ -1,9 +1,6 @@
-package com.smallus.host.controller;
+package com.smallus.classes.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,22 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
-import com.smallus.host.service.CalcService;
 
 /**
- * Servlet implementation class AjaxViewHostCalcServlet
+ * Servlet implementation class InsertClassDetailServlet
  */
-@WebServlet(name = "/host/ajaxViewHostCalc.do", urlPatterns = { "/host/ajaxViewHostCalc.do" })
-public class AjaxViewHostCalcServlet extends HttpServlet {
+@WebServlet("/class/insertClassDetail.do")
+public class InsertClassDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxViewHostCalcServlet() {
+    public InsertClassDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,21 +33,21 @@ public class AjaxViewHostCalcServlet extends HttpServlet {
 		HttpSession session= request.getSession();
 		Host host=(Host)session.getAttribute("loginHost");
 		String hostId=host.getHostId();
-		
-		//Gson gson= new Gson();
-		List<Calc> calcList=new CalcService().selectAllcalcByhostId(hostId, 1, 10);
-		if(calcList.isEmpty()||calcList==null) {
-			System.out.println("ajax calcList 없음없");
+		int result=0;
+		//int result= new ClassService().insertClassDetail(hostId);
+		String msg; String loc;
+		if(result>0) {
+			System.out.println(result);
+			msg="클래스 세부 일정 등록을 성공 했습니다 :)";
+			loc="/views/host/viewHostClassDetail.jsp";
 		}else {
-			System.out.println("ajax calcList 있음있");
-			response.setContentType("text/html;charset=utf-8");
-			//gson.toJson(data,response.getWriter());
-			PrintWriter out=response.getWriter();
-			out.print(calcList);
-//			request.setAttribute("calcList",calcList);				
+			msg="클래스 세부 일정 등록을 실패했습니다 ;(";
+			loc="/";
+					
 		}
-		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);
-		
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher(loc).forward(request, response);
 	}
 
 	/**

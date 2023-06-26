@@ -1,8 +1,8 @@
 package com.smallus.payment.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-import com.smallus.payment.model.vo.Payment;
+import com.google.gson.Gson;
+import com.smallus.coupon.model.vo.Coupon;
+import com.smallus.coupon.service.CouponService;
+import com.smallus.member.model.vo.Member;
+import com.smallus.payment.model.vo.ClassPayment;
+import com.smallus.payment.service.PaymentService;
 
 /**
  * Servlet implementation class PaymentServlet
@@ -34,46 +38,40 @@ public class PaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session=request.getSession();
 		
 		// login한 멤버 정보 가져오기
-		//Member m=request.getAttribute("loginMember");
-		//String memberId=m.getMemberId();
-		String memberId="test"; // 임의로 test아이디를 사용
-		
-		// 결제할 내역 가져오기
-		// Classes classList= new service().blahblah(memberId);
+		HttpSession session=request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		// memberId를 매개변수로 하는 쿠폰 가격 가져오기 
-		// int couponPrice = new CouponService().selectCouponPrice(memberId); 
+		List<Coupon> coupon=new CouponService().selectCouponByMemberId(loginMember.getMemberId());
 		
-		int couponPrice=0;// 위에서 memberId를 이용해서 가져온다
-		int price=0;// 1인당 가격
-		int personnel=0; // 인원수 (갯수)
-		int totalPrice=0; // 총 가격 
-		totalPrice= (price*personnel)-couponPrice;
-		
-		
-		// 반복문 순회하면서 쿠폰 가격, 총 결제 가격 정리하기 
-		// for(Classes c : classesList){
-		//		price= c.getClassPrice();
-		//		personnel=c.getClassPersonnel();
-		//		totalPrice=(price*personnel)-couponPrice;
-		// }	
-		
-		SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-		Date date = new Date(System.currentTimeMillis());
-		System.out.println(date);
-		
-		//paymentId생성 
-		// Payment 객체 생성 
-		//Payment p=new Payment().builder().paymentId("PYM"+date).classDetailId("a").memberId(memberId).
-		Payment p=new Payment();
-		session.setAttribute("paymentInfo", p);
-		response.sendRedirect(request.getContextPath()+"/views/host/test.jsp"); // 결제하는 페이지로 이동
-		
-				
-				
+		//CATEGORY_TITLE, CLASS_TITLE, CLASS_ADDRESS, CLASS_ID, CLASS_DETAIL_ID,
+		//BOOKING_TIME_START, BOOKING_TIME_END,  CLASS_PERSONNEL, REMAINING_PERSONNEL, CLASS_PRICE
+		//String classId=request.getParameter("classId");
+		String classId="CLA1000"; // 현재는 임의로 하나의 클래스아이디를 가져왔음 
+		List<ClassPayment> list= new PaymentService().selectClassDetailByClassId(classId);
+		System.out.println(coupon+" "+list.size());
+		Gson gson = new Gson();
+//		response.setContentType("text/html;charset=utf-8"); // html
+		if(list!=null&&!list.isEmpty()) {
+			System.out.println("classpayment list 있음");
+//			gson.toJson(list,response.getWriter()); //html
+//			gson.toJson(coupon,response.getWriter()); //html
+			
+			// GSON을 사용하여 List를 JSON 형식의 문자열로 변환
+			String json = gson.toJson(list);
+			
+			// JSON 데이터를 클라이언트로 전송 (예: HttpServletResponse)
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
+			
+		}else {
+			request.setAttribute("msg", "잘못된 접근입니다.");
+			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+		}
 	}
 	
 	

@@ -21,16 +21,48 @@
     font-weight: normal;
     font-style: normal;
 }
+
+:root {
+  --btn-radius: 2rem;
+  --img-radius: 1rem;
+  --element-back-color: red;
+  --be-color:#F5E7D2; /* 연한 베이지 버튼 */
+  --ye-color:#FBEFD3; /* 연한 노란색 버튼 */
+  --dk-color:#E8D6C3; /*진한베이지 버튼 */
+  --footer-col:#F3EEE6; /* footer 색상 */
+  --main-col-lt:#FFFCF5; /* main primary */
+  --main-col-dk:#555555; /* border 컬러*/
+  --border-color:#F6E9DF; /*border  연한 컬러*/
+  --border-light:1px solid #F6E9DF;
+  --font-small:0.8rem; /* button 폰트 사이즈 */
+  --btn-padding:0.4rem 0.6rem; /* button padding 값 */
+  --hr-style:0.5px solid #888888; /* 제목 아래 선 그을 때 자주 사용함 (제가 사용해서 뒀어요) */
+  --section-width:70%; 
+  --section-center:0 auto;
+  
+  --seciton-margin:2rem auto; /* 70% 적용된 섹션이 중앙 정렬 됩니다 */
+  --title-marginTop: 4rem; /*title margin-top */
+  --btn-bold:bolder;
+  --line-style:1px solid #555555;
+  --fontBold:"GmarketSansBold";
+}
+/* 사용법
+적용하고 싶은 영역 
+	{
+	border-radius:var(--btn-radius);
+	} 
+*/
+
+
 footer {
-    background-color: #F3EEE6;
+    background-color: var(--footer-col);
 }
 
 /* img slide */
 .h-main * {box-sizing:border-box;}
 
 #mainOpacity{
-    background-color: #FFFBF5;
-}
+    background-color:var(--main-col-lt);}
 /*  */
 
 /* Slideshow container */
@@ -115,12 +147,12 @@ div.h-main-slide-container{
 /* section3 banner */
 section.h-main-banner{
     width:100%;
-    background-color: #FBEFD3;
+    background-color:var(--ye-color);
     margin: 6rem 0;
 }
 .h-banner-container{
     width:70%;
-    margin: 0 auto;
+    margin: var(--section-center);
     display: flex;
 }
 .h-banner-area{
@@ -149,13 +181,13 @@ section.h-main-banner{
 .h-main-sec2 button, .h-imgContainer button, .h-main-banner button{
     width: 5rem;
     height:2rem;
-    background-color: #E8DFD1;
+    background-color:var(--be-color);
     border-radius: 2rem;
     border-style: none;
     margin: 1rem auto 0 0;
 }
 .h-main-banner button{
-    margin: 0 auto;
+    margin: var(--section-center);
 }
 
 /* slide-img*/
@@ -169,7 +201,7 @@ section.h-main-banner{
 
 .h-main-sec2 .text{
     width:40%;
-    color: #595959;
+    color:var(--main-col-dk);
     display: flex;
     font-size: 1.5rem;
     flex-direction: column;
@@ -204,13 +236,13 @@ section.h-main-banner{
 }
 .h-main h2 {
     width:70%;
-    margin: 0 auto;
-    font-family: "GmarketSansBold";
-}
+    margin: var(--section-center);
+    font-family: var(--fontBold);
+    }
 /* new class section */
 section.h-imgContainer{
     width:70%;
-    margin: 0 auto;
+    margin: var(--section-center);
     display: flex;
     margin-bottom: 3rem;
 }
@@ -230,7 +262,6 @@ section.h-imgContainer .h-img-list img{
 
 section.h-imgContainer .h-img-list h4{
     margin-top: 0.5rem;
-    font-family: "GmarketSansMedium";
 }
 
 /* 하트 더보기  */

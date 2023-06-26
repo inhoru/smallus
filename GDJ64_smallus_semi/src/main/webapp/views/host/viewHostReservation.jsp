@@ -28,6 +28,10 @@
             <div>
                 <div class="h-main-title"> 
                     <h3>전체 예약 내역</h3>
+	                <select name="h-selectPaymentDate" id="h-selectPaymentDate" onchange="selectDateOption()">
+	                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 일 ↓</option>
+	                	<option value="N" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>결제 일 ↑</option>
+	                </select>
 	                <select name="h-selectPaymentStatus" id="h-selectPaymentStatus" onchange="selectOption()">
 	                	<option>결제 상태(전체)</option>
 	                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 완료</option>
@@ -86,23 +90,39 @@
                     }%>
                 </table>
             </div>
-            <div class="pageBar">
-            	<%=request.getAttribute("pageBar") %>
-            </div>
+	            <div class="pageBar">
+	            	<%=request.getAttribute("pageBar") %>
+	            </div>
         </section>
 <script>
-//select 옵션 변경하면 이동하는 함
+
+//select 결제일 정렬 옵션 변경하면 이동
+function selectDateOptio(){
+	let dateIndex = $("#h-selectPaymentDate option").index($("#h-selectPaymentDate option:selected"));
+	let statusIndex = $("#h-selectPaymentStatus option").index($("#h-selectPaymentStatus option:selected"));
+	// index =0 -> 내림 / 1:오름 (변경)
+	//console.log(index);
+	if(dateIndex==0&&statusIndex==0){
+		location.replace('<%=request.getContextPath()%>/host/viewHostRsv.do');
+	}else if(dateIndex==0&&statusIndex==1){
+		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y');
+
+	}else if(dateIndex==2&&statusIndex==2){
+		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
+	}
+}
+//select 옵션 변경하면 이동
 function selectOption(){
-	let index = $("#h-selectPaymentStatus option").index($("#h-selectPaymentStatus option:selected"));
+	let statusIndex = $("#h-selectPaymentStatus option").index($("#h-selectPaymentStatus option:selected"));
 	let div=$("#h-selectPaymentStatus option")
 	// index =1 -> W / 2:Y/3:N
 	//console.log(index);
-	if(index==0){
+	if(statusIndex==0){
 		location.replace('<%=request.getContextPath()%>/host/viewHostRsv.do');
-	}else if(index==1){
+	}else if(statusIndex==1){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y');
 
-	}else if(index==2){
+	}else if(statusIndex==2){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
 	}
 }

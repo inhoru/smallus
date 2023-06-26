@@ -13,7 +13,7 @@
 	<!-- host-main reservation -->
 	<section class="h-main">
 		<div class="h-main-title">
-			<h2>5월 예약 내역</h2>
+			<h2>스케줄 관리</h2>
 			<!-- 예약내역 상세 페이지로 이동 -->
 			<div class="h-viewList">
 				<a href="">+</a>
@@ -27,7 +27,7 @@
 			<div class="h-main-title">
 				<h2>새로운 예약 내역</h2>
 				<!-- 예약 내역 상세 페이지로 이동 -->
-				<div class="h-viewList" id="h-main-moveTo-rsv">+</div>
+				<div class="h-viewList" id="h-main-moveTo-rsv"><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">+</a></div>
 			</div>
 			<hr>
 			<table id="h-main-rsv-tbl">
@@ -66,23 +66,29 @@
 		</div>
 	</section>
 	<!-- host-main-calc -->
-	<section class="h-main">
+	<!-- <section class="h-main">
 		<div class="h-main-title">
 			<h2>월별 매출 내역</h2>
-			<!-- 매출 내역 상세 페이지로 이동 -->
+			매출 내역 상세 페이지로 이동
 			<div class="h-viewList">
 				<a href="">+</a>
 			</div>
 		</div>
 		<hr>
 		<div class="h-r-callendar" id="h-main-chart"></div>
-	</section>
+	</section> -->
 	<%-- <script src="<%=request.getContextPath() %>/js/host.js"></script> --%>
 	<script>
 		let hostCalcDate= <%=loginHost.getCalcReqDate()%>;
 		var date= new Date();
 		let year=date.getFullYear();
 		let month=date.getMonth();
+		
+		let classTitle;
+		let bookingTimeStart;
+		let bookingTimeEnd;
+		let memberId;
+		let classPersonnel;
 		
 			   let eventDiv=document.getElementsByClassName('fc-event');
 			    let calendarEl = document.getElementById('h-main-calendar');
@@ -109,21 +115,21 @@
 				    		dataType:"json",
 				    		success:(data)=>{ 
 								// responseText에 저장된 값을 data에 대입한다.
+							  	/* JSON.stringify({
+									"classTitle":classTitle,
+									"bookingTimeStart":bookingTimeStart,
+									"bookingTimeEnd":bookingTimeEnd,
+									"memberId":memberId,
+									"classPersonnel":classPersonnel
+								} */
 							 	console.log(data);
 							    calendar.render();
-							  /*   JSON.stringify({
-									"userId":"bsyoo",
-									"password":"1234",
-									"age":19,
-									"userName":"유병승",
-									"gender":"M",
-									"email":"teacherdev09@gmail.com"
-									} */
 							 },
 							 error: (e,m)=>{
 							 	console.log(e); // element
 							 	console.log(m);
 							 	if(e.status==404) alert("요청한 페이지가 없습니다.");
+							 	if(e.status==505) alert("505 error");
 							 },
 							 complete:()=>{
 							 }

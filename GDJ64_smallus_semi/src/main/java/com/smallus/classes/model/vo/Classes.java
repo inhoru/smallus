@@ -35,6 +35,7 @@ public class Classes {
 	private String classThumbnail;
 	private String categoryTitle;
 	
+	
 	private Wishlist wishlist;
 	private Category Category;
 	

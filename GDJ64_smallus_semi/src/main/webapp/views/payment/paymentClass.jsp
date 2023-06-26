@@ -2,22 +2,28 @@
 	pageEncoding="UTF-8"%>
 <%@ page
    import="java.util.*, com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,com.smallus.classes.model.vo.Classes"%>
-<%
-	Member loginMember = (Member) session.getAttribute("loginMember");
-	Map<String, String> data=(Map)request.getAttribute("data");
-	List<Coupon> couponList = (List)request.getAttribute("couponList");
+ <%
+	Member m= (Member) session.getAttribute("loginMember");
+	/*  Map<String, String> data=(Map)request.getAttribute("data");
+	List<Coupon> coupon = (List)request.getAttribute("coupon");
 	int price=Integer.parseInt(data.get("classPrice"));
 	int personnel=Integer.parseInt(data.get("classPersonnel"));
 	int sumPrice=price*personnel;
 	int couponPrice=10000;
-	int totalPrice=sumPrice-couponPrice;
+	int totalPrice=sumPrice-couponPrice; */
 	
-	String memberName=loginMember.getMemberName();
-	String memberEmail=loginMember.getMemberEmail();
-	String memberPhone=loginMember.getMemberPhone();
+	String memberName=m.getMemberName();
+	String memberEmail=m.getMemberEmail();
+	String memberPhone=m.getMemberPhone();
+	int total=64000;
+	String t="*초보가능*마들렌 만들기";
 %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/mypage/test.css"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <style>
 	th#h-pay-classTitle{
 	text-align:left;}
@@ -26,28 +32,35 @@
 <!-- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script> -->
 <%@ page import="com.smallus.classes.model.vo.ClassDetail, com.smallus.coupon.model.vo.Coupon" %>
+<%@ include file="/views/common/myHeader.jsp"%>
 <div id="mainOpacity">
 	<section class="h-payment-container">
 		<div class="h-payment">
 			<div class="h-payment-title">
-				<h3>결제 클래스 정보</h3>
+				<h3>결제 클래스 정보</h3>CLA1000 -클래스 아이디 인원 20명 가격 32000원
+				CLD1005 23/07/13 - 23/07/13 남은 인원수 20명
 		    </div><hr>
 		    <div class="h-payClass-list h-class-list-n">
 		    	<a href="" class="h-class-list-img">
 		    		<img src="<%=request.getContextPath()%>/img/main-img2.jpg" >
 				</a>
 				<table>
-					<tr><th>[<%=data.get("hostNickname") %>]</th></tr>
+					<%-- <tr><th>[<%=data.get("hostNickname") %>]</th></tr> --%>
+					<tr><th>닉네임</th></tr>
 					<tr>
-						<th>[<%=data.get("classCategoryTitle") %>]&nbsp;&nbsp;[<%=data.get("classAddress") %>]</th>
-						<th colspan="4" id="h-pay-classTitle"><%=data.get("classTitle") %></th>
+						<%-- <th>[<%=data.get("classCategoryTitle") %>]&nbsp;&nbsp;[<%=data.get("classAddress") %>]</th> --%>
+						<%-- <th colspan="4" id="h-pay-classTitle"><%=data.get("classTitle") %></th> --%>
+						<th colspan="4" id="h-pay-classTitle"><%=t %></th>
 					</tr>
 					<tr>
-						<td><%=data.get("bookingTimeStart") %></td>
-						<td><%=data.get("bookingTimeEnd") %></td>
+						<%-- <td><%=data.get("bookingTimeStart") %></td>
+						<td><%=data.get("bookingTimeEnd") %></td> --%>
+						<td>23/07/13 3시</td>
+						<td>23/07/13 5시</td>
 						<td></td>
 						<td>수강 신청 인원</td>
-						<td><%=personnel%> 명</td>
+						<%-- <td><%=personnel%> 명</td> --%>
+						<td>2</td>
 					</tr>
 				</table>
 			</div>
@@ -60,15 +73,15 @@
 				<table>
 					<tr>
 						<th>이름</th>
-						<td><%=loginMember.getMemberName() %></td>
+						<td><%=m.getMemberName() %></td>
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td><%=loginMember.getMemberEmail() %></td>
+						<td><%=m.getMemberEmail() %></td>
 					</tr>
 					<tr>
 						<th>전화번호</th>
-						<td><%=loginMember.getMemberPhone() %></td>
+						<td><%=m.getMemberPhone() %></td>
 					</tr>
 				</table>
 			</div>
@@ -81,13 +94,13 @@
 				<h4>쿠폰</h4>
 			    <select id="h-selectCoupon" name="h-selectCoupon">
 				    <option selected disabled>쿠폰 선택</option>
-			    	<%if(couponList!=null&&!couponList.isEmpty()){
-			    		for(Coupon c: couponList){%>
+			    	<%-- <%if(coupon!=null&&!coupon.isEmpty()){
+			    		for(Coupon c: coupon){%>
 				    	<option value="<%=c.getCouponPrice()%>"><%=c.getCouponName() %>&nbsp;&nbsp;(할인 금액 : <%=c.getCouponPrice()%>원)</option>
 			    	<%}
-			    	}else{ %>
+			    	}else{ %> --%>
 				    	<option value="0">보유한 쿠폰이 없습니다.</option>
-			    	<%} %>
+			    <%-- 	<%} %> --%>
 			    </select>
 		    	<button onclick="selectOption()">쿠폰 적용</button>
 		    </div>
@@ -95,22 +108,29 @@
 				<table>
 					<tr>
 						<th>금액(클래스 금액 * 수강 인원)</th>
-						<td><%=price %> 원 * <%=personnel %> 명</td>
-						<th><%=sumPrice %> 원</th>
+						<td id="h-payPrice">32000</td>
+						<td id="h-payPersonnel">2</td>
+						<th id="h-paySumPrice">64000</th>
 					</tr>
 					<tr>
 						<th>쿠폰 적용 금액</th>
 						<td></td>
-						<th id="h-couponPrice"></th>
+						<th id="h-couponPrice">0</th>
 					</tr>
 					<tr>
 						<th>최종 결제 금액</th>
 						<td></td>
-						<th id="h-totalPrice"> 원</th>
+						<th id="h-totalPrice"><%=total %></th>
 					</tr>
 				</table>
 			</div>
 		</div>
+		<div>
+			<p>
+				
+			</p>
+		</div>
+		
 		<div class="h-payment">
 			<div class="h-payment-title">
 		    	<button value="kakaopay"onclick="payment('kakaopay','card')">k 결제하기</button>
@@ -119,10 +139,11 @@
 		    </div>
 		</div>
 	</section>
+	
 </div>
 <script>
 //select 옵션 변경하면 이동하는 함
-function selectOption(){
+<%-- function selectOption(){
 	let coupon=$("#h-selectCoupon option:selected").val();
 	$("#h-couponPrice").text("- "+coupon+" 원")
 	let sum='<%=sumPrice %>';
@@ -130,19 +151,26 @@ function selectOption(){
 	$("#h-totalPrice").text(total+" 원")
 	// index =1 -> W / 2:Y/3:N
 	//console.log($("#h-couponPrice"));
-}
+} --%>
 const today = new Date();   
-const hours = today.getHours(); // 시
-const minutes = today.getMinutes();  // 분
-const seconds = today.getSeconds();  // 초
-const milliseconds = today.getMilliseconds();
-const makeMerchantUid = hours +  minutes + seconds + milliseconds;
+const year = today.getFullYear();
+const month = ('0' + (today.getMonth() + 1)).slice(-2);
+const day = ('0' + today.getDate()).slice(-2);
+
+const dateString = year + '' + month  + '' + day;
+
+
+const hours = ('0' + today.getHours()).slice(-2); 
+const minutes = ('0' + today.getMinutes()).slice(-2);
+const seconds = ('0' + today.getSeconds()).slice(-2); 
+
+const timeString = hours + '' + minutes  + '' + seconds;
+const makeMerchantUid = dateString+timeString;
 let name='<%=memberName%>'
 let email='<%=memberEmail%>'
 let phone='<%=memberPhone%>'
 let payment_id="RSV"+makeMerchantUid;
-
-const amount=<%=totalPrice%>
+<%-- const amount=<%=totalPrice%> --%>
 
 function payment(pg_provider, payment_method){
 	var IMP = window.IMP; 
@@ -157,91 +185,58 @@ function payment(pg_provider, payment_method){
 		pg_mid='kcp.A52CY';
 	}
 
-alert(pg_mid);
-
-const data={
-		pg : pg_mid, //pg : 'html5_inicis',
-		pay_method : 'card',
-        merchant_uid: 'RSV'+makeMerchantUid, // 상점에서 관리하는 주문 번호
-        name : '<%=data.get("classTitle") %>',
-        amount : amount, 
-        buyer_email : email,
-        buyer_name : name,
-        buyer_tel : phone
-};
-IMP.request_pay(data, response => {
-	alert("callback!: "+JSON.stringify(response));
-	//console.log(response)
-	//console.log(data)
+	alert(pg_mid);
 	
-    //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	jQuery.ajax({
-			url: "<%=request.getContextPath()%>/payments/callback_receive.do", /* //cross-domain error가 발생하지 않도록 주의해주세요 */
-	        type: 'POST',
-	        header:{'Content-Type':'application/json'},
-	        data: {"data":JSON.stringify(response)}
-		}).done(function (data){
-			//const rsp=JSON.parse(data);
-			//console.log(rsp);
-//			alert('Please, Check your payment result page');
-			if ( response.success ) {
-               var msg = '결제가 완료되었습니다.';
-                msg += '\n고유ID : ' + response.imp_uid;
-                msg += '\n상점 거래ID : ' + response.merchant_uid;
-                msg += '\결제 금액 : ' + response.paid_amount;
-                msg += '카드 승인번호 : ' + response.apply_num;
-				console.log(response);
-                alert(msg);
-            } else {
-            	var msg = '결제에 실패하였습니다.';
-	  		    msg += '에러내용 : ' + response.error_msg;
-	  		 	console.log(response);
-	  		    alert(msg);
-            }
-		})
-	});
+	const data={
+			pg : pg_mid, //pg : 'html5_inicis',
+			pay_method : 'card',
+	        merchant_uid: 'RSV'+makeMerchantUid, // 상점에서 관리하는 주문 번호
+	       <%--  name : '<%=data.get("classTitle") %>', --%>
+	       	name:'*초보가능*마들렌 만들기',
+	        amount : 64000,
+	        buyer_email : email,
+	        buyer_name : name,
+	        buyer_tel : phone
+	};
+	IMP.request_pay(data, response => {
+		alert("callback!: "+JSON.stringify(response));
+		//console.log(response)
+		//console.log(data)
+		
+	    //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+		jQuery.ajax({
+				url: "<%=request.getContextPath()%>/payments/callback_receive.do", /* //cross-domain error가 발생하지 않도록 주의해주세요 */
+		        type: 'POST',
+		        header:{'Content-Type':'application/json'},
+		        data: {"data":JSON.stringify(response), 
+		        	"classDetailId":"CLD1005", 
+		        	"couponId":"NONE", 
+		        	"price":"32000",
+		        	"classPersonnel":"2",
+		        	"totalPrice":"64000"
+		        }
+			}).done(function (data){
+				//const rsp=JSON.parse(data);
+				//console.log(rsp);
+	//			alert('Please, Check your payment result page');
+				console.log(data);
+				if ( response.success ) {
+	               var msg = '결제가 완료되었습니다.';
+	                msg += '\n고유ID : ' + response.imp_uid;
+	                msg += '\n상점 거래ID : ' + response.merchant_uid;
+	                msg += '\결제 금액 : ' + response.paid_amount;
+	                msg += '카드 승인번호 : ' + response.apply_num;
+					console.log(response);
+	                alert(msg);
+	                location.assign('<%=request.getContextPath()%>/payment/afterPayment.do?paymentId='+merchant_uid);
+	                
+	            } else {
+	            	var msg = '결제에 실패하였습니다.';
+		  		    msg += '에러내용 : ' + response.error_msg;
+		  		 	console.log(response);
+		  		    alert(msg);
+	            }
+			});// end ajax
+	}); // end request_pay
 }
-<%--		    if (rsp.success) {
-		      var msg = '결제가 완료되었습니다.';
-		      alert(msg);
-		    } else {
-		      var msg = '결제에 실패하였습니다.';
-		      msg += '에러내용 : ' + response.error_msg;
-		      alert(msg);
-		    }
- function(rsp) {
-    if ( rsp.success ) {
-        //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-        jQuery.ajax({
-            url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                imp_uid : rsp.imp_uid
-                //기타 필요한 데이터가 있으면 추가 전달
-            }
-        }).done(function(data) {
-            //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-            if ( everythings_fine ) {
-                msg = '결제가 완료되었습니다.';
-                msg += '\n고유ID : ' + rsp.imp_uid;
-                msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                msg += '\결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-                
-                alert(msg);
-            } else {
-                //[3] 아직 제대로 결제가 되지 않았습니다.
-                //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-            }
-        });
-        //성공시 이동할 페이지
-        location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg;
-    } else {
-        msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
-        //실패시 이동할 페이지
-        location.href="<%=request.getContextPath()%>/order/payFail";
-        alert(msg);
-    } --%>
 </script>
