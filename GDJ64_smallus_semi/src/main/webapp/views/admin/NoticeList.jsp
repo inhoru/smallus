@@ -17,6 +17,18 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 %>
 <jsp:include page="<%=include%>"/>
 <style>
+	button#deleteNoticebtn {
+	width:4rem;
+	font-weight: bold;
+	background-color: #E8D6C3;
+	border:0px;
+	border-radius: 1rem;
+	text-align:center;
+	font-size: 0.5rem;
+	height:25px;
+	cursor:pointer;
+}
+
 </style>
 <body>
 <div id="mainOpacity h-host-main">
@@ -63,8 +75,10 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 	                    </tr>
 	                    <tr>
 	                    	<td colspan="5" class="m-noticedetailcontainer<%=n.getNoticeId()%>" style="display:none;">
-	                    	<%-- <img src="<%=request.getContextPath()%>/upload/notice/"alt="">  --%>
-	                    	<textarea style="width: 1350px; height: 250px;"><%=n.getNoticeContent()%></textarea>
+	                    	<div>
+	                    	<img src="<%=request.getContextPath()%>/upload/notice/<%=n.getNoticeImageRename()%>"alt="이게왜안떠?" style="height:500px; width:400px;">
+	                    	<p style="width: 1350px; "><%=n.getNoticeContent()%></p>
+	                    	</div>
 	                    	</td>
 	                    </tr>
 	                    <%}%>

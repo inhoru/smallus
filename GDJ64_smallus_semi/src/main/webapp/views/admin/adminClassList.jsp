@@ -26,7 +26,7 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 	<div id="mainOpacity h-host-main">
 		<section class="h-main">
 			<div class="h-main-title">
-				<h2>클래스 승인관리</h2>
+				<h2>호스트클래스관리</h2>
 			</div>
 		</section>
 		<section class="h-main h-main-rsvList">
@@ -37,7 +37,7 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 						<th>클래스이름</th>
 						<th>호스트아이디</th>
 						<th>등록일</th>
-						<th>승인상태</th>
+						<th></th>
 						<th></th>
 						<th></th>
 					</tr>
@@ -49,13 +49,12 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 						<td><%=c.getHostId()%></td>
 						<td><%=c.getClassUpLoadDate()%></td>
 						<td><%=c.getClassPassId()%></td>
-						<td><button id="m-classconfirmbtn" onclick="classconfirm('<%=c.getClassId()%>');">승인</button></td>
-						<td><button id="m-classrejectbtn" onclick="classreject('<%=c.getClassId()%>');">거절</button></td>
+						<td><button id="m-classconfirmbtn" onclick="classconfirm('<%=c.getClassId()%>');">삭제</button></td>
 					</tr>
 					<%} %>
 				<%}else{ %>
 		        	<tr>
-                        <td colspan="7">승인할 클래스가 없습니다.</td>
+                        <td colspan="7">조회할 클래스가 없습니다.</td>
                     </tr>
 				<%} %>
 				</table>
@@ -69,15 +68,8 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 </div>
 </body>
 <script>
-	const classreject=(classId)=>{
-		/* let classId=$("#m-classId").val(); */
-		open("<%=request.getContextPath()%>/views/admin/classReject.jsp?classId="+classId
-				,"_blank","width=600, height=200, top=300,left=500");
-	}
-
-	
-	const classconfirm=(classId)=>{
-		location.assign("<%=request.getContextPath()%>/admin/ClassesConfirm.do?classId="+classId);
+	function classconfirm(ClassId){
+		
 	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

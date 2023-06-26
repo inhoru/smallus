@@ -33,8 +33,8 @@ public class NoticeDao {
 				noticeTitle(rs.getString("NOTICE_TITLE")).
 				noticeRdate(rs.getDate("NOTICE_RDATE")).
 				noticeContent(rs.getString("NOTICE_CONTENT")).
-				build();
-		
+				noticeImageOrignal(rs.getString("NOTICE_IMAGE_ORIGNAL")).
+				noticeImageRename(rs.getString("NOTICE_IMAGE_RENAME")).build();
 	}
 	
 	public static NoticeImage getNoticeImage(ResultSet rs) throws SQLException{
@@ -114,5 +114,18 @@ public class NoticeDao {
 			close(pstmt);
 		}return result;
 	}
-
+	public int deleteNoticeImage(Connection conn, String noticeId) {
+		PreparedStatement pstmt=null;
+		int result2=0;
+		try {
+			//deleteNOticeImage=DELETE FROM NOTICE_Image WHERE NOTICE_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("deleteNoticeImage"));
+			pstmt.setString(1,noticeId);
+			result2=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result2;
+	}
 }
