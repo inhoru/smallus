@@ -44,7 +44,6 @@ public class UpdateHostProfileImgServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Host loginHost = (Host) session.getAttribute("loginHost");
-		Host hostInfo = (Host) request.getAttribute("hostInfo");
 		String hostId= loginHost.getHostId();
 		String renameFile=mr.getFilesystemName("h-upFile");
 		String msg; String loc = null;
@@ -52,6 +51,8 @@ public class UpdateHostProfileImgServlet extends HttpServlet {
 		if(renameFile!=null&& result>0) {
 			msg="수정 성공 :)";
 			loc="/host/moveHostProfile.do";
+			Host h= new HostService().selectByhostId(hostId);
+			session.setAttribute("loginHost",h);
 		}else {
 			msg="수정 실패 :<";
 		}

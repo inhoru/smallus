@@ -66,19 +66,19 @@ margin:0.2rem 0; font-size: 0.6rem;}
      	<h2>내 프로필 정보 보기</h2>
         <hr>
         <!--프로필 사진 분기처리-->
-        	<img src="<%=request.getContextPath()%>/img/<%=hostInfo.getHostImg()%>" id="h-hostImg">
+        	<img src="<%=request.getContextPath()%>/img/<%=loginHost.getHostImg()%>" id="h-hostImg">
         	<a href=""><img src="<%=request.getContextPath()%>/img/edit.svg" id="h-edit-pf"></a>
         	<input type="file" style="display:none" id="h-profileInput" accept="image/*" name="h-upFile">
 		<div class="h-profile-info">
 			<table>
 				<tr>
 					<th>아이디</th>
-					<td><label for=""><input type="text" placeholder="id" value="<%=hostInfo.getHostId()%>" readonly disabled></label></td>
+					<td><label for=""><input type="text" placeholder="id" value="<%=loginHost.getHostId()%>" readonly disabled></label></td>
 					<td></td>
 				</tr>
 				<tr>
 					<th>닉네임</th>
-					<td><label for="updateNickname"><input type="text" id="h-hostNickname" placeholder="닉네임은 2글자 이상~20글자 이하" value="<%=hostInfo.getHostNickname()%>"></label></td>
+					<td><label for="updateNickname"><input type="text" id="h-hostNickname" placeholder="닉네임은 2글자 이상~20글자 이하" value="<%=loginHost.getHostNickname()%>"></label></td>
 					<td><button id="h-updateNickname">변경</button></td>
 				</tr>
 				<tr>
@@ -91,17 +91,17 @@ margin:0.2rem 0; font-size: 0.6rem;}
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><label for=""><input type="text" value="<%=hostInfo.getHostEmail()%>" disabled></label></td>
+					<td><label for=""><input type="text" value="<%=loginHost.getHostEmail()%>" disabled></label></td>
 					<td></td>
 				</tr>
 				<tr>
 					<th>휴대폰번호</th>
-					<td><label for=""><input type="text" value="<%=hostInfo.getHostPhone()%>" disabled></label></td>
+					<td><label for=""><input type="text" value="<%=loginHost.getHostPhone()%>" disabled></label></td>
 					<td></td>
 				</tr>
 				<tr>
 					<th>전화번호</th>
-					<td><label for="updatePhone"><input type="text" id="h-hostHomePhone" placeholder="전화번호는 클래스 판매 페이지에서 대표 번호로 노출 됩니다." value="<%=hostInfo.getHostHomephone()%>"></label></td>
+					<td><label for="updatePhone"><input type="text" id="h-hostHomePhone" placeholder="전화번호는 클래스 판매 페이지에서 대표 번호로 노출 됩니다." value="<%=loginHost.getHostHomephone()%>"></label></td>
 					<td><button id="h-updatePhone">변경</button></td>
 				</tr>
 				<tr>
