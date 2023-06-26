@@ -1,7 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
-<div class="qna_page">
+<style>
+#co{
+width: 100px;
+height: 25px;
+border-radius: 20px;
+margin-left: 50%;
+}
+/* #but{
+width: 100px;
+height: 25px;
+border-radius: 20px;
+margin-left: 50%;
+} */
+</style>
+<div class="qnac_page">
 	<section id="main">
 		<div class="qna">
 			<a style="display: block; padding: 3% 25%; font-size: 24px;">Q &
@@ -17,11 +31,10 @@
 						cols="100" rows="2" placeholder="   제목을 입력해 주세요"></textarea>
 					<textarea
 						style="margin: 1% 35%; font-size: 8px; border-radius: 20px; padding-left:10px"
-						cols="100" rows="20" placeholder="    내용을 입력해 주세요"></textarea>
+						cols="100" rows="20" placeholder="답변을 입력해주세요"></textarea>
 					<br>
 					<br>
-					<button type="sumbit"
-						style="width: 80px; height: 25px; border-radius: 20px; margin-left: 50%;">등록하기</button>
+					<button id="co" type="sumbit"">답변하기</button>
 					<br>
 					<br>
 					<br>
