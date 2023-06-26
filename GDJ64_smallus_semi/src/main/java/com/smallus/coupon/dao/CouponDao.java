@@ -83,13 +83,15 @@ public class CouponDao {
 		return result;
 	}
 	public int couponCount(Connection conn ,String memberId) {
+		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("couponCount"));
-			//SELECT COUNT(MEMBER_ID) FROM COUPON WHERE MEMBER_ID=?
+			//SELECT COUNT(MEMBER_ID) FROM COUPON WHERE MEMBER_ID=? AND NOT COUPON_ID =?
 			pstmt.setString(1, memberId);
+			pstmt.setString(2, "NONE");
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
 		}catch(SQLException e) {

@@ -12,7 +12,7 @@ int cPage = (int) request.getAttribute("cPage");
 <div id="mainOpacity">
 	<div class="i-withdrawalendtotal">
 		<section class="i-tablecontent">
-			<table class="i-mypageCategories">
+		<table class="i-mypageCategories">
 			<tr>
 				<td class="i-myInfo i-my">내정보</td>
 				<td class="i-info">클래스정보</td>
@@ -80,28 +80,22 @@ int cPage = (int) request.getAttribute("cPage");
 						</div>
 						<div class="i-paymentbutton">
 							<%
-							if (paymentStatus.equals("결제완료") && startDate.after(today)) {
+							if (paymentStatus.equals("결제완료")) {
 							%>
-							<button class="i-withdrawalbutton1 i-writingreview">예약취소</button>
+							<button class="i-withdrawalbutton1 i-writingreview i-cancel" >예약취소</button>
 							<%
-							} else {
+							} else if(paymentStatus.equals("수강완료")){
 							%>
-							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">예약취소</button> -->
+							<button class="i-withdrawalbutton1 i-writingreview">후기
+								작성</button>
 							<%
 							}
 							%>
 							<%
 							if (paymentStatus.equals("결제취소") || endDate.after(today)) {
 							%>
-							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">후기
-								작성</button> -->
 							<%
-							} else {
-							%>
-							<button class="i-withdrawalbutton1 i-writingreview">후기
-								작성</button>
-							<%
-							}
+							} 
 							%>
 						</div>
 					</div>
@@ -152,6 +146,20 @@ int cPage = (int) request.getAttribute("cPage");
 					if(e.status==404) alert("요청한 페이지가 없습니다");
 				}
 			})
+		}else if(statu=='수강완료'){
+			$.ajax({
+				type:"get",
+				url:"<%=request.getContextPath()%>/paymentCompleted.do",
+				 data: {id:paymentId,cPage:<%=cPage%>},
+				success:data=>{
+					$("#mainOpacity").html(data);
+				},
+				error:(r,m)=>{
+					console.log(r);
+					console.log(m);
+					if(e.status==404) alert("요청한 페이지가 없습니다");
+				}
+			})
 		}else{
 			$.ajax({
 				type:"get",
@@ -170,19 +178,27 @@ int cPage = (int) request.getAttribute("cPage");
 	});
 	
 	
-	$(".i-completedList").click(e=>{
-		const completed=$(e.target).text();
-		location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+completed)
-		});
+$(".i-completedList").click(e=>{
+const completed=$(e.target).text();
+location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+completed)
+});
 
-		$(".i-cancellationList").click(e=>{	
-			const cancellation=$(e.target).text();
-			
-			location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+cancellation)
-		});
+$(".i-cancellationList").click(e=>{	
+	const cancellation=$(e.target).text();
+	
+	location.assign("<%=request.getContextPath()%>/paymentajaxcancellation.do?status="+cancellation)
+});
+	
+$(".i-cancel").click(function(e) {
+	const context="http://localhost:8080/GDJ64_smallus_semi";
+	  const paymentId = $(this).closest(".i-paymentList").find(".i-paymentId").val();
+	  window.open(context+"/paymentCancel.do?paymentId="+paymentId,"_blank",'width=500 , height=200, left=670, top=300');
+});
 
 
 
 
 </script>
-<%@ include file="/views/common/footer.jsp"%>
+
+
+	<%@ include file="/views/common/footer.jsp"%>

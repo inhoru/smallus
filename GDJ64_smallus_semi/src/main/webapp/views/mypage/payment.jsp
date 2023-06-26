@@ -143,6 +143,20 @@ int cPage = (int) request.getAttribute("cPage");
 					if(e.status==404) alert("요청한 페이지가 없습니다");
 				}
 			})
+		}else if(statu=='수강완료'){
+			$.ajax({
+				type:"get",
+				url:"<%=request.getContextPath()%>/paymentCompleted.do",
+				 data: {id:paymentId,cPage:<%=cPage%>},
+				success:data=>{
+					$("#mainOpacity").html(data);
+				},
+				error:(r,m)=>{
+					console.log(r);
+					console.log(m);
+					if(e.status==404) alert("요청한 페이지가 없습니다");
+				}
+			})
 		}else{
 			$.ajax({
 				type:"get",
