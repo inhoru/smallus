@@ -96,4 +96,13 @@ public class ClassService {
 		return list;
 	}
 	
+	public int deleteClassByClassId(String hostId) {
+		Connection conn=getConnection();
+		int result=dao.deleteClassByClassId(conn, hostId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 }	

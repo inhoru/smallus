@@ -372,6 +372,7 @@ public class PaymentDao {
 				p.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
 				p.getPayment().setMemberId(rs.getString("MEMBER_ID"));
 				p.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				
 				list.add(p);
 			}
 		} catch (SQLException e) {

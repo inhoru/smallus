@@ -124,6 +124,12 @@
 			$(".h-calc").html(data);
 		});
 	});
+
+	// 알람
+	$(".i-noticon").on("click", () => {
+	  $(".notification-container").slideToggle(300);
+	});
+</script>
 <%@ include file="/views/common/hostFooter.jsp"%>
 
 
