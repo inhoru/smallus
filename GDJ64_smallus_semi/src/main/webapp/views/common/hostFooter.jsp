@@ -32,6 +32,5 @@
 </footer>
 </div>
 <!-- 페이지가모두 로드 된후 실행 -->
-<%-- <script src="<%=request.getContextPath() %>/js/calendar.js"></script> --%>
 </body>
 </html>

@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, com.smallus.host.model.vo.Calc" %>
 <%
 	List<Calc> calcList =(List)request.getAttribute("calcList");
 	List<Calc> cSortList =(List)request.getAttribute("cSortList");
 %>
 <%@ include file="/views/common/hostHeader.jsp"%>
-<%@ page import="java.util.List, com.smallus.host.model.vo.Calc" %>
 <!--main-->
 <div id="mainOpacity h-host-main">
 	<section class="h-main h-calc">
@@ -39,7 +39,7 @@
 		<div class="h-r-callendar" id="h-main-chart"></div> -->
 		<div class="h-main-title">
 			<h3>전체 정산 내역</h3>
-			<select name="h-selecCalcStatus" id="h-selecCalcStatus" onchange="selecCalcStatus()">
+			<select name="h-selectCalcStatus" id="h-selectCalcStatus" onchange="selectCalcStatus()">
                	<option>정산 상태(전체)</option>
                	<option value="W" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("W")?"selected":""%>>정산 대기</option>
                	<option value="Y" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("Y")?"selected":""%>>정산 완료</option>
@@ -102,16 +102,8 @@
             </div>
         </section>
 <script type="text/javascript">
-	// 정산 정보 수정 및 입력 
-	$("#h-UpdateHostAccount").click(e=>{
-		$.get("<%=request.getContextPath()%>/host/updateHostCalc.do",data=>{
-			console.log(data);
-			$(".h-calc").html(data);
-		});
-	});
-	
 	//select 옵션 변경하면 이동
-	function selecCalcStatus(){
+	function selectCalcStatus(){
 		let index = $("#h-selecCalcStatus option").index($("#h-selecCalcStatus option:selected"));
 		// index =1 -> W / 2:Y/3:N
 		//console.log(index);
@@ -125,7 +117,13 @@
 			location.assign('<%=request.getContextPath()%>/host/sortingHostCalc.do?calcStatus=N');
 		}
 	}
-	
+	// 정산 정보 수정 및 입력 
+	$("#h-UpdateHostAccount").click(e=>{
+		$.get("<%=request.getContextPath()%>/host/updateHostCalc.do",data=>{
+			console.log(data);
+			$(".h-calc").html(data);
+		});
+	});
 <%@ include file="/views/common/hostFooter.jsp"%>
 
 
