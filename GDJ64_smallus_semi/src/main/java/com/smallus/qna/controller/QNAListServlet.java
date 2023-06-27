@@ -13,18 +13,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.qna.model.vo.Qna;
+import com.smallus.qna.model.vo.Qnac;
+import com.smallus.qna.service.QnaService;
+import com.smallus.qna.service.QnacService;
 
 /**
  * Servlet implementation class QNA
  */
 @WebServlet("/ajax/qnaTest.do")
-public class QNAList extends HttpServlet {
+public class QNAListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAList() {
+    public QNAListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,6 +36,7 @@ public class QNAList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		Date today=null;
 		try {
@@ -40,20 +44,25 @@ public class QNAList extends HttpServlet {
 		}catch(ParseException e) {
 			//e.printStackTrace()
 			today=new Date();
-			
 		}
-		List<Qna> qnas = List.of(
-				Qna.builder().qnaId("001").
-				memberId("aaaa").
-				classId("test-class-2").
-				qnaTitle("내 손으로 만드는 작은 바다").
-				qndContent("맞나?").
-				qndRdate(today).
-				qnaFinishYn("Y").build()
-				);
-		request.setAttribute("qnas", qnas);
 		
-		request.getRequestDispatcher("/views/qna/qnaListAjax.jsp").forward(request, response);
+//		List<Qna> qnas = List.of(
+//				Qna.builder().qnaId("001").
+//				memberId("aaaa").
+//				classId("test-class-2").
+//				qnaTitle("내 손으로 만드는 작은 바다").
+//				qndContent("맞나?").
+//				qndRdate(today).
+//				qnaFinishYn("Y").build()
+//				);
+		
+		List<Qna> qnas=new QnaService().detailQnaList();
+		List<Qnac> qnacs=new QnacService().detailQnacList();
+
+		request.setAttribute("qnas", qnas);
+		request.setAttribute("qnacs", qnacs);
+		
+		request.getRequestDispatcher("/views/qna/qnaListAjax.jsp").forward(request, response); //주소수정예정
 	}
 
 	/**

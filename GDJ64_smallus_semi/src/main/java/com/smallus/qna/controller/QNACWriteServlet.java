@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class QNACWrite
  */
 @WebServlet("/QNACWrite")
-public class QNACWrite extends HttpServlet {
+public class QNACWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNACWrite() {
+    public QNACWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
