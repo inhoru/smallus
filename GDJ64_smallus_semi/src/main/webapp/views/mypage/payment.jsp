@@ -79,7 +79,7 @@ int cPage = (int) request.getAttribute("cPage");
 							<%
 							if (paymentStatus.equals("결제완료")) {
 							%>
-							<button class="i-withdrawalbutton1 i-writingreview">예약취소</button>
+							<button class="i-withdrawalbutton1 i-writingreview i-cancel" >예약취소</button>
 							<%
 							} else if(paymentStatus.equals("수강완료")){
 							%>
@@ -143,6 +143,20 @@ int cPage = (int) request.getAttribute("cPage");
 					if(e.status==404) alert("요청한 페이지가 없습니다");
 				}
 			})
+		}else if(statu=='수강완료'){
+			$.ajax({
+				type:"get",
+				url:"<%=request.getContextPath()%>/paymentCompleted.do",
+				 data: {id:paymentId,cPage:<%=cPage%>},
+				success:data=>{
+					$("#mainOpacity").html(data);
+				},
+				error:(r,m)=>{
+					console.log(r);
+					console.log(m);
+					if(e.status==404) alert("요청한 페이지가 없습니다");
+				}
+			})
 		}else{
 			$.ajax({
 				type:"get",
@@ -172,6 +186,11 @@ $(".i-cancellationList").click(e=>{
 	location.assign("<%=request.getContextPath()%>/paymentajaxcancellation.do?status="+cancellation)
 });
 	
+$(".i-cancel").click(function(e) {
+	const context="http://localhost:8080/GDJ64_smallus_semi";
+	  const paymentId = $(this).closest(".i-paymentList").find(".i-paymentId").val();
+	  window.open(context+"/paymentCancel.do?paymentId="+paymentId,"_blank",'width=500 , height=200, left=670, top=300');
+});
 
 
 

@@ -17,6 +17,7 @@ import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.common.JDBCTemplate;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Notifications;
 import com.smallus.member.model.vo.Wishlist;
 import com.smallus.payment.model.vo.Payment;
 
@@ -346,8 +347,59 @@ public class MemberDao {
 			close(pstmt);
 		}return result;
 	}
+	public List<Notifications> selectAllNotifications(Connection conn, String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Notifications> list=new ArrayList<Notifications>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectAllNotifications"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getNotifications(rs));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 	
-	
+	public int notificationsCount(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("notificationsCount"));
+			//SELECT COUNT(MEMBER_ID) FROM NOTIFICATIONS WHERE MEMBER_ID =?
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	public int notifications(Connection conn, String notId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("notifications"));
+			//DELETE FROM NOTIFICATIONS WHERE NOTIFL_ID=?
+			pstmt.setString(1,notId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 
 
 	public static Member getMember(ResultSet rs) throws SQLException {
@@ -357,4 +409,8 @@ public class MemberDao {
 				.memberImg(rs.getString("MEMBER_IMG")).memberNickname(rs.getString("MEMBER_NICKNAME"))
 				.memberSt(rs.getString("MEMBER_ST")).build();
 	}
+	public static Notifications getNotifications(ResultSet rs) throws SQLException {
+		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
+	}
+	
 }

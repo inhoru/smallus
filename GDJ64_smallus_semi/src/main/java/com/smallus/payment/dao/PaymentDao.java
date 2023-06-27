@@ -17,6 +17,7 @@ import java.util.Properties;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Notifications;
 import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCalc;
@@ -534,11 +535,65 @@ public class PaymentDao {
 		}
 		return result;
 	}
-	
+	public int paymentCancel(Connection conn,String paymentId) {
+		String cancel="결제취소";
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("paymentCancel"));
+			pstmt.setString(1, cancel);
+			pstmt.setString(2, paymentId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public Payment searchBypaymentId(Connection conn, String paymentId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Payment p = new Payment();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchBypaymentId"));
+			//SELECT * FROM PAYMENT LEFT JOIN COUPON USING(COUPON_ID) WHERE PAYMENT_ID=?
+			pstmt.setString(1, paymentId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p=(getPayment(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return p;
+	}
+	public int reinsertCoupon(Connection conn,String paymentId,String couponId,String memberId,Date createdDate,Date expiredDated) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("reinsertCoupon"));
+			//INSERT INTO COUPON VALUES(?,?,?,?)
+			pstmt.setString(1, couponId);
+			pstmt.setString(2, memberId);
+			pstmt.setDate(3, (java.sql.Date) createdDate);
+			pstmt.setDate(4, (java.sql.Date) expiredDated);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	public static Payment getPayment(ResultSet rs) throws SQLException {
+		return Payment.builder().paymentId(rs.getString("PAYMENT_ID")).classDetailId(rs.getString("CLASS_DETAIL_ID")).memberId(rs.getString("MEMBER_ID")).couponId(rs.getString("COUPON_ID")).price(rs.getInt("PRICE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).TotalPrice(rs.getInt("TOTAL_PRICE")).paymentType(rs.getString("PAYMENT_TYPE")).paymentDate(rs.getDate("PAYMENT_DATE")).paymentStatus(rs.getString("PAYMENT_STATUS")).createdDate(rs.getDate("CREATED_DATE")).expiredDated(rs.getDate("EXPIRED_DATED")).build();
+	}
 }
-
-
-
 
 
 

@@ -28,6 +28,11 @@ public class Payment implements Serializable {
 	private Date bookingTimeStart;
 	private Date bookingTimeEnd; 
 	
+	private Date createdDate;
+	private Date expiredDated;
+	
+	
+	
 	
 	@Override
 	public String toString() {
