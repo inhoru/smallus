@@ -63,7 +63,7 @@ public class ReviewDao {
 		ResultSet rs = null;
 		List<Review> list = new ArrayList();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectReview"));
+			pstmt=conn.prepareStatement(sql.getProperty("hostReview"));
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			
@@ -128,6 +128,7 @@ public class ReviewDao {
 		}
 		return result;
 	}
+	
 	
 	
 	

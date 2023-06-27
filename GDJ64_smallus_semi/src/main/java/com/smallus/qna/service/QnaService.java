@@ -10,6 +10,7 @@ import static com.smallus.common.JDBCTemplate.*;
 
 public class QnaService{
 	
+	// 여기는 Q N A 입니다.
 	private QnaDao dao = new QnaDao();
 	
 	public List<Qna> detailQnaList(){
@@ -19,4 +20,6 @@ public class QnaService{
 		return list;
 	}
 	
+	
+	// 여기는 Q N A 입니다.
 }

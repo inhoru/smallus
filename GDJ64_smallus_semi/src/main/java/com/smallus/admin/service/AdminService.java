@@ -8,6 +8,7 @@ import static com.smallus.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.admin.dao.AdminDao;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.host.model.vo.Calc;
@@ -232,5 +233,17 @@ public class AdminService {
 		Classes c=dao.classHostId(conn,classId);
 		close(conn);
 		return c; 
+	}
+	public int selectInquiryCount() {
+		Connection conn=getConnection();
+		int totalData=dao.selectInquiryCount(conn);
+		close(conn);
+		return totalData;
+	}
+	public List<Inquiry> checkInquiryAll(int cPage,int numPerpage){
+		Connection conn=getConnection();
+		List<Inquiry> list=dao.checkInquiryAll(conn,cPage,numPerpage);
+		close(conn);
+		return list;
 	}
 }

@@ -1,18 +1,22 @@
 package com.smallus.qna.model.dao;
 
+import static com.smallus.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.smallus.qna.model.vo.Qnac;
-import static com.smallus.common.JDBCTemplate.close;
 
 public class QnacDao {
-
+	
+	// 여기는 Q N A C 입니다!!!!!! 정신차리시요!!!!!!!!!!
 	private Properties sql = new Properties();
 
 	public QnacDao() {
@@ -45,5 +49,21 @@ public class QnacDao {
 		}
 		return result;
 	}
+	
+	public List<Qnac> detailQnacList(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		List<Qnac> list=new ArrayList();
+//		try {
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			
+//		}
+		return list;
+	}
+	
+	// 여기는 Q N A C 입니다!!!!!! 정신차리시요!!!!!!!!!! 
 
 }

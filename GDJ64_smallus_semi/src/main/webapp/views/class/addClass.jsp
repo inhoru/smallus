@@ -14,7 +14,7 @@
 	<section id="d-addClass">
 	<form action="<%=request.getContextPath() %>/host/addClassEnd.do" method="post" enctype="multipart/form-data">
 		<br> <br>
-		<h3>클래스 등록하기 (기본정보)</h3>
+		<h3>클래스 등록하기</h3>
 		<hr>
 		<div id="inputs">
 			<p>클래스 이름</p>
@@ -39,10 +39,10 @@
 			<p>주소</p>
 			<!-- <input type="text" id="sample4_postcode" placeholder="우편번호"> -->
 			<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
-			<input type="text" id="sample4_roadAddress" name="classAddress" placeholder="주소 입력(버튼 이용)" readonly required>
+			<input type="text" id="sample4_roadAddress" name="classAddress" placeholder="주소 입력(버튼 이용 + 상세주소 입력)" required>
 			<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소"> -->
 			<span id="guide" style="color:#999;display:none"></span>
-			<input type="text" id="sample4_detailAddress" placeholder="상세주소">
+			<!-- <input type="text" id="sample4_detailAddress" placeholder="상세주소"> -->
 			<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목"> -->
 			
 			<p>제공사항</p>
@@ -52,24 +52,21 @@
 			<p>준비물</p>
 			<input type="text" name="classSupplies" placeholder="준비물을 입력해주세요.">
 			<p>상세 내용</p>
-			<textarea name="" id="" cols="80" rows="10" name="classDetail"
+			<textarea name="classDetail" id="" cols="80" rows="10"
 				placeholder="글자는 최대 500자까지 작성 가능합니다."></textarea>
-			<div id="inputs">
 			<p>스케쥴 등록</p>
 				<div id="AddSchedule-calendar">
 					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
 					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
 					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
 					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
-					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
-					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
 				</div>
 			</div>
-		</div>
 		<br> <br> <input type="submit" value="등록하기"> <br>
-		<br> <br> <br>
 		</form>
+		</section>
 		</div>
+		<br> <br> <br>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -128,12 +125,12 @@ $(function() {
                     document.getElementById("sample4_extraAddress").value = '';
                 }
 
-                var guideTextBox = document.getElementById("guide");
+                /* var guideTextBox = document.getElementById("guide");
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                 if(data.autoRoadAddress) {
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                   /*  guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block'; */
+                   guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                    guideTextBox.style.display = 'block';
 
                 } else if(data.autoJibunAddress) {
                     var expJibunAddr = data.autoJibunAddress;
@@ -142,7 +139,7 @@ $(function() {
                 } else {
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
-                }
+                } */
             }
         }).open();
     }    
