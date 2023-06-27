@@ -52,11 +52,10 @@ button#m-InquiryEnrollbtn{
 					<td><%=c.getMemberId() %></td>
 					<td><%=c.getBoardRdate() %></td>
 					<td><%=c.getBoardCheck() %></td>
-					<td><button id="m-InquiryEnrollbtn"
-							onclick="InquiryEnroll('<%=c.getBoardId()%>');">답변등록하기</button></td>
 				</tr>
 				<tr class="m-inquirydetailcontainer<%=c.getBoardId() %>" style="display:none;">
-					<td colspan="6">
+					<td>1:1문의내용</td>
+					<td colspan="4" style="padding-left:10px; text-align:left;">
 						<div>
 						<%if(c.getSfRename()!=null){ %>
 							<img src="<%=request.getContextPath()%>/upload/inquiry/<%=c.getSfRename()%>" alt="" style="height:;,width:;">
@@ -64,11 +63,22 @@ button#m-InquiryEnrollbtn{
 							<pre><%=c.getBoardContent() %></pre>
 						</div>
 					</td>
+					
 				</tr>
+					<%if(!c.getBoardCheck().equals("답변완료")){ %>
+					<tr class="m-inquirydetailcontainer<%=c.getBoardId() %>" style="display:none;">
+						<td>1:1문의답변</td>
+						<td colspan="3" style="padding-left:10px; text-align:left;">
+							<input type="text" name="commentConent" id="m-commentConent" style="width:800px;">
+						</td>
+						<td><button id="m-InquiryEnrollbtn"
+								onclick="InquiryEnroll('<%=c.getBoardId()%>');">답변등록하기</button></td>
+					</tr>
+					<%} %>
 				<%}%>
 				<%} else {%>
 				<tr>
-					<td colspan="7">조회할 데이터가 없습니다.</td>
+					<td colspan="5">조회할 데이터가 없습니다.</td>
 				</tr>
 				<%
 				}
@@ -106,7 +116,9 @@ $(".m-inquirydetailcontainer"+boardId).slideToggle();
 }; --%>
 	function InquiryEnroll(boardId){
 		console.log(boardId);
-		location.assign("<%=request.getContextPath()%>/admin/InquiryEnrollServlet.do?boardId="+boardId);
+		let commentConent=$("#m-commentConent").val();
+		console.log(commentConent);
+				<%-- location.assign("<%=request.getContextPath()%>/admin/InquiryEnrollServlet.do?boardId="+boardId+"&commentConent="+commentConent); --%>
 	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

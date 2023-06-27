@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/hostHeader.jsp"%>
+<%-- <%@ include file="/views/host/hostHeader.jsp"%> --%>
+<%@ include file="/views/common/mainHeader.jsp"%>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/class/addClassSchedule.css"/>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -118,5 +119,6 @@ $(function() {
 
 
 
-<%@ include file="/views/common/hostFooter.jsp"%>
+<%@ include file="/views/common/footer.jsp"%>
+		<%-- <%@ include file="/views/host/hostFooter.jsp"%> --%>
 		

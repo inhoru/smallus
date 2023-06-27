@@ -8,12 +8,12 @@ import static com.smallus.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
-import com.smallus.review.model.dao.ReviewDao2;
+import com.smallus.review.model.dao.ReviewDao;
 import com.smallus.review.model.vo.Review;
 
 public class ReviewMemberService {
 	
-	private ReviewDao2 dao = new ReviewDao2();
+	private ReviewDao dao = new ReviewDao();
 	
 	public List<Review> memberReview(String userId){
 		Connection conn = getConnection();

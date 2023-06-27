@@ -57,22 +57,6 @@ public class EnrollNoticeServlet extends HttpServlet {
 		System.out.println(hostId+noticeType+noticeTitle+noticeContent+noticeFilepath);
 		Notice n=Notice.builder().hostId(hostId).noticeType(noticeType).noticeTitle(noticeTitle).noticeContent(noticeContent).noticeFilepath(noticeFilepath).build();
 		int result=new NoticeService().enrollNotice(n);
-//		System.out.println(n);
-//		Notice notice=new NoticeService().selectNotice(n);
-//		System.out.println(notice.getNoticeId());
-//		String noticeId=notice.getNoticeId();
-//		System.out.println(noticeId);
-//		if(noticeId==null) {
-//			msg="공지사항 등록을 실패하였습니다. :( \n다시시도하세요";
-//			loc="/admin/noticeListServlet.do";
-//			request.setAttribute("msg", msg);
-//			request.setAttribute("loc", loc);
-//			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-//			return;
-//		}
-//		NoticeImage ni=NoticeImage.builder().noticeId(noticeId).noticeImageOrignal(noticeImageOrignal).noticeImageRename(noticeImageRename).build();
-//		int result2=new NoticeService().enrollNoticeImg(ni);
-		
 		String msg,loc;
 		if(result>0) {
 			//입력 성공

@@ -5,23 +5,21 @@
 	List<PaymentCalc> sortStatusList=(List)request.getAttribute("sortStatusList");
 %>
 <%@ include file="/views/common/hostHeader.jsp"%>
-<!-- fullcalendar css -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/calendar.js"></script>
 <%@ page import="java.util.List, 
 				com.smallus.payment.model.vo.PaymentCalc,
 				com.smallus.payment.model.vo.Payment,
 				com.smallus.classes.model.vo.Classes,
 				com.smallus.classes.model.vo.ClassDetail,
-				com.smallus.host.model.vo.Calc" %>
+				com.smallus.host.model.vo.Calc
+" %>
+<script src="<%=request.getContextPath() %>/js/calendar.js"></script>
 <div id="mainOpacity h-host-main">
 	<section class="h-main h-rsv">
      	<div class="h-main-title">
-			<h3 id="h-rsvMonth">v</h3><hr>
+			<h3>5월 예약 내역</h3><hr>
         </div><hr>
-	<div class="h-r-callendar" id="h-main-calendar"></div>
+		<div class="h-r-callendar" id="h-main-calendar"></div>
         
 	</section>
 	<section class="h-main h-main-rsvList">
@@ -96,11 +94,6 @@ function selectOption(){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
 	}
 }
-let date = new Date();
-let month= date.getMonth()+1;
-let monthTitle =month+'월 예약 내역';
-$("#h-rsvMonth").text(monthTitle);
-
 </script>
 <%@ include file="/views/common/hostFooter.jsp"%>
 

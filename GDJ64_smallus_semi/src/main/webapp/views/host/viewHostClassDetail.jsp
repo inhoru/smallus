@@ -15,7 +15,7 @@
 	--btn-bold: bolder;
 }
 
-.h-modalNickName, .h-modalPassword, .h-modalPhone, .h-modalEmail, .h-modalDelete, .h-modalInsertSchedule {
+.h-modalNickName, .h-modalPassword, .h-modalPhone, .h-modalEmail, .h-modalDelete {
 	position: fixed;
 	z-index: 1;
 	left: 0;
@@ -185,6 +185,7 @@ width: 20rem;
 			<button class="h-close-modal">닫기</button>
 		</div>
 	</div>
+
 	<div class="h-modalInsertSchedule" style="display: hidden">
 		<div class="modal-content h-insertSchedule">
 			<h4>클래스 세부 일정을 추가합니다.</h4>
@@ -197,7 +198,9 @@ width: 20rem;
 			<button class="h-close-modal">닫기</button> 
 		</div>
 	</div>
+
 <script>
+
 	// 일정 추가함수
 	$(function() {
 	  $('input[name="datetimes"]').daterangepicker({
@@ -220,6 +223,7 @@ width: 20rem;
 	
 	//삭제 모달창 열기
 	$("#h-updateClassStaus").click(e => {
+
 		$(".h-modalDelete").css('display', 'block');
 		$("document").css('overflow', 'hidden');
 	});
@@ -255,6 +259,7 @@ width: 20rem;
 	$(".h-close-modal").click(e => {
 		$(".h-modalInsertSchedule").css('display', 'none');
 		$("document").css('overflow', 'auto');
+
 	})
 	
 	

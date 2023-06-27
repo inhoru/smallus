@@ -183,6 +183,7 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentCount"));
+			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -200,6 +201,7 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentdetailCount"));
+			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=? AND PAYMENT_STATUS=?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, completed);
 			rs=pstmt.executeQuery();
@@ -223,6 +225,7 @@ public class PaymentDao {
 			pstmt.setString(1, paymentId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
+////SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END ,HOST_NAME, CLASS_PRICE, PAYMENT_NAME, TOTAL_PRICE,COUPON_PRICE FROM PAYMENT P LEFT JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) LEFT JOIN CLASS USING(CLASS_ID) LEFT JOIN HOST USING(HOST_ID) LEFT JOIN PAYMENT_TYPE USING(PAYMENT_TYPE) LEFT JOIN COUPON_TYPE USING(COUPON_ID) WHERE PAYMENT_ID=?
 				PaymentCompleted pc=new PaymentCompleted();
 				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
@@ -253,6 +256,8 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectRsvCount"));
+			//SELECT COUNT(*) FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
+			//LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 			pstmt.setString(1, hostId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -265,6 +270,11 @@ public class PaymentDao {
 		return result;
 	}
 	
+	// SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START,
+	// CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, P.PAYMENT_STATUS 
+	// FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT
+	// JOIN PAYMENT P USING(CLASS_DETAIL_ID)
+	// LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 	public List<PaymentCalc> selectAllpaymentByhostId(Connection conn, String hostId,int cPage, int numPerpage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -295,8 +305,7 @@ public class PaymentDao {
 		}
 		return list;
 	}
-	
-	
+
 	public List<PaymentCalc> sortingPaymentByStatus(Connection conn, String hostId,String passStatus,int cPage, int numPerpage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -329,6 +338,12 @@ public class PaymentDao {
 		return list;
 	}
 	
+//	selectNewPaymentByhostId=SELECT * FROM (SELECT ROWNUM AS RNUM, B.* 	FROM 
+//	(SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE 
+//	FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
+//	LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) 
+//	LEFT JOIN CALC CL USING(HOST_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL)B) 
+//	WHERE RNUM BETWEEN 1 AND 5 ORDER BY PAYMENT_DATE DESC
 	public List<PaymentCalc> selectNewPaymentByhostId(Connection conn, String hostId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -359,7 +374,7 @@ public class PaymentDao {
 		return list;
 	}
 	
-	
+
 	public List<ClassPayment> selectClassDetailByClassId(Connection conn, String classId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -547,10 +562,12 @@ public class PaymentDao {
 			close(pstmt);
 		}
 		return result;
+		
 	}
 	public static Payment getPayment(ResultSet rs) throws SQLException {
 		return Payment.builder().paymentId(rs.getString("PAYMENT_ID")).classDetailId(rs.getString("CLASS_DETAIL_ID")).memberId(rs.getString("MEMBER_ID")).couponId(rs.getString("COUPON_ID")).price(rs.getInt("PRICE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).TotalPrice(rs.getInt("TOTAL_PRICE")).paymentType(rs.getString("PAYMENT_TYPE")).paymentDate(rs.getDate("PAYMENT_DATE")).paymentStatus(rs.getString("PAYMENT_STATUS")).createdDate(rs.getDate("CREATED_DATE")).expiredDated(rs.getDate("EXPIRED_DATED")).build();
 	}
+
 	
 	public Payment selectPaymentIdByMemberId(Connection conn,String memberId, String classDetailId) {
 		PreparedStatement pstmt=null;
@@ -681,7 +698,7 @@ public class PaymentDao {
 		return result;
 	}
 	
-	
+
 }
 
 

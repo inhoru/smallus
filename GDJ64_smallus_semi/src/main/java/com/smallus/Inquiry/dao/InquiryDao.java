@@ -159,16 +159,17 @@ private Properties sql= new Properties();
 	
 	
 	
-	public static Inquiry getInquiry(ResultSet rs) throws SQLException {
+	private Inquiry getInquiry(ResultSet rs) throws SQLException {
 		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).boardId(rs.getString("BOARD_ID")).sfId(rs.getString("SF_ID")).sfRename(rs.getString("SF_RENAME")).build();
 	}
-	public static Inquiry getInquiry2(ResultSet rs) throws SQLException {
-		return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).sfId(rs.getString("SF_ID")).sfRename(rs.getString("SF_RENAME")).build();
-	}
+	
 	private Faq getFaq(ResultSet rs) throws SQLException {
 		return Faq.builder().faqId(rs.getString("FAQ_ID")).hostId(rs.getString("HOST_ID")).faqTitle(rs.getString("FAQ_TITLE")).faqContent(rs.getString("FAQ_CONTENT")).faqType(rs.getString("FAQ_TYPE")).build();
 	}
 	private InquiryComment getComment(ResultSet rs) throws SQLException {
 		return InquiryComment.builder().commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).build();
 	}
+	public static Inquiry getInquiry2(ResultSet rs) throws SQLException {
+	      return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).sfId(rs.getString("SF_ID")).sfRename(rs.getString("SF_RENAME")).build();
+	   }
 }

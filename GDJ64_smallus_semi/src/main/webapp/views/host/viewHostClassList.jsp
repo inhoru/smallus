@@ -62,7 +62,6 @@
 	 <section class="h-main h-main-rsvList">
      	<div class="h-main-title">
      		<h3>내 클래스 보기</h3>
-                <!-- <div class="h-viewList"><a href="">+</a></div> -->
                 <select name="h-selectClassStatus" id="h-selectClassStatus" onchange="selectOption()">
                 	<option>승인 상태(전체)</option>
                 	<option value="W" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>승인 대기</option>
@@ -121,7 +120,6 @@
 						<tr>
 							<td colspan="3"></td>
 							<td><button onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=c.getClassId()%>')">수정</button></td>
-							<%-- <td><button onclick="deleteClass(<%=c.getClassId() %>)">삭제</button></td> --%>
 						</tr>
 					</table>
 				</div>

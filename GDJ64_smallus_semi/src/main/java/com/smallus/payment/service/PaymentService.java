@@ -159,6 +159,7 @@ public class PaymentService {
 		return result;
 	}
 	
+
 	public Payment selectPaymentIdByMemberId(String memberId, String classDetailId) {
 		Connection conn=getConnection();
 		Payment p=dao.selectPaymentIdByMemberId(conn, memberId, classDetailId);
@@ -199,6 +200,7 @@ public class PaymentService {
 		return c; 
 	}
 	
+
 	
 	// 페이징 처리를 위한 전체 데이터 수 찾기
 	public int selectSortingCount(String hostId,String paymentStatus) {
