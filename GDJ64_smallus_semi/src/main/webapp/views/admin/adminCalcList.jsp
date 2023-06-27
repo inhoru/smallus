@@ -62,8 +62,6 @@ button#m-calcdeletebtn{
 					<%}else{ %>
 					<td>정산거절</td>
 					<%} %>
-					<td><button id="m-calcdeletebtn"
-							onclick="calcdelete('<%=c.getCalcId()%>');">삭제</button></td>
 				</tr>
 				<%}%>
 				<%} else {%>
@@ -97,9 +95,5 @@ const selectCalc=()=>{
 		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
 	}
 };
-	function calcdelete(){
-		console.log(calcId);
-		location.assign("<%=request.getContextPath()%>/admin/CalcDeleteServlet.do?calcId="+calcId);
-	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

@@ -266,25 +266,6 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
-	public List<NoticeImage> checkNoticeImageAll(Connection conn){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<NoticeImage> list2=new ArrayList();
-		try {
-			//checkNoticeImageAll=SELECT * FROM NOTICE_IMAGE
-			pstmt=conn.prepareStatement(sql.getProperty("checkNoticeImageAll"));
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				list2.add(getNoticeImage(rs));
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return list2;
-	}
-	
 	public int selectConfirmClassesCount(Connection conn) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -391,7 +372,7 @@ public class AdminDao {
 		ResultSet rs=null;
 		List<Classes> list=new ArrayList();
 		try {
-			//checkClassesAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y')M) WHERE RNUM BETWEEN ? AND ?
+			//checkClassesAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS IN('Y','N')M) WHERE RNUM BETWEEN ? AND ?
 			pstmt=conn.prepareStatement(sql.getProperty("checkClassesAll"));
 			pstmt.setInt(1, (cPage-1)*numPerpage+1);
 			pstmt.setInt(2, cPage*numPerpage);

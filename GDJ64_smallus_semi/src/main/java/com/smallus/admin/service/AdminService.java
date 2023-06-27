@@ -108,13 +108,6 @@ public class AdminService {
 		return list;
 	}
 	
-	public List<NoticeImage> checkNoticeImageAll(){
-		Connection conn=getConnection();
-		List<NoticeImage> list2=dao.checkNoticeImageAll(conn);
-		close(conn);
-		return list2;
-	}
-	
 	public int selectConfirmClassesCount() {
 		Connection conn=getConnection();
 		int totalData=dao.selectConfirmClassesCount(conn);

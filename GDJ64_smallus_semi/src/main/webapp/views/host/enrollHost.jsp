@@ -204,7 +204,6 @@ let epw;
 				data:{hostEmail:hostEmail},
 				dataType:"text",
 				success: function(data){
-					console.log(data);
 					if(data!='null'){
 						epw=data;
 						$("hostEmail_check2").focus();
@@ -222,8 +221,6 @@ let epw;
 	
 	function emailcheck(){
 		let emailcheck=$("#hostEmail_check2").val();
-		console.log(emailcheck, typeof emailcheck)
-		console.log(epw, typeof epw);
 		if(epw==emailcheck){
 			$("#hostEmail_check3").val('Y');
 			alert("인증성공하셨습니다.");
