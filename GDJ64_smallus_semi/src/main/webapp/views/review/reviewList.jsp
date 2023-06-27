@@ -11,14 +11,14 @@
 
 	<div class="d-review-header">
 		<h2>내 클래스에 등록된 후기</h2>
-		<select>
+		<!-- <select>
 			<option value="클래스명">클래스명</option>
 			<option value="작성일순">작성일순</option>
 		</select>
 		<select>
 			<option value="class1">부드러운 앙금으로 빚어내는 네리끼리 화과자 </option>
 			<option value="class2">베이킹 어렵지 않다! 고소하고 달콤한 마들렌 만들기</option>
-		</select>
+		</select> -->
 	</div>
 	
 	<div class="d-review-list">
@@ -65,20 +65,25 @@
 	margin: 0 auto;
 	}
 	.d-review-one{
+		width:100%;
+	}
+	.d-review-table{
+		width:100%;
+	}
+	.d-review-one{
 		margin:20px;
 		display: inline-block;
 	}
 	.d-review-table h2{
-	color:gold;
+		color:gold;
 	}
 	.d-review-table button{
-	justify-content: end;
-	margin-left: 95%; 
-	width: 80px;
+		float:right;
+		width: 80px;
 	/* 삭제버튼을 오른쪽으로 빼고 싶으나.... */
 	}
 	.d-review-table table{
-	margin-left:20px;
+		margin-left:20px;
 	}
 	.d-review-header>select{
 		display:inline-block;
