@@ -58,13 +58,13 @@ public class ReviewDao {
 //			close(pstmt);
 //		}return list;
 //	}
-	public List<Review> selectReview(Connection conn, String classId) {
+	public List<Review> selectReview(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Review> list = new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectReview"));
-			pstmt.setString(1, classId);
+			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {

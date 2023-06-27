@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.smallus.member.model.vo.Member;
 import com.smallus.review.model.vo.Review;
 import com.smallus.review.service.ReviewService;
 
@@ -32,8 +34,10 @@ public class ReviewListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String classId=request.getParameter("classId");
-		List<Review> reviews=new ReviewService().selectReview(classId);
+		HttpSession session=request.getSession();
+		Member loginMember=(Member)session.getAttribute("loginMember");
+		
+		List<Review> reviews=new ReviewService().selectReview(loginMember.getMemberId());
 		
 		request.setAttribute("reviews", reviews);
 		
