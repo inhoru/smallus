@@ -160,5 +160,21 @@ public class PaymentService {
 		return result;
 	}
 	
+	public Payment selectPaymentIdByMemberId(String memberId, String classDetailId) {
+		Connection conn=getConnection();
+		Payment p=dao.selectPaymentIdByMemberId(conn, memberId, classDetailId);
+		close(conn);
+		return p;
+	}
+	
+	public int deleteCouponByMemberId(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.deleteCouponByMemberId(conn, memberId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	
 }

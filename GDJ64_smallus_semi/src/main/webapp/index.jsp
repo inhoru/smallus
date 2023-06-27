@@ -3,31 +3,6 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="com.smallus.classes.model.vo.ClassIndex" %>
 <script>
-	<%-- $(function(){
-	  // 실행할 기능을 정의해주세요.
-		location.assign('<%=request.getContextPath()%>/class/newClass.do');
-	}); --%>
-	<%-- $.ajax({
-		url:"<%=request.getContextPath()%>/class/newClass.do",
-		dataType: "text",
-		success: function(data) {
-				console.log(data);
-				console.log(data.split(","))
-				$(".newClass").attr("src","");
-				<a href="<%=request.getContextPath()%>/class/classDetail.do?classId=id" class="newClass">
-					<img src="<%=request.getContextPath() %>/img/<%=c.getClasses().getClassThumbnail()%>.png" alt="no img">
-					<h4><%=c.getClasses().getClassTitle()%></h4>
-					<h5><%=c.getCategory().getCategoryTitle()%> | <%=c.getClasses().getClassAddress()%></h5>
-				</a>
-				let img=$("<img>");
-				img.attr("src","<%=request.getContextPath()%>/img/")
-				
-			},
-			error: (r, m, e) => {
-				console.log(r);
-				console.log(m);
-			}
-		}); --%>
 	function fn_login(){
 		alert("로그인 후 발급 받을 수 있습니다.")
 	}
