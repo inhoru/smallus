@@ -77,7 +77,7 @@
 				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
 					<a href="<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=c.getClassId()%>" id="h-class-list">
-						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
+						<img src="<%=request.getContextPath()%>/upload/class/<%=c.getClassThumbnail()%>">
 						<input type="hidden" name="classId" class="h-classId" value="<%=c.getClassId()%>">
 					</a>
 					<table>
@@ -108,16 +108,12 @@
 							<td class="h-tbl-align-left">신청 일</td>
 							<td><%=c.getClassUpLoadDate() %></td>
 							<td>승인 일</td>
-								<%if(c.getClassPassId().equals("Y")){ %>
 							<td>								
 								<%= c.getClassPassDate()%>
 							</td>
-							<%}else{%>
-							<td>-</td>
-							<%} %>
 						</tr>
 						<tr>
-							<td colspan="2"></td>
+							<td colspan="3"></td>
 							<td><button>수정</button></td>
 							<%-- <td><button onclick="deleteClass(<%=c.getClassId() %>)">삭제</button></td> --%>
 						</tr>
@@ -129,7 +125,7 @@
 				<div class="h-class-list h-class-pass-list">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
 					<a href="" id="h-class-list">
-						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
+						<img src="<%=request.getContextPath()%>/upload/class/<%=c.getClassThumbnail()%>">
 						<input type="hidden" name="classId" class="h-classId" value="<%=c.getClassId()%>">
 					</a>
 					<table>
@@ -162,18 +158,13 @@
 							<td class="h-tbl-align-left">신청 일</td>
 							<td><%=c.getClassUpLoadDate() %></td>
 							<td>승인 일</td>
-								<%if(c.getClassPassId().equals("Y")){ %>
 							<td>								
 								<%= c.getClassPassDate()%>
 							</td>
-							<%}else{%>
-							<td>-</td>
-							<%} %>
 						</tr>
 						<tr>
-							<td colspan="2"></td>
+							<td colspan="3"></td>
 							<td><button>수정</button></td>
-							<td><button class="h-deleteClass">삭제</button></td>
 						</tr>
 					</table>
 				</div>
@@ -186,14 +177,6 @@
 	            	<%=request.getAttribute("pageBar") %>
 	            </div>
         </section>
-		<div class="h-modal" style="display:hidden">
-			<div class="modal-content">
-				<h4>등록하신 클래스 세부 일정도 함께 삭제됩니다</h4>
-				<h4>삭제 하시겠습니까?</h4>
-				<button class="h-close-modal">삭제 취소</button>
-				<button id="h-delClass">삭제하기</button>
-			</div>
-		</div>
 	<script>
 	
 		// select 옵션 변경하면 이동하는 함
@@ -214,28 +197,6 @@
 				$(".h-class-list-n").css('display','none');
 				$(".h-class-pass-list").css('display','flex');
 		}
-		
-
-		
-		
-		// 모달창 닫기
-		$(".h-close-modal").click(e=>{
-			$(".h-modal").css('display','none');
-			document.body.css('overflow','auto'); 
-		})
-		
-		$("#h-delClass").click(e=>{
-			$.get(context+'/host/CheckDeleteClass.do?classId='+classId,function(data){
-				if(data>0){
-					alert('삭제 완료 ;)');
-					$(".h-modal").css('display','none');
-					document.body.css('overflow','auto'); 
-				}else{
-					alert('삭제 실패 ;<');
-				}
-			}); 
-		});
-		
 		
 	</script>       
 <%@ include file="/views/common/hostFooter.jsp"%>

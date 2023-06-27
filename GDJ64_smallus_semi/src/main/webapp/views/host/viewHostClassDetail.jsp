@@ -83,9 +83,9 @@ width: 20rem;
 		</div>
 			<div class="h-class-list">
 				<a href="">
-					<img src="<%=request.getContextPath()%>/img/<%=list.getClassThumbnail() %>">
+					<img src="<%=request.getContextPath()%>/upload/class/<%=list.getClassThumbnail() %>">
 				</a>
-				<table>
+				<table class="h-classDetailTblInfo">
 					<tr>
 						<%if(list.getClassPassId().equals("Y")){%>
 							<th class="h-tbl-align-left">승인 완료</th>
@@ -96,9 +96,9 @@ width: 20rem;
 						<%}else if(list.getClassPassId().contains("N")){ %>
 							<th class="h-tbl-align-left">승인 거절</th>
 							<%switch(list.getClassPassId()) {
-								case "N1" :%><th>거절 사유 1</th><%break; 
-								case "N2" :%><th>거절 사유 2</th><%break; 
-								case "N3" :%><th>거절 사유 3</th><%break; 
+								case "N1" :%><th>내용 부실</th><%break; 
+								case "N2" :%><th>내용 부적절</th><%break; 
+								case "N3" :%><th>중복 등록</th><%break; 
 							}
 						}%>
 						<th colspan="2"><%=list.getClassId() %></th>
@@ -122,7 +122,7 @@ width: 20rem;
 					</tr>
 				</table>
 				<div>
-					<button id="deleteClass" value="<%=list.getClassId()%>">삭제</button>
+					<button id="h-updateClassStaus" value="<%=list.getClassId()%>">판매 중지</button>
 				</div>				
 			</div><!--end .h-class list-->
 	</section>
@@ -163,10 +163,10 @@ width: 20rem;
 	</section>
 	<div class="h-modalDelete" style="display: hidden">
 		<div class="modal-content h-deleteClass">
-			<h4>하위 클래스 세부 일정도 같이 삭제됩니다</h4>
+			<h4>하위 클래스 세부 일정도 같이 판매 중지 처리됩니다</h4>
 			<input type="hidden" value="">
-			<button id="h-checkDelete">삭제</button>
-			<button class="h-close-modal">삭제 취소</button>
+			<button id="h-checkDelete">변경</button>
+			<button class="h-close-modal">닫기</button>
 		</div>
 	</div>
 	<div class="h-modalInsertSchedule" style="display: hidden">
@@ -203,14 +203,14 @@ width: 20rem;
 	
 	
 	//삭제 모달창 열기
-	$("#deleteClass").click(e => {
+	$("#h-updateClassStaus").click(e => {
 		$(".h-modalDelete").css('display', 'block');
 		$("document").css('overflow', 'hidden');
 	});
 	
 	// 삭제 버튼 클릭 
 	$("#h-checkDelete").click(e => {
-		location.assign('<%=request.getContextPath()%>/deleteClass.do?classId=?<%=list.getClassId()%>')
+		location.assign('<%=request.getContextPath()%>/updateClassStatus.do?classId=?<%=list.getClassId()%>')
 		$(".h-modalDelete").css('display', 'none');
 		$("document").css('overflow', 'auto');
 	})

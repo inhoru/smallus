@@ -96,9 +96,9 @@ public class ClassService {
 		return list;
 	}
 	
-	public int deleteClassByClassId(String hostId) {
+	public int updatedClassStatusByClassId(String hostId) {
 		Connection conn=getConnection();
-		int result=dao.deleteClassByClassId(conn, hostId);
+		int result=dao.updatedClassStatusByClassId(conn, hostId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

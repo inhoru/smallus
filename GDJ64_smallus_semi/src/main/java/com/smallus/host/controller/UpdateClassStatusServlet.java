@@ -13,14 +13,14 @@ import com.smallus.classes.model.service.ClassService;
 /**
  * Servlet implementation class DeleteClassServlet
  */
-@WebServlet("/deleteClass.do")
-public class DeleteClassServlet extends HttpServlet {
+@WebServlet("/updateClassStatus.do")
+public class UpdateClassStatusServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteClassServlet() {
+    public UpdateClassStatusServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +32,8 @@ public class DeleteClassServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 //		request.getRequestDispatcher("/views/host/deleteClass.jsp").forward(request,response);
 		String hostId=request.getParameter("classId");
-		int result=new ClassService().deleteClassByClassId(hostId);
-		String msg=""; String loc="/views/host/viewHostClassList.jsp";
+		int result=new ClassService().updatedClassStatusByClassId(hostId);
+		String msg=""; String loc="/class/viewHostClassList.do";
 		if(result>0) {
 			msg="삭제 성공";
 		}else {

@@ -268,12 +268,12 @@ public class ClassesDao {
 		}return list;
 	}
 	
-	public int deleteClassByClassId(Connection conn, String hostId) {
+	public int updatedClassStatusByClassId(Connection conn, String hostId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("deleteClassByClassId"));
+			pstmt=conn.prepareStatement(sql.getProperty("updatedClassStatusByClassId"));
 			pstmt.setString(1, hostId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
