@@ -86,6 +86,7 @@ if (cookies != null) {
                <img src="<%=request.getContextPath()%>/img/알림.png" alt=""
                   width="25px" height="25px"> <span class="num-count"><%=notcount%></span>
             </div>
+
          </div>
          <div class="notification-container">
             <div class="scroll-snap-card">
@@ -204,9 +205,9 @@ if (cookies != null) {
             <tr>
                <td><a
                   href="<%=request.getContextPath()%>/admin/HostListServlet.do">호스트회원관리</a></td>
-               <td><a href="">호스트정산</a></td>
+               <td><a href="<%=request.getContextPath()%>/admin/ClacListServlet.do">호스트정산</a></td>
                <td><a
-                  href="<%=request.getContextPath()%>/admin/ClacListServlet.do">정산승인</a></td>
+                  href="<%=request.getContextPath()%>/admin/ClacConfirmListServlet.do">정산승인</a></td>
                <td><a href="">1:1문의</a></td>
             </tr>
          </table>
@@ -238,3 +239,4 @@ if (cookies != null) {
      })
    
    </script>
+>>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
