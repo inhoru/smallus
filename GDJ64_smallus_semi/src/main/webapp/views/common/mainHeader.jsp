@@ -157,7 +157,7 @@ if (cookies != null) {
 								value="small" checked /> <label class="notification"
 								for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
 								<br /> <span class="i-notType"><%=n.getNotiflType()%></span> <a
-								href=""><%=n.getNotiflType()%> 의대한<%=n.getNotiflMessage()%>
+								href="<%=request.getContextPath()%>/memberInquiry.do"><%=n.getNotiflType()%> <%=n.getNotiflMessage()%>
 							</a><input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"></label>
 
 							<%

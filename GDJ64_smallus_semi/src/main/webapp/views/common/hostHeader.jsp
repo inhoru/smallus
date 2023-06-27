@@ -24,6 +24,7 @@ if (cookies != null) {
 <title>Small us ☺</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/host/hostHeader.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/host/hostMainStyle.css">
+ 
 
 <script type="text/javascript"
    src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
@@ -70,7 +71,7 @@ if (cookies != null) {
             <a href="<%=request.getContextPath()%>/host/hostLogout.do"
                class="h-logout">로그아웃</a>
             <%
-         if (loginHost != null) {
+         if (loginHost != null&&!loginHost.getHostId().equals("admin")) {
             List<Notifications> not = (List) session.getAttribute("Notlist");
             int notcount = (int) session.getAttribute("notcount");
          %>
@@ -99,8 +100,8 @@ if (cookies != null) {
                      <input class="checkbox" type="checkbox" id="size_<%=count%>"
                         value="small" checked /> <label class="notification"
                         for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
-                        <br /> <span class="i-notType"><%=n.getNotiflType()%></span> <a
-                        href=""><%=n.getNotiflType()%> 의대한<%=n.getNotiflMessage()%>
+                        <br /><a href="<%=request.getContextPath()%>/class/viewHostClassList.do"><span class="i-notType"><%=n.getNotiflType()%> <%=n.getTypeTitle()%></span> 
+                        <%= n.getNotiflMessage()%>
                      </a><input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"></label>
 
                      <%
@@ -147,7 +148,7 @@ if (cookies != null) {
             </tr>
             <tr>
                <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원 탈퇴</a></td>
-               <td><a href="">클래스 등록하기</a></td>
+               <td><a href="<%=request.getContextPath()%>/class/insertClassDetail.do">클래스 등록하기</a></td>
                <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산 정보 관리</a></td>
                <!-- <td><a href="">1:1 문의</a></td> -->
             </tr>
@@ -223,5 +224,10 @@ if (cookies != null) {
                }
             })
      })
-   
+
+     $(".i-noticon").on("click", () => {
+  $(".notification-container").slideToggle(300);
+});
    </script>
+ 
+

@@ -31,13 +31,14 @@ public class UpdateClassStatusServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		request.getRequestDispatcher("/views/host/deleteClass.jsp").forward(request,response);
-		String hostId=request.getParameter("classId");
-		int result=new ClassService().updatedClassStatusByClassId(hostId);
+		String classId=request.getParameter("classId");
+		System.out.println(classId);
+		int result=new ClassService().updatedClassStatusByClassId(classId);
 		String msg=""; String loc="/class/viewHostClassList.do";
 		if(result>0) {
-			msg="삭제 성공";
+			msg="변경 성공";
 		}else {
-			msg="삭제 실패";
+			msg="변경 실패";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

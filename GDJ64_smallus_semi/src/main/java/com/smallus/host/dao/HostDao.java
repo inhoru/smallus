@@ -173,18 +173,16 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 	         close(pstmt);
 	      }return result;
    }
-	
    public int updateHostProfile(Connection conn,Host h,String hostId) {
 	      PreparedStatement pstmt=null;
 	      int result=0;
 	      try {
 	         pstmt=conn.prepareStatement(sql.getProperty("updateHostProfile"));
-	         pstmt.setString(1, h.getHostPw());
-	         pstmt.setString(2, h.getHostHomephone());
-	         pstmt.setString(3, h.getHostImg());
-	         pstmt.setString(4, h.getHostNickname());
-	         pstmt.setString(5, h.getHostEmail());
-	         pstmt.setString(6, hostId);
+	         pstmt.setString(1, h.getHostNickname());
+	         pstmt.setString(2, h.getHostPw());
+	         pstmt.setString(3, h.getHostHomephone());
+	         pstmt.setString(4, h.getHostEmail());
+	         pstmt.setString(5, hostId);
 	         result=pstmt.executeUpdate();
 	      }catch(SQLException e) {
 	         e.printStackTrace();
@@ -245,18 +243,39 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 			close(pstmt);
 		}return result;
 	}
-	public int insertNot(Connection conn, String notId) {
+	public int insertNot(Connection conn, String notId,String title) {
 		PreparedStatement pstmt=null;
 		int result=0;
 
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
-			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,?,null,?,SYSDATE,?)
-			String c="클래스승인이되었습니다.";
-			String d="클래스상세";
+			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,?,null,?,?,SYSDATE,?)
+			String c="승인이되었습니다.";
+			String d="클래스";
 			pstmt.setString(1,notId);
-			pstmt.setString(2,c);
-			pstmt.setString(3,d);
+			pstmt.setString(2,title);
+			pstmt.setString(3,c);
+			pstmt.setString(4,d);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public int insertNot2(Connection conn, String notId,String title) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
+			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,?,null,?,?,SYSDATE,?)
+			String c="거절되었습니다.";
+			String d="클래스";
+			pstmt.setString(1,notId);
+			pstmt.setString(2,title);
+			pstmt.setString(3,c);
+			pstmt.setString(4,d);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -267,7 +286,7 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 	
 	
 	public static Notifications getNotifications(ResultSet rs) throws SQLException {
-		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
+		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).typeTitle(rs.getString("TYPT_TITLE")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
 	}
 
    

@@ -77,10 +77,10 @@ width: 20rem;
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-class-sub">
      	<h2>내 클래스 보기</h2>
-		<h3>클래스 기본 정보 관리하기</h3>
 		<div>
 			<button class="h-moveToClassList" onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassList.do')">클래스 목록으로</button>
 		</div>
+		<h3>클래스 기본 정보 관리하기</h3>
 			<div class="h-class-list">
 				<a href="">
 					<img src="<%=request.getContextPath()%>/upload/class/<%=list.getClassThumbnail() %>">
@@ -89,10 +89,8 @@ width: 20rem;
 					<tr>
 						<%if(list.getClassPassId().equals("Y")){%>
 							<th class="h-tbl-align-left">승인 완료</th>
-							<th>판매 상태</th>
 						<%}else if(list.getClassPassId().equals("W")){%>
 							<th class="h-tbl-align-left">승인 대기 중</th>
-							<th></th>
 						<%}else if(list.getClassPassId().contains("N")){ %>
 							<th class="h-tbl-align-left">승인 거절</th>
 							<%switch(list.getClassPassId()) {
@@ -101,6 +99,13 @@ width: 20rem;
 								case "N3" :%><th>중복 등록</th><%break; 
 							}
 						}%>
+						<th>
+							<%if(list.getClassStatus().equals("N")){ %>
+								판매 중지
+							<%}else if(list.getClassStatus().equals("Y")&&list.getClassPassId().equals("Y")){ %>
+								판매 중
+							<%} %>
+						</th>
 						<th colspan="2"><%=list.getClassId() %></th>
 					</tr>
 					<tr>
@@ -142,7 +147,7 @@ width: 20rem;
 					<th>시간</th>
 					<th>예약 인원</th>
 				</tr>
-			<%if(classDetailList!=null&&!classDetailList.isEmpty()){
+			<%if(classDetailList!=null&&!classDetailList.isEmpty()&&list.getClassStatus().equals("Y")){
 				int count=1;
 				for(ClassDetail cd: classDetailList){%>
 				<tr>
@@ -152,8 +157,19 @@ width: 20rem;
 					<td><%=list.getClassPersonnel()%>명</td>
 					<td class="h-class-tbl-btn"><button>삭제</button></td>
 				</tr>
-			<%count++;} 
-			}else{%>
+				<%count++;}
+			}else if(classDetailList!=null&&!classDetailList.isEmpty()&&list.getClassStatus().equals("N")){
+				int count=1;
+				for(ClassDetail cd: classDetailList){%>
+				<tr>
+					<td><%=count %></td>
+					<td><%=cd.getClassDetailId() %></td>
+					<td><%=cd.getBookingTimeStart()%> - <%=cd.getBookingTimeEnd()%></td>
+					<td><%=list.getClassPersonnel()%>명</td>
+					<td class="h-class-tbl-btn"></td>
+				</tr>
+				
+			<%count++;} }else{%>
 				<tr>
 					<td colspan="4">조회할 세부 클래스가 없습니다.</td>
 				</tr>
@@ -210,7 +226,7 @@ width: 20rem;
 	
 	// 삭제 버튼 클릭 
 	$("#h-checkDelete").click(e => {
-		location.assign('<%=request.getContextPath()%>/updateClassStatus.do?classId=?<%=list.getClassId()%>')
+		location.assign('<%=request.getContextPath()%>/updateClassStatus.do?classId=<%=list.getClassId()%>')
 		$(".h-modalDelete").css('display', 'none');
 		$("document").css('overflow', 'auto');
 	})

@@ -150,7 +150,6 @@ section.h-main table {
 }
 
 section.h-main-rsvList table, table#h-main-calc-tbl{
-	border: 1px solid #444444;
 	border-collapse: collapse;
 	clear: both;
 }
@@ -259,12 +258,12 @@ div.h-class-list img{
 }
 
 /* class table style*/
-div.h-class-list table{
+/* div.h-class-list table{
 	width:75%;
 	font-size:0.8rem;
 	margin:1rem auto;
 	border:0;
-}
+} */
 div.h-class-list table .h-tbl-align-left{
 	text-align:left;
 }
@@ -292,7 +291,6 @@ section.h-class-sub div.h-class-list{
 section.h-class-sub div.h-class-list table.h-classDetailTblInfo {
 	width:100%;
 	font-size:1rem;
-	border: 1px solid red;
 }
 section.h-class-sub div.h-class-list table.h-classDetailTblInfo *{
 	height:2rem;

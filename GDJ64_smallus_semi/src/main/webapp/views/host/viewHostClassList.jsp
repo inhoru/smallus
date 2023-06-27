@@ -98,7 +98,13 @@
 							}else if(c.getClassPassId().equals("Y")){%>
 								<th class="h-tbl-align-left" class="h-class-pass-Y">승인 완료<th>
 							<%}%>
-								
+						<th>
+							<%if(c.getClassStatus().equals("N")){ %>
+								판매 중지
+							<%}else if(c.getClassStatus().equals("Y")&&c.getClassPassId().equals("Y")){ %>
+								판매 중
+							<%} %>
+						</th>
 						<th colspan="3"><%=c.getClassId() %></th>
 						</tr>
 						<tr>
@@ -114,7 +120,7 @@
 						</tr>
 						<tr>
 							<td colspan="3"></td>
-							<td><button>수정</button></td>
+							<td><button onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=c.getClassId()%>')">수정</button></td>
 							<%-- <td><button onclick="deleteClass(<%=c.getClassId() %>)">삭제</button></td> --%>
 						</tr>
 					</table>

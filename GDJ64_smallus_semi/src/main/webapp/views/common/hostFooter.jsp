@@ -32,6 +32,6 @@
 </footer>
 </div>
 <!-- 페이지가모두 로드 된후 실행 -->
-<%-- <script src="<%=request.getContextPath() %>/js/header.js"></script> --%>
+
 </body>
 </html>
