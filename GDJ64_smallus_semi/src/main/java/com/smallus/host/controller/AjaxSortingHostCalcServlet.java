@@ -87,15 +87,13 @@ public class AjaxSortingHostCalcServlet extends HttpServlet {
 		}
 		request.setAttribute("pageBar", pageBar);
 
-		
+		System.out.println(calcStatus);
 		List<Calc> cSortList=new CalcService().sortingByCalcStatus(hostId, calcStatus, cPage, numPerpage);
 		if(cSortList.isEmpty()||cSortList==null) {
 			System.out.println("cSortList 없음없");
 		}else {
 			System.out.println("calcList 있음있");
 			request.setAttribute("cSortList",cSortList);
-			Host newHost=new HostService().selectByhostId(hostId);
-			session.setAttribute("loginHost", newHost);
 		}
 		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);
 		

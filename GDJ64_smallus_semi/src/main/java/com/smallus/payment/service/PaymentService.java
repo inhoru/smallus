@@ -176,5 +176,12 @@ public class PaymentService {
 		return result;
 	}
 	
+	public PaymentCompleted selectPaymentByPaymentId(String paymentId) {
+		Connection conn=getConnection();
+		PaymentCompleted p=dao.selectPaymentByPaymentId(conn, paymentId);
+		close(conn);
+		return p;
+	}
+	
 	
 }

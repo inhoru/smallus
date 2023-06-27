@@ -78,6 +78,8 @@ public class PaymentEndServlet extends HttpServlet {
 		
 		if((boolean)dataMap.get("status").equals("paid")) {
 			dataMap.put("status", "결제완료");
+		}else {
+			String msg="결제가 완료 되지 않았습니다";
 		}
 		String paymentId=dataMap.get("merchant_uid");
 		System.out.println("paymentId : "+paymentId);
@@ -91,15 +93,10 @@ public class PaymentEndServlet extends HttpServlet {
 		int result=new PaymentService().insertPayment(dataMap);
 		int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
 		
-		
 		if(result>0 && result>0 && delResult>0) System.out.println("입력 완료");
 		else System.out.println("error T_T");
 		
-		PaymentCompleted p =new PaymentService().memberCompletedpayment(paymentId);
-		request.setAttribute("paymentList", list);
-		String cPage=request.getParameter("cPage");
-		request.setAttribute("cPage", 1);
-		request.getRequestDispatcher("/views/mypage/paymentCompleted.jsp").forward(request, response);
+		
 		
 		
 	}

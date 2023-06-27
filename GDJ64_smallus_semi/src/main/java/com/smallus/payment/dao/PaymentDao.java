@@ -593,6 +593,38 @@ public class PaymentDao {
 		}
 		return result;
 	}
+	
+	public PaymentCompleted selectPaymentByPaymentId(Connection conn, String paymentId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		PaymentCompleted pc=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectPaymentByPaymentId"));
+			pstmt.setString(1, paymentId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				pc=new PaymentCompleted();
+				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				pc.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				pc.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				pc.getPayment().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				pc.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				pc.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				pc.getPaymentType().setPaymentName(rs.getString("PAYMENT_NAME"));
+				pc.getClasses().setClassPrice(rs.getInt("CLASS_PRICE"));
+				pc.getHost().setHostName(rs.getString("HOST_NAME"));
+				pc.getCoupon().setCouponPrice(rs.getInt("COUPON_PRICE"));
+				pc.getPayment().setTotalPrice(rs.getInt("TOTAL_PRICE"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return pc;
+	}
 }
 
 
