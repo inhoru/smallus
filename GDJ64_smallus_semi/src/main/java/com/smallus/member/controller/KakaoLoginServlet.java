@@ -1,6 +1,8 @@
 package com.smallus.member.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Notifications;
 import com.smallus.member.service.MemberService;
 
 /**
@@ -44,6 +47,12 @@ public class KakaoLoginServlet extends HttpServlet {
 			session.setAttribute("loginMember",loginMember);
 			//화면전환시킬방법 2가지중 sendRedirect로 보낸다 이유는 데이터를  session 저장시켰고, url주소에 정보를 남기지 않기 위해서
 			response.sendRedirect(request.getContextPath());
+			String memberId=loginMember.getMemberId();
+			List<Notifications> list =new MemberService().selectAllNotifications(memberId);
+			int notcount = new MemberService().notificationsCount(memberId);
+			session.setAttribute("notcount",notcount);
+			session.setAttribute("Notlist",list);
+			
 		}else {
 			//로그인 실패 -> 인증못받음
 			//실패 메세지 출력
