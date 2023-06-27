@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.Inquiry.model.vo.Inquiry;
+import com.smallus.Inquiry.model.vo.InquiryComment;
 import com.smallus.admin.service.AdminService;
 
 /**

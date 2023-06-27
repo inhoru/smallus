@@ -239,4 +239,16 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	public int inquiryAnswerEnroll(String boardId,String commentConent) {
+		Connection conn=getConnection();
+		int result=dao.inquiryAnswerEnroll(conn,boardId,commentConent);
+		close(conn);
+		return result;
+	}
+	public int inquiryUpdate(String boardId,String boardCheck) {
+		Connection conn=getConnection();
+		int result2=dao.inquiryUpdate(conn,boardId,boardCheck);
+		close(conn);
+		return result2;
+	}
 }

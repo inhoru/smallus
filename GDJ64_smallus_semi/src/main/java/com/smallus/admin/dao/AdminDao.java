@@ -620,4 +620,34 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
+	public int inquiryAnswerEnroll(Connection conn, String boardId, String commentConent) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//inquiryAnswerEnroll=INSERT INTO BOARD_COMMENT VALUES(SEQ_BOARD_COMMENT.NEXTVAL,?,?,SYSDATE)
+			pstmt=conn.prepareStatement(sql.getProperty("inquiryAnswerEnroll"));
+			pstmt.setString(1,boardId);
+			pstmt.setString(2,commentConent);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int inquiryUpdate(Connection conn, String boardId,String boardCheck) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//inquiryUpdate=UPDATE BOARD SET BOARD_CHECK=? WHERE BOARD_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("inquiryUpdate"));
+			pstmt.setString(1, boardCheck);
+			pstmt.setString(2,boardId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }
