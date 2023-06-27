@@ -255,9 +255,9 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 			String c="승인이되었습니다.";
 			String d="클래스";
 			pstmt.setString(1,notId);
-			pstmt.setString(2,c);
-			pstmt.setString(3,d);
-			pstmt.setString(4,title);
+			pstmt.setString(2,title);
+			pstmt.setString(3,c);
+			pstmt.setString(4,d);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -275,9 +275,9 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 			String c="거절되었습니다.";
 			String d="클래스";
 			pstmt.setString(1,notId);
-			pstmt.setString(2,c);
-			pstmt.setString(3,d);
-			pstmt.setString(4,title);
+			pstmt.setString(2,title);
+			pstmt.setString(3,c);
+			pstmt.setString(4,d);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

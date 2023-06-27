@@ -17,7 +17,6 @@ import java.util.Properties;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
-import com.smallus.member.model.vo.Notifications;
 import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCalc;
@@ -625,6 +624,50 @@ public class PaymentDao {
 		}
 		return pc;
 	}
+	public int insertNot(Connection conn, String classDetailId,Classes n) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
+			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,(SELECT HOST_ID FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) WHERE CLASS_DETAIL_ID=?),null,?,?,SYSDATE,?)
+			String c="이 등록되었습니다.";
+			String b="예약";
+			pstmt.setString(1,n.getHostId());
+			pstmt.setString(2,n.getClassTitle());
+			pstmt.setString(3,c);
+			pstmt.setString(4,b);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public Classes classDetailId(Connection conn,String classDetailId)  {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Classes rc = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("classDetailId"));
+			//SELECT HOST_ID,CLASS_TITLE FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) WHERE CLASS_DETAIL_ID=?
+			pstmt.setString(1, classDetailId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				rc=new Classes();
+				rc.setHostId(rs.getString("HOST_ID"));
+				rc.setClassTitle(rs.getString("CLASS_TITLE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}	
+		return rc;
+	}
+	
+	
+	
 }
 
 
