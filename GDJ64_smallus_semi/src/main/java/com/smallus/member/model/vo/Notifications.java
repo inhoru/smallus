@@ -15,6 +15,7 @@ public class Notifications {
 	private String notiflId;
 	private String hostId;
 	private String memberId;
+	private String typeTitle;
 	private String notiflMessage;
 	private	Date createdAt;
 	private String notiflType;

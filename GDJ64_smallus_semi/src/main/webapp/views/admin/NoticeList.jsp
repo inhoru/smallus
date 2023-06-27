@@ -122,5 +122,5 @@ function deleteNotice(noticeId){
 	location.assign("<%=request.getContextPath()%>/notice/DeleteNotice.do?noticeId="+noticeId);
 }
 </script>
-<script src="<%=request.getContextPath()%>/js/header.js"></script>
+
 <%@ include file="/views/common/hostFooter.jsp"%>

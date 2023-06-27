@@ -1,4 +1,4 @@
-package com.smallus.qna.controller;
+package com.smallus.review.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -12,19 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smallus.qna.model.vo.Qna;
+import com.smallus.member.controller.MemberIdDuplicate;
+import com.smallus.review.model.vo.Review;
 
 /**
- * Servlet implementation class QNA
+ * Servlet implementation class reviewList
  */
-@WebServlet("/ajax/qnaTest.do")
-public class QNAList extends HttpServlet {
+@WebServlet("/reviewListMyPage.do")
+public class ReviewMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAList() {
+    public ReviewMemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,29 +34,31 @@ public class QNAList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date today=null;
 		try {
-			today=sdf.parse("2023-06-20");
+			today=sdf.parse("2023-06-21 14:30");
 		}catch(ParseException e) {
 			//e.printStackTrace()
-			today=new Date();
-			
+			today=new Date();	
 		}
-		List<Qna> qnas = List.of(
-				Qna.builder().qnaId("001").
-				memberId("aaaa").
-				classId("test-class-2").
-				qnaTitle("내 손으로 만드는 작은 바다").
-				qndContent("맞나?").
-				qndRdate(today).
-				qnaFinishYn("Y").build()
-				);
-		request.setAttribute("qnas", qnas);
 		
-		request.getRequestDispatcher("/views/qna/qnaListAjax.jsp").forward(request, response);
-	}
+//		List<Review> reviewList=new ReviewMemberService()
+		
 
+		List<Review> reviews = List.of(
+				Review.builder(). reviewId("RVW1000").
+				memberId("test").
+				paymentId("PYM20230502").
+				reviewTitle("후기제목입니다").
+				reviewContent("후기내용입니다").
+				reviewRating(5).
+				reviewDate(today).
+				build()
+				);
+		request.setAttribute("reviews",reviews);
+		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response); //주소수정예정
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
