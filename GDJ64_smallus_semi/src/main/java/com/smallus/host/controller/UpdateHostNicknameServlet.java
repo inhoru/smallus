@@ -43,7 +43,6 @@ public class UpdateHostNicknameServlet extends HttpServlet {
 			System.out.println("nick change Ok");
 		}
 		System.out.println("nickname "+result);
-		//response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().print(result);

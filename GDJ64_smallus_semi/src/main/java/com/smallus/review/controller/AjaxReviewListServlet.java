@@ -18,13 +18,13 @@ import com.smallus.review.model.vo.Review;
  * Servlet implementation class reviewList
  */
 @WebServlet("/ajax/reviewTest.do")
-public class reviewListServlet extends HttpServlet {
+public class AjaxReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewListServlet() {
+    public AjaxReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,14 +33,15 @@ public class reviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date today=null;
 		try {
-			today=sdf.parse("2023-06-21");
+			today=sdf.parse("2023-06-21 14:30");
 		}catch(ParseException e) {
 			//e.printStackTrace()
 			today=new Date();	
 		}
+
 		List<Review> reviews = List.of(
 				Review.builder(). reviewId("RVW1000").
 				paymentId("PYM20230502").
@@ -53,7 +54,6 @@ public class reviewListServlet extends HttpServlet {
 		request.setAttribute("reviews",reviews);
 		request.getRequestDispatcher("/views/review/reviewListAjax.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

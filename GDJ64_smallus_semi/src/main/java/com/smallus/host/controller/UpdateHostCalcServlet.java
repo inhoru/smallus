@@ -42,15 +42,21 @@ public class UpdateHostCalcServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		String hostId=request.getParameter("hostId");
+		
+		HttpSession session = request.getSession();
+		Host loginHost = (Host) session.getAttribute("loginHost");
+		String hostId=(loginHost.getHostId());
+		
 		String hostAccountBank=request.getParameter("hostAccountBank");
 		String hostAccount=request.getParameter("hostAccount");
 		String hostAccountName=request.getParameter("hostAccountName");
 		int calcReqDate=Integer.parseInt(request.getParameter("calcReqDate"));
 		int result= new HostService().updateHostCalc(hostAccountBank, hostAccount, hostAccountName, calcReqDate, hostId);
+		Host host=new HostService().selectByhostId(hostId);
 		//System.out.println(hostId+" "+hostAccountBank+""+hostAccount+""+hostAccountName+""+calcReqDate);
 		//System.out.println("calcReqDate : "+calcReqDate+" result : "+result);
 		if(result>0) {
+			session.setAttribute("loginHost", host);
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.print(hostAccountBank);
