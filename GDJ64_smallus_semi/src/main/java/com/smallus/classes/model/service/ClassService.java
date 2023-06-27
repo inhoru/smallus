@@ -1,12 +1,16 @@
 package com.smallus.classes.model.service;
 
-import static com.smallus.common.JDBCTemplate.*;
+import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
+import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
 
 import com.smallus.classes.model.dao.ClassesDao;
 import com.smallus.classes.model.vo.ClassDetail;
+import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.classes.model.vo.Classes;
 
 public class ClassService {
@@ -83,6 +87,13 @@ public class ClassService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public List<ClassIndex> newClassList(){
+		Connection conn= getConnection();
+		List<ClassIndex> list=dao.newClassList(conn);
+		close(conn);
+		return list;
 	}
 	
 }	

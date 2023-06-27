@@ -1,28 +1,29 @@
-package com.smallus.host.controller;
+package com.smallus.classes.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.smallus.host.model.vo.Host;
-import com.smallus.host.service.HostService;
+import com.google.gson.Gson;
+import com.smallus.classes.model.service.ClassService;
+import com.smallus.classes.model.vo.ClassIndex;
 
 /**
- * Servlet implementation class UpdateHostNickname
+ * Servlet implementation class ViewNewClassListServlet
  */
-@WebServlet(name = "/host/updateNickname.do", urlPatterns = { "/host/updateNickname.do" })
-public class UpdateHostNicknameServlet extends HttpServlet {
+@WebServlet("/class/newClass.do")
+public class ViewNewClassListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateHostNicknameServlet() {
+    public ViewNewClassListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +33,17 @@ public class UpdateHostNicknameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session= request.getSession();
-		Host hostInfo = (Host) session.getAttribute("hostInfo");
-		String hostId=(hostInfo.getHostId());
+		List<ClassIndex> list = new ClassService().newClassList();
+//		request.setAttribute("newClass", list);
+//		request.getRequestDispatcher("/").forward(request, response);
+		System.out.println(list);
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html;charset=utf-8");
+//		response.getWriter().print(list);
+		Gson gson= new Gson();
+		response.setContentType("application/json; charset=UTF-8");
+		gson.toJson(list,response.getWriter());
 		
-		String nickname=request.getParameter("nickname");
-		System.out.println(nickname);
-		int result=new HostService().updateHostNickname(nickname,hostId);
-		if(result>0) {
-			System.out.println("nick change Ok");
-		}
-		System.out.println("nickname "+result);
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().print(result);
 	}
 
 	/**

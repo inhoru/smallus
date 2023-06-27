@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.smallus.classes.model.vo.ClassDetail;
+import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.payment.dao.PaymentDao;
 
@@ -75,7 +76,6 @@ public class ClassesDao {
 	}
 	
 	// Classes vo에서 toString override 한 객체를 가져온다.
-	//return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail;
 	public List<Classes> selectAllClassesByHostId(Connection conn, String hostId, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -123,8 +123,6 @@ public class ClassesDao {
 		return list;
 	}
 	
-	
-	//selectClassesByHostId=SELECT * FROM CLASS WHERE HOST_ID=?
 	public List<Classes> selectClassesByHostId(Connection conn, String hostId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -240,5 +238,28 @@ public class ClassesDao {
 			close(pstmt);
 		}return result;
 	}
+	public List<ClassIndex> newClassList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ClassIndex> list=new ArrayList<ClassIndex>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("newClassList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ClassIndex c=new ClassIndex();
+				c.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				c.getClasses().setClassAddress(rs.getString("CLASS_ADDRESS"));
+				c.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				list.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	
 	
 }

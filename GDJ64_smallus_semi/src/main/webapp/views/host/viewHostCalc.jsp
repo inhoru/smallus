@@ -29,14 +29,14 @@
 	</section>
 	<!-- main -->
 	<section class="h-main h-main-calcList">
-		<div class="h-main-title">
+		<!-- <div class="h-main-title">
 			<h3>정산 내역 그래프로 보기</h3>
 	    </div>
 	    <div class="h-viewList">
 			<a href=""id="h-viewChart">+</a>
 		</div>
 	        <hr>
-		<div class="h-r-callendar" id="h-main-chart"></div>
+		<div class="h-r-callendar" id="h-main-chart"></div> -->
 		<div class="h-main-title">
 			<h3>전체 정산 내역</h3>
 			<select name="h-selecCalcStatus" id="h-selecCalcStatus" onchange="selecCalcStatus()">
@@ -109,62 +109,6 @@
 			$(".h-calc").html(data);
 		});
 	});
-	var date= new Date();
-	let month= date.getMonth()+1;
-	// + 버튼 누르면 차트 정보 보이는 함수
-	let calcList='<%=calcList%>';
-	let calcArr=calcList.split(",");
-	let calcReqDate='<%=loginHost.getCalcReqDate()%>';
-	let calcPrice=calcArr[6];
-	var num =calcPrice.match(/\d+/g)
-	console.log(month)
-    /* google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['월 별', '정산 금액'],
-		  [month+calcReqDate, num]
-        ]);
-
-        var options = {
-          title: '탈퇴 통계'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('h-viewList'));
-
-        chart.draw(data, options);
-      } */
-	google.charts.load('current', { 'packages': ['corechart'] });
-	google.charts.setOnLoadCallback(drawDashboard); //콜백 함수 실행되면그래프 생김
-	$("#h-viewChart").click(e=>{
-		 google.charts.load('current');
-		  function drawVisualization() {
-		    var dataTable = [
-		      [month+calcReqDate, num],
-		      ["Indonesia", 117],
-		      ["China", 137],
-		      ["Nigeria", 142],
-		      ["Pakistan", 198],
-		      ["India", 336],
-		      ["Japan", 339],
-		      ["Bangladesh", 1045]
-		    ];
-		    google.visualization.drawChart({
-		      "containerId": "h-viewList",
-		      "dataTable": dataTable,
-		      "refreshInterval": 5,
-		      "chartType": "Table",
-		      "options": {
-		        "alternatingRowStyle": true,
-		        "showRowNumber" : true,
-		      }
-		    });
-		  }
-		  google.charts.setOnLoadCallback(drawVisualization);
-	/* }) */
-	
 	
 	//select 옵션 변경하면 이동
 	function selecCalcStatus(){
@@ -182,7 +126,6 @@
 		}
 	}
 	
- <%-- <script src="<%=request.getContextPath() %>/js/host.js"></script> --%>
 <%@ include file="/views/common/hostFooter.jsp"%>
 
 
