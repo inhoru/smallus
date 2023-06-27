@@ -2,12 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="com.smallus.classes.model.vo.ClassIndex" %>
-<script>
-	<%-- $(function(){
-	  // 실행할 기능을 정의해주세요.
-		location.assign('<%=request.getContextPath()%>/class/newClass.do');
-	}); --%>
-	<%-- $.ajax({
+ <%-- <script>
+
+	 $.ajax({
 		url:"<%=request.getContextPath()%>/class/newClass.do",
 		dataType: "text",
 		success: function(data) {
@@ -27,11 +24,11 @@
 				console.log(r);
 				console.log(m);
 			}
-		}); --%>
+		}); 
 	function fn_login(){
 		alert("로그인 후 발급 받을 수 있습니다.")
 	}
-</script>
+</script> --%> 
 <%
 	List<ClassIndex> newClass=(List)request.getAttribute("newClass");
 %>
