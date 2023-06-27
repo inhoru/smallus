@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="com.smallus.classes.model.vo.ClassIndex" %>
- <%-- <script>
+  <script>
 
-	 $.ajax({
+	<%--  $.ajax({
 		url:"<%=request.getContextPath()%>/class/newClass.do",
 		dataType: "text",
 		success: function(data) {
@@ -24,13 +24,11 @@
 				console.log(r);
 				console.log(m);
 			}
-		}); 
+		});  --%>
 
-<script>
-	function fn_login(){
-		alert("로그인 후 발급 받을 수 있습니다.")
-	}
-</script> --%> 
+
+	
+</script>
 <%
 	List<ClassIndex> newClass=(List)request.getAttribute("newClass");
 %>
@@ -132,7 +130,7 @@
 			</div>
 			<%} 
 		}%>
-		<%-- <div class="h-img-list">
+		<div class="h-img-list">
 			<a href=""> <img src="<%=request.getContextPath() %>/img/img-slide2-4.png" alt="no img">
 				<h4>class-title</h4>
 				<h5>category | location</h5>
@@ -179,7 +177,7 @@
                      </svg>
 				</label>
 			</div>
-		</div> --%>
+		</div>
 	</section>
 
 	<!-- best class section -->
