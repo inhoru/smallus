@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+a<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <script src="<%=request.getContextPath()%>/js/main.js"></script>
@@ -34,7 +34,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 			<tr>
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
-				<td><a href="<%=request.getContextPath()%>/review/reviewListAjax.do">후기관리</a></td>
+				<td><a href="<%=request.getContextPath()%>/review/reviewList.do">후기관리</a></td>
 				<td class="i-customerService"><a href="<%=request.getContextPath()%>/ajax/qnaTest.do">Q&A</a></td>
 			</tr>
 		</table>

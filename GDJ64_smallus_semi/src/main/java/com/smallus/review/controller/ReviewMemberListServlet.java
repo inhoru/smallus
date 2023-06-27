@@ -43,7 +43,7 @@ public class ReviewMemberListServlet extends HttpServlet {
 			today=new Date();	
 		}
 		
-//		List<Review> reviewList=new ReviewMemberService().memberReview 
+//		List<Review> reviewList=new ReviewMemberService()
 		
 
 		List<Review> reviews = List.of(
@@ -57,7 +57,7 @@ public class ReviewMemberListServlet extends HttpServlet {
 				build()
 				);
 		request.setAttribute("reviews",reviews);
-		request.getRequestDispatcher("/views/review/reviewListAjax.jsp").forward(request, response); //주소수정예정
+		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response); //주소수정예정
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
