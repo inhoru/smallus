@@ -36,8 +36,6 @@
 	List<ClassIndex> newClass=(List)request.getAttribute("newClass");
 %>
 
-
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container" id="hmain">
