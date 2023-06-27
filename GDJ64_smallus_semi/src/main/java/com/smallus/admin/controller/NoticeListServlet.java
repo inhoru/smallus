@@ -83,12 +83,10 @@ public class NoticeListServlet extends HttpServlet {
 		}
 		//1. DB에서 member테이블에 있는 데이터 가져오기
 		List<Notice> list=new AdminService().checkNoticeAll(cPage,numPerpage);
-		List<NoticeImage> list2=new AdminService().checkNoticeImageAll();
 //		list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("NoticeList", list);
-		request.setAttribute("NoticeImage", list2);
 		request.getRequestDispatcher("/views/admin/NoticeList.jsp").forward(request, response);
 		}else {
 		request.getRequestDispatcher("/views/admin/NoticeList.jsp").forward(request, response);

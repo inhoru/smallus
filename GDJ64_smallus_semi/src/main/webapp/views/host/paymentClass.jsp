@@ -212,10 +212,7 @@
 				msg += '\결제 금액 : ' + response.paid_amount;
 				msg += '카드 승인번호 : ' + response.apply_num; */
 				console.log(response);
-				console.log(response.merchant_uid);
 				alert(msg);
-				let paymentId=response.merchant_uid;
-				location.assign('<%=request.getContextPath()%>/paymentResult.do?paymentId='+paymentId);
 
 			} else {
 				var msg = '결제에 실패하였습니다.';

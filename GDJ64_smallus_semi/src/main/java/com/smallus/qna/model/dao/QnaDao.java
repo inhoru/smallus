@@ -16,7 +16,6 @@ import com.smallus.qna.model.vo.Qna;
 
 public class QnaDao {
 	
-	// 여기는 Q N A 입니다.
 	private Properties sql=new Properties();
 	
 	public QnaDao() {
@@ -75,6 +74,4 @@ public class QnaDao {
 		}return result;
 	}
 
-	
-	// 여기는 Q N A 입니다.
 }

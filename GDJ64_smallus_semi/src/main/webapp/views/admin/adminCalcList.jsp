@@ -10,7 +10,7 @@ List<Calc> CalcList = (List)request.getAttribute("CalcList");
 	align-items: center;
 }
 
-button#m-calcdeletebtn{
+button#m-classdeletebtn{
 	width: 4rem;
 	font-weight: bold;
 	background-color: #E8D6C3;
@@ -27,12 +27,6 @@ button#m-calcdeletebtn{
 		<div class="h-main-title">
 			<h2>호스트 정산관리</h2>
 		</div>
-			<select id="m-selectCalc" onchange="selectCalc();">
-				<option value="A">전체정산내역</option>
-				<option value="Y" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("Y")?"selected":""%>>정산완료</option>
-				<option value="W" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("W")?"selected":""%>>정산대기</option>
-				<option value="N" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("N")?"selected":""%>>정산거절</option>
-			</select>
 	</section>
 	<section class="h-main h-main-rsvList">
 		<div>
@@ -41,9 +35,8 @@ button#m-calcdeletebtn{
 					<th>정산번호</th>
 					<th>호스트아이디</th>
 					<th>정산요청일</th>
-					<th>정산승인일</th>
-					<th>정산요청금액</th>
-					<th>정산최종금액</th>
+					<th>정산금액</th>
+					<th>최종금액</th>
 					<th>정산상태</th>
 				</tr>
 				<%if (CalcList != null && !CalcList.isEmpty()) {
@@ -52,9 +45,9 @@ button#m-calcdeletebtn{
 					<td><%=c.getCalcId()%></td>
 					<td><%=c.getHostId()%></td>
 					<td><%=c.getCalcReqDate()%></td>
-					<td><%=c.getCalcPassDate()%></td>
 					<td><%=c.getCalcPrice()%></td>
 					<td><%=c.getCalcFinalPrice()%></td>
+
 					<%if(c.getCalcStatus().equals("Y")){ %>
 					<td>정산완료</td>
 					<%}else if(c.getCalcStatus().equals("W")){ %>
@@ -62,13 +55,11 @@ button#m-calcdeletebtn{
 					<%}else{ %>
 					<td>정산거절</td>
 					<%} %>
-					<td><button id="m-calcdeletebtn"
-							onclick="calcdelete('<%=c.getCalcId()%>');">삭제</button></td>
 				</tr>
 				<%}%>
 				<%} else {%>
 				<tr>
-					<td colspan="7">조회할 정산내역이 없습니다.</td>
+					<td colspan="7">승인할 정산요청이 없습니다.</td>
 				</tr>
 				<%
 				}
@@ -97,9 +88,6 @@ const selectCalc=()=>{
 		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
 	}
 };
-	function calcdelete(){
-		console.log(calcId);
-		location.assign("<%=request.getContextPath()%>/admin/CalcDeleteServlet.do?calcId="+calcId);
-	}
+
 </script>
 <%@ include file="/views/common/footer.jsp"%>

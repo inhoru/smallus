@@ -33,10 +33,10 @@ public class ClassesDeleteServlet extends HttpServlet {
 		int result=new AdminService().deleteByClass(classId);
 		String msg,loc;
 		if(result>0) {
-			msg="클래스 게시중단을 완료했습니다.";
+			msg="클래스삭제를 완료했습니다.";
 			loc="/admin/ClassesListServlet.do";
 		}else {
-			msg="클래스 게시중단을 실패했습니다.";
+			msg="클래스삭제를 실패했습니다.";
 			loc="/admin/ClassesListServlet.do";
 		}
 		request.setAttribute("msg",msg);

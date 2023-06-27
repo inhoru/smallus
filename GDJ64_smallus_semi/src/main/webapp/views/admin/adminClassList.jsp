@@ -44,26 +44,34 @@ button#m-classdeletebtn{
 					<th>호스트아이디</th>
 					<th>등록일자</th>
 					<th>승인일자</th>
-					<th>게시상태</th>
 				</tr>
 				<%if (ClassesList != null && !ClassesList.isEmpty()) {
 					for (Classes c : ClassesList) {%>
-				<tr style="cursor: pointer;"
-					onclick="classdetail('<%=c.getClassId()%>');">
-					<td><%=c.getCategoryTitle()%></td>
-					<td><%=c.getClassTitle()%></td>
-					<td><%=c.getHostId()%></td>
-					<td><%=c.getClassUpLoadDate()%></td>
-					<td><%=c.getClassPassDate()%></td>
+				<tr>
+					<td style="cursor: pointer;"
+					onclick="classdetail('<%=c.getClassId()%>');"><%=c.getCategoryTitle()%></td>
+					<td style="cursor: pointer;"
+					onclick="classdetail('<%=c.getClassId()%>');"><%=c.getClassTitle()%></td>
+					<td style="cursor: pointer;"
+					onclick="classdetail('<%=c.getClassId()%>');"><%=c.getHostId()%></td>
+					<td style="cursor: pointer;"
+					onclick="classdetail('<%=c.getClassId()%>');"><%=c.getClassUpLoadDate()%></td>
+					<td style="cursor: pointer;"
+					onclick="classdetail('<%=c.getClassId()%>');"><%=c.getClassPassDate()%></td>
 					<%if(c.getClassStatus().equals("Y")){ %>
 					<td>게시중</td>
 					<%}else{ %>
 					<td>게시중단</td>
 					<%} %>
 					<%if(c.getClassStatus().equals("Y")){ %>
+
 					<td><button id="m-classdeletebtn"
+
 							onclick="classdelete('<%=c.getClassId()%>');">게시중단</button></td>
+					<%}else{ %>
+					<td></td>
 					<%} %>
+
 				</tr>
 				<%}%>
 				<%} else {%>
@@ -103,7 +111,6 @@ const selectClass=()=>{
 		location.assign("<%=request.getContextPath()%>/maintoclass.do");
 	}
 	function classdelete(classId){
-		console.log(classId);
 		location.assign("<%=request.getContextPath()%>/admin/ClassesDeleteServlet.do?classId="+classId);
 	}
 </script>

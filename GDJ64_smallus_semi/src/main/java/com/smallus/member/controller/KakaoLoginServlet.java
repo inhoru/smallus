@@ -52,7 +52,6 @@ public class KakaoLoginServlet extends HttpServlet {
 			session.setAttribute("notcount1",notcount);
 			session.setAttribute("Notlist1",list);
 			response.sendRedirect(request.getContextPath());
-			
 		}else {
 			//로그인 실패 -> 인증못받음
 			//실패 메세지 출력

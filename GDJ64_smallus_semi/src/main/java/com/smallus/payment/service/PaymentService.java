@@ -160,6 +160,7 @@ public class PaymentService {
 		return result;
 	}
 	
+
 	public Payment selectPaymentIdByMemberId(String memberId, String classDetailId) {
 		Connection conn=getConnection();
 		Payment p=dao.selectPaymentIdByMemberId(conn, memberId, classDetailId);
@@ -200,5 +201,6 @@ public class PaymentService {
 		return c; 
 	}
 	
+
 	
 }

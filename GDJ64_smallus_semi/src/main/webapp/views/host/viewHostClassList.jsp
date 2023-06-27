@@ -94,11 +94,12 @@
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부적절</th>
 									<%}else if(c.getClassPassId().equals("N3")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>중복 등록</th>
-									<%} 
-							}else if(c.getClassPassId().equals("Y")){%>
-								<th class="h-tbl-align-left" class="h-class-pass-Y">승인 완료<th>
-							<%}%>
-								
+									<%}%>
+							<%} else if(c.getClassPassId().equals("Y")){%>
+								<th class="h-tbl-align-left" class="h-class-pass-Y">
+										승인 완료
+								<th>
+								<%} %> 
 						<th colspan="3"><%=c.getClassId() %></th>
 						</tr>
 						<tr>
@@ -119,7 +120,9 @@
 						<tr>
 							<td colspan="2"></td>
 							<td><button>수정</button></td>
-							<%-- <td><button onclick="deleteClass(<%=c.getClassId() %>)">삭제</button></td> --%>
+							<td><button onclick="deleteClass(<%=c.getClassId() %>)">삭제</button></td>
+							<!-- <td><button class="h-deleteClass">삭제</button></td> -->
+							<!--이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
 						</tr>
 					</table>
 				</div>

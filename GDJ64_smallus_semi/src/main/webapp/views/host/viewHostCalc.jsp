@@ -35,7 +35,8 @@
 	    <div class="h-viewList">
 			<a href=""id="h-viewChart">+</a>
 		</div>
-	        <hr> -->
+	        <hr>
+		<div class="h-r-callendar" id="h-main-chart"></div> -->
 		<div class="h-main-title">
 			<h3>전체 정산 내역</h3>
 			<select name="h-selectCalcStatus" id="h-selectCalcStatus" onchange="selectCalcStatus()">
@@ -87,15 +88,7 @@
 		                        <td><%=c.getCalcPassDate()%></td>
                                 <td><%=c.getCalcPrice()%> 원</td>
                                 <td><%=c.getCalcFinalPrice()%> 원</td>
-		                        <td>
-					           		<%if(c.getCalcStatus().equals("N")){ %>
-					           			정산 거절
-					           		<%}else if(c.getCalcStatus().equals("Y")) {%>
-					           			정산 완료
-					           		<%}else if(c.getCalcStatus().equals("W")){ %>
-					           			정산 대기
-					           		<%} %>
-					            </td>
+		                        <td><%=c.getCalcStatus()%></td>
 	                   		</tr>
 	                    <%count++;
                     } %>
@@ -111,10 +104,9 @@
 <script type="text/javascript">
 	//select 옵션 변경하면 이동
 	function selectCalcStatus(){
-		let index = $("#h-selectCalcStatus option").index($("#h-selectCalcStatus option:selected"));
-		
+		let index = $("#h-selecCalcStatus option").index($("#h-selecCalcStatus option:selected"));
 		// index =1 -> W / 2:Y/3:N
-		console.log(index);
+		//console.log(index);
 		 if(index==0){
 			location.replace('<%=request.getContextPath()%>/host/viewHostCalc.do');
 		}else if(index==1){

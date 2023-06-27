@@ -12,13 +12,6 @@ import com.smallus.notice.model.vo.NoticeImage;
 public class NoticeService {
 	NoticeDao dao=new NoticeDao();
 	
-	public Notice selectNotice(Notice n) {
-		Connection conn=getConnection();
-		Notice notice=dao.selectNotice(conn,n);
-		close(conn);
-		return notice;
-	}
-	
 	public int enrollNotice(Notice n) {
 		Connection conn=getConnection();
 		int result=dao.enrollNotice(conn,n);
@@ -26,22 +19,10 @@ public class NoticeService {
 		return result;
 	}
 	
-	public int enrollNoticeImg(NoticeImage ni) {
-		Connection conn=getConnection();
-		int result2=dao.enrollNoticeImg(conn,ni);
-		close(conn);
-		return result2;
-	}
 	public int deleteNotice(String noticeId) {
 		Connection conn=getConnection();
 		int result=dao.deleteNotice(conn,noticeId);
 		close(conn);
 		return result;
-	}
-	public int deleteNoticeImage(String noticeId) {
-		Connection conn=getConnection();
-		int result2=dao.deleteNoticeImage(conn,noticeId);
-		close(conn);
-		return result2;
 	}
 }
