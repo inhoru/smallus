@@ -6,6 +6,12 @@
 	List<PaymentCalc> newList=(List)session.getAttribute("newList");
 	List<Classes> calendarList=(List)session.getAttribute("calendarList");
 %>
+<!-- fullcalendar css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="<%=request.getContextPath() %>/js/calendar.js"></script>
+<!-- fullcalendar 언어 설정관련 script -->
 <%@ include file="/views/common/hostHeader.jsp"%>
 <!--main-->
 <div id="mainOpacity h-host-main">

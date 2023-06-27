@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.CalcService;
+import com.smallus.host.service.HostService;
 import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.service.PaymentService;
 
@@ -86,13 +87,13 @@ public class AjaxSortingHostCalcServlet extends HttpServlet {
 		}
 		request.setAttribute("pageBar", pageBar);
 
-		
+		System.out.println(calcStatus);
 		List<Calc> cSortList=new CalcService().sortingByCalcStatus(hostId, calcStatus, cPage, numPerpage);
 		if(cSortList.isEmpty()||cSortList==null) {
 			System.out.println("cSortList 없음없");
 		}else {
 			System.out.println("calcList 있음있");
-			request.setAttribute("cSortList",cSortList);		
+			request.setAttribute("cSortList",cSortList);
 		}
 		request.getRequestDispatcher("/views/host/viewHostCalc.jsp").forward(request, response);
 		

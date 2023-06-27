@@ -106,6 +106,18 @@ public class HostService {
 		return result;
 	}
 	
+	public int insertNot(String hostId) {
+		Connection conn=getConnection();
+		int result=dao.insertNot(conn,hostId);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 
 }

@@ -1,30 +1,25 @@
-package com.smallus.review.controller;
+package com.smallus.admin.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.smallus.member.model.vo.Member;
-import com.smallus.review.model.vo.Review;
-import com.smallus.review.service.ReviewService;
+import com.smallus.admin.service.AdminService;
 
 /**
- * Servlet implementation class ReviewListServlet
+ * Servlet implementation class CalcRejectServlet
  */
-@WebServlet("/review/reviewList.do")
-public class ReviewListServlet extends HttpServlet {
+@WebServlet("/admin/CalcRejectServlet.do")
+public class CalcRejectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListServlet() {
+    public CalcRejectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +28,20 @@ public class ReviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		HttpSession session=request.getSession();
-		Member loginMember=(Member)session.getAttribute("loginMember");
-		
-		List<Review> reviews=new ReviewService().selectReview(loginMember.getMemberId());
-		
-		request.setAttribute("reviews", reviews);
-		
-		//System.out.println(reviews);
-		
-		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response);
-	
+		String calcId=request.getParameter("calcId");
+		System.out.println(calcId);
+		int result=new AdminService().calcReject(calcId);
+		String msg="",loc="";
+		if(result>0) {
+			msg="호스트 정산요청 거철처리에 성공하였습니다.";
+			loc="/admin/ClacConfirmListServlet.do";
+		}else {
+			msg="호스트 정산요청 거절처리에 실패하였습니다.";
+			loc="/admin/ClacConfirmListServlet.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 	}
 
 	/**
