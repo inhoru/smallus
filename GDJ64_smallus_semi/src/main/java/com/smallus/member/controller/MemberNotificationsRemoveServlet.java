@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.smallus.host.model.vo.Host;
+import com.smallus.host.service.HostService;
 import com.smallus.member.model.vo.Member;
 import com.smallus.member.model.vo.Notifications;
 import com.smallus.member.service.MemberService;
@@ -38,9 +40,16 @@ public class MemberNotificationsRemoveServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		int result = new MemberService().notifications(notId);
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		String memberId=loginMember.getMemberId();
-		List<Notifications> list =new MemberService().selectAllNotifications(memberId);
-		int notcount = new MemberService().notificationsCount(memberId);
+		Host loginHost = (Host) session.getAttribute("loginHost");
+		
+		if(loginMember==null) {
+			List<Notifications> list =new HostService().selectAllNotifications(loginHost.getHostId());
+			int notcount = new HostService().notificationsCount(loginHost.getHostId());
+			session.setAttribute("notcount",notcount);
+			session.setAttribute("Notlist",list);
+		}
+		List<Notifications> list =new MemberService().selectAllNotifications(loginMember.getMemberId());
+		int notcount = new MemberService().notificationsCount(loginMember.getMemberId());
 		session.setAttribute("notcount",notcount);
 		session.setAttribute("Notlist",list);
 		

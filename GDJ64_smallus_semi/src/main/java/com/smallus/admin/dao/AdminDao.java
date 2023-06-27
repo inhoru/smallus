@@ -476,5 +476,26 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
+	public Classes classHostId(Connection conn,String classId)  {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Classes c = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("classHostId"));
+			// SELECT HOST_ID FROM CLASS WHERE CLASS_ID=?
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				m = getMember(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}	
+		return m;
+	}
 	
 }

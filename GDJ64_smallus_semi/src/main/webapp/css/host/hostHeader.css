@@ -337,7 +337,7 @@ input.checkbox[type=checkbox]:not(:checked)+label * {
 
 /* 삭제후 사라지는애니메이션 */
 input.checkbox[type=checkbox]:checked+label {
-	height: 3.25rem;
+	height: 5.25rem;
 	padding: 1.125rem 4rem 0.75rem 2rem;
 	font-size: 75%;
 }

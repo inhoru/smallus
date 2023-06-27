@@ -187,4 +187,10 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	public Classes classHostId(String classId) {
+		Connection conn=getConnection();
+		Classes c=dao.classHostId(conn,classId);
+		close(conn);
+		return c; 
+	}
 }

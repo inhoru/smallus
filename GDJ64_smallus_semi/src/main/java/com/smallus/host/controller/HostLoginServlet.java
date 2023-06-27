@@ -81,6 +81,12 @@ public class HostLoginServlet extends HttpServlet {
 		}else if(loginHost!=null&&loginHost.getHostId().equals("admin")){
 			HttpSession session=request.getSession();
 			session.setAttribute("loginHost",loginHost);
+			List<Notifications> list =new HostService().selectAllNotifications(hostId);
+			int notcount = new HostService().notificationsCount(hostId);
+		
+			session.setAttribute("notcount",notcount);
+			session.setAttribute("Notlist",list);
+			
 			response.sendRedirect(request.getContextPath()+"/admin/AdminMainServlet.do");
 		}else {
 			//로그인 실패 -> 인증못받음
