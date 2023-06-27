@@ -129,14 +129,17 @@ if (cookies != null) {
 
 			<%
 			if (loginMember != null) {
-				List<Notifications> not = (List) session.getAttribute("Notlist");
-				int notcount = (int) session.getAttribute("notcount");
+				List<Notifications> not = (List) session.getAttribute("Notlist1");
+				int notcount = (int) session.getAttribute("notcount1");
 			%>
 
 			<div class="notification-icon">
 				<div class="icon i-noticon">
 					<img src="<%=request.getContextPath()%>/img/알림.png" alt=""
-						width="25px" height="25px"> <span class="num-count"><%=notcount%></span>
+						width="25px" height="25px">
+						<%if (loginHost==null){%>
+						 <span class="num-count"><%=notcount%></span>
+						 <%} %>
 				</div>
 			</div>
 			<div class="notification-container">
@@ -153,6 +156,7 @@ if (cookies != null) {
 							<%
 							for (Notifications n : not) {
 							%>
+							
 							<input class="checkbox" type="checkbox" id="size_<%=count%>"
 								value="small" checked /> <label class="notification"
 								for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
@@ -162,6 +166,7 @@ if (cookies != null) {
 
 							<%
 							count++;
+							
 							}
 							%>
 							<%

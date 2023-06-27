@@ -49,8 +49,8 @@ public class KakaoLoginServlet extends HttpServlet {
 			String memberId=loginMember.getMemberId();
 			List<Notifications> list =new MemberService().selectAllNotifications(memberId);
 			int notcount = new MemberService().notificationsCount(memberId);
-			session.setAttribute("notcount",notcount);
-			session.setAttribute("Notlist",list);
+			session.setAttribute("notcount1",notcount);
+			session.setAttribute("Notlist1",list);
 			response.sendRedirect(request.getContextPath());
 			
 		}else {

@@ -100,8 +100,8 @@ if (cookies != null) {
                      <input class="checkbox" type="checkbox" id="size_<%=count%>"
                         value="small" checked /> <label class="notification"
                         for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
-                        <br /><a href="<%=request.getContextPath()%>/class/viewHostClassList.do"><span class="i-notType"><%=n.getNotiflType()%> <%=n.getTypeTitle()%></span> 
-                        <%= n.getNotiflMessage()%>
+                        <br /><a href="<%=request.getContextPath()%>/class/viewHostClassList.do"><span class="i-notType"><%=n.getNotiflType()%><%= n.getNotiflMessage()%></span> 
+                      <%=n.getTypeTitle()%>
                      </a><input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"></label>
 
                      <%
