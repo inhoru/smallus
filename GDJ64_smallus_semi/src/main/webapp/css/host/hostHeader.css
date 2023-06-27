@@ -213,3 +213,188 @@ a {
     color: inherit;
 
 }
+.i-nocoupon {
+	font-weight: 900;
+	font-size: 24px;
+	text-align: center;
+	padding-top: 10%;
+	padding-bottom: 10%;
+}
+
+/* 알림타입 */
+.i-notType {
+	margin-top: 2%;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2%;
+	font-weight: 900;
+	color: black;
+}
+
+/* 알람 목록 */
+.notification-container::before {
+	content: "";
+	position: absolute;
+	top: 0px;
+	right: 0;
+	width: 0;
+	height: 0;
+	transform: translate(-1rem, -100%);
+	border-left: 0.75rem solid transparent;
+	border-right: 0.75rem solid transparent;
+	border-bottom: 0.75rem solid white;
+}
+
+/* 화면 너비가 1800px 이상일 때 */
+@media ( min-width : 1800px) {
+	.notification-container {
+		  	background-color: #FFFBF5;
+	display: none;
+	cursor: default;
+	position: absolute;
+	z-index: 999;
+	right: 500px;
+	margin-top: 270px;
+	width: 400px;
+	font-weight: 300;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+	}
+}
+
+/* 화면 너비가 800px 이상 1400px 이하일 때 */
+@media ( min-width : 800px) and (max-width: 1440px) {
+	.notification-container {
+	  	background-color: #FFFBF5;
+	display: none;
+	cursor: default;
+	position: absolute;
+	z-index: 999;
+	right: 330px;
+	margin-top: 270px;
+	width: 400px;
+	font-weight: 300;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+
+	}
+}
+@media ( min-width : 1500px) and (max-width: 1800px) {
+	.notification-container {
+		  	background-color: #FFFBF5;
+	display: none;
+	cursor: default;
+	position: absolute;
+	z-index: 999;
+	right: 517px;
+	margin-top: 270px;
+	width: 400px;
+	font-weight: 300;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+	}
+}
+
+/* 알람스크롤 */
+.scroll-snap-card {
+	margin-bottom: 2%;
+	height: 200px;
+	overflow: scroll;
+	border-radius: 10px;
+}
+
+/* 알람스크롤바없애기 */
+.scroll-snap-card::-webkit-scrollbar {
+	display: none;
+}
+
+/* 알림 체크박스 */
+input.checkbox[type=checkbox] {
+	display: none;
+}
+
+/* 알람체크박스2 */
+input.checkbox[type=checkbox]+label {
+	display: block;
+}
+
+/* 삭제 체크박스 */
+input.checkbox[type=checkbox]:not(:checked)+label {
+	transition: height 0.25s;
+	height: 0;
+	padding: 0;
+	font-size: 0;
+	border: none;
+}
+
+/* 삭제체크박스 숨김 */
+input.checkbox[type=checkbox]:not(:checked)+label * {
+	display: none;
+}
+
+/* 삭제후 사라지는애니메이션 */
+input.checkbox[type=checkbox]:checked+label {
+	height: 3.25rem;
+	padding: 1.125rem 4rem 0.75rem 2rem;
+	font-size: 75%;
+}
+/* 알람 아이콘 */
+.notification-icon {
+	position: relative;
+	margin-right: 1em;
+	border-radius: 5px;
+}
+
+/* 알람 갯수 */
+.num-count {
+	position: absolute;
+	user-select: none;
+	cursor: default;
+	font-size: 0.6rem;
+	background: #e74c3c;
+	width: 1.2rem;
+	height: 1.2rem;
+	color: #ecf0f1;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	top: -0.33rem;
+	right: -0.66rem;
+	box-sizing: border-box;
+}
+
+/* 알람 전체 */
+/* .notification-container {
+	background-color: #FFFBF5;
+	display: none;
+	cursor: default;
+	position: absolute;
+	z-index: 999;
+	right: 520px;
+	margin-top: 270px;
+	width: 400px;
+	font-weight: 300;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	box-shadow: 0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2);
+} */
+
+/* 알람 세부목록 */
+.notification {
+	height: 3.25rem;
+	padding: 0.5rem 0.5rem 2.0rem 2.0rem;
+	font-size: 70%;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* 알람 내용  */
+.i-notifcationTotal {
+	height: 80px;
+}

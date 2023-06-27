@@ -16,6 +16,8 @@ import com.smallus.classes.model.service.ClassService;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.HostService;
+import com.smallus.member.model.vo.Notifications;
+import com.smallus.member.service.MemberService;
 import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.service.PaymentService;
 
@@ -67,6 +69,11 @@ public class HostLoginServlet extends HttpServlet {
 			//로그인 성공 -> 인증받음
 			HttpSession session=request.getSession();
 			session.setAttribute("loginHost",loginHost);
+			List<Notifications> list =new HostService().selectAllNotifications(hostId);
+			int notcount = new HostService().notificationsCount(hostId);
+		
+			session.setAttribute("notcount",notcount);
+			session.setAttribute("Notlist",list);
 			
 			//화면전환시킬방법 2가지중 sendRedirect로 보낸다 이유는 데이터를  session 저장시켰고, url주소에 정보를 남기지 않기 위해서
 			response.sendRedirect(request.getContextPath()+"/hostMain.do");
