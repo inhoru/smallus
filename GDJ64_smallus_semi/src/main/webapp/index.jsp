@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="com.smallus.classes.model.vo.ClassIndex" %>
-
  <%-- <script>
 
 	 $.ajax({
@@ -26,7 +25,7 @@
 				console.log(m);
 			}
 		}); 
-=======
+
 <script>
 	function fn_login(){
 		alert("로그인 후 발급 받을 수 있습니다.")
@@ -37,7 +36,6 @@
 %>
 
 
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container" id="hmain">
