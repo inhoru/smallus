@@ -1,12 +1,13 @@
 package com.smallus.admin.dao;
 
-import static com.smallus.classes.model.dao.ClassesDao.getClasses;
 import static com.smallus.common.JDBCTemplate.close;
 import static com.smallus.host.dao.CalcDao.getCalc;
 import static com.smallus.host.dao.HostDao.getHost;
 import static com.smallus.member.dao.MemberDao.getMember;
 import static com.smallus.notice.dao.NoticeDao.getNotice;
 import static com.smallus.notice.dao.NoticeDao.getNoticeImage;
+import static com.smallus.classes.model.dao.ClassesDao.getClasses2;
+import static com.smallus.classes.model.dao.ClassesDao.getClasses;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -482,11 +483,11 @@ public class AdminDao {
 		Classes c = null;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("classHostId"));
-			// SELECT HOST_ID FROM CLASS WHERE CLASS_ID=?
+			// SELECT * FROM CLASS WHERE CLASS_ID=?
 			pstmt.setString(1, classId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				c = getMember(rs);
+				c = getClasses2(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -494,7 +495,9 @@ public class AdminDao {
 			close(rs);
 			close(pstmt);
 		}	
-		return m;
+		return c;
 	}
+	
+	
 	
 }
