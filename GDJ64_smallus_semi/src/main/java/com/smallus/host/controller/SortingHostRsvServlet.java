@@ -1,4 +1,4 @@
-package com.smallus.payment.controller;
+package com.smallus.host.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,12 +39,6 @@ public class SortingHostRsvServlet extends HttpServlet {
 		String hostId=host.getHostId();
 		
 		String paymentStatus=request.getParameter("paymentStatus");
-		if(paymentStatus.equals("Y")) {
-			paymentStatus="결제완료";
-		}else if(paymentStatus.equals("N")) {
-			paymentStatus="결제취소";
-		}
-		
 		
 		// 페이징 처리
 		int cPage, numPerpage;
@@ -58,26 +52,33 @@ public class SortingHostRsvServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			numPerpage = 6;
 		}
-
+		
 		String pageBar = "";
 		int totalData = new PaymentService().selectRsvCount(hostId);
+		if(paymentStatus.equals("Y")) {
+			int sortingYCount= new PaymentService().selectSortingCount(hostId,paymentStatus);
+			totalData=sortingYCount;
+		}else if(paymentStatus.equals("N")) {
+			int sortingNCount= new PaymentService().selectSortingCount(hostId,paymentStatus );
+			totalData=sortingNCount;
+		}
 		System.out.println(totalData);
 		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageNo + pageBarSize - 1;
-
+		
 		if (pageNo == 1) {
 			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + (pageNo - 1)
+			pageBar += "<a href='" + request.getRequestURI() + "?paymentStatus=" + paymentStatus + "&cPage=" + (pageNo - 1)
 					+ "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (pageNo == cPage) {
 				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
 			} else {
-				pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo
+				pageBar += "<a href='" + request.getRequestURI() + "?paymentStatus=" + paymentStatus + "&cPage=" + pageNo
 						+ "&numPerpage=" + numPerpage + "'> " + pageNo + " </a>";
 			}
 			pageNo++;
@@ -85,11 +86,16 @@ public class SortingHostRsvServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo + "&numPerpage="
+			pageBar += "<a href='" + request.getRequestURI() + "?paymentStatus=" + paymentStatus + "&cPage=" + pageNo + "&numPerpage="
 					+ numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
 		
+		if(paymentStatus.equals("Y")) {
+			paymentStatus="결제완료";
+		}else if(paymentStatus.equals("N")) {
+			paymentStatus="결제취소";
+		}
 		List<PaymentCalc> sortStatusList=new PaymentService().sortingPaymentByStatus(hostId,paymentStatus,cPage,numPerpage);
 		if(sortStatusList.isEmpty()||sortStatusList==null) {
 			System.out.println("sortStatusList없음없");

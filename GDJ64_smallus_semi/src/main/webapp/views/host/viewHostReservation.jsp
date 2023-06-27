@@ -30,13 +30,12 @@
                     <h3>전체 예약 내역</h3>
 	                <select name="h-selectPaymentStatus" id="h-selectPaymentStatus" onchange="selectOption()">
 	                	<option>결제 상태(전체)</option>
-	                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 완료</option>
-	                	<option value="N" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>결제 취소</option>
+	                	<option value="Y" <%=request.getParameter("paymentStatus")!=null&&request.getParameter("paymentStatus").equals("Y")?"selected":""%>>결제 완료</option>
+	                	<option value="N" <%=request.getParameter("paymentStatus")!=null&&request.getParameter("paymentStatus").equals("N")?"selected":""%>>결제 취소</option>
 	                </select>
                 </div>
                 <table id="h-main-rsv-tbl">
                     <tr>
-                    	<th>NO</th>
                         <th>결제 번호</th>
                         <th>클래스 이름</th>
                         <th>날짜</th>
@@ -46,11 +45,9 @@
                         <th>결제 상태</th>
                     </tr>
                     <%if(rsvList!=null && !rsvList.isEmpty()){
-                    	int count=1;
                     	for(PaymentCalc p: rsvList){
                         %>
 		                    <tr>
-		                    	<td><%=count %></td>
 		                        <td><%=p.getPayment().getPaymentId()%></td>
 		                        <td><%=p.getClasses().getClassTitle()%></td>
 		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
@@ -59,13 +56,10 @@
 		                        <td><%=p.getPayment().getPaymentDate()%></td>
 		                        <td><%=p.getPayment().getPaymentStatus()%></td>
 	                   		</tr>
-	                    <%count++;
-	                    }
+	                 <% }
                     }else if(sortStatusList!=null && !sortStatusList.isEmpty()){
-                    	int count=1;
                     	for(PaymentCalc p: sortStatusList){%>
                         <tr>
-		                    	<td><%=count %></td>
 		                        <td><%=p.getPayment().getPaymentId()%></td>
 		                        <td><%=p.getClasses().getClassTitle()%></td>
 		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
@@ -74,8 +68,7 @@
 		                        <td><%=p.getPayment().getPaymentDate()%></td>
 		                        <td><%=p.getPayment().getPaymentStatus()%></td>
 	                   		</tr>
-	                    <%count++;
-	                    }
+	                   <% }
                     }else{ %>
                     <tr>
                         <td colspan="8">조회된 예약이 없습니다.</td>
@@ -95,7 +88,7 @@ function selectOption(){
 	// index =1 -> W / 2:Y/3:N
 	//console.log(index);
 	if(statusIndex==0){
-		location.replace('<%=request.getContextPath()%>/host/viewHostRsv.do');
+		location.assign('<%=request.getContextPath()%>/host/viewHostRsv.do?');
 	}else if(statusIndex==1){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y');
 

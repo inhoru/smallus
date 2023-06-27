@@ -5,8 +5,9 @@
 	Host loginHost=(Host)session.getAttribute("loginHost");
 	Host hostInfo=(Host) request.getAttribute("hostInfo");
 %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/host/hostMainStyle.css">
 <section class="h-updateAccInfo">
-	<h2>정산 정보 입력</h2><hr>
+	<h3>정산 정보 입력</h3><hr>
 	<div>
 		<h4>은행 명</h4>
 		<select id="h-selectAccountBank">
@@ -35,21 +36,26 @@
 		</select>
 	</div>
 	<div>
-		<span>* 입력 하신 정산 일에 자동으로 매달 정산 신청됩니다</span>
+		<span>* 입력 하신 정산 일에 자동으로 매달 정산 신청됩니다</span><br>
 		<button id="h-hostAccountUpdateBtn">수정</button>
+		<button id="h-hostAccountBack">뒤로 가기</button><hr>
 	</div>
 </section>
 <script>
+	// 돌아가기 버튼
+	$("#h-hostAccountBack").click(e=>{
+		location.assign('<%=request.getContextPath()%>/host/viewHostCalc.do')
+	})
+	 // 수정 버튼 누르면 정산 정보 업데이트 됨 
 	$("#h-hostAccountUpdateBtn").click(e=>{
     let accountbank=$("#h-selectAccountBank option:selected").val();
     let account=$("#h-UDT-hostAccount").val();
     let accountName=$("#h-UDT-hostAccountName").val();
     let calcReq=$("#h-selectCalcDate option:selected").val();
-    console.log(accountbank, account, accountName, calcReq)
-    
+    // 입력받은 값의 길이로 분기처리 
+    if(accountbank.length>0 && account.length>0 && accountName.length>0 && calcReq.length>0){ 
 		$.ajax({
 			url:"<%=request.getContextPath()%>/host/updateHostAccount.do",
-			//type:"get",
 			type:"post",
 			data:{
 				hostId:'<%=loginHost.getHostId()%>',
@@ -69,8 +75,13 @@
 				if(e.status==404) alert("요청한 페이지가 없습니다.");
 			},
 			complete:()=>{
-				location.assign('<%=request.getContextPath()%>/host/viewHostCalc.do?hostId=<%=loginHost.getHostId() %>')
+				location.assign('<%=request.getContextPath()%>/host/viewHostCalc.do')
 			}
 		});
+    }else{
+    	alert("정산 정보는 빈 칸으로 둘 수 없습니다.");
+    }
+    console.log(accountbank, account, accountName, calcReq)
+    
 	})
 </script>

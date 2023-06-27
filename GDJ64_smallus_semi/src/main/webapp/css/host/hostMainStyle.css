@@ -322,7 +322,7 @@ div.h-class-detail>div{
 }
 /* .h-class-sub page 내부 button style */
 div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, 
-.h-profile button , section.h-calc #h-UpdateHostAccount, .h-calc #h-UpdateHostAccount.h-updateAccInfo button{
+.h-profile button , section.h-calc #h-UpdateHostAccount, .h-calc #h-UpdateHostAccount, .h-updateAccInfo button{
 	margin-left:2rem;
 	width:var(--title-marginTop);
 	font-weight: var(--btn-bold);
@@ -583,4 +583,9 @@ section.h-updateAccInfo span {
 	cursor: pointer;
 }
 
+#h-hostAccountBack{
+	width:6rem;
+	margin-left:1rem;
+	margin-top:1rem;
+}
 

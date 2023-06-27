@@ -56,13 +56,14 @@ public class AjaxSortingHostCalcServlet extends HttpServlet {
 		}
 
 		String pageBar = "";
-		int totalData = new CalcService().selectCalcCount(hostId);
+		String calcStatus=request.getParameter("calcStatus");
+		int sortCount=new CalcService().selectCalcBySort(hostId, calcStatus);
+		int totalData = sortCount;
 		System.out.println(totalData+" "+hostId);
 		int totalPage = (int) Math.ceil((double) totalData / numPerpage);
 		int pageBarSize = 5;
 		int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
 		int pageEnd = pageNo + pageBarSize - 1;
-		String calcStatus=request.getParameter("calcStatus");
 
 		if (pageNo == 1) {
 			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";

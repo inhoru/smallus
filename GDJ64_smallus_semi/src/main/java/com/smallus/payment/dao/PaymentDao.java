@@ -248,9 +248,7 @@ public class PaymentDao {
 		return list;
 	}
 	
-	
 	public int selectRsvCount(Connection conn,String hostId) {
-		int count=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
@@ -624,6 +622,26 @@ public class PaymentDao {
 			close(pstmt);
 		}
 		return pc;
+	}
+	
+	
+	public int selectSortingCount(Connection conn,String hostId,String paymentStatus) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectSortingCount"));
+			pstmt.setString(1, hostId);
+			pstmt.setString(2, paymentStatus);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 }
 

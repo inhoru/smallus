@@ -57,13 +57,12 @@
 	cursor: pointer;
 }
 div#h-AddSchedule-calendar{
-	width: 1000px;
-	height: 500px;
-	margin: 10px;
-	border: 2px solid #595959;
-	border-radius: 20px;
-	padding:10px;
+	width: 100%;
+	margin: 2rem auto;
 }
+div#h-AddSchedule-calendar input{
+width: 20rem; 
+
     </style>
 <%@ page import="com.smallus.classes.model.vo.ClassDetail, com.smallus.classes.model.vo.Classes" %>
 <%
@@ -71,7 +70,10 @@ div#h-AddSchedule-calendar{
 	Classes list=(Classes)request.getAttribute("list");
 %>
 <%@ include file="/views/common/hostHeader.jsp"%>
-<!--main-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-class-sub">
      	<h2>내 클래스 보기</h2>
@@ -171,11 +173,12 @@ div#h-AddSchedule-calendar{
 		<div class="modal-content h-insertSchedule">
 			<h4>클래스 세부 일정을 추가합니다.</h4>
 			<div id="h-AddSchedule-calendar">
-				<input type="text" name="datetimes"/><button>추가</button><button>삭제</button>
+				<input type="text" name="datetimes"><button class="addTime">추가</button>
 			</div>
+			<div id="h-addScheduleCheck"></div>
 			<input type="hidden" value="">
-			<button id="h-insertSch">추가</button>
-			<button class="h-close-modal">추가 취소</button>
+			<!-- <button id="h-insertSch">추가</button>-->
+			<button class="h-close-modal">닫기</button> 
 		</div>
 	</div>
 <script>
@@ -184,16 +187,16 @@ div#h-AddSchedule-calendar{
 	  $('input[name="datetimes"]').daterangepicker({
 //		  singleDatePicker: true,
 		  showDropdowns: true,
-	    timePicker: true,
-	    startDate: moment().startOf('hour'),
-	    endDate: moment().startOf('hour').add(32, 'hour'),
-	    locale: {
-	      format: 'YYYY-MM-DD HH:mm',
-	      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
-		    "applyLabel": "확인",                    // 확인 버튼 텍스트
-		    "cancelLabel": "취소",                   // 취소 버튼 텍스트
-		    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-		    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+		    timePicker: true,
+		    startDate: moment().startOf('hour'),
+		    endDate: moment().startOf('hour').add(32, 'hour'),
+		    locale: {
+		      format: 'YYYY-MM-DD HH:mm',
+		      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
+			    "applyLabel": "확인",                    // 확인 버튼 텍스트
+			    "cancelLabel": "취소",                   // 취소 버튼 텍스트
+			    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+			    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
 	    }
 	  });
 	});
@@ -221,7 +224,21 @@ div#h-AddSchedule-calendar{
 	$("#h-insertClassDetail").click(e=>{
 		$(".h-modalInsertSchedule").css('display', 'block');
 		$("document").css('overflow', 'hidden');
-		<%-- location.assign('<%=request.getContextPath()%>/class/insertClassDetail.do?classId=<%=list.getClassId()%>'); --%>
+	})
+	
+	let delBtn;
+	$(".addTime").click(e=>{
+		let add=$('input[name="datetimes"]').val();
+		let newClass=$("<input type='text' disabled>").val(add);
+		delBtn=$("<button class='h-delBtnSch' name='delbtn'>").text("삭제");
+		let f=$("<form>").append(newClass).append(delBtn);
+		$("#h-addScheduleCheck").append(f);
+	})
+	
+	// 삭제 변경모달창 닫기
+	$(".h-close-modal").click(e => {
+		$(".h-modalInsertSchedule").css('display', 'none');
+		$("document").css('overflow', 'auto');
 	})
 	
 	

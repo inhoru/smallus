@@ -48,5 +48,15 @@ public class CalcService {
 		return list;
 	}
 	
+	public int selectCalcBySort(String hostId, String calcStatus) {
+		Connection conn=getConnection();
+		int result=dao.selectCalcBySort(conn, hostId,calcStatus);
+		if(result>0) {
+			commit(conn);
+		}else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	
 }
