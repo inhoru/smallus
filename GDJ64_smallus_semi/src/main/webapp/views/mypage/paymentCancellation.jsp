@@ -9,7 +9,7 @@ String cPage=(String)request.getAttribute("cPage");
 <div id="mainOpacity">
         <div class="i-withdrawalendtotal">
             <section class="i-tablecontent">
-            <table class="i-mypageCategories">
+           <table class="i-mypageCategories">
 			<tr>
 				<td class="i-myInfo i-my">내정보</td>
 				<td class="i-info">클래스정보</td>
@@ -19,7 +19,7 @@ String cPage=(String)request.getAttribute("cPage");
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
-				<td class="i-customerService"><a href="">공지사항</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 			</tr>
 			<tr>
 				<td class="i-myInfo"><a
@@ -30,8 +30,8 @@ String cPage=(String)request.getAttribute("cPage");
 			<tr>
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
-				<td><a href="">후기관리</a></td>
-				<td class="i-customerService"><a href="">Q&A</a></td>
+				<td><a href="<%=request.getContextPath()%>/ajax/reviewTest.do">후기관리</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/ajax/qnaTest.do">Q&A</a></td>
 			</tr>
 		</table>
             </section>

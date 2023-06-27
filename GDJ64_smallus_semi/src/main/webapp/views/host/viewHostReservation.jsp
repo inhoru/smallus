@@ -13,13 +13,11 @@
 				com.smallus.classes.model.vo.ClassDetail,
 				com.smallus.host.model.vo.Calc
 " %>
-<!--main-->
+<script src="<%=request.getContextPath() %>/js/calendar.js"></script>
 <div id="mainOpacity h-host-main">
 	<section class="h-main h-rsv">
      	<div class="h-main-title">
 			<h3>5월 예약 내역</h3><hr>
-     			<!-- 예약 내역 상세 페이지로 이동 -->
-                <!-- <div class="h-viewList"><a href="">+</a></div> -->
         </div><hr>
 		<div class="h-r-callendar" id="h-main-calendar"></div>
         
@@ -89,28 +87,6 @@
         </section>
 <script>
 
-	let dateIndex = $("#h-selectPaymentDate option").index($("#h-selectPaymentDate option:selected"));
-	
-//select 결제일 <%-- 정렬 옵션 변경하면 이동
-function selectDateOption(){
-	// index =0 -> 내림 / 1:오름 (변경)
-	//console.log(index);
-	if(dateIndex==0&&statusIndex==0){
-		location.replace('<%=request.getContextPath()%>/host/viewHostRsv.do');
-	}else if(dateIndex==0&&statusIndex==1){
-		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y');
-
-	}else if(dateIndex==0&&statusIndex==2){
-		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
-	}else if(dateIndex==1&&statusIndex==0){
-		location.replace('<%=request.getContextPath()%>/host/viewHostRsv.do?sort=asc');
-	else if(dateIndex==1&&statusIndex==1){
-		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y&sort=asc');
-
-	}else if(dateIndex==1&&statusIndex==2){
-		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N&sort=asc');
-	}
-} --%>
 //select 옵션 변경하면 이동
 function selectOption(){
 	let statusIndex = $("#h-selectPaymentStatus option").index($("#h-selectPaymentStatus option:selected"));
