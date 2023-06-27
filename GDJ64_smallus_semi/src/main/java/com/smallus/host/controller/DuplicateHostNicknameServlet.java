@@ -34,9 +34,7 @@ public class DuplicateHostNicknameServlet extends HttpServlet {
 		String nickname=request.getParameter("nickname");
 		System.out.println(nickname);
 		Host h=new HostService().selectByhostNickname(nickname);
-		System.out.println(h);
-//		response.setContentType("text/csv;charset=utf-8");
-//		response.getWriter().print(h==null?0:1);
+//		System.out.println(h);
 	}
 
 	/**

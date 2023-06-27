@@ -38,17 +38,13 @@ public class PaymentClassServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-//		List<Coupon> coupon=new CouponService().selectCouponByMemberId(loginMember.getMemberId());
 		String classDetailId=request.getParameter("id");
 		PaymentInfo pInfo= new PaymentService().selectPaymentInfo(classDetailId);
 		String personnel=request.getParameter("personnel");
-//		System.out.println(classDetailId);
-//		// memberId를 매개변수로 하는 쿠폰 가격 가져오기 
-//		List<Coupon> coupon=new CouponService().selectCouponByMemberId(loginMember.getMemberId());
-//		PaymentInfo pInfo= new PaymentService().selectPaymentInfo(classDetailId);
-//		// 선택한 수량, 디테일 클래스 아이디만 가지고 이동 -> 
-//		
+		
+		// memberId를 매개변수로 하는 쿠폰 가격 가져오기 
 		List<Coupon> coupon=new CouponService().selectCouponByMemberId(loginMember.getMemberId());
+		// 선택한 수량, 디테일 클래스 아이디만 가지고 이동 -> 
 		request.setAttribute("coupon",coupon);
 		request.setAttribute("paymentInfo",pInfo);
 		request.setAttribute("personnel",personnel);
@@ -56,14 +52,8 @@ public class PaymentClassServlet extends HttpServlet {
 		System.out.println("coupon : "+coupon);
 		System.out.println("pInfo : "+pInfo);
 		System.out.println("personnel : "+personnel);
-//		
 		
-//		
-//		Gson gson= new Gson();
-//		response.setContentType("application/json; charset=UTF-8");
-//		PrintWriter out=response.getWriter();
-//		gson.toJson(coupon,response.getWriter());
-		request.getRequestDispatcher("/views/payment/paymentClass.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/host/paymentClass.jsp").forward(request, response);
 			
 			
 	}

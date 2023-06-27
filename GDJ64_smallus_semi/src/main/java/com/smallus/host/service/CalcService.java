@@ -41,5 +41,12 @@ public class CalcService {
 		return calcList;
 	}
 	
+	public List<Calc> selectCalcByMonth(String hostId, int month, int calcReqDate){
+		Connection conn=getConnection();
+		List<Calc> list=dao.selectCalcByMonth(conn, hostId, month, calcReqDate);
+		close(conn);
+		return list;
+	}
+	
 	
 }

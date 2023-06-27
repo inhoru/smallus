@@ -31,14 +31,7 @@ public class PaymentTestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		Gson gson = new Gson();
-//		// GSON을 사용하여 List를 JSON 형식의 문자열로 변환
-//		String ClassDetail=request.getParameter("ClassDetail");
-//		// JSON 데이터를 클라이언트로 전송 (예: HttpServletResponse)
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		ClassDetail requestData=gson.fromJson(ClassDetail,ClassDetail.class); // data를 Member class로 변환해준다
-		request.getRequestDispatcher("/views/payment/paymentClass.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/host/paymentClass.jsp").forward(request, response);
 	}
 
 	/**

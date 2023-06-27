@@ -16,13 +16,13 @@ import com.smallus.host.service.HostService;
  * Servlet implementation class UpdateHostNickname
  */
 @WebServlet(name = "/host/updateNickname.do", urlPatterns = { "/host/updateNickname.do" })
-public class UpdateHostNickname extends HttpServlet {
+public class UpdateHostNicknameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateHostNickname() {
+    public UpdateHostNicknameServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +32,9 @@ public class UpdateHostNickname extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		Host loginHost = (Host) session.getAttribute("loginHost");
-		String hostId=(loginHost.getHostId());
+		HttpSession session= request.getSession();
+		Host hostInfo = (Host) session.getAttribute("hostInfo");
+		String hostId=(hostInfo.getHostId());
 		
 		String nickname=request.getParameter("nickname");
 		System.out.println(nickname);
@@ -43,10 +43,10 @@ public class UpdateHostNickname extends HttpServlet {
 			System.out.println("nick change Ok");
 		}
 		System.out.println("nickname "+result);
-//		response.setContentType("application/json");
-//		response.setCharacterEncoding("UTF-8");
-//		response.setContentType("text/html;charset=utf-8");
-//		response.getWriter().print(result);
+		//response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**

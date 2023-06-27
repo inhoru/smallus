@@ -53,16 +53,8 @@ public class PaymentEndServlet extends HttpServlet {
 		
 		// front에서 보낸 데이터를 data로 가져옴 
 		String data=request.getParameter("data");
-		//data : {"success":true,"imp_uid":"imp_182519379256","pay_method":"point","merchant_uid":"RSV1004",
-		//"name":"[베이킹] [베이킹] 휘낭시에 굽기","paid_amount":50000,"currency":"KRW","pg_provider":"kakaopay","pg_type":"payment",
-		//"pg_tid":"T4926c0f62ea0baecb0a","apply_num":"","buyer_name":"김세미","buyer_email":"test@naver.com",
-		//"buyer_tel":"01057111106","buyer_addr":"","buyer_postcode":"","custom_data":null,"status":"paid","paid_at":1687317530,
-		//"receipt_url":"https://mockup-pg-web.kakao.com/v1/confirmation/p/T4926c0f62ea0baecb0a/3930989aadf75ac385d920f5f158cb649d11b26ceed1571a2fcd93d2dfc74b0c",
-		//"card_name":null,"bank_name":null,"card_quota":0,"card_number":""}
 		
-		//String jsonData = request.getParameter("jsonData");
 		Map<String, String> dataMap = new HashMap<>();
-		//Map<String, String> newPayment= new HashMap<String,String>();
 		dataMap = gson.fromJson(data, dataMap.getClass());
 		
 		// callback으로 받은 함수 중 빠진 데이터를 ajax로 가져와서 map에 넣어줌 
@@ -86,26 +78,19 @@ public class PaymentEndServlet extends HttpServlet {
 			dataMap.put("status", "결제완료");
 		}
 		
-//		System.out.println("payment_id : "+(String)dataMap.get("merchant_uid"));
-//		System.out.println("classDetail_id : "+(String)dataMap.get("classDetailId"));
-//		System.out.println("member_id : "+(String)dataMap.get("memberId"));
-//		System.out.println("coupon_id : "+(String)dataMap.get("couponId"));
-//		System.out.println("price : "+ Integer.parseInt(dataMap.get("price")));
-//		System.out.println("personnel : "+ Integer.parseInt(String.valueOf(dataMap.get("classPersonnel"))));
-//		System.out.println("totalPrice : "+ Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
-//		System.out.println("pg_provider : "+(String)dataMap.get("pg_provider"));
-//		System.out.println("status : "+(String)dataMap.get("status"));
 		
 		int personnel=Integer.parseInt(classPersonnel);
-		//int remainingPersonnel= Integer.parseInt(request.getParameter("classPersonnel"));
 		int remainingPersonnel= new PaymentService().selectRemainPer(classDetailId);
-		System.out.println("personnel :"+personnel);
-		System.out.println("remainingPersonnel :"+remainingPersonnel);
-		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
+		
+//		System.out.println("personnel :"+personnel);
+//		System.out.println("remainingPersonnel :"+remainingPersonnel);
+//		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
+		
 		remainingPersonnel=remainingPersonnel-personnel;
-//		
+		
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
 		int result=new PaymentService().insertPayment(dataMap);
+		
 		if(result>0) System.out.println("입력 완료");
 		else System.out.println("error T_T");
 		

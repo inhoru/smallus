@@ -138,8 +138,6 @@
 		
 		price='<%=p.getClasses().getClassPrice()%>';
 		person='<%=personnel%>';
-		/* let price=$("#h-payPrice").val();
-		let person=$("#h-payPersonnel").val(); */
 		let sum = price*person;
 		console.log("price : "+price);
 		console.log("person : "+person);
@@ -148,8 +146,6 @@
 		total = sum-coupon;
 		$("#h-totalPrice").text(total + " 원")
 		console.log("total : "+total);
-		// index =1 -> W / 2:Y/3:N
-		//console.log($("#h-couponPrice"));
 	}
 	const today = new Date();
 	const year = today.getFullYear();

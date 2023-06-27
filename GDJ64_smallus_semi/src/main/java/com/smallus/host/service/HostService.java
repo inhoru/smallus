@@ -65,41 +65,25 @@ public class HostService {
 		int result=dao.updateHostNickname(conn,nickname,hostId);
 		if(result>0) {
 			commit(conn);
-			System.out.println("service nick O");
 		}else {
 			rollback(conn);
-			System.out.println("service nick x");
-		}
-		close(conn);
-		return result;
-	}
-	public int updateHostProfile(String hostId,String hostNickname,String hostPw,String hostHomePhone, String hostImg) {
-		Connection conn=getConnection();
-		int result=dao.updateHostProfile(conn,hostId,hostNickname,hostPw,hostHomePhone,hostImg);
-		if(result>0) {
-			commit(conn);
-			System.out.println("service hostPf O");
-		}else {
-			rollback(conn);
-			System.out.println("service hostPf  X");
 		}
 		close(conn);
 		return result;
 	}
 	
-	public int updateHostImg(String renameFile, String hostId) {
+	public int updateHostProfile(Host h, String hostId) {
 		Connection conn=getConnection();
-		int result=dao.updateHostImg(conn,renameFile,hostId);
+		int result=dao.updateHostProfile(conn,h,hostId);
 		if(result>0) {
 			commit(conn);
-			System.out.println("service updateImg O");
 		}else {
 			rollback(conn);
-			System.out.println("service updateImg x");
 		}
 		close(conn);
 		return result;
 	}
+	
 	
 	
 

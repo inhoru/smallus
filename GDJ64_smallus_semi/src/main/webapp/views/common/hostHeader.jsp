@@ -30,7 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
     <!-- fullcalendar 언어 설정관련 script -->
     <%-- <script src="<%=request.getContextPath() %>/js/calendar.js"></script> --%>
-    <script src="<%=request.getContextPath() %>/js/chart.js"></script>
+    <%-- <script src="<%=request.getContextPath() %>/js/chart.js"></script> --%>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     
@@ -104,7 +104,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><a href="<%=request.getContextPath()%>/review/viewHostReview.do">후기 관리</a></td>
+                        <td><a href="<%=request.getContextPath()%>/host/viewHostReview.do">후기 관리</a></td>
                     </tr>
                 </table>
             </div>            
