@@ -2,10 +2,12 @@ package com.smallus.admin.dao;
 
 import static com.smallus.classes.model.dao.ClassesDao.getClasses;
 import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.host.dao.CalcDao.getCalc;
 import static com.smallus.host.dao.HostDao.getHost;
 import static com.smallus.member.dao.MemberDao.getMember;
 import static com.smallus.notice.dao.NoticeDao.getNotice;
 import static com.smallus.notice.dao.NoticeDao.getNoticeImage;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,6 +20,7 @@ import java.util.Properties;
 
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.common.JDBCTemplate;
+import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
@@ -136,7 +139,19 @@ public class AdminDao {
 			close(pstmt);
 		}return result;
 	}
-	
+	public int deleteByClass(Connection conn,String classId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteByClass"));
+			pstmt.setString(1, classId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 	public List<Host> checkHostAll(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -333,4 +348,154 @@ public class AdminDao {
 			close(pstmt);
 		}return result;
 	}
+	public List<Classes> ClassesAll(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Classes> list2=new ArrayList();
+		try {
+			//classesAll=SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y'
+			pstmt=conn.prepareStatement(sql.getProperty("classesAll"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list2.add(getClasses(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list2;
+	}
+	public int selectClassesCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			//selectClassesCount=SELECT COUNT(*) FROM CLASS WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y'
+			pstmt=conn.prepareStatement(sql.getProperty("selectClassesCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public List<Classes> checkClassesAll(Connection conn,int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Classes> list=new ArrayList();
+		try {
+			//checkClassesAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y')M) WHERE RNUM BETWEEN ? AND ?
+			pstmt=conn.prepareStatement(sql.getProperty("checkClassesAll"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getClasses(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public int selectClassSortCount(Connection conn,String categoryId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			//selectClassSortCount=SELECT COUNT(*) FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y' AND CATEGORY_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("selectClassSortCount"));
+			pstmt.setString(1,categoryId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public List<Classes> checkClassSort(Connection conn, String categoryId, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Classes> list=new ArrayList();
+		try {
+			//checkClassSort=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y' AND CATEGORY_ID=?)M) WHERE RNUM BETWEEN ? AND ?
+			pstmt=conn.prepareStatement(sql.getProperty("checkClassSort"));
+			pstmt.setString(1, categoryId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getClasses(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public int selectConfirmCalcCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			//selectConfirmCalcCount=SELECT COUNT(*) FROM CALC WHERE CALC_STATUS='W'
+			pstmt=conn.prepareStatement(sql.getProperty("selectConfirmCalcCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public List<Calc> checkConfirmCalc(Connection conn, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Calc> list=new ArrayList();
+		try {
+			//checkConfirmCalc=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC WHERE CALC_STATUS='W')M) WHERE RNUM BETWEEN ? AND ?
+			pstmt=conn.prepareStatement(sql.getProperty("checkConfirmCalc"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getCalc(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public Classes classHostId(Connection conn,String classId)  {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Classes c = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("classHostId"));
+			// SELECT HOST_ID FROM CLASS WHERE CLASS_ID=?
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				m = getMember(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}	
+		return m;
+	}
+	
 }

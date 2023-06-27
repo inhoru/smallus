@@ -232,8 +232,7 @@ public class ClassesDao {
 			pstmt=conn.prepareStatement(sql.getProperty("updateRemainPersonnel"));
 			pstmt.setInt(1, updateRemainPersonnel);
 			pstmt.setString(2, classDetailId);
-			rs=pstmt.executeQuery();
-			if(rs.next()) result=rs.getInt("RN");
+			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

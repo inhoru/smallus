@@ -9,6 +9,17 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 	#pageBar{
 		align-items:center;
 	}
+	button#m-deletemember {
+	width:4rem;
+	font-weight: bold;
+	background-color: #E8D6C3;
+	border:0px;
+	border-radius: 1rem;
+	text-align:center;
+	font-size: 0.5rem;
+	height:25px;
+	cursor:pointer;
+}
 </style>
 <body>
 	<div id="mainOpacity h-host-main">
@@ -47,7 +58,7 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<td><%=m.getMemberConsent()%></td>
 						<td><%=m.getMemberSt()%></td>
 						<%if(m.getMemberSt().equals("Y")){ %>
-						<td><button onclick="deletemember('<%=m.getMemberId()%>');">삭제</button></td>
+						<td><button id="m-deletemember"onclick="deletemember('<%=m.getMemberId()%>');">삭제</button></td>
 						<%}else{%>
 							<td></td>
 						<%}%>

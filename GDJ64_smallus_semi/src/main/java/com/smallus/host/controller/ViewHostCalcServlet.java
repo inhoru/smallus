@@ -14,8 +14,6 @@ import com.google.gson.Gson;
 import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.CalcService;
-import com.smallus.payment.model.vo.PaymentCalc;
-import com.smallus.payment.service.PaymentService;
 
 /**
  * Servlet implementation class ViewHostCalcServlet
@@ -86,6 +84,10 @@ public class ViewHostCalcServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		Gson gson= new Gson();
 		List<Calc> calcList=new CalcService().selectAllcalcByhostId(hostId, cPage, numPerpage);
+		//int month=Integer.parseInt(request.getParameter("month")); 사용자에게 입력 받음 
+		int calcReqDate= host.getCalcReqDate();
+		int month=5;
+		//List<Calc> cList= new CalcService().selectCalcByMonth(hostId,month,calcReqDate);
 		if(calcList.isEmpty()||calcList==null) {
 			System.out.println("selectAllcalcByhostId 없음없");
 		}else {

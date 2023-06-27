@@ -6,6 +6,7 @@ import static com.smallus.common.JDBCTemplate.getConnection;
 import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.model.vo.PaymentCompleted;
+import com.smallus.payment.model.vo.PaymentInfo;
 
 public class PaymentService {
 	private PaymentDao dao= new PaymentDao();
@@ -118,6 +120,44 @@ public class PaymentService {
 		PaymentCompleted pc=dao.paymentResult(conn, paymentId);
 		close(conn);
 		return pc;
+	}
+	public int paymentCancel(String paymentId) {
+		Connection conn=getConnection();
+		int result=dao.paymentCancel(conn,paymentId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public Payment searchBypaymentId(String paymentId){
+		Connection conn=getConnection();
+		Payment  pc=dao.searchBypaymentId(conn, paymentId);
+		close(conn);
+		return pc;
+	}
+	public int reinsertCoupon(String paymentId,String couponId,String memberId,java.util.Date date,java.util.Date date2) {
+		Connection conn=getConnection();
+		int result=dao.reinsertCoupon(conn,paymentId,couponId,memberId,date,date2);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
+	
+	
+	public PaymentInfo selectPaymentInfo(String classDetailId) {
+		Connection conn=getConnection();
+		PaymentInfo pinfo=dao.selectPaymentInfo(conn, classDetailId);
+		close(conn);
+		return pinfo;
+	}
+	
+	public int selectRemainPer(String classDetailId) {
+		Connection conn=getConnection();
+		int result=dao.selectRemainPer(conn, classDetailId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 	

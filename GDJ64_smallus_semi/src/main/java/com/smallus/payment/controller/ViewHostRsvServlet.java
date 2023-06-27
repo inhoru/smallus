@@ -81,6 +81,9 @@ public class ViewHostRsvServlet extends HttpServlet {
 		}
 		request.setAttribute("pageBar", pageBar);
 		
+		
+		String sort=request.getParameter("sort");
+		//List<PaymentCalc> rsvList=new PaymentService().selectAllpaymentByhostId(hostId,cPage,numPerpage);
 		List<PaymentCalc> rsvList=new PaymentService().selectAllpaymentByhostId(hostId,cPage,numPerpage);
 		System.out.println(rsvList);
 		if(rsvList.isEmpty()||rsvList==null) {

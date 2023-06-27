@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.admin.service.AdminService;
+import com.smallus.classes.model.vo.Classes;
 
 /**
  * Servlet implementation class ClassesConfirmServlet
@@ -32,14 +33,16 @@ public class ClassesConfirmServlet extends HttpServlet {
 		String classId=request.getParameter("classId");
 		System.out.println(classId);
 		int result=new AdminService().classConfirm(classId);
+		Classes c=new AdminService().classHostId(classId);
 		System.out.println(result);
 		String msg="",loc="";
 		if(result>0) {
+			
 			msg="클래스 승인처리에 성공하였습니다.";
-			loc="/admin/ClaasesListServlet.do";
+			loc="/admin/ClassesConfirmListServlet.do";
 		}else {
 			msg="클래스 승인처리에 실패하였습니다.";
-			loc="/admin/ClaasesListServlet.do";
+			loc="/admin/ClassesConfirmListServlet.do";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

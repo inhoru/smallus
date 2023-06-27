@@ -22,7 +22,7 @@ int cPage = (int) request.getAttribute("cPage");
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
-				<td class="i-customerService"><a href="">공지사항</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 			</tr>
 			<tr>
 				<td class="i-myInfo"><a
@@ -33,8 +33,8 @@ int cPage = (int) request.getAttribute("cPage");
 			<tr>
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
-				<td><a href="">후기관리</a></td>
-				<td class="i-customerService"><a href="">Q&A</a></td>
+				<td><a href="<%=request.getContextPath()%>/ajax/reviewTest.do">후기관리</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/ajax/qnaTest.do">Q&A</a></td>
 			</tr>
 		</table>
 		</section>
@@ -80,28 +80,22 @@ int cPage = (int) request.getAttribute("cPage");
 						</div>
 						<div class="i-paymentbutton">
 							<%
-							if (paymentStatus.equals("결제완료") && startDate.after(today)) {
+							if (paymentStatus.equals("결제완료")) {
 							%>
-							<button class="i-withdrawalbutton1 i-writingreview">예약취소</button>
+							<button class="i-withdrawalbutton1 i-writingreview i-cancel" >예약취소</button>
 							<%
-							} else {
+							} else if(paymentStatus.equals("수강완료")){
 							%>
-							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">예약취소</button> -->
+							<button class="i-withdrawalbutton1 i-writingreview">후기
+								작성</button>
 							<%
 							}
 							%>
 							<%
 							if (paymentStatus.equals("결제취소") || endDate.after(today)) {
 							%>
-							<!-- <button class="i-withdrawalbutton1 i-writingreview1 ">후기
-								작성</button> -->
 							<%
-							} else {
-							%>
-							<button class="i-withdrawalbutton1 i-writingreview">후기
-								작성</button>
-							<%
-							}
+							} 
 							%>
 						</div>
 					</div>
@@ -152,6 +146,20 @@ int cPage = (int) request.getAttribute("cPage");
 					if(e.status==404) alert("요청한 페이지가 없습니다");
 				}
 			})
+		}else if(statu=='수강완료'){
+			$.ajax({
+				type:"get",
+				url:"<%=request.getContextPath()%>/paymentCompleted.do",
+				 data: {id:paymentId,cPage:<%=cPage%>},
+				success:data=>{
+					$("#mainOpacity").html(data);
+				},
+				error:(r,m)=>{
+					console.log(r);
+					console.log(m);
+					if(e.status==404) alert("요청한 페이지가 없습니다");
+				}
+			})
 		}else{
 			$.ajax({
 				type:"get",
@@ -170,19 +178,27 @@ int cPage = (int) request.getAttribute("cPage");
 	});
 	
 	
-	$(".i-completedList").click(e=>{
-		const completed=$(e.target).text();
-		location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+completed)
-		});
+$(".i-completedList").click(e=>{
+const completed=$(e.target).text();
+location.assign("<%=request.getContextPath()%>/paymentajaxcompleted.do?status="+completed)
+});
 
-		$(".i-cancellationList").click(e=>{	
-			const cancellation=$(e.target).text();
-			
-			location.assign("<%=request.getContextPath()%>/paymentajaxcancellation.do?status="+cancellation)
-		});
+$(".i-cancellationList").click(e=>{	
+	const cancellation=$(e.target).text();
+	
+	location.assign("<%=request.getContextPath()%>/paymentajaxcancellation.do?status="+cancellation)
+});
+	
+$(".i-cancel").click(function(e) {
+	const context="http://localhost:8080/GDJ64_smallus_semi";
+	  const paymentId = $(this).closest(".i-paymentList").find(".i-paymentId").val();
+	  window.open(context+"/paymentCancel.do?paymentId="+paymentId,"_blank",'width=500 , height=200, left=670, top=300');
+});
 
 
 
 
 </script>
-<%@ include file="/views/common/footer.jsp"%>
+
+
+	<%@ include file="/views/common/footer.jsp"%>

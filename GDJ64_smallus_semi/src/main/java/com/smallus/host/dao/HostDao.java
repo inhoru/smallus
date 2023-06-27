@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.smallus.host.model.vo.Host;
+import com.smallus.member.model.vo.Notifications;
 
 public class HostDao {
 private Properties sql=new Properties();//final로 선언하면 처리속도 빨라짐
@@ -47,7 +50,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
       ResultSet rs=null;
       Host h=null;
       try {
-         //hostLogin=SELECT * FROM HOST WHERE HOST_ID=? AND HOST_PW=?
          pstmt=conn.prepareStatement(sql.getProperty("hostLogin"));
          pstmt.setString(1, hostId);
          pstmt.setString(2, password);
@@ -67,7 +69,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
       ResultSet rs=null;
       Host h=null;
       try {
-         //selectByhostId=SELECT * FROM HOST WHERE HOST_ID=? AND HOST_ST='Y'
          pstmt=conn.prepareStatement(sql.getProperty("selectByhostId"));
          pstmt.setString(1, hostId);
          rs=pstmt.executeQuery();
@@ -86,7 +87,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
       ResultSet rs=null;
       Host h=null;
       try {
-         //selectByhostNickname=SELECT * FROM HOST WHERE HOST_NICKNAME=? AND HOST_ST='Y'
          pstmt=conn.prepareStatement(sql.getProperty("selectByhostNickname"));
          pstmt.setString(1, hostNickname);
          rs=pstmt.executeQuery();
@@ -105,7 +105,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
       int result=0;
       try {
          pstmt = conn.prepareStatement(sql.getProperty("enrollHost"));
-         //enrollHost=INSERT INTO MEMBER VALUES(?,?,?,?,?,?,DEFAULT,DEFAULT,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT)
          pstmt.setString(1, h.getHostId());
          pstmt.setString(2, h.getHostPw());
          pstmt.setString(3, h.getHostName());
@@ -127,7 +126,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		int result=0;
 		Host h=null;
 		try {
-			//updateHostCalc=UPDATE HOST SET HOST_ACCOUNT_BANK=?, HOST_ACCOUNT=?, HOST_ACCOUNT_NAME=? CALC_REQ_DATE=? WHERE HOST_ID=?
 			pstmt=conn.prepareStatement(sql.getProperty("updateHostCalc"));
 			pstmt.setString(1, accountBank);
 			pstmt.setString(2, account);
@@ -147,7 +145,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteHostByhostId"));
-			//deleteHostByhostId=UPDATE MEMBER SET MEMBER_ST='N' WHERE MEMBER_ID = ? AND MEMBER_PW=?
 			pstmt.setString(1,hostId);
 			pstmt.setString(2, password);
 			result=pstmt.executeUpdate();
@@ -164,7 +161,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 	      ResultSet rs=null;
 	      int result=0;
 	      try {
-	         //updateHostNickname=UPDATE HOST SET HOST_NICKNAME=? WHERE HOST_ID=? AND HOST_ST='Y'
 	         pstmt=conn.prepareStatement(sql.getProperty("updateHostNickname"));
 	         pstmt.setString(1, hostNickname);
 	         pstmt.setString(2, hostId);
@@ -176,46 +172,86 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 	         close(rs);
 	         close(pstmt);
 	      }return result;
-	}
-   
-   public int updateHostProfile(Connection conn,String hostId,String hostNickname,String hostPw,String hostHomePhone,String hostImg) {
+   }
+	
+   public int updateHostProfile(Connection conn,Host h,String hostId) {
 	      PreparedStatement pstmt=null;
 	      int result=0;
 	      try {
 	         pstmt=conn.prepareStatement(sql.getProperty("updateHostProfile"));
-	         pstmt.setString(1, hostId);
-	         pstmt.setString(2, hostNickname);
-	         pstmt.setString(3, hostPw);
-	         pstmt.setString(4, hostHomePhone);
-	         pstmt.setString(5, hostImg);
+	         pstmt.setString(1, h.getHostPw());
+	         pstmt.setString(2, h.getHostHomephone());
+	         pstmt.setString(3, h.getHostImg());
+	         pstmt.setString(4, h.getHostNickname());
+	         pstmt.setString(5, h.getHostEmail());
+	         pstmt.setString(6, hostId);
 	         result=pstmt.executeUpdate();
-	         System.out.println(result);
 	      }catch(SQLException e) {
 	         e.printStackTrace();
 	      }finally {
 	         close(pstmt);
 	      }return result;
 	}
-   
-   
-   
-   public int updateHostImg(Connection conn,String renameFile, String hostId) {
-	      PreparedStatement pstmt=null;
-	      ResultSet rs=null;
-	      int result=0;
-	      try {
-	         pstmt=conn.prepareStatement(sql.getProperty("updateHostImg"));
-	         pstmt.setString(1, renameFile);
-	         pstmt.setString(2, hostId);
-	         rs=pstmt.executeQuery();
-	         if(rs.next()) result=rs.getInt(1);
-	      }catch(SQLException e) {
-	         e.printStackTrace();
-	      }finally {
-	         close(rs);
-	         close(pstmt);
-	      }return result;
+   public List<Notifications> selectAllNotifications(Connection conn, String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Notifications> list=new ArrayList<Notifications>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectAllNotifications"));
+			pstmt.setString(1, memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getNotifications(rs));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
 	}
+	
+	public int notificationsCount(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("notificationsCount"));
+			//SELECT COUNT(HOST_ID) FROM NOTIFICATIONS WHERE HOST_ID =?
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	public int notifications(Connection conn, String notId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("notifications"));
+			//DELETE FROM NOTIFICATIONS WHERE NOTIFL_ID=?
+			pstmt.setString(1,notId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
+	public static Notifications getNotifications(ResultSet rs) throws SQLException {
+		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
+	}
+
+   
+   
    
    
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.dao.MemberDao;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Notifications;
 
 public class MemberService {
 		MemberDao dao=new MemberDao();
@@ -118,4 +119,26 @@ public class MemberService {
 		else rollback(conn);
 		return result;
 	}
+	public List<Notifications> selectAllNotifications(String memberId){
+		Connection conn=getConnection();
+		List<Notifications> list=dao.selectAllNotifications(conn,memberId);
+		close(conn);
+		return list;
+	}
+	
+	public int notificationsCount(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.notificationsCount(conn,memberId);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int notifications(String notId) {
+		Connection conn=getConnection();
+		int result=dao.notifications(conn,notId);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	
 }

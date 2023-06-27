@@ -1,4 +1,4 @@
-package com.smallus.review.controller;
+package com.smallus.host.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.smallus.review.service.ReviewService;
 /**
  * Servlet implementation class ViewHostReviewServlet
  */
-@WebServlet("/review/viewHostReview.do")
+@WebServlet("/host/viewHostReview.do")
 public class ViewHostReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
