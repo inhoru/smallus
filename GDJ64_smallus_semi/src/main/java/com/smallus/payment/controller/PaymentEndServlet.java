@@ -2,6 +2,7 @@ package com.smallus.payment.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.smallus.classes.model.service.ClassService;
 import com.smallus.member.model.vo.Member;
+import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCompleted;
 import com.smallus.payment.service.PaymentService;
 
@@ -76,23 +78,25 @@ public class PaymentEndServlet extends HttpServlet {
 		
 		if((boolean)dataMap.get("status").equals("paid")) {
 			dataMap.put("status", "결제완료");
+		}else {
+			String msg="결제가 완료 되지 않았습니다";
 		}
-		
+		String paymentId=dataMap.get("merchant_uid");
+		System.out.println("paymentId : "+paymentId);
 		
 		int personnel=Integer.parseInt(classPersonnel);
 		int remainingPersonnel= new PaymentService().selectRemainPer(classDetailId);
-		
-//		System.out.println("personnel :"+personnel);
-//		System.out.println("remainingPersonnel :"+remainingPersonnel);
-//		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
 		
 		remainingPersonnel=remainingPersonnel-personnel;
 		
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
 		int result=new PaymentService().insertPayment(dataMap);
+		int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
 		
-		if(result>0) System.out.println("입력 완료");
+		if(result>0 && result>0 && delResult>0) System.out.println("입력 완료");
 		else System.out.println("error T_T");
+		
+		
 		
 		
 	}

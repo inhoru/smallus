@@ -48,7 +48,7 @@ public class ViewHostReviewServlet extends HttpServlet {
 		try {
 			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
 		} catch (NumberFormatException e) {
-			numPerpage = 6;
+			numPerpage = 10;
 		}
 
 		String pageBar = "";

@@ -27,12 +27,6 @@ if (cookies != null) {
 
 <script type="text/javascript"
    src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
-<!-- fullcalendar css -->
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script> -->
-<!-- fullcalendar 언어 설정관련 script -->
- 
 <%-- <script src="<%=request.getContextPath() %>/js/chart.js"></script> --%>
 <script type="text/javascript"
    src="https://www.gstatic.com/charts/loader.js"></script>
@@ -144,26 +138,18 @@ if (cookies != null) {
                <th>고객 센터</th>
             </tr>
             <tr>
-               <td><a href="<%=request.getContextPath()%>/hostProfile.do">프로필
-                     수정</a></td>
+               <td><a href="<%=request.getContextPath()%>/hostProfile.do">프로필 수정</a></td>
+               <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do" id="h-viewCLassList">내 클래스 보기</a></td>
                <td><a
-                  href="<%=request.getContextPath()%>/class/viewHostClassList.do"
-                  id="h-viewCLassList">내 클래스 보기</a></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스
-                     예약 관리</a></td>
+                  href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
                <td><a
                   href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
             </tr>
             <tr>
-               <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원
-                     탈퇴</a></td>
-               <%-- <td><a href="<%=request.getContextPath()%>/host/withdrawalPasswordCheck.do">회원 탈퇴</a></td> --%>
+               <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원 탈퇴</a></td>
                <td><a href="">클래스 등록하기</a></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산
-                     정보 관리</a></td>
-               <td><a href="">1:1 문의</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산 정보 관리</a></td>
+               <!-- <td><a href="">1:1 문의</a></td> -->
             </tr>
             <tr>
                <td></td>

@@ -28,7 +28,6 @@ public class CalcDao {
 		}
 	}
 
-	
 	public static Calc getCalc(ResultSet rs) throws SQLException {
 		return Calc.builder()
 				.calcId(rs.getString("CALC_ID"))
@@ -37,7 +36,8 @@ public class CalcDao {
 				.calcReqDate(rs.getDate("CALC_REQ_DATE"))
 				.calcPassDate(rs.getDate("CALC_PASS_DATE"))
 				.calcPrice(rs.getInt("CALC_PRICE"))
-				.calcFinalPrice(rs.getInt("CALC_FINAL_PRICE")).build();
+				.calcFinalPrice(rs.getInt("CALC_FINAL_PRICE"))
+				.build();
 	}
 	
 	public int selectCalcCount(Connection conn, String hostId) {
@@ -89,7 +89,7 @@ public class CalcDao {
 		List<Calc> calcList=new ArrayList<Calc>();
 		try {
 			
-			pstmt=conn.prepareStatement("sortingByCalcStatus");
+			pstmt=conn.prepareStatement(sql.getProperty("sortingByCalcStatus"));
 			pstmt.setString(1, hostId);
 			pstmt.setString(2, calcStatus);
 			pstmt.setInt(3, (cPage-1)*numPerpage+1);

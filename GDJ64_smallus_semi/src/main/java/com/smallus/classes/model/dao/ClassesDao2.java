@@ -85,6 +85,7 @@ public class ClassesDao2 {
 		int result=0;
 		try {
 			for(ClassDetail sc:schedule) {
+				System.out.println("스케쥴 인식이 왜 안될까요 : "+sc);;
 				pstmt=conn.prepareStatement(sql.getProperty("addClassSchedule"));
 				pstmt.setDate(1, sc.getBookingTimeStart());
 				pstmt.setDate(2, sc.getBookingTimeEnd());
