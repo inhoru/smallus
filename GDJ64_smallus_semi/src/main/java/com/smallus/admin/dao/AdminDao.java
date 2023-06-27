@@ -1,13 +1,15 @@
 package com.smallus.admin.dao;
 
+import static com.smallus.classes.model.dao.ClassesDao.getClasses;
+import static com.smallus.classes.model.dao.ClassesDao.getClasses2;
 import static com.smallus.common.JDBCTemplate.close;
 import static com.smallus.host.dao.CalcDao.getCalc;
 import static com.smallus.host.dao.HostDao.getHost;
 import static com.smallus.member.dao.MemberDao.getMember;
 import static com.smallus.notice.dao.NoticeDao.getNotice;
 import static com.smallus.notice.dao.NoticeDao.getNoticeImage;
-import static com.smallus.classes.model.dao.ClassesDao.getClasses2;
-import static com.smallus.classes.model.dao.ClassesDao.getClasses;
+import static com.smallus.Inquiry.dao.InquiryDao.getInquiry2;
+
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.common.JDBCTemplate;
 import com.smallus.host.model.vo.Calc;
@@ -339,7 +342,7 @@ public class AdminDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			//UPDATE CLASS SET CLASS_PASS_ID='Y' WHERE CLASS_ID=?
+			//classConfirm=UPDATE CLASS SET CLASS_PASS_ID='Y',CLASS_PASS_DATE=SYSDATE WHERE CLASS_ID=?
 			pstmt=conn.prepareStatement(sql.getProperty("classConfirm"));
 			pstmt.setString(1, classId);
 			result = pstmt.executeUpdate();
@@ -599,5 +602,41 @@ public class AdminDao {
 			close(pstmt);
 		}	
 		return c;
+	}
+	public int selectInquiryCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			//selectInquiryCount=SELECT COUNT(*) FROM BOARD
+			pstmt=conn.prepareStatement(sql.getProperty("selectInquiryCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public List<Inquiry> checkInquiryAll(Connection conn, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Inquiry> list=new ArrayList();
+		try {
+			//checkInquiryAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID))M) WHERE RNUM BETWEEN ? AND ?
+			pstmt=conn.prepareStatement(sql.getProperty("checkInquiryAll"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getInquiry2(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
 	}
 }
