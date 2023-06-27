@@ -483,11 +483,10 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("classHostId"));
 			// SELECT HOST_ID FROM CLASS WHERE CLASS_ID=?
-			pstmt.setString(1, memberId);
-			pstmt.setString(2, password);
+			pstmt.setString(1, classId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				m = getMember(rs);
+				c = getMember(rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
