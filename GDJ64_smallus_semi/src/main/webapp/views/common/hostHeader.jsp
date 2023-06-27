@@ -195,7 +195,7 @@ if (cookies != null) {
                <td><a href="<%=request.getContextPath()%>/admin/ClacListServlet.do">호스트정산</a></td>
                <td><a
                   href="<%=request.getContextPath()%>/admin/ClacConfirmListServlet.do">정산승인</a></td>
-               <td><a href="">1:1문의</a></td>
+               <td><a href="<%=request.getContextPath()%>/admin/InquiryListServlet.do">1:1문의</a></td>
             </tr>
          </table>
       </div>
