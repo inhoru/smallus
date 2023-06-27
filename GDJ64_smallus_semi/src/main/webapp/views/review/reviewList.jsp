@@ -10,7 +10,7 @@
 	<br><br>
 
 	<div class="d-review-header">
-		<h2>내 클래스에 등록된 후기</h2>
+		<h2>후기</h2>
 		<!-- <select>
 			<option value="클래스명">클래스명</option>
 			<option value="작성일순">작성일순</option>

@@ -38,6 +38,7 @@ public class ClassesConfirmServlet extends HttpServlet {
 		System.out.println(classId);
 		int result=new AdminService().classConfirm(classId);
 		Classes c=new AdminService().classHostId(classId);
+
 		String msg="",loc="";
 		if(result>0) {
 			HttpSession session=request.getSession();

@@ -42,7 +42,7 @@ public class ClacListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			numPerpage=10;
 		}
-		int totalData=new AdminService().selectCalcCount();
+		int totalData=new AdminService().selectConfirmCalcCount();
 		//System.out.println(totalData);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
@@ -68,7 +68,7 @@ public class ClacListServlet extends HttpServlet {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
-		List<Calc> list=new AdminService().checkCalcAll(cPage,numPerpage);
+		List<Calc> list=new AdminService().checkConfirmCalc(cPage,numPerpage);
 		//list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);

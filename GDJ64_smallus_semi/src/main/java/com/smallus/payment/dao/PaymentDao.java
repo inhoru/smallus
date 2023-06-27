@@ -184,6 +184,7 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentCount"));
+			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -201,6 +202,7 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentdetailCount"));
+			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=? AND PAYMENT_STATUS=?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, completed);
 			rs=pstmt.executeQuery();
@@ -224,6 +226,7 @@ public class PaymentDao {
 			pstmt.setString(1, paymentId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
+////SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END ,HOST_NAME, CLASS_PRICE, PAYMENT_NAME, TOTAL_PRICE,COUPON_PRICE FROM PAYMENT P LEFT JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) LEFT JOIN CLASS USING(CLASS_ID) LEFT JOIN HOST USING(HOST_ID) LEFT JOIN PAYMENT_TYPE USING(PAYMENT_TYPE) LEFT JOIN COUPON_TYPE USING(COUPON_ID) WHERE PAYMENT_ID=?
 				PaymentCompleted pc=new PaymentCompleted();
 				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
@@ -248,6 +251,7 @@ public class PaymentDao {
 		return list;
 	}
 	
+	//selectAllpaymentByhostId=SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL AND PAYMENT_DATE BETWEEN TO_DATE(?) and TO_DATE(?)
 	
 	public int selectRsvCount(Connection conn,String hostId) {
 		int count=0;
@@ -256,6 +260,8 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectRsvCount"));
+			//SELECT COUNT(*) FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
+			//LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 			pstmt.setString(1, hostId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -268,6 +274,11 @@ public class PaymentDao {
 		return result;
 	}
 	
+	// SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START,
+	// CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, P.PAYMENT_STATUS 
+	// FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT
+	// JOIN PAYMENT P USING(CLASS_DETAIL_ID)
+	// LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 	public List<PaymentCalc> selectAllpaymentByhostId(Connection conn, String hostId,int cPage, int numPerpage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -299,6 +310,11 @@ public class PaymentDao {
 		return list;
 	}
 	
+	// SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START,
+	// CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, P.PAYMENT_STATUS 
+	// FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT
+	// JOIN PAYMENT P USING(CLASS_DETAIL_ID)
+	// LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID=? 
 	
 	public List<PaymentCalc> sortingPaymentByStatus(Connection conn, String hostId,String passStatus,int cPage, int numPerpage) {
 		PreparedStatement pstmt = null;
@@ -332,6 +348,12 @@ public class PaymentDao {
 		return list;
 	}
 	
+//	selectNewPaymentByhostId=SELECT * FROM (SELECT ROWNUM AS RNUM, B.* 	FROM 
+//	(SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE 
+//	FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
+//	LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) 
+//	LEFT JOIN CALC CL USING(HOST_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL)B) 
+//	WHERE RNUM BETWEEN 1 AND 5 ORDER BY PAYMENT_DATE DESC
 	public List<PaymentCalc> selectNewPaymentByhostId(Connection conn, String hostId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -363,6 +385,10 @@ public class PaymentDao {
 	}
 	
 	
+//	selectClassDetailByClassId=SELECT CATEGORY_TITLE, CLASS_TITLE, CLASS_ADDRESS, CLASS_ID, CLASS_DETAIL_ID, 
+//			BOOKING_TIME_START, BOOKING_TIME_END,  CLASS_PERSONNEL, REMAINING_PERSONNEL, CLASS_PRICE 
+//			FROM CLASS_DETAIL LEFT JOIN CLASS USING(CLASS_ID) LEFT JOIN CATEGORY USING(CATEGORY_ID)
+//			WHERE CLASS_ID=? AND CLASS_STATUS='Y'
 	public List<ClassPayment> selectClassDetailByClassId(Connection conn, String classId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -404,6 +430,16 @@ public class PaymentDao {
 		}
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertPayment"));
+//			pstmt.setString(1, (String)dataMap.get("merchant_uid"));
+//			pstmt.setString(2, (String)dataMap.get("classDetailId"));
+//			pstmt.setString(3, (String)dataMap.get("memberId"));
+//			pstmt.setString(4, (String)dataMap.get("couponId"));
+//			pstmt.setInt(5, Integer.parseInt(String.valueOf(dataMap.get("price"))));
+//			pstmt.setInt(6, Integer.parseInt(String.valueOf(dataMap.get("classPersonnel"))));
+//			pstmt.setInt(7, Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
+//			pstmt.setString(8, (String)dataMap.get("pg_provider"));
+//			pstmt.setString(9,(String)dataMap.get("status"));
+			
 			pstmt.setString(1, dataMap.get("merchant_uid"));
 			pstmt.setString(2, dataMap.get("classDetailId"));
 			pstmt.setString(3, dataMap.get("memberId"));
@@ -522,6 +558,7 @@ public class PaymentDao {
 		Payment p = new Payment();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("searchBypaymentId"));
+			//SELECT * FROM PAYMENT LEFT JOIN COUPON USING(COUPON_ID) WHERE PAYMENT_ID=?
 			pstmt.setString(1, paymentId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -540,6 +577,7 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("reinsertCoupon"));
+			//INSERT INTO COUPON VALUES(?,?,?,?)
 			pstmt.setString(1, couponId);
 			pstmt.setString(2, memberId);
 			pstmt.setDate(3, (java.sql.Date) createdDate);
@@ -551,79 +589,10 @@ public class PaymentDao {
 			close(pstmt);
 		}
 		return result;
+		
 	}
 	public static Payment getPayment(ResultSet rs) throws SQLException {
 		return Payment.builder().paymentId(rs.getString("PAYMENT_ID")).classDetailId(rs.getString("CLASS_DETAIL_ID")).memberId(rs.getString("MEMBER_ID")).couponId(rs.getString("COUPON_ID")).price(rs.getInt("PRICE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).TotalPrice(rs.getInt("TOTAL_PRICE")).paymentType(rs.getString("PAYMENT_TYPE")).paymentDate(rs.getDate("PAYMENT_DATE")).paymentStatus(rs.getString("PAYMENT_STATUS")).createdDate(rs.getDate("CREATED_DATE")).expiredDated(rs.getDate("EXPIRED_DATED")).build();
-	}
-	
-	public Payment selectPaymentIdByMemberId(Connection conn,String memberId, String classDetailId) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String status="결제완료";
-		Payment p=null;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("searchBypaymentId"));
-			pstmt.setString(1, memberId);
-			pstmt.setString(2, classDetailId);
-			pstmt.setString(3, status);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				getPayment(rs);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return p;
-	}
-	
-	public int deleteCouponByMemberId(Connection conn, String memberId) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("deleteCouponByMemberId"));
-			pstmt.setString(1, memberId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e){
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
-	
-	public PaymentCompleted selectPaymentByPaymentId(Connection conn, String paymentId) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		PaymentCompleted pc=null;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectPaymentByPaymentId"));
-			pstmt.setString(1, paymentId);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				pc=new PaymentCompleted();
-				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
-				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
-				pc.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
-				pc.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
-				pc.getPayment().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
-				pc.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
-				pc.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
-				pc.getPaymentType().setPaymentName(rs.getString("PAYMENT_NAME"));
-				pc.getClasses().setClassPrice(rs.getInt("CLASS_PRICE"));
-				pc.getHost().setHostName(rs.getString("HOST_NAME"));
-				pc.getCoupon().setCouponPrice(rs.getInt("COUPON_PRICE"));
-				pc.getPayment().setTotalPrice(rs.getInt("TOTAL_PRICE"));
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}
-		return pc;
 	}
 }
 
