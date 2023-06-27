@@ -41,7 +41,7 @@ public class ClassesListSortServlet extends HttpServlet {
 		try {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
 		}catch(NumberFormatException e) {
-			numPerpage=10;
+			numPerpage=5;
 		}
 		int totalData=new AdminService().selectClassSortCount(categoryId);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);

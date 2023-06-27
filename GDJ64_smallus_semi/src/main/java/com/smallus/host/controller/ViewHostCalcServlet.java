@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.CalcService;
+import com.smallus.host.service.HostService;
 
 /**
  * Servlet implementation class ViewHostCalcServlet
@@ -90,6 +91,8 @@ public class ViewHostCalcServlet extends HttpServlet {
 		//List<Calc> cList= new CalcService().selectCalcByMonth(hostId,month,calcReqDate);
 		if(calcList.isEmpty()||calcList==null) {
 			System.out.println("selectAllcalcByhostId 없음없");
+			Host newHost=new HostService().selectByhostId(hostId);
+			session.setAttribute("loginHost", newHost);
 		}else {
 			System.out.println("selectAllcalcByhostId 있음있");
 			request.setAttribute("calcList",calcList);				

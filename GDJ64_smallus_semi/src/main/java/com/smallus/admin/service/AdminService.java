@@ -8,6 +8,7 @@ import static com.smallus.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.List;
 
+import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.admin.dao.AdminDao;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.host.model.vo.Calc;
@@ -187,10 +188,62 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
+	public int selectCalcCount(){
+		Connection conn=getConnection();
+		int totalData=dao.selectCalcCount(conn);
+		close(conn);
+		return totalData;
+	}
+	public int calcConfirm(int calcFinalPrice,String calcId) {
+		Connection conn=getConnection();
+		int result=dao.calcConfirm(conn,calcFinalPrice,calcId);
+		close(conn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int calcReject(String calcId) {
+		Connection conn=getConnection();
+		int result=dao.calcReject(conn,calcId);
+		close(conn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public List<Calc> checkCalcAll(int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Calc> list=dao.checkCalcAll(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public int selectCalcSortCount(String calcStatus) {
+		Connection conn=getConnection();
+		int totalData=dao.selectCalcSortCount(conn,calcStatus);
+		close(conn);
+		return totalData;
+	}
+	public List<Calc> checkCalcSort(String calcStatus, int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Calc> list=dao.checkCalcSort(conn,calcStatus,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
 	public Classes classHostId(String classId) {
 		Connection conn=getConnection();
 		Classes c=dao.classHostId(conn,classId);
 		close(conn);
 		return c; 
+	}
+	public int selectInquiryCount() {
+		Connection conn=getConnection();
+		int totalData=dao.selectInquiryCount(conn);
+		close(conn);
+		return totalData;
+	}
+	public List<Inquiry> checkInquiryAll(int cPage,int numPerpage){
+		Connection conn=getConnection();
+		List<Inquiry> list=dao.checkInquiryAll(conn,cPage,numPerpage);
+		close(conn);
+		return list;
 	}
 }

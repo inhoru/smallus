@@ -59,8 +59,8 @@
 	cursor:pointer;
 } /* 적용안됨.. */
 
-#AddSchedule-calendar{
-	width: 1000px;
+div#AddSchedule-calendar{
+	width: 600px;
 	height: 500px;
 	margin: 10px;
 	border: 2px solid #595959;

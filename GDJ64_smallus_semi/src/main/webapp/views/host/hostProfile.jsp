@@ -46,7 +46,6 @@
 }
 .modal-content table{
 	width: 100%;
-	border: 1px solid red;
 	display:flex;
 	justify-content: space-between;
 }

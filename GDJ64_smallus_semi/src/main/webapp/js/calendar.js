@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-   //let classNmae='클래스 이름';
-   //let classTime='클래스 시간';
-   //let memberName='회원 이름';
-   //let memberNum='2';
-
 
    let eventDiv=document.getElementsByClassName('fc-event');
   //  console.log(eventDiv);
@@ -57,42 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      /*events:[    
-        {
-          title: payments[1], // a property!
-          start: payments[2], // a property!
-          color: '#f2c19d',
-        },
-        {
-          title: payments[7], // a property!
-          start: payments[9], // a property!
-          color: '#f2c19d',
-        }
-      
-      ]*/
-
-        // events: function(info, successCallback, failureCallback){
-    	  // // ajax 처리로 데이터를 로딩 시킨다.
-    	  // $.ajax({
-    		//  type:"get",
-    		//  url:"<%=request.getContextPath()%>/host/viewCalendar.do",
-    		//  dataType:"json",
-    		//  success:(data)=>{ 
-				// 	// responseText에 저장된 값을 data에 대입한다.
-				// 	console.log(data);
-				// 	//$("<h3>").text(data).css("color","magenta").appendTo($("#container"));
-				// },
-				// error: (e,m)=>{
-				// 	// console.log(e); // element
-				// 	// console.log(m);
-				// 	if(e.status==404) alert("요청한 페이지가 없습니다.");
-				// },
-				// complete:()=>{
-				// 	alert("서버와 통신 끝"); // success나 error가 끝난 뒤에 무조건 complete가 실행 된다
-				// }
-    		
-    	  // 	});
-    	  // },
         events: [
               { // this object will be "parsed" into an Event Object
                 title: '휘낭시에 15:00 김*영님 2명', // a property!
@@ -120,16 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 end: '2023-06-12T12:30:00'
             },
         ],
-        
-        /*eventClick: function(info) {
-
-            // 일정 클릭 시 발생할 이벤트
-            //클릭한 일정 Id
-            let id = info.event._def.defId;
-            alert(id+'hi');
-          */
-        
-        
     });
     calendar.render();
     

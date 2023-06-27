@@ -245,6 +245,26 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 			close(pstmt);
 		}return result;
 	}
+	public int insertNot(Connection conn, String notId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
+			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,?,null,?,SYSDATE,?)
+			String c="클래스승인이되었습니다.";
+			String d="클래스상세";
+			pstmt.setString(1,notId);
+			pstmt.setString(2,c);
+			pstmt.setString(3,d);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 	
 	public static Notifications getNotifications(ResultSet rs) throws SQLException {
 		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();

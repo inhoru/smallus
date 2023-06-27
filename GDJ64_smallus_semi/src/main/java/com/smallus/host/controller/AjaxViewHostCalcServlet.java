@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.CalcService;
+import com.smallus.host.service.HostService;
 
 /**
  * Servlet implementation class AjaxViewHostCalcServlet
@@ -45,6 +46,8 @@ public class AjaxViewHostCalcServlet extends HttpServlet {
 			System.out.println("ajax calcList 없음없");
 		}else {
 			System.out.println("ajax calcList 있음있");
+			Host newHost=new HostService().selectByhostId(hostId);
+			session.setAttribute("loginHost", newHost);
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out=response.getWriter();
 			out.print(calcList);
