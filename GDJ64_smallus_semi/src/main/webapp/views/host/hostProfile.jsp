@@ -14,7 +14,7 @@
 	--btn-bold: bolder;
 }
 
-.h-modalNickName, .h-modalPassword, .h-modalPhone {
+.h-modalNickName, .h-modalPassword, .h-modalPhone, .h-modalEmail {
 	position: fixed;
 	z-index: 1;
 	left: 0;
@@ -27,15 +27,15 @@
 	text-align:center;
 }
 
-.modal-content, .h-changeNickname, .h-changePassword {
-	background-color: #FFFBF5;
+ .modal-content{
+	background-color: var(--main-col-lt);
 	margin: 15% auto;
-	padding: 3rem;
 	width: 40%;
 	text-align:center;
+	padding: 2rem;
 }
 
-.modal-content button {
+.modal-content button, .h-updateEmail button {
 	background-color:var(--be-color);
 	padding: var(--btn-padding);
 	font-size: var(--font-small);
@@ -43,6 +43,12 @@
 	border: 0;
 	margin-left:1rem;
 	margin-top:2rem;
+}
+.modal-content table{
+	width: 100%;
+	border: 1px solid red;
+	display:flex;
+	justify-content: space-between;
 }
 
 .modal-content button:hover, .modal-content button:focus {
@@ -66,7 +72,7 @@ margin:0.2rem 0; font-size: 0.6rem;}
      	<h2>내 프로필 정보 보기</h2>
         <hr>
         <!--프로필 사진 분기처리-->
-        	<img src="<%=request.getContextPath()%>/img/<%=loginHost.getHostImg()%>" id="h-hostImg">
+        	<img src="<%=request.getContextPath()%>/img/<%=loginHost.getHostImg()%>" id="h-hostImg" name="h-hostImg">
         	<a href=""><img src="<%=request.getContextPath()%>/img/edit.svg" id="h-edit-pf"></a>
         	<input type="file" style="display:none" id="h-profileInput" accept="image/*" name="h-upFile">
 		<div class="h-profile-info">
@@ -86,13 +92,13 @@ margin:0.2rem 0; font-size: 0.6rem;}
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><label for="updatePassword"><input type="text" id="h-hostPassword" placeholder="비밀번호는 영어+숫자 8글자 ~32글자 이하로 입력해주세요" value="••••••••"></label></td>
+					<td><label for="updatePassword"><input type="password" id="h-hostPassword" placeholder="비밀번호는 영어+숫자 8글자 ~32글자 이하로 입력해주세요" value="••••••••"></label></td>
 					<td><button id="h-updatePassword">변경</button></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><label for=""><input type="text" value="<%=loginHost.getHostEmail()%>" disabled></label></td>
-					<td></td>
+					<td><label for=""><input type="text" value="<%=loginHost.getHostEmail()%>" id="h-hostEmail"></label></td>
+					<td><button id="h-updateEmail">변경</button></td>
 				</tr>
 				<tr>
 					<th>휴대폰번호</th>
@@ -128,7 +134,7 @@ margin:0.2rem 0; font-size: 0.6rem;}
 					<td>현재 비밀번호</td>
 					<td><input type="password" name="password" id="h-curPw" required></td>
 				</tr>
-				<tr><td colspan="2" display="hidden" class="hiddenMsgPP"></td></tr>
+				<tr><td colspan="2" style="display:hidden;" class="hiddenMsgPP"></td></tr>
 				<tr>
 					<td>변경할 비밀번호</td>
 					<td><input type="password" name="password" id="h-newPw" required></td>
@@ -137,9 +143,32 @@ margin:0.2rem 0; font-size: 0.6rem;}
 					<td>비밀번호 확인</td>
 					<td><input type="password" name="password" id="h-checkPw" required></td>
 				</tr>
-				<tr><td colspan="2" display="hidden" class="hiddenMsgP"></td></tr>
+				<tr><td colspan="2" style="display:hidden;" class="hiddenMsgP"></td></tr>
 			</table>
 			<button id="h-applyHostPwd">변경</button>
+			<button class="h-close-modal">변경 취소</button>
+		</div>
+	</div>
+	
+	<div class="h-modalEmail" style="display: hidden;">
+		<div class="modal-content h-updateEmail">
+			<table>
+				<tr>
+					<td>변경할 이메일 주소</td>
+					<td><input type="email" name="hostEmail" id="h-checkEmail" required></td>
+					<td><button name="hostEmail_check" id="hostEmail_check" onclick="hsendMail()">인증번호 발송</button>
+						<input type="hidden" id="m-timer" value="180">
+					</td>
+				</tr>
+				<tr>
+					<td>이메일 인증 번호</td>
+					<td><input type="text" name="hostEmailNumber" id="h-checkEmailNum" required></td>
+					<td><button value="인증" id="hostEmail_doubleCheck" onclick="hCheckEmail();">인증</button>
+						<input type="hidden" name="hostEmail_doubleCheck">
+					</td>
+				</tr>
+			</table>
+			<button id="h-applyHostEmail">변경</button>
 			<button class="h-close-modal">변경 취소</button>
 		</div>
 	</div>
@@ -153,184 +182,56 @@ margin:0.2rem 0; font-size: 0.6rem;}
 		</div>
 	</div>
 	<script>
+	// 프로필이미지를 선택했을 때 이미지를 변경할 수 있는 파일을 선택하는 이벤트
+	$("#h-edit-pf").click(e => {
+		$("#h-profileInput").click();
+	});
 	
-		// 프로필이미지를 선택했을 때 이미지를 변경할 수 있는 파일을 선택하는 이벤트
-		$("#h-edit-pf").click(e=>{
-			$("#h-profileInput").click();
-		});
-		
-		
-		// input의 이미지가 변경되었을 때 발생하는 이벤트
-		$("#h-profileInput").change(e=>{
-			const reader= new FileReader();
-			// input 속성의 accept를 이용해서 원하는 형식의 파일만 받을 수 있다 -> 분기처리 필수 
-			reader.onload=e=>{
-				// e.target.result 속성에 변경된 파일이 나온다.
-				$("#h-hostImg").attr("src",e.target.result);
-			}
-			reader.readAsDataURL(e.target.files[0]); // 읽은 data URL로 바꿔주는 함수
-		});
-		
-		
-		// 프로필 수정 사항 
-		let inputs= document.querySelectorAll(".h-profile-info input");
-		$(".h-submit").click(e=>{
-			if($(".h-profile-info input").val()!=null){
-				//console.log(inputs[0].value);
-				$.ajax({
-					url:"<%=request.getContextPath()%>/host/updateHostProfile.do",
-					data:{
-						"hostNickname":$("#h-hostNickname").val(),
-						"hostPw":$("#h-hostPassword").val(),
-						"hostHomePhone":$("#h-hostHomePhone").val(),
-						"hostImg":$("#h-hostImg").val(),
-					},
-					success:(data)=>{
-						console.log(data, typeof data);
-						if(data>0){
-							alert("변경 완료 :)");
-						}else{
-							alert("변경 실패 :<");
-						}
-					},error: (e,m)=>{
-						console.log(data);
-						}
-				});
-			}
-		});
-	
-		
-		// 비밀번호 모달창 닫기 
-		function closeNick(e){
-			$(".h-modalNickName").css('display','none');
-			$("document").css('overflow','auto'); 
-		}
-		function closePw(e){
-			$(".h-modalPassword").css('display','none');
-			$("document").css('overflow','auto'); 
-		}
-	
-	
-		// 변경할 비밀번호 체크 
-		$("#h-checkPw").keyup(e=>{
-			let pw=$("#h-newPw").val();
-			let checkPw=e.target.value;
-			console.log(checkPw);
-			let color=""; let msg="";
-			if(pw==checkPw){
-				color="green"; msg="비밀번호가 일치합니다 :)";
-			}else{
-				color="red"; msg="비밀번호가 불일치합니다 :<";
-			}
-			$(".hiddenMsgP").text(msg).css("color",color);
-		})
-		
-		// 닉네임 변경 버튼 클릭 
-		$("#h-applyHostPwd").click(e=>{
-			/* let new=($("#h-checkNickname").val()); */
-			document.querySelector("#h-hostPassword").value=($("#h-checkPw").val());
-			$.ajax({
-				url:"<%=request.getContextPath()%>/host/updateNickname.do",
-				data:{"nickname":(e.target.value)},
-				success:(data)=>{
-					console.log(data, typeof data);
-					if(data==0){
-						alert('변경 완료 :)');
-						closeNick();
-					}else {
-						alert('변경 실패 ;<');
-					}
-				},error: (e,m)=>{
-					console.log(data);
-					}
-				});
-		})
+	// input의 이미지가 변경되었을 때 발생하는 이벤트
+	$("#h-profileInput").change(e => {
+		const reader = new FileReader();
+	 	// input 속성의 accept를 이용해서 원하는 형식의 파일만 받을 수 있다 -> 분기처리 필수 
+	 	reader.onload=(e)=> {
+	 		$("#h-hostImg").attr({"src":e.target.result});
+	 	}
+	 	reader.readAsDataURL(e.target.files[0]); // 읽은 data URL로 바꿔주는 함수
+	});
+ 	
+ 
 
-		// 닉네임 변경 모달창 열기
-		$("#h-updateNickname").click(e=>{
-			$(".h-modalNickName").css('display','block');
-			$("document").css('overflow','hidden'); 
+// 프로필 수정 사항 
+let inputs = document.querySelectorAll(".h-profile-info input");
+$(".h-submit").click(e => {
+	if ($(".h-profile-info input").val() != null) {
+		//console.log(inputs[0].value);
+		$.ajax({
+			url: "<%=request.getContextPath()%>/host/updateProfile.do",
+			data: {
+				"hostNickname": $("#h-hostNickname").val(),
+				"hostPw": $("#h-hostPassword").val(),
+				"hostHomePhone": $("#h-hostHomePhone").val(),
+				"hostEmail":$("#h-hostEmail").val(),
+				"hostImg": $("#h-hostImg").val(),
+			},
+			success: (data) => {
+				console.log(data, typeof data);
+				if (data > 0) {
+					alert("변경 완료 :)");
+				} else {
+					alert("변경 실패 :<");
+				}
+			}, error: (e, m) => {
+				console.log(data);
+			}
 		});
-		
-		// 닉네임 중복 체크 
-		$("#h-checkNickname").keyup(e=>{
-			let hostrNicknameReg = /^[a-zA-Z0-9가-힣]{2,}$/;
-			console.log(e.target.value.length)
-			if(e.target.value.length>2 && e.target.value.length<21){
-				$.ajax({
-					url:"<%=request.getContextPath()%>/host/duplicateNickname.do",
-					data:{"nickname":(e.target.value)},
-					success:(data)=>{
-						console.log(data, typeof data);
-						let msg=""; let color="";
-						if(data==0){
-							msg="사용 가능한 닉네임입니다";
-							color="green";
-						}else {
-							msg="사용 불가능한 닉네임입니다";
-							color="red";
-						}
-						$(".hiddenMsg").text(msg).css("color",color);
-					},error: (e,m)=>{
-						console.log(data);
-						}
-					});
-			}else{
-				let msg=""; let color="";
-				msg="두 글자 이상 입력하세요";
-				color="red"
-				$(".hiddenMsg").text(msg).css("color",color);
-			};
-		});
-		
-		// 닉네임 변경 버튼 클릭 
-		$("#h-applyNickname").click(e=>{
-			/* let new=($("#h-checkNickname").val()); */
-			document.querySelector("#h-hostNickname").value=($("#h-checkNickname").val());
-			alert('변경 완료 ;)')
-			closeNick();
-		})
-		
-		// 닉네임 변경모달창 닫기
-		$(".h-close-modal").click(e=>{
-			closeNick();
-		})
-		
-		
-		// 비밀번호 변경 모달창 열기
-		$("#h-updatePassword").click(e=>{
-			$(".h-modalPassword").css('display','block');
-			$("document").css('overflow','hidden'); 
-		});
-		
-		// 비밀번호 변경모달창 닫기
-		$(".h-close-modal").click(e=>{
-			closePw();
-		})
-		
-		// 전화번호 변경 버튼 클릭 
-		$("#h-applyhostPhone").click(e=>{
-			/* let new=($("#h-checkNickname").val()); */
-			document.querySelector("#h-hostHomePhone").value=($("#h-checkPhone").val());
-			alert('변경 완료 ;)')
-			$(".h-modalPhone").css('display','none');
-			$("document").css('overflow','auto'); 
-		})
-		
-		// 전화번호 변경 모달창 열기
-		$("#h-updatePhone").click(e=>{
-			$(".h-modalPhone").css('display','block');
-			$("document").css('overflow','hidden'); 
-		});
-		
-		// 전화번호 변경모달창 닫기
-		$(".h-close-modal").click(e=>{
-			$(".h-modalPhone").css('display','none');
-			$("document").css('overflow','auto'); 
-		})
+	}
+});
+
+
 		
 		
 		
 	</script>
+	<script src="<%=request.getContextPath() %>/js/hostProfile.js"></script>
 	<%@ include file="/views/common/hostFooter.jsp"%>
         

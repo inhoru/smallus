@@ -17,10 +17,12 @@ import java.util.Properties;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Notifications;
 import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCalc;
 import com.smallus.payment.model.vo.PaymentCompleted;
+import com.smallus.payment.model.vo.PaymentInfo;
 
 public class PaymentDao {
 	
@@ -370,6 +372,7 @@ public class PaymentDao {
 				p.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
 				p.getPayment().setMemberId(rs.getString("MEMBER_ID"));
 				p.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				
 				list.add(p);
 			}
 		} catch (SQLException e) {
@@ -421,43 +424,6 @@ public class PaymentDao {
 	public int insertPayment(Connection conn, Map<String,String> dataMap) {
 		PreparedStatement pstmt=null;
 		int result=0;
-//		for (Map.Entry<String, String> entry : dataMap.entrySet()) {
-//		    String key = entry.getKey();
-//		    Object value = entry.getValue();
-
-//		private String paymentId;
-//		private String classDetailId;
-//		private String memberId;
-//		private String couponId;
-//		private int price;
-//		private int classPersonnel;
-//		private int TotalPrice;
-//		private String impUid;
-//		private String request;
-//		private String paymentType;
-//		private Date paymentDate;
-//		private String paymentStatus;
-		
-//		Key: buyer_email, Value: inhoru126@gmail.com
-//		Key: buyer_postcode, Value: 
-//		Key: card_number, Value: 5433330000006209
-//		Key: buyer_addr, Value: 
-//		Key: buyer_name, Value: 테스트11
-//		Key: pay_method, Value: card
-//		Key: pg_type, Value: payment
-//		Key: pg_tid, Value: 23426996122073
-//		Key: receipt_url, Value: https://admin8.kcp.co.kr/assist/bill.BillActionNew.do?cmd=card_bill&tno=23426996122073&order_no=imp_837301481343&trade_mony=64000
-//		Key: buyer_tel, Value: 101231231
-//		Key: imp_uid, Value: imp_837301481343
-//		Key: name, Value: *초보가능*마들렌 만들기
-//		Key: card_name, Value: 현대카드
-//		Key: apply_num, Value: 55283725
-//		Key: currency, Value: KRW
-//		Key: pg_provider, Value: kcp
-//		Key: merchant_uid, Value: RSV790
-//		Key: status, Value: paid
-//		디테일아이디 ; CLD1005쿠폰아이디 : 0인원수 : 2총 금액 : 64000금액 : 32000
-		//insertPayment=INSERT INTO PAYMENT VALUES(?,?,?,?,?,?,?,?,?,?,SYSDATE,?)
 		String paymentStatus="";
 		if((boolean)dataMap.get("status").equals("paid")) {
 			paymentStatus="결제완료";
@@ -484,17 +450,6 @@ public class PaymentDao {
 			pstmt.setString(8, dataMap.get("pg_provider"));
 			pstmt.setString(9, dataMap.get("status"));
 			
-//			System.out.println("payment_id : "+(String)dataMap.get("merchant_uid"));
-//			System.out.println("classDetail_id : "+(String)dataMap.get("classDetailId"));
-//			System.out.println("member_id : "+(String)dataMap.get("memberId"));
-//			System.out.println("coupon_id : "+(String)dataMap.get("couponId"));
-//			System.out.println("price : "+ Integer.parseInt(dataMap.get("price")));
-//			System.out.println("personnel : "+ Integer.parseInt(String.valueOf(dataMap.get("classPersonnel"))));
-//			System.out.println("totalPrice : "+ Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
-//			System.out.println("receipt_url : "+(String)dataMap.get("pg_tid"));
-//			System.out.println("receipt_url : "+(String)dataMap.get("receipt_url"));
-//			System.out.println("pg_tid : "+(String)dataMap.get("pg_provider"));
-//			System.out.println("pg_provider : "+(String)dataMap.get("status"));
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -512,7 +467,6 @@ public class PaymentDao {
 			pstmt.setString(1, paymentId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-//SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END ,HOST_NAME, CLASS_PRICE, PAYMENT_NAME, TOTAL_PRICE,COUPON_PRICE FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) JOIN HOST USING(HOST_ID) JOIN PAYMENT_TYPE USING(PAYMENT_TYPE) JOIN COUPON_TYPE USING(COUPON_ID) WHERE PAYMENT_ID=?
 				PaymentCompleted pc=new PaymentCompleted();
 				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
@@ -534,12 +488,113 @@ public class PaymentDao {
 			close(pstmt);
 		}
 		return p;
+	}	
+	
+	public PaymentInfo selectPaymentInfo(Connection conn, String classDetailId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		PaymentInfo p = new PaymentInfo();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectPaymentInfo"));
+			pstmt.setString(1, classDetailId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				p.getClasses().setClassId(rs.getString("CLASS_ID"));
+				p.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				p.getClasses().setClassPrice(rs.getInt("CLASS_PRICE"));
+				p.getClasses().setClassAddress(rs.getString("CLASS_ADDRESS"));
+				p.getClassDetail().setClassDetailId(rs.getString("CLASS_DETAIL_ID"));
+				p.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				p.getClassDetail().setRemainingPersonnel(rs.getInt("REMAINING_PERSONNEL"));
+				p.getHost().setHostNickname(rs.getString("HOST_NICKNAME"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return p;
 	}
 	
+
+	public int selectRemainPer(Connection conn, String classDetailId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectRemainPer"));
+			pstmt.setString(1, classDetailId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int paymentCancel(Connection conn,String paymentId) {
+		String cancel="결제취소";
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("paymentCancel"));
+			pstmt.setString(1, cancel);
+			pstmt.setString(2, paymentId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public Payment searchBypaymentId(Connection conn, String paymentId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Payment p = new Payment();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchBypaymentId"));
+			//SELECT * FROM PAYMENT LEFT JOIN COUPON USING(COUPON_ID) WHERE PAYMENT_ID=?
+			pstmt.setString(1, paymentId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				p=(getPayment(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return p;
+	}
+	public int reinsertCoupon(Connection conn,String paymentId,String couponId,String memberId,Date createdDate,Date expiredDated) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("reinsertCoupon"));
+			//INSERT INTO COUPON VALUES(?,?,?,?)
+			pstmt.setString(1, couponId);
+			pstmt.setString(2, memberId);
+			pstmt.setDate(3, (java.sql.Date) createdDate);
+			pstmt.setDate(4, (java.sql.Date) expiredDated);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	public static Payment getPayment(ResultSet rs) throws SQLException {
+		return Payment.builder().paymentId(rs.getString("PAYMENT_ID")).classDetailId(rs.getString("CLASS_DETAIL_ID")).memberId(rs.getString("MEMBER_ID")).couponId(rs.getString("COUPON_ID")).price(rs.getInt("PRICE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).TotalPrice(rs.getInt("TOTAL_PRICE")).paymentType(rs.getString("PAYMENT_TYPE")).paymentDate(rs.getDate("PAYMENT_DATE")).paymentStatus(rs.getString("PAYMENT_STATUS")).createdDate(rs.getDate("CREATED_DATE")).expiredDated(rs.getDate("EXPIRED_DATED")).build();
+	}
 }
-
-
-
 
 
 

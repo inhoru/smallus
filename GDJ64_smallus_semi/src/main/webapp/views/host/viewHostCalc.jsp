@@ -101,8 +101,6 @@
 	            </div>
             </div>
         </section>
-    <!--Load the AJAX API-->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	// 정산 정보 수정 및 입력 
 	$("#h-UpdateHostAccount").click(e=>{
@@ -111,16 +109,40 @@
 			$(".h-calc").html(data);
 		});
 	});
-	
+	var date= new Date();
+	let month= date.getMonth()+1;
 	// + 버튼 누르면 차트 정보 보이는 함수
-	
+	let calcList='<%=calcList%>';
+	let calcArr=calcList.split(",");
+	let calcReqDate='<%=loginHost.getCalcReqDate()%>';
+	let calcPrice=calcArr[6];
+	var num =calcPrice.match(/\d+/g)
+	console.log(month)
+    /* google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['월 별', '정산 금액'],
+		  [month+calcReqDate, num]
+        ]);
+
+        var options = {
+          title: '탈퇴 통계'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('h-viewList'));
+
+        chart.draw(data, options);
+      } */
 	google.charts.load('current', { 'packages': ['corechart'] });
 	google.charts.setOnLoadCallback(drawDashboard); //콜백 함수 실행되면그래프 생김
 	$("#h-viewChart").click(e=>{
 		 google.charts.load('current');
 		  function drawVisualization() {
 		    var dataTable = [
-		      ["Country", "Population Density"],
+		      [month+calcReqDate, num],
 		      ["Indonesia", 117],
 		      ["China", 137],
 		      ["Nigeria", 142],
@@ -130,7 +152,7 @@
 		      ["Bangladesh", 1045]
 		    ];
 		    google.visualization.drawChart({
-		      "containerId": "visualization_div",
+		      "containerId": "h-viewList",
 		      "dataTable": dataTable,
 		      "refreshInterval": 5,
 		      "chartType": "Table",
@@ -141,32 +163,7 @@
 		    });
 		  }
 		  google.charts.setOnLoadCallback(drawVisualization);
-		<%-- $.ajax({
-			type:"get",
-  		  	url:"<%=request.getContextPath()%>/host/ajaxViewHostCalc.do",
-  		  	success:(data)=>{ 
-			 	// responseText에 저장된 값을 data에 대입한다.
-				console.log(data);
-				function drawVisualization() {
-					 let data2 = google.visualization.arrayToDataTable(
-							 data2.addColumn('string','Country');
-								data2.addColumn('number','Population');
-								data2.addColumn('number','Area');
-								data2.addRows([
-								  ['CN', 1324, 9640821],
-								  ['IN', 1133, 3287263],
-								  ['US', 304, 9629091],
-								  ['ID', 232, 1904569],
-								  ['BR', 187, 8514877]
-				}
-				
-		 	},
-			error: function(xhr, type) {
-			      alert('server msg : ' + xhr.status)
-
-		    }
-  	   	}); --%>
-	})
+	/* }) */
 	
 	
 	//select 옵션 변경하면 이동
@@ -185,9 +182,7 @@
 		}
 	}
 	
-</script>
-<%-- <script src="<%=request.getContextPath() %>/js/host.js"></script> --%>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <%-- <script src="<%=request.getContextPath() %>/js/host.js"></script> --%>
 <%@ include file="/views/common/hostFooter.jsp"%>
 
 

@@ -29,28 +29,37 @@
 				<p>★ <%=starPoint %>점</p>
 				<!-- 리뷰 조회해서 평균내기 -->
 			</div>
-			<h3><%=info.getClassTitle() %></h3>
-			<h4>1인 <%=info.getClassPrice() %>원</h4>
-			<div class="d-detail-schedule">
-				<div id="d-detail-date">
-					<select>
-					<%for(ClassDetail cd : schedule){ %>
-						<option><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %></option>
-						<!-- 현재 인원 추출방식은 문자열 자르기 -->
-					<%} %>
-					</select> 
+				<h3 name="classTitle"><%=info.getClassTitle() %></h3>
+				<h4>1인 <%=info.getClassPrice() %>원</h4>
+				<div class="d-detail-schedule">
+					<div id="d-detail-date">
+						<select id="h-pselectClassDetailOption" onchange="selectClassDetailOption()">
+							<option>시간 선택</option>
+						<%if(schedule!=null&&!schedule.isEmpty()){
+							for(ClassDetail cd : schedule){ 
+								if(cd.getRemainingPersonnel()!=0){%>
+									<option name="classDetailOption" value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart() %>_<%=cd.getBookingTimeEnd() %>_<%=cd.getRemainingPersonnel() %>">
+										<%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %>
+									</option>
+									<!-- 현재 인원 추출방식은 문자열 자르기 -->
+									<%}
+								}
+							}else{%>
+								<option>사용 가능한 쿠폰이 없습니다</option>
+							<%}%>
+						</select> 
+					</div>
+					<div id="d-detail-personnel">
+						<p>인원 수</p>
+						<button onclick="personMinus();">-</button>
+						<p id="personnel" name="personnel">1명</p>
+						<button onclick="personPlus();">+</button>
+					</div>
+					<div id="d-payment">
+						<p id="d-payment-price"name="price">결제금액원</p>
+						<input type="submit" value="결제하기" id="h-moveToPay">
+					</div>
 				</div>
-				<div id="d-detail-personnel">
-					<p>인원수</p>
-					<button onclick="personMinus();">-</button>
-					<p id="personnel">1명</p>
-					<button onclick="personPlus();">+</button>
-				</div>
-				<div id="d-payment">
-					<p id="d-payment-price">결제금액 <%=info.getClassPrice() %>원</p>
-					<input type="submit" value="결제하기" id="h-moveToPay">
-				</div>
-			</div>
 		</div>
 	</div>
 	<br>
@@ -89,7 +98,7 @@
 		</nav>
 	</div>
 </div>
-
+<section id="h-paymentSectionContainer"></section>
 <script>
 	let personnelCount=1;
 	let payment=<%=info.getClassPrice() %>*personnelCount;
@@ -165,30 +174,72 @@
 					}
 				});
 			});
-		let loginMember='<%=(Member) session.getAttribute("loginMember")%>';
+		// 선택한 옵션의 값 가져오기 
+		let classDetailArr;
+		let classDetailId;
+		let classBookingTimeStart;
+		let classBookingTimeEnd;
+		let remainingPersonnel;
+		let adssgd;
+		function selectClassDetailOption(){
+			let index =$("#h-pselectClassDetailOption option:selected").val();
+			classDetailArr= index.split("_");
+		}
+		
+		let selectedClass ='<%=info%>';
+		let a=selectedClass.split(",");
+		let loginMember='<%=session.getAttribute("loginMember")%>'
 		// 결제하기 버튼 클릭하면 로그인 분기처리 
 		$("#h-moveToPay").click(e=>{
-			console.log(loginMember);
-			if(loginMember==null){
-				location.assign('<%=request.getContextPath()%>/memberLoginMove.do');
+			/* console.log(loginMember); */
+			let classDetailId=classDetailArr[0];
+			let classBookingTimeStart=classDetailArr[1];
+			let classBookingTimeEnd=classDetailArr[2];
+			let remainingPersonnel=classDetailArr[3];
+			
+			if(loginMember=="null"){
+				alert("로그인 후 결제할 수 있습니다.")
+				location.replace("<%=request.getContextPath()%>/memberLoginMove.do");
 			}else{
-				$.ajax({
-					url:"<%=request.getContextPath()%>/host/payment.do",
+				location.assign('<%=request.getContextPath()%>/class/payment.do?id='+classDetailId+'&personnel='+personnelCount);
+				<%-- $.ajax({
+					url:"<%=request.getContextPath()%>/class/payment.do",
 					/* header:{'Content-Type':'application/json'}, */
 					//dataType:"html",
 					dataType:"json",
 					data:{
-						
+						"categoryTitle":'<%=info.getCategoryTitle() %>',
+						"classTitle":'<%=info.getClassTitle() %>',
+						"classId":a[0],
+						"classPrice":'<%=info.getClassPrice() %>',
+						"personnel": personnelCount,
+						"classAddress":'<%=info.getClassAddress()%>',
+						"classDetailId":classDetailId,
+						"classBookingTimeStart":classBookingTimeStart,
+						"classBookingTimeEnd":classBookingTimeEnd,
+						"remainingPersonnel":remainingPersonnel
+					/* 	"classDetailId":classDetailId,
+						"classBookingTimeStart":classBookingTimeStart,
+						"classBookingTimeEnd":classBookingTimeEnd,
+						"remainingPersonnel":remainingPersonnel */
 					},
+<<<<<<< HEAD
+					/*succ ess:function(data){
+						console.log(data);
+					}, */
+=======
 					success:function(data){
 						console.log(data, typeof data);
 				        },
+>>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
 					error: function(jqXHR, textStatus, errorThrown) {
 						console.log("에러 발생: " + textStatus, errorThrown);
 					}
-				})
+				})// end ajax  --%>
 			}
 		})
+		
+		
 </script>
 
 <style>

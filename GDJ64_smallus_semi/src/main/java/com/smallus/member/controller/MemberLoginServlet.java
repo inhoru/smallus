@@ -1,6 +1,7 @@
 package com.smallus.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Notifications;
 import com.smallus.member.service.MemberService;
 
 
@@ -63,6 +65,11 @@ public class MemberLoginServlet extends HttpServlet {
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember",loginMember);
 			response.sendRedirect(request.getContextPath());
+			List<Notifications> list =new MemberService().selectAllNotifications(memberId);
+			int notcount = new MemberService().notificationsCount(memberId);
+			session.setAttribute("notcount",notcount);
+			session.setAttribute("Notlist",list);
+			
 		
 		}else {
 			//로그인 실패 -> 인증못받음

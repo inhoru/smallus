@@ -29,24 +29,6 @@ public class CalcDao {
 	}
 
 	
-//	CALC_ID	VARCHAR2(30) PRIMARY KEY,
-//	HOST_ID	VARCHAR2(100) REFERENCES HOST(HOST_ID) ON DELETE CASCADE,
-//	CALC_STATUS	VARCHAR2(30) DEFAULT '정산 대기' CHECK(CALC_STATUS IN('정산 대기','처리 중','정산 완료')),
-//	CALC_REQ_DATE DATE,
-//	CALC_PASS_DATE	DATE,
-//    CALC_PRICE	NUMBER	NOT NULL,
-//	CALC_FINAL_PRICE NUMBER
-	
-	
-//	CALC_ID	VARCHAR2(30) PRIMARY KEY,
-//	HOST_ID	VARCHAR2(100) REFERENCES HOST(HOST_ID) ON DELETE CASCADE,
-//	CALC_STATUS	VARCHAR2(30) DEFAULT '정산대기' CHECK(CALC_STATUS IN('정산대기','정산거절','정산완료')),
-//	CALC_REQ_DATE DATE,
-//	CALC_PASS_DATE	DATE,
-//    CALC_PRICE	NUMBER	NOT NULL,
-//	CALC_FINAL_PRICE NUMBER
-	
-	//SELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM (SELECT * FROM CALC WHERE HOST_ID=?)C) WHERE RNUM BETWEEN ? AND ?
 	public static Calc getCalc(ResultSet rs) throws SQLException {
 		return Calc.builder()
 				.calcId(rs.getString("CALC_ID"))
@@ -58,15 +40,6 @@ public class CalcDao {
 				.calcFinalPrice(rs.getInt("CALC_FINAL_PRICE")).build();
 	}
 	
-//	private String calcId;
-//	private String hostId;
-//	private String calcStatus;
-//	private Date calcReqDate;
-//	private Date calcPassDate;
-//	private int calcPrice;
-//	private int calcFinalPrice;
-	
-//	selectCalcCount=SELECT COUNT(CALC_ID) FROM CALC WHERE HOST_ID=?
 	public int selectCalcCount(Connection conn, String hostId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -86,7 +59,6 @@ public class CalcDao {
 	
 	}
 			
-//	selectAllcalcByhostId=SELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM (SELECT * FROM CALC WHERE HOST_ID=?)C) WHERE RNUM BETWEEN ? AND ?
 	
 	public List<Calc> selectAllcalcByhostId(Connection conn, String hostId, int cPage, int numPerpage) {
 		PreparedStatement pstmt=null;
@@ -94,7 +66,6 @@ public class CalcDao {
 		List<Calc> calcList=new ArrayList<Calc>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectAllcalcByhostId"));
-			//pstmt=conn.prepareStatement("SELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM (SELECT * FROM CALC WHERE HOST_ID=?)C) WHERE RNUM BETWEEN ? AND ?");
 			pstmt.setString(1, hostId);
 			pstmt.setInt(2, (cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
@@ -112,15 +83,13 @@ public class CalcDao {
 	}
 	
 	
-	//sortingByCalcStatusSELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM (SELECT * FROM CALC WHERE HOST_ID=? AND CALC_STATUS=? )C) WHERE RNUM BETWEEN ? AND ?
 	public List<Calc> sortingByCalcStatus(Connection conn, String hostId, String calcStatus, int cPage, int numPerpage) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Calc> calcList=new ArrayList<Calc>();
 		try {
 			
-			pstmt=conn.prepareStatement("SELECT * FROM (SELECT ROWNUM AS RNUM, C.* FROM (SELECT * FROM CALC WHERE HOST_ID=? AND CALC_STATUS=? )C) WHERE RNUM BETWEEN ? AND ?");
-			//pstmt=conn.prepareStatement(sql.getProperty("sortingByCalcStatus"));
+			pstmt=conn.prepareStatement("sortingByCalcStatus");
 			pstmt.setString(1, hostId);
 			pstmt.setString(2, calcStatus);
 			pstmt.setInt(3, (cPage-1)*numPerpage+1);
@@ -138,5 +107,29 @@ public class CalcDao {
 		}return calcList;
 	}
 	
+	public List<Calc> selectCalcByMonth(Connection conn, String hostId, int month, int calcReqDate) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Calc> calcList=new ArrayList<Calc>();
+		try {
+			
+			String first= "2023"+month+calcReqDate;
+			String last="2023"+(month+1)+(calcReqDate-1);
+			pstmt=conn.prepareStatement("selectCalcByMonth");
+			pstmt.setString(1, hostId);
+			pstmt.setString(2, first); 
+			pstmt.setString(3, last);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Calc c=new Calc();
+				calcList.add(getCalc(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return calcList;
+	}
 	
 }

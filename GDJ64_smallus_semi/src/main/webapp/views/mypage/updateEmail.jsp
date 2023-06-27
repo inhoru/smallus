@@ -61,12 +61,13 @@ div.checkId-button {
 	border-radius: 15px;
 	width: 200px;
 	height: 25px;
-	padding: 1%;
+	padding-left: 5%;
 }
 .i-memberEmail{
 	border-radius: 15px;
 	width: 200px;
 	height: 25px;
+	padding-left: 5%;
 	
 }
 

@@ -6,9 +6,11 @@ import static com.smallus.common.JDBCTemplate.getConnection;
 import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.smallus.host.dao.HostDao;
 import com.smallus.host.model.vo.Host;
+import com.smallus.member.model.vo.Notifications;
 
 public class HostService {
 
@@ -65,39 +67,42 @@ public class HostService {
 		int result=dao.updateHostNickname(conn,nickname,hostId);
 		if(result>0) {
 			commit(conn);
-			System.out.println("service nick O");
 		}else {
 			rollback(conn);
-			System.out.println("service nick x");
-		}
-		close(conn);
-		return result;
-	}
-	public int updateHostProfile(String hostId,String hostNickname,String hostPw,String hostHomePhone, String hostImg) {
-		Connection conn=getConnection();
-		int result=dao.updateHostProfile(conn,hostId,hostNickname,hostPw,hostHomePhone,hostImg);
-		if(result>0) {
-			commit(conn);
-			System.out.println("service hostPf O");
-		}else {
-			rollback(conn);
-			System.out.println("service hostPf  X");
 		}
 		close(conn);
 		return result;
 	}
 	
-	public int updateHostImg(String renameFile, String hostId) {
+	public int updateHostProfile(Host h, String hostId) {
 		Connection conn=getConnection();
-		int result=dao.updateHostNickname(conn,renameFile,hostId);
+		int result=dao.updateHostProfile(conn,h,hostId);
 		if(result>0) {
 			commit(conn);
-			System.out.println("service updateImg O");
 		}else {
 			rollback(conn);
-			System.out.println("service updateImg x");
 		}
 		close(conn);
+		return result;
+	}
+	public List<Notifications> selectAllNotifications(String memberId){
+		Connection conn=getConnection();
+		List<Notifications> list=dao.selectAllNotifications(conn,memberId);
+		close(conn);
+		return list;
+	}
+	public int notificationsCount(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.notificationsCount(conn,memberId);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
+	public int notifications(String notId) {
+		Connection conn=getConnection();
+		int result=dao.notifications(conn,notId);
+		if(result>0)commit(conn);
+		else rollback(conn);
 		return result;
 	}
 	

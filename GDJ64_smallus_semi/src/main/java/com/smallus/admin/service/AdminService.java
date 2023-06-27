@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.smallus.admin.dao.AdminDao;
 import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
@@ -59,7 +60,14 @@ public class AdminService {
 		else rollback(conn);
 		return result;
 	}
-	
+	public int deleteByClass(String classId) {
+		Connection conn=getConnection();
+		int result=dao.deleteByClass(conn,classId);
+		close(conn);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	public int selectHostCount() {
 		Connection conn=getConnection();
 		int totalData=dao.selectHostCount(conn);
@@ -135,5 +143,54 @@ public class AdminService {
 		if(result>0)commit(conn);
 		else rollback(conn);
 		return result;
+	}
+	
+	public List<Classes> ClassesAll(){
+		Connection conn=getConnection();
+		List<Classes> list2=dao.ClassesAll(conn);
+		close(conn);
+		return list2;
+	}
+	public int selectClassesCount() {
+		Connection conn=getConnection();
+		int totalData=dao.selectClassesCount(conn);
+		close(conn);
+		return totalData;
+	}
+	public List<Classes> checkClassesAll(int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Classes> list=dao.checkClassesAll(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public int selectClassSortCount(String categoryId) {
+		Connection conn=getConnection();
+		int totalData=dao.selectClassSortCount(conn,categoryId);
+		close(conn);
+		return totalData;
+	}
+	public List<Classes> checkClassSort(String categoryId,int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Classes> list=dao.checkClassSort(conn,categoryId,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public int selectConfirmCalcCount() {
+		Connection conn=getConnection();
+		int totalData=dao.selectConfirmCalcCount(conn);
+		close(conn);
+		return totalData;
+	}
+	public List<Calc> checkConfirmCalc(int cPage, int numPerpage){
+		Connection conn=getConnection();
+		List<Calc> list=dao.checkConfirmCalc(conn,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public Classes classHostId(String classId) {
+		Connection conn=getConnection();
+		Classes c=dao.classHostId(conn,classId);
+		close(conn);
+		return c; 
 	}
 }

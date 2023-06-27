@@ -32,10 +32,16 @@ public class NoticeService {
 		close(conn);
 		return result2;
 	}
-	public int deleteNotice(String NoticeId) {
+	public int deleteNotice(String noticeId) {
 		Connection conn=getConnection();
-		int result=dao.deleteNotice(conn,NoticeId);
+		int result=dao.deleteNotice(conn,noticeId);
 		close(conn);
 		return result;
+	}
+	public int deleteNoticeImage(String noticeId) {
+		Connection conn=getConnection();
+		int result2=dao.deleteNoticeImage(conn,noticeId);
+		close(conn);
+		return result2;
 	}
 }

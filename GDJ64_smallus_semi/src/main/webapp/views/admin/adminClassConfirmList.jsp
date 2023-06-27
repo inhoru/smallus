@@ -9,6 +9,18 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 	#pageBar{
 		align-items:center;
 	}
+	
+	button#m-classconfirmbtn,#m-classrejectbtn  {
+	width:4rem;
+	font-weight: bold;
+	background-color: #E8D6C3;
+	border:0px;
+	border-radius: 1rem;
+	text-align:center;
+	font-size: 0.5rem;
+	height:25px;
+	cursor:pointer;
+}
 </style>
 <body>
 	<div id="mainOpacity h-host-main">
@@ -37,8 +49,8 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 						<td><%=c.getHostId()%></td>
 						<td><%=c.getClassUpLoadDate()%></td>
 						<td><%=c.getClassPassId()%></td>
-						<td><button id=m-classconfirmbtn onclick="classconfirm('<%=c.getClassId()%>');">승인</button></td>
-						<td><button id=m-classrejectbtn onclick="classreject('<%=c.getClassId()%>');">거절</button></td>
+						<td><button id="m-classconfirmbtn" onclick="classconfirm('<%=c.getClassId()%>');">승인</button></td>
+						<td><button id="m-classrejectbtn" onclick="classreject('<%=c.getClassId()%>');">거절</button></td>
 					</tr>
 					<%} %>
 				<%}else{ %>

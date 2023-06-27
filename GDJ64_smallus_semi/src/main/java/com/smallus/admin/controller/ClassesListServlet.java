@@ -15,7 +15,7 @@ import com.smallus.classes.model.vo.Classes;
 /**
  * Servlet implementation class ClaasesListServlet
  */
-@WebServlet("/admin/ClaasesListServlet.do")
+@WebServlet("/admin/ClassesListServlet.do")
 public class ClassesListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,9 +31,6 @@ public class ClassesListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//DB의 member테이블에 저장된 전체 회원을 가져와 화면에 출력해주는 기능
-		
-		//페이징 처리하기
 		int cPage,numPerpage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -45,26 +42,18 @@ public class ClassesListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			numPerpage=10;
 		}
-		//3. 페이지바를 구성
-		 //1) DB에 저장된 전체 데이터의 수를 가져오기
-		int totalData=new AdminService().selectConfirmClassesCount();
+		int totalData=new AdminService().selectClassesCount();
 		//System.out.println(totalData);
-		 //2) 전체페이지수를 계산하기
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-		//(double)로 형변환 해서 소수점 계산 해주고 Math.ceil을 이용해서 올림처리 한 후 (int)로 형변환
-		//+1을 하면은 페이지가 더 생기긴하나 소수점이 아닐경우 빈페이지 생성된다.
 		int pageBarSize=5;
-		// 3) 페이지바 시작번호 계산하기
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
-		//4. 페이지바를 구성하는 html 저장하기
 		String pageBar="";
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
 		}else {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
 		}
-		//선택할 페이지 번호 출력하기
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
@@ -73,21 +62,20 @@ public class ClassesListServlet extends HttpServlet {
 			}
 			pageNo++;
 		}
-		//다음 출력
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
-		List<Classes> list=new AdminService().checkConfirmClasses(cPage,numPerpage);
+		List<Classes> list=new AdminService().checkClassesAll(cPage,numPerpage);
 		//list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);
-		request.setAttribute("ClassesConfirmList", list);
-		request.getRequestDispatcher("/views/admin/adminClassConfirmList.jsp").forward(request, response);
+		request.setAttribute("ClassesList", list);
+		request.getRequestDispatcher("/views/admin/adminClassList.jsp").forward(request, response);
 		}else {
-		request.getRequestDispatcher("/views/admin/adminClassConfirmList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminClassList.jsp").forward(request, response);
 		}
 	}
 
