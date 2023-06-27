@@ -42,7 +42,9 @@ public class ClassesConfirmServlet extends HttpServlet {
 		String msg="",loc="";
 		if(result>0) {
 			HttpSession session=request.getSession();
-			int insertNot=new HostService().insertNot(c.getHostId());
+			Classes n=new AdminService().classHostId(classId);
+			String d=n.getClassTitle();
+			int insertNot=new HostService().insertNot(c.getHostId(),d);
 			List<Notifications> list =new HostService().selectAllNotifications(c.getHostId());
 			int notcount = new HostService().notificationsCount(c.getHostId());
 			session.setAttribute("notcount",notcount);

@@ -169,4 +169,7 @@ private Properties sql= new Properties();
 	private InquiryComment getComment(ResultSet rs) throws SQLException {
 		return InquiryComment.builder().commentConent(rs.getString("COMMENT_CONENT")).commentRdate(rs.getDate("COMMENT_RDATE")).commentId(rs.getString("COMMENT_ID")).build();
 	}
+	public static Inquiry getInquiry2(ResultSet rs) throws SQLException {
+	      return Inquiry.builder().boardId(rs.getString("BOARD_ID")).memberId(rs.getString("MEMBER_ID")).boardType(rs.getString("BOARD_TYPE")).boardTitle(rs.getString("BOARD_TITLE")).boardContent(rs.getString("BOARD_CONTENT")).boardRdate(rs.getDate("BOARD_RDATE")).boardCheck(rs.getString("BOARD_CHECK")).sfId(rs.getString("SF_ID")).sfRename(rs.getString("SF_RENAME")).build();
+	   }
 }

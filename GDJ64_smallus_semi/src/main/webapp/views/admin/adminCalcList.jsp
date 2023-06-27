@@ -47,11 +47,14 @@ button#m-classdeletebtn{
 					<td><%=c.getCalcReqDate()%></td>
 					<td><%=c.getCalcPrice()%></td>
 					<td><%=c.getCalcFinalPrice()%></td>
-					<td>정산대기</td>					
-					<td><button id="m-calcConfirm"
-							onclick="calcConfirm'<%=c.getCalcId()%>');">정산</button></td>
-					<td><button id="m-calcReject"
-							onclick="calcReject'<%=c.getCalcId()%>');">거절</button></td>							
+
+					<%if(c.getCalcStatus().equals("Y")){ %>
+					<td>정산완료</td>
+					<%}else if(c.getCalcStatus().equals("W")){ %>
+					<td>정산대기</td>
+					<%}else{ %>
+					<td>정산거절</td>
+					<%} %>
 				</tr>
 				<%}%>
 				<%} else {%>
@@ -71,9 +74,20 @@ button#m-classdeletebtn{
 	</div>
 </body>
 <script>
-	function calcConfirm(calcId){
-		console.log(calcId);
-		location.assign("<%=request.getContextPath()%>/admin/CalcConfirmServlet.do?calcId="+calcId);
+const selectCalc=()=>{
+	let index = $("#m-selectCalc option").index($("#m-selectCalc option:selected"));
+	let calcStatus=$("#m-selectCalc").val();
+	console.log(index,calcStatus);
+	if(index==0){
+		location.replace('<%=request.getContextPath()%>/admin/ClacListServlet.do');
+	}else if(index==1){
+		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
+	}else if(index==2){
+		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
+	}else if(index==3){
+		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
 	}
+};
+
 </script>
 <%@ include file="/views/common/footer.jsp"%>

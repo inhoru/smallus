@@ -17,7 +17,6 @@ import java.util.Properties;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
-import com.smallus.member.model.vo.Notifications;
 import com.smallus.payment.model.vo.ClassPayment;
 import com.smallus.payment.model.vo.Payment;
 import com.smallus.payment.model.vo.PaymentCalc;
@@ -594,6 +593,121 @@ public class PaymentDao {
 	public static Payment getPayment(ResultSet rs) throws SQLException {
 		return Payment.builder().paymentId(rs.getString("PAYMENT_ID")).classDetailId(rs.getString("CLASS_DETAIL_ID")).memberId(rs.getString("MEMBER_ID")).couponId(rs.getString("COUPON_ID")).price(rs.getInt("PRICE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).TotalPrice(rs.getInt("TOTAL_PRICE")).paymentType(rs.getString("PAYMENT_TYPE")).paymentDate(rs.getDate("PAYMENT_DATE")).paymentStatus(rs.getString("PAYMENT_STATUS")).createdDate(rs.getDate("CREATED_DATE")).expiredDated(rs.getDate("EXPIRED_DATED")).build();
 	}
+
+	
+	public Payment selectPaymentIdByMemberId(Connection conn,String memberId, String classDetailId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String status="결제완료";
+		Payment p=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchBypaymentId"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, classDetailId);
+			pstmt.setString(3, status);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				getPayment(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return p;
+	}
+	
+	public int deleteCouponByMemberId(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteCouponByMemberId"));
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public PaymentCompleted selectPaymentByPaymentId(Connection conn, String paymentId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		PaymentCompleted pc=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectPaymentByPaymentId"));
+			pstmt.setString(1, paymentId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				pc=new PaymentCompleted();
+				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
+				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
+				pc.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				pc.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				pc.getPayment().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+				pc.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				pc.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				pc.getPaymentType().setPaymentName(rs.getString("PAYMENT_NAME"));
+				pc.getClasses().setClassPrice(rs.getInt("CLASS_PRICE"));
+				pc.getHost().setHostName(rs.getString("HOST_NAME"));
+				pc.getCoupon().setCouponPrice(rs.getInt("COUPON_PRICE"));
+				pc.getPayment().setTotalPrice(rs.getInt("TOTAL_PRICE"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return pc;
+	}
+	public int insertNot(Connection conn, String classDetailId,Classes n) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
+			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,(SELECT HOST_ID FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) WHERE CLASS_DETAIL_ID=?),null,?,?,SYSDATE,?)
+			String c="이 등록되었습니다.";
+			String b="예약";
+			pstmt.setString(1,n.getHostId());
+			pstmt.setString(2,n.getClassTitle());
+			pstmt.setString(3,c);
+			pstmt.setString(4,b);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public Classes classDetailId(Connection conn,String classDetailId)  {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Classes rc = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("classDetailId"));
+			//SELECT HOST_ID,CLASS_TITLE FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) WHERE CLASS_DETAIL_ID=?
+			pstmt.setString(1, classDetailId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				rc=new Classes();
+				rc.setHostId(rs.getString("HOST_ID"));
+				rc.setClassTitle(rs.getString("CLASS_TITLE"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}	
+		return rc;
+	}
+	
+	
+
 }
 
 

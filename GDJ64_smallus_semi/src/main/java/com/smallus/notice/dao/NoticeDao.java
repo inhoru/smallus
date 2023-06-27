@@ -36,8 +36,6 @@ public class NoticeDao {
 				noticeContent(rs.getString("NOTICE_CONTENT")).
 				noticeFilepath(rs.getString("NOTICE_FILEPATH")).
 				build();
-//				noticeImageOrignal(rs.getString("NOTICE_IMAGE_ORIGNAL")).
-//				noticeImageRename(rs.getString("NOTICE_IMAGE_RENAME")).build();
 	}
 	
 	public static NoticeImage getNoticeImage(ResultSet rs) throws SQLException{
@@ -67,43 +65,6 @@ public class NoticeDao {
 			close(pstmt);
 		}return result;
 	}
-	public Notice selectNotice(Connection conn, Notice n) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Notice notice=null;
-		try {
-			//SELECT * FROM NOTICE WHERE NOTICE_TITLE=?
-			pstmt=conn.prepareStatement(sql.getProperty("selectNotice"));
-			pstmt.setString(1,n.getNoticeTitle());
-			rs=pstmt.executeQuery();
-			if(rs.next()) {
-				notice=getNotice(rs);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return notice;
-	}
-	
-	public int enrollNoticeImg(Connection conn, NoticeImage ni) {
-		PreparedStatement pstmt=null;
-		int result2=0;
-		try {
-			//enrollNoticeImg=INSERT INTO NOTICE_IMAGE VALUES(SEQ_NOTICE_IMAGE_ID.NEXTVAL,?,?,?)
-			pstmt=conn.prepareStatement(sql.getProperty("enrollNoticeImg"));
-			pstmt.setString(1, ni.getNoticeId());
-			pstmt.setString(2, ni.getNoticeImageOrignal());
-			pstmt.setString(3, ni.getNoticeImageRename());
-			result2=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result2;
-	}
-	
 	public int deleteNotice(Connection conn, String noticeId) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -117,19 +78,5 @@ public class NoticeDao {
 		}finally {
 			close(pstmt);
 		}return result;
-	}
-	public int deleteNoticeImage(Connection conn, String noticeId) {
-		PreparedStatement pstmt=null;
-		int result2=0;
-		try {
-			//deleteNOticeImage=DELETE FROM NOTICE_Image WHERE NOTICE_ID=?
-			pstmt=conn.prepareStatement(sql.getProperty("deleteNoticeImage"));
-			pstmt.setString(1,noticeId);
-			result2=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result2;
 	}
 }

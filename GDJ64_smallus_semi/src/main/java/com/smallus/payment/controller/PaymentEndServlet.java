@@ -2,6 +2,7 @@ package com.smallus.payment.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -13,8 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.smallus.classes.model.service.ClassService;
+import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.service.HostService;
 import com.smallus.member.model.vo.Member;
-import com.smallus.payment.model.vo.PaymentCompleted;
+import com.smallus.member.model.vo.Notifications;
+//github.com/you-so-good/smallus.git
 import com.smallus.payment.service.PaymentService;
 
 /**
@@ -81,7 +85,7 @@ public class PaymentEndServlet extends HttpServlet {
 		
 		int personnel=Integer.parseInt(classPersonnel);
 		int remainingPersonnel= new PaymentService().selectRemainPer(classDetailId);
-		
+		int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
 //		System.out.println("personnel :"+personnel);
 //		System.out.println("remainingPersonnel :"+remainingPersonnel);
 //		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
@@ -91,7 +95,16 @@ public class PaymentEndServlet extends HttpServlet {
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
 		int result=new PaymentService().insertPayment(dataMap);
 		
-		if(result>0) System.out.println("입력 완료");
+
+		Classes n=new PaymentService().classDetailId(classDetailId);
+		int insertNot=new PaymentService().insertNot(classDetailId,n);		
+		List<Notifications> list =new HostService().selectAllNotifications(n.getHostId());
+		int notcount = new HostService().notificationsCount(n.getHostId());
+		session.setAttribute("notcount",notcount);
+		session.setAttribute("Notlist",list);
+		
+		if(result>0 && result>0 && delResult>0) System.out.println("입력 완료");
+
 		else System.out.println("error T_T");
 		
 		

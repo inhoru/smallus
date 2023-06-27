@@ -6,10 +6,10 @@ import static com.smallus.common.JDBCTemplate.getConnection;
 import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.member.model.vo.Member;
 import com.smallus.payment.dao.PaymentDao;
 import com.smallus.payment.model.vo.ClassPayment;
@@ -160,5 +160,47 @@ public class PaymentService {
 		return result;
 	}
 	
+
+	public Payment selectPaymentIdByMemberId(String memberId, String classDetailId) {
+		Connection conn=getConnection();
+		Payment p=dao.selectPaymentIdByMemberId(conn, memberId, classDetailId);
+		close(conn);
+		return p;
+	}
+	
+	public int deleteCouponByMemberId(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.deleteCouponByMemberId(conn, memberId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public PaymentCompleted selectPaymentByPaymentId(String paymentId) {
+		Connection conn=getConnection();
+		PaymentCompleted p=dao.selectPaymentByPaymentId(conn, paymentId);
+		close(conn);
+		return p;
+	}
+	public int insertNot(String classDetailId,Classes n) {
+		Connection conn=getConnection();
+		int result=dao.insertNot(conn,classDetailId,n);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	public Classes classDetailId(String classDetailId) {
+		Connection conn=getConnection();
+		Classes c=dao.classDetailId(conn,classDetailId);
+		close(conn);
+		return c; 
+	}
+	
+
 	
 }
