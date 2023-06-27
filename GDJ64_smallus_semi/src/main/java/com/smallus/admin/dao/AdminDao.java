@@ -477,6 +477,109 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
+	public int calcConfirm(Connection conn,int calcFinalPrice,String calcId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//calcConfirm=UPDATE CALC SET CALC_STATUS='Y', CALC_PASS_DATE=SYSDATE, CALC_FINAL_PRICE=? WHERE CALC_STATUS='W' AND CALC_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("calcConfirm"));
+			pstmt.setInt(1, calcFinalPrice);
+			pstmt.setString(2, calcId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int calcReject(Connection conn,String calcId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			//calcReject=UPDATE CALC SET CALC_STATUS='N', CALC_PASS_DATE=SYSDATE WHERE CALC_STATUS='W' AND CALC_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("calcReject"));
+			pstmt.setString(1, calcId);
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int selectCalcCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			//selectCalcCount=SELECT COUNT(*) FROM CALC
+			pstmt=conn.prepareStatement(sql.getProperty("selectCalcCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public List<Calc> checkCalcAll(Connection conn, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Calc> list=new ArrayList();
+		try {
+			//checkCalcAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC)M) WHERE RNUM BETWEEN ? AND ?
+			pstmt=conn.prepareStatement(sql.getProperty("checkCalcAll"));
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getCalc(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public int selectCalcSortCount(Connection conn,String calcStatus) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			//selectCalcSortCount=SELECT COUNT(*) FROM CALC WHERE CALC_STATUS=?
+			pstmt=conn.prepareStatement(sql.getProperty("selectCalcSortCount"));
+			pstmt.setString(1,calcStatus);
+			rs=pstmt.executeQuery();
+			if(rs.next()) 
+				totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return totalData;
+	}
+	public List<Calc> checkCalcSort(Connection conn,String calcStatus, int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Calc> list=new ArrayList();
+		try {
+			//checkCalcSort=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC WHERE CALC_STATUS=?)M) WHERE RNUM BETWEEN ? AND ?
+			pstmt=conn.prepareStatement(sql.getProperty("checkCalcSort"));
+			pstmt.setString(1, calcStatus);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				list.add(getCalc(rs));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	public Classes classHostId(Connection conn,String classId)  {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -497,7 +600,4 @@ public class AdminDao {
 		}	
 		return c;
 	}
-	
-	
-	
 }

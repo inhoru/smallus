@@ -10,7 +10,7 @@ List<Calc> CalcList = (List)request.getAttribute("CalcList");
 	align-items: center;
 }
 
-button#m-classdeletebtn{
+button#m-calcdeletebtn{
 	width: 4rem;
 	font-weight: bold;
 	background-color: #E8D6C3;
@@ -27,6 +27,12 @@ button#m-classdeletebtn{
 		<div class="h-main-title">
 			<h2>호스트 정산관리</h2>
 		</div>
+			<select id="m-selectCalc" onchange="selectCalc();">
+				<option value="A">전체정산내역</option>
+				<option value="Y" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("Y")?"selected":""%>>정산완료</option>
+				<option value="W" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("W")?"selected":""%>>정산대기</option>
+				<option value="N" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("N")?"selected":""%>>정산거절</option>
+			</select>
 	</section>
 	<section class="h-main h-main-rsvList">
 		<div>
@@ -35,8 +41,9 @@ button#m-classdeletebtn{
 					<th>정산번호</th>
 					<th>호스트아이디</th>
 					<th>정산요청일</th>
-					<th>정산금액</th>
-					<th>최종금액</th>
+					<th>정산승인일</th>
+					<th>정산요청금액</th>
+					<th>정산최종금액</th>
 					<th>정산상태</th>
 				</tr>
 				<%if (CalcList != null && !CalcList.isEmpty()) {
@@ -45,18 +52,23 @@ button#m-classdeletebtn{
 					<td><%=c.getCalcId()%></td>
 					<td><%=c.getHostId()%></td>
 					<td><%=c.getCalcReqDate()%></td>
+					<td><%=c.getCalcPassDate()%></td>
 					<td><%=c.getCalcPrice()%></td>
 					<td><%=c.getCalcFinalPrice()%></td>
-					<td>정산대기</td>					
-					<td><button id="m-calcConfirm"
-							onclick="calcConfirm'<%=c.getCalcId()%>');">정산</button></td>
-					<td><button id="m-calcReject"
-							onclick="calcReject'<%=c.getCalcId()%>');">거절</button></td>							
+					<%if(c.getCalcStatus().equals("Y")){ %>
+					<td>정산완료</td>
+					<%}else if(c.getCalcStatus().equals("W")){ %>
+					<td>정산대기</td>
+					<%}else{ %>
+					<td>정산거절</td>
+					<%} %>
+					<td><button id="m-calcdeletebtn"
+							onclick="calcdelete('<%=c.getCalcId()%>');">삭제</button></td>
 				</tr>
 				<%}%>
 				<%} else {%>
 				<tr>
-					<td colspan="7">승인할 정산요청이 없습니다.</td>
+					<td colspan="7">조회할 정산내역이 없습니다.</td>
 				</tr>
 				<%
 				}
@@ -71,9 +83,23 @@ button#m-classdeletebtn{
 	</div>
 </body>
 <script>
-	function calcConfirm(calcId){
+const selectCalc=()=>{
+	let index = $("#m-selectCalc option").index($("#m-selectCalc option:selected"));
+	let calcStatus=$("#m-selectCalc").val();
+	console.log(index,calcStatus);
+	if(index==0){
+		location.replace('<%=request.getContextPath()%>/admin/ClacListServlet.do');
+	}else if(index==1){
+		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
+	}else if(index==2){
+		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
+	}else if(index==3){
+		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
+	}
+};
+	function calcdelete(){
 		console.log(calcId);
-		location.assign("<%=request.getContextPath()%>/admin/CalcConfirmServlet.do?calcId="+calcId);
+		location.assign("<%=request.getContextPath()%>/admin/CalcDeleteServlet.do?calcId="+calcId);
 	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>
