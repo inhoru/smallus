@@ -345,9 +345,9 @@ $(".h-close-modal").click(e => {
 	closeNick();
 })
 // 현재 비밀번호 체크
-$("#h-curPw").keyup(e => {
-	 $.ajax({
-	     url: "<%=request.getContextPath()%>/host/updateNickname.do",
+	$("#h-curPw").keyup(e => {
+	 	$.ajax({
+	     	url: "<%=request.getContextPath()%>/host/updateNickname.do",
 	            data: { "curPw": $(e.target).val() },
 	            success: function (data) {
 	                console.log(data, typeof data);
@@ -364,7 +364,7 @@ $("#h-curPw").keyup(e => {
 	                console.log(textStatus);
 	                console.log(errorThrown);
 	            }
-	        });
+	 	});
 	 });
 const passwordReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 // 변경할 비밀번호 체크 

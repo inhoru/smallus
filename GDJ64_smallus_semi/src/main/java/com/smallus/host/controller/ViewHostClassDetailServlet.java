@@ -52,10 +52,8 @@ public class ViewHostClassDetailServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("classDetailList", classDetailList);
 			request.getRequestDispatcher("/views/host/viewHostClassDetail.jsp").forward(request, response);
-			System.out.println("세부클래스있음");
 		}else {
 			request.setAttribute("msg", "조회할 클래스가 없습니다.");
-			System.out.println("세부클래스없음");
 			request.setAttribute("loc", "/views/host/viewHostClassList.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}

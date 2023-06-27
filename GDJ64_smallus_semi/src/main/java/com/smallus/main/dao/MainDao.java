@@ -46,4 +46,22 @@ public class MainDao {
 		}
 		return list;
 	}
+	public List<Classes> newClass(Connection conn) {
+		List<Classes> list = new ArrayList<Classes>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty(""));
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(getClasses2(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 }

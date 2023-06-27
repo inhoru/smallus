@@ -81,30 +81,25 @@
 					</a>
 					<table>
 						<tr>
-							<%if(c.getClassPassId().equals("W")){ %>
-								<th class="h-tbl-align-left" class="h-class-pass-W">
-										승인 대기
-								</th>
-								<th></th>
-							<%}else if(c.getClassPassId().equals("N1") || c.getClassPassId().equals("N2") || c.getClassPassId().equals("N3")) {
+							<%if(c.getClassPassId().equals("Y")&&c.getClassStatus().equals("Y")){ %>
+								<th class="h-tbl-align-left" class="h-class-pass-Y">클래스 승인 완료<th>
+								<th class="h-classStatus-Y">판매 중지</th>
+							<%}else if(c.getClassPassId().equals("Y")&&c.getClassStatus().equals("N")){ %>
+								<th class="h-tbl-align-left h-classStatus-Y" colspan="2">판매 중지</th>
+							<%}else if(c.getClassPassId().equals("W")&&c.getClassStatus().equals("Y")) {%>
+								<th class="h-tbl-align-left" class="h-class-pass-W" colspan="2">승인 대기</th>
+							<%}else if((c.getClassPassId().equals("N1") || c.getClassPassId().equals("N2") || c.getClassPassId().equals("N3")) &&c.getClassStatus().equals("Y")){
 								if(c.getClassPassId().equals("N1")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부실</th>
-									<%}else if(c.getClassPassId().equals("N2")){%>
+								<%}else if(c.getClassPassId().equals("N2")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부적절</th>
-									<%}else if(c.getClassPassId().equals("N3")){%>
+								<%}else if(c.getClassPassId().equals("N3")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>중복 등록</th>
-									<%} 
-							}else if(c.getClassPassId().equals("Y")){%>
-								<th class="h-tbl-align-left" class="h-class-pass-Y">승인 완료<th>
-							<%}%>
-						<th>
-							<%if(c.getClassStatus().equals("N")){ %>
-								판매 중지
-							<%}else if(c.getClassStatus().equals("Y")&&c.getClassPassId().equals("Y")){ %>
-								판매 중
+								<%} 
+							}else{%>
+								<th class="h-tbl-align-left" class="h-class-pass-N">판매 중지</th><th></th>
 							<%} %>
-						</th>
-						<th colspan="3"><%=c.getClassId() %></th>
+						<th colspan="2"><%=c.getClassId() %></th>
 						</tr>
 						<tr>
 							<td class="h-tbl-align-left" colspan="4"><%=c.getClassTitle() %></td>
@@ -113,9 +108,7 @@
 							<td class="h-tbl-align-left">신청 일</td>
 							<td><%=c.getClassUpLoadDate() %></td>
 							<td>승인 일</td>
-							<td>								
-								<%= c.getClassPassDate()%>
-							</td>
+							<td><%= c.getClassPassDate()%></td>
 						</tr>
 						<tr>
 							<td colspan="3"></td>
