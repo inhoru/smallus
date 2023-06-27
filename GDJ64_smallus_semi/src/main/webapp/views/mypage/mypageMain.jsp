@@ -34,7 +34,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 			<tr>
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
-				<td><a href="<%=request.getContextPath()%>/review/review.do">후기관리</a></td>
+				<td><a href="<%=request.getContextPath()%>/review/reviewList.do">후기관리</a></td>
 				<td class="i-customerService"><a href="<%=request.getContextPath()%>/ajax/qnaTest.do">Q&A</a></td>
 			</tr>
 		</table>
@@ -68,7 +68,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 						<a href="<%=request.getContextPath()%>/mypageCoupon.do"
 							class="i-as1"><%=coupon%></a> <a
 							href="<%=request.getContextPath()%>/memberWishList.do"
-							class="i-as2"><%=wishCount %></a> <a href="" class="i-as3">3</a>
+							class="i-as2"><%=wishCount %></a> <a href="<%=request.getContextPath()%>/review/reviewList.do" class="i-as3">3</a>
 					</div>
 				</div>
 			</div>
