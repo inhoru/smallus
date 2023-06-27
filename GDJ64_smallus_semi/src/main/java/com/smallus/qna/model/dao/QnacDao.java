@@ -6,10 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import static com.smallus.common.JDBCTemplate.*;
 
 import com.smallus.qna.model.vo.Qnac;
-import static com.smallus.common.JDBCTemplate.close;
 
 public class QnacDao {
 
@@ -44,6 +46,20 @@ public class QnacDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public List<Qnac> detailQnacList(Connection conn){
+		PreparedStatement pstmt = null;
+		ResultSet rs=null;
+		List<Qnac> list=new ArrayList();
+//		try {
+//			
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			
+//		}
+		return list;
 	}
 
 }
