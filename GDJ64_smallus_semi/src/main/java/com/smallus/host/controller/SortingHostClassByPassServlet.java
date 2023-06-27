@@ -1,4 +1,4 @@
-package com.smallus.classes.controller;
+package com.smallus.host.controller;
 
 import java.io.IOException;
 import java.util.List;

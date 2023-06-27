@@ -18,7 +18,7 @@ public class ReviewDao {
 	
 	public ReviewDao() {
 		String path = ReviewDao.class
-					.getResource("sql/review/reviewsql.properties")
+					.getResource("/sql/review.properties")
 					.getPath();
 		try {
 				sql.load(new FileReader(path));

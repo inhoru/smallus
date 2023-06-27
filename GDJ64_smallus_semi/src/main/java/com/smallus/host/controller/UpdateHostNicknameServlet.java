@@ -7,21 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.HostService;
 
 /**
- * Servlet implementation class DuplicateHostNicknameServlet
+ * Servlet implementation class UpdateHostNickname
  */
-@WebServlet("/host/duplicateNickname.do")
-public class DuplicateHostNicknameServlet extends HttpServlet {
+@WebServlet(name = "/host/updateNickname.do", urlPatterns = { "/host/updateNickname.do" })
+public class UpdateHostNicknameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DuplicateHostNicknameServlet() {
+    public UpdateHostNicknameServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,10 +32,21 @@ public class DuplicateHostNicknameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session= request.getSession();
+		Host hostInfo = (Host) session.getAttribute("hostInfo");
+		String hostId=(hostInfo.getHostId());
+		
 		String nickname=request.getParameter("nickname");
 		System.out.println(nickname);
-		Host h=new HostService().selectByhostNickname(nickname);
-//		System.out.println(h);
+		int result=new HostService().updateHostNickname(nickname,hostId);
+		if(result>0) {
+			System.out.println("nick change Ok");
+		}
+		System.out.println("nickname "+result);
+		//response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**

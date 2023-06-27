@@ -31,6 +31,7 @@ public class MailSendServlet2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String hostEmail=request.getParameter("hostEmail");
 		MailSend ms = new MailSend();
+		System.out.println(hostEmail);
 		if(hostEmail!=null) {
 			String epw=ms.MailSend(hostEmail);
 			System.out.println("이메일보내기성공");

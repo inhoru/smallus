@@ -28,10 +28,6 @@
             <div>
                 <div class="h-main-title"> 
                     <h3>전체 예약 내역</h3>
-	                <select name="h-selectPaymentDate" id="h-selectPaymentDate" onchange="selectDateOption()">
-	                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 일 ↓</option>
-	                	<option value="N" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>결제 일 ↑</option>
-	                </select>
 	                <select name="h-selectPaymentStatus" id="h-selectPaymentStatus" onchange="selectOption()">
 	                	<option>결제 상태(전체)</option>
 	                	<option value="Y" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("Y")?"selected":""%>>결제 완료</option>
@@ -49,8 +45,6 @@
                         <th>결제 일</th>
                         <th>결제 상태</th>
                     </tr>
-                    <!-- //P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, 
-					//P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE -->
                     <%if(rsvList!=null && !rsvList.isEmpty()){
                     	int count=1;
                     	for(PaymentCalc p: rsvList){
@@ -67,12 +61,7 @@
 	                   		</tr>
 	                    <%count++;
 	                    }
-                    }else{ %>
-                    <tr>
-                        <td colspan="8">조회된 예약이 없습니다.</td>
-                    </tr>
-                    <%} %>
-                    <%if(sortStatusList!=null && !sortStatusList.isEmpty()){
+                    }else if(sortStatusList!=null && !sortStatusList.isEmpty()){
                     	int count=1;
                     	for(PaymentCalc p: sortStatusList){%>
                         <tr>
@@ -87,7 +76,11 @@
 	                   		</tr>
 	                    <%count++;
 	                    }
-                    }%>
+                    }else{ %>
+                    <tr>
+                        <td colspan="8">조회된 예약이 없습니다.</td>
+                    </tr>
+                    <%} %>
                 </table>
             </div>
 	            <div class="pageBar">
@@ -96,10 +89,10 @@
         </section>
 <script>
 
-//select 결제일 정렬 옵션 변경하면 이동
-function selectDateOptio(){
 	let dateIndex = $("#h-selectPaymentDate option").index($("#h-selectPaymentDate option:selected"));
-	let statusIndex = $("#h-selectPaymentStatus option").index($("#h-selectPaymentStatus option:selected"));
+	
+//select 결제일 <%-- 정렬 옵션 변경하면 이동
+function selectDateOption(){
 	// index =0 -> 내림 / 1:오름 (변경)
 	//console.log(index);
 	if(dateIndex==0&&statusIndex==0){
@@ -107,14 +100,20 @@ function selectDateOptio(){
 	}else if(dateIndex==0&&statusIndex==1){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y');
 
-	}else if(dateIndex==2&&statusIndex==2){
+	}else if(dateIndex==0&&statusIndex==2){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
+	}else if(dateIndex==1&&statusIndex==0){
+		location.replace('<%=request.getContextPath()%>/host/viewHostRsv.do?sort=asc');
+	else if(dateIndex==1&&statusIndex==1){
+		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=Y&sort=asc');
+
+	}else if(dateIndex==1&&statusIndex==2){
+		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N&sort=asc');
 	}
-}
+} --%>
 //select 옵션 변경하면 이동
 function selectOption(){
 	let statusIndex = $("#h-selectPaymentStatus option").index($("#h-selectPaymentStatus option:selected"));
-	let div=$("#h-selectPaymentStatus option")
 	// index =1 -> W / 2:Y/3:N
 	//console.log(index);
 	if(statusIndex==0){

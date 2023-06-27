@@ -1,4 +1,4 @@
-package com.smallus.classes.controller;
+package com.smallus.common;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
