@@ -18,7 +18,7 @@ public class ReviewDao {
 	
 	public ReviewDao() {
 		String path = ReviewDao.class
-					.getResource("sql/review/reviewsql.properties")
+					.getResource("/sql/review.properties")
 					.getPath();
 		try {
 				sql.load(new FileReader(path));
@@ -29,12 +29,15 @@ public class ReviewDao {
 	
 	private Review getReview(ResultSet rs) throws SQLException{
 	return Review.builder()
-			.reviewId(rs.getString("riview_id"))
+			.reviewId(rs.getString("review_id"))
 			.paymentId(rs.getString("payment_id"))
 			.reviewTitle(rs.getString("review_title"))
 			.reviewContent(rs.getString("review_content"))
 			.reviewRating(rs.getInt("review_Rating"))
 			.reviewDate(rs.getDate("review_date"))
+			.imgPath(rs.getString("CLASS_THUMBNAIL"))
+			.memberId(rs.getString("member_id"))
+			.classTitle(rs.getString("class_title"))
 			.build();
 }
 //	public List<Review> selectReview(Connection conn,String classId) {
@@ -55,13 +58,15 @@ public class ReviewDao {
 //			close(pstmt);
 //		}return list;
 //	}
-	public List<Review> selectReview(Connection conn) {
+	public List<Review> selectReview(Connection conn, String classId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Review> list = new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectReview"));
+			pstmt.setString(1, classId);
 			rs=pstmt.executeQuery();
+			
 			while(rs.next()) {
 				list.add(getReview(rs));
 			}

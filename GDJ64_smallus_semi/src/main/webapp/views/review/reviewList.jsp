@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<%@ page import="java.util.List,com.smallus.review.model.vo.Review" %>
 <%@ include file="/views/common/mainHeader.jsp"%>
-
+<%
+	List<Review> reviews=(List)request.getAttribute("reviews");
+%>
 <div id="d-review-page">
 
 	<br><br>
@@ -20,88 +22,41 @@
 	</div>
 	
 	<div class="d-review-list">
-		<hr>
-		<div class="d-review-one">
-			<img id="imgs" src="<%=request.getContextPath()%>/img/img-slide2-1.png"
-				width="150px" height="150px">
-			<div class="d-review-table">
-				<table>
-					<tr>
-						<td  id="tr">작성자</td>
-					<td id="td">2023-06-15 19:50</td>
-					</tr>
-					<tr>
-						<td id="tr"><h3>부드러운 앙금으로 빚어내는 네리끼리 화과자</h3></td>
-					</tr>
-					<tr>
-						<td id="tr"><h2>★★★★★</h2></td>
-					</tr>
-					<tr>
-						<td id="tr"><h4>너무 재밌어용ㅎㅎ</h4></td>
-				</tr>
-					<tr>
-						<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
-					</tr>
-				</table>
-			<button>삭제</button>
+		<%if(reviews==null || reviews.isEmpty()){ %>
+			<div class="d-review-one">
+				작성된 리뷰가 없습니다.
 			</div>
-		</div>
-		
-		<hr>
-		<div class="d-review-one">
-			<img id="imgs" src="<%=request.getContextPath()%>/img/img-slide2-1.png"
-				width="150px" height="150px">
-			<div class="d-review-table">
-			<table>
-				<tr>
-					<td  id="tr">작성자</td>
-					<td id="td">2023-06-15 19:50</td>
-					</tr>
-				<tr>
-					<td id="tr"><h3>부드러운 앙금으로 빚어내는 네리끼리 화과자</h3></td>
-				</tr>
-				<tr>
-					<td id="tr"><h2>★★★★★</h2></td>
-				</tr>
-				<tr>
-						<td id="tr"><h4>너무 재밌어용ㅎㅎ</h4></td>
-				</tr>
-				<tr>
-					<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
-				</tr>
-			</table>
-			<button>삭제</button>
-			</div>
-		</div>
-		
-		<hr>
-		<div class="d-review-one">
-			<img id="imgs" src="<%=request.getContextPath()%>/img/img-slide2-1.png"
-				width="150px" height="150px">
-			<div class="d-review-table">
-			<table>
-				<tr>
-					<td  id="tr">작성자</td>
-					<td id="td">2023-06-15 19:50</td>
-					</tr>
-				<tr>
-					<td id="tr"><h3>부드러운 앙금으로 빚어내는 네리끼리 화과자</h3></td>
-				</tr>
-				<tr>
-					<td id="tr"><h2>★★★★★</h2></td>
-				</tr>
-				<tr>
-						<td id="tr"><h4>너무 재밌어용ㅎㅎ</h4></td>
-				</tr>
-				<tr>
-					<td id="tr"><p>할머니 생신 선물로 만들어 드렸는데 너무 이뻐서 못 먹겠다고 하시더라구요. 너무 좋아하셔서 뿌듯했어요:)</p></td>
-				</tr>
-			</table>
-			<button>삭제</button>
-			</div>
-		</div>
-		
-	
+		<%} else{
+			for(Review r : reviews){%>
+				<hr>
+				<div class="d-review-one">
+					<img id="imgs" src="<%=request.getContextPath()%>/img/<%=r.getImgPath() %>"
+						width="150px" height="150px">
+					<div class="d-review-table">
+						<table>
+							<tr>
+								<td  id="tr"><%=r.getMemberId() %></td>
+								<td id="td"><%=r.getReviewDate() %></td>
+							</tr>
+							<tr>
+								<td id="tr"><h3><%=r.getClassTitle() %></h3></td>
+							</tr>
+							<tr>
+								<td id="tr"><h2><%=r.getReviewRating() %></h2></td>
+							</tr>
+							<tr>
+								<td id="tr"><h4><%=r.getReviewTitle() %></h4></td>
+						</tr>
+							<tr>
+								<td id="tr"><p><%=r.getReviewContent() %></p></td>
+							</tr>
+						</table>
+					<button>삭제</button>
+					</div>
+				</div>
+		<%} 
+		}%>
+			
 	</div>
 </div>
 <style>

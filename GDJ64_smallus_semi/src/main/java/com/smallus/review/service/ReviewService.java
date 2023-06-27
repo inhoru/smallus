@@ -17,9 +17,9 @@ public class ReviewService {
 //		close(conn);
 //		return list;
 //	}
-	public List<Review> selectReview(){
+	public List<Review> selectReview(String classId){
 		Connection conn = getConnection();
-		List<Review> list = dao.selectReview(conn);
+		List<Review> list = dao.selectReview(conn, classId);
 		close(conn);
 		return list;
 	}

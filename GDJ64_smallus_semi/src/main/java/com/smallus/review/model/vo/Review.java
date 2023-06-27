@@ -22,5 +22,8 @@ public class Review {
 	private String reviewContent;
 	private int reviewRating;
 	private Date reviewDate;
+	private String imgPath;
+	private String memberId;
+	private String classTitle;
 
 }

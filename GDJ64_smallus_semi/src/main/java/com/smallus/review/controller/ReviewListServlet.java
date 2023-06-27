@@ -1,9 +1,6 @@
 package com.smallus.review.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.review.model.vo.Review;
+import com.smallus.review.service.ReviewService;
 
 /**
- * Servlet implementation class reviewList
+ * Servlet implementation class ReviewListServlet
  */
-@WebServlet("/ajax/reviewTest.do")
-public class reviewListServlet extends HttpServlet {
+@WebServlet("/review/reviewList.do")
+public class ReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public reviewListServlet() {
+    public ReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +31,16 @@ public class reviewListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-		Date today=null;
-		try {
-			today=sdf.parse("2023-06-21");
-		}catch(ParseException e) {
-			//e.printStackTrace()
-			today=new Date();	
-		}
-		List<Review> reviews = List.of(
-				Review.builder(). reviewId("RVW1000").
-				paymentId("PYM20230502").
-				reviewTitle("후기제목입니다").
-				reviewContent("후기내용입니다").
-				reviewRating(5).
-				reviewDate(today).
-				build()
-				);
-		request.setAttribute("reviews",reviews);
-		request.getRequestDispatcher("/views/review/reviewListAjax.jsp").forward(request, response);
+
+		String classId=request.getParameter("classId");
+		List<Review> reviews=new ReviewService().selectReview(classId);
+		
+		request.setAttribute("reviews", reviews);
+		
+		//System.out.println(reviews);
+		
+		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response);
+	
 	}
 
 	/**
