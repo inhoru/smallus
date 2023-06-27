@@ -22,7 +22,7 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/memberprofile.do">프로필관리</a></td>
 				<td><a href="<%=request.getContextPath()%>/memberpayment.do">결제내역</a></td>
-				<td class="i-customerService"><a href="">공지사항</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
 			</tr>
 			<tr>
 				<td class="i-myInfo"><a
@@ -33,8 +33,8 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 			<tr>
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
-				<td><a href="">후기관리</a></td>
-				<td class="i-customerService"><a href="">Q&A</a></td>
+				<td><a href="<%=request.getContextPath()%>/ajax/reviewTest.do">후기관리</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/ajax/qnaTest.do">Q&A</a></td>
 			</tr>
 		</table>
 	</section>
@@ -188,14 +188,27 @@ List<Inquiry> inquiryList = (List) request.getAttribute("inquiry");
 		
 	
 	
-	
-	$(".i-inquiryContent").click(e=>{
-	$(e.target).parent().next().slideToggle(0);
-	
-	$(e.target).parent().next().next().slideToggle(0);
+	$(document).ready(function() {
+		  $(".i-inquiryContent").click(function() {
+		    const parent = $(this).closest("tr");
+		    const answerRow = parent.next(".i-inquiryContentAnswer");
+		    const tdsRow = parent.next().next(".i-tds");
 
-	
-	})
+		    if (answerRow.is(":visible")) {
+		      answerRow.slideUp();
+		      if (tdsRow.length > 0) {
+		        tdsRow.slideUp();
+		      }
+		    } else {
+		      answerRow.slideDown();
+		      if (tdsRow.length > 0) {
+		        tdsRow.slideDown();
+		      }
+		    }
+		  });
+		});
+
+
 	
 	$(".i-faqCategoriesDetails").click(e=>{
 		const categorie=$(e.target).text();

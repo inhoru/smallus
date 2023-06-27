@@ -34,8 +34,8 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 			<tr>
 				<td class="i-myInfo"><a
 					href="<%=request.getContextPath()%>/mypageCoupon.do">쿠폰관리</a></td>
-				<td><a href="">후기관리</a></td>
-				<td class="i-customerService"><a href="">Q&A</a></td>
+				<td><a href="<%=request.getContextPath()%>/ajax/reviewTest.do">후기관리</a></td>
+				<td class="i-customerService"><a href="<%=request.getContextPath()%>/ajax/qnaTest.do">Q&A</a></td>
 			</tr>
 		</table>
 	</section>

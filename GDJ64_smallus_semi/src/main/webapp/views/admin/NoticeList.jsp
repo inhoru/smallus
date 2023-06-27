@@ -24,6 +24,7 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
    href="<%=request.getContextPath()%>/css/mypage/mypage.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostHeader.css">
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/host/hostMainStyle.css">
+
 <style>
 	button#deleteNoticebtn {
 	width:4rem;
@@ -121,4 +122,5 @@ function deleteNotice(noticeId){
 	location.assign("<%=request.getContextPath()%>/notice/DeleteNotice.do?noticeId="+noticeId);
 }
 </script>
+<script src="<%=request.getContextPath()%>/js/header.js"></script>
 <%@ include file="/views/common/hostFooter.jsp"%>
