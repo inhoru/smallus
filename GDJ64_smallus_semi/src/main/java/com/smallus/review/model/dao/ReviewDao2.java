@@ -12,11 +12,11 @@ import java.util.Properties;
 import com.smallus.review.model.vo.Review;
 import static com.smallus.common.JDBCTemplate.close;
 
-public class ReviewDao {
+public class ReviewDao2 {
 	
 	private Properties sql = new Properties();
 	
-	public ReviewDao() {
+	public ReviewDao2() {
 		String path = ReviewDao.class
 					.getResource("/sql/review.properties")
 					.getPath();
@@ -63,7 +63,7 @@ public class ReviewDao {
 		ResultSet rs = null;
 		List<Review> list = new ArrayList();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("hostReview"));
+			pstmt=conn.prepareStatement(sql.getProperty("memberSelectReview"));
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			
@@ -81,7 +81,7 @@ public class ReviewDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("insertReview"));
+			pstmt=conn.prepareStatement(sql.getProperty("reviewMember"));
 			pstmt.setString(1, r.getPaymentId());
 			pstmt.setString(2, r.getReviewTitle());
 			pstmt.setString(3, r.getReviewContent());
@@ -110,14 +110,14 @@ public class ReviewDao {
 //		}return r;
 //	}
 	
-	public int countReviewByhostId(Connection conn, String hostId) {
+	public int countReviewByhostId(Connection conn, String userId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("countReviewByhostId"));
 			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
-			pstmt.setString(1, hostId);
+			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
 		}catch(SQLException e) {
@@ -128,7 +128,6 @@ public class ReviewDao {
 		}
 		return result;
 	}
-	
 	
 	
 	
