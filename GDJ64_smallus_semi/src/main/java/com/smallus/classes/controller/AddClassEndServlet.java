@@ -70,14 +70,14 @@ public class AddClassEndServlet extends HttpServlet {
 		int result=new ClassService2().addClass(newClass);
 		
 		
-		
 		// 여기서부터 클래스 스케쥴 등록
 		// 입력내용을 배열로 받은 뒤, for문을 돌면서 내용을 자른다
-		String[] schedule=request.getParameterValues("datetimes");
+		String[] schedule=mr.getParameterValues("datetimes");
 		List<ClassDetail> scheduleList=new ArrayList();
 		SimpleDateFormat dateFormet=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
 			for(String s:schedule) {
+				System.out.println("읽어들인 스케쥴: "+s);
 				ClassDetail cd=ClassDetail.builder()
 						.bookingTimeStart(new java.sql.Date(dateFormet.parse(s.substring(1, 16)).getTime()))
 						.bookingTimeEnd(new java.sql.Date(dateFormet.parse(s.substring(20, 35)).getTime()))
@@ -92,14 +92,16 @@ public class AddClassEndServlet extends HttpServlet {
 		if(!scheduleList.isEmpty()) { // 이거 꼭 해야하나 싶지만 혹시모르니깐
 			result2=new ClassService2().addClassSchedule(scheduleList);
 		}
-//		
-//		
-//		if(result>0&&result2>0) {
-//			// 성공
-//		}else {
-			// 실패
-			// request.setAttribute("msg", "클래스 등록에 실패하였습니다.");
-//		}
+		
+		
+		if(result>0&&result2>0) {
+			// 성공
+			System.out.println("클래스와 스케쥴 모두 등록 성공!");
+		}else {
+			 // 실패
+//			 request.setAttribute("msg", "클래스 등록에 실패하였습니다.");
+			System.out.println("등록 오류!'");
+		}
 		// request.setAttribute("msg", "메세지 변수");
 		// request.setAttribute("loc", "주소 변수");
 		
