@@ -15,7 +15,7 @@
 	--btn-bold: bolder;
 }
 
-.h-modalNickName, .h-modalPassword, .h-modalPhone, .h-modalEmail, .h-modalDelete, .h-modalInsertSchedule {
+.h-modalNickName, .h-modalPassword, .h-modalPhone, .h-modalEmail, .h-modalDelete {
 	position: fixed;
 	z-index: 1;
 	left: 0;
@@ -55,14 +55,6 @@
 	color: black;
 	text-decoration: none;
 	cursor: pointer;
-}
-div#h-AddSchedule-calendar{
-	width: 1000px;
-	height: 500px;
-	margin: 10px;
-	border: 2px solid #595959;
-	border-radius: 20px;
-	padding:10px;
 }
     </style>
 <%@ page import="com.smallus.classes.model.vo.ClassDetail, com.smallus.classes.model.vo.Classes" %>
@@ -167,39 +159,8 @@ div#h-AddSchedule-calendar{
 			<button class="h-close-modal">삭제 취소</button>
 		</div>
 	</div>
-	<div class="h-modalInsertSchedule" style="display: hidden">
-		<div class="modal-content h-insertSchedule">
-			<h4>클래스 세부 일정을 추가합니다.</h4>
-			<div id="h-AddSchedule-calendar">
-				<input type="text" name="datetimes"/><button>추가</button><button>삭제</button>
-			</div>
-			<input type="hidden" value="">
-			<button id="h-insertSch">추가</button>
-			<button class="h-close-modal">추가 취소</button>
-		</div>
-	</div>
 <script>
-	// 일정 추가함수
-	$(function() {
-	  $('input[name="datetimes"]').daterangepicker({
-//		  singleDatePicker: true,
-		  showDropdowns: true,
-	    timePicker: true,
-	    startDate: moment().startOf('hour'),
-	    endDate: moment().startOf('hour').add(32, 'hour'),
-	    locale: {
-	      format: 'YYYY-MM-DD HH:mm',
-	      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
-		    "applyLabel": "확인",                    // 확인 버튼 텍스트
-		    "cancelLabel": "취소",                   // 취소 버튼 텍스트
-		    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-		    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-	    }
-	  });
-	});
-	
-	
-	//삭제 모달창 열기
+	//삭 변경 모달창 열기
 	$("#deleteClass").click(e => {
 		$(".h-modalDelete").css('display', 'block');
 		$("document").css('overflow', 'hidden');
@@ -219,9 +180,8 @@ div#h-AddSchedule-calendar{
 	})
 	
 	$("#h-insertClassDetail").click(e=>{
-		$(".h-modalInsertSchedule").css('display', 'block');
-		$("document").css('overflow', 'hidden');
-		<%-- location.assign('<%=request.getContextPath()%>/class/insertClassDetail.do?classId=<%=list.getClassId()%>'); --%>
+		window
+		location.assign('<%=request.getContextPath()%>/class/insertClassDetail.do?classId=<%=list.getClassId()%>');
 	})
 	
 	

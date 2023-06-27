@@ -40,7 +40,7 @@ public class ClassesConfirmListServlet extends HttpServlet {
 		try {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
 		}catch(NumberFormatException e) {
-			numPerpage=5;
+			numPerpage=10;
 		}
 		int totalData=new AdminService().selectConfirmClassesCount();
 		//System.out.println(totalData);
