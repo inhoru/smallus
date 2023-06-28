@@ -32,20 +32,20 @@ public class InquiryEnrollServlet extends HttpServlet {
 		String boardId=request.getParameter("boardId");
 		String commentConent=request.getParameter("commentConent");
 		System.out.println(boardId+" "+commentConent);
-//		int result=new AdminService().inquiryAnswerEnroll(boardId,commentConent);
-//		String boardCheck="답변완료";
-//		int result2=new AdminService().inquiryUpdate(boardId,boardCheck);
-//		String msg,loc;
-//		if(result>0) {
-//			msg="1:1문의 답변완료 했습니다.";
-//			loc="/admin/InquiryListServlet.do";
-//		}else {
-//			msg="1:1문의 답변실패 했습니다.";
-//			loc="/admin/InquiryListServlet.do";
-//		}
-//		request.setAttribute("msg", msg);
-//		request.setAttribute("loc", loc);
-//		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
+		int result=new AdminService().inquiryAnswerEnroll(boardId,commentConent);
+		String boardCheck="답변완료";
+		int result2=new AdminService().inquiryUpdate(boardId,boardCheck);
+		String msg,loc;
+		if(result>0) {
+			msg="1:1문의 답변완료 했습니다.";
+			loc="/admin/InquiryListServlet.do";
+		}else {
+			msg="1:1문의 답변실패 했습니다.";
+			loc="/admin/InquiryListServlet.do";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
    }
 
    /**

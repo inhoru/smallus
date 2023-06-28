@@ -45,6 +45,10 @@ public class AddClassEndServlet extends HttpServlet {
 		// String hostId=request.getParameter("hostId");
 		String hostId="c1234"; // 클래스를 등록할 임시 호스트 아이디
 		
+//		HttpSession session= request.getSession();
+//		Host host=(Host)session.getAttribute("loginHost");
+//		String hostId=(host.getHostId());
+		
 		// 파일 업로드
 		String path=getServletContext().getRealPath("/upload/class");
 		int maxSize=1024*1024*30;
@@ -82,14 +86,13 @@ public class AddClassEndServlet extends HttpServlet {
 						.bookingTimeStart(new java.sql.Date(dateFormet.parse(s.substring(1, 16)).getTime()))
 						.bookingTimeEnd(new java.sql.Date(dateFormet.parse(s.substring(20, 35)).getTime()))
 						.build();
-				// 날짜는 sql문에서 자동 등록예정
 				scheduleList.add(cd);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		int result2=0;
-		if(!scheduleList.isEmpty()) { // 이거 꼭 해야하나 싶지만 혹시모르니깐
+		if(!scheduleList.isEmpty()) { //생략가능?
 			result2=new ClassService2().addClassSchedule(scheduleList);
 		}
 //		
@@ -107,6 +110,7 @@ public class AddClassEndServlet extends HttpServlet {
 		// 성공메세지 띄우는거 공용으로 있는지? 랑 이거 끝나면 호스트 마이페이지(클래스관리)로 들어가면 될듯
 		
 		request.getRequestDispatcher("/").forward(request, response);
+		// 현재는 홈으로 이동
 		
 		
 	}
