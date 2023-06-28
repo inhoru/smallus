@@ -2,25 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="com.smallus.classes.model.vo.ClassIndex"%>
-<script>
-
-	  $.ajax({
-		url:"<%=request.getContextPath()%>/mainPage.do",
-		dataType: 'json',
-		success: data =>{
-				
-			console.log(data);
-				
-			},
-			error: (r, m, e) => {
-				console.log(r);
-				console.log(m);
-			}
-		}); 
-
-
-	
-</script>
 
 
 <div id="mainOpacity" class="h-main">

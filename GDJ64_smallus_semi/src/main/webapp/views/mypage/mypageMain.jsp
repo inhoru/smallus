@@ -130,7 +130,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 									</div>
 								</div>
 								<img
-									src="<%=request.getContextPath()%>/img/<%=m.getClasses().getClassThumbnail()%>"
+									src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>"
 									alt="" class="i-reservationImg">
 							</div>
 
@@ -205,7 +205,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 							<section class="i-imgContainer">
 								<div class="i-img-list">
 									<a href=""> <img
-										src="<%=request.getContextPath()%>/img/<%=w.getClassThumbnail()%>"
+										src="<%=request.getContextPath()%>/upload/class/<%=w.getClassThumbnail()%>"
 										alt="no img">
 										<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
 										<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">

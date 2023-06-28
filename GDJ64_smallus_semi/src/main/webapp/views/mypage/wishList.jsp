@@ -54,7 +54,7 @@ List<Classes> wish = (List) request.getAttribute("wishList");
 					<section class="i-imgContainer i-wishContainer">
 						<div class="i-img-list">
 							<a href=""> <img
-								src="<%=request.getContextPath()%>/img/<%=w.getClassThumbnail()%>"
+								src="<%=request.getContextPath()%>/upload/class/<%=w.getClassThumbnail()%>"
 								alt="no img">
 								<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
 								<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">
