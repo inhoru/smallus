@@ -29,21 +29,21 @@
 	<!-- main 배너 -->
 	<div class="h-main-slide-container" id="hmain">
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img0.jpg" style="width: 100%" id="h-craft" onclick="location.assign('<%=request.getContextPath()%>/categoryBeauty.do?categoryId=EXE')">
+			<img src="<%=request.getContextPath()%>/img/main-img0.jpg" style="width: 100%" id="h-craft">
 			<div class="slide-text">Craft</div>
 		</div>
 
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img2.jpg" style="width: 100%" id="h-beauty" onclick="location.assign('<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA')">
+			<img src="<%=request.getContextPath()%>/img/main-img2.jpg" style="width: 100%" id="h-beauty">
 			<div class="slide-text">Beauty</div>
 		</div>
 
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img3.jpg" style="width: 100%" id="h-activity" onclick="location.assign('<%=request.getContextPath()%>/categoryCooking.do?categoryId=CRA')">
+			<img src="<%=request.getContextPath()%>/img/main-img3.jpg" style="width: 100%" id="h-activity">
 			<div class="slide-text">Activity</div>
 		</div>
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img4.jpg" style="width: 100%" id="h-cooking" onclick="location.assign('<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO')">
+			<img src="<%=request.getContextPath()%>/img/main-img4.jpg" style="width: 100%" id="h-cooking">
 			<div class="slide-text">Cooking</div>
 		</div>
 
@@ -194,16 +194,16 @@
 	</section> --%>
 <script>
 		$("#h-activity").click(e=>{
-			location.assign('<%=request.getContextPath()%>/categoryActivity.do');
+			location.assign('<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE');
 		})
 		$("#h-beauty").click(e=>{
-			location.assign('<%=request.getContextPath()%>/categoryBeauty.do');
+			location.assign('<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA');
 		})
 		$("#h-craft").click(e=>{
-			location.assign('<%=request.getContextPath()%>/categoryCraft.do');
+			location.assign('<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA');
 		})
 		$("#h-cooking").click(e=>{
-			location.assign('<%=request.getContextPath()%>/categoryCooking.do');
+			location.assign('<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO');
 		})
 		let slideIndex = 1;
 	    showSlides(slideIndex);

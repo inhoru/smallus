@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.classes.model.vo.ClassIndex;
+import com.smallus.classes.model.vo.Classes;
 import com.smallus.main.service.MainService;
 
 /**
@@ -33,28 +34,64 @@ public class ViewCategoryCookingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String categoryId=request.getParameter("categoryId");
-		//List<ClassIndex> allCooking= new MainService().selectAllclassByCategory(categoryId, cPage, numPerpage);
+		
+		int cPage, numPerpage;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage = 1;
+		}
+		try {
+			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+		} catch (NumberFormatException e) {
+			numPerpage = 8;
+		}
+		int totalData = new MainService().allClassByCategoryCount(categoryId);
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
+		if (pageNo == 1) {
+			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
+		}
+		while (!(pageNo > pageEnd || pageNo > totalPage)) {
+			if (pageNo == cPage) {
+				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
+			} else {
+				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"'> " + pageNo + " </a>";
+			}
+			pageNo++;
+		}
+		if (pageNo > totalPage) {
+			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"' class='h-pageBar-txt'> 다음 </a>";
+		}
+		
+		request.setAttribute("pageBar", pageBar);
+		
+		List<ClassIndex> allCooking= new MainService().selectAllclassByCategory(categoryId, cPage, numPerpage);
 		List<ClassIndex> newCooking= new MainService().selectNewClassByCategory(categoryId);
 		if(newCooking!=null && !newCooking.isEmpty()) {
-			System.out.println("newCooking O");
+//			System.out.println("newCooking O");
 		}
-		request.setAttribute("newCooking", newCooking);
 		System.out.println(categoryId);
-		String categoryTitle="";
-		if(categoryId.equals("COO")) {
-			categoryTitle="요리";
-		}
-		System.out.println(categoryTitle);
-//		CRA 공예
-//		BEA 뷰티
-//		EXE 운동
-//		COO 요리
+		String categoryTitle="요리";
 		List<ClassIndex> bestCooking= new MainService().selectBestClassByCategory(categoryTitle);
-		request.setAttribute("bestCooking", bestCooking);
 		if(newCooking!=null && !newCooking.isEmpty() && bestCooking!=null && !bestCooking.isEmpty()) {
-			System.out.println("성");
+//			System.out.println("성");
+			request.setAttribute("newCooking", newCooking);
+			request.setAttribute("bestCooking", bestCooking);
+			request.setAttribute("allCooking", allCooking);
+			request.getRequestDispatcher("/views/main/viewCategoryCooking.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "선택한 카테고리 클래스가 없습니다.");
+			request.setAttribute("loc","/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/views/main/viewCategoryCooking.jsp").forward(request, response);
 		
 	}
 

@@ -34,10 +34,6 @@ public class MainPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//List<Classes> list=new MainService().mainPage();
-		//System.out.println(list);
-		
-
 
 		List<ClassIndex> newClass = new MainService().NewClassList();
 		List<ClassIndex> wishClass= new MainService().wishClassList();

@@ -193,4 +193,48 @@ public class MainDao {
 			close(pstmt);
 		}return list;
 	}
+	
+	public int allClassByCategoryCount(Connection conn, String categoryId) {
+		PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      int totalData=0;
+	      try {
+	         pstmt=conn.prepareStatement(sql.getProperty("allClassByCategoryCount"));
+	         pstmt.setString(1, categoryId);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) 
+	            totalData=rs.getInt(1);
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(pstmt);
+	      }return totalData;
+	}
+	
+	public List<ClassIndex> selectAllclassByCategory(Connection conn,String categoryId,int cPage, int numPerpage){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ClassIndex> list=new ArrayList<ClassIndex>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectAllclassByCategory"));
+			pstmt.setString(1,categoryId);
+			pstmt.setInt(2, (cPage-1)*numPerpage+1);
+			pstmt.setInt(3, cPage*numPerpage);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ClassIndex c=new ClassIndex();
+				c.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				c.getClasses().setClassAddress(rs.getString("ADDRESS"));
+				c.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				c.getClasses().setClassId(rs.getString("CLASS_ID"));
+				list.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 }

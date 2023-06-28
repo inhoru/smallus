@@ -1,60 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-:root { -
-	--btn-radius: 2rem; 
-	--img-radius: 1rem; 
-	--be-color: #F5E7D2; /* 연한 베이지 버튼 */ 
-	--ye-color: #FBEFD3; /* 연한 노란색 버튼 */ 
-	--dk-color: #E8D6C3; /*진한베이지 버튼 */ 
-	--main-col-lt: #FFFCF5; /* main primary */ 
-	--border-color: #F6E9DF; /*border  연한 컬러*/ 
-	--font-small: 0.8rem; /* button 폰트 사이즈 */ 
-	--btn-padding: 0.4rem 0.6rem; /* button padding 값 */ 
-	--btn-bold: bolder;
-}
-
-.h-modalNickName, .h-modalPassword, .h-modalPhone, .h-modalEmail, .h-modalDelete {
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.4);
-	display: none;
-	text-align:center;
-}
-
- .modal-content{
-	background-color: var(--main-col-lt);
-	margin: 15% auto;
-	width: 40%;
-	text-align:center;
-	padding: 2rem;
-}
-
-.modal-content button, .h-updateEmail button, .h-modalDelete button{
-	background-color:var(--be-color);
-	padding: var(--btn-padding);
-	font-size: var(--font-small);
-	border-radius: var(--btn-radius);
-	border: 0;
-	margin-left:1rem;
-	margin-top:2rem;
-}
-.modal-content table{
-	width: 100%;
-	display:flex;
-	justify-content: space-between;
-}
-
-.modal-content button:hover, .modal-content button:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
 div#h-AddSchedule-calendar{
 	width: 100%;
 	margin: 2rem auto;
@@ -139,6 +85,7 @@ width: 20rem;
 					<button id="h-insertClassDetail">추가</button>
 				</div>
 			</div>
+				<%@ include file="/views/host/modal.jsp"%>
 			<table class="h-class-detailTbl">
 				<tr>
 					<th>NO</th>
@@ -175,31 +122,7 @@ width: 20rem;
 			<%} %>
 			</table>
 		</div>
-	</section>
-	<div class="h-modalDelete" style="display:none">
-		<div class="modal-content h-deleteClass">
-			<h4>하위 클래스 세부 일정도 같이 판매 중지 처리됩니다</h4>
-			<input type="hidden" value="">
-			<button id="h-checkDelete">변경</button>
-			<button class="h-close-modal">닫기</button>
-		</div>
-	</div>
-
-	<div class="h-modalInsertSchedule" style="display:none">
-		<div class="modal-content h-insertSchedule">
-			<h4>클래스 세부 일정을 추가합니다.</h4>
-			<span><small>날짜가 적힌 칸을 누르면 달력에서 일정을 선택할 수 있습니다.</small></span>
-			<div id="h-AddSchedule-calendar">
-				<input type="text" name="datetimes"><button class="addTime">일정 추가 하기</button>
-				<span><small>계속해서 추가하려면 달력을 눌러주세요</small></span>
-			</div>
-			<div id="h-addScheduleCheck"></div>
-			<input type="hidden" value="">
-			<button id="h-addScheduleBtn">새로운 일정 등록하기</button>
-			<button class="h-close-modal">취소</button> 
-		</div>
-	</div>
-
+	</section>	
 <script>
 	let remainingPersonnel='<%=list.getClassPersonnel()%>';
 	let classId='<%=list.getClassId()%>';
@@ -261,28 +184,6 @@ width: 20rem;
 		 });
 		
 	})
-	
-	
-	// 일정 추가함수
-	$(function() {
-	  $('input[name="datetimes"]').daterangepicker({
-//		  singleDatePicker: true,
-		  showDropdowns: true,
-		    timePicker: true,
-		    startDate: moment().startOf('hour'),
-		    endDate: moment().startOf('hour').add(32, 'hour'),
-		    locale: {
-		      format: 'YYYY-MM-DD HH:mm',
-		      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
-			    "applyLabel": "확인",                    // 확인 버튼 텍스트
-			    "cancelLabel": "취소",                   // 취소 버튼 텍스트
-			    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-			    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-	    }
-	  });
-	});
-	
-	
 	// 판매중단 모달창 열기
 	$("#h-updateClassStaus").click(e => {
 
@@ -304,12 +205,12 @@ width: 20rem;
 	})
 	
 	// 일정 추가 모달 열기
-	$("#h-insertClassDetail").click(e=>{
-		$(".h-modalInsertSchedule").css('display', 'block');
-		$("document").css('overflow', 'auto');
-		//$("body").css('overflow', 'hidden');
-		//$(".h-modalInsertSchedule").siblings().css('overflow', 'hidden');
-	})
+	$("#h-insertClassDetail").click(e => {
+	  $(".h-modalInsertSchedule").css('display', 'block');
+	  $("body").css('overflow', 'hidden');
+	  //$("body").css('overflow', 'hidden');
+	  //$(".h-modalInsertSchedule").siblings().css('overflow', 'hidden');
+	});
 	
 	let delBtn;
 	let newClass;
@@ -339,6 +240,27 @@ width: 20rem;
 		$("document").css('overflow', 'auto');
 
 	})
+	
+	// 일정 추가함수
+	$(function() {
+	  $('input[name="datetimes"]').daterangepicker({
+//		  singleDatePicker: true,
+		  showDropdowns: true,
+		    timePicker: true,
+		    startDate: moment().startOf('hour'),
+		    endDate: moment().startOf('hour').add(32, 'hour'),
+		    locale: {
+		      format: 'YYYY-MM-DD HH:mm',
+		      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
+			    "applyLabel": "확인",                    // 확인 버튼 텍스트
+			    "cancelLabel": "취소",                   // 취소 버튼 텍스트
+			    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
+			    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+	    }
+	  });
+	});
+	
+	
 	
 	
 </script>
