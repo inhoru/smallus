@@ -39,7 +39,7 @@ public class ClassesDao2 {
 			pstmt = conn.prepareStatement(sql.getProperty("selectClassInfo"));
 			pstmt.setString(1, classId);
 			rs = pstmt.executeQuery();
-			if(rs.next()) classData=oriDao.getClasses(rs);
+			if(rs.next()) classData=getClasses(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -100,5 +100,14 @@ public class ClassesDao2 {
 			close(pstmt);
 		}return result;
 	}
+	
+	// builder 패턴을 이용해서 Classes 객체 가져오기
+		public static Classes getClasses(ResultSet rs) throws SQLException {
+			return Classes.builder().classId(rs.getString("CLASS_ID")).hostId(rs.getString("HOST_ID")).categoryId(rs.getString("CATEGORY_ID"))
+					.classTitle(rs.getString("CLASS_TITLE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).classPrice(rs.getInt("CLASS_PRICE")).classAddress(rs.getString("CLASS_ADDRESS"))
+					.classOffer(rs.getString("CLASS_OFFER")).classSupplies(rs.getString("CLASS_SUPPLIES")).classNotice(rs.getString("CLASS_NOTICE")).classDetail(rs.getString("CLASS_DETAIL"))
+					.classStatus(rs.getString("CLASS_STATUS")).classUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE")).classPassDate(rs.getDate("CLASS_PASS_DATE")).classPassId(rs.getString("CLASS_PASS_ID"))
+					.classThumbnail(rs.getString("CLASS_THUMBNAIL")).categoryTitle(rs.getString("CATEGORY_TITLE")).hostNickname(rs.getString("HOST_NICKNAME")).build();
+		}
 	
 }
