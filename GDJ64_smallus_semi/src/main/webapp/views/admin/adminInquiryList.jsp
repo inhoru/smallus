@@ -27,12 +27,11 @@ button#m-InquiryEnrollbtn{
 		<div class="h-main-title">
 			<h2>1:1문의 관리</h2>
 		</div>
-<%-- 			<select id="m-selectCalc" onchange="selectCalc();">
-				<option value="A">전체정산내역</option>
-				<option value="Y" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("Y")?"selected":""%>>정산완료</option>
-				<option value="W" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("W")?"selected":""%>>정산대기</option>
-				<option value="N" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("N")?"selected":""%>>정산거절</option>
-			</select> --%>
+			<select id="m-selectInquiry" onchange="selectInquiry();">
+				<option value="A">전체내역</option>
+				<option value="답변완료" <%=request.getParameter("boardCheck")!=null&&request.getParameter("boardCheck").equals("답변완료")?"selected":""%>>답변완료</option>
+				<option value="답변대기" <%=request.getParameter("boardCheck")!=null&&request.getParameter("boardCheck").equals("답변대기")?"selected":""%>>답변대기</option>
+			</select>
 	</section>
 	<section class="h-main h-main-rsvList">
 		<div>
@@ -106,19 +105,17 @@ button#m-InquiryEnrollbtn{
 		console.log(commentConent);
 				location.assign("<%=request.getContextPath()%>/admin/InquiryEnrollServlet.do?boardId="+boardId+"&commentConent="+commentConent);
 	}
-<%-- const selectCalc=()=>{
-	let index = $("#m-selectCalc option").index($("#m-selectCalc option:selected"));
-	let calcStatus=$("#m-selectCalc").val();
-	console.log(index,calcStatus);
+const selectInquiry=()=>{
+	let index = $("#m-selectInquiry option").index($("#m-selectInquiry option:selected"));
+	let boardCheck=$("#m-selectInquiry").val();
+	console.log(index,boardCheck);
 	if(index==0){
-		location.replace('<%=request.getContextPath()%>/admin/ClacListServlet.do');
+		location.replace('<%=request.getContextPath()%>/admin/InquiryListServlet.do');
 	}else if(index==1){
-		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
+		location.assign('<%=request.getContextPath()%>/admin/InquirySortListServlet.do?boardCheck='+boardCheck);
 	}else if(index==2){
-		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
-	}else if(index==3){
-		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
+		location.assign('<%=request.getContextPath()%>/admin/InquirySortListServlet.do?boardCheck='+boardCheck);
 	}
-}; --%>
+};
 </script>
 <%@ include file="/views/common/footer.jsp"%>

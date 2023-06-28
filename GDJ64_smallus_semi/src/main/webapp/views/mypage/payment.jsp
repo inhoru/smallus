@@ -67,7 +67,7 @@ int cPage = (int) request.getAttribute("cPage");
 						name="paymentId" class="i-paymentId">
 					<div class="i-paymentimg">
 						<img
-							src="<%=request.getContextPath()%>/img/<%=p.getClasses().getClassThumbnail()%>"
+							src="<%=request.getContextPath()%>/upload/class/<%=p.getClasses().getClassThumbnail()%>"
 							alt="" width="180px" height="180px">
 						<div class="i-paymenttotal">
 							<h3 class="i-patmenth3"><%=p.getClasses().getClassTitle()%></h3>

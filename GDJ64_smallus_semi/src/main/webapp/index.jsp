@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
-<%@ page import="com.smallus.payment.model.vo.MainPayment"%>
+
+<%@ page import="com.smallus.classes.model.vo.ClassIndex"%>
+
+
+
 <script>
 	  $.ajax({
 		url:"<%=request.getContextPath()%>/mainPage.do",
@@ -17,7 +21,9 @@
 				console.log(m);
 			}
 
+
 		}); 
+
 
 </script>
 

@@ -1,5 +1,7 @@
 package com.smallus.Inquiry.dao;
 
+import static com.smallus.classes.model.dao.ClassesDao.getClasses2;
+import static com.smallus.member.dao.MemberDao.getMember;
 import static com.smallus.common.JDBCTemplate.close;
 
 import java.io.FileReader;
@@ -15,8 +17,8 @@ import java.util.Properties;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.Inquiry.model.vo.InquiryComment;
-
 import com.smallus.coupon.dao.CouponDao;
+import com.smallus.member.model.vo.Member;
 
 public class InquiryDao {
 private Properties sql= new Properties();
@@ -156,7 +158,45 @@ private Properties sql= new Properties();
 		}
 		return result;
 	}
-	
+	 public Member searchMemberId(Connection conn,String boardId)  {
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      Member m = null;
+	      try {
+	         pstmt = conn.prepareStatement(sql.getProperty("searchMemberId"));
+	   
+	         pstmt.setString(1, boardId);
+	         rs = pstmt.executeQuery();
+	         if (rs.next()) {
+	            m = getMember(rs);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rs);
+	         close(pstmt);
+	      }   
+	      return m;
+	   }
+	 public int insertNot(Connection conn,String memberId) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			try {
+				
+				pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
+				String c="답변이 등록되었습니다.";
+				String d="1:1문의";
+				pstmt.setString(1, memberId);
+				pstmt.setString(2,c);
+				pstmt.setString(3,d);
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
 	
 	
 	private Inquiry getInquiry(ResultSet rs) throws SQLException {

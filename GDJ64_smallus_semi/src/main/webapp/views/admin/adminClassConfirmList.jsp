@@ -48,7 +48,7 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 						<td><%=c.getClassTitle()%></td>
 						<td><%=c.getHostId()%></td>
 						<td><%=c.getClassUpLoadDate()%></td>
-						<td><%=c.getClassPassId()%></td>
+						<td>승인대기</td>
 						<td><button id="m-classconfirmbtn" onclick="classconfirm('<%=c.getClassId()%>');">승인</button></td>
 						<td><button id="m-classrejectbtn" onclick="classreject('<%=c.getClassId()%>');">거절</button></td>
 					</tr>

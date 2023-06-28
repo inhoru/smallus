@@ -31,9 +31,10 @@ public class ClassesDao {
 	}
 	//CLASS_ID, CATEGORY_TITLE, CLASS_TITLE, CLASS_UPLOAD_DATE, CLASS_PASS_DATE, CLASS_PASS_ID, CLASS_THUMBNAIL, CLASS_STATUS
 	// builder 패턴을 이용해서 필요한 Class 객체만 사용
-	public Classes getClass(ResultSet rs) throws SQLException {
+	public static Classes getClass(ResultSet rs) throws SQLException {
 		return Classes.builder().classId(rs.getString("CLASS_ID")).categoryTitle(rs.getString("CATEGORY_TITLE")).classTitle(rs.getString("CLASS_TITLE")).classUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE"))
 				.classPassDate(rs.getDate("CLASS_PASS_DATE")).classPassId(rs.getString("CLASS_PASS_ID")).classThumbnail(rs.getString("CLASS_THUMBNAIL")).classStatus(rs.getString("CLASS_STATUS")).build();
+		
 	}
 	
 	

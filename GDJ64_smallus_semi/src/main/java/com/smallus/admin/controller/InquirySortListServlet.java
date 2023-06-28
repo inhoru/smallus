@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smallus.Inquiry.model.vo.Inquiry;
 import com.smallus.admin.service.AdminService;
-import com.smallus.host.model.vo.Calc;
+import com.smallus.member.model.vo.Member;
 
 /**
- * Servlet implementation class ClacListServlet
+ * Servlet implementation class InquirySortListServlet
  */
-@WebServlet("/admin/ClacListServlet.do")
-public class ClacListServlet extends HttpServlet {
+@WebServlet("/admin/InquirySortListServlet.do")
+public class InquirySortListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClacListServlet() {
+    public InquirySortListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,6 +32,7 @@ public class ClacListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String boardCheck=request.getParameter("boardCheck");
 		int cPage,numPerpage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -42,8 +44,7 @@ public class ClacListServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			numPerpage=5;
 		}
-		int totalData=new AdminService().selectCalcCount();
-		//System.out.println(totalData);
+		int totalData=new AdminService().selectInquirySortCount(boardCheck);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -67,15 +68,14 @@ public class ClacListServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
-		
-		List<Calc> list=new AdminService().checkCalcAll(cPage,numPerpage);
-		//list.forEach(e->System.out.println(e)); //list불러온값 확인
+		List<Inquiry> list=new AdminService().checkInquirySort(boardCheck,cPage,numPerpage);
+//		list.forEach(e->System.out.println(e)); //list불러온값 확인
 		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("pageBar",pageBar);
-		request.setAttribute("CalcList", list);
-		request.getRequestDispatcher("/views/admin/adminCalcList.jsp").forward(request, response);
+		request.setAttribute("InquiryList", list);
+		request.getRequestDispatcher("/views/admin/adminInquiryList.jsp").forward(request, response);
 		}else {
-		request.getRequestDispatcher("/views/admin/adminCalcList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/adminInquiryList.jsp").forward(request, response);
 		}
 	}
 

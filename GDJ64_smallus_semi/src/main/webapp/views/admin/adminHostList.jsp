@@ -22,7 +22,7 @@ List<Host> HostList=(List)request.getAttribute("HostList");
 	<div id="mainOpacity h-host-main">
 		<section class="h-main">
 			<div class="h-main-title">
-				<h2>호스트회원관리</h2>
+				<h2>호스트 회원관리</h2>
 			</div>
 			<select id="m-selectHost" onchange="selectHost();">
 				<option value="A">전체호스트회원</option>
@@ -52,8 +52,16 @@ List<Host> HostList=(List)request.getAttribute("HostList");
 						<th><%=h.getHostNickname()%></th>
 						<td><%=h.getHostPhone()%></td>
 						<td><%=h.getHostEmail()%></td>
-						<td><%=h.getHostConsent()%></td>
-						<td><%=h.getHostSt()%></td>
+						<%if(h.getHostConsent().equals("Y")) {%>
+							<td>수신동의</td>
+						<%}else{ %>
+							<td>수신미동의</td>
+						<%} %>
+						<%if(h.getHostSt().equals("Y")){ %>
+							<td>일반호스트</td>
+						<%}else{ %>
+							<td>탈퇴한호스트</td>
+						<%} %>
 						<%if(h.getHostSt().equals("Y")){ %>
 						<td><button id="m-deleteHost"onclick="deleteHost('<%=h.getHostId()%>');">삭제</button></td>
 						<%}else{%>
@@ -88,8 +96,6 @@ List<Host> HostList=(List)request.getAttribute("HostList");
 			location.assign('<%=request.getContextPath()%>/admin/HostListSortServlet.do?hostSt='+hostSt);
 		}
 	}
-	
-	
 	const deleteHost=(hostId)=>{
 		location.assign("<%=request.getContextPath()%>/admin/HostDelete.do?hostId="+hostId);
 	} 

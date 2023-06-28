@@ -28,6 +28,47 @@ public class MainService {
 //		return list;
 //	}
 //	
+
+//	public List<ClassIndex> NewClassList(){
+//		Connection conn= getConnection();
+//		List<ClassIndex> list=dao.NewClassList(conn);
+//		close(conn);
+//		return list;
+//	}
+	public List<Classes> searchCategoriesCheck(String search){
+		Connection conn= getConnection();
+		List<Classes> list=dao.searchCategoriesCheck(conn,search);
+		close(conn);
+		return list;
+	}
+	public List<Classes> searchCategories(String search,int cPage, int numPerpage){
+		Connection conn= getConnection();
+		List<Classes> list=dao.searchCategories(conn,search,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	public List<Classes> searchAddres(String search,int cPage, int numPerpage){
+		Connection conn= getConnection();
+		List<Classes> list=dao.searchAddres(conn,search,cPage,numPerpage);
+		close(conn);
+		return list;
+	}
+	 public int searchCategoriesCount(String search) {
+	      Connection conn=getConnection();
+	      int totalData=dao.searchCategoriesCount(conn,search);
+	      close(conn);
+	      return totalData;
+	   }
+	 public int searchAddresCount(String search) {
+	      Connection conn=getConnection();
+	      int totalData=dao.searchAddresCount(conn,search);
+	      close(conn);
+	      return totalData;
+	   }
+	   
+	   
+	
+
 	public List<ClassIndex> NewClassList(){
 		Connection conn= getConnection();
 		List<ClassIndex> list=dao.NewClassList(conn);
@@ -41,4 +82,5 @@ public class MainService {
 		close(conn);
 		return list;
 	}
+
 }

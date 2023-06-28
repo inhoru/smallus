@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.smallus.admin.service.AdminService;
 import com.smallus.classes.model.vo.Classes;
-import com.smallus.notice.model.vo.Notice;
+import com.smallus.host.model.vo.Calc;
 
 /**
  * Servlet implementation class AdminMaingServlet
@@ -26,47 +26,11 @@ public class AdminMainServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cPage,numPerpage;
-		try {
-			cPage=Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
-			cPage=1;
-		}
-		try {
-			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
-		}catch(NumberFormatException e) {
-			numPerpage=10;
-		}
-		int totalData=new AdminService().selectNoticeCount();
-		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-		int pageBarSize=5;
-		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-		int pageEnd=pageNo+pageBarSize-1;
-		String pageBar="";
-		if(pageNo==1) {
-			pageBar+="<span>[이전]</span>";
-		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
-		}
-		while(!(pageNo>pageEnd||pageNo>totalPage)) {
-			if(pageNo==cPage) {
-				pageBar+="<span>"+pageNo+"</span>";
-			}else {
-				pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>"+pageNo+"</a>";
-			}
-			pageNo++;
-		}
-		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
-		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
-		}
-		List<Notice> list=new AdminService().checkNoticeAll(cPage,numPerpage);
-		List<Classes> list2=new AdminService().ClassesAll();
+		List<Classes> list=new AdminService().recentConfirmClasses();
+		List<Calc> list2=new AdminService().recentConfirmCalc();
 		if(list!=null&&!list.isEmpty()) {
-		request.setAttribute("pageBar",pageBar);
-		request.setAttribute("NoticeList", list);
-		request.setAttribute("ClassesList", list2);
+		request.setAttribute("ClassesList", list);
+		request.setAttribute("CalcList", list2);
 		request.getRequestDispatcher("/views/admin/adminMain.jsp").forward(request, response);
 		}else {
 		request.getRequestDispatcher("/views/admin/adminMain.jsp").forward(request, response);

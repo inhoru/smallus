@@ -1,14 +1,21 @@
 package com.smallus.admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.smallus.Inquiry.model.service.InquiryService;
 import com.smallus.admin.service.AdminService;
+import com.smallus.host.service.HostService;
+import com.smallus.member.model.vo.Member;
+import com.smallus.member.model.vo.Notifications;
+import com.smallus.member.service.MemberService;
 
 /**
  * Servlet implementation class InquiryEnrollServlet
@@ -37,6 +44,13 @@ public class InquiryEnrollServlet extends HttpServlet {
 		int result2=new AdminService().inquiryUpdate(boardId,boardCheck);
 		String msg,loc;
 		if(result>0) {
+			Member memberId=new InquiryService().searchMemberId(boardId);
+			HttpSession session=request.getSession();
+			new InquiryService().insertNot(memberId.getMemberId());
+			List<Notifications> list =new MemberService().selectAllNotifications(memberId.getMemberId());
+			int notcount = new MemberService().notificationsCount(memberId.getMemberId());
+			session.setAttribute("notcount1",notcount);
+			session.setAttribute("Notlist1",list);
 			msg="1:1문의 답변완료 했습니다.";
 			loc="/admin/InquiryListServlet.do";
 		}else {
