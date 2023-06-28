@@ -18,13 +18,13 @@ import com.smallus.review.service.ReviewService;
  * Servlet implementation class ReviewListServlet
  */
 @WebServlet("/review/reviewList.do")
-public class ReviewListServlet extends HttpServlet {
+public class ViewHostReviewListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewListServlet() {
+    public ViewHostReviewListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class ReviewListServlet extends HttpServlet {
 		Member loginMember=(Member)session.getAttribute("loginMember");
 		
 		List<Review> reviews=new ReviewService().selectReview(loginMember.getMemberId());
-		
+		//List<ReviewClass> rc=new ReviewService().selectReviewClassByClassId(hostId,cPage,numPerpage);
 		request.setAttribute("reviews", reviews);
 		
 		//System.out.println(reviews);

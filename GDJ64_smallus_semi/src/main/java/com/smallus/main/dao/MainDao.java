@@ -29,51 +29,6 @@ public class MainDao {
 		}
 	}
 	
-//	public List<Classes> mainPage(Connection conn) {
-//		List<Classes> list = new ArrayList<Classes>();
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		try {
-//			pstmt = conn.prepareStatement(sql.getProperty("mainPage"));
-//			rs = pstmt.executeQuery();
-//			while (rs.next()) {
-//				list.add(getClasses2(rs));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		return list;
-//	}
-	
-	
-//	public List<MainPayment> selectBestClass(Connection conn) {
-//		List<MainPayment> list = new ArrayList<MainPayment>();
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		int totalPriceSum = 0;
-//		try {
-//			pstmt = conn.prepareStatement(sql.getProperty("selectBestClass"));
-//			rs = pstmt.executeQuery();
-//			while (rs.next()) {
-//				MainPayment p=new MainPayment();
-//				p.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
-//				p.getClasses().setClassAddress(rs.getString("CLASS_ADDRESS"));
-//				p.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
-//				p.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
-//				p.getClasses().setClassId(rs.getString("CLASS_ID"));
-//				list.add(p);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		return list;
-//	}
 	public List<ClassIndex> NewClassList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

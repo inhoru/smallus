@@ -65,9 +65,6 @@ public class MainService {
 	      close(conn);
 	      return totalData;
 	   }
-	   
-	   
-	
 
 	public List<ClassIndex> NewClassList(){
 		Connection conn= getConnection();

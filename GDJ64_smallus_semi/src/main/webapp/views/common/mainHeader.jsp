@@ -190,7 +190,7 @@ if (cookies != null) {
 		<table id="categoriesTable">
 			<tr>
 				<td class="ca"><a
-					href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">요리<a></a></td>
+					href="<%=request.getContextPath()%>/categoryCooking.do?categoryID='COO'">요리<a></a></td>
 				<td class="ca"><a
 					href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">공예</a></td>
 				<td class="ca"><a

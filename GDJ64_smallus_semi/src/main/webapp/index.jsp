@@ -73,7 +73,7 @@
 		<div class="text">
 			<span>나의 첫 베이킹</span> 인기 베이킹 클래스
 			<!--baking 카테고리에서 베스트 인 메뉴 상위 노출/ 아래에 베이킹 카테고리 출력-->
-			<button name="h-best-baking-class">바로가기</button>
+			<button name="h-best-baking-class" onclick="location.assign('<%=request.getContextPath()%>/categoryCooking.do')">바로가기</button>
 		</div> 
 		
 		<ul class="h-gallery">

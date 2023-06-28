@@ -1,8 +1,6 @@
-package com.smallus.main.controller;
+package com.smallus.review.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smallus.classes.model.vo.ClassIndex;
-import com.smallus.classes.model.vo.Classes;
-import com.smallus.main.service.MainService;
-import com.smallus.payment.model.vo.MainPayment;
+import com.smallus.review.service.ReviewService;
 
 /**
- * Servlet implementation class MainPageServlet
+ * Servlet implementation class DeleteReviewByHostServlet
  */
-@WebServlet("/mainPage.do")
-public class MainPageServlet extends HttpServlet {
+@WebServlet("/review/deleteReviewByHost.do")
+public class DeleteReviewByHostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainPageServlet() {
+    public DeleteReviewByHostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,16 +29,14 @@ public class MainPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//List<Classes> list=new MainService().mainPage();
-		//System.out.println(list);
-		
-		List<ClassIndex> newClass = new MainService().NewClassList();
-		List<ClassIndex> wishClass= new MainService().wishClassList();
+		// TODO Auto-generated method stub
+		String reviewId= request.getParameter("reviewId");
+		System.out.println(reviewId);
+		int result= new ReviewService().deleteReviewByhost(reviewId);
+		if(result>0) System.out.println("성공 ");
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setAttribute("wishClass", wishClass);
-		request.setAttribute("newClass", newClass);
-		request.getRequestDispatcher("/views/host/expClass.jsp").forward(request, response);
+		response.setContentType("text/csv;charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**

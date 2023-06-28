@@ -1,12 +1,16 @@
 package com.smallus.review.service;
 
+import static com.smallus.common.JDBCTemplate.close;
+import static com.smallus.common.JDBCTemplate.commit;
+import static com.smallus.common.JDBCTemplate.getConnection;
+import static com.smallus.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.List;
 
 import com.smallus.review.model.dao.ReviewDao;
 import com.smallus.review.model.vo.Review;
-
-import static com.smallus.common.JDBCTemplate.*;
+import com.smallus.review.model.vo.ReviewHost;
 public class ReviewService {
 
 	private ReviewDao dao = new ReviewDao();
@@ -46,11 +50,19 @@ public class ReviewService {
 		return count;
 	}
 	
-	public List<Review> hoistReviewList(String hostId){
+	public List<ReviewHost> hostReviewList(String hostId, int cPage, int numPerpage){
 		Connection conn = getConnection();
-		List<Review> list = dao.hoistReviewList(conn, hostId);
+		List<ReviewHost> list = dao.hostReviewList(conn, hostId, cPage, numPerpage);
 		close(conn);
 		return list;
+	}
+	
+	public int deleteReviewByhost(String reviewId) {
+		Connection conn=getConnection();
+		int count=dao.deleteReviewByhost(conn,reviewId);
+		if(count>0) commit(conn);
+		else rollback(conn);
+		return count;
 	}
 	
 }
