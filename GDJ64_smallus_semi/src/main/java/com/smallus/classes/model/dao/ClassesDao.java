@@ -44,7 +44,7 @@ public class ClassesDao {
 				.classTitle(rs.getString("CLASS_TITLE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).classPrice(rs.getInt("CLASS_PRICE")).classAddress(rs.getString("CLASS_ADDRESS"))
 				.classOffer(rs.getString("CLASS_OFFER")).classSupplies(rs.getString("CLASS_SUPPLIES")).classNotice(rs.getString("CLASS_NOTICE")).classDetail(rs.getString("CLASS_DETAIL"))
 				.classStatus(rs.getString("CLASS_STATUS")).classUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE")).classPassDate(rs.getDate("CLASS_PASS_DATE")).classPassId(rs.getString("CLASS_PASS_ID"))
-				.classThumbnail(rs.getString("CLASS_THUMBNAIL")).categoryTitle(rs.getString("CATEGORY_TITLE")).build();
+				.classThumbnail(rs.getString("CLASS_THUMBNAIL")).categoryTitle(rs.getString("CATEGORY_TITLE")).hostNickname(rs.getString("HOST_NICKNAME")).build();
 	}
 	public static Classes getClasses2(ResultSet rs) throws SQLException {
 		return Classes.builder().classId(rs.getString("CLASS_ID")).hostId(rs.getString("HOST_ID")).categoryId(rs.getString("CATEGORY_ID"))

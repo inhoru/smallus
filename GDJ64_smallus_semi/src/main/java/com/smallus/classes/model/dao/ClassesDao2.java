@@ -30,7 +30,7 @@ public class ClassesDao2 {
 	}
 	
 	// 상세페이지 전용. classId로 Classes 단일정보 가져오기
-	// selectClassInfo=SELECT * FROM CLASS WHERE CLASS_ID=? ORDER BY BOOKING_TIME_START
+	// selectClassInfo=SELECT * FROM CLASS JOIN HOST USING(HOST_ID) JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_ID=?
 	public Classes selectClassByClassId(Connection conn, String classId) {
 		Classes classData=new Classes();
 		PreparedStatement pstmt = null;

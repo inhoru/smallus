@@ -24,12 +24,14 @@
 		<div class="d-detail-main">
 			<div id="d-detail-top">
 				<p><%=info.getCategoryTitle() %></p>
+				
 				<p>♥ 찜 <%=wishNum%> </p>
 				<!-- if분기로 찜 여부 표시 -->
 				<p>★ <%=starPoint %>점</p>
 				<!-- 리뷰 조회해서 평균내기 -->
 			</div>
-				<h3 name="classTitle"><%=info.getClassTitle() %></h3>
+				<h2 name="classTitle"><%=info.getClassTitle() %></h2>
+				<p name="hostNickname"><%=info.getHostNickname() %></p>
 				<h4>1인 <%=info.getClassPrice() %>원</h4>
 				<div class="d-detail-schedule">
 					<div id="d-detail-date">
