@@ -62,7 +62,7 @@ public class QNAListServlet extends HttpServlet {
 		request.setAttribute("qnas", qnas);
 		request.setAttribute("qnacs", qnacs);
 		
-		request.getRequestDispatcher("/views/qna/qnaListAjax.jsp").forward(request, response); //주소수정예정
+		request.getRequestDispatcher("/views/qna/qnalist.jsp").forward(request, response); //주소수정예정
 	}
 
 	/**
