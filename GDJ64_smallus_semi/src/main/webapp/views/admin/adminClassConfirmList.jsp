@@ -43,11 +43,11 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 					</tr>
 				<%if(ClassesConfirmList!=null&&!ClassesConfirmList.isEmpty()) {
 					for(Classes c:ClassesConfirmList){%>
-					<tr style="cursor:pointer;" onclick="classConfirmDetail('<%=c.getClassId()%>');">
-						<td><%=c.getCategoryTitle()%></td>
-						<td><%=c.getClassTitle()%></td>
-						<td><%=c.getHostId()%></td>
-						<td><%=c.getClassUpLoadDate()%></td>
+					<tr>
+						<td style="cursor:pointer;" onclick="classConfirmDetail('<%=c.getClassId()%>');"><%=c.getCategoryTitle()%></td>
+						<td style="cursor:pointer;" onclick="classConfirmDetail('<%=c.getClassId()%>');"><%=c.getClassTitle()%></td>
+						<td style="cursor:pointer;" onclick="classConfirmDetail('<%=c.getClassId()%>');"><%=c.getHostId()%></td>
+						<td style="cursor:pointer;" onclick="classConfirmDetail('<%=c.getClassId()%>');"><%=c.getClassUpLoadDate()%></td>
 						<td>승인대기</td>
 						<td><button id="m-classconfirmbtn" onclick="classconfirm('<%=c.getClassId()%>');">승인</button></td>
 						<td><button id="m-classrejectbtn" onclick="classreject('<%=c.getClassId()%>');">거절</button></td>
