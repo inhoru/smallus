@@ -37,8 +37,8 @@ public class MainPageServlet extends HttpServlet {
 		//List<Classes> list=new MainService().mainPage();
 		//System.out.println(list);
 		
-//		List<MainPayment> best=new MainService().selectBestClass();
-		
+
+
 		List<ClassIndex> newClass = new MainService().NewClassList();
 		List<ClassIndex> wishClass= new MainService().wishClassList();
 		

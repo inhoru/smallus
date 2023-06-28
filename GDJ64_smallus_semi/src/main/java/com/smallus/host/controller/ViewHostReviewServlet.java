@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.smallus.host.model.vo.Host;
-import com.smallus.payment.model.vo.PaymentCalc;
-import com.smallus.review.model.vo.Review;
+import com.smallus.review.model.vo.ReviewHost;
 import com.smallus.review.service.ReviewService;
 
 /**
@@ -63,14 +62,14 @@ public class ViewHostReviewServlet extends HttpServlet {
 		if (pageNo == 1) {
 			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + (pageNo - 1)
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1)
 					+ "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (pageNo == cPage) {
 				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
 			} else {
-				pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo
+				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo
 						+ "&numPerpage=" + numPerpage + "'> " + pageNo + " </a>";
 			}
 			pageNo++;
@@ -78,7 +77,7 @@ public class ViewHostReviewServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo + "&numPerpage="
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage="
 					+ numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);
@@ -90,12 +89,12 @@ public class ViewHostReviewServlet extends HttpServlet {
 //			System.out.println("sortStatusList있음있");
 //			request.setAttribute("sortStatusList",sortStatusList);				
 //		}
-		List<Review> reviews=new ReviewService().hoistReviewList(host.getHostId());
+		List<ReviewHost> reviews=new ReviewService().hostReviewList(hostId, cPage, numPerpage);
 				
 		request.setAttribute("reviews", reviews);
-		
-		request.getRequestDispatcher("/views/review/reviewListHost.jsp").forward(request, response);
-		
+		System.out.println(reviews);
+		//request.getRequestDispatcher("/views/review/reviewListHost.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/host/viewHostReview.jsp").forward(request, response);
 	}
 
 	/**

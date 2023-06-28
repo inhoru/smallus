@@ -1,92 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat"%>
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat" %>
 <%
-Classes info = (Classes) request.getAttribute("classinfo");
-List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
+	Classes info=(Classes)request.getAttribute("classinfo");
+	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
 %>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ae17cb6906cd1874ef26a94895d53fdb"></script>
-<%!// public int personnelCount=1;
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ae17cb6906cd1874ef26a94895d53fdb&libraries=services"></script>
+<%!
+	// public int personnelCount=1;
 	// int classPrice=37000;
 	// 이 자료를 자바로 저장해야하는지? 자바스크립트로 저장해도 넘길수있는지?
-	int wishNum = 110;
-	double starPoint = 4.5;%>
-
+	int wishNum=110;
+	double starPoint=4.5;
+%>
+ <meta charset="utf-8">
 <%@ include file="/views/common/mainHeader.jsp"%>
-<meta charset="utf-8" />
 
 <div class="d-class-detail">
 	<div class="d-detail-header">
 		<div class="d-detail-img">
-			<img
-				src="<%=request.getContextPath()%>/upload/class/<%=info.getClassThumbnail()%>"
-				width=400px height=400px>
+			<img src="<%=request.getContextPath()%>/upload/class/<%=info.getClassThumbnail() %>" width=400px height=400px>
 			<!-- 이미지 등록한것 있으면 수정예정 -->
 		</div>
 		<div class="d-detail-main">
 			<div id="d-detail-top">
-				<p><%=info.getCategoryTitle()%></p>
-
-				<p>
-					♥ 찜
-					<%=wishNum%>
-				</p>
+				<p><%=info.getCategoryTitle() %></p>
+				
+				<p>♥ 찜 <%=wishNum%> </p>
 				<!-- if분기로 찜 여부 표시 -->
-				<p>
-					★
-					<%=starPoint%>점
-				</p>
+				<p>★ <%=starPoint %>점</p>
 				<!-- 리뷰 조회해서 평균내기 -->
 			</div>
-			<h2 name="classTitle"><%=info.getClassTitle()%></h2>
-			<p name="hostNickname"><%=info.getHostNickname()%></p>
-			<h3>
-				1인
-				<%=info.getClassPrice()%>원
-			</h3>
-			<div class="d-detail-schedule">
-				<div id="d-detail-date">
-					<select id="h-pselectClassDetailOption"
-						onchange="selectClassDetailOption()">
-
-						<option>시간 선택</option>
-						<%
-						if (schedule != null && !schedule.isEmpty()) {
-							for (ClassDetail cd : schedule) {
-								if (cd.getRemainingPersonnel() != 0) {
-						%>
-						<option name="classDetailOption"
-							value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart()%>_<%=cd.getBookingTimeEnd()%>_<%=cd.getRemainingPersonnel()%>">
-							<%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart())%>
-							~
-							<%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd())%>
-							잔여인원:<%=cd.getRemainingPersonnel()%>
-						</option>
-						<!-- 현재 인원 추출방식은 문자열 자르기 -->
-						<%
-						}
-						}
-						} else {
-						%>
-						<option>사용 가능한 쿠폰이 없습니다</option>
-						<%
-						}
-						%>
-					</select>
+				<h2 name="classTitle"><%=info.getClassTitle() %></h2>
+				<p name="hostNickname"><%=info.getHostNickname() %></p>
+				<h3>1인 <%=info.getClassPrice() %>원</h3>
+				<div class="d-detail-schedule">
+					<div id="d-detail-date">
+						<select id="h-pselectClassDetailOption" onchange="selectClassDetailOption()">
+						
+							<option>시간 선택</option>
+						<%if(schedule!=null&&!schedule.isEmpty()){
+							for(ClassDetail cd : schedule){ 
+								if(cd.getRemainingPersonnel()!=0){%>
+									<option name="classDetailOption" value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart() %>_<%=cd.getBookingTimeEnd() %>_<%=cd.getRemainingPersonnel() %>">
+										<%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %>
+									</option>
+									<!-- 현재 인원 추출방식은 문자열 자르기 -->
+									<%}
+								}
+							}else{%>
+								<option>사용 가능한 쿠폰이 없습니다</option>
+							<%}%>
+						</select> 
+					</div>
+					<div id="d-detail-personnel">
+						<p>인원 수</p>
+						<button onclick="personMinus();">-</button>
+						<p id="personnel" name="personnel">1명</p>
+						<button onclick="personPlus();">+</button>
+					</div>
+					<div id="d-payment">
+						<p id="d-payment-price"name="price">결제금액원</p>
+						<input type="submit" value="결제하기" id="h-moveToPay">
+					</div>
 				</div>
-				<div id="d-detail-personnel">
-					<p>인원 수</p>
-					<button onclick="personMinus();">-</button>
-					<p id="personnel" name="personnel">1명</p>
-					<button onclick="personPlus();">+</button>
-				</div>
-				<div id="d-payment">
-					<p id="d-payment-price" name="price">결제금액원</p>
-					<input type="submit" value="결제하기" id="h-moveToPay">
-				</div>
-			</div>
 		</div>
 	</div>
 	<br>
@@ -106,20 +83,20 @@ List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
 			<!-- style="font-size: 16px; font-weight: bolder; margin-left: 20%;" -->
 			<ul>
 				<li id="info"><p>상세 정보</p></li>
-				<p id="text"><%=info.getClassDetail()%></p>
+				<p id="text"><%=info.getClassDetail() %></p>
 				<hr>
 				<li id="info"><p>주소</p></li>
-				<div id="map" style="width: 750px; height: 400px;"></div>
-				<p style="font-size: 8px"><%=info.getClassAddress()%></p>
+				<div id="map" style="width:100%;height:350px;"></div>
+				<p style="font-size: 8px"><%=info.getClassAddress() %></p>
 				<hr>
 				<li id="info"><p>제공 사항</p></li>
-				<p id="text"><%=info.getClassOffer()%></p>
+				<p id="text"><%=info.getClassOffer() %></p>
 				<hr>
 				<li id="info"><p>유의 사항</p></li>
-				<p id="text"><%=info.getClassNotice()%></p>
+				<p id="text"><%=info.getClassNotice() %></p>
 				<hr>
 				<li id="info"><p>준비물</p></li>
-				<p id="text"><%=info.getClassSupplies()%></p>
+				<p id="text"><%=info.getClassSupplies() %></p>
 				<!-- <hr style="margin-right: 20%"> -->
 			</ul>
 		</nav>
@@ -128,7 +105,7 @@ List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
 <section id="h-paymentSectionContainer"></section>
 <script>
 	let personnelCount=1;
-	let payment=<%=info.getClassPrice()%>*personnelCount;
+	let payment=<%=info.getClassPrice() %>*personnelCount;
 	
 	const personMinus=()=>{
 		personnelCount=personnelCount-1;
@@ -152,7 +129,7 @@ List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
 	}
 	const paymentcalcul=()=>{
 		document.getElementById("personnel").innerHTML=personnelCount+"명";
-		payment=<%=info.getClassPrice()%>*personnelCount;
+		payment=<%=info.getClassPrice() %>*personnelCount;
 		document.getElementById("d-payment-price").innerHTML="결제금액 "+payment+"원";
 	}
 	document.getElementById("d-detail-date").addEventListener("change",e=>{
@@ -234,113 +211,116 @@ List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
 		
 		
 </script>
-
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(37.577141019068, 126.93409032741), // 지도의 중심좌표
+    mapOption = {
+        center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
-    };
+    };  
 
-var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+<!-- // 지도를 생성합니다  -->   
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-// 마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng(37.577141019068, 126.93409032741); 
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
 
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('<%=info.getClassAddress() %>', function(result, status) {
 
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-	</script>
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
 
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        /* var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;"></div>'
+        });
+        infowindow.open(map, marker);
+ */
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});   
+</script>
 <style>
 /* 기본상세정보 CSS : 상세페이지 접근때부터 있어야해서 여기도 있음 */
-nav.detail_info {
-	font-size: 16px;
+	nav.detail_info{
+	font-size:16px;
 	font-weight: bolder;
 	margin-left: 20%;
-}
-
-#info {
+	}
+	#info{
 	margin: 1%;
-}
-
-#text {
+	}
+	#text{
 	font-weight: lighter;
 	font-size: 8px;
 	margin: 1%
-}
-
-#address {
+	}
+	#address{
 	width: 750px;
 	height: 300px;
-	margin: 1% 2%
-}
-
-hr {
+	margin: 1% 2%}
+	hr{
 	margin-right: 20%;
-}
+	}
+
 
 /* 상세페이지 전체 */
-.d-class-detail {
-	width: 70%;
-	margin: 0 auto;
-}
-
-.d-detail-header {
-	display: flex;
-	margin: 15px;
-}
-
-.d-detail-header>* {
-	padding: 15px;
-}
-
-.d-detail-header div {
-	margin: 5px 0;
-}
-
-#d-detail-top {
-	display: flex;
-}
-
-#d-detail-personnel {
-	display: flex;
-}
-
-#d-detail-personnel button {
-	width: 30px;
-	background-color: #F8D8D8;
-	border-radius: 20px;
-}
-
-#d-payment {
-	display: flex;
-}
-
-#d-payment>input {
-	width: 100px;
-	background-color: #F8D8D8;
-	border-radius: 20px;
-}
-
-.d-class-detail div {
-	/* border:1px solid red; */
-	
-}
-
-.d-detail-menu nav {
-	display: flex;
+	.d-class-detail{
+		width:70%;
+		margin : 0 auto;
+	}
+	.d-detail-header{
+		display:flex;
+		margin : 15px;
+	}
+	.d-detail-header>*{
+		padding: 15px;
+	}
+	.d-detail-header div{
+		margin:5px 0;
+	}
+	#d-detail-top{
+		display:flex;
+	}
+	#d-detail-personnel{
+		display:flex;
+	}
+	#d-detail-personnel button{
+		width:30px;
+		background-color:#F8D8D8;
+		border-radius: 20px;
+	}
+	#d-payment{
+		display:flex;
+	}
+	#d-payment> input{
+		width:100px;
+		background-color:#F8D8D8;
+		border-radius: 20px;
+	}
+	.d-class-detail div{
+		/* border:1px solid red; */
+	}
+	.d-detail-menu nav{
+	display:flex;
 	justify-content: space-around;
-	text-align: center;
-}
-
-.d-detail-menu ul {
+		text-align: center;
+	}
 	
-}
+	.d-detail-menu ul{
+
+		
+	}
+	
 </style>
 
 

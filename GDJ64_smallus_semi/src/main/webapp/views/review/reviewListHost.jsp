@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.smallus.review.model.vo.Review" %>	
+<%@ page import="java.util.List,com.smallus.review.model.vo.ReviewHost" %>	
 <%
-	List<Review> reviews=(List)request.getAttribute("reviews");
+	List<ReviewHost> reviews=(List)request.getAttribute("reviews");
 	
 %>	
 <%@ include file="/views/common/hostHeader.jsp"%>
@@ -30,28 +30,28 @@
 				작성된 리뷰가 없습니다.
  			</div>
 		<%} else{
-			for(Review r : reviews){%>
+			for(ReviewHost r : reviews){%>
 				<hr>
 				<div class="d-review-one">
-					<img id="imgs" src="<%=request.getContextPath()%>/img/<%=r.getImgPath() %>"
+					<img id="imgs" src="<%=request.getContextPath()%>/upload/class/<%=r.getClasses().getClassThumbnail()%>"
 						width="150px" height="150px">
 					<div class="d-review-table">
 						<table>
 							<tr>
-								<td  id="tr"><%=r.getMemberNickname() %></td>
-								<td id="td"><%=r.getReviewDate() %></td>
+								<td  id="tr"><%=r.getPayment().getMemberId() %></td>
+								<td id="td"><%=r.getReview().getReviewDate() %></td>
 							</tr>
 							<tr>
-								<td id="tr"><h3><%=r.getClassTitle() %></h3></td>
+								<td id="tr"><h3><%=r.getClasses().getClassTitle() %></h3></td>
 							</tr>
 							<tr>
-								<td id="tr"><h2><%=r.getReviewRating() %></h2></td>
+								<td id="tr"><h2><%=r.getReview().getReviewRating() %></h2></td>
 							</tr>
 							<tr>
-								<td id="tr"><h4><%=r.getReviewTitle() %></h4></td>
+								<td id="tr"><h4><%=r.getReview().getReviewTitle() %></h4></td>
 						</tr>
 							<tr>
-								<td id="tr"><p><%=r.getReviewContent() %></p></td>
+								<td id="tr"><p><%=r.getReview().getReviewContent() %></p></td>
 							</tr>
 						</table>
 					<input type="button" onclick="alert('삭제되었습니다.')" value="삭제">
@@ -109,10 +109,5 @@
 	/* .d-review-one>*{
 	border: 1px solid orange;
 	} */
-	
-	
-	
-		
 </style>
-
 <%@ include file="/views/common/hostFooter.jsp"%>
