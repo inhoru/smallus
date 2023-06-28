@@ -26,7 +26,6 @@ button#m-calcConfirm,#m-calcReject{
 	<section class="h-main">
 		<div class="h-main-title">
 			<h2>호스트 정산관리</h2>
-		</div>
 	</section>
 	<section class="h-main h-main-rsvList">
 		<div>
@@ -38,6 +37,8 @@ button#m-calcConfirm,#m-calcReject{
 					<th>정산요청금액</th>
 					<th>정산최종금액</th>
 					<th>정산상태</th>
+					<th></th>
+					<th></th>
 				</tr>
 				<%if (CalcList != null && !CalcList.isEmpty()) {
 					for (Calc c : CalcList) {%>

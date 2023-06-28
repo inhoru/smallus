@@ -27,6 +27,12 @@ button#m-classdeletebtn{
 		<div class="h-main-title">
 			<h2>호스트 정산관리</h2>
 		</div>
+			<select id="m-selectCalc" onchange="selectCalc();">
+				<option value="A">전체내역</option>
+				<option value="Y" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("Y")?"selected":""%>>정산완료</option>
+				<option value="W" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("W")?"selected":""%>>정산대기</option>
+				<option value="N" <%=request.getParameter("calcStatus")!=null&&request.getParameter("calcStatus").equals("N")?"selected":""%>>정산거절</option>
+			</select>
 	</section>
 	<section class="h-main h-main-rsvList">
 		<div>
@@ -45,9 +51,8 @@ button#m-classdeletebtn{
 					<td><%=c.getCalcId()%></td>
 					<td><%=c.getHostId()%></td>
 					<td><%=c.getCalcReqDate()%></td>
-					<td><%=c.getCalcPrice()%></td>
-					<td><%=c.getCalcFinalPrice()%></td>
-
+					<td><%=c.getCalcPrice()%>원</td>
+					<td><%=(int)Math.round(c.getCalcPrice()*0.8)%>원</td>
 					<%if(c.getCalcStatus().equals("Y")){ %>
 					<td>정산완료</td>
 					<%}else if(c.getCalcStatus().equals("W")){ %>

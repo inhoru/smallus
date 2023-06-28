@@ -25,7 +25,7 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 	<div id="mainOpacity h-host-main">
 		<section class="h-main">
 			<div class="h-main-title">
-				<h2>일반회원관리</h2>
+				<h2>일반 회원관리</h2>
 			</div>
 			<select id="m-selectMember" onchange="selectMember();">
 				<option value="A">전체회원</option>
@@ -55,9 +55,19 @@ List<Member> memberList=(List)request.getAttribute("MemberList");
 						<td><%=m.getMemberNickname()%></td>
 						<td><%=m.getMemberPhone()%></td>
 						<td><%=m.getMemberEmail()%></td>
-						<td><%=m.getMemberConsent()%></td>
-						<td><%=m.getMemberSt()%></td>
+						<%if(m.getMemberConsent().equals("Y")){ %>
+							<td>수신동의</td>
+						<%}else{ %>
+							<td>수신미동의</td>
+						<%} %>
 						<%if(m.getMemberSt().equals("Y")){ %>
+							<td>일반회원</td>
+						<%}else if(m.getMemberSt().equals("K")){ %>
+							<td>카카오회원</td>
+						<%}else{ %>
+							<td>탈퇴한회원</td>
+						<%} %>
+						<%if(m.getMemberSt().equals("Y")||m.getMemberSt().equals("K")){ %>
 						<td><button id="m-deletemember"onclick="deletemember('<%=m.getMemberId()%>');">삭제</button></td>
 						<%}else{%>
 							<td></td>

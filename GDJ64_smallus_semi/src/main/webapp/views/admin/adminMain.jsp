@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="com.smallus.classes.model.vo.Classes,com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,
-	com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.smallus.notice.model.vo.NoticeImage, java.util.List"%>
+	com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.smallus.notice.model.vo.NoticeImage, java.util.List,
+	com.smallus.host.model.vo.Calc"%>
 <%
 List<Classes> ClassesList = (List) request.getAttribute("ClassesList");
-List<Notice> NoticeLists = (List) request.getAttribute("NoticeList");
+List<Calc> CalcList = (List) request.getAttribute("CalcList");
 %>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <style>
@@ -22,169 +23,125 @@ button#deleteNoticebtn, #m-classdeletebtn {
 }
 </style>
 <body>
-	<section class="h-main">
-		<div class="h-main-title">
-			<h2>공지사항</h2>
-			<%
-			if (loginHost.getHostId().equals("admin")) {
-			%>
-			<div class="h-viewList">
-				<a
-					href="<%=request.getContextPath()%>/views/admin/adminNoticeEnroll.jsp">+</a>
+	<div style="cursor:pointer;" onclick="moveConfirmClasses();">
+		<section class="h-main">
+			<div class="h-main-title">
+				<h2>최근 클래스 승인요청 건</h2>
+				<%
+				if (loginHost.getHostId().equals("admin")) {
+				%>
+				<div class="h-viewList">
+					<a href=""></a>
+				</div>
+				<%
+				} else {
+				%>
+				<%
+				}
+				%>
 			</div>
-			<%
-			} else {
-			%>
-			<%
-			}
-			%>
-		</div>
-	</section>
-	<section class="h-main h-main-rsvList">
-		<div>
-			<table id="m-table">
-				<tr>
-					<th>종류</th>
-					<th>제목</th>
-					<th>작성일</th>
-					<th>작성자</th>
+		</section>
+		<section class="h-main h-main-rsvList">
+			<div>
+				<table id="h-main-rsv-tbl">
+					<tr>
+						<th>카테고리</th>
+						<th>클래스이름</th>
+						<th>호스트아이디</th>
+						<th>등록일</th>
+						<th>승인상태</th>
+					</tr>
 					<%
-					if (loginHost.getHostId().equals("admin")) {
+					if (ClassesList != null && !ClassesList.isEmpty()) {
+						for (Classes c : ClassesList) {
 					%>
-					<th></th>
+					<tr>
+						<td><%=c.getCategoryTitle()%></td>
+						<td><%=c.getClassTitle()%></td>
+						<td><%=c.getHostId()%></td>
+						<td><%=c.getClassUpLoadDate()%></td>
+						<td>승인대기</td>
+					</tr>
 					<%
 					}
 					%>
-				</tr>
-				<%
-				if (NoticeLists != null && !NoticeLists.isEmpty()) {
-					for (Notice n : NoticeLists) {
-				%>
-				<tr style="cursor: pointer;"
-					onclick="noticedetail('<%=n.getNoticeId()%>');">
-					<%
-					if (n.getNoticeType().equals("1")) {
-					%>
-					<td>공지사항</td>
-					<%
-					} else if (n.getNoticeType().equals("2")) {
-					%>
-					<td>이벤트</td>
 					<%
 					} else {
 					%>
-					<td>기타</td>
+					<tr>
+						<td colspan="7">승인할 클래스가 없습니다.</td>
+					</tr>
 					<%
 					}
 					%>
-					<td><%=n.getNoticeTitle()%></td>
-					<td><%=n.getNoticeRdate()%></td>
-					<td><%=n.getHostId()%></td>
-					<td>
-						<%
-						if (loginHost.getHostId().equals("admin")) {
-						%>
-						<button id="deleteNoticebtn" style="cursor: pointer;"
-							onclick="deleteNotice('<%=n.getNoticeId()%>');">삭제</button> <%
- }
- %>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="5" class="m-noticedetailcontainer<%=n.getNoticeId()%>"
-						style="display: none;">
-						<div>
-							<%if(n.getNoticeFilepath()!=null){%>
-							<img
-								src="<%=request.getContextPath()%>/upload/notice/<%=n.getNoticeFilepath()%>"
-								alt="이게왜안떠?" style="height: 300px; width: 200px;">
-							<%} %>
-							<pre style="width: 1350px;"><%=n.getNoticeContent()%></pre>
-						</div>
-					</td>
-				</tr>
-				<%
-				}
-				%>
-				<%
-				} else {
-				%>
-				<tr>
-					<td colspan="5">등록된 공지사항이 없습니다.</td>
-				</tr>
-				<%
-				}
-				%>
-			</table>
-		</div>
-	</section>
-	<section class="h-main">
-		<div class="h-main-title">
-			<h2>호스트클래스관리</h2>
-			<%
-			if (loginHost.getHostId().equals("admin")) {
-			%>
-			<div class="h-viewList">
-				<a href="<%=request.getContextPath()%>/admin/AdminMainServlet.do"></a>
+				</table>
 			</div>
-			<%
-			} else {
-			%>
-			<%
-			}
-			%>
-		</div>
-	</section>
-	<section class="h-main h-main-rsvList">
-		<div>
-			<table id="h-main-rsv-tbl">
-				<tr>
-					<th>카테고리</th>
-					<th>클래스이름</th>
-					<th>호스트아이디</th>
-					<th>등록일자</th>
-					<th>승인일자</th>
-				</tr>
+		</section>
+	</div>
+	<div style="cursor:pointer;" onclick="moveConfirmCalc()">
+		<section class="h-main">
+			<div class="h-main-title">
+				<h2>최근 호스트 정산승인요청 건</h2>
 				<%
-				if (ClassesList != null && !ClassesList.isEmpty()) {
-					for (Classes c : ClassesList) {
+				if (loginHost.getHostId().equals("admin")) {
 				%>
-				<tr style="cursor: pointer;"
-					onclick="classdetail('<%=c.getClassId()%>');">
-					<td><%=c.getCategoryTitle()%></td>
-					<td><%=c.getClassTitle()%></td>
-					<td><%=c.getHostId()%></td>
-					<td><%=c.getClassUpLoadDate()%></td>
-					<td><%=c.getClassPassDate()%></td>
-					<td><button id="m-classdeletebtn"
-							onclick="classdelete('<%=c.getClassId()%>');">삭제</button></td>
-				</tr>
-				<%
-				}
-				%>
+				<div class="h-viewList">
+					<a href=""></a>
+				</div>
 				<%
 				} else {
 				%>
-				<tr>
-					<td colspan="5">조회할 클래스가 없습니다.</td>
-				</tr>
 				<%
 				}
 				%>
-			</table>
-		</div>
-	</section>
+			</div>
+		</section>
+		<section class="h-main h-main-rsvList">
+			<div>
+				<table id="h-main-rsv-tbl">
+					<tr>
+						<th>정산번호</th>
+						<th>호스트아이디</th>
+						<th>정산요청일</th>
+						<th>정산요청금액</th>
+						<th>정산최종금액</th>
+						<th>정산상태</th>
+					</tr>
+					<%
+					if (CalcList != null && !CalcList.isEmpty()) {
+						for (Calc c : CalcList) {
+					%>
+					<tr>
+						<td><%=c.getCalcId()%></td>
+						<td><%=c.getHostId()%></td>
+						<td><%=c.getCalcReqDate()%></td>
+						<td><%=c.getCalcPrice()%>원</td>
+						<td><%=(int) Math.round(c.getCalcPrice() * 0.8)%>원</td>
+						<td>정산대기</td>
+					</tr>
+					<%
+					}
+					%>
+					<%
+					} else {
+					%>
+					<tr>
+						<td colspan="7">승인할 정산요청이 없습니다.</td>
+					</tr>
+					<%
+					}
+					%>
+				</table>
+			</div>
+		</section>
+	</div>
 </body>
 <script>
-	$(() => {
-		$(".m-noticedetailcontainer").hide();
-	});
-	function noticedetail(noticeId){
-		$(".m-noticedetailcontainer"+noticeId).slideToggle();
+	function moveConfirmClasses(){
+		location.assign("<%=request.getContextPath()%>/admin/ClassesConfirmListServlet.do");
 	}
-
-	function deleteNotice(noticeId){
-		location.assign("<%=request.getContextPath()%>/notice/DeleteNotice.do?noticeId="+noticeId);
+	function moveConfirmCalc(){
+		location.assign("<%=request.getContextPath()%>/admin/ClacConfirmListServlet.do");
 	}
 </script>
 <%@ include file="/views/common/hostFooter.jsp"%>

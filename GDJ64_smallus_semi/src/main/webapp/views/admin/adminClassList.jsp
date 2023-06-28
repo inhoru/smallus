@@ -44,6 +44,8 @@ button#m-classdeletebtn{
 					<th>호스트아이디</th>
 					<th>등록일자</th>
 					<th>승인일자</th>
+					<th></th>
+					<th></th>
 				</tr>
 				<%if (ClassesList != null && !ClassesList.isEmpty()) {
 					for (Classes c : ClassesList) {%>
@@ -67,7 +69,7 @@ button#m-classdeletebtn{
 
 					<td><button id="m-classdeletebtn"
 
-							onclick="classdelete('<%=c.getClassId()%>');">게시중단</button></td>
+							onclick="classdelete('<%=c.getClassId()%>');">승인취소</button></td>
 					<%}else{ %>
 					<td></td>
 					<%} %>
