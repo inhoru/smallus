@@ -283,6 +283,20 @@ public class ClassesDao {
 			close(pstmt);
 		}return result;
 	}
-	
+	public int deleteClassDetailBydetaiLid(Connection conn, String classDetailId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteClassDetailBydetaiLid"));
+			pstmt.setString(1, classDetailId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 }

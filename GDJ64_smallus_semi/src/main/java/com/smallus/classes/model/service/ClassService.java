@@ -105,4 +105,13 @@ public class ClassService {
 		return result;
 	}
 	
+	public int deleteClassDetailBydetaiLid(String classDetailId) {
+		Connection conn=getConnection();
+		int result=dao.deleteClassDetailBydetaiLid(conn, classDetailId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 }	
