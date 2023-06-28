@@ -16,13 +16,13 @@ import com.smallus.main.service.MainService;
  * Servlet implementation class ViewCategoryActivityServlet
  */
 @WebServlet("/categoryActivity.do")
-public class ViewCategoryActivityServlet extends HttpServlet {
+public class ViewCategoryExerciseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewCategoryActivityServlet() {
+    public ViewCategoryExerciseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

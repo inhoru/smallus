@@ -7,8 +7,8 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common/headrFooter.css">
 <%
-	List<ClassIndex> newBeauty= (List)request.getAttribute("newBeauty");
-	List<ClassIndex> bestBeauty= (List)request.getAttribute("bestBeauty");
+	List<ClassIndex> newExe= (List)request.getAttribute("newExe");
+	List<ClassIndex> bestExe= (List)request.getAttribute("bestExe");
 %>
 <style>
 div.craft{
@@ -28,14 +28,14 @@ justify-content: space_evenly;
 </style>
 <div id="mainOpacity" class="h-main">
 <section class="h-categoryMain">
-	<img src="<%=request.getContextPath()%>/img/category_cooking.jpg" alt="re1" title="내 손으로 작은 바..."
+	<img src="<%=request.getContextPath()%>/img/category_exercise.jpg" alt="re1" title="내 손으로 작은 바..."
         onclick="location.href='<%=request.getContextPath()%>/maintoclass.do'">
 </section>
 <div class="h-main">
 	<h2>NEW CLASS</h2>
 	<section class="h-imgContainer">
-		<%if(newBeauty!=null && !newBeauty.isEmpty()){ 
-				for(ClassIndex m : newBeauty){%>
+		<%if(newExe!=null && !newExe.isEmpty()){ 
+				for(ClassIndex m : newExe){%>
 				<div class="h-img-list">
 					<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"> <img src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
 						<h4><%=m.getClasses().getClassTitle() %></h4>
@@ -61,8 +61,8 @@ justify-content: space_evenly;
 	</section>
 	<h2>BEST CLASS</h2>
 	<section class="h-imgContainer">
-		<%if(bestBeauty!=null && !bestBeauty.isEmpty()){ 
-				for(ClassIndex m : bestBeauty){%>
+		<%if(bestExe!=null && !bestExe.isEmpty()){ 
+				for(ClassIndex m : bestExe){%>
 				<div class="h-img-list">
 					<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"> <img src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
 						<h4><%=m.getClasses().getClassTitle() %></h4>
