@@ -5,6 +5,10 @@
 	List<PaymentCalc> sortStatusList=(List)request.getAttribute("sortStatusList");
 %>
 <%@ include file="/views/common/hostHeader.jsp"%>
+<!-- fullcalendar css -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/calendar.js"></script>
 <%@ page import="java.util.List, 
 				com.smallus.payment.model.vo.PaymentCalc,
@@ -13,7 +17,6 @@
 				com.smallus.classes.model.vo.ClassDetail,
 				com.smallus.host.model.vo.Calc
 " %>
-<script src="<%=request.getContextPath() %>/js/calendar.js"></script>
 <div id="mainOpacity h-host-main">
 	<section class="h-main h-rsv">
      	<div class="h-main-title">
