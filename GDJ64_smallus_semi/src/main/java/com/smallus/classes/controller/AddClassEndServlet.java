@@ -11,12 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.smallus.classes.model.service.ClassService2;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
+import com.smallus.host.model.vo.Host;
 
 /**
  * Servlet implementation class AddClassServlet
@@ -41,14 +43,10 @@ public class AddClassEndServlet extends HttpServlet {
 		// 클래스등록페이지 작성후 자료를 DB에 반영하는 서블릿
 		
 		
-		
-		// String hostId=request.getParameter("hostId");
-		String hostId="c1234"; // 클래스를 등록할 임시 호스트 아이디
-		
-//		HttpSession session= request.getSession();
-//		Host host=(Host)session.getAttribute("loginHost");
-//		String hostId=(host.getHostId());
-		
+//		HttpSession session = request.getSession(false);
+//		Host loginHost = (Host) session.getAttribute("loginHost");
+		//String hostId=(loginHost.getHostId());
+		String hostId="c1234";
 		// 파일 업로드
 		String path=getServletContext().getRealPath("/upload/class");
 		int maxSize=1024*1024*30;
