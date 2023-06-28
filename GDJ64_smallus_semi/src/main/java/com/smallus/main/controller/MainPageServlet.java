@@ -1,7 +1,6 @@
 package com.smallus.main.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,11 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.vo.ClassIndex;
-import com.smallus.classes.model.vo.Classes;
+import com.smallus.main.model.vo.Wish;
 import com.smallus.main.service.MainService;
-import com.smallus.payment.model.vo.MainPayment;
+import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class MainPageServlet
@@ -37,7 +37,8 @@ public class MainPageServlet extends HttpServlet {
 		//List<Classes> list=new MainService().mainPage();
 		//System.out.println(list);
 		
-//		List<MainPayment> best=new MainService().selectBestClass();
+
+
 		List<ClassIndex> newClass = new MainService().NewClassList();
 		List<ClassIndex> wishClass= new MainService().wishClassList();
 		
@@ -45,6 +46,7 @@ public class MainPageServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setAttribute("wishClass", wishClass);
 		request.setAttribute("newClass", newClass);
+		
 		request.getRequestDispatcher("/views/host/expClass.jsp").forward(request, response);
 	}
 

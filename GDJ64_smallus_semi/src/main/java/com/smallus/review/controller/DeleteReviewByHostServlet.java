@@ -8,13 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smallus.member.model.vo.Member;
-import com.smallus.review.model.dao.ReviewDao;
+import com.smallus.review.service.ReviewService;
 
 /**
- * Servlet implementation class RemoveListServlet
+ * Servlet implementation class DeleteReviewByHostServlet
  */
-@WebServlet("/review/reviewList.do")
+@WebServlet("/review/deleteReviewByHost.do")
 public class DeleteReviewByHostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,7 +29,14 @@ public class DeleteReviewByHostServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ReviewDao dao=new ReviewDao();
+		// TODO Auto-generated method stub
+		String reviewId= request.getParameter("reviewId");
+		System.out.println(reviewId);
+		int result= new ReviewService().deleteReviewByhost(reviewId);
+		if(result>0) System.out.println("성공 ");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/csv;charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**
@@ -39,6 +45,7 @@ public class DeleteReviewByHostServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+
+	}
 	}
 
-}

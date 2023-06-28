@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.smallus.main.model.vo.Wish;
+import com.smallus.main.service.MainService;
 import com.smallus.member.model.vo.Member;
 import com.smallus.member.model.vo.Notifications;
 import com.smallus.member.service.MemberService;
@@ -69,6 +71,8 @@ public class MemberLoginServlet extends HttpServlet {
 			int notcount = new MemberService().notificationsCount(memberId);
 			session.setAttribute("notcount1",notcount);
 			session.setAttribute("Notlist1",list);
+			List<Wish> wishMember= new MainService().wishMember(memberId);
+			session.setAttribute("wishMember", wishMember);
 			
 		
 		}else {

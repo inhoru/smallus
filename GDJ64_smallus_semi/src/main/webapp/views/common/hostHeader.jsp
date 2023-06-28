@@ -96,9 +96,7 @@ if (cookies != null) {
                      <%
                      for (Notifications n : not) {
                      %>
-                     <input class="checkbox" type="checkbox" id="size_<%=count%>"
-                        value="small" checked /> <label class="notification"
-                        for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
+                     <input class="checkbox" type="checkbox" id="size_<%=count%>" value="small" checked /> <label class="notification"  for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
                         <br /><span class="i-notType"><%=n.getNotiflType()%><%= n.getNotiflMessage()%><img alt="" src="<%=request.getContextPath()%>/img/알림삭제.png" width="15px" height="15px" style="cursor: pointer;"></span> 
                      <a href="<%=request.getContextPath()%>/class/viewHostClassList.do"> <%=n.getTypeTitle()%> </a>
                     <input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"></label>

@@ -189,46 +189,28 @@ if (cookies != null) {
 		</div>
 		<table id="categoriesTable">
 			<tr>
-				<td class="ca"><a
-					href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">요리<a></a></td>
-				<td class="ca"><a
-					href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">공예</a></td>
-				<td class="ca"><a
-					href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">뷰티</a></td>
-				<td class="ca"><a
-					href="<%=request.getContextPath()%>/views/main/category_activity.jsp">운동</a></td>
+				<td class="ca"><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">요리<a></a></td>
+				<td class="ca"><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">공예</a></td>
+				<td class="ca"><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">뷰티</a></td>
+				<td class="ca"><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">운동</a></td>
 			</tr>
 			<tr>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">제과</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">레진</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">비누</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_activity.jsp">실내스포츠</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">제과</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">레진</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">비누</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">실내스포츠</a></td>
 			</tr>
 			<tr>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">제빵</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">가죽</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">향수</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_activity.jsp">야외스포츠</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">제빵</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">가죽</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">향수</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">야외스포츠</a></td>
 			</tr>
 			<tr>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_cooking.jsp">음료</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_crafts.jsp">스테인
-						글라스</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_beauty.jsp">천연
-						화장품</a></td>
-				<td><a
-					href="<%=request.getContextPath()%>/views/main/category_activity.jsp"></a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">음료</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">스테인 글라스</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">천연 화장품</a></td>
+				<td><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE"></a></td>
 			</tr>
 		</table>
 	</header>
