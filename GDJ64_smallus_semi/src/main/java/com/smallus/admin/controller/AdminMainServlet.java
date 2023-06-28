@@ -28,13 +28,10 @@ public class AdminMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Classes> list=new AdminService().recentConfirmClasses();
 		List<Calc> list2=new AdminService().recentConfirmCalc();
-		if(list!=null&&!list.isEmpty()) {
 		request.setAttribute("ClassesList", list);
 		request.setAttribute("CalcList", list2);
 		request.getRequestDispatcher("/views/admin/adminMain.jsp").forward(request, response);
-		}else {
-		request.getRequestDispatcher("/views/admin/adminMain.jsp").forward(request, response);
-		}
+
 	}
 
 	/**

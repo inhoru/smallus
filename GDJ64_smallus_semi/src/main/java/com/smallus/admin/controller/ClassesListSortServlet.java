@@ -41,7 +41,7 @@ public class ClassesListSortServlet extends HttpServlet {
 		try {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
 		}catch(NumberFormatException e) {
-			numPerpage=10;
+			numPerpage=5;
 		}
 		int totalData=new AdminService().selectClassSortCount(categoryId);
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
@@ -52,20 +52,20 @@ public class ClassesListSortServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?categoryId="+categoryId+"&numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
 		}
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getRequestURI()+"?categoryId="+categoryId+"&numPerpage="+numPerpage+"&cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?categoryId="+categoryId+"&numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		List<Classes> list=new AdminService().checkClassSort(categoryId,cPage,numPerpage);
 //		list.forEach(e->System.out.println(e)); //list불러온값 확인

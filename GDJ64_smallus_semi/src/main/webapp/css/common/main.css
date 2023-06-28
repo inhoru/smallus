@@ -247,18 +247,21 @@ section.h-imgContainer{
     margin: var(--section-center);
     display: flex;
     margin-bottom: 3rem;
+    flex-wrap: wrap;
+    justify-content:space-between;
 }
 .h-img-list{
-    width:25%;
-    margin: 2rem 1rem 2rem 0;
-    height: 20rem;
+    width:24%;
+   /*  margin: 0.5% 1% 0.5% 0; */
+    margin:2rem 0;
+    height: 18rem;
 }
 section.h-imgContainer .h-img-list:last-child{
     margin-right: 0;;
 }
 section.h-imgContainer .h-img-list img{
     width: 100%;
-    height: 15rem;
+    height: 14rem;
     border-radius: 2rem;
 }
 
@@ -363,4 +366,18 @@ section.h-best-class div.h-img-list-row .h-img-list{
 }
 section.h-best-class div.h-img-list-row .h-img-list:last-child{
     margin-right: 0;
+}
+
+/* 카테고리 페이지 컨테이너 정렬 */
+.h-categoryContainer {
+	flex-flow : row wrap;
+}
+
+.h-text {
+	width: 70%;
+	margin:1rem auto;
+}
+
+.h-cateAll  div.h-img-list {
+	margin-bottom : 1.5rem;
 }

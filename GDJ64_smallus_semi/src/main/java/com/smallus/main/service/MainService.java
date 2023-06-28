@@ -62,5 +62,20 @@ public class MainService {
 		close(conn);
 		return list;
 	}
-
+	
+	public int allClassByCategoryCount(String categoryId) {
+		Connection conn = getConnection();
+		int totalData = dao.allClassByCategoryCount(conn, categoryId);
+		close(conn);
+		return totalData;
+	}
+	
+	
+	public List<ClassIndex> selectAllclassByCategory(String categoryId, int cPage, int numPerpage) {
+		Connection conn = getConnection();
+		List<ClassIndex> list = dao.selectAllclassByCategory(conn, categoryId,cPage, numPerpage);
+		close(conn);
+		return list;
+	}
+	
 }

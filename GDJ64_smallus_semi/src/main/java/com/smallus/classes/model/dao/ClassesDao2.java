@@ -86,12 +86,9 @@ public class ClassesDao2 {
 		
 		try {
 			for(ClassDetail sc:schedule) {
-				System.out.println("sc.getBookingTimeEnd() : "+sc.getBookingTimeEnd());
-				System.out.println("getTime : "+sc.getBookingTimeEnd().getTime());
-//				System.out.println("getHours : "+sc.getBookingTimeEnd().getHours()); 확인하고 싶었으나 사용시 오류)
 				pstmt=conn.prepareStatement(sql.getProperty("addClassSchedule"));
-				pstmt.setDate(1, sc.getBookingTimeStart());
-				pstmt.setDate(2, sc.getBookingTimeEnd());
+				pstmt.setTimestamp(1, new java.sql.Timestamp(sc.getBookingTimeStart().getTime()));
+				pstmt.setTimestamp(2, new java.sql.Timestamp(sc.getBookingTimeEnd().getTime()));
 				result=pstmt.executeUpdate();
 			}
 		}catch(SQLException e) {

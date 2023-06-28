@@ -1,12 +1,6 @@
 package com.smallus.classes.controller;
 
-import static com.smallus.common.JDBCTemplate.close;
-import static com.smallus.common.JDBCTemplate.commit;
-import static com.smallus.common.JDBCTemplate.getConnection;
-import static com.smallus.common.JDBCTemplate.rollback;
-
 import java.io.IOException;
-import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,65 +62,28 @@ public class InsertClassDetailByClassDetailPageServlet extends HttpServlet {
 		String cID=(String)map.get("classId");
 		String re=(String)map.get("remainingPersonnel");
 		
-		
-		int insertResult=0;
 		String[] classTime = request.getParameterValues("classTime");
-		if (per != null) {
-		  for (String time : classTime) {
-		    //System.out.println("time : "+time);
 		    try {
-		    	for(int i=0;i<size;i++) {
-		    		ClassDetail c=new ClassDetail();
-		    		ClassDetail.builder().classId(cID)
+		    		for (String time : classTime) {
+		    		ClassDetail c= ClassDetail.builder().classId(cID)
 		    		.bookingTimeStart(new java.sql.Date(dateFormet.parse(time.substring(0, time.indexOf("~")-1)).getTime()))
-		    		.bookingTimeEnd(new java.sql.Date(dateFormet.parse(time.substring(time.indexOf("~")+1)).getTime()))
+					.bookingTimeEnd(new java.sql.Date(dateFormet.parse(time.substring(time.indexOf("~")+1)).getTime()))
 		    		.remainingPersonnel(Integer.parseInt(re)).build();
-		    		insertResult=new ClassService().InsertClassDetailByClassDetailPage(c);
-		    	}if(insertResult>0) System.out.println("성공");
-				else System.out.println("실패");
+		    		list.add(c);
+		    		}
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		  }
+		    
+		if(list!=null|| !list.isEmpty()) {
+			for(ClassDetail c:list) {
+				System.out.println("c"+c.getClassId()+"ctimestart "+c.getBookingTimeStart()+"ctimeend "+c.getBookingTimeEnd()+" "+c.getRemainingPersonnel());
+			}
+			System.out.println("list O"+list.size());
+			int insertResult=new ClassService().InsertClassDetailByHostPage(list);
+			if(insertResult>0) System.out.println("등록 성공 :)");
+			else System.out.println("등록 실패 ;<");
 		}
-		
-		
-//		for(ClassDetail c: list) {
-//			ClassDetail one=new ClassDetail();
-//			one.setClassId(c.getClassId());
-//			one.setBookingTimeStart(c.getBookingTimeStart());
-//			one.setBookingTimeEnd(c.getBookingTimeEnd());
-//			one.setRemainingPersonnel(c.getRemainingPersonnel());
-//			insertResult=new ClassService().InsertClassDetailByClassDetailPage(one);
-//			
-//		}if(insertResult>0) System.out.println("성공");
-//		else System.out.println("실패");
-		
-//		int result=new ClassService().InsertClassDetailByClassDetailPage(list,list.size());
-		
-		
-		
-		
-//		다영님 코드
-//		String[] schedule=request.getParameterValues("datetimes");
-//	      List<ClassDetail> scheduleList=new ArrayList();
-//	      SimpleDateFormat dateFormet=new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//	      try {
-//	         for(String s:schedule) {
-//	            ClassDetail cd=ClassDetail.builder()
-//	                  .bookingTimeStart(new java.sql.Date(dateFormet.parse(s.substring(1, 16)).getTime()))
-//	                  .bookingTimeEnd(new java.sql.Date(dateFormet.parse(s.substring(20, 35)).getTime()))
-//	                  .build();
-//	            scheduleList.add(cd);
-//	         }
-//	      }catch(Exception e) {
-//	         e.printStackTrace();
-		
-//	      }
-//	      int result2=0;
-//	      if(!scheduleList.isEmpty()) { //생략가능?
-//	         result2=new ClassService2().addClassSchedule(scheduleList);
-//	      }
 		
 		
 	}

@@ -87,7 +87,7 @@ public class CalcDao {
 		List<Calc> calcList=new ArrayList<Calc>();
 		try {
 			
-			pstmt=conn.prepareStatement("sortingByCalcStatus");
+			pstmt=conn.prepareStatement(sql.getProperty("sortingByCalcStatus"));
 			pstmt.setString(1, hostId);
 			pstmt.setString(2, calcStatus);
 			pstmt.setInt(3, (cPage-1)*numPerpage+1);

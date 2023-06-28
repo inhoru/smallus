@@ -50,7 +50,7 @@
                         %>
 		                    <tr>
 		                        <td><%=p.getPayment().getPaymentId()%></td>
-		                        <td><%=p.getClasses().getClassTitle()%></td>
+		                        <td><a><%=p.getClasses().getClassTitle()%></a></td>
 		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
 		                        <td><%=p.getPayment().getMemberId()%> 님 예약</td>
 		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
@@ -62,7 +62,7 @@
                     	for(PaymentCalc p: sortStatusList){%>
                         <tr>
 		                        <td><%=p.getPayment().getPaymentId()%></td>
-		                        <td><%=p.getClasses().getClassTitle()%></td>
+		                        <td><a><%=p.getClasses().getClassTitle()%></a></td>
 		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
 		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
 		                        <td><%=p.getPayment().getMemberId()%> 님 예약</td>

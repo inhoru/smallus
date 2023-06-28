@@ -85,14 +85,8 @@ public class SortingHostClassByPassServlet extends HttpServlet {
 
 		List<Classes> classListPass = new ClassService().selectClassListByPassStatus(hostId, passStatus,cPage,numPerpage);
 		
-		if(classListPass!=null&&!classListPass.isEmpty()) {
 			request.setAttribute("classListPass", classListPass);
 			request.getRequestDispatcher("/views/host/viewHostClassList.jsp").forward(request, response);
-		}else {
-			request.setAttribute("msg", "조회할 클래스가 없습니다.");
-			request.setAttribute("loc", "/views/host/viewHostClassList.jsp");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		}
 	}
 
 	/**

@@ -110,7 +110,7 @@ const selectClass=()=>{
 	}
 };
 	function classdetail(classId){
-		location.assign("<%=request.getContextPath()%>/maintoclass.do");
+		location.assign("<%=request.getContextPath()%>/class/viewClassPage.do?classId="+classId);
 	}
 	function classdelete(classId){
 		location.assign("<%=request.getContextPath()%>/admin/ClassesDeleteServlet.do?classId="+classId);

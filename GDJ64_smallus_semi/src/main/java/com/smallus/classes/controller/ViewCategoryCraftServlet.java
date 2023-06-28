@@ -33,26 +33,61 @@ public class ViewCategoryCraftServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String categoryId=request.getParameter("categoryId");
+		
+		int cPage, numPerpage;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage = 1;
+		}
+		try {
+			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+		} catch (NumberFormatException e) {
+			numPerpage = 8;
+		}
+		int totalData = new MainService().allClassByCategoryCount(categoryId);
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
+		if (pageNo == 1) {
+			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
+		}
+		while (!(pageNo > pageEnd || pageNo > totalPage)) {
+			if (pageNo == cPage) {
+				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
+			} else {
+				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"'> " + pageNo + " </a>";
+			}
+			pageNo++;
+		}
+		if (pageNo > totalPage) {
+			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"' class='h-pageBar-txt'> 다음 </a>";
+		}
+		
+		request.setAttribute("pageBar", pageBar);
+		
 		List<ClassIndex> newCraft= new MainService().selectNewClassByCategory(categoryId);
+		List<ClassIndex> allCraft= new MainService().selectNewClassByCategory(categoryId);
 		if(newCraft!=null && !newCraft.isEmpty()) {
-			System.out.println("newCraft O");
 		}
-		request.setAttribute("newCraft", newCraft);
-		System.out.println(categoryId);
-		String categoryTitle="";
-		if(categoryId.equals("CRA")) {
-			categoryTitle="공예";
-		}
-//		CRA 공예
-//		BEA 뷰티
-//		EXE 운동
-//		COO 요리
+		String categoryTitle="공예";
 		List<ClassIndex> bestCraft= new MainService().selectBestClassByCategory(categoryTitle);
-		request.setAttribute("bestCraft", bestCraft);
 		if(newCraft!=null && !newCraft.isEmpty() && bestCraft!=null && !bestCraft.isEmpty()) {
-			System.out.println("성");
+			request.setAttribute("newCraft", newCraft);
+			request.setAttribute("bestCraft", bestCraft);
+			request.setAttribute("allCraft", allCraft);
+			request.getRequestDispatcher("/views/main/viewCategoryCraft.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "선택한 카테고리 클래스가 없습니다.");
+			request.setAttribute("loc","/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/views/main/viewCategoryCraft.jsp").forward(request, response);
 	}
 
 	/**
