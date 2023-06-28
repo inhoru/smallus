@@ -16,8 +16,11 @@
 				console.log(r);
 				console.log(m);
 			}
-		});
+
+		}); 
+
 </script>
+
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container" id="hmain">

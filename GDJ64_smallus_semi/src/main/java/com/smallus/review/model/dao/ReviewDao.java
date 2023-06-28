@@ -130,7 +130,25 @@ public class ReviewDao {
 	}
 	
 	
-	
+	public List<Review> hoistReviewList(Connection conn, String hostId){
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Review> list = new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("hostreviewList"));
+			pstmt.setString(1, hostId);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				list.add(getReview(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	
 	
 	
