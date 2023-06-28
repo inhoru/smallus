@@ -743,4 +743,23 @@ public class AdminDao {
 	         close(pstmt);
 	      }return list;
 	}
+	public Classes selectByClassId(Connection conn, String classId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Classes classinfo=null;
+		try {
+			//selectByClassId=selectByClassId=SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_ID=?
+			pstmt=conn.prepareStatement(sql.getProperty("selectByClassId"));
+			pstmt.setString(1, classId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				classinfo=getClasses(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return classinfo;
+	}
 }
