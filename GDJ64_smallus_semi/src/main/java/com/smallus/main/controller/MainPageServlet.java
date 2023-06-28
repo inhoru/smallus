@@ -40,6 +40,7 @@ public class MainPageServlet extends HttpServlet {
 //		List<MainPayment> best=new MainService().selectBestClass();
 		List<ClassIndex> newClass = new MainService().NewClassList();
 		List<ClassIndex> wishClass= new MainService().wishClassList();
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setAttribute("wishClass", wishClass);

@@ -22,8 +22,9 @@
 			<p>등록할 사진</p>
 				<!--<img src="https://img.freepik.com/free-icon/add-button-with-plus-symbol-in-a-black-circle_318-48599.jpg"
 				width="200" height="200" alt=""> -->
-				<input type="file" name="classThumbnail" required><button>추가</button><button>삭제</button>
-			<p>※첫번째 사진이 썸네일로 등록됩니다.</p>
+				<input type="file" name="classThumbnail" accept="image/*" required>
+				<div id="imagePreview"></div>
+			<p>※해당 사진이 썸네일로 등록됩니다.</p>
 			<br>
 			<p>카테고리</p>
 			<select name="category">
@@ -53,11 +54,9 @@
 			<input type="text" name="classSupplies" placeholder="준비물을 입력해주세요.">
 			<p>상세 내용</p>
 			<textarea name="classDetail" id="" cols="80" rows="10"
-				placeholder="글자는 최대 500자까지 작성 가능합니다."></textarea>
+				placeholder="클래스에 대한 설명을 입력해주세요."></textarea>
 			<p>스케쥴 등록</p>
 			<div id="AddSchedule-calendar">
-					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
-					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
 					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
 					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
 			</div>
@@ -69,6 +68,8 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+
 $(function() {
 	  $('input[name="datetimes"]').daterangepicker({
 //		  singleDatePicker: true,
@@ -144,8 +145,6 @@ $(function() {
     }    
     
 </script>
-
-
 
 
 		<%-- <%@ include file="/views/common/footer.jsp"%> --%>

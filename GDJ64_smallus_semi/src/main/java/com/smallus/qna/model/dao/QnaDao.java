@@ -20,7 +20,7 @@ public class QnaDao {
 	
 	public QnaDao() {
 		String path = QnaDao.class
-					.getResource("sql/qna/qnasql.properties")
+					.getResource("/sql/qna.properties")
 					.getPath();
 		try {
 			sql.load(new FileReader(path));
