@@ -33,8 +33,8 @@ String search=(String) request.getAttribute("search");
 								<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
 								<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">
 								<h5>
-									category |
-									<%=w.getCategoryTitle()%></h5>
+									<%=w.getCategoryTitle() %> |
+									<%=w.getClassAddress()%></h5>
 							</a>
 							<div class="i-wish-container i-wishheart">
 								<input type="checkbox" checked="checked"
