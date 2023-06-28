@@ -82,6 +82,10 @@ public class AddClassEndServlet extends HttpServlet {
 				ClassDetail cd=ClassDetail.builder()
 						.bookingTimeStart(new java.sql.Date(dateFormet.parse(s.substring(0, s.indexOf("~")-1)).getTime()))
 						.bookingTimeEnd(new java.sql.Date(dateFormet.parse(s.substring(s.indexOf("~")+1)).getTime()))
+//						.bookingTimeStart(s.substring(0, s.indexOf("~")-1))
+//						.bookingTimeEnd(s.substring(s.indexOf("~")+1))
+//						.bookingTimeStart(dateFormet.parse(s.substring(0, s.indexOf("~")-1)))
+//						.bookingTimeEnd(dateFormet.parse(s.substring(s.indexOf("~")+1)))
 						.build();
 				scheduleList.add(cd);
 			}

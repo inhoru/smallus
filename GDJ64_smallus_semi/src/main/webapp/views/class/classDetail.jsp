@@ -43,7 +43,10 @@
 							for(ClassDetail cd : schedule){ 
 								if(cd.getRemainingPersonnel()!=0){%>
 									<option name="classDetailOption" value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart() %>_<%=cd.getBookingTimeEnd() %>_<%=cd.getRemainingPersonnel() %>">
-										<%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %>
+									<!-- <option > -->
+										 <%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %>
+										 <%-- <%=cd.getBookingTimeStart().substring(0,16)%> ~ <%=cd.getBookingTimeEnd().substring(20) %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
+										 <%-- <%=cd.getBookingTimeStart()%> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
 									</option>
 									<!-- 현재 인원 추출방식은 문자열 자르기 -->
 									<%}
