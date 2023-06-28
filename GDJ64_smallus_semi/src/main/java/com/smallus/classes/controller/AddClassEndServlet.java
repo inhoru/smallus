@@ -109,7 +109,7 @@ public class AddClassEndServlet extends HttpServlet {
 		// request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		// 성공메세지 띄우는거 공용으로 있는지? 랑 이거 끝나면 호스트 마이페이지(클래스관리)로 들어가면 될듯
 		
-		request.getRequestDispatcher("/views/class/classDetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/main/category_cooking.jsp").forward(request, response);
 		
 		
 	}

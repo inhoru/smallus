@@ -101,7 +101,7 @@ public class ClassesDao2 {
 		}return result;
 	}
 	
-	// builder 패턴을 이용해서 Classes 객체 가져오기
+	// builder 패턴을 이용해서 Classes 객체 가져오기 - 호스트닉네임 추가버전 (별도로 만듦)
 		public static Classes getClasses(ResultSet rs) throws SQLException {
 			return Classes.builder().classId(rs.getString("CLASS_ID")).hostId(rs.getString("HOST_ID")).categoryId(rs.getString("CATEGORY_ID"))
 					.classTitle(rs.getString("CLASS_TITLE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).classPrice(rs.getInt("CLASS_PRICE")).classAddress(rs.getString("CLASS_ADDRESS"))
