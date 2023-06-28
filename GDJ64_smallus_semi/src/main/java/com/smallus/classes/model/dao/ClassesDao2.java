@@ -30,7 +30,7 @@ public class ClassesDao2 {
 	}
 	
 	// 상세페이지 전용. classId로 Classes 단일정보 가져오기
-	// selectClassInfo=SELECT * FROM CLASS WHERE CLASS_ID=? ORDER BY BOOKING_TIME_START
+	// selectClassInfo=SELECT * FROM CLASS JOIN HOST USING(HOST_ID) JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_ID=?
 	public Classes selectClassByClassId(Connection conn, String classId) {
 		Classes classData=new Classes();
 		PreparedStatement pstmt = null;
@@ -39,7 +39,7 @@ public class ClassesDao2 {
 			pstmt = conn.prepareStatement(sql.getProperty("selectClassInfo"));
 			pstmt.setString(1, classId);
 			rs = pstmt.executeQuery();
-			if(rs.next()) classData=oriDao.getClasses(rs);
+			if(rs.next()) classData=getClasses(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -83,8 +83,12 @@ public class ClassesDao2 {
 	public int addClassSchedule(Connection conn, List<ClassDetail> schedule) {
 		PreparedStatement pstmt=null;
 		int result=0;
+		
 		try {
 			for(ClassDetail sc:schedule) {
+				System.out.println("sc.getBookingTimeEnd() : "+sc.getBookingTimeEnd());
+				System.out.println("getTime : "+sc.getBookingTimeEnd().getTime());
+//				System.out.println("getHours : "+sc.getBookingTimeEnd().getHours()); 확인하고 싶었으나 사용시 오류)
 				pstmt=conn.prepareStatement(sql.getProperty("addClassSchedule"));
 				pstmt.setDate(1, sc.getBookingTimeStart());
 				pstmt.setDate(2, sc.getBookingTimeEnd());
@@ -96,5 +100,14 @@ public class ClassesDao2 {
 			close(pstmt);
 		}return result;
 	}
+	
+	// builder 패턴을 이용해서 Classes 객체 가져오기 - 호스트닉네임 추가버전 (별도로 만듦)
+		public static Classes getClasses(ResultSet rs) throws SQLException {
+			return Classes.builder().classId(rs.getString("CLASS_ID")).hostId(rs.getString("HOST_ID")).categoryId(rs.getString("CATEGORY_ID"))
+					.classTitle(rs.getString("CLASS_TITLE")).classPersonnel(rs.getInt("CLASS_PERSONNEL")).classPrice(rs.getInt("CLASS_PRICE")).classAddress(rs.getString("CLASS_ADDRESS"))
+					.classOffer(rs.getString("CLASS_OFFER")).classSupplies(rs.getString("CLASS_SUPPLIES")).classNotice(rs.getString("CLASS_NOTICE")).classDetail(rs.getString("CLASS_DETAIL"))
+					.classStatus(rs.getString("CLASS_STATUS")).classUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE")).classPassDate(rs.getDate("CLASS_PASS_DATE")).classPassId(rs.getString("CLASS_PASS_ID"))
+					.classThumbnail(rs.getString("CLASS_THUMBNAIL")).categoryTitle(rs.getString("CATEGORY_TITLE")).hostNickname(rs.getString("HOST_NICKNAME")).build();
+		}
 	
 }

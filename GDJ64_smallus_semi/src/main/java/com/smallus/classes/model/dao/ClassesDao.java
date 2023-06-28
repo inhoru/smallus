@@ -29,8 +29,7 @@ public class ClassesDao {
 			e.printStackTrace();
 		}
 	}
-	
-	
+	//CLASS_ID, CATEGORY_TITLE, CLASS_TITLE, CLASS_UPLOAD_DATE, CLASS_PASS_DATE, CLASS_PASS_ID, CLASS_THUMBNAIL, CLASS_STATUS
 	// builder 패턴을 이용해서 필요한 Class 객체만 사용
 	public Classes getClass(ResultSet rs) throws SQLException {
 		return Classes.builder().classId(rs.getString("CLASS_ID")).categoryTitle(rs.getString("CATEGORY_TITLE")).classTitle(rs.getString("CLASS_TITLE")).classUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE"))
@@ -81,7 +80,6 @@ public class ClassesDao {
 		}
 		return list;
 	}
-	
 	// Classes vo에서 toString override 한 객체를 가져온다.
 	public List<Classes> selectAllClassesByHostId(Connection conn, String hostId, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
@@ -104,7 +102,6 @@ public class ClassesDao {
 			close(pstmt);
 		}return list;
 	}
-	
 	// Classes vo에서 toString override 한 객체를 가져온다.
 	public List<Classes> selectClassListByPassStatus(Connection conn, String hostId, String passStatus,int cPage, int numPerpage) {
 		List<Classes> list = new ArrayList<Classes>();
@@ -299,4 +296,22 @@ public class ClassesDao {
 		}return result;
 	}
 	
+	public int InsertClassDetailByClassDetailPage(Connection conn, ClassDetail classdetail) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("InsertClassDetailByClassDetailPage"));
+			pstmt.setString(1,classdetail.getClassId());
+			pstmt.setDate(2, classdetail.getBookingTimeStart());
+			pstmt.setDate(3, classdetail.getBookingTimeEnd());
+			pstmt.setInt(4, classdetail.getRemainingPersonnel());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 }

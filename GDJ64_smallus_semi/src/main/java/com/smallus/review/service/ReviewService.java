@@ -46,6 +46,11 @@ public class ReviewService {
 		return count;
 	}
 	
-	
+	public List<Review> hoistReviewList(String hostId){
+		Connection conn = getConnection();
+		List<Review> list = dao.hoistReviewList(conn, hostId);
+		close(conn);
+		return list;
+	}
 	
 }

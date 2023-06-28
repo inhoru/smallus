@@ -3,7 +3,7 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="com.smallus.payment.model.vo.MainPayment"%>
 <script>
-	  <%-- $.ajax({
+	  $.ajax({
 		url:"<%=request.getContextPath()%>/mainPage.do",
 		dataType: 'html',
 		success: data =>{
@@ -16,8 +16,11 @@
 				console.log(r);
 				console.log(m);
 			}
-		});  --%>
+
+		}); 
+
 </script>
+
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container" id="hmain">
@@ -78,7 +81,7 @@
 	<section class="h-main-banner">
 		<div class="h-banner-container">
 			<div class="h-banner-area">
-				<a href="">
+				<a href="<%=request.getContextPath()%>/memberLoginMove.do">
 					<div>
 						<h3>신규 가입 5000원 할인 쿠폰 지급</h3>
 						<button name="enroll" id="enroll" onclick="fn_login()">가입하기</button>
@@ -86,7 +89,7 @@
 				</a>
 			</div>
 			<div class="h-banner-area">
-				<a href="">
+				<a href="<%=request.getContextPath()%>/admin/AdminMainServlet.do">
 					<div>
 						<h3>small us X Kakao pay</h3>
 						<h5>Kakao Pay로 10만원 이상 결제 시 5천원 할인</h5>
@@ -191,9 +194,6 @@
 			</div>
 		</div>
 	</section> --%>
-	<!-- best class section -->
-	<!-- <div id="hMainBest"></div> -->
-		
 <script>
 		$("#h-activity").click(e=>{
 			location.assign('<%=request.getContextPath()%>/categoryActivity.do');

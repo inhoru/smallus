@@ -38,13 +38,13 @@ public class MainPageServlet extends HttpServlet {
 		//System.out.println(list);
 		
 //		List<MainPayment> best=new MainService().selectBestClass();
-//		List<ClassIndex> newClass = new MainService().NewClassList();
-
+		List<ClassIndex> newClass = new MainService().NewClassList();
+		List<ClassIndex> wishClass= new MainService().wishClassList();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-//		request.setAttribute("bestClass", best);
-//		request.setAttribute("newClass", newClass);
-//		request.getRequestDispatcher("/views/host/bestClass.jsp").forward(request, response);
+		request.setAttribute("wishClass", wishClass);
+		request.setAttribute("newClass", newClass);
+		request.getRequestDispatcher("/views/host/expClass.jsp").forward(request, response);
 	}
 
 	/**

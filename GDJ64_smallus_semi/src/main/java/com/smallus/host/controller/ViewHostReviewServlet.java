@@ -12,12 +12,13 @@ import javax.servlet.http.HttpSession;
 
 import com.smallus.host.model.vo.Host;
 import com.smallus.payment.model.vo.PaymentCalc;
+import com.smallus.review.model.vo.Review;
 import com.smallus.review.service.ReviewService;
 
 /**
  * Servlet implementation class ViewHostReviewServlet
  */
-@WebServlet("/host/viewHostReview.do")
+@WebServlet(name="hostReview",urlPatterns = "/host/viewHostReview.do")
 public class ViewHostReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -89,8 +90,11 @@ public class ViewHostReviewServlet extends HttpServlet {
 //			System.out.println("sortStatusList있음있");
 //			request.setAttribute("sortStatusList",sortStatusList);				
 //		}
+		List<Review> reviews=new ReviewService().hoistReviewList(host.getHostId());
+				
+		request.setAttribute("reviews", reviews);
 		
-		request.getRequestDispatcher("/views/review/reviewList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/review/reviewListHost.jsp").forward(request, response);
 		
 	}
 

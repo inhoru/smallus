@@ -83,7 +83,7 @@
 						<tr>
 							<%if(c.getClassPassId().equals("Y")&&c.getClassStatus().equals("Y")){ %>
 								<th class="h-tbl-align-left" class="h-class-pass-Y">클래스 승인 완료<th>
-								<th class="h-classStatus-Y">판매 중지</th>
+								<th class="h-classStatus-Y">판매 중</th>
 							<%}else if(c.getClassPassId().equals("Y")&&c.getClassStatus().equals("N")){ %>
 								<th class="h-tbl-align-left h-classStatus-Y" colspan="2">판매 중지</th>
 							<%}else if(c.getClassPassId().equals("W")&&c.getClassStatus().equals("Y")) {%>

@@ -144,20 +144,14 @@ if (cookies != null) {
                <th>고객 센터</th>
             </tr>
             <tr>
-               <td><a href="<%=request.getContextPath()%>/hostProfile.do">프로필
-                     수정</a></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/class/viewHostClassList.do"
-                  id="h-viewCLassList">내 클래스 보기</a></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스
-                     예약 관리</a></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
+               <td><a href="<%=request.getContextPath()%>/hostProfile.do">프로필 수정</a></td>
+               <td><a href="<%=request.getContextPath()%>/class/viewHostClassList.do" id="h-viewCLassList">내 클래스 보기</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">클래스 예약 관리</a></td>
+               <td><a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
             </tr>
             <tr>
                <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원 탈퇴</a></td>
-               <td><a href="<%=request.getContextPath()%>/">클래스 등록하기</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/insertClass.do">클래스 등록하기</a></td>
                <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산 정보 관리</a></td>
                <!-- <td><a href="">1:1 문의</a></td> -->
             </tr>
@@ -169,9 +163,7 @@ if (cookies != null) {
             </tr>
             <tr>
                <td></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/host/viewHostReview.do">후기
-                     관리</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/viewHostReview.do">후기 관리</a></td>
             </tr>
          </table>
       </div>
@@ -240,3 +232,4 @@ if (cookies != null) {
 
    </script>
  
+
