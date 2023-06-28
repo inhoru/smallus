@@ -34,9 +34,7 @@ public class ViewHostMainpageServlet extends HttpServlet {
 		List<PaymentCalc> newList=new PaymentService().selectNewPaymentByhostId(hostId);
 		List<Classes> calendarList=new ClassService().selectClassByCalendar(hostId);
 		if(newList.isEmpty()||newList==null||calendarList.isEmpty()||calendarList==null) {
-			System.out.println("newList 없음없");
 		}else {
-			System.out.println("newList 있음있"+newList.size());
 			session.setAttribute("newList",newList);	
 			session.setAttribute("calendarList", calendarList);
 		}

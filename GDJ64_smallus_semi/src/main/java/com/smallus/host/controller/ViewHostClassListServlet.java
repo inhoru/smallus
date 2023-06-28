@@ -81,17 +81,12 @@ public class ViewHostClassListServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		
 		// 호스트 아이디를 기준으로 클래스 리스트를 db에서 가져옴 
-		//List<Classes> classList=new ClassService().selectAllClassesByHostId(hostId);
 		List<Classes> classList=new ClassService().selectAllClassesByHostId(hostId,cPage,numPerpage);
 		// 분기처리해서 hostClassList페이지로 전달
 		if(classList!=null&&!classList.isEmpty()) {
-//			System.out.println("클래스 있음");
-//			System.out.println(classList.size());
-//			System.out.println(cPage+" "+ numPerpage);
 			request.setAttribute("classList", classList);
 			request.getRequestDispatcher("/views/host/viewHostClassList.jsp").forward(request, response);
 		}else {
-			System.out.println("클래스 없음");
 			request.setAttribute("msg", "조회할 클래스가 없습니다.");
 			request.setAttribute("loc", "/views/host/hostMain.jsp");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);

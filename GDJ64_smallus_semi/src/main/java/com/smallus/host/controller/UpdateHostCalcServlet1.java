@@ -17,7 +17,6 @@ import com.smallus.host.model.vo.Host;
 @WebServlet("/host/updateHostCalc.do")
 public class UpdateHostCalcServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */

@@ -1,6 +1,7 @@
 package com.smallus.main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.smallus.classes.model.service.ClassService;
+import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.main.service.MainService;
+import com.smallus.payment.model.vo.MainPayment;
 
 /**
  * Servlet implementation class MainPageServlet
@@ -33,12 +34,17 @@ public class MainPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Classes> list=new MainService().mainPage();
-		System.out.println(list);
+		//List<Classes> list=new MainService().mainPage();
+		//System.out.println(list);
 		
-		Gson gson=new Gson();
-		response.setContentType("application/json;charset=utf-8");
-		gson.toJson(list,response.getWriter());
+//		List<MainPayment> best=new MainService().selectBestClass();
+//		List<ClassIndex> newClass = new MainService().NewClassList();
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+//		request.setAttribute("bestClass", best);
+//		request.setAttribute("newClass", newClass);
+//		request.getRequestDispatcher("/views/host/bestClass.jsp").forward(request, response);
 	}
 
 	/**
