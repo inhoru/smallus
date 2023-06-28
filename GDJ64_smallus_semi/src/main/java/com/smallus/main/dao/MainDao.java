@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.payment.dao.PaymentDao;
 
