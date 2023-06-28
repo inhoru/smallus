@@ -1,8 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
+
 <%@ page import="com.smallus.classes.model.vo.ClassIndex"%>
 
+
+
+<script>
+	  <%-- $.ajax({
+		url:"<%=request.getContextPath()%>/mainPage.do",
+		dataType: 'html',
+		success: data =>{
+				
+			console.log(data);
+			$("#hMainNew").html(data);
+				
+			},
+			error: (r, m, e) => {
+				console.log(r);
+				console.log(m);
+			}
+		});  --%>
+</script>
 
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
@@ -51,20 +70,13 @@
 			<span>나의 첫 베이킹</span> 인기 베이킹 클래스
 			<!--baking 카테고리에서 베스트 인 메뉴 상위 노출/ 아래에 베이킹 카테고리 출력-->
 			<button name="h-best-baking-class">바로가기</button>
-		</div>
+		</div> 
+		
 		<ul class="h-gallery">
-			<li class="h-img-slider2"><a href=""><img
-					src="<%=request.getContextPath()%>/img/img-slide2-1.png"
-					class="sImg"></a></li>
-			<li class="h-img-slider2"><a href=""><img
-					src="<%=request.getContextPath()%>/img/img-slide2-2.png"
-					class="sImg"></a></li>
-			<li class="h-img-slider2"><a href=""><img
-					src="<%=request.getContextPath()%>/img/img-slide2-3.png"
-					class="sImg"></a></li>
-			<li class="h-img-slider2"><a href=""><img
-					src="<%=request.getContextPath()%>/img/img-slide2-4.png"
-					class="sImg"></a></li>
+			<li class="h-img-slider2"><a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=CLA1000"><img src="<%=request.getContextPath()%>/img/img-slide2-1.png" class="sImg"></a></li>
+			<li class="h-img-slider2"><a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=CLA1040"><img src="<%=request.getContextPath()%>/img/img-slide2-2.png" class="sImg"></a></li>
+			<li class="h-img-slider2"><a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=CLA1037"><img src="<%=request.getContextPath()%>/img/img-slide2-3.png" class="sImg"></a></li>
+			<li class="h-img-slider2"><a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=CLA1028"><img src="<%=request.getContextPath()%>/img/img-slide2-4.png" class="sImg"></a></li>
 		</ul>
 	</section>
 	<!-- 광고 배너 -->
@@ -75,8 +87,7 @@
 					<div>
 						<h3>신규 가입 5000원 할인 쿠폰 지급</h3>
 						<button name="enroll" id="enroll" onclick="fn_login()">가입하기</button>
-					</div> <img
-					src="<%=request.getContextPath()%>/img/main-banner-coupon.svg">
+					</div> <img src="<%=request.getContextPath()%>/img/main-banner-coupon.svg">
 				</a>
 			</div>
 			<div class="h-banner-area">
@@ -84,16 +95,16 @@
 					<div>
 						<h3>small us X Kakao pay</h3>
 						<h5>Kakao Pay로 10만원 이상 결제 시 5천원 할인</h5>
-					</div> <!-- 아래 쿠폰 이미지는 결제 수단에 따라 이미지 변경 예정 --> <img
-					src="<%=request.getContextPath()%>/img/kakaopay.png" width="100"
-					height="100">
+					</div> <!-- 아래 쿠폰 이미지는 결제 수단에 따라 이미지 변경 예정 -->
+					<img src="<%=request.getContextPath()%>/img/kakaopay.png" width="100" height="100">
 				</a>
 			</div>
 		</div>
 	</section>
 
 	<!-- new class section -->
-	<h2>NEW CLASS</h2>
+	<div id="hMainNew"></div>
+	<%-- <h2>NEW CLASS</h2>
 	<section class="h-imgContainer">
 
 		<div class="h-img-list">
@@ -184,114 +195,10 @@
 				</label>
 			</div>
 		</div>
-	</section>
-
+	</section> --%>
 	<!-- best class section -->
-	<h2>BEST CLASS</h2>
-	<section class="h-imgContainer h-best-class">
-		<div class="h-img-list">
-			<a href=""> <img
-				src="<%=request.getContextPath()%>/img/img-slide2-4.png"
-				alt="no img">
-				<h4>가장 많이 찜한 클래스</h4>
-			</a>
-			<button class="btn-best-wish">바로 가기</button>
-		</div>
-		<div class="h-img-list-row-container">
-			<div class="h-img-list-row">
-				<div class="h-img-list">
-
-					<a href=""> <img src="./img/img-slide2-4.png" alt="no img">
-						<h4>class-title</h4>
-						<h5>category | location</h5>
-					</a>
-					<div class="h-wish-container">
-						<input type="checkbox" checked="checked" id="i-favorite5"
-							name="favorite-checkbox" value="favorite-button"> <label
-							for="i-favorite5" class="i-container"> <svg
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-heart">
-                                    <path
-									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                    </path>
-                             </svg>
-						</label>
-					</div>
-				</div>
-				<div class="h-img-list">
-					<a href=""><img
-						src="<%=request.getContextPath()%>/img/img-slide2-4.png"
-						alt="no img">
-						<h4>class-title</h4>
-						<h5>category | location</h5> </a>
-					<div class="h-wish-container">
-						<input type="checkbox" checked="checked" id="i-favorite7"
-							name="favorite-checkbox" value="favorite-button"> <label
-							for="i-favorite7" class="i-container"> <svg
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-heart">
-                                    <path
-									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                    </path>
-                             </svg>
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="h-img-list-row">
-				<div class="h-img-list">
-					<a href=""> <img
-						src="<%=request.getContextPath()%>/img/img-slide2-4.png"
-						alt="no img">
-						<h4>class-title</h4>
-						<h5>category | location</h5>
-					</a>
-					<div class="h-wish-container">
-						<input type="checkbox" checked="checked" id="i-favorite6"
-							name="favorite-checkbox" value="favorite-button"> <label
-							for="i-favorite6" class="i-container"> <svg
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-heart">
-                                    <path
-									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                    </path>
-                            </svg>
-						</label>
-					</div>
-
-
-				</div>
-				<div class="h-img-list">
-					<a href=""> <img
-						src="<%=request.getContextPath()%>/img/img-slide2-4.png"
-						alt="no img">
-						<h4>class-title</h4>
-						<h5>category | location</h5>
-					</a>
-					<div class="h-wish-container">
-						<input type="checkbox" checked="checked" id="i-favorite6"
-							name="favorite-checkbox" value="favorite-button"> <label
-							for="i-favorite6" class="i-container"> <svg
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-								stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-heart">
-                                    <path
-									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                    </path>
-                            </svg>
-						</label>
-					</div>
-			</div>
-		</div>
-</div>
-</section>
+	<!-- <div id="hMainBest"></div> -->
+		
 <script>
 		$("#h-activity").click(e=>{
 			location.assign('<%=request.getContextPath()%>/categoryActivity.do');

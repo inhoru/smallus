@@ -156,14 +156,10 @@ if (cookies != null) {
                   href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
             </tr>
             <tr>
-               <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원
-                     탈퇴</a></td>
-               <%-- <td><a href="<%=request.getContextPath()%>/host/withdrawalPasswordCheck.do">회원 탈퇴</a></td> --%>
-               <td><a href="">클래스 등록하기</a></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산
-                     정보 관리</a></td>
-               <td><a href="">1:1 문의</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원 탈퇴</a></td>
+               <td><a href="<%=request.getContextPath()%>/">클래스 등록하기</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산 정보 관리</a></td>
+               <!-- <td><a href="">1:1 문의</a></td> -->
             </tr>
             <tr>
                <td></td>

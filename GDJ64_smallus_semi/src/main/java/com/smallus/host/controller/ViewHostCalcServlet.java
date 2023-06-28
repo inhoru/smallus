@@ -64,14 +64,14 @@ public class ViewHostCalcServlet extends HttpServlet {
 		if (pageNo == 1) {
 			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + (pageNo - 1)
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1)
 					+ "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
 		}
 		while (!(pageNo > pageEnd || pageNo > totalPage)) {
 			if (pageNo == cPage) {
 				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
 			} else {
-				pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo
+				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo
 						+ "&numPerpage=" + numPerpage + "'> " + pageNo + " </a>";
 			}
 			pageNo++;
@@ -79,7 +79,7 @@ public class ViewHostCalcServlet extends HttpServlet {
 		if (pageNo > totalPage) {
 			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
 		} else {
-			pageBar += "<a href='" + request.getRequestURI() + "?hostId=" + hostId + "&cPage=" + pageNo + "&numPerpage="
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage="
 					+ numPerpage + "' class='h-pageBar-txt'> 다음 </a>";
 		}
 		request.setAttribute("pageBar", pageBar);

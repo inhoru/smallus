@@ -34,7 +34,7 @@ public class ClassesDao {
 	// builder 패턴을 이용해서 필요한 Class 객체만 사용
 	public Classes getClass(ResultSet rs) throws SQLException {
 		return Classes.builder().classId(rs.getString("CLASS_ID")).categoryTitle(rs.getString("CATEGORY_TITLE")).classTitle(rs.getString("CLASS_TITLE")).classUpLoadDate(rs.getDate("CLASS_UPLOAD_DATE"))
-				.classPassDate(rs.getDate("CLASS_PASS_DATE")).classPassId(rs.getString("CLASS_PASS_ID")).classThumbnail(rs.getString("CLASS_THUMBNAIL")).build();
+				.classPassDate(rs.getDate("CLASS_PASS_DATE")).classPassId(rs.getString("CLASS_PASS_ID")).classThumbnail(rs.getString("CLASS_THUMBNAIL")).classStatus(rs.getString("CLASS_STATUS")).build();
 	}
 	
 	
@@ -268,13 +268,13 @@ public class ClassesDao {
 		}return list;
 	}
 	
-	public int deleteClassByClassId(Connection conn, String hostId) {
+	public int updatedClassStatusByClassId(Connection conn, String classId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("deleteClassByClassId"));
-			pstmt.setString(1, hostId);
+			pstmt=conn.prepareStatement(sql.getProperty("updatedClassStatusByClassId"));
+			pstmt.setString(1, classId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -283,6 +283,20 @@ public class ClassesDao {
 			close(pstmt);
 		}return result;
 	}
-	
+	public int deleteClassDetailBydetaiLid(Connection conn, String classDetailId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteClassDetailBydetaiLid"));
+			pstmt.setString(1, classDetailId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 	
 }

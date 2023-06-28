@@ -65,7 +65,6 @@ public class PaymentService {
 		close(conn);
 		return list;
 	}
-	
 	// 페이징 처리를 위한 전체 데이터 수 찾기
 	public int selectRsvCount(String hostId) {
 		Connection conn=getConnection();
@@ -202,5 +201,15 @@ public class PaymentService {
 	}
 	
 
+	
+	// 페이징 처리를 위한 전체 데이터 수 찾기
+	public int selectSortingCount(String hostId,String paymentStatus) {
+		Connection conn=getConnection();
+		int count=dao.selectSortingCount(conn,hostId,paymentStatus);
+		if(count>0) commit(conn);
+		else rollback(conn);
+		return count;
+	}
+	
 	
 }

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import com.smallus.host.model.vo.Host;
 import com.smallus.host.service.HostService;
+import com.smallus.member.model.vo.Member;
+import com.smallus.member.service.MemberService;
 
 /**
  * Servlet implementation class UpdateHostNickname
@@ -32,20 +34,11 @@ public class UpdateHostNicknameServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session= request.getSession();
-		Host hostInfo = (Host) session.getAttribute("hostInfo");
-		String hostId=(hostInfo.getHostId());
 		
-		String nickname=request.getParameter("nickname");
-		System.out.println(nickname);
-		int result=new HostService().updateHostNickname(nickname,hostId);
-		if(result>0) {
-			System.out.println("nick change Ok");
-		}
-		System.out.println("nickname "+result);
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().print(result);
+		String nickName=request.getParameter("nickName");
+		Host m=new HostService().selectByhostNickname(nickName);
+		response.setContentType("text/csv;charset=utf-8");
+		response.getWriter().print(m==null?true:false);
 	}
 
 	/**

@@ -202,40 +202,6 @@
 				location.replace("<%=request.getContextPath()%>/memberLoginMove.do");
 			}else{
 				location.assign('<%=request.getContextPath()%>/class/payment.do?id='+classDetailId+'&personnel='+personnelCount);
-				<%-- $.ajax({
-					url:"<%=request.getContextPath()%>/class/payment.do",
-					/* header:{'Content-Type':'application/json'}, */
-					//dataType:"html",
-					dataType:"json",
-					data:{
-						"categoryTitle":'<%=info.getCategoryTitle() %>',
-						"classTitle":'<%=info.getClassTitle() %>',
-						"classId":a[0],
-						"classPrice":'<%=info.getClassPrice() %>',
-						"personnel": personnelCount,
-						"classAddress":'<%=info.getClassAddress()%>',
-						"classDetailId":classDetailId,
-						"classBookingTimeStart":classBookingTimeStart,
-						"classBookingTimeEnd":classBookingTimeEnd,
-						"remainingPersonnel":remainingPersonnel
-					/* 	"classDetailId":classDetailId,
-						"classBookingTimeStart":classBookingTimeStart,
-						"classBookingTimeEnd":classBookingTimeEnd,
-						"remainingPersonnel":remainingPersonnel */
-					},
-<<<<<<< HEAD
-					/*succ ess:function(data){
-						console.log(data);
-					}, */
-=======
-					success:function(data){
-						console.log(data, typeof data);
-				        },
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
-					error: function(jqXHR, textStatus, errorThrown) {
-						console.log("에러 발생: " + textStatus, errorThrown);
-					}
-				})// end ajax  --%>
 			}
 		})
 		
