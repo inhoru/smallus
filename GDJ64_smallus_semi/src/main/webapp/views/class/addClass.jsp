@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ include file="/views/host/hostHeader.jsp"%> 헤더 오류로 인해 css 따로 적음--%>
-<%@ include file="/views/common/mainHeader.jsp"%>
+<%@ include file="/views/common/hostHeader.jsp"%>
+<%-- <%@ include file="/views/common/mainHeader.jsp"%> --%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/class/addClass.css" />
 	
@@ -148,5 +148,5 @@ $(function() {
 
 
 
-		<%@ include file="/views/common/footer.jsp"%>
-		<%-- <%@ include file="/views/common/hostFooter.jsp"%> --%>
+		<%-- <%@ include file="/views/common/footer.jsp"%> --%>
+		<%@ include file="/views/common/hostFooter.jsp"%>

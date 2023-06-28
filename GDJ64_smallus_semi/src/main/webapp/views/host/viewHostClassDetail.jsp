@@ -242,7 +242,7 @@ width: 20rem;
 		 let thisBtn = $(e.target);
 		 let detailArr= thisBtn.parent().siblings();
 		 let detailId=detailArr.eq(1).text();
-		 alert("h");
+		 alert("삭제됩니다");
 		 $.ajax({
 		     	url: "<%=request.getContextPath()%>/classDetail/deleteClassdetail.do",
 		            data: { 

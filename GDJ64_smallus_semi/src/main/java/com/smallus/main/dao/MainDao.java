@@ -85,7 +85,7 @@ public class MainDao {
 			while(rs.next()) {
 				ClassIndex c=new ClassIndex();
 				c.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
-				c.getClasses().setClassAddress(rs.getString("CLASS_ADDRESS"));
+				c.getClasses().setClassAddress(rs.getString("ADDRESS"));
 				c.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
 				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
 				c.getClasses().setClassId(rs.getString("CLASS_ID"));
@@ -109,7 +109,7 @@ public class MainDao {
 			while(rs.next()) {
 				ClassIndex c=new ClassIndex();
 				c.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
-				c.getClasses().setClassAddress(rs.getString("CLASS_ADDRESS"));
+				c.getClasses().setClassAddress(rs.getString("ADDRESS"));
 				c.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
 				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
 				c.getClasses().setClassId(rs.getString("CLASS_ID"));
