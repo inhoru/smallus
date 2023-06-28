@@ -274,4 +274,10 @@ public class AdminService {
 		close(conn);
 		return list2;
 	}
+	public Classes selectByClassId(String classId) {
+		Connection conn=getConnection();
+		Classes classinfo=dao.selectByClassId(conn,classId);
+		close(conn);
+		return classinfo;
+	}
 }

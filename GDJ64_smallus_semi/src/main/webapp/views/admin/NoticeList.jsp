@@ -59,7 +59,6 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
                     	<th>종류</th>
                         <th>제목</th>
                         <th>작성일</th>
-                        <th>작성자</th>
                        	<%if(loginHost!=null&&loginHost.getHostId().equals("admin")){ %>
                         <th></th>
                         <%}else{%>
@@ -74,9 +73,8 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 	                    	<td>이벤트</td>
 	                    	<%}else{%>
 	                    	<td>기타</td><%}%>
-	                    	<td><%=n.getNoticeTitle()%></td>
+	                    	<td style="text-align:left; padding-left:10px;"><%=n.getNoticeTitle()%></td>
 	                    	<td><%=n.getNoticeRdate()%></td>
-	                    	<td><%=n.getHostId()%></td>
 	                    	<td>
 	                    	 <%if(loginHost!=null&&loginHost.getHostId().equals("admin")){ %>
 	                    	<button id="deleteNoticebtn" style="cursor:pointer;" onclick="deleteNotice('<%=n.getNoticeId()%>');">삭제</button>
@@ -84,10 +82,10 @@ com.smallus.classes.model.vo.Classes, com.smallus.notice.model.vo.Notice,com.sma
 	                    	</td>
 	                    </tr>
 	                    <tr class="m-noticedetailcontainer<%=n.getNoticeId()%>" style="display:none;">
-	                    	<td colspan="5">
+	                    	<td colspan="4">
 	                    	<div>
 	                    	<%if(n.getNoticeFilepath()!=null){ %>
-	                    	<img src="<%=request.getContextPath()%>/upload/notice/<%=n.getNoticeFilepath()%>"alt="이게왜안떠?" style="height: 300px; width: 200px;">
+	                    	<img src="<%=request.getContextPath()%>/upload/notice/<%=n.getNoticeFilepath()%>"alt="" style="height: 300px; width: 200px;">
 	                    	<%} %>
 	                    	<pre style="width: 1350px; "><%=n.getNoticeContent()%></pre>
 	                    	</div>

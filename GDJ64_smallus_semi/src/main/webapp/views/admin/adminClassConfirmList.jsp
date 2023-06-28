@@ -43,7 +43,7 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 					</tr>
 				<%if(ClassesConfirmList!=null&&!ClassesConfirmList.isEmpty()) {
 					for(Classes c:ClassesConfirmList){%>
-					<tr>
+					<tr style="cursor:pointer;" onclick="classConfirmDetail('<%=c.getClassId()%>');">
 						<td><%=c.getCategoryTitle()%></td>
 						<td><%=c.getClassTitle()%></td>
 						<td><%=c.getHostId()%></td>
@@ -69,6 +69,9 @@ List<Classes> ClassesConfirmList=(List)request.getAttribute("ClassesConfirmList"
 </div>
 </body>
 <script>
+	const classConfirmDetail=(classId)=>{
+		location.assign("<%=request.getContextPath()%>/admin/ClassesConfirmDetailServlet.do?classId="+classId);
+	}
 	const classreject=(classId)=>{
 		/* let classId=$("#m-classId").val(); */
 		open("<%=request.getContextPath()%>/views/admin/classReject.jsp?classId="+classId

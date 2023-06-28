@@ -45,7 +45,8 @@ List<Classes> wish = (List) request.getAttribute("wishList");
 				<%
 				} else {
 				%>
-				<div class="i-wishListTotalManagement">
+				<div class="i-wishListTotalManagement" style="
+    margin: 5%;">
 					<%
 					int wcount = 0;
 					for (Classes w : wish) {
@@ -56,13 +57,7 @@ List<Classes> wish = (List) request.getAttribute("wishList");
 							<a href=""> <img
 								src="<%=request.getContextPath()%>/upload/class/<%=w.getClassThumbnail()%>"
 								alt="no img">
-								<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
-								<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">
-								<h5>
-									category |
-									<%=w.getCategory().getCategoryTitle()%></h5>
-							</a>
-							<div class="i-wish-container i-wishheart">
+								<div class="i-wish-container i-wishheart">
 								<input type="checkbox" checked="checked"
 									id="i-favorite<%=wcount%>" name="favorite-checkbox"
 									value="favorite-button" class="i-wishCheck"> <label
@@ -77,6 +72,13 @@ List<Classes> wish = (List) request.getAttribute("wishList");
                                                 </svg>
 								</label>
 							</div>
+								<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
+								<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">
+								<h5>
+									<%=w.getCategoryTitle() %> |
+									<%=w.getClassAddress()%></h5>
+							</a>
+							
 						</div>
 					</section>
 					

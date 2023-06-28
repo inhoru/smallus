@@ -23,41 +23,33 @@
 
 
 		}); 
-
-
 </script>
 
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
 	<div class="h-main-slide-container" id="hmain">
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img0.jpg"
-				style="width: 100%" id="h-craft">
+			<img src="<%=request.getContextPath()%>/img/main-img0.jpg" style="width: 100%" id="h-craft" onclick="location.assign('<%=request.getContextPath()%>/categoryBeauty.do?categoryId=EXE')">
 			<div class="slide-text">Craft</div>
 		</div>
 
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img2.jpg"
-				style="width: 100%" id="h-beauty">
+			<img src="<%=request.getContextPath()%>/img/main-img2.jpg" style="width: 100%" id="h-beauty" onclick="location.assign('<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA')">
 			<div class="slide-text">Beauty</div>
 		</div>
 
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img3.jpg"
-				style="width: 100%" id="h-activity">
+			<img src="<%=request.getContextPath()%>/img/main-img3.jpg" style="width: 100%" id="h-activity" onclick="location.assign('<%=request.getContextPath()%>/categoryCooking.do?categoryId=CRA')">
 			<div class="slide-text">Activity</div>
 		</div>
 		<div class="slides fade">
-			<img src="<%=request.getContextPath()%>/img/main-img4.jpg"
-				style="width: 100%" id="h-cooking">
+			<img src="<%=request.getContextPath()%>/img/main-img4.jpg" style="width: 100%" id="h-cooking" onclick="location.assign('<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO')">
 			<div class="slide-text">Cooking</div>
 		</div>
 
 		<!-- Next and previous buttons -->
-		<a class="prev" onclick="plusSlides(-1)"><img
-			src="<%=request.getContextPath()%>/img/prev.svg"></a> <a
-			class="next" onclick="plusSlides(1)"><img
-			src="<%=request.getContextPath()%>/img/next.svg"></a>
+		<a class="prev" onclick="plusSlides(-1)"><img src="<%=request.getContextPath()%>/img/prev.svg"></a>
+		<a class="next" onclick="plusSlides(1)"><img src="<%=request.getContextPath()%>/img/next.svg"></a>
 	</div>
 	<br>
 	<!-- The dots/circles -->
@@ -73,7 +65,7 @@
 		<div class="text">
 			<span>나의 첫 베이킹</span> 인기 베이킹 클래스
 			<!--baking 카테고리에서 베스트 인 메뉴 상위 노출/ 아래에 베이킹 카테고리 출력-->
-			<button name="h-best-baking-class" onclick="location.assign('<%=request.getContextPath()%>/categoryCooking.do')">바로가기</button>
+			<button name="h-best-baking-class" onclick="hViewCookingCategory()">바로가기</button>
 		</div> 
 		
 		<ul class="h-gallery">

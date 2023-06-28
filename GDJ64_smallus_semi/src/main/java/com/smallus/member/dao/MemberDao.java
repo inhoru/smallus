@@ -277,18 +277,8 @@ public class MemberDao {
 			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Wishlist w = new Wishlist();
-				w.setMemberId(rs.getString("MEMBER_ID"));
-				Category g=new Category();
-				g.setCategoryTitle(rs.getString("CATEGORY_TITLE"));
-				Classes c=new Classes();
-				c.setClassTitle(rs.getString("CLASS_TITLE"));
-				c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
-				g.setCategoryTitle(rs.getString("CATEGORY_TITLE"));
-				c.setClassId(rs.getString("CLASS_ID"));
-				c.setWishlist(w);
-				c.setCategory(g);
-				list.add(c);
+				list.add(getClass(rs));
+				
 			}
 			
 		}catch(SQLException e) {
@@ -413,4 +403,9 @@ public class MemberDao {
 		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
 	}
 	
+	public  Classes getClass(ResultSet rs) throws SQLException {
+		return Classes.builder().classId(rs.getString("CLASS_ID")).categoryTitle(rs.getString("CATEGORY_TITLE")).classTitle(rs.getString("CLASS_TITLE"))
+				.classThumbnail(rs.getString("CLASS_THUMBNAIL")).classAddress(rs.getString("ADDRESS")).build();
+		
+	}
 }
