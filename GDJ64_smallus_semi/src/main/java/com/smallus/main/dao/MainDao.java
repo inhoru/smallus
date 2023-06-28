@@ -73,29 +73,53 @@ public class MainDao {
 //		}
 //		return list;
 //	}
-//	public List<ClassIndex> NewClassList(Connection conn){
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		List<ClassIndex> list=new ArrayList<ClassIndex>();
-//		try {
-//			pstmt=conn.prepareStatement(sql.getProperty("newClassList"));
-//			rs=pstmt.executeQuery();
-//			while(rs.next()) {
-//				ClassIndex c=new ClassIndex();
-//				c.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
-//				c.getClasses().setClassAddress(rs.getString("CLASS_ADDRESS"));
-//				c.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
-//				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
-//				c.getClasses().setClassId(rs.getString("CLASS_ID"));
-//				list.add(c);
-//			}
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}return list;
-//	}
+	public List<ClassIndex> NewClassList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ClassIndex> list=new ArrayList<ClassIndex>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("newClassList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ClassIndex c=new ClassIndex();
+				c.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				c.getClasses().setClassAddress(rs.getString("ADDRESS"));
+				c.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				c.getClasses().setClassId(rs.getString("CLASS_ID"));
+				list.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+//	CLASS_TITLE, CLASS_ADDRESS, CLASS_THUMBNAIL, CATEGORY_TITLE, CLASS_ID
+	public List<ClassIndex> wishClassList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ClassIndex> list=new ArrayList<ClassIndex>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("wishClassList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				ClassIndex c=new ClassIndex();
+				c.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				c.getClasses().setClassAddress(rs.getString("ADDRESS"));
+				c.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+				c.getClasses().setClassId(rs.getString("CLASS_ID"));
+				list.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	
 	public List<Classes> searchCategoriesCheck(Connection conn,String search){
 		PreparedStatement pstmt=null;

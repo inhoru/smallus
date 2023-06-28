@@ -28,6 +28,7 @@ public class MainService {
 //		return list;
 //	}
 //	
+
 //	public List<ClassIndex> NewClassList(){
 //		Connection conn= getConnection();
 //		List<ClassIndex> list=dao.NewClassList(conn);
@@ -67,4 +68,19 @@ public class MainService {
 	   
 	   
 	
+
+	public List<ClassIndex> NewClassList(){
+		Connection conn= getConnection();
+		List<ClassIndex> list=dao.NewClassList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public List<ClassIndex> wishClassList(){
+		Connection conn= getConnection();
+		List<ClassIndex> list=dao.wishClassList(conn);
+		close(conn);
+		return list;
+	}
+
 }

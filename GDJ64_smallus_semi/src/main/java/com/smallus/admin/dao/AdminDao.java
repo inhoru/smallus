@@ -624,7 +624,7 @@ public class AdminDao {
       ResultSet rs=null;
       List<Inquiry> list=new ArrayList();
       try {
-         //checkInquiryAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID))M) WHERE RNUM BETWEEN ? AND ?
+         //checkInquiryAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID) ORDER BY BOARD_RDATE DESC)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkInquiryAll"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -668,5 +668,79 @@ public class AdminDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	public int selectInquirySortCount(Connection conn, String boardCheck) {
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      int totalData=0;
+	      try {
+	         //selectInquirySortCount=SELECT COUNT(*) FROM BOARD WHERE BOARD_CHECK=?
+	         pstmt=conn.prepareStatement(sql.getProperty("selectInquirySortCount"));
+	         pstmt.setString(1, boardCheck);
+	         rs=pstmt.executeQuery();
+	         if(rs.next()) 
+	            totalData=rs.getInt(1);
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(pstmt);
+	      }return totalData;
+	}
+	public List<Inquiry> checkInquirySort(Connection conn, String boardCheck, int cPage, int numPerpage){
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      List<Inquiry> list=new ArrayList();
+	      try {
+	         //checkInquirySort=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID) WHERE BOARD_CHECK=? ORDER BY BOARD_RDATE DESC)M) WHERE RNUM BETWEEN ? AND ?
+	         pstmt=conn.prepareStatement(sql.getProperty("checkInquirySort"));
+	         pstmt.setString(1, boardCheck);
+	         pstmt.setInt(2, (cPage-1)*numPerpage+1);
+	         pstmt.setInt(3, cPage*numPerpage);
+	         rs=pstmt.executeQuery();
+	         while(rs.next()) {
+	            list.add(getInquiry2(rs));
+	         }
+	      }catch(SQLException e){
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }return list;
+	}
+	public List<Classes> recentConfirmClasses(Connection conn){
+	    PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      List<Classes> list=new ArrayList();
+	      try {
+	         //recentConfirmClasses=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='W' ORDER BY CLASS_UPLOAD_DATE DESC)M) WHERE RNUM BETWEEN 1 AND 10
+	         pstmt=conn.prepareStatement(sql.getProperty("recentConfirmClasses"));
+	         rs=pstmt.executeQuery();
+	         while(rs.next()) {
+	            list.add(getClasses(rs));
+	         }
+	      }catch(SQLException e){
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }return list;
+	}
+	public List<Calc> recentConfirmCalc(Connection conn){
+	      PreparedStatement pstmt=null;
+	      ResultSet rs=null;
+	      List<Calc> list=new ArrayList();
+	      try {
+	         //recentConfirmCalc=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC WHERE CALC_STATUS='W' ORDER BY CALC_REQ_DATE)M) WHERE RNUM BETWEEN 1 AND 10
+	         pstmt=conn.prepareStatement(sql.getProperty("recentConfirmCalc"));
+	         rs=pstmt.executeQuery();
+	         while(rs.next()) {
+	            list.add(getCalc(rs));
+	         }
+	      }catch(SQLException e){
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }return list;
 	}
 }

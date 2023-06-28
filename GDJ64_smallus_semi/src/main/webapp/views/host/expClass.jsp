@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.smallus.payment.model.vo.MainPayment, java.util.List,com.smallus.classes.model.vo.ClassIndex"%>
+<%@ page import="java.util.List,com.smallus.classes.model.vo.ClassIndex"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/main.css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/common/headrFooter.css">
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
 <%
-	List<MainPayment> bestClass=(List)request.getAttribute("bestClass");
+	List<ClassIndex> wishClass=(List)request.getAttribute("wishClass");
 	List<ClassIndex> newClass=(List)request.getAttribute("newClass");
 %>
 	<h2>NEW CLASS</h2>
@@ -15,7 +15,7 @@
 			<div class="h-img-list">
 				<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"> <img src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
 					<h4><%=m.getClasses().getClassTitle() %></h4>
-					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress().substring(0,6)%></h5>
+					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress()%></h5>
 				</a>
 				<div class="h-wish-container">
 					<input type="checkbox" checked="checked" id="i-favorite2"
@@ -38,12 +38,12 @@
 		
 		<h2>BEST CLASS</h2>
 		<section class="h-imgContainer">
-		<%if(bestClass!=null && !bestClass.isEmpty()){ 
-			for(MainPayment m : bestClass){%>
+		<%if(wishClass!=null && !wishClass.isEmpty()){ 
+			for(ClassIndex m : wishClass){%>
 			<div class="h-img-list">
 				<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"> <img src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
 					<h4><%=m.getClasses().getClassTitle() %></h4>
-					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress().substring(0,6)%></h5>
+					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress()%></h5>
 				</a>
 				<div class="h-wish-container">
 					<input type="checkbox" checked="checked" id="i-favorite2"

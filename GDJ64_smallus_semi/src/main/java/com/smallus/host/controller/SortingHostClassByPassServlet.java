@@ -40,7 +40,7 @@ public class SortingHostClassByPassServlet extends HttpServlet {
 		String hostId=host.getHostId();
 		
 		String passStatus=request.getParameter("passStatus");
-
+		System.out.println(passStatus);
 		// 페이징 처리
 		int cPage, numPerpage;
 		try {

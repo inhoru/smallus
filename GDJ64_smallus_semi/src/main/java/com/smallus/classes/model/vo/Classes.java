@@ -35,13 +35,15 @@ public class Classes {
 	private String classThumbnail;
 	private String categoryTitle;
 	
+	private String hostNickname;
+	
 	
 	private Wishlist wishlist;
 	private Category Category;
 	
 	@Override
 	public String toString() {
-		return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail;
+		return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail+","+classStatus;
 	}
 	
 	

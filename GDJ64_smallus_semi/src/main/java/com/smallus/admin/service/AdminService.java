@@ -250,4 +250,28 @@ public class AdminService {
 		close(conn);
 		return result2;
 	}
+	public int selectInquirySortCount(String boardCheck) {
+	    Connection conn=getConnection();
+	    int totalData=dao.selectInquirySortCount(conn,boardCheck);
+	    close(conn);
+	    return totalData;
+	}
+	public List<Inquiry> checkInquirySort(String boardCheck, int cPage, int numPerpage){
+	      Connection conn=getConnection();
+	      List<Inquiry> list=dao.checkInquirySort(conn,boardCheck,cPage,numPerpage);
+	      close(conn);
+	      return list;
+	}
+	public List<Classes> recentConfirmClasses(){
+		Connection conn=getConnection();
+		List<Classes> list=dao.recentConfirmClasses(conn);
+		close(conn);
+		return list;
+	}
+	public List<Calc> recentConfirmCalc(){
+		Connection conn=getConnection();
+		List<Calc> list2=dao.recentConfirmCalc(conn);
+		close(conn);
+		return list2;
+	}
 }

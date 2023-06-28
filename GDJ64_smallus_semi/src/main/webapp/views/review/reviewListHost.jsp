@@ -1,31 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.smallus.review.model.vo.Review" %>
-<%@ include file="/views/common/mainHeader.jsp"%>
+<%@ page import="java.util.List,com.smallus.review.model.vo.Review" %>	
 <%
 	List<Review> reviews=(List)request.getAttribute("reviews");
-%>
+	
+%>	
+<%@ include file="/views/common/hostHeader.jsp"%>
+
 <div id="d-review-page">
 
 	<br><br>
-
+		
 	<div class="d-review-header">
-		<h2>후기</h2>
-		<!-- <select>
+		<h2>클래스에 등록된 후기</h2>
+		<select>
 			<option value="클래스명">클래스명</option>
 			<option value="작성일순">작성일순</option>
 		</select>
 		<select>
 			<option value="class1">부드러운 앙금으로 빚어내는 네리끼리 화과자 </option>
 			<option value="class2">베이킹 어렵지 않다! 고소하고 달콤한 마들렌 만들기</option>
-		</select> -->
+		</select>
 	</div>
 	
 	<div class="d-review-list">
+		<hr>
 		<%if(reviews==null || reviews.isEmpty()){ %>
 			<div class="d-review-one">
 				작성된 리뷰가 없습니다.
-			</div>
+ 			</div>
 		<%} else{
 			for(Review r : reviews){%>
 				<hr>
@@ -35,7 +38,7 @@
 					<div class="d-review-table">
 						<table>
 							<tr>
-								<td  id="tr"><%=r.getMemberId() %></td>
+								<td  id="tr"><%=r.getMemberNickname() %></td>
 								<td id="td"><%=r.getReviewDate() %></td>
 							</tr>
 							<tr>
@@ -51,12 +54,13 @@
 								<td id="tr"><p><%=r.getReviewContent() %></p></td>
 							</tr>
 						</table>
-					<button type="bottun" onclick="alert('삭제되었습니다.');" >삭제</button>
+					<button type="button" onclick="alert('삭제되었습니다.')">삭제</button>
 					</div>
 				</div>
 		<%} 
 		}%>
-			
+		
+	
 	</div>
 </div>
 <style>
@@ -111,4 +115,4 @@
 		
 </style>
 
-<%@ include file="/views/common/footer.jsp"%>
+<%@ include file="/views/common/hostFooter.jsp"%>
