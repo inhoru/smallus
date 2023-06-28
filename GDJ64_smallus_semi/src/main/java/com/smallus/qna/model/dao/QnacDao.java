@@ -18,7 +18,7 @@ public class QnacDao {
 	private Properties sql = new Properties();
 
 	public QnacDao() {
-		String path = QnacDao.class.getResource("sql/qnac/qnacsql.properties").getPath();
+		String path = QnacDao.class.getResource("/sql/qnac.properties").getPath();
 		try {
 			sql.load(new FileReader(path));
 		} catch (IOException e) {
