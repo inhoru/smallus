@@ -51,7 +51,7 @@
 								<td id="tr"><p><%=r.getReviewContent() %></p></td>
 							</tr>
 						</table>
-					<button>삭제</button>
+					<button type="bottun" onclick="alert('삭제되었습니다.');" >삭제</button>
 					</div>
 				</div>
 		<%} 
