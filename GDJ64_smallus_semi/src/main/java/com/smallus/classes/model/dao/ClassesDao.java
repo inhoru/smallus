@@ -299,4 +299,22 @@ public class ClassesDao {
 		}return result;
 	}
 	
+	public int InsertClassDetailByClassDetailPage(Connection conn, ClassDetail classdetail) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("InsertClassDetailByClassDetailPage"));
+			pstmt.setString(1,classdetail.getClassId());
+			pstmt.setDate(2, classdetail.getBookingTimeStart());
+			pstmt.setDate(3, classdetail.getBookingTimeEnd());
+			pstmt.setInt(4, classdetail.getRemainingPersonnel());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 }

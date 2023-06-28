@@ -7,6 +7,7 @@ import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.smallus.classes.model.dao.ClassesDao;
 import com.smallus.classes.model.vo.ClassDetail;
@@ -112,6 +113,19 @@ public class ClassService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public int InsertClassDetailByClassDetailPage(ClassDetail classdetail) {
+		Connection conn=getConnection();
+		int result=dao.InsertClassDetailByClassDetailPage(conn, classdetail);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
 	}
 	
 }	

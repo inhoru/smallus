@@ -125,6 +125,7 @@ width: 20rem;
 					</tr>
 				</table>
 				<div>
+					<button id="h-updateClassInfomation" value="<%=list.getClassId()%>">세부 내용 수정</button>
 					<button id="h-updateClassStaus" value="<%=list.getClassId()%>">판매 중지</button>
 				</div>				
 			</div><!--end .h-class list-->
@@ -230,6 +231,11 @@ width: 20rem;
 		 	});
 			
 		})
+	});
+	
+	// 세부 내용 수정 버튼클릭 
+	$("#h-updateClassInfomation").click(e=>{
+		alert("연결하기");
 	})
 	// 삭제 버튼 클릭 
 	$("#hDeleteClassDetail").click(e=>{

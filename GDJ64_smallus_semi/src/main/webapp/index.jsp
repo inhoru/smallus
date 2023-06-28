@@ -3,7 +3,7 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="com.smallus.payment.model.vo.MainPayment"%>
 <script>
-	  <%-- $.ajax({
+	  $.ajax({
 		url:"<%=request.getContextPath()%>/mainPage.do",
 		dataType: 'html',
 		success: data =>{
@@ -16,7 +16,7 @@
 				console.log(r);
 				console.log(m);
 			}
-		});  --%>
+		});
 </script>
 <div id="mainOpacity" class="h-main">
 	<!-- main 배너 -->
