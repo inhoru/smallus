@@ -83,7 +83,7 @@ h2{
 		<nav class="detail_info">
 			<!-- style="font-size: 16px; font-weight: bolder; margin-left: 20%;" -->
 			<h2>상세 정보</h2>
-			<p><%=info.getClassDetail()%></p>
+			<pre><%=info.getClassDetail()%></pre>
 			<hr>
 			<h2>주소</h2>
 			<p><%=info.getClassAddress()%></p>

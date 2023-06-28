@@ -168,6 +168,24 @@ public class ReviewDao {
 			close(pstmt);
 		}return list;
 	}
+
+	public int delete(Connection conn, String reviewId) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		
+//		String sql="REMOVE REVIEW_ID"
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("deleteReviewByhost"));
+			pstmt.setString(1, reviewId);
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+
 	
 	public int deleteReviewByhost(Connection conn, String reviewId) {
 		PreparedStatement pstmt=null;
@@ -183,6 +201,7 @@ public class ReviewDao {
 		}
 		return result;
 	}
+
 	
 	
 	
