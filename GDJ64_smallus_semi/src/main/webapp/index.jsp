@@ -95,7 +95,7 @@
 				</a>
 			</div>
 			<div class="h-banner-area">
-				<a href="<%=request.getContextPath()%>/admin/AdminMainServlet.do">
+				<a href="<%=request.getContextPath()%>/admin/noticeListServlet.do">
 					<div>
 						<h3>small us X Kakao pay</h3>
 						<h5>Kakao Pay로 10만원 이상 결제 시 5천원 할인</h5>
