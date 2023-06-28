@@ -62,7 +62,6 @@
 	 <section class="h-main h-main-rsvList">
      	<div class="h-main-title">
      		<h3>내 클래스 보기</h3>
-                <!-- <div class="h-viewList"><a href="">+</a></div> -->
                 <select name="h-selectClassStatus" id="h-selectClassStatus" onchange="selectOption()">
                 	<option>승인 상태(전체)</option>
                 	<option value="W" <%=request.getParameter("passStatus")!=null&&request.getParameter("passStatus").equals("W")?"selected":""%>>승인 대기</option>
@@ -77,30 +76,30 @@
 				<div class="h-class-list h-class-list-n">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
 					<a href="<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=c.getClassId()%>" id="h-class-list">
-						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
+						<img src="<%=request.getContextPath()%>/upload/class/<%=c.getClassThumbnail()%>">
 						<input type="hidden" name="classId" class="h-classId" value="<%=c.getClassId()%>">
 					</a>
 					<table>
 						<tr>
-							<%if(c.getClassPassId().equals("W")){ %>
-								<th class="h-tbl-align-left" class="h-class-pass-W">
-										승인 대기
-								</th>
-								<th></th>
-							<%}else if(c.getClassPassId().equals("N1") || c.getClassPassId().equals("N2") || c.getClassPassId().equals("N3")) {
+							<%if(c.getClassPassId().equals("Y")&&c.getClassStatus().equals("Y")){ %>
+								<th class="h-tbl-align-left" class="h-class-pass-Y">클래스 승인 완료<th>
+								<th class="h-classStatus-Y">판매 중지</th>
+							<%}else if(c.getClassPassId().equals("Y")&&c.getClassStatus().equals("N")){ %>
+								<th class="h-tbl-align-left h-classStatus-Y" colspan="2">판매 중지</th>
+							<%}else if(c.getClassPassId().equals("W")&&c.getClassStatus().equals("Y")) {%>
+								<th class="h-tbl-align-left" class="h-class-pass-W" colspan="2">승인 대기</th>
+							<%}else if((c.getClassPassId().equals("N1") || c.getClassPassId().equals("N2") || c.getClassPassId().equals("N3")) &&c.getClassStatus().equals("Y")){
 								if(c.getClassPassId().equals("N1")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부실</th>
-									<%}else if(c.getClassPassId().equals("N2")){%>
+								<%}else if(c.getClassPassId().equals("N2")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>내용 부적절</th>
-									<%}else if(c.getClassPassId().equals("N3")){%>
+								<%}else if(c.getClassPassId().equals("N3")){%>
 									<th class="h-tbl-align-left" class="h-class-pass-N">승인 거절</th><th>중복 등록</th>
-									<%}%>
-							<%} else if(c.getClassPassId().equals("Y")){%>
-								<th class="h-tbl-align-left" class="h-class-pass-Y">
-										승인 완료
-								<th>
-								<%} %> 
-						<th colspan="3"><%=c.getClassId() %></th>
+								<%} 
+							}else{%>
+								<th class="h-tbl-align-left" class="h-class-pass-N">판매 중지</th><th></th>
+							<%} %>
+						<th colspan="2"><%=c.getClassId() %></th>
 						</tr>
 						<tr>
 							<td class="h-tbl-align-left" colspan="4"><%=c.getClassTitle() %></td>
@@ -109,20 +108,11 @@
 							<td class="h-tbl-align-left">신청 일</td>
 							<td><%=c.getClassUpLoadDate() %></td>
 							<td>승인 일</td>
-								<%if(c.getClassPassId().equals("Y")){ %>
-							<td>								
-								<%= c.getClassPassDate()%>
-							</td>
-							<%}else{%>
-							<td>-</td>
-							<%} %>
+							<td><%= c.getClassPassDate()%></td>
 						</tr>
 						<tr>
-							<td colspan="2"></td>
-							<td><button>수정</button></td>
-							<td><button onclick="deleteClass(<%=c.getClassId() %>)">삭제</button></td>
-							<!-- <td><button class="h-deleteClass">삭제</button></td> -->
-							<!--이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
+							<td colspan="3"></td>
+							<td><button onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=c.getClassId()%>')">수정</button></td>
 						</tr>
 					</table>
 				</div>
@@ -132,7 +122,7 @@
 				<div class="h-class-list h-class-pass-list">
 					<!-- 썸네일 이미지 클릭 혹은 더보기버튼 클릭으로 상세 페이지로 이동 -->
 					<a href="" id="h-class-list">
-						<img src="<%=request.getContextPath()%>/img/<%=c.getClassThumbnail()%>">
+						<img src="<%=request.getContextPath()%>/upload/class/<%=c.getClassThumbnail()%>">
 						<input type="hidden" name="classId" class="h-classId" value="<%=c.getClassId()%>">
 					</a>
 					<table>
@@ -165,18 +155,13 @@
 							<td class="h-tbl-align-left">신청 일</td>
 							<td><%=c.getClassUpLoadDate() %></td>
 							<td>승인 일</td>
-								<%if(c.getClassPassId().equals("Y")){ %>
 							<td>								
 								<%= c.getClassPassDate()%>
 							</td>
-							<%}else{%>
-							<td>-</td>
-							<%} %>
 						</tr>
 						<tr>
-							<td colspan="2"></td>
+							<td colspan="3"></td>
 							<td><button>수정</button></td>
-							<td><button class="h-deleteClass">삭제</button></td>
 						</tr>
 					</table>
 				</div>
@@ -189,14 +174,6 @@
 	            	<%=request.getAttribute("pageBar") %>
 	            </div>
         </section>
-		<div class="h-modal" style="display:hidden">
-			<div class="modal-content">
-				<h4>등록하신 클래스 세부 일정도 함께 삭제됩니다</h4>
-				<h4>삭제 하시겠습니까?</h4>
-				<button class="h-close-modal">삭제 취소</button>
-				<button id="h-delClass">삭제하기</button>
-			</div>
-		</div>
 	<script>
 	
 		// select 옵션 변경하면 이동하는 함
@@ -217,28 +194,6 @@
 				$(".h-class-list-n").css('display','none');
 				$(".h-class-pass-list").css('display','flex');
 		}
-		
-
-		
-		
-		// 모달창 닫기
-		$(".h-close-modal").click(e=>{
-			$(".h-modal").css('display','none');
-			document.body.css('overflow','auto'); 
-		})
-		
-		$("#h-delClass").click(e=>{
-			$.get(context+'/host/CheckDeleteClass.do?classId='+classId,function(data){
-				if(data>0){
-					alert('삭제 완료 ;)');
-					$(".h-modal").css('display','none');
-					document.body.css('overflow','auto'); 
-				}else{
-					alert('삭제 실패 ;<');
-				}
-			}); 
-		});
-		
 		
 	</script>       
 <%@ include file="/views/common/hostFooter.jsp"%>

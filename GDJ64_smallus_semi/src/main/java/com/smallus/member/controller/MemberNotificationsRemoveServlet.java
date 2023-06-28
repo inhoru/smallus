@@ -47,11 +47,13 @@ public class MemberNotificationsRemoveServlet extends HttpServlet {
 			int notcount = new HostService().notificationsCount(loginHost.getHostId());
 			session.setAttribute("notcount",notcount);
 			session.setAttribute("Notlist",list);
+		}else {
+			
+			List<Notifications> list =new MemberService().selectAllNotifications(loginMember.getMemberId());
+			int notcount = new MemberService().notificationsCount(loginMember.getMemberId());
+			session.setAttribute("notcount",notcount);
+			session.setAttribute("Notlist",list);
 		}
-		List<Notifications> list =new MemberService().selectAllNotifications(loginMember.getMemberId());
-		int notcount = new MemberService().notificationsCount(loginMember.getMemberId());
-		session.setAttribute("notcount",notcount);
-		session.setAttribute("Notlist",list);
 		
 		
 		

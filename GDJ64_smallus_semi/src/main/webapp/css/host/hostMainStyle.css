@@ -150,7 +150,6 @@ section.h-main table {
 }
 
 section.h-main-rsvList table, table#h-main-calc-tbl{
-	border: 1px solid #444444;
 	border-collapse: collapse;
 	clear: both;
 }
@@ -232,7 +231,7 @@ select#h-selectClassStatus option, select#h-selecCalcStatus option, select#h-sel
 }
 /* host class page - class list */
 div.h-class-list {
-	width:50%;
+	width:60%;
 	border-top:var(--border-light);
 	border-bottom:var(--border-light);
 	display:flex;
@@ -259,12 +258,12 @@ div.h-class-list img{
 }
 
 /* class table style*/
-div.h-class-list table{
+/* div.h-class-list table{
 	width:75%;
 	font-size:0.8rem;
 	margin:1rem auto;
 	border:0;
-}
+} */
 div.h-class-list table .h-tbl-align-left{
 	text-align:left;
 }
@@ -284,21 +283,21 @@ section.h-class-sub h2{
 section.h-class-sub h3{
 	margin: 1rem 0;
 }
-section.h-class-sub .h-class-list{
+section.h-class-sub div.h-class-list{
 	width:100%;
 	align-items:flex-start;
 }
 /* class subpage - table resize */
-section.h-class-sub .h-class-list table {
-	width:80%;
+section.h-class-sub div.h-class-list table.h-classDetailTblInfo {
+	width:100%;
 	font-size:1rem;
 }
-section.h-class-sub .h-class-list table *{
+section.h-class-sub div.h-class-list table.h-classDetailTblInfo *{
 	height:2rem;
 	text-align: left;
 }
 /* class subpage - img resize */
-section.h-class-sub .h-class-list img{
+section.h-class-sub div.h-class-list img{
 	width:12rem;
 	height:12rem;
 	margin-right:3rem;
@@ -322,7 +321,7 @@ div.h-class-detail>div{
 }
 /* .h-class-sub page 내부 button style */
 div.h-class-list button, .h-class-sub button, .h-class-detailTbl button, div.h-class-detail button, 
-.h-profile button , section.h-calc #h-UpdateHostAccount, .h-calc #h-UpdateHostAccount.h-updateAccInfo button{
+.h-profile button , section.h-calc #h-UpdateHostAccount, .h-calc #h-UpdateHostAccount, .h-updateAccInfo button{
 	margin-left:2rem;
 	width:var(--title-marginTop);
 	font-weight: var(--btn-bold);
@@ -583,4 +582,9 @@ section.h-updateAccInfo span {
 	cursor: pointer;
 }
 
+#h-hostAccountBack, #deleteClass{
+	width:6rem;
+	margin-left:1rem;
+	margin-top:1rem;
+}
 

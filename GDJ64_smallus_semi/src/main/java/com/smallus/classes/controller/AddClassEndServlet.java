@@ -45,6 +45,10 @@ public class AddClassEndServlet extends HttpServlet {
 		// String hostId=request.getParameter("hostId");
 		String hostId="c1234"; // 클래스를 등록할 임시 호스트 아이디
 		
+//		HttpSession session= request.getSession();
+//		Host host=(Host)session.getAttribute("loginHost");
+//		String hostId=(host.getHostId());
+		
 		// 파일 업로드
 		String path=getServletContext().getRealPath("/upload/class");
 		int maxSize=1024*1024*30;
@@ -61,7 +65,7 @@ public class AddClassEndServlet extends HttpServlet {
 				.classPersonnel(Integer.parseInt(mr.getParameter("classPersonnel")))
 				.classPrice(Integer.parseInt(mr.getParameter("classPrice")))
 				.classOffer(mr.getParameter("classOffer"))
-				.classAddress(mr.getParameter("classAddress"))
+				.classAddress(mr.getParameter("classAddress")+" "+mr.getParameter("classAddressDetail"))
 				.classSupplies(mr.getParameter("classSupplies"))
 				.classNotice(mr.getParameter("classNotice"))
 				.classDetail(mr.getParameter("classDetail"))
@@ -73,40 +77,39 @@ public class AddClassEndServlet extends HttpServlet {
 		
 		// 여기서부터 클래스 스케쥴 등록
 		// 입력내용을 배열로 받은 뒤, for문을 돌면서 내용을 자른다
-		String[] schedule=request.getParameterValues("datetimes");
+		String[] schedule=mr.getParameterValues("datetimes");
 		List<ClassDetail> scheduleList=new ArrayList();
 		SimpleDateFormat dateFormet=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
 			for(String s:schedule) {
 				ClassDetail cd=ClassDetail.builder()
-						.bookingTimeStart(new java.sql.Date(dateFormet.parse(s.substring(1, 16)).getTime()))
-						.bookingTimeEnd(new java.sql.Date(dateFormet.parse(s.substring(20, 35)).getTime()))
+						.bookingTimeStart(new java.sql.Date(dateFormet.parse(s.substring(0, s.indexOf("~")-1)).getTime()))
+						.bookingTimeEnd(new java.sql.Date(dateFormet.parse(s.substring(s.indexOf("~")+1)).getTime()))
 						.build();
-				// 날짜는 sql문에서 자동 등록예정
 				scheduleList.add(cd);
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		int result2=0;
-		if(!scheduleList.isEmpty()) { // 이거 꼭 해야하나 싶지만 혹시모르니깐
+		if(!scheduleList.isEmpty()) { //생략가능?
 			result2=new ClassService2().addClassSchedule(scheduleList);
 		}
 //		
 //		
-//		if(result>0&&result2>0) {
-//			// 성공
-//		}else {
-			// 실패
-			// request.setAttribute("msg", "클래스 등록에 실패하였습니다.");
-//		}
+		if(result>0&&result2>0) {
+			System.out.println("클래스와 스케쥴 모두 등록 성공!");
+		}else {
+		// request.setAttribute("msg", "클래스 등록에 실패하였습니다.");
+			System.out.println("클래스/스케쥴 등록 오류!'");
+		}
 		// request.setAttribute("msg", "메세지 변수");
 		// request.setAttribute("loc", "주소 변수");
 		
 		// request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		// 성공메세지 띄우는거 공용으로 있는지? 랑 이거 끝나면 호스트 마이페이지(클래스관리)로 들어가면 될듯
 		
-		request.getRequestDispatcher("/").forward(request, response);
+		request.getRequestDispatcher("/views/class/classDetail.jsp").forward(request, response);
 		
 		
 	}

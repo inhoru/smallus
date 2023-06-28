@@ -38,7 +38,7 @@ public class MainToClassDetailServlet extends HttpServlet {
 		// '단일 클래스'의 정보와 스케쥴을 같이 가져옴
 		
 		/* String classId=request.getParameter("classId"); */
-		String classId="CLA1000"; // 스케쥴 등록된 임시 클래스아이디 정보
+		String classId="CLA1064"; // 스케쥴 등록된 임시 클래스아이디 정보
 		
 		Classes classInfo= new ClassService2().selectClassByClassId(classId);
 		List<ClassDetail> classSchedule=new ClassService().selectClassDetailByClassId(classId);

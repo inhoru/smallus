@@ -15,7 +15,6 @@ import com.smallus.host.model.vo.Calc;
 import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Member;
 import com.smallus.notice.model.vo.Notice;
-import com.smallus.notice.model.vo.NoticeImage;
 public class AdminService {
    
       AdminDao dao=new AdminDao();
@@ -106,13 +105,6 @@ public class AdminService {
       List<Notice> list=dao.checkNoticeAll(conn,cPage,numPerpage);
       close(conn);
       return list;
-   }
-   
-   public List<NoticeImage> checkNoticeImageAll(){
-      Connection conn=getConnection();
-      List<NoticeImage> list2=dao.checkNoticeImageAll(conn);
-      close(conn);
-      return list2;
    }
    
    public int selectConfirmClassesCount() {
@@ -246,4 +238,16 @@ public class AdminService {
       close(conn);
       return list;
    }
+	public int inquiryAnswerEnroll(String boardId,String commentConent) {
+		Connection conn=getConnection();
+		int result=dao.inquiryAnswerEnroll(conn,boardId,commentConent);
+		close(conn);
+		return result;
+	}
+	public int inquiryUpdate(String boardId,String boardCheck) {
+		Connection conn=getConnection();
+		int result2=dao.inquiryUpdate(conn,boardId,boardCheck);
+		close(conn);
+		return result2;
+	}
 }

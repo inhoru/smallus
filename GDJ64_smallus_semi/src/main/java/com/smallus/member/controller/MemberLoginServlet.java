@@ -67,8 +67,8 @@ public class MemberLoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 			List<Notifications> list =new MemberService().selectAllNotifications(memberId);
 			int notcount = new MemberService().notificationsCount(memberId);
-			session.setAttribute("notcount",notcount);
-			session.setAttribute("Notlist",list);
+			session.setAttribute("notcount1",notcount);
+			session.setAttribute("Notlist1",list);
 			
 		
 		}else {

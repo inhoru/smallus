@@ -24,16 +24,19 @@
 		<div class="d-detail-main">
 			<div id="d-detail-top">
 				<p><%=info.getCategoryTitle() %></p>
+				
 				<p>♥ 찜 <%=wishNum%> </p>
 				<!-- if분기로 찜 여부 표시 -->
 				<p>★ <%=starPoint %>점</p>
 				<!-- 리뷰 조회해서 평균내기 -->
 			</div>
-				<h3 name="classTitle"><%=info.getClassTitle() %></h3>
+				<h2 name="classTitle"><%=info.getClassTitle() %></h2>
+				<p name="hostNickname"><%=info.getHostNickname() %></p>
 				<h4>1인 <%=info.getClassPrice() %>원</h4>
 				<div class="d-detail-schedule">
 					<div id="d-detail-date">
 						<select id="h-pselectClassDetailOption" onchange="selectClassDetailOption()">
+						
 							<option>시간 선택</option>
 						<%if(schedule!=null&&!schedule.isEmpty()){
 							for(ClassDetail cd : schedule){ 
@@ -202,40 +205,6 @@
 				location.replace("<%=request.getContextPath()%>/memberLoginMove.do");
 			}else{
 				location.assign('<%=request.getContextPath()%>/class/payment.do?id='+classDetailId+'&personnel='+personnelCount);
-				<%-- $.ajax({
-					url:"<%=request.getContextPath()%>/class/payment.do",
-					/* header:{'Content-Type':'application/json'}, */
-					//dataType:"html",
-					dataType:"json",
-					data:{
-						"categoryTitle":'<%=info.getCategoryTitle() %>',
-						"classTitle":'<%=info.getClassTitle() %>',
-						"classId":a[0],
-						"classPrice":'<%=info.getClassPrice() %>',
-						"personnel": personnelCount,
-						"classAddress":'<%=info.getClassAddress()%>',
-						"classDetailId":classDetailId,
-						"classBookingTimeStart":classBookingTimeStart,
-						"classBookingTimeEnd":classBookingTimeEnd,
-						"remainingPersonnel":remainingPersonnel
-					/* 	"classDetailId":classDetailId,
-						"classBookingTimeStart":classBookingTimeStart,
-						"classBookingTimeEnd":classBookingTimeEnd,
-						"remainingPersonnel":remainingPersonnel */
-					},
-<<<<<<< HEAD
-					/*succ ess:function(data){
-						console.log(data);
-					}, */
-=======
-					success:function(data){
-						console.log(data, typeof data);
-				        },
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
-					error: function(jqXHR, textStatus, errorThrown) {
-						console.log("에러 발생: " + textStatus, errorThrown);
-					}
-				})// end ajax  --%>
 			}
 		})
 		

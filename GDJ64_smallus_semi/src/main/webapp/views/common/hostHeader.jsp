@@ -105,8 +105,8 @@ if (cookies != null) {
                      <input class="checkbox" type="checkbox" id="size_<%=count%>"
                         value="small" checked /> <label class="notification"
                         for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
-                        <br /><a href="<%=request.getContextPath()%>/class/viewHostClassList.do"><span class="i-notType"><%=n.getNotiflType()%> <%=n.getTypeTitle()%></span> 
-                        <%= n.getNotiflMessage()%>
+                        <br /><a href="<%=request.getContextPath()%>/class/viewHostClassList.do"><span class="i-notType"><%=n.getNotiflType()%><%= n.getNotiflMessage()%></span> 
+                      <%=n.getTypeTitle()%>
                      </a><input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"></label>
 
                      <%
@@ -156,14 +156,10 @@ if (cookies != null) {
                   href="<%=request.getContextPath()%>/admin/noticeListServlet.do">공지사항</a></td>
             </tr>
             <tr>
-               <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원
-                     탈퇴</a></td>
-               <%-- <td><a href="<%=request.getContextPath()%>/host/withdrawalPasswordCheck.do">회원 탈퇴</a></td> --%>
-               <td><a href="">클래스 등록하기</a></td>
-               <td><a
-                  href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산
-                     정보 관리</a></td>
-               <td><a href="">1:1 문의</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/withdrawal.do">회원 탈퇴</a></td>
+               <td><a href="<%=request.getContextPath()%>/">클래스 등록하기</a></td>
+               <td><a href="<%=request.getContextPath()%>/host/viewHostCalc.do">정산 정보 관리</a></td>
+               <!-- <td><a href="">1:1 문의</a></td> -->
             </tr>
             <tr>
                <td></td>
@@ -205,10 +201,10 @@ if (cookies != null) {
             <tr>
                <td><a
                   href="<%=request.getContextPath()%>/admin/HostListServlet.do">호스트회원관리</a></td>
-               <td><a href="">호스트정산</a></td>
+               <td><a href="<%=request.getContextPath()%>/admin/ClacListServlet.do">호스트정산</a></td>
                <td><a
-                  href="<%=request.getContextPath()%>/admin/ClacListServlet.do">정산승인</a></td>
-               <td><a href="">1:1문의</a></td>
+                  href="<%=request.getContextPath()%>/admin/ClacConfirmListServlet.do">정산승인</a></td>
+               <td><a href="<%=request.getContextPath()%>/admin/InquiryListServlet.do">1:1문의</a></td>
             </tr>
          </table>
       </div>
@@ -241,6 +237,7 @@ if (cookies != null) {
      $(".i-noticon").on("click", () => {
   $(".notification-container").slideToggle(300);
 });
+
    </script>
  
 

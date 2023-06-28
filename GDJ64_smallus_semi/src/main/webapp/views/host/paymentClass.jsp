@@ -78,10 +78,13 @@
 			    <select id="h-selectCoupon" name="h-selectCoupon">
 				    <option selected disabled>쿠폰 선택</option>
 			    	<%if(coupon!=null&&!coupon.isEmpty()){
-			    		for(Coupon cp: coupon){%>
+			    		for(Coupon cp: coupon){
+			    			if(cp.getCouponId().equals("NONE")){%>
+			    			<%}else{ %>
 				    	<option value="<%=cp.getCouponPrice()%>"><%=cp.getCouponName() %>&nbsp;&nbsp;(할인 금액 : <%=cp.getCouponPrice()%>원)</option>
 				    	<option id="h-usedCoupon" value="<%=cp.getCouponId()%>" style="display:none;">
-			    	<%}
+			    			<%}
+			    		}
 			    	}else{ %>
 				    	<option value="0">보유한 쿠폰이 없습니다.</option>
 			    	<%} %>

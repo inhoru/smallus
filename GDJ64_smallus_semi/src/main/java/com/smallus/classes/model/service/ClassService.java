@@ -7,6 +7,7 @@ import static com.smallus.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import com.smallus.classes.model.dao.ClassesDao;
 import com.smallus.classes.model.vo.ClassDetail;
@@ -96,13 +97,35 @@ public class ClassService {
 		return list;
 	}
 	
-	public int deleteClassByClassId(String hostId) {
+	public int updatedClassStatusByClassId(String classId) {
 		Connection conn=getConnection();
-		int result=dao.deleteClassByClassId(conn, hostId);
+		int result=dao.updatedClassStatusByClassId(conn, classId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public int deleteClassDetailBydetaiLid(String classDetailId) {
+		Connection conn=getConnection();
+		int result=dao.deleteClassDetailBydetaiLid(conn, classDetailId);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int InsertClassDetailByClassDetailPage(ClassDetail classdetail) {
+		Connection conn=getConnection();
+		int result=dao.InsertClassDetailByClassDetailPage(conn, classdetail);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
 	}
 	
 }	

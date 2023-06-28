@@ -69,7 +69,7 @@ button#m-InquiryEnrollbtn{
 					<tr class="m-inquirydetailcontainer<%=c.getBoardId() %>" style="display:none;">
 						<td>1:1문의답변</td>
 						<td colspan="3" style="padding-left:10px; text-align:left;">
-							<input type="text" name="commentConent" id="commentConent" style="width:800px;">
+							<input type="text" name="commentConent" id="commentConent<%=c.getBoardId()%>" style="width:800px;">
 						</td>
 						<td><button id="m-InquiryEnrollbtn"
 								onclick="InquiryEnroll('<%=c.getBoardId()%>');">답변등록하기</button></td>
@@ -93,13 +93,19 @@ button#m-InquiryEnrollbtn{
 	</div>
 </body>
 <script>
-$(() => {
-	$(".m-inquirydetailcontainer").hide();
-});
-
-function inquirydetail(boardId){
-$(".m-inquirydetailcontainer"+boardId).slideToggle();
-}
+	$(() => {
+		$(".m-inquirydetailcontainer").hide();
+	});
+	
+	function inquirydetail(boardId){
+	$(".m-inquirydetailcontainer"+boardId).slideToggle();
+	}
+	function InquiryEnroll(boardId){
+		console.log(boardId);
+		let commentConent=$("#commentConent"+boardId).val();
+		console.log(commentConent);
+				location.assign("<%=request.getContextPath()%>/admin/InquiryEnrollServlet.do?boardId="+boardId+"&commentConent="+commentConent);
+	}
 <%-- const selectCalc=()=>{
 	let index = $("#m-selectCalc option").index($("#m-selectCalc option:selected"));
 	let calcStatus=$("#m-selectCalc").val();
@@ -114,10 +120,5 @@ $(".m-inquirydetailcontainer"+boardId).slideToggle();
 		location.assign('<%=request.getContextPath()%>/admin/ClacSortListServlet.do?calcStatus='+calcStatus);
 	}
 }; --%>
-	function InquiryEnroll(boardId){
-		console.log(boardId);
-		let commentConent=$("#commentConent").val();
-				location.assign("<%=request.getContextPath()%>/admin/InquiryEnrollServlet.do?boardId="+boardId+"&commentConent="+commentConent);
-	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>

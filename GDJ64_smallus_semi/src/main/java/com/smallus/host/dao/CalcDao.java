@@ -39,7 +39,6 @@ public class CalcDao {
 				.calcPrice(rs.getInt("CALC_PRICE"))
 				.calcFinalPrice(rs.getInt("CALC_FINAL_PRICE")).build();
 	}
-	
 	public int selectCalcCount(Connection conn, String hostId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -56,7 +55,6 @@ public class CalcDao {
 			close(pstmt);
 		}
 		return result;
-	
 	}
 			
 	
@@ -130,6 +128,26 @@ public class CalcDao {
 			close(rs);
 			close(pstmt);
 		}return calcList;
+	}
+	
+	
+	public int selectCalcBySort(Connection conn, String hostId,String calcStatus) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectCalcBySort"));
+			pstmt.setString(1, hostId);
+			pstmt.setString(2,calcStatus);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

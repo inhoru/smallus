@@ -250,10 +250,7 @@ public class PaymentDao {
 		return list;
 	}
 	
-	//selectAllpaymentByhostId=SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL AND PAYMENT_DATE BETWEEN TO_DATE(?) and TO_DATE(?)
-	
 	public int selectRsvCount(Connection conn,String hostId) {
-		int count=0;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
@@ -308,13 +305,7 @@ public class PaymentDao {
 		}
 		return list;
 	}
-	
-	// SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START,
-	// CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, P.PAYMENT_STATUS 
-	// FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT
-	// JOIN PAYMENT P USING(CLASS_DETAIL_ID)
-	// LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID=? 
-	
+
 	public List<PaymentCalc> sortingPaymentByStatus(Connection conn, String hostId,String passStatus,int cPage, int numPerpage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -383,11 +374,7 @@ public class PaymentDao {
 		return list;
 	}
 	
-	
-//	selectClassDetailByClassId=SELECT CATEGORY_TITLE, CLASS_TITLE, CLASS_ADDRESS, CLASS_ID, CLASS_DETAIL_ID, 
-//			BOOKING_TIME_START, BOOKING_TIME_END,  CLASS_PERSONNEL, REMAINING_PERSONNEL, CLASS_PRICE 
-//			FROM CLASS_DETAIL LEFT JOIN CLASS USING(CLASS_ID) LEFT JOIN CATEGORY USING(CATEGORY_ID)
-//			WHERE CLASS_ID=? AND CLASS_STATUS='Y'
+
 	public List<ClassPayment> selectClassDetailByClassId(Connection conn, String classId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -429,16 +416,6 @@ public class PaymentDao {
 		}
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertPayment"));
-//			pstmt.setString(1, (String)dataMap.get("merchant_uid"));
-//			pstmt.setString(2, (String)dataMap.get("classDetailId"));
-//			pstmt.setString(3, (String)dataMap.get("memberId"));
-//			pstmt.setString(4, (String)dataMap.get("couponId"));
-//			pstmt.setInt(5, Integer.parseInt(String.valueOf(dataMap.get("price"))));
-//			pstmt.setInt(6, Integer.parseInt(String.valueOf(dataMap.get("classPersonnel"))));
-//			pstmt.setInt(7, Integer.parseInt(String.valueOf(dataMap.get("totalPrice"))));
-//			pstmt.setString(8, (String)dataMap.get("pg_provider"));
-//			pstmt.setString(9,(String)dataMap.get("status"));
-			
 			pstmt.setString(1, dataMap.get("merchant_uid"));
 			pstmt.setString(2, dataMap.get("classDetailId"));
 			pstmt.setString(3, dataMap.get("memberId"));
@@ -517,7 +494,6 @@ public class PaymentDao {
 		}
 		return p;
 	}
-	
 
 	public int selectRemainPer(Connection conn, String classDetailId) {
 		PreparedStatement pstmt=null;
@@ -557,7 +533,6 @@ public class PaymentDao {
 		Payment p = new Payment();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("searchBypaymentId"));
-			//SELECT * FROM PAYMENT LEFT JOIN COUPON USING(COUPON_ID) WHERE PAYMENT_ID=?
 			pstmt.setString(1, paymentId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -576,7 +551,6 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("reinsertCoupon"));
-			//INSERT INTO COUPON VALUES(?,?,?,?)
 			pstmt.setString(1, couponId);
 			pstmt.setString(2, memberId);
 			pstmt.setDate(3, (java.sql.Date) createdDate);
@@ -664,12 +638,12 @@ public class PaymentDao {
 		}
 		return pc;
 	}
+	
 	public int insertNot(Connection conn, String classDetailId,Classes n) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
-			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,(SELECT HOST_ID FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) WHERE CLASS_DETAIL_ID=?),null,?,?,SYSDATE,?)
 			String c="이 등록되었습니다.";
 			String b="예약";
 			pstmt.setString(1,n.getHostId());
@@ -689,7 +663,6 @@ public class PaymentDao {
 		Classes rc = null;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("classDetailId"));
-			//SELECT HOST_ID,CLASS_TITLE FROM CLASS JOIN CLASS_DETAIL USING(CLASS_ID) WHERE CLASS_DETAIL_ID=?
 			pstmt.setString(1, classDetailId);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -706,6 +679,24 @@ public class PaymentDao {
 		return rc;
 	}
 	
+	public int selectSortingCount(Connection conn,String hostId,String paymentStatus) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectSortingCount"));
+			pstmt.setString(1, hostId);
+			pstmt.setString(2, paymentStatus);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
 	
 
 }
