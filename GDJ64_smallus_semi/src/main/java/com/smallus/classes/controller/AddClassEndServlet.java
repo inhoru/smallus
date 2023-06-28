@@ -43,10 +43,9 @@ public class AddClassEndServlet extends HttpServlet {
 		// 클래스등록페이지 작성후 자료를 DB에 반영하는 서블릿
 		
 		
-//		HttpSession session = request.getSession(false);
-//		Host loginHost = (Host) session.getAttribute("loginHost");
-		//String hostId=(loginHost.getHostId());
-		String hostId="c1234";
+		HttpSession session = request.getSession(false);
+		Host loginHost = (Host) session.getAttribute("loginHost");
+		String hostId=(loginHost.getHostId());
 		// 파일 업로드
 		String path=getServletContext().getRealPath("/upload/class");
 		int maxSize=1024*1024*30;

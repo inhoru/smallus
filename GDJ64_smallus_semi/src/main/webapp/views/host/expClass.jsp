@@ -15,7 +15,7 @@
 			<div class="h-img-list">
 				<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"> <img src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
 					<h4><%=m.getClasses().getClassTitle() %></h4>
-					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress().substring(0,6)%></h5>
+					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress()%></h5>
 				</a>
 				<div class="h-wish-container">
 					<input type="checkbox" checked="checked" id="i-favorite2"
@@ -43,7 +43,7 @@
 			<div class="h-img-list">
 				<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"> <img src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
 					<h4><%=m.getClasses().getClassTitle() %></h4>
-					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress().substring(0,6)%></h5>
+					<h5><%=m.getCategory().getCategoryTitle()%> | <%=m.getClasses().getClassAddress()%></h5>
 				</a>
 				<div class="h-wish-container">
 					<input type="checkbox" checked="checked" id="i-favorite2"
