@@ -690,6 +690,7 @@ section.i-imgContainer .i-img-list h4 {
 	height: 40px;
 	border-radius: 20px;
 	margin-left: 5%;
+	padding-left: 2%;
 }
 /* 쿠폰입력전체 */
 .i-couponinput {

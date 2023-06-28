@@ -51,8 +51,8 @@ public class MemberNotificationsRemoveServlet extends HttpServlet {
 			
 			List<Notifications> list =new MemberService().selectAllNotifications(loginMember.getMemberId());
 			int notcount = new MemberService().notificationsCount(loginMember.getMemberId());
-			session.setAttribute("notcount",notcount);
-			session.setAttribute("Notlist",list);
+			session.setAttribute("notcount1",notcount);
+			session.setAttribute("Notlist1",list);
 		}
 		
 		

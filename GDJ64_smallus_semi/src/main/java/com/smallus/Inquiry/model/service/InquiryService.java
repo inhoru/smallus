@@ -11,6 +11,7 @@ import java.util.List;
 import com.smallus.Inquiry.dao.InquiryDao;
 import com.smallus.Inquiry.model.vo.Faq;
 import com.smallus.Inquiry.model.vo.Inquiry;
+import com.smallus.member.model.vo.Member;
 
 
 public class InquiryService {
@@ -90,5 +91,22 @@ public class InquiryService {
 		return result;
 	}
 	
+	public Member searchMemberId(String boardId) {
+		Connection conn= getConnection();
+		Member m= dao.searchMemberId(conn,boardId);
+		if(m!=null) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return m;
+	}
+	public int insertNot(String memberId) {
+		Connection conn = getConnection();
+		int result = dao.insertNot(conn,memberId);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 }

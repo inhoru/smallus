@@ -374,7 +374,7 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("notificationsCount"));
-			//SELECT COUNT(MEMBER_ID) FROM NOTIFICATIONS WHERE MEMBER_ID =?
+			
 			pstmt.setString(1,memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);

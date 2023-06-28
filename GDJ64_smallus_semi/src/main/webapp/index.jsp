@@ -7,7 +7,7 @@
 
 
 <script>
-	  <%-- $.ajax({
+	  $.ajax({
 		url:"<%=request.getContextPath()%>/mainPage.do",
 		dataType: 'html',
 		success: data =>{
@@ -20,7 +20,7 @@
 				console.log(r);
 				console.log(m);
 			}
-		});  --%>
+		});
 </script>
 
 <div id="mainOpacity" class="h-main">

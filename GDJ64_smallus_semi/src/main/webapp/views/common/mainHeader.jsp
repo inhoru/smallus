@@ -52,7 +52,7 @@ if (cookies != null) {
 						width="12px" height="12px">
 				</div>
 				<div id="hiddenseach">
-					<form action="http://www.google.co.kr/search" method="get">
+					<form action="<%=request.getContextPath()%>/main/mainSearch.do" method="get">
 						<input type="text" name="q" class="search"
 							placeholder=" 관심,주제,클래스,호스트찾기">
 					</form>
@@ -96,7 +96,7 @@ if (cookies != null) {
 					width="12px" height="12px">
 			</div>
 			<div id="hiddenseach">
-				<form action="http://www.google.co.kr/search" method="get">
+				<form action="<%=request.getContextPath()%>/main/mainSearch.do" method="get">
 					<input type="text" name="q" class="search"
 						placeholder=" 관심,주제,클래스,호스트찾기">
 				</form>
@@ -160,9 +160,9 @@ if (cookies != null) {
 							<input class="checkbox" type="checkbox" id="size_<%=count%>"
 								value="small" checked /> <label class="notification"
 								for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
-								<br /> <span class="i-notType"><%=n.getNotiflType()%></span> <a
+								<br /> <span class="i-notType"><%=n.getNotiflType()%> <img alt="" src="<%=request.getContextPath()%>/img/알림삭제.png" width="15px" height="15px" style="cursor: pointer;"></span> <a
 								href="<%=request.getContextPath()%>/memberInquiry.do"><%=n.getNotiflType()%> <%=n.getNotiflMessage()%>
-							</a><input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"></label>
+							</a><input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"> </label>
 
 							<%
 							count++;
