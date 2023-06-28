@@ -9,7 +9,7 @@ import java.util.List;
 import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.main.dao.MainDao;
-import com.smallus.payment.model.vo.MainPayment;
+import com.smallus.main.model.vo.Wish;
 
 public class MainService {
 	private MainDao dao= new MainDao();
@@ -63,6 +63,12 @@ public class MainService {
 	public List<ClassIndex> wishClassList(){
 		Connection conn= getConnection();
 		List<ClassIndex> list=dao.wishClassList(conn);
+		close(conn);
+		return list;
+	}
+	public List<Wish> wishMember(String memberId){
+		Connection conn= getConnection();
+		List<Wish> list=dao.wishMember(conn,memberId);
 		close(conn);
 		return list;
 	}

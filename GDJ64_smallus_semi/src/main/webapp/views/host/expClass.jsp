@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.smallus.classes.model.vo.ClassIndex"%>
+<%@ page
+	import="java.util.List,com.smallus.classes.model.vo.ClassIndex,com.smallus.member.model.vo.Member, com.smallus.host.model.vo.Host,com.smallus.main.model.vo.Wish"%>
+
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/common/main.css">
 <link rel="stylesheet"
@@ -9,10 +12,23 @@
 <%
 List<ClassIndex> wishClass = (List) request.getAttribute("wishClass");
 List<ClassIndex> newClass = (List) request.getAttribute("newClass");
+Member loginMember = (Member) session.getAttribute("loginMember");
+if(loginMember!=null){
+List<Wish> wish = (List) session.getAttribute("wishMember");
+}
 %>
 <h2>NEW CLASS</h2>
+		<% if(loginMember!=null){
+List<Wish> wish = (List) session.getAttribute("wishMember");%>
+
+		<%for(Wish w : wish){ %>
+			<input type="hidden"
+			value="<%=w.getClassId()%>" class="i-classId2">
+		<%} 
+		}%>
 <section class="h-imgContainer">
 	<%
+		int wcounts = 0;
 	if (newClass != null && !newClass.isEmpty()) {
 		for (ClassIndex m : newClass) {
 	%>
@@ -21,10 +37,14 @@ List<ClassIndex> newClass = (List) request.getAttribute("newClass");
 			href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>">
 			<img
 			src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
-			<div class="h-wish-container i-wishheart">
-				<input type="checkbox" checked="checked" id="i-favorite2"
-					name="favorite-checkbox" value="favorite-button"> <label
-					for="i-favorite2" class="i-container"> <svg
+			<div class="h-wish-container">
+				<%
+				if (loginMember != null) {
+				%>
+				<input type="checkbox" id="i-favorite<%=wcounts%>"
+					name="favorite-checkbox" value="favorite-button"
+					class="i-wishCheck"> <label for="i-favorite<%=wcounts%>"
+					class="i-container"> <svg
 						xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 						viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
 						stroke-linecap="round" stroke-linejoin="round"
@@ -34,8 +54,13 @@ List<ClassIndex> newClass = (List) request.getAttribute("newClass");
 	                            </path>
 	                    </svg>
 				</label>
+				<input type="hidden"
+			value="<%=m.getClasses().getClassId()%>" class="i-classId">
+				<%
+				}
+				%>
 			</div>
-			<h4><%=m.getClasses().getClassTitle()%></h4>
+			<h4><%=m.getClasses().getClassTitle()%></h4> 
 			<h5><%=m.getCategory().getCategoryTitle()%>
 				|
 				<%=m.getClasses().getClassAddress()%></h5>
@@ -43,6 +68,7 @@ List<ClassIndex> newClass = (List) request.getAttribute("newClass");
 
 	</div>
 	<%
+	wcounts++;
 	}
 	}
 	%>
@@ -51,6 +77,7 @@ List<ClassIndex> newClass = (List) request.getAttribute("newClass");
 <h2>BEST CLASS</h2>
 <section class="h-imgContainer">
 	<%
+		int wcount = 0;
 	if (wishClass != null && !wishClass.isEmpty()) {
 		for (ClassIndex m : wishClass) {
 	%>
@@ -59,11 +86,14 @@ List<ClassIndex> newClass = (List) request.getAttribute("newClass");
 			href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>">
 			<img
 			src="<%=request.getContextPath()%>/upload/class/<%=m.getClasses().getClassThumbnail()%>">
-			<div class="h-wish-container i-wishheart"
-				style="display: flex; position: relative; bottom: 40px; margin-right: 5%; justify-content: end;">
-				<input type="checkbox" checked="checked" id="i-favorite2"
+			<div class="h-wish-container">
+				<%
+				if (loginMember != null) {
+				%>
+
+				<input type="checkbox" id="i-favorites<%=wcount%>"
 					name="favorite-checkbox" value="favorite-button"> <label
-					for="i-favorite2" class="i-container"> <svg
+					for="i-favorites<%=wcount%>" class="i-container"> <svg
 						xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 						viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
 						stroke-linecap="round" stroke-linejoin="round"
@@ -73,6 +103,10 @@ List<ClassIndex> newClass = (List) request.getAttribute("newClass");
 	                            </path>
 	                    </svg>
 				</label>
+				<%
+				
+				}
+				%>
 			</div>
 			<h4><%=m.getClasses().getClassTitle()%></h4>
 			<h5><%=m.getCategory().getCategoryTitle()%>
@@ -82,7 +116,52 @@ List<ClassIndex> newClass = (List) request.getAttribute("newClass");
 
 	</div>
 	<%
+	wcount++;
 	}
 	}
 	%>
 </section>
+
+<script>
+$(".i-wishCheck").change(e=>{
+	var classTitle = $(e.target).closest('.h-img-list').find('.i-classId').val();
+	var isChecked = $(e.target).is(':checked');
+	if(isChecked){
+		$.ajax({
+			type:"get",
+			url:"<%=request.getContextPath()%>/member/wishCheckAdd.do",
+			 data: { title:classTitle},
+			success:data=>{
+				
+			},
+			error:(r,m)=>{
+				console.log(r);
+				console.log(m);
+				if(e.status==404) alert("요청한 페이지가 없습니다");
+			}
+		})
+	}else{
+		$.ajax({
+			type:"get",
+			url:"<%=request.getContextPath()%>/member/wishCheckRemove.do",
+			data: { title:classTitle},
+			success:data=>{
+				
+			},
+			error:(r,m)=>{
+				console.log(r);
+				console.log(m);
+				if(e.status==404) alert("요청한 페이지가 없습니다");
+			}
+		})
+	}
+})
+
+$(".i-wishCheck").change(e=>{
+	var classTitle = $(e.target).closest('.h-img-list').find('.i-classId').val();
+	var classId=$(".i-classId2").val();
+
+
+
+
+</script>

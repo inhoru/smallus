@@ -1,6 +1,5 @@
 package com.smallus.main.dao;
 
-import static com.smallus.classes.model.dao.ClassesDao.getClasses2;
 import static com.smallus.common.JDBCTemplate.close;
 
 import java.io.FileReader;
@@ -15,6 +14,7 @@ import java.util.Properties;
 
 import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.classes.model.vo.Classes;
+import com.smallus.main.model.vo.Wish;
 import com.smallus.payment.dao.PaymentDao;
 
 public class MainDao {
@@ -97,7 +97,7 @@ public class MainDao {
 			close(pstmt);
 		}return list;
 	}
-//	CLASS_TITLE, CLASS_ADDRESS, CLASS_THUMBNAIL, CATEGORY_TITLE, CLASS_ID
+
 	public List<ClassIndex> wishClassList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -165,6 +165,27 @@ public class MainDao {
 	         close(pstmt);
 	      }return totalData;
 	   }
+	public List<Wish> wishMember(Connection conn,String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Wish> list=new ArrayList<Wish>();
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("wishClassList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Wish c=new Wish();
+				c.setClassId(rs.getString("WISH_ID"));
+				c.setMemberId(rs.getString("MEMBER_ID"));
+				c.setWishId(rs.getString("WISH_ID"));
+				list.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
 	
 	public  Classes getClass(ResultSet rs) throws SQLException {
 		return Classes.builder().classId(rs.getString("CLASS_ID")).categoryTitle(rs.getString("CATEGORY_TITLE")).classTitle(rs.getString("CLASS_TITLE"))

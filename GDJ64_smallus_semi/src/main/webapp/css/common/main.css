@@ -273,6 +273,14 @@ section.h-imgContainer .h-img-list h4{
 	bottom: 40px;
 	
 }
+/* 메인페이지하트 */
+.h-wish-container{
+	display: flex;
+	justify-content: end;
+	position: relative;
+	bottom: 40px;
+	margin-right: 5%;
+}
 /* 하트 체크박스 */
 .h-wish-container input {
     display: none;
