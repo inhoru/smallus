@@ -18,13 +18,13 @@ import com.smallus.payment.service.PaymentService;
  * Servlet implementation class SortingHostRsvServlet
  */
 @WebServlet("/host/sortingHostRsv.do")
-public class SortingHostRsvServlet extends HttpServlet {
+public class ViewSortingPaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortingHostRsvServlet() {
+    public ViewSortingPaymentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
