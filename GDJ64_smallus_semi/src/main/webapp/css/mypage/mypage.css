@@ -311,7 +311,9 @@
 	width: 100%;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	
 }
+
 
 /* 찜부등호이미지 */
 .i-wishListSlick img {
@@ -395,8 +397,9 @@
 /* 리스트 4개 */
 .i-img-list {
 	width: 250px;
-	margin: 2rem 1rem 2rem 0;
-	height: 20rem;
+    margin: 2rem 26px;
+    margin-top: 50px;
+   
 }
 
 /* 찜 이미지 */
@@ -407,40 +410,33 @@ section.i-imgContainer .i-img-list img {
 }
 /* 찜 클래스이름 */
 section.i-imgContainer .i-img-list h4 {
-	margin-top: 0.5rem;
+	
 	font-family: "GmarketSansMedium";
 	white-space: normal;
 }
 /*  찜목록더보기 */
-.i-wishContainer{
-	    margin-left: 56px;	
-}
 
-/* 하트 더보기  */
-.i-wish-container {
-	display: flex;
-	height: 80px;
-	position: relative;
-	bottom: 30%;
-	left: 85%;
-}
+
 
 /* 하트 체크박스 */
 .i-wish-container input {
 	display: none;
 }
 .i-wishheart{
+	position: relative;
+	left: 210px;
+	bottom: 40px;
 	
-	bottom: 35%;
 }
 
 /* 하트 */
 .i-wish-container input:checked+label svg {
 	cursor: pointer;
-	fill: rgb(255, 255, 255);
-	stroke: rgb(255, 255, 255);
+	fill: rgb(255, 0, 0);
+	stroke: rgb(255, 0, 0);
 	animation: heartButton 1s;
 }
+
 
 /* 하트애니메이션 */
 @keyframes heartButton {
