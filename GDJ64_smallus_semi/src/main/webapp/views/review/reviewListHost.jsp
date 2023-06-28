@@ -38,7 +38,7 @@
 					<div class="d-review-table">
 						<table>
 							<tr>
-								<td  id="tr"><%=r.getMemberId() %></td>
+								<td  id="tr"><%=r.getMemberNickname() %></td>
 								<td id="td"><%=r.getReviewDate() %></td>
 							</tr>
 							<tr>

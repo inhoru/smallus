@@ -38,6 +38,7 @@ public class ReviewDao {
 			.imgPath(rs.getString("CLASS_THUMBNAIL"))
 			.memberId(rs.getString("member_id"))
 			.classTitle(rs.getString("class_title"))
+			.memberNickname(rs.getString("member_nickname"))
 			.build();
 }
 //	public List<Review> selectReview(Connection conn,String classId) {

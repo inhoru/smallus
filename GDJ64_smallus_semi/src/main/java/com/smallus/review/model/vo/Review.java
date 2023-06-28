@@ -25,5 +25,7 @@ public class Review {
 	private String imgPath;
 	private String memberId;
 	private String classTitle;
+	
+	private String memberNickname;
 
 }
