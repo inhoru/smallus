@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/mainHeader.jsp"%>
+<%-- <%@ include file="/views/common/mainHeader.jsp"%> --%>
 <style>
 #qnatext {
 	border: 1px solid #444444;
@@ -130,4 +130,4 @@ table#list th, table#list td {
 	</script>
 	</div>
 </section>
-<%@ include file="/views/common/footer.jsp"%>
+<%-- <%@ include file="/views/common/footer.jsp"%> --%>

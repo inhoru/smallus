@@ -34,7 +34,7 @@ margin-left: 50%;
 						cols="100" rows="20" placeholder="답변을 입력해주세요"></textarea>
 					<br>
 					<br>
-					<button id="co" type="sumbit"">답변하기</button>
+					<input id="co" type="submit" value="답변하기" onclick="alert('답변이 등록되었습니다')">
 					<br>
 					<br>
 					<br>
