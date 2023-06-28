@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,com.smallus.review.model.vo.Review" %>
+<%@ page import="java.util.List,com.smallus.review.model.vo.Review, java.text.SimpleDateFormat" %>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%
 	List<Review> reviews=(List)request.getAttribute("reviews");
@@ -36,7 +36,7 @@
 						<table>
 							<tr>
 								<td  id="tr"><%=r.getMemberId() %></td>
-								<td id="td"><%=r.getReviewDate() %></td>
+								<td id="td"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(r.getReviewDate()) %></td>
 							</tr>
 							<tr>
 								<td id="tr"><h3><%=r.getClassTitle() %></h3></td>
