@@ -32,7 +32,7 @@
 			</div>
 				<h2 name="classTitle"><%=info.getClassTitle() %></h2>
 				<p name="hostNickname"><%=info.getHostNickname() %></p>
-				<h4>1인 <%=info.getClassPrice() %>원</h4>
+				<h3>1인 <%=info.getClassPrice() %>원</h3>
 				<div class="d-detail-schedule">
 					<div id="d-detail-date">
 						<select id="h-pselectClassDetailOption" onchange="selectClassDetailOption()">
