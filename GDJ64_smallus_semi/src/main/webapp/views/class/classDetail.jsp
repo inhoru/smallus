@@ -36,6 +36,7 @@
 				<div class="d-detail-schedule">
 					<div id="d-detail-date">
 						<select id="h-pselectClassDetailOption" onchange="selectClassDetailOption()">
+						
 							<option>시간 선택</option>
 						<%if(schedule!=null&&!schedule.isEmpty()){
 							for(ClassDetail cd : schedule){ 

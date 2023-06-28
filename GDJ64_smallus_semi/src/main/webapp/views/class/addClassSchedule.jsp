@@ -9,6 +9,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
+<!-- 현재 addClass에 합쳐져 사용하지 않는 페이지입니다!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
 <div id="mainOpacity">
 	<section id="d-addClass">
 		<br> <br>
