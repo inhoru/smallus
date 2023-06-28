@@ -72,8 +72,7 @@ int cPage = (int) request.getAttribute("cPage");
 						<div class="i-paymenttotal">
 							<h3 class="i-patmenth3"><%=p.getClasses().getClassTitle()%></h3>
 							<span>인원 : <%=p.getPayment().getClassPersonnel()%></span><br />
-							<span class="i-booking"><%=p.getClassDetail().getBookingTimeStart()%>
-								|| <%=p.getClassDetail().getBookingTimeEnd()%></span>
+							<span class="i-booking"><%=p.getClassDetail().getBookingTimeStart1()%> ~ <%=p.getClassDetail().getBookingTimeEnd1()%></span>
 						</div>
 						<div class="i-paymentbutton">
 							<%

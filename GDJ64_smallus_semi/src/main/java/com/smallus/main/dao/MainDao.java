@@ -123,11 +123,12 @@ public class MainDao {
 		ResultSet rs=null;
 		List<Wish> list=new ArrayList<Wish>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("wishClassList"));
+			pstmt=conn.prepareStatement(sql.getProperty("wishMember"));
+			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Wish c=new Wish();
-				c.setClassId(rs.getString("WISH_ID"));
+				c.setClassId(rs.getString("CLASS_ID"));
 				c.setMemberId(rs.getString("MEMBER_ID"));
 				c.setWishId(rs.getString("WISH_ID"));
 				list.add(c);
@@ -185,6 +186,7 @@ public class MainDao {
 				c.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
 				c.getClasses().setClassId(rs.getString("CLASS_ID"));
 				list.add(c);
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -194,3 +196,4 @@ public class MainDao {
 		}return list;
 	}
 }
+

@@ -1,6 +1,7 @@
 package com.smallus.payment.model.vo;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ public class Payment implements Serializable {
 	
 	private Date createdDate;
 	private Date expiredDated;
+	
 	
 	
 	

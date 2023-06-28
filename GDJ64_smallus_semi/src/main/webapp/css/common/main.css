@@ -267,12 +267,12 @@ section.h-imgContainer .h-img-list h4{
 }
 
 
-.i-wishheart{
+/* .i-wishheart{
 	position: relative;
 	left: 210px;
 	bottom: 40px;
 	
-}
+} */
 /* 메인페이지하트 */
 .h-wish-container{
 	display: flex;

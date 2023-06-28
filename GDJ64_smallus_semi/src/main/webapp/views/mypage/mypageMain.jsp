@@ -122,10 +122,10 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 										<span class="i-reservation-day"><%=m.getPayment().getPaymentDate()%></span>
 									</div>
 									<div class="i-bs">
-										<a href=""><div class="i-reservation-title"><%=m.getClasses().getClassTitle()%></div></a>
+										<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"><div class="i-reservation-title"><%=m.getClasses().getClassTitle()%></div></a>
 									</div>
 									<div class="i-bs1">
-										<span class="i-reservation-reservationDay"><%=m.getClassDetail().getBookingTimeStart()%>||<%=m.getClassDetail().getBookingTimeEnd()%></span>
+										<span class="i-reservation-reservationDay"><%=m.getClassDetail().getBookingTimeStart1()%> | <%=m.getClassDetail().getBookingTimeEnd1()%></span>
 										<span class="i-reservation-peopleNum">인원 : <%=m.getPayment().getClassPersonnel()%></span>
 									</div>
 								</div>
@@ -204,7 +204,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 							%>
 							<section class="i-imgContainer i-wishContainer">
 						<div class="i-img-list">
-							<a href=""> <img
+							<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=w.getClassId()%>"> <img
 								src="<%=request.getContextPath()%>/upload/class/<%=w.getClassThumbnail()%>"
 								alt="no img">
 								<div class="i-wish-container i-wishheart">
@@ -221,6 +221,8 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
                                                     </path>
                                                 </svg>
 								</label>
+								
+								
 							</div>
 								<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
 								<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">

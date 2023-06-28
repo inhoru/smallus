@@ -1,6 +1,7 @@
 package com.smallus.classes.model.vo;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,7 @@ public class ClassDetail {
 	private Date bookingTimeEnd;
 	private int remainingPersonnel;
 
+	 private  String bookingTimeStart1; 
+	 private  String bookingTimeEnd1; 
+	
 }
