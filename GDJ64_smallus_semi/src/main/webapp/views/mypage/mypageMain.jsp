@@ -202,34 +202,35 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 							<%
 							}
 							%>
-							<section class="i-imgContainer">
-								<div class="i-img-list">
-									<a href=""> <img
-										src="<%=request.getContextPath()%>/upload/class/<%=w.getClassThumbnail()%>"
-										alt="no img">
-										<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
-										<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">
-										<h5>
-											category |
-											<%=w.getCategory().getCategoryTitle()%></h5>
-									</a>
-									<div class="i-wish-container">
-										<input type="checkbox" checked="checked"
-											id="i-favorite<%=wcount%>" name="favorite-checkbox"
-											value="favorite-button" class="i-wishCheck"> <label
-											for="i-favorite<%=wcount%>" class="i-container"> <svg
-												xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-												viewBox="0 0 24 24" fill="none" stroke="white"
-												stroke-width="2" stroke-linecap="round"
-												stroke-linejoin="round" class="feather feather-heart">
+							<section class="i-imgContainer i-wishContainer">
+						<div class="i-img-list">
+							<a href=""> <img
+								src="<%=request.getContextPath()%>/upload/class/<%=w.getClassThumbnail()%>"
+								alt="no img">
+								<div class="i-wish-container i-wishheart">
+								<input type="checkbox" checked="checked"
+									id="i-favorite<%=wcount%>" name="favorite-checkbox"
+									value="favorite-button" class="i-wishCheck"> <label
+									for="i-favorite<%=wcount%>" class="i-container"> <svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="white"
+										stroke-width="2" stroke-linecap="round"
+										stroke-linejoin="round" class="feather feather-heart">
                                                     <path
-													d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+											d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
                                                     </path>
                                                 </svg>
-										</label>
-									</div>
-								</div>
-							</section>
+								</label>
+							</div>
+								<h4 class="i-classTitle"><%=w.getClassTitle()%></h4>
+								<input type="hidden" value="<%=w.getClassId()%>" class="i-classId">
+								<h5>
+									<%=w.getCategoryTitle() %> |
+									<%=w.getClassAddress()%></h5>
+							</a>
+							
+						</div>
+					</section>
 							<%
 							if (wcount % 4 == 3) {
 								wslide++;
