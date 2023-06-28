@@ -25,7 +25,13 @@ width: 20rem;
 		<div>
 			<button class="h-moveToClassList" onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassList.do')">클래스 목록으로</button>
 		</div>
-		<h3>클래스 기본 정보 관리하기</h3>
+		<div class="hcaTitleC">
+			<h3>클래스 기본 정보 관리하기</h3>
+					<div class="hCbtnContainer">
+						<button id="h-updateClassInfomation" value="<%=list.getClassId()%>">기본 정보 수정</button>
+						<button id="h-updateClassStaus" value="<%=list.getClassId()%>">클래스 삭제</button>
+					</div>				
+		</div>
 			<div class="h-class-list">
 				<a href="">
 					<img src="<%=request.getContextPath()%>/upload/class/<%=list.getClassThumbnail() %>">
@@ -70,10 +76,6 @@ width: 20rem;
 						<td><%=list.getClassPrice() %></td>
 					</tr>
 				</table>
-				<div>
-					<button id="h-updateClassInfomation" value="<%=list.getClassId()%>">세부 내용 수정</button>
-					<button id="h-updateClassStaus" value="<%=list.getClassId()%>">판매 중지</button>
-				</div>				
 			</div><!--end .h-class list-->
 	</section>
 	<!-- section class detile info  -->
@@ -82,7 +84,7 @@ width: 20rem;
 			<div>
 				<h3>클래스 상세 정보 관리하기</h3>
 				<div>
-					<button id="h-insertClassDetail">추가</button>
+					<button id="h-insertClassDetail">클래스 스케줄 추가</button>
 				</div>
 			</div>
 				<%@ include file="/views/host/modal.jsp"%>
@@ -92,6 +94,7 @@ width: 20rem;
 					<th>클래스 세부 번호</th>
 					<th>시간</th>
 					<th>예약 인원</th>
+					<th></th>
 				</tr>
 			<%if(classDetailList!=null&&!classDetailList.isEmpty()&&list.getClassStatus().equals("Y")){
 				int count=1;
@@ -145,12 +148,16 @@ width: 20rem;
 			    	},
 		            success: function (data) {
 		                console.log(data, typeof data);
+		                alert("일정 등록 성공 :)");
+		                document.location.href = document.location.href;
 		            },
 		            error: function (xhr, textStatus, errorThrown) {
+		            	alert("일정 등록 실패 :|");
 		                console.log(xhr);
 		                console.log(textStatus);
 		                console.log(errorThrown);
 		           }
+		           
 		 	});
 			
 		})
@@ -175,6 +182,7 @@ width: 20rem;
 		                console.log(data, typeof data);
 		                if(data>0) alert("삭제 성공 :)");
 		 				else alert("삭제 실패 :<"); 
+		                document.location.href = document.location.href;
 		            },
 		            error: function (xhr, textStatus, errorThrown) {
 		                console.log(xhr);
@@ -188,7 +196,7 @@ width: 20rem;
 	$("#h-updateClassStaus").click(e => {
 
 		$(".h-modalDelete").css('display', 'block');
-		$("document").css('overflow', 'hidden');
+		$("body").css('overflow', 'hidden');
 	});
 	
 	// 판매 중단 변경 버튼 클릭 
@@ -207,9 +215,9 @@ width: 20rem;
 	// 일정 추가 모달 열기
 	$("#h-insertClassDetail").click(e => {
 	  $(".h-modalInsertSchedule").css('display', 'block');
-	  $("body").css('overflow', 'hidden');
 	  //$("body").css('overflow', 'hidden');
-	  //$(".h-modalInsertSchedule").siblings().css('overflow', 'hidden');
+	  //$("body").css('overflow', 'hidden');
+	  $(".h-modalInsertSchedule").siblings().css('overflow', 'hidden');
 	});
 	
 	let delBtn;

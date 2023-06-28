@@ -115,13 +115,15 @@ public class ClassService {
 		return result;
 	}
 	
-	public int InsertClassDetailByClassDetailPage(ClassDetail classdetail) {
+	public int InsertClassDetailByHostPage(List<ClassDetail> list ) {
 		Connection conn=getConnection();
-		int result=dao.InsertClassDetailByClassDetailPage(conn, classdetail);
+		int result=dao.InsertClassDetailByHostPage(conn, list);
 		if(result>0) {
 			commit(conn);
+			System.out.println("insert o");
 		}else {
 			rollback(conn);
+			System.out.println("insert x");
 		}
 		close(conn);
 		return result;

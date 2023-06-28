@@ -69,10 +69,10 @@
 <div class="h-modalInsertSchedule" style="display: none">
 	<div class="modal-content h-insertSchedule">
 		<h4>클래스 세부 일정을 추가합니다.</h4>
-		<span><small>날짜가 적힌 칸을 누르면 달력에서 일정을 선택할 수 있습니다.</small></span>
+		<span><small>날짜가 적힌 칸을 누르면 달력에서 일정을 선택할 수 있습니다.</small></span><hr>
 		<div id="h-AddSchedule-calendar">
 			<input type="text" name="datetimes">
-			<button class="addTime">일정 추가 하기</button>
+			<button class="addTime">일정 추가 하기</button><br>
 			<span><small>계속해서 추가하려면 달력을 눌러주세요</small></span>
 		</div>
 		<div id="h-addScheduleCheck"></div>
