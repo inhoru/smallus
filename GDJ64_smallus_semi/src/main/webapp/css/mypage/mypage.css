@@ -2,6 +2,7 @@
 #i-main {
 	width: 70%;
 	margin: auto;
+	min-height:700px;
 }
 /* 마이페이지전체배경 */
 .i-mypagetotal {

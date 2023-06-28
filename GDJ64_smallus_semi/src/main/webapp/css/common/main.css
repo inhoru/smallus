@@ -62,7 +62,9 @@ footer {
 .h-main * {box-sizing:border-box;}
 
 #mainOpacity{
-    background-color:var(--main-col-lt);}
+    background-color:var(--main-col-lt);
+    min-height:700px;
+}
 /*  */
 
 /* Slideshow container */

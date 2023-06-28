@@ -68,6 +68,7 @@ hr {
 
 body {
 	background-color:var(--main-col-lt);
+	min-height:700px;
 }
 
 #mainOpacity {
