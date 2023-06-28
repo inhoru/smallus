@@ -31,6 +31,7 @@ public class Classes {
 	private String classStatus;
 	private Date classUpLoadDate;
 	private Date classPassDate;
+	
 	private String classPassId;
 	private String classThumbnail;
 	private String categoryTitle;
