@@ -28,6 +28,7 @@ public class ViewCategoryCookingServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/views/main/category_cooking.jsp").forward(request, response);
+		
 	}
 
 	/**
