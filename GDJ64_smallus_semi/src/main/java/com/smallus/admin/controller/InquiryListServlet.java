@@ -40,7 +40,7 @@ public class InquiryListServlet extends HttpServlet {
       try {
          numPerpage=Integer.parseInt(request.getParameter("numPerpage"));
       }catch(NumberFormatException e) {
-         numPerpage=10;
+         numPerpage=5;
       }
       int totalData=new AdminService().selectInquiryCount();
       //System.out.println(totalData);

@@ -44,6 +44,7 @@ public class ClacSortListServlet extends HttpServlet {
          numPerpage=5;
       }
       int totalData=new AdminService().selectCalcSortCount(calcStatus);
+      //System.out.println(totalData);
       int totalPage=(int)Math.ceil((double)totalData/numPerpage);
       int pageBarSize=5;
       int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
@@ -68,7 +69,7 @@ public class ClacSortListServlet extends HttpServlet {
          pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
       }
       List<Calc> list=new AdminService().checkCalcSort(calcStatus,cPage,numPerpage);
-//      list.forEach(e->System.out.println(e)); //list불러온값 확인
+      //list.forEach(e->System.out.println(e)); //list불러온값 확인
       if(list!=null&&!list.isEmpty()) {
       request.setAttribute("pageBar",pageBar);
       request.setAttribute("CalcList", list);
