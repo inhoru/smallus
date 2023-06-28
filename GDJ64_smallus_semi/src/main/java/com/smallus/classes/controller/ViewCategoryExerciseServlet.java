@@ -13,16 +13,16 @@ import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.main.service.MainService;
 
 /**
- * Servlet implementation class ViewCategoryBeautyServlet
+ * Servlet implementation class ViewCategoryActivityServlet
  */
-@WebServlet("/categoryBeauty.do")
-public class ViewCategoryBeautyServlet extends HttpServlet {
+@WebServlet("/categoryActivity.do")
+public class ViewCategoryExerciseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewCategoryBeautyServlet() {
+    public ViewCategoryExerciseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +31,23 @@ public class ViewCategoryBeautyServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String categoryId=request.getParameter("categoryId");
-		List<ClassIndex> newBeauty= new MainService().selectNewClassByCategory(categoryId);
-		if(newBeauty!=null && !newBeauty.isEmpty()) {
-			System.out.println("newBeauty O");
+		List<ClassIndex> newExe= new MainService().selectNewClassByCategory(categoryId);
+		if(newExe!=null && !newExe.isEmpty()) {
+			System.out.println("newExe O");
 		}
-		request.setAttribute("newBeauty", newBeauty);
+		request.setAttribute("newExe", newExe);
 		System.out.println(categoryId);
 		String categoryTitle="";
-		if(categoryId.equals("BEA")) {
-			categoryTitle="뷰티";
+		if(categoryId.equals("EXE")) {
+			categoryTitle="운동";
 		}
-		List<ClassIndex> bestBeauty= new MainService().selectBestClassByCategory(categoryTitle);
-		request.setAttribute("bestBeauty", bestBeauty);
-		if(newBeauty!=null && !newBeauty.isEmpty() && bestBeauty!=null && !bestBeauty.isEmpty()) {
+		List<ClassIndex> bestExe= new MainService().selectBestClassByCategory(categoryTitle);
+		request.setAttribute("bestExe", bestExe);
+		if(newExe!=null && !newExe.isEmpty() && bestExe!=null && !bestExe.isEmpty()) {
 			System.out.println("성");
 		}
-		request.getRequestDispatcher("/views/main/viewCategoryBeauty.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/main/viewCategoryExercise.jsp").forward(request, response);
 	}
 
 	/**

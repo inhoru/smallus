@@ -5,6 +5,7 @@
 	Classes info=(Classes)request.getAttribute("classinfo");
 	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
 %>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ae17cb6906cd1874ef26a94895d53fdb&libraries=services"></script>
 <%!
 	// public int personnelCount=1;
 	// int classPrice=37000;
@@ -12,7 +13,7 @@
 	int wishNum=110;
 	double starPoint=4.5;
 %>
-
+ <meta charset="utf-8">
 <%@ include file="/views/common/mainHeader.jsp"%>
 
 <div class="d-class-detail">
@@ -88,7 +89,7 @@
 				<p id="text"><%=info.getClassDetail() %></p>
 				<hr>
 				<li id="info"><p>주소</p></li>
-				<img  id="address" src="<%=request.getContextPath()%>/img/category_main/map.png">
+				<div id="map" style="width:100%;height:350px;"></div>
 				<p style="font-size: 8px"><%=info.getClassAddress() %></p>
 				<hr>
 				<li id="info"><p>제공 사항</p></li>
@@ -213,7 +214,44 @@
 		
 		
 </script>
+<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
 
+<!-- // 지도를 생성합니다  -->   
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('<%=info.getClassAddress() %>', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        /* var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;"></div>'
+        });
+        infowindow.open(map, marker);
+ */
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});   
+</script>
 <style>
 /* 기본상세정보 CSS : 상세페이지 접근때부터 있어야해서 여기도 있음 */
 	nav.detail_info{

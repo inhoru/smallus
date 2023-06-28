@@ -266,15 +266,21 @@ section.h-imgContainer .h-img-list h4{
     margin-top: 0.5rem;
 }
 
-/* 하트 더보기  */
-.h-wish-container {
-    display: flex;
-    height: 80px;
-    position: relative;
-    bottom:30%;
-    left:85%;
-}
 
+.i-wishheart{
+	position: relative;
+	left: 210px;
+	bottom: 40px;
+	
+}
+/* 메인페이지하트 */
+.h-wish-container{
+	display: flex;
+	justify-content: end;
+	position: relative;
+	bottom: 40px;
+	margin-right: 5%;
+}
 /* 하트 체크박스 */
 .h-wish-container input {
     display: none;
@@ -283,8 +289,8 @@ section.h-imgContainer .h-img-list h4{
 /* 하트 */
 .h-wish-container input:checked+label svg {
     cursor: pointer;
-    fill: rgb(255, 255, 255);
-    stroke:rgb(255, 255, 255);
+    fill: rgb(255, 0, 0);
+    stroke:rgb(255, 0, 0);
     animation: heartButton 1s;
 }
 

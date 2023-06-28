@@ -1,23 +1,26 @@
-package com.smallus.classes.controller;
+package com.smallus.review.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smallus.review.service.ReviewService;
+
 /**
- * Servlet implementation class ViewCategoryActivityServlet
+ * Servlet implementation class DeleteReviewByHostServlet
  */
-@WebServlet("/categoryActivity.do")
-public class ViewCategoryActivityServlet extends HttpServlet {
+@WebServlet("/review/deleteReviewByHost.do")
+public class DeleteReviewByHostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewCategoryActivityServlet() {
+    public DeleteReviewByHostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +30,13 @@ public class ViewCategoryActivityServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/views/main/category_activity.jsp").forward(request, response);
+		String reviewId= request.getParameter("reviewId");
+		System.out.println(reviewId);
+		int result= new ReviewService().deleteReviewByhost(reviewId);
+		if(result>0) System.out.println("성공 ");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/csv;charset=utf-8");
+		response.getWriter().print(result);
 	}
 
 	/**
