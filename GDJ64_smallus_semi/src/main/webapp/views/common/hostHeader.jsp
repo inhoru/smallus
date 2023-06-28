@@ -244,4 +244,3 @@ if (cookies != null) {
    </script>
  
 
->>>>>>> branch 'dev' of https://github.com/you-so-good/smallus.git
