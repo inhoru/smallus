@@ -42,6 +42,14 @@ public class MainPageServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setAttribute("wishClass", wishClass);
 		request.setAttribute("newClass", newClass);
+		HttpSession session=request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		if(loginMember!=null) {
+			String memberId=loginMember.getMemberId();
+			List<Wish> wishMember= new MainService().wishMember(memberId);
+			session.setAttribute("wishMember", wishMember);
+		}
+		
 		
 		request.getRequestDispatcher("/views/host/expClass.jsp").forward(request, response);
 	}

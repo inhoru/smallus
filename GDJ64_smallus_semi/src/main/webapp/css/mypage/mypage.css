@@ -233,6 +233,13 @@
 	font-size: 14px;
 }
 
+/* 예약내역 세부사항 해상도1440px이하 */
+@media ( min-width : 800px) and (max-width: 1600px) {
+		.i-reservationList {
+		width: 43%;
+	}
+}
+
 .i-reservationImg {
 	border-radius: 20px;
 }
@@ -300,7 +307,7 @@
 .i-wishListTotal {
 	height: 350px;
 	display: flex;
-	justify-content: space-evenly;
+	
 	align-items: center;
 	width: 100%;
 	margin: auto;
@@ -310,7 +317,7 @@
 	display: flex;
 	width: 100%;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	
 	
 }
 
@@ -408,26 +415,60 @@ section.i-imgContainer .i-img-list img {
 	height: 15rem;
 	border-radius: 2rem;
 }
+
+/* 화면 너비가 800px 이상 1400px 이하일 때 */
+@media ( min-width : 800px) and (max-width: 1600px) {
+		.i-img-list {
+		width: 180px;
+	}
+}
+@media ( min-width : 800px) and (max-width: 1600px) {
+		section.i-imgContainer .i-img-list img {
+		width: 190px;
+		height: 60%;
+	}
+}
+/* @media ( min-width : 800px) and (max-width: 1600px) {
+		.i-wishheart {
+		position: relative;
+    
+    bottom: 40px;
+	}
+}
+@media ( min-width : 1800px) {
+		.i-wishheart {
+		position: relative;
+	
+	bottom: 40px;
+	}
+} */
+.i-wishheart{
+	display: flex;
+    justify-content: end;
+    position: relative;
+    bottom: 40px;
+    margin-right: 5%;
+}
+
+
+
 /* 찜 클래스이름 */
 section.i-imgContainer .i-img-list h4 {
 	
 	font-family: "GmarketSansMedium";
 	white-space: normal;
 }
-/*  찜목록더보기 */
-
+/*  찜하트  */
+.i-container{
+	cursor: pointer;
+}
 
 
 /* 하트 체크박스 */
 .i-wish-container input {
 	display: none;
 }
-.i-wishheart{
-	position: relative;
-	left: 210px;
-	bottom: 40px;
-	
-}
+
 
 /* 하트 */
 .i-wish-container input:checked+label svg {
@@ -810,7 +851,7 @@ section.i-imgContainer .i-img-list h4 {
 }
 /*부킹 시간 */
 .i-booking{
-	width: 230px;
+	width: 350px;
 }
 /* 결제내역 전체영역 */
 .i-mypageCommon {

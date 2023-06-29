@@ -8,17 +8,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.smallus.classes.model.vo.Category;
 import com.smallus.classes.model.vo.ClassDetail;
 import com.smallus.classes.model.vo.Classes;
 import com.smallus.common.JDBCTemplate;
 import com.smallus.member.model.vo.Member;
 import com.smallus.member.model.vo.Notifications;
-import com.smallus.member.model.vo.Wishlist;
 import com.smallus.payment.model.vo.Payment;
 
 public class MemberDao {
@@ -244,13 +243,15 @@ public class MemberDao {
 				Classes c=new Classes();
 				Payment p=new Payment();
 				ClassDetail d=new ClassDetail();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 				p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
 				c.setClassTitle(rs.getString("CLASS_TITLE"));
 				c.setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
 				p.setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
-				d.setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
-				d.setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				d.setBookingTimeStart1(rs.getTimestamp("BOOKING_TIME_START").toLocalDateTime().format(formatter));
+				d.setBookingTimeEnd1(rs.getTimestamp("BOOKING_TIME_END").toLocalDateTime().format(formatter));
+				c.setClassId(rs.getString("CLASS_ID"));
 				Member m = new Member();
 				m.setClasses(c);
 				m.setPayment(p);

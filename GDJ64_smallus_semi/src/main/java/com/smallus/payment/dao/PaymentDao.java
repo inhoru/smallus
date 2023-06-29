@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,6 +76,9 @@ public class PaymentDao {
 			Classes c=new Classes();
 			Payment p=new Payment();
 			ClassDetail d=new ClassDetail();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			d.setBookingTimeStart1(rs.getTimestamp("BOOKING_TIME_START").toLocalDateTime().format(formatter));
+			d.setBookingTimeEnd1(rs.getTimestamp("BOOKING_TIME_END").toLocalDateTime().format(formatter));
 			p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 			p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
 			c.setClassTitle(rs.getString("CLASS_TITLE"));
