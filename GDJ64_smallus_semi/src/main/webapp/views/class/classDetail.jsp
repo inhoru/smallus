@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat" %>
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
 <%
 	Classes info=(Classes)request.getAttribute("classinfo");
 	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
@@ -52,7 +53,7 @@
 									<%}
 								}
 							}else{%>
-								<option>사용 가능한 쿠폰이 없습니다</option>
+								<option>선택 가능한 일정이 없습니다. </option>
 							<%}%>
 						</select> 
 					</div>
@@ -122,7 +123,7 @@
 		personnelCount=personnelCount+1;
 		let select=$("#d-detail-date>select option:selected").val();
 		console.log(select);
-		let maxPersonnel=select.substr(29);
+		let maxPersonnel=select.substr(30);
 		console.log(maxPersonnel);
 		if(personnelCount>maxPersonnel){
 			alert("신청 가능한 인원이 초과되었습니다.");
@@ -191,6 +192,19 @@
 		function selectClassDetailOption(){
 			let index =$("#h-pselectClassDetailOption option:selected").val();
 			classDetailArr= index.split("_");
+			
+			alert("진짜 지랄마라");
+			// 선택내용에 따라 결제하기 버튼을 숨김
+			let select=$("#d-detail-date>select option:selected").val();
+			let maxPersonnel=select.substr(30);
+			if(maxPersonnel==0||select="시간 선택"){
+				$("#d-detail-personnel").hide() ;
+				$("#d-payment").hide() ;
+			}else{
+				$("#d-detail-personnel").show() ;
+				$("#d-payment").show() ;
+			}
+			
 		}
 		
 		let selectedClass ='<%=info%>';
