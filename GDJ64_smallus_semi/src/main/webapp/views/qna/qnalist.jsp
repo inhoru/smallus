@@ -2,65 +2,65 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
 <style>
-.h-qnaBody {
-	min-height: 700px;
-}
-
 #qnatext {
 	border: 1px solid #444444;
+	margin: 1% 20%;
 	border-radius: 20px;
-	width: 100%;
-	margin: 0.5rem auto;
+	width: 650px;
 	display: none;
 	justify-content: center;
 }
 
 #qnactext {
 	border: 1px solid #444444;
+	margin: 1% 20%;
 	border-radius: 20px;
-	width: 100%;
-	margin: 0.5rem auto;
+	width: 650px;
 	display: none;
 	justify-content: center;
+}
+#a{
+	margin: 1% auto;	
+	width: 650px;
+	justify-content:center;
 }
 
 #l {
 	text-align: left;
 	padding-left: 5px;
 }
-
 div#select_container {
 	margin-right: 21%;
 	text-align: right;
 }
 
 section#main {
-	width: 70%;
-	margin: 2rem auto;
-	text-align: center;
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center
 }
 
-div#qna{
-	display: block;
-	margin: 3% 20%;
-	font-size: 24px
-}
-
-table#list {
+table{
 	width: 100%;
 	border-collapse: collapse;
 	border-top: 1px solid #444444;
 	text-align: center;
-	margin-right: 100%;
+	margin-right:100%;
 }
 
-table#list th, table#list td {
-	border-bottom: 1px solid #444444;
+table>tr {
+	border-bottom: 1px solid #444444; 
 	padding: 1% auto;
 }
 
-#td {
+#tra{
+	border: 1px solid #444444;
+	margin: 1% 20%;
+	border-radius: 20px;
+	width: 650px;
+	justify-content: center;
 	display: none;
+
 }
 </style>
 <<section id="main">
