@@ -11,6 +11,7 @@ import java.util.List;
 import com.smallus.host.dao.HostDao;
 import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Notifications;
+import com.smallus.payment.model.vo.PaymentCal;
 
 public class HostService {
 
@@ -129,7 +130,12 @@ public class HostService {
 		return result;
 	}
 	
-	
+	public List<PaymentCal> viewPaymentCalendar(String hostId){
+		Connection conn=getConnection();
+		List<PaymentCal> list=dao.viewPaymentCalendar(conn,hostId);
+		close(conn);
+		return list;
+	}
 	
 
 }

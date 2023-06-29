@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.smallus.host.model.vo.Host;
 import com.smallus.member.model.vo.Notifications;
+import com.smallus.payment.model.vo.PaymentCal;
 
 public class HostDao {
 private Properties sql=new Properties();//final로 선언하면 처리속도 빨라짐
@@ -285,7 +286,30 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).typeTitle(rs.getString("TYPT_TITLE")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
 	}
 
-   
+   public List<PaymentCal> viewPaymentCalendar(Connection conn, String hostId){
+	   PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<PaymentCal> list=new ArrayList<PaymentCal>();
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("viewPaymentCalendar"));
+			pstmt.setString(1,hostId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PaymentCal p=new PaymentCal();
+				p.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+				p.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+				list.add(p);
+			}
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+   }
    
    
    

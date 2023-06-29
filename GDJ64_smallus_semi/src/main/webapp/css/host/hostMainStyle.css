@@ -143,6 +143,9 @@ div.h-viewList {
 	margin: 2rem auto;
 }
 
+.h-main-rsvList {
+	padding-bottom:4rem;
+}
 section.h-main table {
 	width: 100%;
 	text-align: center;
@@ -177,8 +180,8 @@ section.h-main-rsvList table th, section.h-main-rsvList table td, table#h-main-c
 	background-color:var(--ye-color);
 }
 .fc-button-active {
-	border-color: #ffc107 !important;
-	background-color: #ffc107 !important;
+	border-color: #F5E7D2 !important;
+	background-color: #F5E7D2 !important;
 	color: var(--main-col-dk) !important;
 	font-weight: var(--btn-bold) !important;
 }
