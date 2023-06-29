@@ -108,11 +108,16 @@
 							<td class="h-tbl-align-left">신청 일</td>
 							<td><%=c.getClassUpLoadDate() %></td>
 							<td>승인 일</td>
-							<td><%= c.getClassPassDate()%></td>
+							<td>
+								 <%if(c.getClassPassId().equals("Y")){ %>
+								<%= c.getClassPassDate()%>
+								<%} else{%>승인 대기 중<%} %>	
+							</td>
 						</tr>
 						<tr>
 							<td colspan="3"></td>
-							<td><button onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=c.getClassId()%>')">수정</button></td>
+							<%-- <td><button onclick="location.assign('<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=c.getClassId()%>')">수정</button></td> --%>
+							<td></td>
 						</tr>
 					</table>
 				</div>
@@ -153,10 +158,14 @@
 						</tr>
 						<tr>
 							<td class="h-tbl-align-left">신청 일</td>
-							<td><%=c.getClassUpLoadDate() %></td>
+							<td>
+								<%=c.getClassUpLoadDate() %>
+							</td>
 							<td>승인 일</td>
-							<td>								
+							<td>
+							 <%if(c.getClassPassId().equals("Y")){ %>
 								<%= c.getClassPassDate()%>
+								<%} %>								
 							</td>
 						</tr>
 						<tr>

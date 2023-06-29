@@ -69,7 +69,9 @@ width: 20rem;
 						<td class="h-tbl-align-left">신청 일</td>
 						<td><%=list.getClassUpLoadDate() %></td>
 						<td>승인 일</td>
-						<td><%=list.getClassPassDate() %></td>
+						<td> <%if(list.getClassPassId().equals("Y")){ %>
+								<%= list.getClassPassDate()%>
+								<%} else{%>승인 대기 중<%} %>	</td>
 					</tr>
 					<tr>
 						<td class="h-tbl-align-left">금액</td>
