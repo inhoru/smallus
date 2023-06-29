@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat" %>
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
 <%
 	Classes info=(Classes)request.getAttribute("classinfo");
 	List<ClassDetail> schedule=(List)request.getAttribute("classSchedule");
@@ -43,7 +44,6 @@
 							for(ClassDetail cd : schedule){ 
 								if(cd.getRemainingPersonnel()!=0){%>
 									<option name="classDetailOption" value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart() %>_<%=cd.getBookingTimeEnd() %>_<%=cd.getRemainingPersonnel() %>">
-									<!-- <option > -->
 										 <%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %>
 										 <%-- <%=cd.getBookingTimeStart().substring(0,16)%> ~ <%=cd.getBookingTimeEnd().substring(20) %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
 										 <%-- <%=cd.getBookingTimeStart()%> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
@@ -52,7 +52,7 @@
 									<%}
 								}
 							}else{%>
-								<option>사용 가능한 쿠폰이 없습니다</option>
+								<option>선택 가능한 일정이 없습니다. </option>
 							<%}%>
 						</select> 
 					</div>
@@ -122,7 +122,7 @@
 		personnelCount=personnelCount+1;
 		let select=$("#d-detail-date>select option:selected").val();
 		console.log(select);
-		let maxPersonnel=select.substr(29);
+		let maxPersonnel=select.substr(30);
 		console.log(maxPersonnel);
 		if(personnelCount>maxPersonnel){
 			alert("신청 가능한 인원이 초과되었습니다.");
@@ -191,6 +191,18 @@
 		function selectClassDetailOption(){
 			let index =$("#h-pselectClassDetailOption option:selected").val();
 			classDetailArr= index.split("_");
+			
+			// 선택내용에 따라 결제하기 버튼을 숨김
+			let select=$("#d-detail-date>select option:selected").val();
+			let maxPersonnel=select.substr(30);
+			 if(select=="시간 선택"){
+				$("#d-detail-personnel").hide() ;
+				$("#d-payment").hide() ;
+			}else{
+				$("#d-detail-personnel").show() ;
+				$("#d-payment").show() ;
+			}  
+			
 		}
 		
 		let selectedClass ='<%=info%>';
@@ -215,10 +227,10 @@
 		
 </script>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
     };  
 
 <!-- // 지도를 생성합니다  -->   
