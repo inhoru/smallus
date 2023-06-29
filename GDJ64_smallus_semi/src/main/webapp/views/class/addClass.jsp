@@ -62,27 +62,6 @@
 					<input type="text" name="datetimes" readonly>
 					<input type="button" value="추가" onclick="schedulePlus();">
 					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
-				</div>
-				<div id="plusSchedule">
-					<input type="text" name="datetimes" readonly>
-					<input type="button" value="추가" onclick="schedulePlus();">
-					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
-				</div>
-				<div id="plusSchedule">
-					<input type="text" name="datetimes" readonly>
-					<input type="button" value="추가" onclick="schedulePlus();">
-					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
-				</div>
-				<div id="plusSchedule">
-					<input type="text" name="datetimes" readonly>
-					<input type="button" value="추가" onclick="schedulePlus();">
-					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
-				</div>
-				<div id="plusSchedule">
-					<input type="text" name="datetimes" readonly>
-					<input type="button" value="추가" onclick="schedulePlus();">
-					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
-				</div>
 			</div>
 		</div>
 		<br> <br> <input type="submit" value="등록하기"> <br>

@@ -44,7 +44,6 @@
 							for(ClassDetail cd : schedule){ 
 								if(cd.getRemainingPersonnel()!=0){%>
 									<option name="classDetailOption" value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart() %>_<%=cd.getBookingTimeEnd() %>_<%=cd.getRemainingPersonnel() %>">
-									<!-- <option > -->
 										 <%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart()) %> ~ <%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd()) %> 잔여인원:<%=cd.getRemainingPersonnel() %>
 										 <%-- <%=cd.getBookingTimeStart().substring(0,16)%> ~ <%=cd.getBookingTimeEnd().substring(20) %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
 										 <%-- <%=cd.getBookingTimeStart()%> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
@@ -193,17 +192,16 @@
 			let index =$("#h-pselectClassDetailOption option:selected").val();
 			classDetailArr= index.split("_");
 			
-			alert("진짜 지랄마라");
 			// 선택내용에 따라 결제하기 버튼을 숨김
 			let select=$("#d-detail-date>select option:selected").val();
 			let maxPersonnel=select.substr(30);
-			if(maxPersonnel==0||select="시간 선택"){
+			 if(select=="시간 선택"){
 				$("#d-detail-personnel").hide() ;
 				$("#d-payment").hide() ;
 			}else{
 				$("#d-detail-personnel").show() ;
 				$("#d-payment").show() ;
-			}
+			}  
 			
 		}
 		
@@ -229,10 +227,10 @@
 		
 </script>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
     };  
 
 <!-- // 지도를 생성합니다  -->   
