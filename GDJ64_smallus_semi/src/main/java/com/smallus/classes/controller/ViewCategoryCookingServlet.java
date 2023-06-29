@@ -61,7 +61,7 @@ public class ViewCategoryCookingServlet extends HttpServlet {
 			if (pageNo == cPage) {
 				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
 			} else {
-				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"'> " + pageNo + " </a>";
+				pageBar += "<a href='" + request.getRequestURI() + "?categoryId="+categoryId+"&cPage=" + pageNo + "&numPerpage=" + numPerpage +"'> " + pageNo + " </a>";
 			}
 			pageNo++;
 		}
