@@ -474,7 +474,7 @@ section.i-imgContainer .i-img-list h4 {
 .i-wish-container input:checked+label svg {
 	cursor: pointer;
 	fill: rgb(255, 0, 0);
-	stroke: rgb(255, 0, 0);
+	stroke: rgb(255, 255, 255);
 	animation: heartButton 1s;
 }
 

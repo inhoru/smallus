@@ -41,6 +41,7 @@ public class ViewClassPageServlet extends HttpServlet {
 			List<ClassDetail> classSchedule=new ClassService().selectClassDetailByClassId(classId);
 			request.setAttribute("classinfo",classInfo);
 			request.setAttribute("classSchedule", classSchedule);
+			request.setAttribute("classId", classId);
 		
 		
 		request.getRequestDispatcher("/views/class/classDetail.jsp").forward(request, response);
