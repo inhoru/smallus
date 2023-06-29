@@ -3,7 +3,6 @@
 <%@ page
 	import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat"%>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
-
 <%
 Classes info = (Classes) request.getAttribute("classinfo");
 List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
@@ -27,11 +26,20 @@ String classId = (String) request.getAttribute("classId");
 			<div class="d-detail-main">
 				<div id="d-detail-top">
 					<p><%=info.getCategoryTitle()%></p>
-
-
-
-
-
+					<div class="h-wish-container">
+						<input type="checkbox" id="i-favoritee2" name="favorite-checkbox"
+							value="favorite-button" class="i-wishCheck" checked> <label
+							for="i-favoritee2" class="i-container"> <svg
+								xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+								stroke-linecap="round" stroke-linejoin="round"
+								class="feather feather-heart">
+		                            <path
+									d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+		                            </path>
+		                    </svg>
+						</label>
+					</div>
 				</div>
 
 				<h2 name="classTitle"><%=info.getClassTitle()%></h2>
@@ -58,8 +66,6 @@ String classId = (String) request.getAttribute("classId");
 								~
 								<%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd())%>
 								잔여인원:<%=cd.getRemainingPersonnel()%>
-								<%-- <%=cd.getBookingTimeStart().substring(0,16)%> ~ <%=cd.getBookingTimeEnd().substring(20) %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
-								<%-- <%=cd.getBookingTimeStart()%> ~ <%=cd.getBookingTimeEnd() %> 잔여인원:<%=cd.getRemainingPersonnel() %> --%>
 							</option>
 							<!-- 현재 인원 추출방식은 문자열 자르기 -->
 							<%
@@ -84,20 +90,6 @@ String classId = (String) request.getAttribute("classId");
 						<p id="d-payment-price" name="price">결제금액원</p>
 						<input type="submit" value="결제하기" id="h-moveToPay">
 					</div>
-						<div class="h-wish-container">
-					<input type="checkbox" id="i-favoritee2" name="favorite-checkbox"
-						value="favorite-button" class="i-wishCheck" checked> <label
-						for="i-favoritee2" class="i-container"> <svg
-							xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-							viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-							stroke-linecap="round" stroke-linejoin="round"
-							class="feather feather-heart">
-	                            <path
-								d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-	                            </path>
-	                    </svg>
-					</label>
-				</div>
 				</div>
 			</div>
 		</div>
@@ -363,13 +355,14 @@ hr {
 	margin: 5px 0;
 }
 
-#d-detail-top {
+#d-detail-top *{
 	display: flex;
 }
-
 #d-detail-personnel {
 	display: flex;
 }
+#d-detail-top input{
+display:none;}
 
 #d-detail-personnel button {
 	width: 30px;
@@ -404,8 +397,21 @@ hr {
 .h-wish-container input:checked+label svg {
     cursor: pointer;
     fill: rgb(255, 0, 0);
-    stroke:rgb(255, 255, 255);
+    stroke:rgb(255, 0, 0);
     animation: heartButton 1s;
+}
+
+.h-wish-container input+label svg {
+    cursor: pointer;
+    fill: rgb(255, 255, 255);
+    stroke:rgb(255, 0, 0);
+    animation: heartButton 1s;
+}
+ #d-detail-top .h-wish-container{
+	display: flex;
+	justify-content: end;
+	position: relative;
+	margin-right: 5%;
 }
 </style>
 
