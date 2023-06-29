@@ -61,14 +61,14 @@ public class MemberListSortServlet extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?memberSt="+memberSt+"&numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
 		}
 		//선택할 페이지 번호 출력하기
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
 			if(pageNo==cPage) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getRequestURI()+"?memberSt="+memberSt+"&numPerpage="+numPerpage+"&cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
@@ -76,7 +76,7 @@ public class MemberListSortServlet extends HttpServlet {
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a href='"+request.getRequestURI()+"?memberSt="+memberSt+"&numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
 		//1. DB에서 member테이블에 있는 데이터 가져오기

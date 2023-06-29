@@ -19,10 +19,10 @@
 		<div id="inputs">
 			<p>클래스 이름</p>
 			<input type="text" name="classTitle" placeholder="등록하실 클래스명을 입력해주세요." required>
-			<p>등록할 사진</p>
+			<p >등록할 사진</p>
 				<!--<img src="https://img.freepik.com/free-icon/add-button-with-plus-symbol-in-a-black-circle_318-48599.jpg"
 				width="200" height="200" alt=""> -->
-				<input type="file" name="classThumbnail" accept="image/*" required>
+				<input type="file" name="classThumbnail" accept="image/*" id="thumbnail" required>
 				<div id="imagePreview"></div>
 			<p>※해당 사진이 썸네일로 등록됩니다.</p>
 			<br>
@@ -57,8 +57,7 @@
 				placeholder="클래스에 대한 설명을 입력해주세요."></textarea>
 			<p>스케쥴 등록</p>
 			<div id="AddSchedule-calendar">
-					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
-					<input type="text" name="datetimes" readonly/><button>추가</button><button>삭제</button> <br>
+				<input type="text" name="datetimes" readonly><input type="button" value="추가" onclick="schedulePlus();"> <br>
 			</div>
 		</div>
 		<br> <br> <input type="submit" value="등록하기"> <br>
@@ -69,6 +68,10 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
+const schedulePlus=()=>{
+	alert("노답");
+	const $input=$
+}
 
 $(function() {
 	  $('input[name="datetimes"]').daterangepicker({
@@ -76,7 +79,7 @@ $(function() {
 		  showDropdowns: true,
 	    timePicker: true,
 	    startDate: moment().startOf('hour'),
-	    endDate: moment().startOf('hour').add(32, 'hour'),
+	    endDate: moment().startOf('hour').add(3, 'hour'),
 	    locale: {
 	      format: 'YYYY-MM-DD HH:mm',
 	      "separator": " ~ ",                     // 시작일시와 종료일시 구분자

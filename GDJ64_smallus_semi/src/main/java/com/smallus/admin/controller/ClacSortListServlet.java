@@ -53,20 +53,20 @@ public class ClacSortListServlet extends HttpServlet {
       if(pageNo==1) {
          pageBar+="<span>[이전]</span>";
       }else {
-         pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
+         pageBar+="<a href='"+request.getRequestURI()+"?calcStatus="+calcStatus+"&numPerpage="+numPerpage+"&cPage="+(pageNo-1)+"'>[이전]</a>";
       }
       while(!(pageNo>pageEnd||pageNo>totalPage)) {
          if(pageNo==cPage) {
             pageBar+="<span>"+pageNo+"</span>";
          }else {
-            pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>"+pageNo+"</a>";
+            pageBar+="<a href='"+request.getRequestURI()+"?calcStatus="+calcStatus+"&numPerpage="+numPerpage+"&cPage="+pageNo+"'>"+pageNo+"</a>";
          }
          pageNo++;
       }
       if(pageNo>totalPage) {
          pageBar+="<span>[다음]</span>";
       }else {
-         pageBar+="<a href='"+request.getRequestURI()+"?numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
+         pageBar+="<a href='"+request.getRequestURI()+"?calcStatus="+calcStatus+"&numPerpage="+numPerpage+"&cPage="+pageNo+"'>[다음]</a>";
       }
       List<Calc> list=new AdminService().checkCalcSort(calcStatus,cPage,numPerpage);
       //list.forEach(e->System.out.println(e)); //list불러온값 확인

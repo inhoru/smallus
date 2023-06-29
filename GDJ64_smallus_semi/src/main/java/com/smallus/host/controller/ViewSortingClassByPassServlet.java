@@ -18,13 +18,13 @@ import com.smallus.host.model.vo.Host;
  * Servlet implementation class SortingClassByPassServlet
  */
 @WebServlet("/class/sortingHostClassByPass.do")
-public class SortingHostClassByPassServlet extends HttpServlet {
+public class ViewSortingClassByPassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortingHostClassByPassServlet() {
+    public ViewSortingClassByPassServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -85,14 +85,8 @@ public class SortingHostClassByPassServlet extends HttpServlet {
 
 		List<Classes> classListPass = new ClassService().selectClassListByPassStatus(hostId, passStatus,cPage,numPerpage);
 		
-		if(classListPass!=null&&!classListPass.isEmpty()) {
 			request.setAttribute("classListPass", classListPass);
 			request.getRequestDispatcher("/views/host/viewHostClassList.jsp").forward(request, response);
-		}else {
-			request.setAttribute("msg", "조회할 클래스가 없습니다.");
-			request.setAttribute("loc", "/views/host/viewHostClassList.jsp");
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
-		}
 	}
 
 	/**

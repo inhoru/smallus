@@ -232,7 +232,7 @@ select#h-selectClassStatus option, select#h-selecCalcStatus option, select#h-sel
 }
 /* host class page - class list */
 div.h-class-list {
-	width:60%;
+	width:50%;
 	border-top:var(--border-light);
 	border-bottom:var(--border-light);
 	display:flex;
@@ -259,12 +259,12 @@ div.h-class-list img{
 }
 
 /* class table style*/
-/* div.h-class-list table{
+div.h-class-list table{
 	width:75%;
 	font-size:0.8rem;
 	margin:1rem auto;
 	border:0;
-} */
+} 
 div.h-class-list table .h-tbl-align-left{
 	text-align:left;
 }
@@ -309,10 +309,11 @@ table .h-tbl-className{
 }
 /* .h-class-list 내부 button container  */
 div.h-class-list div{
-	margin: auto 0 2rem 3rem;
+	margin: auto 0 2rem 1rem;
 	flex-direction:row;
-	width:20%;
+	width:8rem;
 	justify-content: space-around;
+	
 }
 div.h-class-detail>div{
 	width: 100%;
@@ -588,4 +589,15 @@ section.h-updateAccInfo span {
 	margin-left:1rem;
 	margin-top:1rem;
 }
-
+.hCbtnContainer {
+	width: 10%;
+	padding-bottom:0;
+}
+.hcaTitleC {
+	display: flex;
+	 justify-content: center;
+}
+.hcaTitleC button, #h-insertClassDetail, #h-addScheduleBtn, .addTime {
+	width: 10rem;
+	margin-bottom:0;
+}

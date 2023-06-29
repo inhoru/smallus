@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,9 +37,6 @@ public class PaymentDao {
 		}
 	}
 	
-    //SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, 
-	//CL.CALC_PASS_DATE FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) 
-	//LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 	public List<Payment> selectPaymentByhostId(Connection conn, String hostId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -70,7 +68,6 @@ public class PaymentDao {
 		List<Member> list=new ArrayList<Member>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("searchByMemberPayment"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) WHERE MEMBER_ID=? ORDER BY PAYMENT_DATE DESC)B) WHERE RNUM BETWEEN ? AND ?
 			pstmt.setString(1, memberId);
 			pstmt.setInt(2,(cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
@@ -79,6 +76,9 @@ public class PaymentDao {
 			Classes c=new Classes();
 			Payment p=new Payment();
 			ClassDetail d=new ClassDetail();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			d.setBookingTimeStart1(rs.getTimestamp("BOOKING_TIME_START").toLocalDateTime().format(formatter));
+			d.setBookingTimeEnd1(rs.getTimestamp("BOOKING_TIME_END").toLocalDateTime().format(formatter));
 			p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 			p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
 			c.setClassTitle(rs.getString("CLASS_TITLE"));
@@ -106,7 +106,6 @@ public class PaymentDao {
 		List<Member> list=new ArrayList<Member>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("memberCompletedpayment"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) WHERE MEMBER_ID=? AND PAYMENT_STATUS=? ORDER BY PAYMENT_DATE DESC)B) WHERE RNUM BETWEEN ? AND ?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2,completed);
 			pstmt.setInt(3,(cPage-1)*numPerpage+1);
@@ -144,7 +143,6 @@ public class PaymentDao {
 		List<Member> list=new ArrayList<Member>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("membercancellationpayment"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) WHERE MEMBER_ID=? AND PAYMENT_STATUS=? ORDER BY PAYMENT_DATE DESC)B) WHERE RNUM BETWEEN ? AND ?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2,completed);
 			pstmt.setInt(3,(cPage-1)*numPerpage+1);
@@ -183,7 +181,6 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentCount"));
-			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -201,7 +198,6 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentdetailCount"));
-			//SELECT COUNT(MEMBER_ID) FROM PAYMENT WHERE MEMBER_ID=? AND PAYMENT_STATUS=?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, completed);
 			rs=pstmt.executeQuery();
@@ -225,7 +221,6 @@ public class PaymentDao {
 			pstmt.setString(1, paymentId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-////SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL,P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END ,HOST_NAME, CLASS_PRICE, PAYMENT_NAME, TOTAL_PRICE,COUPON_PRICE FROM PAYMENT P LEFT JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) LEFT JOIN CLASS USING(CLASS_ID) LEFT JOIN HOST USING(HOST_ID) LEFT JOIN PAYMENT_TYPE USING(PAYMENT_TYPE) LEFT JOIN COUPON_TYPE USING(COUPON_ID) WHERE PAYMENT_ID=?
 				PaymentCompleted pc=new PaymentCompleted();
 				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
@@ -256,8 +251,6 @@ public class PaymentDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectRsvCount"));
-			//SELECT COUNT(*) FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
-			//LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 			pstmt.setString(1, hostId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -270,11 +263,6 @@ public class PaymentDao {
 		return result;
 	}
 	
-	// SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START,
-	// CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, P.PAYMENT_STATUS 
-	// FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) LEFT
-	// JOIN PAYMENT P USING(CLASS_DETAIL_ID)
-	// LEFT JOIN CALC CL USING(HOST_ID)WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL
 	public List<PaymentCalc> selectAllpaymentByhostId(Connection conn, String hostId,int cPage, int numPerpage) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -338,12 +326,6 @@ public class PaymentDao {
 		return list;
 	}
 	
-//	selectNewPaymentByhostId=SELECT * FROM (SELECT ROWNUM AS RNUM, B.* 	FROM 
-//	(SELECT P.PAYMENT_ID, C.CLASS_TITLE, CD.BOOKING_TIME_START, CD.BOOKING_TIME_END, P.CLASS_PERSONNEL, P.PAYMENT_DATE, P.MEMBER_ID, CL.CALC_PASS_DATE 
-//	FROM CLASS_DETAIL CD LEFT JOIN CLASS C USING(CLASS_ID) 
-//	LEFT JOIN PAYMENT P USING(CLASS_DETAIL_ID) 
-//	LEFT JOIN CALC CL USING(HOST_ID) WHERE HOST_ID=? AND P.PAYMENT_ID IS NOT NULL)B) 
-//	WHERE RNUM BETWEEN 1 AND 5 ORDER BY PAYMENT_DATE DESC
 	public List<PaymentCalc> selectNewPaymentByhostId(Connection conn, String hostId) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

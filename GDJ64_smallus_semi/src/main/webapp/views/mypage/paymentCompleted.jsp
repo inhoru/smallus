@@ -45,7 +45,7 @@ String cPage=(String)request.getAttribute("cPage");
 							
 						%>
 						<img
-							src="<%=request.getContextPath()%>/img/<%=p.getClasses().getClassThumbnail()%>"
+							src="<%=request.getContextPath()%>/upload/class/<%=p.getClasses().getClassThumbnail()%>"
 							alt="" width="150px" height="150px">
 						<div class="i-patmentcontent">
 							<h3 ><%=p.getClasses().getClassTitle()%></h3>
@@ -70,7 +70,7 @@ String cPage=(String)request.getAttribute("cPage");
 						<span><%=p.getPaymentType().getPaymentName()%>결제</span><span><%=p.getClasses().getClassPrice() * p.getPayment().getClassPersonnel()%>원</span>
 					</div>
 					<div class="i-paymentInformationDetails">
-						<span>총 결제금액</span><span><%=p.getClasses().getClassPrice() - p.getCoupon().getCouponPrice()%>원</span>
+						<span>총 결제금액</span><span><%=p.getClasses().getClassPrice() * p.getPayment().getClassPersonnel() - p.getCoupon().getCouponPrice()%>원</span>
 					</div>
 				</div>
 

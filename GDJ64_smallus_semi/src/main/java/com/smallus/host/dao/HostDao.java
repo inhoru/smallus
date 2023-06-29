@@ -217,7 +217,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("notificationsCount"));
-			//SELECT COUNT(HOST_ID) FROM NOTIFICATIONS WHERE HOST_ID =?
 			pstmt.setString(1,memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -234,7 +233,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("notifications"));
-			//DELETE FROM NOTIFICATIONS WHERE NOTIFL_ID=?
 			pstmt.setString(1,notId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -249,7 +247,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
-			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,?,null,?,?,SYSDATE,?)
 			String c="승인이되었습니다.";
 			String d="클래스";
 			pstmt.setString(1,notId);
@@ -269,7 +266,6 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("insertNot"));
-			//INSERT INTO NOTIFICATIONS VALUES(NTC_SEQUENCE.NEXTVAL,?,null,?,?,SYSDATE,?)
 			String c="거절되었습니다.";
 			String d="클래스";
 			pstmt.setString(1,notId);

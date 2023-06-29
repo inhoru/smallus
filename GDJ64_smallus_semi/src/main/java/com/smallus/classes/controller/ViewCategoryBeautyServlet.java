@@ -33,22 +33,62 @@ public class ViewCategoryBeautyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String categoryId=request.getParameter("categoryId");
+		
+		int cPage, numPerpage;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage = 1;
+		}
+		try {
+			numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+		} catch (NumberFormatException e) {
+			numPerpage = 8;
+		}
+		int totalData = new MainService().allClassByCategoryCount(categoryId);
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
+		if (pageNo == 1) {
+			pageBar += "<span class='h-pageBar-txt'> 이전 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "' class='h-pageBar-txt'> 이전 </a>";
+		}
+		while (!(pageNo > pageEnd || pageNo > totalPage)) {
+			if (pageNo == cPage) {
+				pageBar += "<span class='h-pageBar-now'> " + pageNo + " </span>";
+			} else {
+				pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"'> " + pageNo + " </a>";
+			}
+			pageNo++;
+		}
+		if (pageNo > totalPage) {
+			pageBar += "<span class='h-pageBar-txt'> 다음 </span>";
+		} else {
+			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"' class='h-pageBar-txt'> 다음 </a>";
+		}
+		
+		request.setAttribute("pageBar", pageBar);
+		
+		
 		List<ClassIndex> newBeauty= new MainService().selectNewClassByCategory(categoryId);
-		if(newBeauty!=null && !newBeauty.isEmpty()) {
-			System.out.println("newBeauty O");
-		}
-		request.setAttribute("newBeauty", newBeauty);
-		System.out.println(categoryId);
-		String categoryTitle="";
-		if(categoryId.equals("BEA")) {
-			categoryTitle="뷰티";
-		}
+		List<ClassIndex> allBeauty= new MainService().selectNewClassByCategory(categoryId);
+		
+		String categoryTitle="뷰티";
 		List<ClassIndex> bestBeauty= new MainService().selectBestClassByCategory(categoryTitle);
-		request.setAttribute("bestBeauty", bestBeauty);
+		System.out.println("new : "+newBeauty+"best : "+bestBeauty+"all : "+allBeauty);
 		if(newBeauty!=null && !newBeauty.isEmpty() && bestBeauty!=null && !bestBeauty.isEmpty()) {
-			System.out.println("성");
+			request.setAttribute("newBeauty", newBeauty);
+			request.setAttribute("bestBeauty", bestBeauty);
+			request.setAttribute("allBeauty", allBeauty);
+			request.getRequestDispatcher("/views/main/viewCategoryBeauty.jsp").forward(request, response);
+		}else {
+			request.setAttribute("msg", "선택한 카테고리 클래스가 없습니다.");
+			request.setAttribute("loc","/");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/views/main/viewCategoryBeauty.jsp").forward(request, response);
 	}
 
 	/**

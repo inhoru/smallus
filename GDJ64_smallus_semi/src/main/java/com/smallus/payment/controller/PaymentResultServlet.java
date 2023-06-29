@@ -33,7 +33,7 @@ public class PaymentResultServlet extends HttpServlet {
 		String paymentId=request.getParameter("paymentId");
 		PaymentCompleted p =new PaymentService().selectPaymentByPaymentId(paymentId);
 		request.setAttribute("payment", p);
-		request.getRequestDispatcher("/views/host/paymentEnd.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/host/viewPaymentResult.jsp").forward(request, response);
 	}
 
 	/**

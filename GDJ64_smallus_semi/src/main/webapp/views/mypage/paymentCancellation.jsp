@@ -44,10 +44,10 @@ String cPage=(String)request.getAttribute("cPage");
                     <h2 class="i-mypageh2">결제상세 내역</h2>
                     <div class="i-paymentCompletedList">
                         <div class="i-paymentimg">
-                            <img src="<%=request.getContextPath()%>/img/<%=p.getClasses().getClassThumbnail()%>" alt="" width="150px" height="150px">
+                            <img src="<%=request.getContextPath()%>/upload/class/<%=p.getClasses().getClassThumbnail()%>" alt="" width="150px" height="150px">
                             <div class="i-patmentcontent">
                                 <h3><%=p.getClasses().getClassTitle()%></h3>
-                                <span><%=p.getClassDetail().getBookingTimeStart()%> || <%=p.getClassDetail().getBookingTimeEnd()%></span>
+                                <span><%=p.getClassDetail().getBookingTimeStart1()%> ~ <%=p.getClassDetail().getBookingTimeEnd1()%></span>
                                 <span><%=p.getHost().getHostName()%></span>
                             </div>
                         </div>

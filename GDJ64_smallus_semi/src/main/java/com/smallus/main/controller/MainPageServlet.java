@@ -34,10 +34,6 @@ public class MainPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//List<Classes> list=new MainService().mainPage();
-		//System.out.println(list);
-		
-
 
 		List<ClassIndex> newClass = new MainService().NewClassList();
 		List<ClassIndex> wishClass= new MainService().wishClassList();
@@ -46,6 +42,14 @@ public class MainPageServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setAttribute("wishClass", wishClass);
 		request.setAttribute("newClass", newClass);
+		HttpSession session=request.getSession();
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		if(loginMember!=null) {
+			String memberId=loginMember.getMemberId();
+			List<Wish> wishMember= new MainService().wishMember(memberId);
+			session.setAttribute("wishMember", wishMember);
+		}
+		
 		
 		request.getRequestDispatcher("/views/host/expClass.jsp").forward(request, response);
 	}

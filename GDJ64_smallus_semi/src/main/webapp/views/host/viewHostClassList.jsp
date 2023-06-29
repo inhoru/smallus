@@ -183,7 +183,7 @@
 			// index =1 -> W / 2:Y/3:N
 			//console.log(index);
 			if(index==0){
-				location.replace('<%=request.getContextPath()%>/class/viewHostClassList.do?hostId=<%=loginHost.getHostId()%>');
+				location.replace('<%=request.getContextPath()%>/class/viewHostClassList.do?');
 			}else if(index==1){
 				location.assign('<%=request.getContextPath()%>/class/sortingHostClassByPass.do?passStatus=W');
 			}else if(index==2){
