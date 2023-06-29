@@ -54,7 +54,7 @@
 								<td id="tr"><p><%=r.getReview().getReviewContent() %></p></td>
 							</tr>
 						</table>
-					<input type="button" onclick="alert('삭제되었습니다.')" value="삭제">
+						<button onclick="deleteReview('<%=r.getReview().getReviewId()%>');">삭제</button>
 					</div>
 				</div>
 		<%} 
@@ -62,6 +62,13 @@
 		
 	
 	</div>
+	<script>
+		function deleteReview(reviewNo){
+			if(confirm("삭제하시겠습니까?")){
+				location.replace("<%=request.getContextPath()%>/review/deleteReviewByHost.do?reviewId="+revieNo);
+			}
+		}
+	</script>
 </div>
 <style>
 	#d-review-page{

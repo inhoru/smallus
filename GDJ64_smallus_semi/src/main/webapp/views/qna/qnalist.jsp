@@ -57,6 +57,8 @@ table#list th, table#list td {
 	border-bottom: 1px solid #444444;
 	padding: 1% auto;
 }
+#td{
+display: none;}
 </style>
 <div class="h-qnaBody">
 	<div id="qna">
@@ -80,14 +82,20 @@ table#list th, table#list td {
 					<th>작성일</th>
 					<th>작성자</th>
 				</tr>
-				<tr onclick="alert('test')">
+				<tr id=td" onclick="show(event)">
 					<td>답변 대기</td>
 					<td>지금 이게 맞나요?</td>
 					<td>제가 하는게 맞는지 모르겠어요ㅜㅠ</td>
 					<td>2023.06.16</td>
 					<td>이성진</td>
 				</tr>
-				<tr id="td" onclick="toggle(event);">
+				</div>
+			</section>
+				<section id="main">
+				<div id="table">
+				</table>
+				<table id="list">
+				<tr id="td" onclick="show(event);">
 					<td>답변 완료</td>
 					<td>어휴..</td>
 					<td>오늘도 학원에 왔다</td>
@@ -97,6 +105,22 @@ table#list th, table#list td {
 			</table>
 			</div>
 			</section>
+			<section id="main">
+			<div class="qna_page">
+			<div id="qnatext" onclick="toggle(event)";>
+				<table>
+					<tr>
+						<td id="l">작성자</td>
+						<td id="l">2023-06-25</td>
+					</tr>
+					<tr>
+						<th id="l">단체 예약</th>
+					</tr>
+					<tr>
+						<td id="l">단체예약을 좀 하고 싶은데 몇 명까지 가능하지 궁금해서 문의 남겨요~</td>
+					</tr>
+				</table>
+			</div>
 		<section id="main">
 			<div class="qna_page">
 			<div id="qnatext" onclick="toggle(event)";>
@@ -128,6 +152,9 @@ table#list th, table#list td {
 	</section>
 </div>
 	<script>
+	function show(e) {
+		$("#td").show();
+	} 
 	function toggle(e) {
 		$("#qnatext").toggle();
 		$("#qnactext").toggle();

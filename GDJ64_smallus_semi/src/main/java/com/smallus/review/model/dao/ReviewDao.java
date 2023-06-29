@@ -132,42 +132,44 @@ public class ReviewDao {
 		return result;
 	}
 	
-	public List<ReviewHost> hostReviewList(Connection conn, String hostId, int cPage, int numPerpage){
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<ReviewHost> list = new ArrayList<ReviewHost>();
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("hostreviewList"));
-			pstmt.setString(1, hostId);
-			pstmt.setInt(2, (cPage-1)*numPerpage+1);
-			pstmt.setInt(3, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				ReviewHost rv= new ReviewHost();
-				rv.getPayment().setPaymentId(rs.getString("PAYMENT_ID"));
-				rv.getPayment().setMemberId(rs.getString("MEMBER_ID"));
-				rv.getClasses().setClassId(rs.getString("CLASS_ID"));
-				rv.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
-				rv.getClasses().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
-				rv.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
-				rv.getClasses().setClassStatus(rs.getString("CLASS_STATUS"));
-				rv.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
-				rv.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
-				rv.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
-				rv.getReview().setReviewId(rs.getString("REVIEW_ID"));
-				rv.getReview().setReviewTitle(rs.getString("REVIEW_TITLE"));
-				rv.getReview().setReviewContent(rs.getString("REVIEW_CONTENT"));
-				rv.getReview().setReviewRating(rs.getInt("REVIEW_RATING"));
-				rv.getReview().setReviewDate(rs.getDate("REVIEW_DATE"));
-				list.add(rv);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return list;
-	}
+	 public List<ReviewHost> hostReviewList(Connection conn, String hostId, int cPage, int numPerpage){
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      List<ReviewHost> list = new ArrayList<ReviewHost>();
+	      try {
+	         pstmt=conn.prepareStatement(sql.getProperty("hostreviewList"));
+	         pstmt.setString(1, hostId);
+				
+				  pstmt.setInt(2, (cPage-1)*numPerpage+1);
+				  pstmt.setInt(3, cPage*numPerpage);
+				
+	         rs=pstmt.executeQuery();
+	         while(rs.next()) {
+	            ReviewHost rv= new ReviewHost();
+	            rv.getPayment().setPaymentId(rs.getString("PAYMENT_ID"));
+	            rv.getPayment().setMemberId(rs.getString("MEMBER_ID"));
+	            rv.getClasses().setClassId(rs.getString("CLASS_ID"));
+	            rv.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));
+	            rv.getClasses().setClassPersonnel(rs.getInt("CLASS_PERSONNEL"));
+	            rv.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
+	            rv.getClasses().setClassStatus(rs.getString("CLASS_STATUS"));
+	            rv.getCategory().setCategoryTitle(rs.getString("CATEGORY_TITLE"));
+	            rv.getClassDetail().setBookingTimeStart(rs.getDate("BOOKING_TIME_START"));
+	            rv.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
+	            rv.getReview().setReviewId(rs.getString("REVIEW_ID"));
+	            rv.getReview().setReviewTitle(rs.getString("REVIEW_TITLE"));
+	            rv.getReview().setReviewContent(rs.getString("REVIEW_CONTENT"));
+	            rv.getReview().setReviewRating(rs.getInt("REVIEW_RATING"));
+	            rv.getReview().setReviewDate(rs.getDate("REVIEW_DATE"));
+	            list.add(rv);
+	         }
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rs);
+	         close(pstmt);
+	      }return list;
+	   }
 
 	public int delete(Connection conn, String reviewId) {
 		PreparedStatement pstmt=null;
