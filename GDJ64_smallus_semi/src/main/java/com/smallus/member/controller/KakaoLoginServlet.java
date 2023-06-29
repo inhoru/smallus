@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.smallus.member.model.vo.Member;
 import com.smallus.member.model.vo.Notifications;
 import com.smallus.member.service.MemberService;
+import com.smallus.payment.service.PaymentService;
 
 /**
  * Servlet implementation class KakaoLoginServlet
@@ -49,6 +50,8 @@ public class KakaoLoginServlet extends HttpServlet {
 			String memberId=loginMember.getMemberId();
 			List<Notifications> list =new MemberService().selectAllNotifications(memberId);
 			int notcount = new MemberService().notificationsCount(memberId);
+			//수강일이 지나면 결제완료 -> 수강완료로 업데이트되는 구문 
+			int updateReservatation = new PaymentService().updatePaymentStatus();
 			session.setAttribute("notcount1",notcount);
 			session.setAttribute("Notlist1",list);
 			response.sendRedirect(request.getContextPath());

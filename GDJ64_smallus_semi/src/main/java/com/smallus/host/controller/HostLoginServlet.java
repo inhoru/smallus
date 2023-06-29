@@ -74,7 +74,8 @@ public class HostLoginServlet extends HttpServlet {
 		
 			session.setAttribute("notcount",notcount);
 			session.setAttribute("Notlist",list);
-			
+			//수강일이 지나면 결제완료 -> 수강완료로 업데이트되는 구문 
+			int updateReservatation = new PaymentService().updatePaymentStatus();
 			//화면전환시킬방법 2가지중 sendRedirect로 보낸다 이유는 데이터를  session 저장시켰고, url주소에 정보를 남기지 않기 위해서
 			response.sendRedirect(request.getContextPath()+"/hostMain.do");
 			
@@ -83,7 +84,8 @@ public class HostLoginServlet extends HttpServlet {
 			session.setAttribute("loginHost",loginHost);
 			List<Notifications> list =new HostService().selectAllNotifications(hostId);
 			int notcount = new HostService().notificationsCount(hostId);
-		
+			//수강일이 지나면 결제완료 -> 수강완료로 업데이트되는 구문 
+			int updateReservatation = new PaymentService().updatePaymentStatus();
 			session.setAttribute("notcount",notcount);
 			session.setAttribute("Notlist",list);
 			

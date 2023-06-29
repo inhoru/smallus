@@ -86,7 +86,7 @@ text-align: right;}
 <%@ include file="/views/common/hostHeader.jsp"%>
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-class-sub">
-     	<h2>내 클래스 후기 보기</h2>
+     	<h3>내 클래스 후기 보기</h3>
      	<!-- <div>
 			<select>
 				<option value="클래스명">클래스명</option>
@@ -111,22 +111,22 @@ text-align: right;}
 						<td class="h-tbl-align-right"><button id="h-deleteReview" value="<%=rh.getReview().getReviewId()%>">삭제</button></td>
 					</tr>
 					<tr>
-						<td class="h-tbl-align-left" colspan="2">[<%=rh.getCategory().getCategoryTitle() %>] <%=rh.getClasses().getClassTitle() %></td>
-						<td class="h-tbl-align-left">[수강 일] <%=rh.getClassDetail().getBookingTimeStart() %> - <%=rh.getClassDetail().getBookingTimeEnd() %></td>
-						<td class="h-tbl-align-left">[수강 인원 수] <%=rh.getPayment().getClassPersonnel() %></td>
+						<td class="h-tbl-align-left" colspan="2"><%=rh.getCategory().getCategoryTitle()%> <%=rh.getClasses().getClassTitle() %></td>
+						<td class="h-tbl-align-left"><%=rh.getClassDetail().getBookingTimeStart() %> - <%=rh.getClassDetail().getBookingTimeEnd() %></td>
+						<td class="h-tbl-align-left"><%=rh.getPayment().getClassPersonnel()%></td>
 					</tr>
 					<tr>
 						<td colspan="2"><%=rh.getReview().getReviewTitle()%></td>
 						<td class="h-tbl-align-right"><%=rh.getPayment().getMemberId() %></td>
-						<td><%=rh.getReview().getReviewDate() %></td>
-						<td>
+						<td><%=rh.getReview().getReviewDate() %></td><td></td>
+						<%-- <td>
 							<%if(rh.getReview().getReviewRating()==5){%>★★★★★
 							<%}else if(rh.getReview().getReviewRating()==4){%>★★★★
 							<%}else if(rh.getReview().getReviewRating()==3) {%>★★★
 							<%}else if(rh.getReview().getReviewRating()==2){%>★★
 							<%}else{ %>★
 							<%} %>
-						</td>
+						</td> --%>
 					</tr>
 					<tr>
 						<td colspan="4"><%=rh.getReview().getReviewContent()%></td>

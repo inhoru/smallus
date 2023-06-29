@@ -399,6 +399,7 @@ input.checkbox[type=checkbox]:checked+label {
 }
 
 .footer {
+	padding-top:3rem;
 	width: 100%;
 	flex-direction: column;
 	background-color: #F3EEE6;

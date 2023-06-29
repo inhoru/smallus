@@ -16,6 +16,7 @@ import com.smallus.main.service.MainService;
 import com.smallus.member.model.vo.Member;
 import com.smallus.member.model.vo.Notifications;
 import com.smallus.member.service.MemberService;
+import com.smallus.payment.service.PaymentService;
 
 
 /**
@@ -73,6 +74,8 @@ public class MemberLoginServlet extends HttpServlet {
 			session.setAttribute("Notlist1",list);
 			List<Wish> wishMember= new MainService().wishMember(memberId);
 			session.setAttribute("wishMember", wishMember);
+			//수강일이 지나면 결제완료 -> 수강완료로 업데이트되는 구문 
+			int updateReservatation = new PaymentService().updatePaymentStatus();
 			
 		
 		}else {
