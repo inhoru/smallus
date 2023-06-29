@@ -31,9 +31,13 @@ public class PaymentResultServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String paymentId=request.getParameter("paymentId");
+		System.out.println(paymentId);
 		PaymentCompleted p =new PaymentService().selectPaymentByPaymentId(paymentId);
-		request.setAttribute("payment", p);
-		request.getRequestDispatcher("/views/host/viewPaymentResult.jsp").forward(request, response);
+		if(p!=null) {
+			request.setAttribute("payment", p);
+			request.getRequestDispatcher("/views/host/ViewPaymentResult.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**

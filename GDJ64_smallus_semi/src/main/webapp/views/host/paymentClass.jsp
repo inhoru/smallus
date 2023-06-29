@@ -129,7 +129,7 @@
 	//select 옵션 변경하면 이동하는 함
 	
 	let couponId=$("#h-usedCoupon").val();
-	let classTitle ='<%=p.getCategory().getCategoryTitle()%>'
+	let classTitle ='<%=p.getClasses().getClassTitle()%>'
 	let remainPer='<%=p.getClassDetail().getRemainingPersonnel()%>';
 	let coupon;
 	let price='<%=p.getClasses().getClassPrice()%>';
@@ -197,40 +197,43 @@
 				buyer_name : name,
 				buyer_tel : phone
 		};
-	IMP.request_pay(data, response => {
-		$.ajax({
-			url: "<%=request.getContextPath()%>/payments/callback_receive.do", 
-			type: 'POST',
-			header: {'Content-Type': 'application/json' },
-			data: {
-				"data": JSON.stringify(response),
-				"classDetailId":classDetailId,
-				"couponId": couponId,
-				"price": price,
-				"classPersonnel": person,
-				"totalPrice": total,
-				"remainingPersonnel": remainPer
-			
-			}
-		}).done(function(data) {
-			//console.log(data);
-			if (response.success) {
-				var msg = '결제가 완료되었습니다.';
-				/* msg += '\n고유ID : ' + response.imp_uid;
-				msg += '\n상점 거래ID : ' + response.merchant_uid;
-				msg += '\결제 금액 : ' + response.paid_amount;
-				msg += '카드 승인번호 : ' + response.apply_num; */
-				console.log(response);
-				alert(msg);
+			IMP.request_pay(data, response => {
+			      $.ajax({
+			         url: "<%=request.getContextPath()%>/payments/callback_receive.do", 
+			         type: 'POST',
+			         header: {'Content-Type': 'application/json' },
+			         data: {
+			            "data": JSON.stringify(response),
+			            "classDetailId":classDetailId,
+			            "couponId": couponId,
+			            "price": price,
+			            "classPersonnel": person,
+			            "totalPrice": total,
+			            "remainingPersonnel": remainPer
+			         }
+			      }).done(function(data) {
+			         if (response.success) {
+			            var msg = '결제가 완료되었습니다.';
+			            /* msg += '\n고유ID : ' + response.imp_uid;
+			            msg += '\n상점 거래ID : ' + response.merchant_uid;
+			            msg += '\결제 금액 : ' + response.paid_amount;
+			            msg += '카드 승인번호 : ' + response.apply_num; */
+			            console.log(response);
+			            let jsonData=JSON.parse(data);
+			            let pId=jsonData.merchant_uid;
+			            console.log(pId)
+			            alert(msg);
+			            location.assign('<%=request.getContextPath()%>/paymentResult.do?paymentId='+pId)
+									            
 
-			} else {
-				var msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : ' + response.error_msg;
-				console.log(response);
-				alert(msg);
-			}
-		});// end ajax
-	}); // end request_pay
+			         } else {
+			            var msg = '결제에 실패하였습니다.';
+			            msg += '에러내용 : ' + response.error_msg;
+			            console.log(response);
+			            alert(msg);
+			         }
+			      });// end ajax
+			   }); // end request_pay
 	}
 	</script>
 </div>
