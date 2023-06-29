@@ -28,7 +28,7 @@ width: 20rem;
 		<div class="hcaTitleC">
 			<h3>클래스 기본 정보 관리하기</h3>
 					<div class="hCbtnContainer">
-						<%-- <button id="h-updateClassInfomation" value="<%=list.getClassId()%>">기본 정보 수정</button> --%>
+						<button id="h-updateClassInfomation" value="<%=list.getClassId()%>">기본 정보 수정</button>
 						<button id="h-updateClassStaus" value="<%=list.getClassId()%>">클래스 삭제</button>
 					</div>				
 		</div>
@@ -167,7 +167,9 @@ width: 20rem;
 	
 	// 세부 내용 수정 버튼클릭 
 	$("#h-updateClassInfomation").click(e=>{
-		alert("연결하기");
+		// alert("연결하기");
+		<%-- location.assign('<%=request.getContextPath()%>/updateClassStatus.do?classId=<%=list.getClassId()%>'); --%>
+		location.assign('<%=request.getContextPath()%>/updateClass.do?classId=<%=list.getClassId()%>');
 	})
 	// 삭제 버튼 클릭 
 	$(".hDeleteClassDetail").click(e=>{
