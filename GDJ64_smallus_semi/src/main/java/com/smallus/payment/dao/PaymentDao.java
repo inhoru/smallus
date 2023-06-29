@@ -115,6 +115,9 @@ public class PaymentDao {
 			Classes c=new Classes();
 			Payment p=new Payment();
 			ClassDetail d=new ClassDetail();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			d.setBookingTimeStart1(rs.getTimestamp("BOOKING_TIME_START").toLocalDateTime().format(formatter));
+			d.setBookingTimeEnd1(rs.getTimestamp("BOOKING_TIME_END").toLocalDateTime().format(formatter));
 			p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 			p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
 			c.setClassTitle(rs.getString("CLASS_TITLE"));
@@ -152,6 +155,9 @@ public class PaymentDao {
 			Classes c=new Classes();
 			Payment p=new Payment();
 			ClassDetail d=new ClassDetail();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			d.setBookingTimeStart1(rs.getTimestamp("BOOKING_TIME_START").toLocalDateTime().format(formatter));
+			d.setBookingTimeEnd1(rs.getTimestamp("BOOKING_TIME_END").toLocalDateTime().format(formatter));
 			p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 			p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
 			c.setClassTitle(rs.getString("CLASS_TITLE"));
@@ -222,6 +228,9 @@ public class PaymentDao {
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				PaymentCompleted pc=new PaymentCompleted();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				pc.getClassDetail().setBookingTimeStart1(rs.getTimestamp("BOOKING_TIME_START").toLocalDateTime().format(formatter));
+				pc.getClassDetail().setBookingTimeEnd1(rs.getTimestamp("BOOKING_TIME_END").toLocalDateTime().format(formatter));
 				pc.getPayment().setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 				pc.getPayment().setPaymentDate(rs.getDate("PAYMENT_DATE"));
 				pc.getClasses().setClassTitle(rs.getString("CLASS_TITLE"));

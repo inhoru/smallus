@@ -6,6 +6,7 @@
 <%
 int coupon = (int) request.getAttribute("countCoupon");
 int wishCount = (int) request.getAttribute("wishCount");
+int reviewCount = (int) request.getAttribute("reviewCount");
 
 List<Member> paymentDetails = (List) request.getAttribute("paymentDetails");
 List<Classes> wishList = (List) request.getAttribute("wishList");
@@ -68,7 +69,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 						<a href="<%=request.getContextPath()%>/mypageCoupon.do"
 							class="i-as1"><%=coupon%></a> <a
 							href="<%=request.getContextPath()%>/memberWishList.do"
-							class="i-as2"><%=wishCount %></a> <a href="<%=request.getContextPath()%>/review/reviewList.do" class="i-as3">3</a>
+							class="i-as2"><%=wishCount %></a> <a href="<%=request.getContextPath()%>/review/reviewList.do" class="i-as3"><%=reviewCount%></a>
 					</div>
 				</div>
 			</div>
@@ -125,7 +126,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 										<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=m.getClasses().getClassId()%>"><div class="i-reservation-title"><%=m.getClasses().getClassTitle()%></div></a>
 									</div>
 									<div class="i-bs1">
-										<span class="i-reservation-reservationDay"><%=m.getClassDetail().getBookingTimeStart1()%> | <%=m.getClassDetail().getBookingTimeEnd1()%></span>
+										<span class="i-reservation-reservationDay"><%=m.getClassDetail().getBookingTimeStart1()%> ~ <%=m.getClassDetail().getBookingTimeEnd1()%></span>
 										<span class="i-reservation-peopleNum">인원 : <%=m.getPayment().getClassPersonnel()%></span>
 									</div>
 								</div>

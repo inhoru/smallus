@@ -3,7 +3,7 @@
 <style>
 #qnatext {
 	border: 1px solid #444444;
-	margin: 1% 35%;
+	margin: 1% auto;
 	border-radius: 20px;
 	width: 650px;
 	display: none;
@@ -12,7 +12,7 @@
 
 #qnactext {
 	border: 1px solid #444444;
-	margin: 1% 35%;
+	margin: 1% auto;
 	border-radius: 20px;
 	width: 650px;
 	display: none;
@@ -30,7 +30,7 @@ div#select_container {
 
 section#main {
 	width: 1000px;
-	margin: 0 25%;
+	margin: 0 auto%;
 	text-align: center
 }
 
@@ -43,12 +43,13 @@ table{
 	width: 100%;
 	border-collapse: collapse;
 	border-top: 1px solid #444444;
+	border-bottom: 1px solid #444444
 	text-align: center;
 	margin-right:100%;
 }
 
-table>th, table>td {
-	border-bottom: 1px solid #444444;
+table>tr {
+	/* border-bottom: 1px solid #444444; */
 	padding: 1% auto;
 }
 </style>
@@ -91,7 +92,7 @@ table>th, table>td {
 	<section id="main">
 		<div id="qnatext" onclick="toggle(event)";>
 			<table>
-				<tr>
+				<tr id="a">
 					<td id="l">작성자</td>
 					<td id="l">2023-06-25</td>
 				</tr>
@@ -105,7 +106,7 @@ table>th, table>td {
 		</div>
 		<div id="qnactext" onclick="toggle(event)";>
 			<table>
-				<tr>
+				<tr id="a">
 					<th id="l">호스트</th>
 					<td id="l">2023-06-25</td>
 				</tr>
