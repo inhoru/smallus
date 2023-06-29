@@ -35,7 +35,7 @@ public class PaymentResultServlet extends HttpServlet {
 		PaymentCompleted p =new PaymentService().selectPaymentByPaymentId(paymentId);
 		if(p!=null) {
 			request.setAttribute("payment", p);
-			request.getRequestDispatcher("/views/host/ViewPaymentResult.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/host/viewPaymentResult.jsp").forward(request, response);
 			
 		}
 	}
