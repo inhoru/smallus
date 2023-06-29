@@ -135,8 +135,9 @@
 	let price='<%=p.getClasses().getClassPrice()%>';
 	let	person='<%=personnel%>';
 	let sum = price*person;
-	let	total = sum-coupon;
+	let total;
 	
+	// 쿠폰 선택 하면 금액 변경
 	function applyCouponPrice(){
 		coupon = $("#h-selectCoupon option:selected").val();
 		console.log(coupon);
@@ -145,17 +146,19 @@
 		console.log("price : "+price);
 		console.log("person : "+person);
 		console.log("sum : "+sum);
-		
+		total = sum-coupon;
 		$("#h-totalPrice").text(total + " 원")
 		console.log("total : "+total);
 	}
 	
+	// 쿠폰 선택 안 했을 때	
 	if($("#h-couponNone:selected")){
 		total=sum;
 		$("#h-totalPrice").text( sum + " 원");
 		console.log("total : "+total);
 		couponId="NONE";
 	}
+	
 	const today = new Date();
 	const year = today.getFullYear();
 	const month = ('0' + (today.getMonth() + 1)).slice(-2);

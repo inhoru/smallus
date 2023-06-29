@@ -3,6 +3,7 @@
         padding-top: 3%;
         width: 1280px;
         height: 5000px;
+        min-height:700px;
     }
     div>detail_page{
     margin:  1% 10%;
