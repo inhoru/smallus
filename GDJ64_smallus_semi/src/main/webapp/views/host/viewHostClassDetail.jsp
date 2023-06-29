@@ -106,7 +106,7 @@ width: 20rem;
 					<td class="h-cd-classDetailId"><%=cd.getClassDetailId() %></td>
 					<td class="h-cd-classDetailTime"><%=cd.getBookingTimeStart()%> - <%=cd.getBookingTimeEnd()%></td>
 					<td class="h-cd-classDetailPer"><%=list.getClassPersonnel()%>명</td>
-					<td class="h-class-tbl-btn"><button id="hDeleteClassDetail">삭제</button></td>
+					<td class="h-class-tbl-btn"><button class="hDeleteClassDetail">삭제</button></td>
 				</tr>
 				<%count++;}
 			}else if(classDetailList!=null&&!classDetailList.isEmpty()&&list.getClassStatus().equals("N")){
@@ -170,7 +170,7 @@ width: 20rem;
 		alert("연결하기");
 	})
 	// 삭제 버튼 클릭 
-	$("#hDeleteClassDetail").click(e=>{
+	$(".hDeleteClassDetail").click(e=>{
 		 let thisBtn = $(e.target);
 		 let detailArr= thisBtn.parent().siblings();
 		 let detailId=detailArr.eq(1).text();
