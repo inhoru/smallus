@@ -221,10 +221,16 @@ section.h-main-banner{
 	scroll-padding: 1rem;
 }
 
-.active {
-	scroll-snap-type: unset;
+/* .h-gallery::-webkit-scrollbar {
+    display: none; 크롬, 사파리, 오페라, 엣지
 }
 
+.h-gallery{
+	-ms-overflow-style:none IE and Edge
+    scrollbar-width:none Firefox
+}
+
+ */
 .h-gallery li {
 	scroll-snap-align: center;
 	display: inline-block;

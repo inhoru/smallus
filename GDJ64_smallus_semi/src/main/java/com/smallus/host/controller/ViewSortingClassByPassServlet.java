@@ -18,13 +18,13 @@ import com.smallus.host.model.vo.Host;
  * Servlet implementation class SortingClassByPassServlet
  */
 @WebServlet("/class/sortingHostClassByPass.do")
-public class SortingHostClassByPassServlet extends HttpServlet {
+public class ViewSortingClassByPassServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SortingHostClassByPassServlet() {
+    public ViewSortingClassByPassServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
