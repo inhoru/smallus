@@ -47,7 +47,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //SELECT COUNT(*) FROM MEMBER
          pstmt=conn.prepareStatement(sql.getProperty("selectMemberCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -63,7 +62,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ST=?
          pstmt=conn.prepareStatement(sql.getProperty("selectMemberSortCount"));
          pstmt.setString(1, memberSt);
          rs=pstmt.executeQuery();
@@ -80,7 +78,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Member> list=new ArrayList();
       try {
-         //SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM MEMBER)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkMemberAll"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -100,7 +97,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Member> list=new ArrayList();
       try {
-         //SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM MEMBER WHERE MEMBER_ST=?)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkMemberSort"));
          pstmt.setString(1, memberSt);
          pstmt.setInt(2, (cPage-1)*numPerpage+1);
@@ -120,7 +116,6 @@ public class AdminDao {
       PreparedStatement pstmt=null;
       int result=0;
       try {
-         //UPDATE MEMBER SET MEMBER_ST='N' WHERE MEMBER_ID = ?
          pstmt=conn.prepareStatement(sql.getProperty("deleteByMember"));
          pstmt.setString(1, memberId);
          result=pstmt.executeUpdate();
@@ -161,7 +156,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Host> list=new ArrayList();
       try {
-         //SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM HOST WHERE HOST_ST='Y')M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkHostAll"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -202,7 +196,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //selectHostCount=SELECT COUNT(*) FROM HOST WHERE HOST_ST IN('Y')
          pstmt=conn.prepareStatement(sql.getProperty("selectHostCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -235,7 +228,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //SELECT COUNT(*) FROM NOTICE
          pstmt=conn.prepareStatement(sql.getProperty("selectNoticeCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -251,7 +243,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Notice> list=new ArrayList();
       try {
-         //SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM NOTICE)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkNoticeAll"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -271,7 +262,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<NoticeImage> list2=new ArrayList();
       try {
-         //checkNoticeImageAll=SELECT * FROM NOTICE_IMAGE
          pstmt=conn.prepareStatement(sql.getProperty("checkNoticeImageAll"));
          rs=pstmt.executeQuery();
          while(rs.next()) {
@@ -290,7 +280,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //SELECT COUNT(*) FROM CLASS WHERE CLASS_PASS_ID='W'
          pstmt=conn.prepareStatement(sql.getProperty("selectConfirmClassesCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -306,7 +295,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Classes> list=new ArrayList();
       try {
-         //SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='W')M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkConfirmClasses"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -326,7 +314,6 @@ public class AdminDao {
       PreparedStatement pstmt=null;
       int result=0;
       try {
-         //UPDATE CLASS SET CLASS_PASS_ID=?,CLASS_PASS_DATE=SYSDATE WHERE CLASS_ID=?
          pstmt=conn.prepareStatement(sql.getProperty("classReject"));
          pstmt.setString(1, classPassId);
          pstmt.setString(2, classId);
@@ -342,7 +329,6 @@ public class AdminDao {
       PreparedStatement pstmt=null;
       int result=0;
       try {
-         //classConfirm=UPDATE CLASS SET CLASS_PASS_ID='Y',CLASS_PASS_DATE=SYSDATE WHERE CLASS_ID=?
          pstmt=conn.prepareStatement(sql.getProperty("classConfirm"));
          pstmt.setString(1, classId);
          result = pstmt.executeUpdate();
@@ -357,7 +343,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Classes> list2=new ArrayList();
       try {
-         //classesAll=SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y'
          pstmt=conn.prepareStatement(sql.getProperty("classesAll"));
          rs=pstmt.executeQuery();
          while(rs.next()) {
@@ -375,7 +360,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //selectClassesCount=SELECT COUNT(*) FROM CLASS WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y'
          pstmt=conn.prepareStatement(sql.getProperty("selectClassesCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -391,7 +375,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Classes> list=new ArrayList();
       try {
-         //checkClassesAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y')M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkClassesAll"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -411,7 +394,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //selectClassSortCount=SELECT COUNT(*) FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y' AND CATEGORY_ID=?
          pstmt=conn.prepareStatement(sql.getProperty("selectClassSortCount"));
          pstmt.setString(1,categoryId);
          rs=pstmt.executeQuery();
@@ -428,7 +410,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Classes> list=new ArrayList();
       try {
-         //checkClassSort=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='Y' AND CLASS_STATUS='Y' AND CATEGORY_ID=?)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkClassSort"));
          pstmt.setString(1, categoryId);
          pstmt.setInt(2, (cPage-1)*numPerpage+1);
@@ -449,7 +430,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //selectConfirmCalcCount=SELECT COUNT(*) FROM CALC WHERE CALC_STATUS='W'
          pstmt=conn.prepareStatement(sql.getProperty("selectConfirmCalcCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -465,7 +445,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Calc> list=new ArrayList();
       try {
-         //checkConfirmCalc=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC WHERE CALC_STATUS='W')M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkConfirmCalc"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -484,7 +463,6 @@ public class AdminDao {
       PreparedStatement pstmt=null;
       int result=0;
       try {
-         //calcConfirm=UPDATE CALC SET CALC_STATUS='Y', CALC_PASS_DATE=SYSDATE, CALC_FINAL_PRICE=? WHERE CALC_STATUS='W' AND CALC_ID=?
          pstmt=conn.prepareStatement(sql.getProperty("calcConfirm"));
          pstmt.setInt(1, calcFinalPrice);
          pstmt.setString(2, calcId);
@@ -499,7 +477,6 @@ public class AdminDao {
       PreparedStatement pstmt=null;
       int result=0;
       try {
-         //calcReject=UPDATE CALC SET CALC_STATUS='N', CALC_PASS_DATE=SYSDATE WHERE CALC_STATUS='W' AND CALC_ID=?
          pstmt=conn.prepareStatement(sql.getProperty("calcReject"));
          pstmt.setString(1, calcId);
          result = pstmt.executeUpdate();
@@ -514,7 +491,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //selectCalcCount=SELECT COUNT(*) FROM CALC
          pstmt=conn.prepareStatement(sql.getProperty("selectCalcCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -530,7 +506,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Calc> list=new ArrayList();
       try {
-         //checkCalcAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkCalcAll"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -550,7 +525,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //selectCalcSortCount=SELECT COUNT(*) FROM CALC WHERE CALC_STATUS=?
          pstmt=conn.prepareStatement(sql.getProperty("selectCalcSortCount"));
          pstmt.setString(1,calcStatus);
          rs=pstmt.executeQuery();
@@ -567,7 +541,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Calc> list=new ArrayList();
       try {
-         //checkCalcSort=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC WHERE CALC_STATUS=?)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkCalcSort"));
          pstmt.setString(1, calcStatus);
          pstmt.setInt(2, (cPage-1)*numPerpage+1);
@@ -589,7 +562,6 @@ public class AdminDao {
       Classes c = null;
       try {
          pstmt = conn.prepareStatement(sql.getProperty("classHostId"));
-         // SELECT * FROM CLASS WHERE CLASS_ID=?
          pstmt.setString(1, classId);
          rs = pstmt.executeQuery();
          if (rs.next()) {
@@ -608,7 +580,6 @@ public class AdminDao {
       ResultSet rs=null;
       int totalData=0;
       try {
-         //selectInquiryCount=SELECT COUNT(*) FROM BOARD
          pstmt=conn.prepareStatement(sql.getProperty("selectInquiryCount"));
          rs=pstmt.executeQuery();
          if(rs.next()) 
@@ -624,7 +595,6 @@ public class AdminDao {
       ResultSet rs=null;
       List<Inquiry> list=new ArrayList();
       try {
-         //checkInquiryAll=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID) ORDER BY BOARD_RDATE DESC)M) WHERE RNUM BETWEEN ? AND ?
          pstmt=conn.prepareStatement(sql.getProperty("checkInquiryAll"));
          pstmt.setInt(1, (cPage-1)*numPerpage+1);
          pstmt.setInt(2, cPage*numPerpage);
@@ -643,7 +613,6 @@ public class AdminDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			//inquiryAnswerEnroll=INSERT INTO BOARD_COMMENT VALUES(SEQ_BOARD_COMMENT.NEXTVAL,?,?,SYSDATE)
 			pstmt=conn.prepareStatement(sql.getProperty("inquiryAnswerEnroll"));
 			pstmt.setString(1,boardId);
 			pstmt.setString(2,commentConent);
@@ -658,7 +627,6 @@ public class AdminDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			//inquiryUpdate=UPDATE BOARD SET BOARD_CHECK=? WHERE BOARD_ID=?
 			pstmt=conn.prepareStatement(sql.getProperty("inquiryUpdate"));
 			pstmt.setString(1, boardCheck);
 			pstmt.setString(2,boardId);
@@ -674,7 +642,6 @@ public class AdminDao {
 	      ResultSet rs=null;
 	      int totalData=0;
 	      try {
-	         //selectInquirySortCount=SELECT COUNT(*) FROM BOARD WHERE BOARD_CHECK=?
 	         pstmt=conn.prepareStatement(sql.getProperty("selectInquirySortCount"));
 	         pstmt.setString(1, boardCheck);
 	         rs=pstmt.executeQuery();
@@ -691,7 +658,6 @@ public class AdminDao {
 	      ResultSet rs=null;
 	      List<Inquiry> list=new ArrayList();
 	      try {
-	         //checkInquirySort=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID) WHERE BOARD_CHECK=? ORDER BY BOARD_RDATE DESC)M) WHERE RNUM BETWEEN ? AND ?
 	         pstmt=conn.prepareStatement(sql.getProperty("checkInquirySort"));
 	         pstmt.setString(1, boardCheck);
 	         pstmt.setInt(2, (cPage-1)*numPerpage+1);
@@ -712,7 +678,6 @@ public class AdminDao {
 	      ResultSet rs=null;
 	      List<Classes> list=new ArrayList();
 	      try {
-	         //recentConfirmClasses=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_PASS_ID='W' ORDER BY CLASS_UPLOAD_DATE DESC)M) WHERE RNUM BETWEEN 1 AND 10
 	         pstmt=conn.prepareStatement(sql.getProperty("recentConfirmClasses"));
 	         rs=pstmt.executeQuery();
 	         while(rs.next()) {
@@ -730,7 +695,6 @@ public class AdminDao {
 	      ResultSet rs=null;
 	      List<Calc> list=new ArrayList();
 	      try {
-	         //recentConfirmCalc=SELECT * FROM (SELECT ROWNUM AS RNUM, M.* FROM (SELECT * FROM CALC WHERE CALC_STATUS='W' ORDER BY CALC_REQ_DATE)M) WHERE RNUM BETWEEN 1 AND 10
 	         pstmt=conn.prepareStatement(sql.getProperty("recentConfirmCalc"));
 	         rs=pstmt.executeQuery();
 	         while(rs.next()) {
@@ -748,7 +712,6 @@ public class AdminDao {
 		ResultSet rs=null;
 		Classes classinfo=null;
 		try {
-			//selectByClassId=selectByClassId=SELECT * FROM CLASS JOIN CATEGORY USING(CATEGORY_ID) WHERE CLASS_ID=?
 			pstmt=conn.prepareStatement(sql.getProperty("selectByClassId"));
 			pstmt.setString(1, classId);
 			rs=pstmt.executeQuery();

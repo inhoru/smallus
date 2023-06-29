@@ -51,7 +51,6 @@ public class NoticeDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			//enrollNotice=INSERT INTO NOTICE VALUES(SEQ_NOTICE_ID.NEXTVAL,?,?,?,?,DEFAULT,?)
 			pstmt=conn.prepareStatement(sql.getProperty("enrollNotice"));
 			pstmt.setString(1, n.getHostId());
 			pstmt.setString(2, n.getNoticeType());
@@ -69,7 +68,6 @@ public class NoticeDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			//deleteNotice=DELETE FROM NOTICE WHERE NOTICE_ID=?
 			pstmt=conn.prepareStatement(sql.getProperty("deleteNotice"));
 			pstmt.setString(1,noticeId);
 			result=pstmt.executeUpdate();

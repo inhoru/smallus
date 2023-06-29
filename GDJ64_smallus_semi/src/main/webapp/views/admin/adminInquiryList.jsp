@@ -57,7 +57,7 @@ button#m-InquiryEnrollbtn{
 					<td colspan="4" style="padding-left:10px; text-align:left;">
 						<div>
 						<%if(c.getSfRename()!=null){ %>
-							<img src="<%=request.getContextPath()%>/upload/inquiry/<%=c.getSfRename()%>" alt="" style="height:;,width:;">
+							<img src="<%=request.getContextPath()%>/upload/inquiry/<%=c.getSfRename()%>" alt="" style="height:200px;,width:200px;">
 							<%} %>
 							<pre><%=c.getBoardContent() %></pre>
 						</div>

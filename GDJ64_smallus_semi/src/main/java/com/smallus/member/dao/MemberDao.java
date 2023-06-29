@@ -38,7 +38,6 @@ public class MemberDao {
 		Member m = null;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("memberLogin"));
-			// SELECT * FROM MEMBER WHERE MEMBER_ID=? AND MEMBER_PW=?
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, password);
 			rs = pstmt.executeQuery();
@@ -59,7 +58,6 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("enrollMember"));
-			// INSERT INTO MEMBER VALUES(?,?,?,?,?,?,DEFAULT,?,DEFAULT)
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
@@ -82,7 +80,6 @@ public class MemberDao {
 		Member m = null;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectByMemberId"));
-			// SELECT * FROM MEMBER WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -103,7 +100,6 @@ public class MemberDao {
 		Member m = null;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectBymemberNickname"));
-			// SELECT * FROM MEMBER WHERE MEMBER_ID=?
 			pstmt.setString(1, memberNickname);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -123,7 +119,6 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("updatePassword"));
-			//updatePassword=UPDATE MEMBER SET MEMBER_PW=? WHERE MEMBER_ID=?
 			pstmt.setString(1, password);
 			pstmt.setString(2, userId);
 			result = pstmt.executeUpdate();
@@ -141,7 +136,6 @@ public class MemberDao {
 		int result = 0;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("KakaoenrollMember"));
-			// INSERT INTO MEMBER VALUES(?,?,?,?,?,DEFAULT,DEFAULT,?,'K')
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPw());
 			pstmt.setString(3, m.getMemberName());
@@ -163,7 +157,6 @@ public class MemberDao {
 		Member m = null;
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("kakaoLogin"));
-			// SELECT * FROM MEMBER WHERE MEMBER_EMAIL=?
 			pstmt.setString(1, memberEmail);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -220,7 +213,6 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteByMember"));
-			//UPDATE MEMBER SET MEMBER_ST='N' WHERE MEMBER_ID = ? AND MEMBER_PW=?
 			pstmt.setString(1,memberId);
 			pstmt.setString(2, password);
 			result=pstmt.executeUpdate();
@@ -236,7 +228,6 @@ public class MemberDao {
 		List<Member> list=new ArrayList<Member>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("paymentDetails"));
-			//SELECT PAYMENT_STATUS,PAYMENT_DATE,CLASS_TITLE,CLASS_THUMBNAIL, P.CLASS_PERSONNEL,BOOKING_TIME_START,BOOKING_TIME_END FROM PAYMENT P JOIN CLASS_DETAIL USING(CLASS_DETAIL_ID) JOIN CLASS USING(CLASS_ID) WHERE MEMBER_ID=?
 			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
@@ -295,7 +286,6 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("wishRemove"));
-			//wishRemove=DELETE FROM WISH WHERE MEMBER_ID = ? AND CLASS_ID=(SELECT CLASS_ID FROM CLASS WHERE CLASS_TITLE=?)
 			pstmt.setString(1,memberId);
 			pstmt.setString(2, title);
 			
@@ -311,7 +301,6 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("wishAdd"));
-			//INSERT INTO WISH VALUES('WIS'||SEQ_WISH_ID.NEXTVAL,?,(SELECT CLASS_ID FROM CLASS WHERE CLASS_TITLE=?));
 			pstmt.setString(1,memberId);
 			pstmt.setString(2, title);
 			result=pstmt.executeUpdate();
@@ -327,7 +316,6 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("wishListCount"));
-			//SELECT COUNT(MEMBER_ID) FROM WISH WHERE MEMBER_ID=? 
 			pstmt.setString(1,memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -382,7 +370,6 @@ public class MemberDao {
 
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("notifications"));
-			//DELETE FROM NOTIFICATIONS WHERE NOTIFL_ID=?
 			pstmt.setString(1,notId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
@@ -397,7 +384,6 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("reviewCount"));
-			//SELECT COUNT(MEMBER_ID) FROM WISH WHERE MEMBER_ID=? 
 			pstmt.setString(1,memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
