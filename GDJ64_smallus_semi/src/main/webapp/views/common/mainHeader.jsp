@@ -5,6 +5,7 @@
 <%
 Member loginMember = (Member) session.getAttribute("loginMember");
 Host loginHost = (Host) session.getAttribute("loginHost");
+String recentlySearch = (String) session.getAttribute("recentlySearch");
 
 Cookie[] cookies = request.getCookies();
 String saveId = null;
@@ -52,7 +53,8 @@ if (cookies != null) {
 						width="12px" height="12px">
 				</div>
 				<div id="hiddenseach">
-					<form action="<%=request.getContextPath()%>/main/mainSearch.do" method="get">
+					<form action="<%=request.getContextPath()%>/main/mainSearch.do"
+						method="get">
 						<input type="text" name="q" class="search"
 							placeholder=" 관심,주제,클래스,호스트찾기">
 					</form>
@@ -96,7 +98,8 @@ if (cookies != null) {
 					width="12px" height="12px">
 			</div>
 			<div id="hiddenseach">
-				<form action="<%=request.getContextPath()%>/main/mainSearch.do" method="get">
+				<form action="<%=request.getContextPath()%>/main/mainSearch.do"
+					method="get">
 					<input type="text" name="q" class="search"
 						placeholder=" 관심,주제,클래스,호스트찾기">
 				</form>
@@ -137,9 +140,13 @@ if (cookies != null) {
 				<div class="icon i-noticon">
 					<img src="<%=request.getContextPath()%>/img/알림.png" alt=""
 						width="25px" height="25px">
-						<%if (loginHost==null){%>
-						 <span class="num-count"><%=notcount%></span>
-						 <%} %>
+					<%
+					if (loginHost == null) {
+					%>
+					<span class="num-count"><%=notcount%></span>
+					<%
+					}
+					%>
 				</div>
 			</div>
 			<div class="notification-container">
@@ -156,17 +163,20 @@ if (cookies != null) {
 							<%
 							for (Notifications n : not) {
 							%>
-							
+
 							<input class="checkbox" type="checkbox" id="size_<%=count%>"
 								value="small" checked /> <label class="notification"
 								for="size_<%=count%>"><span><%=n.getCreatedAt()%></span>
-								<br /> <span class="i-notType"><%=n.getNotiflType()%> <img alt="" src="<%=request.getContextPath()%>/img/알림삭제.png" width="15px" height="15px" style="cursor: pointer;"></span> <a
-								href="<%=request.getContextPath()%>/memberInquiry.do"><%=n.getNotiflType()%> <%=n.getNotiflMessage()%>
-							</a><input type="hidden" value="<%=n.getNotiflId()%>" class="i-notId"> </label>
+								<br /> <span class="i-notType"><%=n.getNotiflType()%> <img
+									alt="" src="<%=request.getContextPath()%>/img/알림삭제.png"
+									width="15px" height="15px" style="cursor: pointer;"></span> <a
+								href="<%=request.getContextPath()%>/memberInquiry.do"><%=n.getNotiflType()%>
+									<%=n.getNotiflMessage()%> </a><input type="hidden"
+								value="<%=n.getNotiflId()%>" class="i-notId"> </label>
 
 							<%
 							count++;
-							
+
 							}
 							%>
 							<%
@@ -189,30 +199,52 @@ if (cookies != null) {
 		</div>
 		<table id="categoriesTable">
 			<tr>
-				<td class="ca"><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">요리<a></a></td>
-				<td class="ca"><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">공예</a></td>
-				<td class="ca"><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">뷰티</a></td>
-				<td class="ca"><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">운동</a></td>
+				<td class="ca"><a
+					href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">요리<a></a></td>
+				<td class="ca"><a
+					href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">공예</a></td>
+				<td class="ca"><a
+					href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">뷰티</a></td>
+				<td class="ca"><a
+					href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">운동</a></td>
 			</tr>
 			<tr>
-				<td><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">제과</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">레진</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">비누</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">실내스포츠</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">제과</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">레진</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">비누</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">실내스포츠</a></td>
 			</tr>
 			<tr>
-				<td><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">제빵</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">가죽</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">향수</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">야외스포츠</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">제빵</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">가죽</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">향수</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE">야외스포츠</a></td>
 			</tr>
 			<tr>
-				<td><a href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">음료</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">스테인 글라스</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">천연 화장품</a></td>
-				<td><a href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE"></a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryCooking.do?categoryId=COO">음료</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryCraft.do?categoryId=CRA">스테인
+						글라스</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryBeauty.do?categoryId=BEA">천연
+						화장품</a></td>
+				<td><a
+					href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE"></a></td>
 			</tr>
 		</table>
+		<!-- <h4>최근 검색어</h4>
+		<br/>
+		<p>서울</p>
+			<br/> -->
 	</header>
 
 	<%
@@ -226,12 +258,14 @@ if (cookies != null) {
     const clickedInsideSearchIcon = $(e.target).hasClass("i-searchIcon");
     const clickedInsideSearchField = $(e.target).is(".search");
     const searchContainer = $(".iconContainer");
+    const header=$("#scroll");
+    
 
     if (isSearchFieldActive && !clickedInsideSearchIcon && !clickedInsideSearchField && !searchContainer.has(e.target).length) {
       const icon = $(".i-iconinfo");
       const searchField = $(".search");
       const categories = $("#categories");
-
+    /*   header.css("height",""); */
       icon.css("visibility", "visible");
       searchField.css("display", "none");
       categories.css("visibility", "visible");
@@ -248,6 +282,8 @@ if (cookies != null) {
        const searchField = $(".search");
        const categories = $("#categories");
        const windowWidth = $(window).innerWidth();
+       const header=$("#scroll");
+       
 
        if (isSearchFieldActive) {
          $("form").submit(); 
@@ -257,6 +293,8 @@ if (cookies != null) {
        icon.css("visibility", "hidden");
        searchField.css("display", "flex");
        categories.css("visibility", "hidden");
+      /*  header.css("height","300px"); */
+           
        
        /* 화면크기에따른 돋보기위치이동 */
        if(windowWidth > 1800) {
@@ -372,7 +410,7 @@ $(".i-searchIcon").click((e) => {
       $("#mainOpacity").css("opacity", "1.0");
       isSearchFieldActive = false;
     }
-  });
+  }); 
   
   //알림 클릭시 삭제
   $(".checkbox").change(e=>{

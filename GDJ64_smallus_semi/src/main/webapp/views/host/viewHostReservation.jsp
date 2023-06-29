@@ -50,9 +50,9 @@
                         %>
 		                    <tr>
 		                        <td>
-		                        	<a href="location.assign('<%=request.getContextPath()%>/host/viewPaymentDetail.do?paymentId=<%=p.getPayment().getPaymentId()%>')"><%=p.getPayment().getPaymentId()%>
+		                        	<a href="<%=request.getContextPath()%>/host/viewPaymentDetail.do?paymentId=<%=p.getPayment().getPaymentId()%>"><%=p.getPayment().getPaymentId()%>
 		                        	</a></td>
-		                        <td><a><%=p.getClasses().getClassTitle()%></a></td>
+		                        <td><a href="<%=request.getContextPath()%>/host/viewPaymentDetail.do?paymentId=<%=p.getPayment().getPaymentId()%>"><%=p.getClasses().getClassTitle()%></a></td>
 		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
 		                        <td><%=p.getPayment().getMemberId()%> 님 예약</td>
 		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
@@ -63,8 +63,8 @@
                     }else if(sortStatusList!=null && !sortStatusList.isEmpty()){
                     	for(PaymentCalc p: sortStatusList){%>
                         <tr>
-		                        <td><a href="location.assign('<%=request.getContextPath()%>/host/viewPaymentDetail.do?paymentId=<%=p.getPayment().getPaymentId()%>')"><%=p.getPayment().getPaymentId()%></a></td>
-		                        <td><a><%=p.getClasses().getClassTitle()%></a></td>
+		                        <td><a href="<%=request.getContextPath()%>/host/viewPaymentDetail.do?paymentId=<%=p.getPayment().getPaymentId()%>"><%=p.getPayment().getPaymentId()%></a></td>
+		                        <td><a href="<%=request.getContextPath()%>/host/viewPaymentDetail.do?paymentId=<%=p.getPayment().getPaymentId()%>"><%=p.getClasses().getClassTitle()%></a></td>
 		                        <td><%=p.getClassDetail().getBookingTimeStart()%> - <%=p.getClassDetail().getBookingTimeEnd()%></td>
 		                        <td><%=p.getClasses().getClassPersonnel()%> 명</td>
 		                        <td><%=p.getPayment().getMemberId()%> 님 예약</td>
@@ -99,6 +99,7 @@ function selectOption(){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
 	}
 }
+
 </script>
 <%@ include file="/views/common/hostFooter.jsp"%>
 
