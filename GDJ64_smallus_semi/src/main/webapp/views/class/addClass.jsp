@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/hostHeader.jsp"%>
-<%-- <%@ include file="/views/common/mainHeader.jsp"%> --%>
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
+
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/class/addClass.css" />
 	
@@ -55,9 +56,33 @@
 			<p>상세 내용</p>
 			<textarea name="classDetail" id="" cols="80" rows="10"
 				placeholder="클래스에 대한 설명을 입력해주세요."></textarea>
-			<p>스케쥴 등록</p>
+			<p>스케쥴 등록 (같은날짜 두번 선택후 시간 등록)</p>
 			<div id="AddSchedule-calendar">
-				<input type="text" name="datetimes" readonly><input type="button" value="추가" onclick="schedulePlus();"> <br>
+				<div id="plusSchedule">
+					<input type="text" name="datetimes" readonly>
+					<input type="button" value="추가" onclick="schedulePlus();">
+					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
+				</div>
+				<div id="plusSchedule">
+					<input type="text" name="datetimes" readonly>
+					<input type="button" value="추가" onclick="schedulePlus();">
+					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
+				</div>
+				<div id="plusSchedule">
+					<input type="text" name="datetimes" readonly>
+					<input type="button" value="추가" onclick="schedulePlus();">
+					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
+				</div>
+				<div id="plusSchedule">
+					<input type="text" name="datetimes" readonly>
+					<input type="button" value="추가" onclick="schedulePlus();">
+					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
+				</div>
+				<div id="plusSchedule">
+					<input type="text" name="datetimes" readonly>
+					<input type="button" value="추가" onclick="schedulePlus();">
+					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	
+				</div>
 			</div>
 		</div>
 		<br> <br> <input type="submit" value="등록하기"> <br>
@@ -69,8 +94,16 @@
 <script>
 
 const schedulePlus=()=>{
-	alert("노답");
-	const $input=$
+	const $input=$("#plusSchedule").clone(true);
+	$("#AddSchedule-calendar").append($input);
+}
+
+const scheduleMinus=(e)=>{
+	if(document.querySelectorAll("#plusSchedule").length==1){
+		alert("일정을 최소 1개 이상 등록해주세요!");
+	}else{
+		$(e.target).parent().remove();
+	}
 }
 
 $(function() {
