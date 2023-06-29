@@ -1,1 +1,1 @@
-{"resources":{"Scripts/Script.sql":{"default-datasource":"oracle_thin-188be1469d5-4fb6b7da725a9c80"}}}
+{"resources":{"Scripts/Script.sql":{"default-datasource":"oracle_thin-188be1469d5-4fb6b7da725a9c80","default-schema":"SEMICOLON"}}}
