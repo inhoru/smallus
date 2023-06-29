@@ -391,6 +391,23 @@ public class MemberDao {
 			close(pstmt);
 		}return result;
 	}
+	public int reviewCount(Connection conn, String memberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("reviewCount"));
+			//SELECT COUNT(MEMBER_ID) FROM WISH WHERE MEMBER_ID=? 
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			if(rs.next())result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
 
 
 	public static Member getMember(ResultSet rs) throws SQLException {
