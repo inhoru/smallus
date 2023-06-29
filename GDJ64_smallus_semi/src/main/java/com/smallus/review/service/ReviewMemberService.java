@@ -29,12 +29,14 @@ public class ReviewMemberService {
 		close(conn);
 		return result;
 	}
-//	public int countReviewByhostId(String userId) {
-//		Connection conn=getConnection();
-//		int count=dao.countReviewByhostId(conn,userId);
-//		if(count>0) commit(conn);
-//		else rollback(conn);
-//		return count;
-//	}
+	/*
+	 * public int deleteReviewMyPage(String reviewId) { Connection
+	 * conn=getConnection(); int count=dao.deleteRevieMyPage(conn,reviewId);
+	 * if(count>0) commit(conn); else rollback(conn); return count; }
+	 */
+	public int deleteReviewMyPage(String reviewId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }
