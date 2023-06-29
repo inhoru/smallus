@@ -80,7 +80,7 @@ int cPage = (int) request.getAttribute("cPage");
 							%>
 							<button class="i-withdrawalbutton1 i-writingreview i-cancel" >예약취소</button>
 							<%
-							} else if(paymentStatus.equals("수강완료")){
+							} else if(paymentStatus.equals("수강완료") ){
 							%>
 							<button class="i-withdrawalbutton1 i-writingreview">후기
 								작성</button>
@@ -88,7 +88,7 @@ int cPage = (int) request.getAttribute("cPage");
 							}
 							%>
 							<%
-							if (paymentStatus.equals("결제취소") || endDate.after(today)) {
+							if (paymentStatus.equals("결제취소") ) {
 							%>
 							<%
 							} 
