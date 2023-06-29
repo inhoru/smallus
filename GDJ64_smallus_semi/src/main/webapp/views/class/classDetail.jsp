@@ -1,18 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat"%>
+	import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat,com.smallus.main.model.vo.Wish"%>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
 <%
 Classes info = (Classes) request.getAttribute("classinfo");
 List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
 String classId = (String) request.getAttribute("classId");
+
+
 %>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ae17cb6906cd1874ef26a94895d53fdb&libraries=services"></script>
 
 <meta charset="utf-8">
+
 <%@ include file="/views/common/mainHeader.jsp"%>
+
+<%
+	
+			boolean isWish = false;
+			if (loginMember != null) {
+		List<Wish> wish = (List<Wish>) session.getAttribute("wishMember");
+		for (Wish w : wish) {
+			
+			    if (w.getClassId().equals(classId)) {
+			        isWish = true;
+			        break;
+			    }
+			
+			
+		
+		
+		}
+			}
+			
+%>
 
 <div style="background-color: #FFFBF5; padding: 1%;">
 	<div class="d-class-detail">
@@ -27,8 +50,11 @@ String classId = (String) request.getAttribute("classId");
 				<div id="d-detail-top">
 					<p><%=info.getCategoryTitle()%></p>
 					<div class="h-wish-container">
+					<%
+				if (loginMember != null) {
+				%>
 						<input type="checkbox" id="i-favoritee2" name="favorite-checkbox"
-							value="favorite-button" class="i-wishCheck" checked> <label
+							value="favorite-button" class="i-wishCheck" <% if (isWish) { %>checked<% } %>> <label
 							for="i-favoritee2" class="i-container"> <svg
 								xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 								viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
@@ -39,6 +65,11 @@ String classId = (String) request.getAttribute("classId");
 		                            </path>
 		                    </svg>
 						</label>
+						 <input type="hidden" value="<%=info.getClassId()%>"
+					class="i-classId">
+					<%} %>
+	
+	
 					</div>
 				</div>
 
@@ -259,6 +290,46 @@ String classId = (String) request.getAttribute("classId");
 		
 </script>
 <script>
+$(".i-wishCheck").change(function(e) {
+	var classTitle = $(this).closest('.h-wish-container').find('.i-classId').val();
+	var isChecked = $(this).is(':checked');
+	console.log(classTitle);
+
+	if (isChecked) {
+		$.ajax({
+			type: "get",
+			url: "<%=request.getContextPath()%>/member/wishCheckAdd.do",
+			data: { title: classTitle },
+			success: function(data) {
+				// 적용된 후의 처리 (예: 화면 업데이트)
+				console.log("Wish added successfully");
+			},
+			error: function(r, m) {
+				console.log(r);
+				console.log(m);
+				if (e.status == 404)
+					alert("요청한 페이지가 없습니다");
+			}
+		});
+	} else {
+		$.ajax({
+			type: "get",
+			url: "<%=request.getContextPath()%>/member/wishCheckRemove.do",
+			data: { title: classTitle },
+			success: function(data) {
+				// 적용된 후의 처리 (예: 화면 업데이트)
+				console.log("Wish removed successfully");
+			},
+			error: function(r, m) {
+				console.log(r);
+				console.log(m);
+				if (e.status == 404)
+					alert("요청한 페이지가 없습니다");
+			}
+		});
+	}
+});
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
     center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
@@ -420,4 +491,5 @@ display:none;}
 
 
 <%@ include file="/views/common/footer.jsp"%>
+
 
