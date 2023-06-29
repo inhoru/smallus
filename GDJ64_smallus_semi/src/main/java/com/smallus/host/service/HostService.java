@@ -74,9 +74,9 @@ public class HostService {
 		return result;
 	}
 	
-	public int updateHostProfile(Host h, String hostId) {
+	public int updateHostProfile(Host h) {
 		Connection conn=getConnection();
-		int result=dao.updateHostProfile(conn,h,hostId);
+		int result=dao.updateHostProfile(conn,h);
 		if(result>0) {
 			commit(conn);
 		}else {

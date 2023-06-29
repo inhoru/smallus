@@ -173,7 +173,7 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 	         close(pstmt);
 	      }return result;
    }
-   public int updateHostProfile(Connection conn,Host h,String hostId) {
+   public int updateHostProfile(Connection conn,Host h) {
 	      PreparedStatement pstmt=null;
 	      int result=0;
 	      try {
@@ -182,7 +182,7 @@ private Properties sql=new Properties();//final로 선언하면 처리속도 빨
 	         pstmt.setString(2, h.getHostPw());
 	         pstmt.setString(3, h.getHostHomephone());
 	         pstmt.setString(4, h.getHostEmail());
-	         pstmt.setString(5, hostId);
+	         pstmt.setString(5, h.getHostId());
 	         result=pstmt.executeUpdate();
 	      }catch(SQLException e) {
 	         e.printStackTrace();
