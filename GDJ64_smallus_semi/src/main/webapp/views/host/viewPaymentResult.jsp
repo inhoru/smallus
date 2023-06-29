@@ -43,11 +43,11 @@
 						<% if(paymentC!=null){
 							%>
 						<img
-							src="<%=request.getContextPath()%>/img/<%=paymentC.getClasses().getClassThumbnail()%>"
+							src="<%=request.getContextPath()%>/upload/class/<%=paymentC.getClasses().getClassThumbnail()%>"
 							alt="" width="150px" height="150px">
 						<div class="i-patmentcontent">
 							<h3 ><%=paymentC.getClasses().getClassTitle()%></h3>
-							<span><%=paymentC.getClassDetail().getBookingTimeStart()%> || <%=paymentC.getClassDetail().getBookingTimeEnd()%></span>
+							<span><%=paymentC.getClassDetail().getBookingTimeStart1()%> ~ <%=paymentC.getClassDetail().getBookingTimeEnd1()%></span>
 							<span><%=paymentC.getHost().getHostName()%></span>
 						</div>
 					</div>
@@ -68,14 +68,14 @@
 						<span><%=paymentC.getPaymentType().getPaymentName()%>결제</span><span><%=paymentC.getClasses().getClassPrice() * paymentC.getPayment().getClassPersonnel()%>원</span>
 					</div>
 					<div class="i-paymentInformationDetails">
-						<span>총 결제금액</span><span><%=paymentC.getClasses().getClassPrice() - paymentC.getCoupon().getCouponPrice()%>원</span>
+						<span>총 결제금액</span><span><%=paymentC.getClasses().getClassPrice() * paymentC.getPayment().getClassPersonnel() - paymentC.getCoupon().getCouponPrice()%>원</span>
 					</div>
 				</div>
 
 
 
 			<%}%>
-				<button class="i-storage" onclick=location.assign("<%=request.getContextPath()%>/memberpayment.do")>확인</button>
+				<button class="i-storage" onclick="location.assign('<%=request.getContextPath()%>/memberpayment.do')">목록으로</button>
 			</div>
 
 		</section>

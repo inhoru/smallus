@@ -51,7 +51,7 @@ public class UpdateHostProfileReServlet extends HttpServlet {
 			
 				int data=new HostService().updateHostProfile(h);
 				Host newHost=new HostService().selectByhostId(hostId);
-				session.setAttribute("hostInfo", newHost);
+				session.setAttribute("loginHost", newHost);
 				System.out.println(data);
 				response.setContentType("text/html;charset=utf-8");
 				response.getWriter().print(data);

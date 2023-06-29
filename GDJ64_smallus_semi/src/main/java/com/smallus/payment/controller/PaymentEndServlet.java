@@ -85,9 +85,6 @@ public class PaymentEndServlet extends HttpServlet {
 		
 		int personnel=Integer.parseInt(classPersonnel);
 		int remainingPersonnel= new PaymentService().selectRemainPer(classDetailId);
-//		System.out.println("personnel :"+personnel);
-//		System.out.println("remainingPersonnel :"+remainingPersonnel);
-//		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
 		
 		
 		if(remainingPersonnel<=0) {
@@ -106,17 +103,12 @@ public class PaymentEndServlet extends HttpServlet {
 			response.setContentType("text/csv;charset=utf-8");
 			response.getWriter().print(data);
 		
-		
-
 		Classes n=new PaymentService().classDetailId(classDetailId);
 		int insertNot=new PaymentService().insertNot(classDetailId,n);		
 		List<Notifications> list =new HostService().selectAllNotifications(n.getHostId());
 		int notcount = new HostService().notificationsCount(n.getHostId());
 		session.setAttribute("notcount",notcount);
 		session.setAttribute("Notlist",list);
-		
-		
-		
 		
 	}
 

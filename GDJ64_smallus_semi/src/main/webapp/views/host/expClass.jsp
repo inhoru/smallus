@@ -33,6 +33,7 @@ Member loginMember = (Member) session.getAttribute("loginMember");
 		
 		}
 			}
+		
 	%>
 	<div class="h-img-list">
 		<a
