@@ -83,7 +83,7 @@ textarea {
 					<div id="to">
 						<a id="a">답변</a>
 						<textarea cols="100" rows="20" placeholder="내용을 입력해 주세요"></textarea>
-					<button id="but2" type="button" onclick="alert('답변등록 완료');">등록하기</button>
+					<input id="but2" type="submit" onclick="submit(event);" value="등록하기">
 					</div>
 					<br>
 					<br>
@@ -98,6 +98,9 @@ textarea {
 	<script>
 		function toreplyopen(e){
 			$("#to").toggle();
+		}
+		function submit(e) {
+			alert("등록되었습니다");
 		}
 	</script>
 </div>

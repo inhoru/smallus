@@ -30,12 +30,13 @@
 	padding-left: 5px;
 }
 div#select_container {
-	margin-right: 21%;
+	/* margin-right: 21%; */
 	text-align: right;
 }
 
 section#main {
-	width: 1000px;
+	width: 100%;
+	height: 700px;
 	margin: 0 auto;
 	text-align: center
 }
@@ -63,6 +64,17 @@ table>tr {
 
 }
 </style>
+<section id=main>
+<div id="qna">
+</div>
+<div id="select_container">
+	<select>
+		<option value="답변 상태">답변 상태</option>
+	</select> <select>
+		<option value="답변 완료">답변 완료</option>
+		<option value="답변 대기">답변 대기</option>
+	</select>
+</div>
 <section id="main">
 	<div id="table">
 		<table>
@@ -136,3 +148,4 @@ table>tr {
 	}
 	</script>
 </section>
+<%@ include file="/views/common/footer.jsp"%>

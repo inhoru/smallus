@@ -34,7 +34,7 @@ margin-left: 50%;
 						cols="100" rows="20" placeholder="답변을 입력해주세요"></textarea>
 					<br>
 					<br>
-					<input id="co" type="submit" value="답변하기" onclick="alert('답변이 등록되었습니다')">
+					<input id="co" type="submit" value="답변하기" onclick="submit(event)">
 					<br>
 					<br>
 					<br>
@@ -42,6 +42,11 @@ margin-left: 50%;
 				</ul>
 			</nav>
 		</div>
+		<script>
+		function submit(e) {
+			alert("답변이 등록되었습니다.");
+		}
+		</script>
 	</section>
 	</div>
 	<!-- <div class="footer">

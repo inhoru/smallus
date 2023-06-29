@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
+#tra{
+	border: 1px solid #444444;
+	margin: 1% 20%;
+	border-radius: 20px;
+	width: 650px;
+	display: none;
+	justify-content: center;
+	}
 #qnatext {
 	border: 1px solid #444444;
 	margin: 1% 20%;
@@ -52,14 +60,6 @@ table>tr {
 	padding: 1% auto;
 }
 
-#tra{
-	border: 1px solid #444444;
-	margin: 1% 20%;
-	border-radius: 20px;
-	width: 650px;
-	justify-content: center;
-	display: none;
-
 }
 </style>
 <section id=main>
@@ -83,27 +83,31 @@ table>tr {
 				<th>작성일</th>
 				<th>작성자</th>
 			</tr>
-			<tr id="td" oncancel="toggle(event)">
+			<tr id="td" oncancel="show(event)";>
 				<td>답변 대기</td>
 				<td>난이도가 어떻게 되...</td>
 				<td>우리 애들이랑 같이...</td>
 				<td>2023.06.16</td>
 				<td>이성진</td>
 			</tr>
-			<tr id="td" onclick="toggle(event);">
+			<tr id="td" onclick="toggle(event)";>
 				<td>답변 완료</td>
 				<td>단체 예약</td>
 				<td>단체 예약을 하려고...</td>
 				<td>2023.06.19</td>
 				<td>나sms 유저다</td>
 			</tr>
-
-		<div>
+		</table>
+		<div id="tra" onclick="show(event)"; >
 			<table>
-				<tr id="tra" onclick="toggle(event)";>
-					<td id="l">율맘</td>
+				<tr id="a">
+					<th id="l">율맘</th>
 					<td id="l">2023-06-25</td>
+					</tr>
+					<tr>
 					<td id="l">난이도가 어떻게 되는건지 궁금해서 질문드려용~</td>
+					</tr>
+					<tr>
 					<td id="l">저희 애들이랑 같이 만들러 가려고 하는데 애들이 만들기엔 많이 어렵나요? 아 애들은 8살 남자아이와 5살여자아이예요~</td>
 				</tr>
 			</table>
@@ -112,7 +116,7 @@ table>tr {
 		<div id="qnatext" onclick="toggle(event)";>
 			<table>
 				<tr id="a">
-					<td id="l">작성자</td>
+					<th id="l">작성자</th>
 					<td id="l">2023-06-25</td>
 				</tr>
 				<tr>
@@ -134,11 +138,11 @@ table>tr {
 				</tr>
 			</table>
 		</div>
+	</div>
 <script>
-	function toggle(e) {
-		$("#tra").toggle(show);	
-}
-	
+	function show(e) {
+		$("#tra").show();
+}	
 	function toggle(e) {
 		$("#qnatext").toggle();
 		$("#qnactext").toggle();
