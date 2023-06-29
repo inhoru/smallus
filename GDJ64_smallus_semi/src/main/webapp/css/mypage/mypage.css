@@ -126,13 +126,13 @@
 /* 쿠폰 갯수 */
 .i-as1 {
 	position: relative;
-	left: -10px;
+	left: -5px;
 }
 
 /* 찜갯수 */
 .i-as2 {
 	position: relative;
-	left: -2px;
+	left: 3px;
 }
 
 /* 후기 갯수 */
@@ -474,7 +474,7 @@ section.i-imgContainer .i-img-list h4 {
 .i-wish-container input:checked+label svg {
 	cursor: pointer;
 	fill: rgb(255, 0, 0);
-	stroke: rgb(255, 255, 255);
+	stroke: rgb(255, 0, 0);
 	animation: heartButton 1s;
 }
 

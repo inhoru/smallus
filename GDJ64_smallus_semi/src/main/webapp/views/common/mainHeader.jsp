@@ -54,7 +54,7 @@ if (cookies != null) {
 				</div>
 				<div id="hiddenseach">
 					<form action="<%=request.getContextPath()%>/main/mainSearch.do"
-						method="get">
+						method="get"  id="todo-form" class="form">
 						<input type="text" name="q" class="search"
 							placeholder=" 관심,주제,클래스,호스트찾기">
 					</form>
@@ -99,12 +99,13 @@ if (cookies != null) {
 			</div>
 			<div id="hiddenseach">
 				<form action="<%=request.getContextPath()%>/main/mainSearch.do"
-					method="get">
+					method="get" id="todo-form" class="form">
 					<input type="text" name="q" class="search"
-						placeholder=" 관심,주제,클래스,호스트찾기">
+						placeholder=" 관심,주제,클래스,호스트찾기" >
 				</form>
 			</div>
 		</nav>
+		
 		<div class="i-loginHeadr">
 			<div class="i-iconinfo">
 				<img
@@ -129,6 +130,7 @@ if (cookies != null) {
 					src="<%=request.getContextPath()%>/img/하트.png" alt="" width="25px"
 					height="25px"></a>
 			</div>
+
 
 			<%
 			if (loginMember != null) {
@@ -197,6 +199,8 @@ if (cookies != null) {
 		}
 		%>
 		</div>
+	
+    
 		<table id="categoriesTable">
 			<tr>
 				<td class="ca"><a
@@ -241,10 +245,7 @@ if (cookies != null) {
 					href="<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE"></a></td>
 			</tr>
 		</table>
-		<!-- <h4>최근 검색어</h4>
-		<br/>
-		<p>서울</p>
-			<br/> -->
+	
 	</header>
 
 	<%
@@ -259,6 +260,7 @@ if (cookies != null) {
     const clickedInsideSearchField = $(e.target).is(".search");
     const searchContainer = $(".iconContainer");
     const header=$("#scroll");
+    const recentSearche=$(".i-recentSearche");
     
 
     if (isSearchFieldActive && !clickedInsideSearchIcon && !clickedInsideSearchField && !searchContainer.has(e.target).length) {
@@ -272,6 +274,7 @@ if (cookies != null) {
       $(".i-searchIcon").css("transform", "translateX(0)");
       $(".i-searchIcon").css("transition", "0.4s");
       $("#mainOpacity").css("opacity", "1.0");
+      recentSearche.css("display","none");
       isSearchFieldActive = false;
       searchField.val("");
     }
@@ -283,25 +286,31 @@ if (cookies != null) {
        const categories = $("#categories");
        const windowWidth = $(window).innerWidth();
        const header=$("#scroll");
+       const recentSearche=$(".i-recentSearche");
+       
        
 
        if (isSearchFieldActive) {
-         $("form").submit(); 
-         return;
-       }
+    	    if (searchField.val().trim() !== "") {
+    	      $("form").submit();
+    	    }
+    	    return;
+    	  }
+
 
        icon.css("visibility", "hidden");
        searchField.css("display", "flex");
        categories.css("visibility", "hidden");
-      /*  header.css("height","300px"); */
+       recentSearche.css("display","block");
+       
            
        
        /* 화면크기에따른 돋보기위치이동 */
        if(windowWidth > 1800) {
            $(".i-searchIcon").css("transform", "translateX(-115px)");
            $(".search").css("margin-bottom","5%");
-       } else if(windowWidth > 1500 ) {
-           $(".i-searchIcon").css("transform", "translateX(-85px)");
+       } else if(windowWidth > 1400 ) {
+           $(".i-searchIcon").css("transform", "translateX(-75px)");
            $(".search").css("margin-bottom","7%");
            
        }
@@ -312,7 +321,17 @@ if (cookies != null) {
        isSearchFieldActive = true;
        e.stopPropagation();
    });
+  /* 공백이면 검색이안되게하는 js */
+  $(".search").keypress((e) => {
+	  const searchField = $(".search");
 
+	  if (e.which === 13) {
+	    if (searchField.val().trim() !== "") {
+	      $("form").submit();
+	    }
+	    return false;
+	  }
+	});
 
 
   // 검색 필드 이외의 영역을 클릭할 때 검색 필드 숨기기
@@ -328,11 +347,16 @@ if (cookies != null) {
       isSearchFieldActive = false;
     }
   });
+
+  
 </script>
+
 	<%
 	} else {
 	%>
 	<script>
+	
+	
 /* 로그인 시 작동 */
 let isSearchFieldActive = false;
 
