@@ -49,7 +49,7 @@ public class MemberDao {
 		} finally {
 			close(rs);
 			close(pstmt);
-		}	
+		}
 		return m;
 	}
 
@@ -130,7 +130,6 @@ public class MemberDao {
 		return result;
 	}
 
-
 	public int KakaoenrollMember(Connection conn, Member m) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -171,7 +170,8 @@ public class MemberDao {
 		return m;
 
 	}
-	public Member selectBynickName(Connection conn ,String nickName) {
+
+	public Member selectBynickName(Connection conn, String nickName) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Member m = null;
@@ -180,7 +180,7 @@ public class MemberDao {
 			pstmt.setString(1, nickName);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				m=(getMember(rs));
+				m = (getMember(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -190,50 +190,55 @@ public class MemberDao {
 		}
 		return m;
 	}
-	public int updateMember(Connection conn, Member m,String s) {
-		PreparedStatement pstmt=null;
-		
-		int result=0;
+
+	public int updateMember(Connection conn, Member m, String s) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("updateMember"));
-			
+			pstmt = conn.prepareStatement(sql.getProperty("updateMember"));
+
 			pstmt.setString(1, m.getMemberNickname());
 			pstmt.setString(2, m.getMemberImg());
 			pstmt.setString(3, m.getMemberEmail());
 			pstmt.setString(4, s);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
-	public int deleteByMember(Connection conn, String memberId,String password) {
-		PreparedStatement pstmt=null;
-		int result=0;
+
+	public int deleteByMember(Connection conn, String memberId, String password) {
+		PreparedStatement pstmt = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("deleteByMember"));
-			pstmt.setString(1,memberId);
-			pstmt.setString(2, password);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}return result;
-	}
-	public List<Member> paymentDetails(Connection conn, String memberId){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<Member> list=new ArrayList<Member>();
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("paymentDetails"));
+			pstmt = conn.prepareStatement(sql.getProperty("deleteByMember"));
 			pstmt.setString(1, memberId);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				Classes c=new Classes();
-				Payment p=new Payment();
-				ClassDetail d=new ClassDetail();
+			pstmt.setString(2, password);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public List<Member> paymentDetails(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Member> list = new ArrayList<Member>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("paymentDetails"));
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Classes c = new Classes();
+				Payment p = new Payment();
+				ClassDetail d = new ClassDetail();
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 				p.setPaymentStatus(rs.getString("PAYMENT_STATUS"));
 				p.setPaymentDate(rs.getDate("PAYMENT_DATE"));
@@ -249,152 +254,167 @@ public class MemberDao {
 				m.setClassDetail(d);
 				list.add(m);
 			}
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return list;
 	}
-	public List<Classes> wishList(Connection conn, String memberId,int cPage,int numPerpage){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<Classes> list=new ArrayList<Classes>();
+
+	public List<Classes> wishList(Connection conn, String memberId, int cPage, int numPerpage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Classes> list = new ArrayList<Classes>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("wishList"));
+			pstmt = conn.prepareStatement(sql.getProperty("wishList"));
 			pstmt.setString(1, memberId);
-			pstmt.setInt(2,(cPage-1)*numPerpage+1);
-			pstmt.setInt(3, cPage*numPerpage);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
+			pstmt.setInt(2, (cPage - 1) * numPerpage + 1);
+			pstmt.setInt(3, cPage * numPerpage);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
 				list.add(getClass(rs));
-				
+
 			}
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return list;
 	}
-	public int wishRemove(Connection conn, String memberId,String title) {
-		PreparedStatement pstmt=null;
-		int result=0;
+
+	public int wishRemove(Connection conn, String memberId, String title) {
+		PreparedStatement pstmt = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("wishRemove"));
-			pstmt.setString(1,memberId);
+			pstmt = conn.prepareStatement(sql.getProperty("wishRemove"));
+			pstmt.setString(1, memberId);
 			pstmt.setString(2, title);
-			
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
-	public int wishAdd(Connection conn, String memberId,String title) {
-		PreparedStatement pstmt=null;
-		int result=0;
+
+	public int wishAdd(Connection conn, String memberId, String title) {
+		PreparedStatement pstmt = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("wishAdd"));
-			pstmt.setString(1,memberId);
+			pstmt = conn.prepareStatement(sql.getProperty("wishAdd"));
+			pstmt.setString(1, memberId);
 			pstmt.setString(2, title);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
+
 	public int wishListCount(Connection conn, String memberId) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int result=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("wishListCount"));
-			pstmt.setString(1,memberId);
-			rs=pstmt.executeQuery();
-			if(rs.next())result=rs.getInt(1);
-		}catch(SQLException e) {
+			pstmt = conn.prepareStatement(sql.getProperty("wishListCount"));
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				result = rs.getInt(1);
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
-	public List<Notifications> selectAllNotifications(Connection conn, String memberId){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		List<Notifications> list=new ArrayList<Notifications>();
+
+	public List<Notifications> selectAllNotifications(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Notifications> list = new ArrayList<Notifications>();
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("selectAllNotifications"));
+			pstmt = conn.prepareStatement(sql.getProperty("selectAllNotifications"));
 			pstmt.setString(1, memberId);
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
 				list.add(getNotifications(rs));
 			}
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
 		}
 		return list;
 	}
-	
+
 	public int notificationsCount(Connection conn, String memberId) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int result=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("notificationsCount"));
-			
-			pstmt.setString(1,memberId);
-			rs=pstmt.executeQuery();
-			if(rs.next())result=rs.getInt(1);
-		}catch(SQLException e) {
+			pstmt = conn.prepareStatement(sql.getProperty("notificationsCount"));
+
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				result = rs.getInt(1);
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
+
 	public int notifications(Connection conn, String notId) {
-		PreparedStatement pstmt=null;
-		int result=0;
+		PreparedStatement pstmt = null;
+		int result = 0;
 
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("notifications"));
-			pstmt.setString(1,notId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
+			pstmt = conn.prepareStatement(sql.getProperty("notifications"));
+			pstmt.setString(1, notId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
+
 	public int reviewCount(Connection conn, String memberId) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int result=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(sql.getProperty("reviewCount"));
-			pstmt.setString(1,memberId);
-			rs=pstmt.executeQuery();
-			if(rs.next())result=rs.getInt(1);
-		}catch(SQLException e) {
+			pstmt = conn.prepareStatement(sql.getProperty("reviewCount"));
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				result = rs.getInt(1);
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(rs);
 			close(pstmt);
-		}return result;
+		}
+		return result;
 	}
-
 
 	public static Member getMember(ResultSet rs) throws SQLException {
 		return Member.builder().memberId(rs.getString("MEMBER_ID")).memberPw(rs.getString("MEMBER_PW"))
@@ -403,13 +423,17 @@ public class MemberDao {
 				.memberImg(rs.getString("MEMBER_IMG")).memberNickname(rs.getString("MEMBER_NICKNAME"))
 				.memberSt(rs.getString("MEMBER_ST")).build();
 	}
+
 	public static Notifications getNotifications(ResultSet rs) throws SQLException {
-		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID")).memberId(rs.getString("MEMBER_ID")).notiflMessage(rs.getString("NOTIFL_MESSAGE")).createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
+		return Notifications.builder().notiflId(rs.getString("NOTIFL_ID")).hostId(rs.getString("HOST_ID"))
+				.memberId(rs.getString("MEMBER_ID")).notiflMessage(rs.getString("NOTIFL_MESSAGE"))
+				.createdAt(rs.getDate("CREATED_AT")).notiflType(rs.getString("NOTIFL_TYPE")).build();
 	}
-	
-	public  Classes getClass(ResultSet rs) throws SQLException {
-		return Classes.builder().classId(rs.getString("CLASS_ID")).categoryTitle(rs.getString("CATEGORY_TITLE")).classTitle(rs.getString("CLASS_TITLE"))
-				.classThumbnail(rs.getString("CLASS_THUMBNAIL")).classAddress(rs.getString("ADDRESS")).build();
-		
+
+	public Classes getClass(ResultSet rs) throws SQLException {
+		return Classes.builder().classId(rs.getString("CLASS_ID")).categoryTitle(rs.getString("CATEGORY_TITLE"))
+				.classTitle(rs.getString("CLASS_TITLE")).classThumbnail(rs.getString("CLASS_THUMBNAIL"))
+				.classAddress(rs.getString("ADDRESS")).build();
+
 	}
 }

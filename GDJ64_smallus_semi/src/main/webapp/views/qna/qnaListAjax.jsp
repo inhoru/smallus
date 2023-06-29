@@ -34,7 +34,7 @@ div#select_container {
 }
 
 section#main {
-	width: 1000px;
+	width: 100%;
 	margin: 0 auto;
 	text-align: center
 }
@@ -62,6 +62,7 @@ table>tr {
 
 }
 </style>
+<section id=main>
 <div id="qna">
 </div>
 <div id="select_container">
