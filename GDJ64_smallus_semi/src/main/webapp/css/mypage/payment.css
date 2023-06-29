@@ -1,6 +1,7 @@
 @charset "UTF-8";
 #mainOpacity {
 		background-color:#FFFCF5;
+		min-height:700px;
 	}
 	section.h-payment-container{
 		width:50%;

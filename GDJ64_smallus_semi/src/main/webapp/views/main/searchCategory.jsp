@@ -80,10 +80,10 @@ String search=(String) request.getAttribute("search");
 		}
 		%>
 	
+
+
+
+
 </div>
-
-
-
-
-
+</div>
 <%@ include file="/views/common/footer.jsp"%>
