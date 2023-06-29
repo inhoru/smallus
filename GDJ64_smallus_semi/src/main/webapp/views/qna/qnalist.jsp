@@ -40,7 +40,7 @@ section#main {
 	text-align: center;
 }
 
-div#qna a {
+div#qna{
 	display: block;
 	margin: 3% 20%;
 	font-size: 24px
@@ -88,10 +88,9 @@ table#list th, table#list td {
 				<td>나sms 유저다</td>
 			</tr>
 		</table>
-		<div class="qna_page">
-	<section id="main">
+		
 		<div id="qnatext" onclick="toggle(event)";>
-			<table>
+			
 				<tr id="a">
 					<td id="l">작성자</td>
 					<td id="l">2023-06-25</td>
@@ -102,10 +101,9 @@ table#list th, table#list td {
 				<tr>
 					<td id="l">단체예약을 좀 하고 싶은데 몇 명까지 가능하지 궁금해서 문의 남겨요~</td>
 				</tr>
-			</table>
 		</div>
 		<div id="qnactext" onclick="toggle(event)";>
-			<table>
+		
 				<tr id="a">
 					<th id="l">호스트</th>
 					<td id="l">2023-06-25</td>
@@ -113,24 +111,18 @@ table#list th, table#list td {
 				<tr>
 					<td id="l">저희 매장이 좀 협소한 관계로 최대 10분만 받고있어요:)</td>
 				</tr>
-			</table>
+		
 		</div>
-	</div>
 	<script>
 	function toggle(e) {
 		$("#qnatext").toggle();
 		$("#qnactext").toggle();
 		
 	}
-	</script>
-</section>
+	
 	function toggle(e) {
 		$("#qna").toggle();
 	}
-	function toggle(e) {
-		$("#qnatext").toggle();
-		$("#qnactext").toggle();
-
-	}
+	
 </script>
 <%@ include file="/views/common/footer.jsp"%>

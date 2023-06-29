@@ -1,4 +1,4 @@
-package com.smallus.host.controller;
+package com.smallus.review.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smallus.payment.model.vo.PaymentCompleted;
-import com.smallus.payment.service.PaymentService;
-
 /**
- * Servlet implementation class ViewPaymentByPaymentIdSerlvet
+ * Servlet implementation class AddReviewServlet
  */
-@WebServlet("/host/viewPaymentDetail.do")
-public class ViewPaymentByPaymentIdSerlvet extends HttpServlet {
+@WebServlet("/addreview.do")
+public class AddReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewPaymentByPaymentIdSerlvet() {
+    public AddReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,15 +26,7 @@ public class ViewPaymentByPaymentIdSerlvet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String paymentId=request.getParameter("paymentId");
-		System.out.println(paymentId);
-		PaymentCompleted p =new PaymentService().selectPaymentByPaymentId(paymentId);
-		if(p!=null) {
-			request.setAttribute("payment", p);
-			request.getRequestDispatcher("/views/host/hostPayment.jsp").forward(request, response);
-			
-		}
+		request.getRequestDispatcher("/views/review/addReview.jsp").forward(request, response);
 	}
 
 	/**
