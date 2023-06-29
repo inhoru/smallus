@@ -140,5 +140,12 @@ public class MemberService {
 		else rollback(conn);
 		return result;
 	}
+	public int reviewCount(String memberId) {
+		Connection conn=getConnection();
+		int result=dao.reviewCount(conn,memberId);
+		if(result>0)commit(conn);
+		else rollback(conn);
+		return result;
+	}
 	
 }

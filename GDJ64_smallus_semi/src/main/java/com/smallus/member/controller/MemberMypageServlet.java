@@ -41,7 +41,9 @@ public class MemberMypageServlet extends HttpServlet {
 		List<Member> m=new MemberService().paymentDetails(loginMember.getMemberId());
 		List<Classes> w=new MemberService().wishList(loginMember.getMemberId(),1,100);
 		int wishCount=new  MemberService().wishListCount(loginMember.getMemberId());
+		int reviewCount =new MemberService().reviewCount(loginMember.getMemberId());
 	request.setAttribute("wishCount", wishCount);
+	request.setAttribute("reviewCount", reviewCount);
 		request.setAttribute("wishList", w);
 		request.setAttribute("paymentDetails",m);
 		request.setAttribute("countCoupon", count);

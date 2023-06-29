@@ -49,7 +49,7 @@ String cPage=(String)request.getAttribute("cPage");
 							alt="" width="150px" height="150px">
 						<div class="i-patmentcontent">
 							<h3 ><%=p.getClasses().getClassTitle()%></h3>
-							<span><%=p.getClassDetail().getBookingTimeStart()%> || <%=p.getClassDetail().getBookingTimeEnd()%></span>
+							<span><%=p.getClassDetail().getBookingTimeStart1()%> ~ <%=p.getClassDetail().getBookingTimeEnd1()%></span>
 							<span><%=p.getHost().getHostName()%></span>
 						</div>
 					</div>

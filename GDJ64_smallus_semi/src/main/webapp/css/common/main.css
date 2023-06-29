@@ -219,6 +219,12 @@ section.h-main-banner{
 	overflow-x: scroll;
 	scroll-snap-type: both mandatory;
 	scroll-padding: 1rem;
+	-ms-overflow-style: none;
+	
+}
+
+.h-gallery::-webkit-scrollbar {
+	display: none;
 }
 
 /* .h-gallery::-webkit-scrollbar {

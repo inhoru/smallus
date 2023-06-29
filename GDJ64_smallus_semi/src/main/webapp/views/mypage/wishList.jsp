@@ -54,7 +54,7 @@ List<Classes> wish = (List) request.getAttribute("wishList");
 					
 					<section class="i-imgContainer i-wishContainer">
 						<div class="i-img-list">
-							<a href=""> <img
+							<a href="<%=request.getContextPath()%>/class/viewClassPage.do?classId=<%=w.getClassId()%>"> <img
 								src="<%=request.getContextPath()%>/upload/class/<%=w.getClassThumbnail()%>"
 								alt="no img">
 								<div class="i-wish-container i-wishheart">

@@ -260,9 +260,12 @@ if (cookies != null) {
        
        /* 화면크기에따른 돋보기위치이동 */
        if(windowWidth > 1800) {
-           $(".i-searchIcon").css("transform", "translateX(-125px)");
-       } else if(windowWidth > 1400) {
-           $(".i-searchIcon").css("transform", "translateX(-90px)");
+           $(".i-searchIcon").css("transform", "translateX(-115px)");
+           $(".search").css("margin-bottom","5%");
+       } else if(windowWidth > 1500 ) {
+           $(".i-searchIcon").css("transform", "translateX(-85px)");
+           $(".search").css("margin-bottom","7%");
+           
        }
        $(".i-searchIcon").css("transition", "0.7s");
        $("#mainOpacity").css("opacity", "0.5");
@@ -332,10 +335,12 @@ $(".i-searchIcon").click((e) => {
   categories.css("visibility", "hidden");
   
   if(windowWidth > 1800) {
-      $(".i-searchIcon").css("transform", "translateX(-35px)");
+      $(".i-searchIcon").css("transform", "translateX(-25px)");
+      $(".search").css("margin-top","1%");
   } else if(windowWidth > 1400) {
-      $(".i-searchIcon").css("transform", "translateX(-15px)");
-  } 
+      $(".i-searchIcon").css("transform", "translateX(-10px)");
+      
+  } 	
   
   $(".i-searchIcon").css("transition", "0.7s");
   $("#mainOpacity").css("opacity", "0.5");

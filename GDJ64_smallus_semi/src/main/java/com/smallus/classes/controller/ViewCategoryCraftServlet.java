@@ -73,7 +73,7 @@ public class ViewCategoryCraftServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		
 		List<ClassIndex> newCraft= new MainService().selectNewClassByCategory(categoryId);
-		List<ClassIndex> allCraft= new MainService().selectNewClassByCategory(categoryId);
+		List<ClassIndex> allCraft= new MainService().selectAllclassByCategory(categoryId, cPage, numPerpage);
 		if(newCraft!=null && !newCraft.isEmpty()) {
 		}
 		String categoryTitle="공예";

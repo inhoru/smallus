@@ -72,12 +72,12 @@
 	<br>
 	<div class="d-detail-menu">
 		<nav>
-			<ul>
-				<li><h3 id="infoAjax">상세 정보</h3></li>
-				<hr>
-				<li><h3 id="reviewAjax">후기</h3></li>
-				<hr>
-				<li><h3 id="qnaAjax">Q & A</h3></li>
+			<ul id="info2">
+				<li><h2 id="infoAjax">상세 정보</h3></li>
+				<hr id="h">
+				<li><h2 id="reviewAjax">후기</h3></li>
+				<hr id="h">
+				<li><h2 id="qnaAjax">Q & A</h3></li>
 			</ul>
 		</nav>
 	</div>
@@ -89,7 +89,7 @@
 				<p id="text"><%=info.getClassDetail() %></p>
 				<hr>
 				<li id="info"><p>주소</p></li>
-				<div id="map" style="width:100%;height:350px;"></div>
+				<div id="map" style="width:80%;height:350px;"></div>
 				<p style="font-size: 8px"><%=info.getClassAddress() %></p>
 				<hr>
 				<li id="info"><p>제공 사항</p></li>
@@ -271,9 +271,18 @@ geocoder.addressSearch('<%=info.getClassAddress() %>', function(result, status) 
 	width: 750px;
 	height: 300px;
 	margin: 1% 2%}
-	hr{
-	margin-right: 20%;
+	 hr{
+	margin-right: auto;
 	}
+ #info2{
+ display: inline-flex;
+ /* justify-content: center; */
+ text-align: justify;
+ width: 80%;
+ margin: 3% 0;
+ }
+ #h{
+ margin: 0 auto;}
 
 
 /* 상세페이지 전체 */

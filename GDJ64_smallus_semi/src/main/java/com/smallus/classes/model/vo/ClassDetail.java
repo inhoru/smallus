@@ -19,7 +19,7 @@ public class ClassDetail {
 	private Date bookingTimeEnd;
 	private int remainingPersonnel;
 
-	 private  String bookingTimeStart1; 
-	 private  String bookingTimeEnd1; 
+	private  String bookingTimeStart1; 
+	private  String bookingTimeEnd1; 
 	
 }
