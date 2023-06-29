@@ -691,6 +691,19 @@ public class PaymentDao {
 		return result;
 	}
 	
+	public int updatePaymentStatus(Connection conn) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("updatePaymentStatus"));
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }
 

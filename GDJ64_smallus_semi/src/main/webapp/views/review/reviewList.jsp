@@ -3,11 +3,10 @@
 <%@ page
 	import="java.util.List,com.smallus.review.model.vo.Review, java.text.SimpleDateFormat"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
-<%@ page import="java.util.List,com.smallus.review.model.vo.ReviewHost" %>	
+<%@ page import="java.util.List,com.smallus.review.model.vo.ReviewHost"%>
 <%
-	List<Review> reviews=(List)request.getAttribute("reviews");
-	
-%>	
+List<Review> reviews = (List) request.getAttribute("reviews");
+%>
 <div id="mainOpacity">
 	<div class="i-withdrawalendtotal">
 		<section class="i-tablecontent">
@@ -65,8 +64,9 @@
 			%>
 			<hr>
 			<div class="d-review-one">
-				<img id="imgs" src="<%=request.getContextPath()%>/upload/class/<%=r.getImgPath()%>"
-						width="150px" height="150px">
+				<img id="imgs"
+					src="<%=request.getContextPath()%>/upload/class/<%=r.getImgPath()%>"
+					width="150px" height="150px">
 				<div class="d-review-table">
 					<table>
 						<tr>
@@ -97,10 +97,10 @@
 		<script>
 		function deleteReview(reviews){
 			if(confirm("삭제하시겠습니까?")){
-				location.replace("<%=request.getContextPath()%>/review/deleteReviewMyPage.do?reviewId="+revies);
+				location.replace("<%=request.getContextPath()%>/revies/deleteReviewMyPage.do?reviewId="+ reviews);
 			}
 		}
-	</script>
+		</script>
 
 		<style>
 #d-review-page {

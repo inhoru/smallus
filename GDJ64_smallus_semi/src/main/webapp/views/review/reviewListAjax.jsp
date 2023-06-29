@@ -70,8 +70,8 @@
 					<tr>
 						<td><h2>★★★★★</h2></td>
 					</tr>
-					<tr id=time>
-						<td>작성자</td>
+					<tr id="time">
+						<td >작성자</td>
 						<td>2023-06-15 19:50</td>
 					</tr>
 					<!-- <tr>
@@ -90,18 +90,27 @@
 	</div>
 </div>
 <style>
-#d-review-page {
-	width: 70%;
-	margin: 0 auto;
+.d-review-list{
+	width: 100%;
 }
+#d-review-page {
+	width: 80%;
+	}
 
 .d-review-one {
-	margin: 20px;
+	/* margin: 20px; */
+	padding: 0 auto;
+	text-align: left;
 }
 
 .d-review-table h2 {
 	color: gold;
+	text-align: left;
 }
+.d-review-table h3{
+text-align: left;
+}
+
 
 .d-review-table button {
 	justify-content: end;
@@ -131,6 +140,7 @@ p {
 
 #time {
 	display: inline;
+	justify-content: left;
 }
 a{
 display: block;}

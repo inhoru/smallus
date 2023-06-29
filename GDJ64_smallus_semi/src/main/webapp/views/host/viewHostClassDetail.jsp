@@ -167,7 +167,9 @@ width: 20rem;
 	
 	// 세부 내용 수정 버튼클릭 
 	$("#h-updateClassInfomation").click(e=>{
-		alert("연결하기");
+		// alert("연결하기");
+		<%-- location.assign('<%=request.getContextPath()%>/updateClassStatus.do?classId=<%=list.getClassId()%>'); --%>
+		<%-- location.assign('<%=request.getContextPath()%>/updateClass.do?classId=<%=list.getClassId()%>'); --%>
 	})
 	// 삭제 버튼 클릭 
 	$(".hDeleteClassDetail").click(e=>{

@@ -1,4 +1,4 @@
-package com.smallus.review.controller;
+package com.smallus.classes.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.smallus.review.service.ReviewMemberService;
+import com.smallus.classes.model.service.ClassService2;
+import com.smallus.classes.model.vo.Classes;
 
 /**
- * Servlet implementation class DeleteReviewMyPage
+ * Servlet implementation class UpdateClassViewServlet
  */
-@WebServlet("/revies/deleteReviewMyPage.do")
-public class DeleteReviewMyPage extends HttpServlet {
+@WebServlet("/updateClass.do")
+public class UpdateClassViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteReviewMyPage() {
+    public UpdateClassViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +30,19 @@ public class DeleteReviewMyPage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String reviewId= request.getParameter("reviewId");
-		/*System.out.println(reviewId);*/
-		int result= new ReviewMemberService().deleteReviewMyPage(reviewId);
-		if(result>0) System.out.println("성공 ");
-		response.sendRedirect(request.getContextPath()+"/review/reviewList.do");
+
+		String classId=request.getParameter("classId");
+	// String classId="CLA1064";
+	
+	Classes classInfo=new ClassService2().selectClassByClassId(classId);
+	
+	request.setAttribute("classinfo", classInfo);
+	
+	request.getRequestDispatcher("/views/class/updateClass.jsp").forward(request, response);
+	
+	
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

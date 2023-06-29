@@ -67,7 +67,7 @@ margin:0.2rem 0; font-size: 0.6rem;}
 <%@ include file="/views/common/hostHeader.jsp"%>
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-profile">
-     	<h2>내 프로필 정보 보기</h2>
+     	<h3>내 프로필 정보 보기</h3>
         <hr>
         	<%-- <img src="<%=request.getContextPath()%>/img/<%=loginHost.getHostImg()%>" id="h-hostImg" name="h-hostImg">
         	<a href=""><img src="<%=request.getContextPath()%>/img/edit.svg" id="h-edit-pf"></a>
