@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat" %>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
-
+<%
+	Classes info=(Classes)request.getAttribute("classinfo");
+%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/class/addClass.css" />
 	
@@ -19,10 +22,9 @@
 		<hr>
 		<div id="inputs">
 			<p>클래스 이름</p>
-			<input type="text" name="classTitle" placeholder="등록하실 클래스명을 입력해주세요." required>
+			<input type="text" name="classTitle" placeholder="등록하실 클래스명을 입력해주세요." 
+			value="<%=info.getCategoryTitle() %>">
 			<p >등록할 사진</p>
-				<!--<img src="https://img.freepik.com/free-icon/add-button-with-plus-symbol-in-a-black-circle_318-48599.jpg"
-				width="200" height="200" alt=""> -->
 				<input type="file" name="classThumbnail" accept="image/*" id="thumbnail" required>
 				<div id="imagePreview"></div>
 			<p>※해당 사진이 썸네일로 등록됩니다.</p>
@@ -35,27 +37,30 @@
 				<option value="EXE">운동</option>
 			</select>
 			<p>클래스 회당 인원제한</p>
-			<input type="number" name="classPersonnel" placeholder="최대 인원수를 입력해주세요." required>명
+			<input type="number" name="classPersonnel" placeholder="최대 인원수를 입력해주세요."
+			value="<%=info.getClassPersonnel() %>">명
 			<p>1인당 클래스 금액</p>
-			<input type="number" name="classPrice" placeholder="금액을 입력해주세요." required>원
+			<input type="number" name="classPrice" placeholder="금액을 입력해주세요."
+			value="<%=info.getClassPrice() %>">원
 			<p>주소</p>
-			<!-- <input type="text" id="sample4_postcode" placeholder="우편번호"> -->
+			<input type="text" id="sample4_roadAddress" name="classAddress" placeholder="주소 입력(버튼 이용)"
+			readonly required value="<%=info.getClassAddress() %>">
 			<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
-			<input type="text" id="sample4_roadAddress" name="classAddress" placeholder="주소 입력(버튼 이용)" readonly required>
-			<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소"> -->
 			<span id="guide" style="color:#999;display:none"></span>
 			<input type="text" id="sample4_detailAddress" name="classAddressDetail" placeholder="상세주소">
-			<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목"> -->
 			
 			<p>제공사항</p>
-			<input type="text" name="classOffer" placeholder="제공사항을 입력해주세요." required>
+			<input type="text" name="classOffer" placeholder="제공사항을 입력해주세요." 
+			required value="<%=info.getClassOffer() %>">
 			<p>유의사항</p>
-			<input type="text" name="classNotice" placeholder="유의사항을 입력해주세요." required>
+			<input type="text" name="classNotice" placeholder="유의사항을 입력해주세요." 
+			required value="<%=info.getClassNotice() %>">
 			<p>준비물</p>
-			<input type="text" name="classSupplies" placeholder="준비물을 입력해주세요.">
+			<input type="text" name="classSupplies" placeholder="준비물을 입력해주세요."
+			required value="<%=info.getClassSupplies() %>">
 			<p>상세 내용</p>
-			<textarea name="classDetail" id="" cols="80" rows="10"
-				placeholder="클래스에 대한 설명을 입력해주세요."></textarea>
+			<textarea name="classDetail" id="" cols="80" rows="10" required
+			placeholder="클래스에 대한 설명을 입력해주세요." value="<%=info.getClassDetail() %>"></textarea>
 				
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 				
