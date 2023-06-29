@@ -75,7 +75,7 @@
 
 
 			<%}%>
-				<button class="i-storage" onclick=location.assign("<%=request.getContextPath()%>/memberpayment.do")>확인</button>
+				<button class="i-storage" onclick="location.assign('<%=request.getContextPath()%>/memberpayment.do')">목록으로</button>
 			</div>
 
 		</section>

@@ -42,17 +42,17 @@ public class ViewClassPageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String classId = request.getParameter("classId");
-		List<ClassIndex> newClass = new MainService().NewClassList();
-		List<ClassIndex> wishClass = new MainService().wishClassList();
+		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
-		String memberId = loginMember.getMemberId();
-		List<Wish> wishMember = new MainService().wishMember(memberId);
 		Classes classInfo = new ClassService2().selectClassByClassId(classId);
 		List<ClassDetail> classSchedule = new ClassService().selectClassDetailByClassId(classId);
-		request.setAttribute("wishClass", wishClass);
-		request.setAttribute("newClass", newClass);
-		session.setAttribute("wishMember", wishMember);
+		if(loginMember!=null) {
+			String memberId=loginMember.getMemberId();
+			List<Wish> wishMember= new MainService().wishMember(memberId);
+			session.setAttribute("wishMember", wishMember);
+			
+		}
 		request.setAttribute("classinfo", classInfo);
 		request.setAttribute("classSchedule", classSchedule);
 		request.setAttribute("classId", classId);

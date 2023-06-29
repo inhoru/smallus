@@ -46,7 +46,7 @@ List<Classes> wishList = (List) request.getAttribute("wishList");
 				<div id="i-proFileImg">
 					<img
 						src="<%=request.getContextPath()%>/upload/mypageprofile/<%=loginMember.getMemberImg()%>"
-						alt="" id="h-go-paypage">
+						alt="">
 					<div id="i-proFileInfo">
 						<h1><%=loginMember.getMemberNickname()%></h1>
 						<p><%=loginMember.getMemberEmail()%></p>
@@ -296,11 +296,6 @@ $(".i-wishCheck").change(e=>{
 			}
 		})
 	}
-})
-
-
-$("#h-go-paypage").click(e=>{
-	location.assign('<%=request.getContextPath()%>/paymentTest.do?memberId=<%=loginMember.getMemberId()%>');
 })
 
 

@@ -304,7 +304,7 @@ section.h-imgContainer .h-img-list h4{
 /* 하트 */
 .h-wish-container input:checked+label svg {
     cursor: pointer;
-    fill: rgb(255, 0, 0);
+    fill: rgb(255, 255, 255);
     stroke:rgb(255, 255, 255);
     animation: heartButton 1s;
 }
@@ -394,3 +394,4 @@ section.h-best-class div.h-img-list-row .h-img-list:last-child{
 .h-cateAll  div.h-img-list {
 	margin-bottom : 1.5rem;
 }
+

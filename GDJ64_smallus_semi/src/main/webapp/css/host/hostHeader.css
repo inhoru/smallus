@@ -173,12 +173,9 @@
         border-radius: 1rem;
     }
 
-    /*  */
-    footer{
-    	widtH:100%;	
-    	margin-top:10rem;
-    }
     .footer {
+    	margin-top:10rem;
+    	padding-top:3rem;
     	width: 100%;
    		flex-direction: column;
     	background-color: #F3EEE6;

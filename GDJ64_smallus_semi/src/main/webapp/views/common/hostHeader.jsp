@@ -62,9 +62,9 @@ if (cookies != null) {
             <%
             if (loginHost != null) {
             %>
-            <a href="<%=request.getContextPath()%>/hostProfile.do"
-               class="h-move-mypage"><img
-               src="<%=request.getContextPath()%>/img/mypage/기본프로필.png" alt=""><%=loginHost.getHostNickname()%>님</a>
+             <a href="<%=request.getContextPath()%>/hostProfile.do"
+               class="h-move-mypage"><%--<img
+               src="<%=request.getContextPath()%>/img/mypage/기본프로필.png" alt=""> --%><%=loginHost.getHostNickname()%>님</a>
             <%
             }
             %>
