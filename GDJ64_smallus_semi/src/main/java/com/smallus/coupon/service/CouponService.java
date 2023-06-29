@@ -45,5 +45,12 @@ public class CouponService {
 		close(conn);
 		return list;
 	}
+	public Coupon searchCoupon(String memberId,String coupon){
+		Connection conn=getConnection();
+		Coupon c=dao.searchCoupon(conn, memberId,coupon);
+		close(conn);
+		return c;
+	}
+	
 	
 }

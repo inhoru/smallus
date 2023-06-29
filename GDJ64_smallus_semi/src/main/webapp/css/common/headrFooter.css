@@ -16,6 +16,10 @@
 	font-weight: 300;
 	font-style: normal;
 }
+#mainOpacity{
+ 
+    min-height:700px;
+}
 :root {
   --btn-radius: 2rem;
   --img-radius: 1rem;

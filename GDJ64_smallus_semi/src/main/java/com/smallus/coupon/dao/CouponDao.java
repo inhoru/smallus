@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-
 import com.smallus.coupon.model.vo.Coupon;
 
 public class CouponDao {
@@ -34,7 +33,7 @@ public class CouponDao {
 		List<Coupon> list=new ArrayList<Coupon>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("searchByMemberCoupon"));
-			//SELECT * FROM COUPON JOIN COUPON_TYPE USING(COUPON_ID) JOIN MEMBER USING(MEMBER_ID) WHERE MEMBER_ID=?
+			
 			pstmt.setString(1, memberId);
 			pstmt.setInt(2,(cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
@@ -72,7 +71,7 @@ public class CouponDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("deleteCoupon"));
-			//DELETE FROM COUPON WHERE EXPIRED_DATE < SYSDATE
+			
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -88,7 +87,7 @@ public class CouponDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("couponCount"));
-			//SELECT COUNT(MEMBER_ID) FROM COUPON WHERE MEMBER_ID=? AND NOT COUPON_ID =?
+			
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, "NONE");
 			rs=pstmt.executeQuery();
@@ -102,14 +101,14 @@ public class CouponDao {
 		return result;
 	}
 	
-	// 결제 시 회원이 가지고 있는 쿠폰 조회
+	
 	public List<Coupon> selectCouponByMemberId(Connection conn, String memberId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Coupon> list=new ArrayList<Coupon>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectCouponByMemberId"));
-			//SELECT * FROM COUPON JOIN COUPON_TYPE USING(COUPON_ID) JOIN MEMBER USING(MEMBER_ID) WHERE MEMBER_ID=? ORDER BY CREATED_DATE DESC
+			
 			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) list.add(getCoupon(rs));
@@ -119,6 +118,26 @@ public class CouponDao {
 			close(rs);
 			close(pstmt);
 		}return list;
+	}
+	public Coupon searchCoupon(Connection conn, String memberId,String coupon){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Coupon c=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("searchCoupon"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, coupon);
+			rs=pstmt.executeQuery();
+			if (rs.next()) {
+				c=new Coupon();
+				c.setCouponId(rs.getString("COUPON_ID"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return c;
 	}
 	
 	

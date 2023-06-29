@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	</body>
 <footer>
 	<div class="footer">
 		<%-- <div class="usMenu">
@@ -31,7 +32,6 @@
 		</div>
 	</div>
 </footer>
-</div>
 <!-- 페이지가모두 로드 된후 실행 -->
 <script src="<%=request.getContextPath()%>/js/header.js"></script>
 <script src="<%=request.getContextPath()%>/js/mypage.js"></script>
