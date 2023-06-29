@@ -202,11 +202,19 @@ public class ReviewDao {
 
 	
 	  public int deleteRevieMyPage(Connection conn,String reviewId) {
-	  PreparedStatement pstmt=null; int result=0; try {
+	  PreparedStatement pstmt=null;
+	  int result=0;
+	  try {
 	  pstmt=conn.prepareStatement(sql.getProperty("deleteReviewMyPage"));
-	  pstmt.setString(1, reviewId); result=pstmt.executeUpdate();
-	  }catch(SQLException e) { e.printStackTrace(); }finally { close(pstmt); }
-	  return result; }
+	  pstmt.setString(1, reviewId); 
+	  result=pstmt.executeUpdate();
+	  }catch(SQLException e) {
+		  e.printStackTrace(); 
+		  }finally { 
+			  close(pstmt); 
+			  }
+	  return result; 
+	  }
 	 
 
 }

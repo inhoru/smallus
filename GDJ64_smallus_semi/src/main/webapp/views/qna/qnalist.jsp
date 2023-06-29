@@ -35,7 +35,8 @@ div#select_container {
 }
 
 section#main {
-	width: 1000px;
+	width: 100%;
+	height: 700px;
 	margin: 0 auto;
 	text-align: center
 }
@@ -147,3 +148,4 @@ table>tr {
 	}
 	</script>
 </section>
+<%@ include file="/views/common/footer.jsp"%>
