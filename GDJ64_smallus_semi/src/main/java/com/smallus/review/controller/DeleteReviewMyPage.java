@@ -34,9 +34,7 @@ public class DeleteReviewMyPage extends HttpServlet {
 		/*System.out.println(reviewId);*/
 		int result= new ReviewMemberService().deleteReviewMyPage(reviewId);
 		if(result>0) System.out.println("성공 ");
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/csv;charset=utf-8");
-		response.getWriter().print(result);
+		response.sendRedirect(request.getContextPath()+"/review/reviewList.do");
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

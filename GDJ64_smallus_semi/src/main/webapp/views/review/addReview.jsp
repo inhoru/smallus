@@ -21,7 +21,9 @@
 	<input type="text" placeholder="제목을 입력해주세요.">
 	<textarea rows="20" cols="100" placeholder="내용을 입력해주세요."></textarea>
 	<br><br><br>
-	<input type="submit" value="등록">
+	<form>
+	<input type="submit" value="등록하기" onclick="alert('등록되었습니다.')">
+	</form>
 </div>
 <br><br><br><br><br>
 
@@ -52,6 +54,7 @@
 		border-radius: 20px;
 		padding: 10px;
 	}
+	
 	.d-add-review-page>input{
 		width: 100%;
 		max-width:600px;
@@ -59,6 +62,7 @@
 		border-radius: 20px;
 		padding: 10px;
 		margin-bottom:10px;
+		text-align: center;
 	
 	}
 	.d-add-review-page>input[type="submit"]{
