@@ -61,6 +61,8 @@ public class PaymentEndServlet extends HttpServlet {
 		String data=request.getParameter("data");
 		
 		Map<String, String> dataMap = new HashMap<>();
+		dataMap = gson.fromJson(data, dataMap.getClass());
+		
 		
 		// callback으로 받은 함수 중 빠진 데이터를 ajax로 가져와서 map에 넣어줌 
 		String classDetailId=request.getParameter("classDetailId");
@@ -75,18 +77,11 @@ public class PaymentEndServlet extends HttpServlet {
 		dataMap.put("price", price);
 		dataMap.put("totalPrice", totalPrice);
 		
-		if (couponId.equals("NONE")) {
-			dataMap.put("couponId", "NONE");
-		}else {
-			int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
-			if(delResult>0) System.out.println("delete coupon success ");
-		}
 		
 		if((boolean)dataMap.get("status").equals("paid")) {
 			dataMap.put("status", "결제완료");
 		}
 		
-		dataMap = gson.fromJson(data, dataMap.getClass());
 		
 		int personnel=Integer.parseInt(classPersonnel);
 		int remainingPersonnel= new PaymentService().selectRemainPer(classDetailId);
@@ -94,10 +89,23 @@ public class PaymentEndServlet extends HttpServlet {
 //		System.out.println("remainingPersonnel :"+remainingPersonnel);
 //		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
 		
-		remainingPersonnel=remainingPersonnel-personnel;
 		
+		if(remainingPersonnel<=0) {
+			 System.out.println("잔여 수량 x");
+			 String msg="잔여 수량이 없습니다";
+			 request.setAttribute("msg", msg);
+		}
+		remainingPersonnel=remainingPersonnel-personnel;
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
+		dataMap.put("couponId", "NONE");
 		int result=new PaymentService().insertPayment(dataMap);
+		int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
+		if(perResult>0) System.out.println("remain update");
+		if(delResult>0) System.out.println("delete ok");
+		if(result>0) System.out.println("insert pay ok");
+			response.setContentType("text/csv;charset=utf-8");
+			response.getWriter().print(data);
+		
 		
 
 		Classes n=new PaymentService().classDetailId(classDetailId);
@@ -106,11 +114,7 @@ public class PaymentEndServlet extends HttpServlet {
 		int notcount = new HostService().notificationsCount(n.getHostId());
 		session.setAttribute("notcount",notcount);
 		session.setAttribute("Notlist",list);
-		if(result>0) System.out.println("insert pay 성공");
-		if(perResult>0) System.out.println(" remaining per success ");
-		if(result>0 && result>0) System.out.println("입력 완료");
-
-		else System.out.println("error T_T");
+		
 		
 		
 		

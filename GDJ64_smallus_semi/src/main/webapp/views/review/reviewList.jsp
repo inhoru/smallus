@@ -3,9 +3,11 @@
 <%@ page
 	import="java.util.List,com.smallus.review.model.vo.Review, java.text.SimpleDateFormat"%>
 <%@ include file="/views/common/mainHeader.jsp"%>
+<%@ page import="java.util.List,com.smallus.review.model.vo.ReviewHost" %>	
 <%
-List<Review> reviews = (List) request.getAttribute("reviews");
-%>
+	List<ReviewHost> reviews=(List)request.getAttribute("reviews");
+	
+%>	
 <div id="mainOpacity">
 	<div class="i-withdrawalendtotal">
 		<section class="i-tablecontent">
@@ -39,12 +41,8 @@ List<Review> reviews = (List) request.getAttribute("reviews");
 			</table>
 		</section>
 
-		<div class="d-review-header" style="
-    width: 70%;
-    margin: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-">
+		<div class="d-review-header"
+			style="width: 70%; margin: auto; margin-top: 1%; margin-bottom: 1%;">
 			<h2>후기</h2>
 			<!-- <select>
 			<option value="클래스명">클래스명</option>
@@ -56,55 +54,55 @@ List<Review> reviews = (List) request.getAttribute("reviews");
 		</select> -->
 		</div>
 
-		<div class="d-review-list" style="
-    margin: auto;
-    width: 70%;
-">
+		<div class="d-review-list" style="margin: auto; width: 70%;">
 			<%
 			if (reviews == null || reviews.isEmpty()) {
 			%>
 			<div class="d-review-one">작성된 리뷰가 없습니다.</div>
 			<%
 			} else {
-			for (Review r : reviews) {
+			for (ReviewHost r : reviews) {
 			%>
 			<hr>
 			<div class="d-review-one">
-				<img id="imgs"
-					src="<%=request.getContextPath()%>/upload/class/<%=r.getImgPath()%>"
-					width="150px" height="150px">
+				<<img id="imgs" src="<%=request.getContextPath()%>/upload/class/<%=r.getClasses().getClassThumbnail()%>"
+						width="150px" height="150px">
 				<div class="d-review-table">
 					<table>
 						<tr>
-							<td id="tr"><%=r.getMemberId()%></td>
-							<td id="td"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(r.getReviewDate())%></td>
+							<td id="tr"><%=r.getReview().getMemberId()%></td>
+							<td id="td"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(r.getReview().getReviewDate())%></td>
 						</tr>
 						<tr>
-							<td id="tr"><h3><%=r.getClassTitle()%></h3></td>
+							<td id="tr"><h3><%=r.getClasses().getClassTitle()%></h3></td>
 						</tr>
 						<tr>
-							<td id="tr"><h2><%=r.getReviewRating()%></h2></td>
+							<td id="tr"><h2><%=r.getReview().getReviewRating()%></h2></td>
 						</tr>
 						<tr>
-							<td id="tr"><h4><%=r.getReviewTitle()%></h4></td>
+							<td id="tr"><h4><%=r.getReview().getReviewTitle()%></h4></td>
 						</tr>
 						<tr>
-							<td id="tr"><p><%=r.getReviewContent()%></p></td>
+							<td id="tr"><p><%=r.getReview().getReviewContent()%></p></td>
 						</tr>
 					</table>
-					<button type="bottun" onclick="alert('삭제되었습니다.');">삭제</button>
+					<button onclick="deleteReview('<%=r.getReview().getReviewId()%>');">삭제</button>
 				</div>
 			</div>
 			<%
 			}
 			}
 			%>
-
 		</div>
-	</div>
-</div>
+		<script>
+		function deleteReview(reviews){
+			if(confirm("삭제하시겠습니까?")){
+				location.replace("<%=request.getContextPath()%>/review/deleteReviewMyPage.do?reviewId="+revies);
+			}
+		}
+	</script>
 
-<style>
+		<style>
 #d-review-page {
 	width: 70%;
 	margin: 0 auto;
@@ -163,4 +161,4 @@ List<Review> reviews = (List) request.getAttribute("reviews");
 	} */
 </style>
 
-<%@ include file="/views/common/footer.jsp"%>
+		<%@ include file="/views/common/footer.jsp"%>

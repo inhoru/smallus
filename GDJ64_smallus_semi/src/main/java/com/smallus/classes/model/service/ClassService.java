@@ -81,6 +81,14 @@ public class ClassService {
 		return list;
 	}
 	
+	
+	public String selectClassIdByclassTitle(String classTitle) {
+		Connection conn= getConnection();
+		String result=dao.selectClassIdByclassTitle(conn,  classTitle);
+		close(conn);
+		return result;
+	}
+	
 	public int updateRemainPersonnel(int updateRemainPersonnel, String classDetailId) {
 		Connection conn=getConnection();
 		int result=dao.updateRemainPersonnel(conn, updateRemainPersonnel,classDetailId);

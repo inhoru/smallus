@@ -226,6 +226,27 @@ public class ClassesDao {
 		}
 	
 	
+	
+	public String selectClassIdByclassTitle(Connection conn, String classTitle){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Classes c=new Classes();
+		String result="";
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectClassIdByclassTitle"));
+			pstmt.setString(1, classTitle);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				result=rs.getString("CLASS_ID");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return result;
+	}
+	
 	public int updateRemainPersonnel(Connection conn, int updateRemainPersonnel, String classDetailId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

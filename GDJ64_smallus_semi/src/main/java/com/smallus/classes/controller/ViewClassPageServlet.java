@@ -36,12 +36,12 @@ public class ViewClassPageServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String classId=request.getParameter("classId");
 		
+			
+			Classes classInfo= new ClassService2().selectClassByClassId(classId);
+			List<ClassDetail> classSchedule=new ClassService().selectClassDetailByClassId(classId);
+			request.setAttribute("classinfo",classInfo);
+			request.setAttribute("classSchedule", classSchedule);
 		
-		Classes classInfo= new ClassService2().selectClassByClassId(classId);
-		List<ClassDetail> classSchedule=new ClassService().selectClassDetailByClassId(classId);
-		
-		request.setAttribute("classinfo",classInfo);
-		request.setAttribute("classSchedule", classSchedule);
 		
 		request.getRequestDispatcher("/views/class/classDetail.jsp").forward(request, response);
 		

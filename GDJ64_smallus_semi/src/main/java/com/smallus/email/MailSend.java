@@ -41,7 +41,7 @@ public class MailSend {
             msg.setRecipient(Message.RecipientType.TO, to);            
             msg.setSubject("안녕하세요 smallus 입니다.", "UTF-8");
            
-            msg.setText("안녕하세요 smallus 입니다. 요청하신 인증번호는 : "+epw+" 입니다.", "UTF-8");                        
+            msg.setText("안녕하세요 smallus 입니다. 요청하신 인증번호는 : "+epw+"입니다.", "UTF-8");                        
             Transport.send(msg);
             
         } catch(AddressException ae) {            
