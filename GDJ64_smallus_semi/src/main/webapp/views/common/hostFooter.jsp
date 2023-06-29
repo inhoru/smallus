@@ -2,18 +2,6 @@
     pageEncoding="UTF-8"%>
 <footer>
 	<div class="footer">
-		<div class="usMenu">
-			<ul>
-				<li><a href="">Host Center</a></li>
-				<li><a href="">Host Center</a></li>
-				<li><a href="">Host Center</a></li>
-			</ul>
-			<ul>
-				<li><a href="">Center</a></li>
-				<li><a href="">Host Center</a></li>
-				<li><a href="">Host Center</a></li>
-			</ul>
-		</div>
 		<div class="usInfo">
 			<div class="copyright">
 				상호명 : ㈜SEMICOLON ㅣ 대표자 : 이다영 ㅣ 주소 : 서울특별시 금천구 가산디지털2로 95 KM타워 3층
@@ -31,7 +19,5 @@
 	</div>
 </footer>
 </div>
-<!-- 페이지가모두 로드 된후 실행 -->
-
 </body>
 </html>

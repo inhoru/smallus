@@ -309,6 +309,14 @@ section.h-imgContainer .h-img-list h4{
     animation: heartButton 1s;
 }
 
+.h-wish-container input+label svg {
+    cursor: pointer;
+    fill: rgba(255, 255, 255,0);
+    stroke:rgb(255, 0, 0);
+    animation: heartButton 1s;
+}
+
+
 /* 하트애니메이션 */
 @keyframes heartButton {
     0% {
@@ -393,3 +401,4 @@ section.h-best-class div.h-img-list-row .h-img-list:last-child{
 .h-cateAll  div.h-img-list {
 	margin-bottom : 1.5rem;
 }
+
