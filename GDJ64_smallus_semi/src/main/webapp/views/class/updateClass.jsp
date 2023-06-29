@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="/views/common/hostHeader.jsp"%>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
 
@@ -15,7 +15,7 @@
 	<section id="d-addClass">
 	<form action="<%=request.getContextPath() %>/host/addClassEnd.do" method="post" enctype="multipart/form-data">
 		<br> <br>
-		<h3>클래스 등록하기 </h3>
+		<h3>클래스 수정하기 </h3>
 		<hr>
 		<div id="inputs">
 			<p>클래스 이름</p>
@@ -56,58 +56,15 @@
 			<p>상세 내용</p>
 			<textarea name="classDetail" id="" cols="80" rows="10"
 				placeholder="클래스에 대한 설명을 입력해주세요."></textarea>
-			<p>스케쥴 등록 (같은날짜 두번 선택후 시간 등록)</p>
-					<input type="text" name="datetimes" id="oriDate" readonly>
-					<input type="button" value="추가" onclick="schedulePlus(event);">
-			<div id="AddSchedule-calendar">
-				<p>※ 현재 등록된 스케쥴</p>
-				<div id="plusSchedule">
-					<!-- <input type="text" name="schedule" readonly>
-					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	 -->
-			</div>
-		</div>
-		<br> <br> <input type="submit" value="등록하기"> <br>
+				
+			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+				
+				</div>
+		<br> <br> <input type="submit" value="수정하기"> <br>
 		<br> <br> <br>
-		</form>
-		</section>
+				</form>
 		</div>
-
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-
-const schedulePlus=(e)=>{
-	const $input=$("#plusSchedule").clone(true);
-	$("#AddSchedule-calendar").append($input);
-	 console.log($("#oriDate").text());
-	//$input.text($("#oriDate").text());
-	
-}
-
-const scheduleMinus=(e)=>{
-	if(document.querySelectorAll("#plusSchedule").length==1){
-		alert("일정을 최소 1개 이상 등록해주세요!");
-	}else{
-		$(e.target).parent().remove();
-	}
-}
-
-$(function() {
-	  $('input[name="datetimes"]').daterangepicker({
-//		  singleDatePicker: true,
-		  showDropdowns: true,
-	    timePicker: true,
-	    startDate: moment().startOf('hour'),
-	    endDate: moment().startOf('hour').add(3, 'hour'),
-	    locale: {
-	      format: 'YYYY-MM-DD HH:mm',
-	      "separator": " ~ ",                     // 시작일시와 종료일시 구분자
-		    "applyLabel": "확인",                    // 확인 버튼 텍스트
-		    "cancelLabel": "취소",                   // 취소 버튼 텍스트
-		    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
-		    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
-	    }
-	  });
-	});
 
     function sample4_execDaumPostcode() {
         new daum.Postcode({
@@ -164,8 +121,9 @@ $(function() {
             }
         }).open();
     }    
-    
-</script>
+				
+				
+				</script>
 
 
 		<%-- <%@ include file="/views/common/footer.jsp"%> --%>
