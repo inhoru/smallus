@@ -220,6 +220,7 @@ $(".h-submit").click(e => {
 				} else {
 					alert("변경 실패 :<");
 				}
+				document.location.href = document.location.href;
 			}, error: (e, m) => {
 				console.log(data);
 			}

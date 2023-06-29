@@ -102,7 +102,7 @@ text-align: right;}
 		<%}else{
 			for(ReviewHost rh: reviews){%>
 			<div class="h-class-list">
-				<a href="">
+				<a href="<%=request.getContextPath()%>/class/viewHostClassDetail.do?classId=<%=rh.getClasses().getClassId()%>">
 					<img src="<%=request.getContextPath()%>/upload/class/<%=rh.getClasses().getClassThumbnail() %>">
 				</a>
 				<table class="h-ReviewTbl">
