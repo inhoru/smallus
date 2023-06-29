@@ -135,7 +135,7 @@ div#m-loginFrm{
 }
 table#loginTable{
 	margin-top: 50px; 
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 	width:350px;
 	height:30px;
 }

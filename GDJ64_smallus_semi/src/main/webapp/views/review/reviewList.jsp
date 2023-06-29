@@ -5,7 +5,7 @@
 <%@ include file="/views/common/mainHeader.jsp"%>
 <%@ page import="java.util.List,com.smallus.review.model.vo.ReviewHost" %>	
 <%
-	List<ReviewHost> reviews=(List)request.getAttribute("reviews");
+	List<Review> reviews=(List)request.getAttribute("reviews");
 	
 %>	
 <div id="mainOpacity">
@@ -61,32 +61,32 @@
 			<div class="d-review-one">작성된 리뷰가 없습니다.</div>
 			<%
 			} else {
-			for (ReviewHost r : reviews) {
+			for (Review r : reviews) {
 			%>
 			<hr>
 			<div class="d-review-one">
-				<<img id="imgs" src="<%=request.getContextPath()%>/upload/class/<%=r.getClasses().getClassThumbnail()%>"
+				<img id="imgs" src="<%=request.getContextPath()%>/upload/class/<%=r.getImgPath()%>"
 						width="150px" height="150px">
 				<div class="d-review-table">
 					<table>
 						<tr>
-							<td id="tr"><%=r.getReview().getMemberId()%></td>
-							<td id="td"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(r.getReview().getReviewDate())%></td>
+							<td id="tr"><%=r.getMemberId()%></td>
+							<td id="td"><%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(r.getReviewDate())%></td>
 						</tr>
 						<tr>
-							<td id="tr"><h3><%=r.getClasses().getClassTitle()%></h3></td>
+							<td id="tr"><h3><%=r.getClassTitle()%></h3></td>
 						</tr>
 						<tr>
-							<td id="tr"><h2><%=r.getReview().getReviewRating()%></h2></td>
+							<td id="tr"><h2><%=r.getReviewRating()%></h2></td>
 						</tr>
 						<tr>
-							<td id="tr"><h4><%=r.getReview().getReviewTitle()%></h4></td>
+							<td id="tr"><h4><%=r.getReviewTitle()%></h4></td>
 						</tr>
 						<tr>
-							<td id="tr"><p><%=r.getReview().getReviewContent()%></p></td>
+							<td id="tr"><p><%=r.getReviewContent()%></p></td>
 						</tr>
 					</table>
-					<button onclick="deleteReview('<%=r.getReview().getReviewId()%>');">삭제</button>
+					<button onclick="deleteReview('<%=r.getReviewId()%>');">삭제</button>
 				</div>
 			</div>
 			<%
