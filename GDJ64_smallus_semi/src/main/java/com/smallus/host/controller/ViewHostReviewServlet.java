@@ -82,18 +82,9 @@ public class ViewHostReviewServlet extends HttpServlet {
 		}
 		request.setAttribute("pageBar", pageBar);
 		
-		//List<PaymentCalc> sortStatusList=new ReviewService().viewAllReviewByHostId(hostId,cPage,numPerpage);
-//		if(sortStatusList.isEmpty()||sortStatusList==null) {
-//			System.out.println("sortStatusList없음없");
-//		}else {
-//			System.out.println("sortStatusList있음있");
-//			request.setAttribute("sortStatusList",sortStatusList);				
-//		}
 		List<ReviewHost> reviews=new ReviewService().hostReviewList(hostId, cPage, numPerpage);
-				
 		request.setAttribute("reviews", reviews);
 		System.out.println(reviews);
-		//request.getRequestDispatcher("/views/review/reviewListHost.jsp").forward(request, response);
 		request.getRequestDispatcher("/views/host/viewHostReview.jsp").forward(request, response);
 	}
 

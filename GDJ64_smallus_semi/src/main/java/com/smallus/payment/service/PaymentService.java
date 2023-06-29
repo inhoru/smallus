@@ -211,5 +211,13 @@ public class PaymentService {
 		return count;
 	}
 	
+	public int updatePaymentStatus() {
+		Connection conn=getConnection();
+		int count=dao.updatePaymentStatus(conn);
+		if(count>0) commit(conn);
+		else rollback(conn);
+		return count;
+	}
+	
 	
 }
