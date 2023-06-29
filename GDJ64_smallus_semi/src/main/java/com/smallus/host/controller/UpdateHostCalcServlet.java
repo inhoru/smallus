@@ -53,8 +53,6 @@ public class UpdateHostCalcServlet extends HttpServlet {
 		int calcReqDate=Integer.parseInt(request.getParameter("calcReqDate"));
 		int result= new HostService().updateHostCalc(hostAccountBank, hostAccount, hostAccountName, calcReqDate, hostId);
 		Host host=new HostService().selectByhostId(hostId);
-		//System.out.println(hostId+" "+hostAccountBank+""+hostAccount+""+hostAccountName+""+calcReqDate);
-		//System.out.println("calcReqDate : "+calcReqDate+" result : "+result);
 		if(result>0) {
 			session.setAttribute("loginHost", host);
 			response.setContentType("text/html; charset=UTF-8");

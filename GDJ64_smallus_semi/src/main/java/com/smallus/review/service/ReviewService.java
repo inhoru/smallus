@@ -50,11 +50,11 @@ public class ReviewService {
 		return count;
 	}
 	
-	public List<ReviewHost> hostReviewList(String hostId, int cPage, int numPerpage){
-		Connection conn = getConnection();
-		List<ReviewHost> list = dao.hostReviewList(conn, hostId, cPage, numPerpage);
-		close(conn);
-		return list;
+	  public List<ReviewHost> hostReviewList(String hostId, int cPage, int numPerpage){
+	      Connection conn = getConnection();
+	      List<ReviewHost> list = dao.hostReviewList(conn, hostId, cPage, numPerpage);
+	      close(conn);
+	      return list;
 	}
 	
 	public int deleteReviewByhost(String reviewId) {

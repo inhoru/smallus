@@ -75,3 +75,10 @@
 	margin: 5px;
 	text-align:center;
 }
+
+input#thumbnail{
+	height:30px;
+}
+#inputs input[type="button"]{
+	width:100px;
+}
