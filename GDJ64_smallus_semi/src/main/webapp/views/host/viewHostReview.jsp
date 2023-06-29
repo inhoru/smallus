@@ -87,7 +87,7 @@ text-align: right;}
 <div id="mainOpacity h-host-main">
 	 <section class="h-main h-class-sub">
      	<h2>내 클래스 후기 보기</h2>
-     	<div>
+     	<!-- <div>
 			<select>
 				<option value="클래스명">클래스명</option>
 				<option value="작성일순">작성일순</option>
@@ -96,7 +96,7 @@ text-align: right;}
 				<option value="class1">부드러운 앙금으로 빚어내는 네리끼리 화과자 </option>
 				<option value="class2">베이킹 어렵지 않다! 고소하고 달콤한 마들렌 만들기</option>
 			</select>
-     	</div>
+     	</div> -->
 		<%if(reviews==null || reviews.isEmpty()){ %>
 			<h5>등록된 후기가 없습니다</h5>
 		<%}else{

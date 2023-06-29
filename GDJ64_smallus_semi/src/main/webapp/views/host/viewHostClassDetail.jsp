@@ -28,12 +28,12 @@ width: 20rem;
 		<div class="hcaTitleC">
 			<h3>클래스 기본 정보 관리하기</h3>
 					<div class="hCbtnContainer">
-						<button id="h-updateClassInfomation" value="<%=list.getClassId()%>">기본 정보 수정</button>
+						<%-- <button id="h-updateClassInfomation" value="<%=list.getClassId()%>">기본 정보 수정</button> --%>
 						<button id="h-updateClassStaus" value="<%=list.getClassId()%>">클래스 삭제</button>
 					</div>				
 		</div>
 			<div class="h-class-list">
-				<a href="">
+				<a href="<%=request.getContextPath()%>/host/viewClasseByHost.do?classId=<%=list.getClassId()%>">
 					<img src="<%=request.getContextPath()%>/upload/class/<%=list.getClassThumbnail() %>">
 				</a>
 				<table class="h-classDetailTblInfo">
@@ -69,7 +69,9 @@ width: 20rem;
 						<td class="h-tbl-align-left">신청 일</td>
 						<td><%=list.getClassUpLoadDate() %></td>
 						<td>승인 일</td>
-						<td><%=list.getClassPassDate() %></td>
+						<td> <%if(list.getClassPassId().equals("Y")){ %>
+								<%= list.getClassPassDate()%>
+								<%} else{%>승인 대기 중<%} %>	</td>
 					</tr>
 					<tr>
 						<td class="h-tbl-align-left">금액</td>
@@ -192,11 +194,14 @@ width: 20rem;
 		 });
 		
 	})
+	function bodyClose(){
+		$("document").css('overflow', 'hidden');
+	}
+	
 	// 판매중단 모달창 열기
 	$("#h-updateClassStaus").click(e => {
-
 		$(".h-modalDelete").css('display', 'block');
-		$("body").css('overflow', 'hidden');
+		bodyClose();
 	});
 	
 	// 판매 중단 변경 버튼 클릭 
@@ -217,7 +222,7 @@ width: 20rem;
 	  $(".h-modalInsertSchedule").css('display', 'block');
 	  //$("body").css('overflow', 'hidden');
 	  //$("body").css('overflow', 'hidden');
-	  $(".h-modalInsertSchedule").siblings().css('overflow', 'hidden');
+	  bodyClose();
 	});
 	
 	let delBtn;
