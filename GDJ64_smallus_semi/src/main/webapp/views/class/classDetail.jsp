@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="java.util.*, com.smallus.classes.model.vo.*, java.text.SimpleDateFormat"%>
+<script src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
+
 <%
 Classes info = (Classes) request.getAttribute("classinfo");
 List<ClassDetail> schedule = (List) request.getAttribute("classSchedule");
@@ -13,7 +15,7 @@ String classId = (String) request.getAttribute("classId");
 <meta charset="utf-8">
 <%@ include file="/views/common/mainHeader.jsp"%>
 
-<div style="background-color: var(- -main-col-lt); padding: 1%;">
+<div style="background-color: #FFFBF5; padding: 1%;">
 	<div class="d-class-detail">
 		<div class="d-detail-header">
 			<div class="d-detail-img">
@@ -26,7 +28,7 @@ String classId = (String) request.getAttribute("classId");
 				<div id="d-detail-top">
 					<p><%=info.getCategoryTitle()%></p>
 
-					
+
 
 
 
@@ -44,6 +46,7 @@ String classId = (String) request.getAttribute("classId");
 							onchange="selectClassDetailOption()">
 
 							<option>시간 선택</option>
+
 							<%
 							if (schedule != null && !schedule.isEmpty()) {
 								for (ClassDetail cd : schedule) {
@@ -51,7 +54,6 @@ String classId = (String) request.getAttribute("classId");
 							%>
 							<option name="classDetailOption"
 								value="<%=cd.getClassDetailId()%>_<%=cd.getBookingTimeStart()%>_<%=cd.getBookingTimeEnd()%>_<%=cd.getRemainingPersonnel()%>">
-								<!-- <option > -->
 								<%=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(cd.getBookingTimeStart())%>
 								~
 								<%=new SimpleDateFormat("MM-dd HH:mm").format(cd.getBookingTimeEnd())%>
@@ -65,11 +67,12 @@ String classId = (String) request.getAttribute("classId");
 							}
 							} else {
 							%>
-							<option>사용 가능한 쿠폰이 없습니다</option>
+							<option>선택 가능한 일정이 없습니다.</option>
 							<%
 							}
 							%>
 						</select>
+
 					</div>
 					<div id="d-detail-personnel">
 						<p>인원 수</p>
@@ -81,13 +84,22 @@ String classId = (String) request.getAttribute("classId");
 						<p id="d-payment-price" name="price">결제금액원</p>
 						<input type="submit" value="결제하기" id="h-moveToPay">
 					</div>
-					
+						<div class="h-wish-container">
+					<input type="checkbox" id="i-favoritee2" name="favorite-checkbox"
+						value="favorite-button" class="i-wishCheck" checked> <label
+						for="i-favoritee2" class="i-container"> <svg
+							xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+							viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-heart">
+	                            <path
+								d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+	                            </path>
+	                    </svg>
+					</label>
 				</div>
-
-
-
-		</div>
-		
+				</div>
+			</div>
 		</div>
 		<br>
 		<div class="d-detail-menu">
@@ -150,7 +162,7 @@ String classId = (String) request.getAttribute("classId");
 		personnelCount=personnelCount+1;
 		let select=$("#d-detail-date>select option:selected").val();
 		console.log(select);
-		let maxPersonnel=select.substr(29);
+		let maxPersonnel=select.substr(30);
 		console.log(maxPersonnel);
 		if(personnelCount>maxPersonnel){
 			alert("신청 가능한 인원이 초과되었습니다.");
@@ -219,6 +231,18 @@ String classId = (String) request.getAttribute("classId");
 		function selectClassDetailOption(){
 			let index =$("#h-pselectClassDetailOption option:selected").val();
 			classDetailArr= index.split("_");
+			
+			// 선택내용에 따라 결제하기 버튼을 숨김
+			let select=$("#d-detail-date>select option:selected").val();
+			let maxPersonnel=select.substr(30);
+			 if(select=="시간 선택"){
+				$("#d-detail-personnel").hide() ;
+				$("#d-payment").hide() ;
+			}else{
+				$("#d-detail-personnel").show() ;
+				$("#d-payment").show() ;
+			}  
+			
 		}
 		
 		let selectedClass ='<%=info%>';
@@ -243,10 +267,10 @@ String classId = (String) request.getAttribute("classId");
 		
 </script>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+mapOption = {
+    center: new kakao.maps.LatLng(37.629212933724, 127.05508971584), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
     };  
 
 <!-- // 지도를 생성합니다  -->   
@@ -378,12 +402,11 @@ hr {
 	
 }
 .h-wish-container input:checked+label svg {
-	cursor: pointer;
-	fill : rgb(255,0,0);
-	stroke: rgb(255, 255, 255);
-	animation: heartButton 1s;
+    cursor: pointer;
+    fill: rgb(255, 0, 0);
+    stroke:rgb(255, 255, 255);
+    animation: heartButton 1s;
 }
-
 </style>
 
 

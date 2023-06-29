@@ -86,6 +86,7 @@ public class ClassesDao2 {
 		
 		try {
 			for(ClassDetail sc:schedule) {
+				System.out.println(sc.getBookingTimeStart().getTime());
 				pstmt=conn.prepareStatement(sql.getProperty("addClassSchedule"));
 				pstmt.setTimestamp(1, new java.sql.Timestamp(sc.getBookingTimeStart().getTime()));
 				pstmt.setTimestamp(2, new java.sql.Timestamp(sc.getBookingTimeEnd().getTime()));
