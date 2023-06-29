@@ -72,9 +72,8 @@ public class ViewCategoryBeautyServlet extends HttpServlet {
 		
 		request.setAttribute("pageBar", pageBar);
 		
-		
+		List<ClassIndex> allBeauty= new MainService().selectAllclassByCategory(categoryId, cPage, numPerpage);
 		List<ClassIndex> newBeauty= new MainService().selectNewClassByCategory(categoryId);
-		List<ClassIndex> allBeauty= new MainService().selectNewClassByCategory(categoryId);
 		
 		String categoryTitle="뷰티";
 		List<ClassIndex> bestBeauty= new MainService().selectBestClassByCategory(categoryTitle);

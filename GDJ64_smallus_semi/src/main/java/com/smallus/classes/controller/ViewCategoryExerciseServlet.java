@@ -70,9 +70,8 @@ public class ViewCategoryExerciseServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("pageBar", pageBar);
-		
+		List<ClassIndex> allExe= new MainService().selectAllclassByCategory(categoryId, cPage, numPerpage);
 		List<ClassIndex> newExe= new MainService().selectNewClassByCategory(categoryId);
-		List<ClassIndex> allExe= new MainService().selectNewClassByCategory(categoryId);
 		String categoryTitle="운동";
 		List<ClassIndex> bestExe= new MainService().selectBestClassByCategory(categoryTitle);
 		if(newExe!=null && !newExe.isEmpty() && bestExe!=null && !bestExe.isEmpty()) {
