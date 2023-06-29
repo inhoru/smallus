@@ -63,7 +63,7 @@ table>tr {
 
 }
 </style>
-<<section id="main">
+<section id="main">
 	<div id="table">
 		<table>
 			<tr>
@@ -73,7 +73,7 @@ table>tr {
 				<th>작성일</th>
 				<th>작성자</th>
 			</tr>
-			<tr>
+			<tr id="td" oncancel="toggle(event)">
 				<td>답변 대기</td>
 				<td>난이도가 어떻게 되...</td>
 				<td>우리 애들이랑 같이...</td>
@@ -87,23 +87,34 @@ table>tr {
 				<td>2023.06.19</td>
 				<td>나sms 유저다</td>
 			</tr>
-		</table>
-		
-		<div id="qnatext" onclick="toggle(event)";>
+
+		<div>
+			<table>
+				<tr id="tra" onclick="toggle(event)";>
+					<td id="l">율맘</td>
+					<td id="l">2023-06-25</td>
+					<td id="l">난이도가 어떻게 되는건지 궁금해서 질문드려용~</td>
+					<td id="l">저희 애들이랑 같이 만들러 가려고 하는데 애들이 만들기엔 많이 어렵나요? 아 애들은 8살 남자아이와 5살여자아이예요~</td>
+				</tr>
+			</table>
+		</div>
 			
+		<div id="qnatext" onclick="toggle(event)";>
+			<table>
 				<tr id="a">
 					<td id="l">작성자</td>
 					<td id="l">2023-06-25</td>
 				</tr>
 				<tr>
-					<th id="l">단체 예약</th>
+					<td id="l">단체 예약</td>
 				</tr>
 				<tr>
 					<td id="l">단체예약을 좀 하고 싶은데 몇 명까지 가능하지 궁금해서 문의 남겨요~</td>
 				</tr>
+			</table>
 		</div>
 		<div id="qnactext" onclick="toggle(event)";>
-		
+			<table>
 				<tr id="a">
 					<th id="l">호스트</th>
 					<td id="l">2023-06-25</td>
@@ -111,18 +122,17 @@ table>tr {
 				<tr>
 					<td id="l">저희 매장이 좀 협소한 관계로 최대 10분만 받고있어요:)</td>
 				</tr>
-		
+			</table>
 		</div>
-	<script>
+<script>
+	function toggle(e) {
+		$("#tra").toggle(show);	
+}
+	
 	function toggle(e) {
 		$("#qnatext").toggle();
 		$("#qnactext").toggle();
 		
 	}
-	
-	function toggle(e) {
-		$("#qna").toggle();
-	}
-	
-</script>
-<%@ include file="/views/common/footer.jsp"%>
+	</script>
+</section>
