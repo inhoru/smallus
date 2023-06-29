@@ -193,6 +193,7 @@
 		</div>
 	</section> --%>
 <script>
+
 		$("#h-activity").click(e=>{
 			location.assign('<%=request.getContextPath()%>/categoryActivity.do?categoryId=EXE');
 		})
