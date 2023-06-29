@@ -18,7 +18,7 @@
 	<!-- host-main reservation -->
 	<section class="h-main">
 		<div class="h-main-title">
-			<h2>스케줄 관리</h2>
+			<h3>스케줄 확인</h3>
 			<!-- 예약내역 상세 페이지로 이동 -->
 			<div class="h-viewList">
 				<a href="">+</a>
@@ -30,7 +30,7 @@
 	<section class="h-main h-main-rsvList">
 		<div>
 			<div class="h-main-title">
-				<h2>새로운 예약 내역</h2>
+				<h3>새로운 예약 내역</h3>
 				<!-- 예약 내역 상세 페이지로 이동 -->
 				<div class="h-viewList" id="h-main-moveTo-rsv"><a href="<%=request.getContextPath()%>/host/viewHostRsv.do">+</a></div>
 			</div>

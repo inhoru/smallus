@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="<%=request.getContextPath() %>/js/calendar.js"></script>
+<script src="<%=request.getContextPath() %>/js/c.js"></script>
 <%@ page import="java.util.List, 
 				com.smallus.payment.model.vo.PaymentCalc,
 				com.smallus.payment.model.vo.Payment,
@@ -99,7 +100,6 @@ function selectOption(){
 		location.assign('<%=request.getContextPath()%>/host/sortingHostRsv.do?paymentStatus=N');
 	}
 }
-
 </script>
 <%@ include file="/views/common/hostFooter.jsp"%>
 

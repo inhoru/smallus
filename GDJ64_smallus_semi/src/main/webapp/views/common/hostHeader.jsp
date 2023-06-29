@@ -14,6 +14,7 @@ if (cookies != null) {
       }
    }
 }
+int hostDate=loginHost.getCalcReqDate();
 %>
 <!DOCTYPE html>
 <html>
@@ -63,8 +64,7 @@ if (cookies != null) {
             if (loginHost != null) {
             %>
              <a href="<%=request.getContextPath()%>/hostProfile.do"
-               class="h-move-mypage"><%--<img
-               src="<%=request.getContextPath()%>/img/mypage/기본프로필.png" alt=""> --%><%=loginHost.getHostNickname()%>님</a>
+               class="h-move-mypage"><%=loginHost.getHostNickname()%>님</a>
             <%
             }
             %>
@@ -221,7 +221,7 @@ if (cookies != null) {
      $(".i-noticon").on("click", () => {
   $(".notification-container").slideToggle(300);
 });
-
+const context = "<%=request.getContextPath()%>";
    </script>
  
 
