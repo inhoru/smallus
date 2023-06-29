@@ -203,7 +203,7 @@ public class MemberDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("updateMember"));
-			//UPDATE MEMBER SET MEMBER_NICKNAME=?,MEMBER_IMG=?, MEMBER_EMAIL=? WHERE MEMBER_ID=? AND MEMBER_ST='Y'
+			
 			pstmt.setString(1, m.getMemberNickname());
 			pstmt.setString(2, m.getMemberImg());
 			pstmt.setString(3, m.getMemberEmail());

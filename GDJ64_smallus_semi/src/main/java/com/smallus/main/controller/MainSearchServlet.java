@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.admin.service.AdminService;
 import com.smallus.classes.model.vo.Classes;
@@ -71,13 +72,15 @@ public class MainSearchServlet extends HttpServlet {
 		} else {
 			pageBar += "<a href='" + request.getRequestURI() + "?cPage=" + pageNo + "&numPerpage=" + numPerpage +"&q="+search+ "' class='h-pageBar-txt'> 다음 </a>";
 		}
-		
+		HttpSession session=request.getSession();
+		session.setAttribute("recentlySearch", search);
 		List<Classes> list = new MainService().searchCategories(search, cPage, numPerpage);
 		request.setAttribute("list", list);
 		request.setAttribute("listCount", totalData);
 		request.setAttribute("search", search);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/main/searchCategory.jsp").forward(request, response);
+		
 	}
 
 	/**
