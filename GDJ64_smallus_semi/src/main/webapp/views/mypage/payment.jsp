@@ -82,7 +82,7 @@ int cPage = (int) request.getAttribute("cPage");
 							<%
 							} else if(paymentStatus.equals("수강완료") ){
 							%>
-							<button class="i-withdrawalbutton1 i-writingreview">후기
+							<button class="i-withdrawalbutton1 i-writingreview i-reivew">후기
 								작성</button>
 							<%
 							}
@@ -189,6 +189,11 @@ $(".i-cancel").click(function(e) {
 	const context="http://localhost:8080/GDJ64_smallus_semi";
 	  const paymentId = $(this).closest(".i-paymentList").find(".i-paymentId").val();
 	  window.open(context+"/paymentCancel.do?paymentId="+paymentId,"_blank",'width=500 , height=200, left=670, top=300');
+});
+
+$(".i-reivew").click(e=>{	
+	const reivew=$(e.target).text();
+	location.assign("<%=request.getContextPath()%>/addreview.do?reivew="+reivew)
 });
 
 
