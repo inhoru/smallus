@@ -46,6 +46,7 @@ public class PaymentEndServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session=request.getSession();
@@ -56,10 +57,10 @@ public class PaymentEndServlet extends HttpServlet {
 		Gson gson= new Gson();
 		
 		// front에서 보낸 데이터를 data로 가져옴 
+		response.setContentType("application/json; charset=UTF-8");
 		String data=request.getParameter("data");
 		
 		Map<String, String> dataMap = new HashMap<>();
-		dataMap = gson.fromJson(data, dataMap.getClass());
 		
 		// callback으로 받은 함수 중 빠진 데이터를 ajax로 가져와서 map에 넣어줌 
 		String classDetailId=request.getParameter("classDetailId");
@@ -74,18 +75,21 @@ public class PaymentEndServlet extends HttpServlet {
 		dataMap.put("price", price);
 		dataMap.put("totalPrice", totalPrice);
 		
-		if(!couponId.isEmpty()||couponId!=null) {
-			dataMap.put("couponId", couponId);
-		}else dataMap.put("couponId", "NONE");
+		if (couponId.equals("NONE")) {
+			dataMap.put("couponId", "NONE");
+		}else {
+			int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
+			if(delResult>0) System.out.println("delete coupon success ");
+		}
 		
 		if((boolean)dataMap.get("status").equals("paid")) {
 			dataMap.put("status", "결제완료");
 		}
 		
+		dataMap = gson.fromJson(data, dataMap.getClass());
 		
 		int personnel=Integer.parseInt(classPersonnel);
 		int remainingPersonnel= new PaymentService().selectRemainPer(classDetailId);
-		int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
 //		System.out.println("personnel :"+personnel);
 //		System.out.println("remainingPersonnel :"+remainingPersonnel);
 //		System.out.println("remainingPersonnel : "+(remainingPersonnel-personnel));
@@ -102,10 +106,12 @@ public class PaymentEndServlet extends HttpServlet {
 		int notcount = new HostService().notificationsCount(n.getHostId());
 		session.setAttribute("notcount",notcount);
 		session.setAttribute("Notlist",list);
-		
-		if(result>0 && result>0 && delResult>0) System.out.println("입력 완료");
+		if(result>0) System.out.println("insert pay 성공");
+		if(perResult>0) System.out.println(" remaining per success ");
+		if(result>0 && result>0) System.out.println("입력 완료");
 
 		else System.out.println("error T_T");
+		
 		
 		
 	}

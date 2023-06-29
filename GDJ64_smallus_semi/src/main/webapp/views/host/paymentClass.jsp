@@ -76,7 +76,7 @@
 			<div class="h-payment-title h-payment-coupon">
 				<h4>쿠폰</h4>
 			    <select id="h-selectCoupon" name="h-selectCoupon">
-				    <option selected disabled>쿠폰 선택</option>
+				    <option id="h-couponNone"selected disabled>쿠폰 선택</option>
 			    	<%if(coupon!=null&&!coupon.isEmpty()){
 			    		for(Coupon cp: coupon){
 			    			if(cp.getCouponId().equals("NONE")){%>
@@ -127,28 +127,34 @@
 		location.assign('<%=request.getContextPath()%>//maintoclass.do');
 	}
 	//select 옵션 변경하면 이동하는 함
-	let total;
+	
 	let couponId=$("#h-usedCoupon").val();
-	let person;
-	let price;
 	let classTitle ='<%=p.getCategory().getCategoryTitle()%>'
 	let remainPer='<%=p.getClassDetail().getRemainingPersonnel()%>';
-	const applyCouponPrice=(e)=> {
-		let coupon = $("#h-selectCoupon option:selected").val();
-		$("#h-couponPrice").text("- " + coupon + " 원")
-		console.log(couponId)
+	let coupon;
+	let price='<%=p.getClasses().getClassPrice()%>';
+	let	person='<%=personnel%>';
+	let sum = price*person;
+	let	total = sum-coupon;
+	
+	function applyCouponPrice(){
+		coupon = $("#h-selectCoupon option:selected").val();
+		console.log(coupon);
+		$("#h-couponPrice").text("- " + coupon + " 원");
 		
-		
-		price='<%=p.getClasses().getClassPrice()%>';
-		person='<%=personnel%>';
-		let sum = price*person;
 		console.log("price : "+price);
 		console.log("person : "+person);
 		console.log("sum : "+sum);
 		
-		total = sum-coupon;
 		$("#h-totalPrice").text(total + " 원")
 		console.log("total : "+total);
+	}
+	
+	if($("#h-couponNone:selected")){
+		total=sum;
+		$("#h-totalPrice").text( sum + " 원");
+		console.log("total : "+total);
+		couponId="NONE";
 	}
 	const today = new Date();
 	const year = today.getFullYear();
@@ -170,7 +176,7 @@
 	let classDetailId='<%=p.getClassDetail().getClassDetailId()%>';
 	let payment_id = "RSV" + makeMerchantUid;
 
-		function payment(pg_provider, payment_method) {
+	function payment(pg_provider, payment_method) {
 			var IMP = window.IMP;
 			IMP.init("imp33310440");
 			var pg_mid;
@@ -181,7 +187,6 @@
 			} else if (pg_provider == 'kcp') {
 				pg_mid = 'kcp.A52CY';
 			}
-
 			const data = {
 				pg: pg_mid,//pg : 'html5_inicis',
 				pay_method: 'card',
@@ -193,10 +198,10 @@
 				buyer_tel : phone
 		};
 	IMP.request_pay(data, response => {
-		jQuery.ajax({
-			url: "<%=request.getContextPath()%>/payments/callback_receive.do", /* //cross-domain error가 발생하지 않도록 주의해주세요 */
+		$.ajax({
+			url: "<%=request.getContextPath()%>/payments/callback_receive.do", 
 			type: 'POST',
-			header: { 'Content-Type': 'application/json' },
+			header: {'Content-Type': 'application/json' },
 			data: {
 				"data": JSON.stringify(response),
 				"classDetailId":classDetailId,
@@ -205,9 +210,10 @@
 				"classPersonnel": person,
 				"totalPrice": total,
 				"remainingPersonnel": remainPer
+			
 			}
 		}).done(function(data) {
-			console.log(data);
+			//console.log(data);
 			if (response.success) {
 				var msg = '결제가 완료되었습니다.';
 				/* msg += '\n고유ID : ' + response.imp_uid;
