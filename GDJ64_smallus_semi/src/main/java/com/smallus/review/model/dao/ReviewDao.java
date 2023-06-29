@@ -186,23 +186,18 @@ public class ReviewDao {
 		}
 		return result;
 	}
+
 	
 
 	
-	public int deleteReviewByhost(Connection conn, String reviewId) {
-		PreparedStatement pstmt=null;
-		int result=0;
-		try {
-			pstmt=conn.prepareStatement(sql.getProperty("deleteReviewByhost"));
-			pstmt.setString(1, reviewId);
-			result=pstmt.executeUpdate();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
-	}
+	/*
+	 * public int deleteReviewByhost(Connection conn, String reviewId) {
+	 * PreparedStatement pstmt=null; int result=0; try {
+	 * pstmt=conn.prepareStatement(sql.getProperty("deleteReviewByhost"));
+	 * pstmt.setString(1, reviewId); result=pstmt.executeUpdate();
+	 * }catch(SQLException e) { e.printStackTrace(); }finally { close(pstmt); }
+	 * return result; }
+	 */
 	
 	/*
 	 * public int deleteRevieMyPage(Connection conn,String reviewId) {

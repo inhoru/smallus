@@ -59,7 +59,7 @@ public class ReviewService {
 	
 	public int deleteReviewByhost(String reviewId) {
 		Connection conn=getConnection();
-		int count=dao.deleteReviewByhost(conn,reviewId);
+		int count=dao.delete(conn,reviewId);
 		if(count>0) commit(conn);
 		else rollback(conn);
 		return count;

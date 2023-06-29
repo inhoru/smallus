@@ -3,7 +3,7 @@
 <style>
 #qnatext {
 	border: 1px solid #444444;
-	margin: 1% auto;
+	margin: 1% 20%;
 	border-radius: 20px;
 	width: 650px;
 	display: none;
@@ -12,11 +12,16 @@
 
 #qnactext {
 	border: 1px solid #444444;
-	margin: 1% auto;
+	margin: 1% 20%;
 	border-radius: 20px;
 	width: 650px;
 	display: none;
 	justify-content: center;
+}
+#a{
+	margin: 1% auto;	
+	width: 650px;
+	justify-content:center;
 }
 
 #l {
@@ -30,31 +35,32 @@ div#select_container {
 
 section#main {
 	width: 1000px;
-	margin: 0 auto%;
+	margin: 0 auto;
 	text-align: center
-}
-
-div#qna a {
-	display: block;
-	margin: 3% 20%;
 }
 
 table{
 	width: 100%;
 	border-collapse: collapse;
 	border-top: 1px solid #444444;
-/* 	border-bottom: 1px solid #444444 */
 	text-align: center;
 	margin-right:100%;
 }
 
 table>tr {
-	/* border-bottom: 1px solid #444444; */
+	border-bottom: 1px solid #444444; 
 	padding: 1% auto;
-	border-bottom: 1px solid #444444;
 }
-#td1{
-display: none;}
+
+#tra{
+	border: 1px solid #444444;
+	margin: 1% 20%;
+	border-radius: 20px;
+	width: 650px;
+	justify-content: center;
+	display: none;
+
+}
 </style>
 <div id="qna">
 </div>
@@ -76,31 +82,13 @@ display: none;}
 				<th>작성일</th>
 				<th>작성자</th>
 			</tr>
-			<tr id="td" onclick="show(event);">
+			<tr id="td" oncancel="toggle(event)">
 				<td>답변 대기</td>
 				<td>난이도가 어떻게 되...</td>
 				<td>우리 애들이랑 같이...</td>
 				<td>2023.06.16</td>
 				<td>이성진</td>
 			</tr>
-			<div class="qna_page">
-	<section id="main">
-		<div id="qna" onclick="show(event)";>
-			<table>
-				<tr id="a">
-					<td id="l">작성자</td>
-					<td id="l">2023-06-25</td>
-				</tr>
-				<tr>
-					<th id="l">난이도가 어떻게 되는건지 궁그매서 질문드려용~</th>
-				</tr>
-				<tr>
-					<td id="l">저희 애들이랑 같이 만들러 가려고 하는데 애들이 만들기엔 많이 어렵나요? 아 애들은 8살 남자아이와 5살여자아이예요~</td>
-				</tr>
-			</table>
-		</div>
-		</section>
-			<table>
 			<tr id="td" onclick="toggle(event);">
 				<td>답변 완료</td>
 				<td>단체 예약</td>
@@ -108,9 +96,18 @@ display: none;}
 				<td>2023.06.19</td>
 				<td>나sms 유저다</td>
 			</tr>
-		</table>
-		<div class="qna_page">
-	<section id="main">
+
+		<div>
+			<table>
+				<tr id="tra" onclick="toggle(event)";>
+					<td id="l">율맘</td>
+					<td id="l">2023-06-25</td>
+					<td id="l">난이도가 어떻게 되는건지 궁금해서 질문드려용~</td>
+					<td id="l">저희 애들이랑 같이 만들러 가려고 하는데 애들이 만들기엔 많이 어렵나요? 아 애들은 8살 남자아이와 5살여자아이예요~</td>
+				</tr>
+			</table>
+		</div>
+			
 		<div id="qnatext" onclick="toggle(event)";>
 			<table>
 				<tr id="a">
@@ -118,7 +115,7 @@ display: none;}
 					<td id="l">2023-06-25</td>
 				</tr>
 				<tr>
-					<th id="l">단체 예약</th>
+					<td id="l">단체 예약</td>
 				</tr>
 				<tr>
 					<td id="l">단체예약을 좀 하고 싶은데 몇 명까지 가능하지 궁금해서 문의 남겨요~</td>
@@ -136,10 +133,9 @@ display: none;}
 				</tr>
 			</table>
 		</div>
-	</div>
-	<script>
-function toggle(e) {
-$("#qna").show();	
+<script>
+	function toggle(e) {
+		$("#tra").toggle(show);	
 }
 	
 	function toggle(e) {
