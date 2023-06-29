@@ -21,7 +21,7 @@
 <div id="mainOpacity h-host-main">
 	<section class="h-main h-rsv">
      	<div class="h-main-title">
-			<h3>5월 예약 내역</h3><hr>
+			<h3>예약 내역 확인하기</h3><hr>
         </div><hr>
 		<div class="h-r-callendar" id="h-main-calendar"></div>
         
