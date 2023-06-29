@@ -40,8 +40,8 @@
 			<input type="number" name="classPrice" placeholder="금액을 입력해주세요." required>원
 			<p>주소</p>
 			<!-- <input type="text" id="sample4_postcode" placeholder="우편번호"> -->
-			<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
 			<input type="text" id="sample4_roadAddress" name="classAddress" placeholder="주소 입력(버튼 이용)" readonly required>
+			<input type="button" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
 			<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소"> -->
 			<span id="guide" style="color:#999;display:none"></span>
 			<input type="text" id="sample4_detailAddress" name="classAddressDetail" placeholder="상세주소">
@@ -56,15 +56,13 @@
 			<p>상세 내용</p>
 			<textarea name="classDetail" id="" cols="80" rows="10"
 				placeholder="클래스에 대한 설명을 입력해주세요."></textarea>
+			<br><br> <br> <br>
 			<p>스케쥴 등록 (같은날짜 두번 선택후 시간 등록)</p>
 					<input type="text" name="datetimes" id="oriDate" readonly>
 					<input type="button" value="추가" onclick="schedulePlus(event);">
 			<div id="AddSchedule-calendar">
 				<p>※ 현재 등록된 스케쥴</p>
-				<div id="plusSchedule">
-					<!-- <input type="text" name="schedule" readonly>
-					<input type="button" value="삭제" onclick="scheduleMinus(event);"> <br>	 -->
-			</div>
+				<div id="plusSchedule">	</div>
 		</div>
 		<br> <br> <input type="submit" value="등록하기"> <br>
 		<br> <br> <br>
@@ -76,20 +74,26 @@
 <script>
 
 const schedulePlus=(e)=>{
-	const $input=$("#plusSchedule").clone(true);
-	$("#AddSchedule-calendar").append($input);
-	 console.log($("#oriDate").text());
-	//$input.text($("#oriDate").text());
+	 const $div=$("<div id='scheduleOne'>");
+	$("#plusSchedule").append($div);
 	
+	const $input=$("<input type='text' name='schedule' readonly>").val($('#oriDate').val());
+	const oridate=$("#oriDate").val();
+	$input.attr(oridate);
+	$("#plusSchedule>div:last").append($input);
+	
+	 const $button=$("<input type='button' onclick='scheduleMinus(event);' value='삭제'>");
+	
+	$("#plusSchedule>div:last").append($button);
 }
 
 const scheduleMinus=(e)=>{
-	if(document.querySelectorAll("#plusSchedule").length==1){
-		alert("일정을 최소 1개 이상 등록해주세요!");
-	}else{
+	//if(document.querySelectorAll("#plusSchedule").length==1){
+		//alert("일정을 최소 1개 이상 등록해주세요!");
+	//}else{
 		$(e.target).parent().remove();
-	}
-}
+	//}
+} 
 
 $(function() {
 	  $('input[name="datetimes"]').daterangepicker({

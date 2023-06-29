@@ -75,6 +75,7 @@ public class AddClassEndServlet extends HttpServlet {
 		// 여기서부터 클래스 스케쥴 등록
 		// 입력내용을 배열로 받은 뒤, for문을 돌면서 내용을 자른다
 		String[] schedule=mr.getParameterValues("schedule");
+		System.out.println(schedule);
 		List<ClassDetail> scheduleList=new ArrayList();
 		SimpleDateFormat dateFormet=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
