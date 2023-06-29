@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.smallus.payment.model.vo.PaymentCompleted;
+import com.smallus.payment.service.PaymentService;
+
 /**
  * Servlet implementation class ViewPaymentByPaymentIdSerlvet
  */
@@ -29,7 +32,12 @@ public class ViewPaymentByPaymentIdSerlvet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String paymentId=request.getParameter("paymentId");
 		System.out.println(paymentId);
-		
+		PaymentCompleted p =new PaymentService().selectPaymentByPaymentId(paymentId);
+		if(p!=null) {
+			request.setAttribute("payment", p);
+			request.getRequestDispatcher("/views/host/hostPayment.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**

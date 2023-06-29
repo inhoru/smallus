@@ -40,9 +40,14 @@ public class ViewHostClassDetailServlet extends HttpServlet {
 		Host host=(Host)session.getAttribute("loginHost");
 		String hostId=host.getHostId();
 		
-		// 클래스 아이디를 기준으로 클래스리스트를 가져옴
+		String title=request.getParameter("title");
 		String classId=request.getParameter("classId");
 		System.out.println(hostId+""+classId);
+		
+		if(title!=null) {
+			classId= new ClassService().selectClassIdByclassTitle(title);
+		}
+		// 클래스 아이디를 기준으로 클래스리스트를 가져옴
 		Classes list =new ClassService().selectClassByClassId(hostId, classId);
 		List<ClassDetail> classDetailList = new ClassService().selectClassDetailByClassId(classId);
 		// 분기처리 후 클래스 상세 페이지로 전송
