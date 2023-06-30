@@ -71,5 +71,24 @@
 		</div>
 	</form>
 </div>
+<script>
+const memberId=$(".i-memberId").val();
+const fn_updatePassword=()=>{
+	 event.preventDefault();
+	window.open("<%=request.getContextPath()%>/member/updatePassword.do?userId="+memberId,"_blank",'width=500 , height=330, left=670, top=300')
+	
+}
+/* 닉네임 변경창 */
+const fn_updateNickname=()=>{
+	window.open("<%=request.getContextPath()%>/updatenickname.do","_blank",'width=500 , height=330, left=670, top=300');
+	 event.preventDefault();
+	}
+	/*이메일 변경창*/
+	const fn_updateEmail=()=>{
+	window.open("<%=request.getContextPath()%>/updateEmail.do","_blank",'width=550 , height=330, left=670, top=300');
+	 event.preventDefault();
+	}
+
+</script>
 
 <%@ include file="/views/common/footer.jsp"%>
