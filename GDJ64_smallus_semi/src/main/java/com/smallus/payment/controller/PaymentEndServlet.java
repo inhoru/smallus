@@ -70,7 +70,7 @@ public class PaymentEndServlet extends HttpServlet {
 		String classPersonnel=request.getParameter("classPersonnel");
 		String price=request.getParameter("price");
 		String totalPrice=request.getParameter("totalPrice");
-		
+		System.out.println("couponId :"+couponId);
 		dataMap.put("memberId", loginMember.getMemberId());
 		dataMap.put("classDetailId", classDetailId);
 		dataMap.put("classPersonnel", classPersonnel);
@@ -94,7 +94,6 @@ public class PaymentEndServlet extends HttpServlet {
 		}
 		remainingPersonnel=remainingPersonnel-personnel;
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
-		dataMap.put("couponId", "NONE");
 		int result=new PaymentService().insertPayment(dataMap);
 		int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
 		if(perResult>0) System.out.println("remain update");

@@ -29,7 +29,7 @@
 		    </div><hr>
 		    <div class="h-payClass-list h-class-list-n">
 		    	<a href="" class="h-class-list-img">
-		    		<img src="<%=request.getContextPath()%>/img/main-img2.jpg" >
+		    		<img src="<%=request.getContextPath()%>/upload/class/<%=p.getClasses().getClassThumbnail()%>" >
 				</a>
 				<table>
 					<tr><th></th></tr>
@@ -128,7 +128,7 @@
 	}
 	//select 옵션 변경하면 이동하는 함
 	
-	let couponId=$("#h-usedCoupon").val();
+	let couponId;
 	let classTitle ='<%=p.getClasses().getClassTitle()%>'
 	let remainPer='<%=p.getClassDetail().getRemainingPersonnel()%>';
 	let coupon;
@@ -137,6 +137,15 @@
 	let sum = price*person;
 	let total;
 	
+	// 쿠폰 선택 안 했을 때	
+	if($("#h-couponNone:selected")){
+		coupon=0;
+		$("#h-totalPrice").text( sum + " 원");
+		console.log("total : "+total);
+		couponId="NONE";
+	}else{
+		applyCouponPrice();
+	}
 	// 쿠폰 선택 하면 금액 변경
 	function applyCouponPrice(){
 		coupon = $("#h-selectCoupon option:selected").val();
@@ -149,15 +158,9 @@
 		total = sum-coupon;
 		$("#h-totalPrice").text(total + " 원")
 		console.log("total : "+total);
+		couponId=$("#h-usedCoupon").val();
 	}
 	
-	// 쿠폰 선택 안 했을 때	
-	if($("#h-couponNone:selected")){
-		total=sum;
-		$("#h-totalPrice").text( sum + " 원");
-		console.log("total : "+total);
-		couponId="NONE";
-	}
 	
 	const today = new Date();
 	const year = today.getFullYear();
@@ -201,6 +204,7 @@
 				buyer_tel : phone
 		};
 			IMP.request_pay(data, response => {
+				console.log(couponId)
 			      $.ajax({
 			         url: "<%=request.getContextPath()%>/payments/callback_receive.do", 
 			         type: 'POST',
