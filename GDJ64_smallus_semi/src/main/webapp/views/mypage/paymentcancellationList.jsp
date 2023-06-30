@@ -190,7 +190,7 @@ $(".i-cancellationList").click(e=>{
 });
 	
 $(".i-cancel").click(function(e) {
-	const context="http://localhost:8080/GDJ64_smallus_semi";
+	const context="http://14.36.141.71:10005/GDJ64_smallus_semi";
 	  const paymentId = $(this).closest(".i-paymentList").find(".i-paymentId").val();
 	  window.open(context+"/paymentCancel.do?paymentId="+paymentId,"_blank",'width=500 , height=200, left=670, top=300');
 });

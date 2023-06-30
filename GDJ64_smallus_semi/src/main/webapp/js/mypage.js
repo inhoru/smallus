@@ -1,6 +1,6 @@
 /* 패스워드 변경창 */
 
-const context="http://localhost:8080/GDJ64_smallus_semi";
+const context="http://14.36.141.71:10005/GDJ64_smallus_semi";
 const memberId=$(".i-memberId").val();
     const fn_updatePassword=()=>{
 		 event.preventDefault();
