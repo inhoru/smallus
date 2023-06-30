@@ -76,7 +76,7 @@ public class PaymentEndServlet extends HttpServlet {
 		dataMap.put("classPersonnel", classPersonnel);
 		dataMap.put("price", price);
 		dataMap.put("totalPrice", totalPrice);
-		
+		dataMap.put("couponId", couponId);
 		
 		if((boolean)dataMap.get("status").equals("paid")) {
 			dataMap.put("status", "결제완료");
