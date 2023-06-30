@@ -88,6 +88,22 @@ const fn_updateNickname=()=>{
 	window.open("<%=request.getContextPath()%>/updateEmail.do","_blank",'width=550 , height=330, left=670, top=300');
 	 event.preventDefault();
 	}
+	 
+    /* 프로필사진변경 */
+    $(".i-proFileInfoimg").click(e=>{
+ 		$("#profileInput").click();
+ 	});
+ 	
+ 	$("#profileInput").change(e=>{
+ 		const reader=new FileReader();
+ 		reader.onload=e=>{
+ 			//e.target.result속성에 변경된 file이 나옴.
+ 			$(".i-myprofile").attr({src:e.target.result});
+ 		}
+ 		reader.readAsDataURL(e.target.files[0]);
+
+ 	});
+ 
 
 </script>
 
