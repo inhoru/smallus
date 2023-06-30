@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.vo.ClassIndex;
+import com.smallus.main.model.vo.Wish;
 import com.smallus.main.service.MainService;
+import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class ViewCategoryCraftServlet
@@ -79,6 +82,13 @@ public class ViewCategoryCraftServlet extends HttpServlet {
 		String categoryTitle="공예";
 		List<ClassIndex> bestCraft= new MainService().selectBestClassByCategory(categoryTitle);
 		if(newCraft!=null && !newCraft.isEmpty() && bestCraft!=null && !bestCraft.isEmpty()) {
+			HttpSession session=request.getSession();
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			if(loginMember!=null) {
+				String memberId=loginMember.getMemberId();
+				List<Wish> wishMember= new MainService().wishMember(memberId);
+				session.setAttribute("wishMember", wishMember);
+			}
 			request.setAttribute("newCraft", newCraft);
 			request.setAttribute("bestCraft", bestCraft);
 			request.setAttribute("allCraft", allCraft);

@@ -101,7 +101,6 @@ public class PaymentEndServlet extends HttpServlet {
 		if(result>0) System.out.println("insert pay ok");
 			response.setContentType("text/csv;charset=utf-8");
 			response.getWriter().print(data);
-		
 		Classes n=new PaymentService().classDetailId(classDetailId);
 		int insertNot=new PaymentService().insertNot(classDetailId,n);		
 		List<Notifications> list =new HostService().selectAllNotifications(n.getHostId());

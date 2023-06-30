@@ -475,6 +475,7 @@ public class PaymentDao {
 				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
 				p.getClassDetail().setRemainingPersonnel(rs.getInt("REMAINING_PERSONNEL"));
 				p.getHost().setHostNickname(rs.getString("HOST_NICKNAME"));
+				p.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -619,6 +620,7 @@ public class PaymentDao {
 				pc.getHost().setHostName(rs.getString("HOST_NAME"));
 				pc.getCoupon().setCouponPrice(rs.getInt("COUPON_PRICE"));
 				pc.getPayment().setTotalPrice(rs.getInt("TOTAL_PRICE"));
+				pc.getCoupon().setCouponId(rs.getString("COUPON_ID"));
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 				pc.getClassDetail().setBookingTimeStart1(rs.getTimestamp("BOOKING_TIME_START").toLocalDateTime().format(formatter));
 				pc.getClassDetail().setBookingTimeEnd1(rs.getTimestamp("BOOKING_TIME_END").toLocalDateTime().format(formatter));

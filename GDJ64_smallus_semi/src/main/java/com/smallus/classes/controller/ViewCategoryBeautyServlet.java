@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.vo.ClassIndex;
+import com.smallus.main.model.vo.Wish;
 import com.smallus.main.service.MainService;
+import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class ViewCategoryBeautyServlet
@@ -79,6 +82,13 @@ public class ViewCategoryBeautyServlet extends HttpServlet {
 		List<ClassIndex> bestBeauty= new MainService().selectBestClassByCategory(categoryTitle);
 		System.out.println("new : "+newBeauty+"best : "+bestBeauty+"all : "+allBeauty);
 		if(newBeauty!=null && !newBeauty.isEmpty() && bestBeauty!=null && !bestBeauty.isEmpty()) {
+			HttpSession session=request.getSession();
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			if(loginMember!=null) {
+				String memberId=loginMember.getMemberId();
+				List<Wish> wishMember= new MainService().wishMember(memberId);
+				session.setAttribute("wishMember", wishMember);
+			}
 			request.setAttribute("newBeauty", newBeauty);
 			request.setAttribute("bestBeauty", bestBeauty);
 			request.setAttribute("allBeauty", allBeauty);

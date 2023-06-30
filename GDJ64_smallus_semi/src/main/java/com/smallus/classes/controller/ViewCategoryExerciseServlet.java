@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.vo.ClassIndex;
+import com.smallus.main.model.vo.Wish;
 import com.smallus.main.service.MainService;
+import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class ViewCategoryActivityServlet
@@ -75,6 +78,13 @@ public class ViewCategoryExerciseServlet extends HttpServlet {
 		String categoryTitle="운동";
 		List<ClassIndex> bestExe= new MainService().selectBestClassByCategory(categoryTitle);
 		if(newExe!=null && !newExe.isEmpty() && bestExe!=null && !bestExe.isEmpty()) {
+			HttpSession session=request.getSession();
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			if(loginMember!=null) {
+				String memberId=loginMember.getMemberId();
+				List<Wish> wishMember= new MainService().wishMember(memberId);
+				session.setAttribute("wishMember", wishMember);
+			}
 			request.setAttribute("newExe", newExe);
 			request.setAttribute("bestExe", bestExe);
 			request.setAttribute("allExe", allExe);

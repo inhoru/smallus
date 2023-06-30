@@ -29,7 +29,7 @@
 		    </div><hr>
 		    <div class="h-payClass-list h-class-list-n">
 		    	<a href="" class="h-class-list-img">
-		    		<img src="<%=request.getContextPath()%>/upload/class/<%=p.getClasses().getClassThumbnail()%>" >
+		    		<img src="<%=request.getContextPath()%>/upload/class/<%=p.getClasses().getClassThumbnail() %>" >
 				</a>
 				<table>
 					<tr><th></th></tr>

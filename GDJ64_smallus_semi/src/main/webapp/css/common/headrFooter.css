@@ -433,6 +433,8 @@ input.checkbox[type=checkbox]:checked+label {
 a {
 	color: inherit;
 }
-.i-recentlySearch{
-
+.i-recentSearche{
+	display:none;
+	background-color: #FFFBF5;
+	height: 200px;
 }

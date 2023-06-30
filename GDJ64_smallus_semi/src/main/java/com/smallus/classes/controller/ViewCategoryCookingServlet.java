@@ -8,10 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.smallus.classes.model.vo.ClassIndex;
 import com.smallus.classes.model.vo.Classes;
+import com.smallus.main.model.vo.Wish;
 import com.smallus.main.service.MainService;
+import com.smallus.member.model.vo.Member;
 
 /**
  * Servlet implementation class ViewCategoryCookingServlet
@@ -82,6 +85,13 @@ public class ViewCategoryCookingServlet extends HttpServlet {
 		String categoryTitle="요리";
 		List<ClassIndex> bestCooking= new MainService().selectBestClassByCategory(categoryTitle);
 		if(newCooking!=null && !newCooking.isEmpty() && bestCooking!=null && !bestCooking.isEmpty()) {
+			HttpSession session=request.getSession();
+			Member loginMember = (Member) session.getAttribute("loginMember");
+			if(loginMember!=null) {
+				String memberId=loginMember.getMemberId();
+				List<Wish> wishMember= new MainService().wishMember(memberId);
+				session.setAttribute("wishMember", wishMember);
+			}
 //			System.out.println("성");
 			request.setAttribute("newCooking", newCooking);
 			request.setAttribute("bestCooking", bestCooking);
