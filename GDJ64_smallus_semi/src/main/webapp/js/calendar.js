@@ -65,13 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
 				var endDate;
 				// 서블릿에서 가져온 JSON 데이터를 이벤트로 변환
 				for (var i = 0; i < response.length; i++) {
-					startDate = formatDate(response[i].classDetail.bookingTimeStart);
-					endDate = formatDate(response[i].classDetail.bookingTimeEnd);
+					startDate = formatDate();
+					endDate = formatDate();
 					console.log("start : " + startDate + "end : " + endDate)
 					var event = {
 						title: response[i].classes.classTitle,
-						start: startDate,
-						end: endDate,
+						start: response[i].classDetail.bookingTimeStart,
+						end: response[i].classDetail.bookingTimeEnd,
 						color: "#FBEFD3"
 					}
 					events.push(event);
