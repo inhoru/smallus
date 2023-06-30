@@ -44,7 +44,7 @@ public class Classes {
 	
 	@Override
 	public String toString() {
-		return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail+","+classStatus;
+		return classId+","+categoryTitle+","+classTitle+","+classUpLoadDate+","+classPassDate+","+classPassId+","+classThumbnail+","+classStatus+","+classThumbnail;
 	}
 	
 	

@@ -475,6 +475,7 @@ public class PaymentDao {
 				p.getClassDetail().setBookingTimeEnd(rs.getDate("BOOKING_TIME_END"));
 				p.getClassDetail().setRemainingPersonnel(rs.getInt("REMAINING_PERSONNEL"));
 				p.getHost().setHostNickname(rs.getString("HOST_NICKNAME"));
+				p.getClasses().setClassThumbnail(rs.getString("CLASS_THUMBNAIL"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

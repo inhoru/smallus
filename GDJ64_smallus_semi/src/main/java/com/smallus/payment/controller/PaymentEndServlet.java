@@ -94,7 +94,7 @@ public class PaymentEndServlet extends HttpServlet {
 		}
 		remainingPersonnel=remainingPersonnel-personnel;
 		int perResult= new ClassService().updateRemainPersonnel(remainingPersonnel,classDetailId);
-		dataMap.put("couponId", "NONE");
+	
 		int result=new PaymentService().insertPayment(dataMap);
 		int delResult=new PaymentService().deleteCouponByMemberId(loginMember.getMemberId());
 		if(perResult>0) System.out.println("remain update");
@@ -102,7 +102,6 @@ public class PaymentEndServlet extends HttpServlet {
 		if(result>0) System.out.println("insert pay ok");
 			response.setContentType("text/csv;charset=utf-8");
 			response.getWriter().print(data);
-		
 		Classes n=new PaymentService().classDetailId(classDetailId);
 		int insertNot=new PaymentService().insertNot(classDetailId,n);		
 		List<Notifications> list =new HostService().selectAllNotifications(n.getHostId());
