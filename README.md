@@ -66,6 +66,87 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 ![localhost_8080_GDJ64_smallus_semi_index jsp (1)](https://github.com/inhoru/smallus/assets/126074577/85ec40ce-cb84-4509-a878-6d8679cbd274)
 
 
+## 2) 로그인 & 회원가입
+
+- 일반회원
+![localhost_8080_GDJ64_smallus_semi_memberLoginMove do](https://github.com/inhoru/smallus/assets/126074577/bf311037-e294-4dae-8d1b-c12c42acee19)
+
+
+![localhost_8080_GDJ64_smallus_semi_views_member_enrollMember jsp](https://github.com/inhoru/smallus/assets/126074577/d753c7af-6d5d-4a75-829a-b84085c7ca00)
+
+<br/>
+
+- 호스트
+
+![localhost_8080_GDJ64_smallus_semi_hostLoginMove do](https://github.com/inhoru/smallus/assets/126074577/f90a812d-0c0f-4d6e-b3b0-44bdc7b6d110)
+
+
+
+![localhost_8080_GDJ64_smallus_semi_views_host_enrollHost jsp](https://github.com/inhoru/smallus/assets/126074577/12437579-53ac-4fdc-81e7-7216468396a0)
+
+<br/>
+
+## 마이페이지
+
+- 메인
+
+![localhost_8080_GDJ64_smallus_semi_memberMypage do (1)](https://github.com/inhoru/smallus/assets/126074577/707d2b64-8704-4bfb-a7dd-1163a8090473)
+
+- 프로필수정
+
+ ![localhost_8080_GDJ64_smallus_semi_memberprofile do](https://github.com/inhoru/smallus/assets/126074577/9eb60972-7962-4455-acfb-1091449f4eea)
+
+ - 결제내역
+
+![localhost_8080_GDJ64_smallus_semi_memberpayment do](https://github.com/inhoru/smallus/assets/126074577/8b77ec88-5a5f-41ea-8c0b-600c1f0a2931)
+
+
+- 1:1 문의
+
+![localhost_8080_GDJ64_smallus_semi_memberInquiry do](https://github.com/inhoru/smallus/assets/126074577/6e98e70f-ca06-452d-b266-94883db4783a)
+
+
+- 쿠폰관리
+![localhost_8080_GDJ64_smallus_semi_mypageCoupon do](https://github.com/inhoru/smallus/assets/126074577/b9c245e7-fd2d-4442-b921-167d83c6c2b8)
+
+
+
+<br/>
+
+
+## 호스트 마이페이지
+
+- 메인
+![image](https://github.com/inhoru/smallus/assets/126074577/3726c1ef-d8c7-4745-9e19-537be1381ab3)
+
+- 내클래스 보기
+
+
+![localhost_8080_GDJ64_smallus_semi_class_viewHostClassList do_hostId=c1234 cPage=2 numPerpage=6](https://github.com/inhoru/smallus/assets/126074577/4e2d81a2-daee-48a5-85f4-7be9b86dfb89)
+
+- 클래스 등록
+
+![localhost_8080_GDJ64_smallus_semi_host_insertClass do](https://github.com/inhoru/smallus/assets/126074577/58a4b80a-ba81-4565-910c-8f048e369f3a
+
+- 예약내역
+
+![localhost_8080_GDJ64_smallus_semi_host_viewHostRsv do](https://github.com/inhoru/smallus/assets/126074577/4e217f59-a9d3-4030-8cfc-1c95b2f0822b)
+
+- 정산관리
+
+![localhost_8080_GDJ64_smallus_semi_host_viewHostCalc do](https://github.com/inhoru/smallus/assets/126074577/0b3351be-f515-440f-9933-a1e401cbed8b)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
