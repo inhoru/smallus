@@ -1,5 +1,5 @@
 # smallus
-팀원: 이다영, 최인호, 최하리, 이성진 , 김민기
+팀원: 이다영, 최인호, 최하리, 이성진 , 강민기
 
 <br/>
 
@@ -30,10 +30,29 @@ Version Control System|Git / github
 
 <br/>
 
-## 프로젝트 기간
-![image](https://github.com/inhoru/smallus/assets/126074577/647db0b4-0e82-43e2-a0a3-1a4c721e7dea){: width="200" height="200"}
+## 프로젝트 일정
+![image](https://github.com/inhoru/smallus/assets/126074577/647db0b4-0e82-43e2-a0a3-1a4c721e7dea)
+
+<br/>
+
+## 프로젝트 디자인
+![image](https://github.com/inhoru/smallus/assets/126074577/02cdfa78-b6ba-4b24-afbe-09d85bd5af2c)
+
+<br/>
+
+## ERD
+
+ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
+
+<br/>
+
+![image](https://github.com/inhoru/smallus/assets/126074577/0985517d-047f-40b4-8720-a4a2cfb1fa7c)
+
+<br/>
+
+## 기능 구현
 
 
 
-## 프로젝트 기능 구현
+
 
