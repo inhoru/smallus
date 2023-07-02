@@ -1,4 +1,4 @@
-![image](https://github.com/inhoru/smallus/assets/126074577/bf48f9e3-0392-4ecd-91cc-49cde3983018)# smallus
+# smallus
 팀원: 이다영, 최인호, 최하리, 이성진 , 강민기
 
 <br/>
