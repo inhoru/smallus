@@ -33,6 +33,27 @@ Version Control System|Git / github
 
 <br/>
 
+## 📆프로젝트 기간
+
+2023.6.15 ~ 2023.6.29
+
+<br/>
+
+## 📝ERD
+![image](https://github.com/inhoru/smallus/assets/126074577/1ce6ac5c-c55f-4224-8464-e803ae15a8ae)
+
+<br/>
+
+
+## 🖌️디자인
+
+![image](https://github.com/inhoru/smallus/assets/126074577/751811c6-bba2-4cbd-88c5-9bbb48ace1d0)
+
+<br/>
+
+## ⭐구현화면
+
+<br/>
 
 ## 1) 메인화면
 
