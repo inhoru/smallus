@@ -30,6 +30,11 @@ Version Control System|Git / github
 
 <br/>
 
+## 프로젝트 기간
+![프로젝트일정](![image](https://github.com/inhoru/smallus/assets/126074577/647db0b4-0e82-43e2-a0a3-1a4c721e7dea);
+
+
+
 ## 프로젝트 기능 구현
 
 * #### 채선혜
