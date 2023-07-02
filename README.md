@@ -93,24 +93,22 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 ![image](https://github.com/inhoru/smallus/assets/126074577/09849afc-081f-4452-9acc-809608d9c052)
 
 
-
-
 - 프로필수정
+![image](https://github.com/inhoru/smallus/assets/126074577/5effb0ee-a535-4389-a032-361aaf4ccbda)
 
 
 
  - 결제내역
-
-
-
+![image](https://github.com/inhoru/smallus/assets/126074577/b7313b29-6dc8-4d4c-aae5-383bf43906ea)
+![image](https://github.com/inhoru/smallus/assets/126074577/da4e50dd-f48c-4781-81eb-3e5f0211e859)
 
 - 1:1 문의
-
-
+![image](https://github.com/inhoru/smallus/assets/126074577/05e602af-94e0-4905-a460-2e2070ce1fa9)
+![image](https://github.com/inhoru/smallus/assets/126074577/686fd4a4-9ca3-43d5-b3de-4ab3480ca679)
 
 
 - 쿠폰관리
-
+![image](https://github.com/inhoru/smallus/assets/126074577/d63d8e5d-351d-466e-bc28-1572dfcac8ea)
 
 
 <br/>
