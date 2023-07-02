@@ -24,7 +24,7 @@ Language | Java , Servlet/JSP, HTML5, CSS, JavaScript
 Web Application Server | Apache Tomcat 9.0
 Database|Oracle
 Framework & Open Api|jQuery, JSON, Ajax,Kakao Developers,smtp, fullcalendar ,I'mport,daterangepicker
-Document| : figma, erdCloud, Notion
+Document| figma, erdCloud, Notion
 IDE| Eclipse, Visual Studio Code /sqldeveloper
 Version Control System|Git / github
 
