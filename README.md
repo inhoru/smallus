@@ -1,4 +1,4 @@
-# smallus
+![localhost_8080_GDJ64_smallus_semi_index jsp (1)](https://github.com/inhoru/smallus/assets/126074577/dc7a4f8d-fb83-4516-ae14-53f48dbae456)# smallus
 팀원: 이다영, 최인호, 최하리, 이성진 , 강민기
 
 <br/>
@@ -63,7 +63,9 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 ## 1) 메인화면
 
 
-![Uploading localhost_8080_GDJ64_smallus_semi_index.jsp (1).png…]()
+![localhost_8080_GDJ64_smallus_semi_index jsp (1)](https://github.com/inhoru/smallus/assets/126074577/85ec40ce-cb84-4509-a878-6d8679cbd274)
+
+
 
 
 
