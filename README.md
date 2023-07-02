@@ -66,13 +66,13 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 ## 1) 메인화면
 
 
-![localhost_8080_GDJ64_smallus_semi_index jsp (1)](https://github.com/inhoru/smallus/assets/126074577/85ec40ce-cb84-4509-a878-6d8679cbd274){: width="100" height="100"}
+![localhost_8080_GDJ64_smallus_semi_index jsp (1)](https://github.com/inhoru/smallus/assets/126074577/85ec40ce-cb84-4509-a878-6d8679cbd274)
 
 
 ## 2) 로그인 & 회원가입
 
 - 일반회원
-![localhost_8080_GDJ64_smallus_semi_memberLoginMove do](https://github.com/inhoru/smallus/assets/126074577/bf311037-e294-4dae-8d1b-c12c42acee19){: width="100" height="100"}
+![localhost_8080_GDJ64_smallus_semi_memberLoginMove do](https://github.com/inhoru/smallus/assets/126074577/bf311037-e294-4dae-8d1b-c12c42acee19)
 
 
 ![localhost_8080_GDJ64_smallus_semi_views_member_enrollMember jsp](https://github.com/inhoru/smallus/assets/126074577/d753c7af-6d5d-4a75-829a-b84085c7ca00)
