@@ -1,4 +1,4 @@
-# smallus
+![image](https://github.com/inhoru/smallus/assets/126074577/bf48f9e3-0392-4ecd-91cc-49cde3983018)# smallus
 팀원: 이다영, 최인호, 최하리, 이성진 , 강민기
 
 <br/>
@@ -55,9 +55,12 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 [smallus.pdf](https://github.com/inhoru/smallus/files/11929572/semicolon.pdf)
 
 
+<br/>
 
 
 ## 기능 구현
+
+<br/>
 
 
 ## 1) 메인화면
@@ -117,26 +120,77 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 ## 호스트 마이페이지
 
 - 메인
+![image](https://github.com/inhoru/smallus/assets/126074577/a83fa1d1-4674-486c-8328-1d18a86ec60c)
+![image](https://github.com/inhoru/smallus/assets/126074577/92d61a31-5abd-4ea5-afea-fcb4e4e907e5)
+
+- 프로필 수정
+
+![image](https://github.com/inhoru/smallus/assets/126074577/109fdd37-d2d1-463b-8e0b-48c2600fb2be)
+
 
 - 내클래스 보기
-
-
-
+![image](https://github.com/inhoru/smallus/assets/126074577/2315bad0-aeec-4da7-81d9-7ca3f6ba88a3)
 
 - 클래스 등록
+![image](https://github.com/inhoru/smallus/assets/126074577/31d685d2-c5c4-4286-a264-cf89ea37f7c0)
+![image](https://github.com/inhoru/smallus/assets/126074577/26c86591-6a47-43b3-b7f9-00bcad4b441b)
 
 
 - 예약내역
+![image](https://github.com/inhoru/smallus/assets/126074577/bc48bfe0-bd95-4259-bc4c-0eff0785c6c6)
+![image](https://github.com/inhoru/smallus/assets/126074577/2f7c2743-8153-48c0-99a3-9afc5a2d77e1)
 
 
 
 - 정산관리
+![image](https://github.com/inhoru/smallus/assets/126074577/9980a285-a796-489f-b2cb-0d8a304b5c5f)
 
 
 
+<br/>
 
 
+## 클래스 상세 & 결제
 
+- 클래스 상세 페이지
+![image](https://github.com/inhoru/smallus/assets/126074577/4a1f41c4-5d50-4614-8cce-84bd3c08a47f)
+![image](https://github.com/inhoru/smallus/assets/126074577/1da06979-7885-4d19-8d70-f65ce3e74d40)
+
+- 클래스 결제
+
+![image](https://github.com/inhoru/smallus/assets/126074577/3b7818d7-c255-4044-9ec5-9b31a143d0e2)
+
+
+<br/>
+
+
+## 관리자페이지
+
+- 메인
+
+![image](https://github.com/inhoru/smallus/assets/126074577/133cec6f-6f38-4e9c-a847-2bb774ec1dc0)
+
+- 회원관리
+![image](https://github.com/inhoru/smallus/assets/126074577/1fbc254e-6180-466a-861c-ea65263792f8)
+![image](https://github.com/inhoru/smallus/assets/126074577/93230c4a-dd94-4795-9eb5-33dc293f4f12)
+
+- 등록된 클래스 관리
+![image](https://github.com/inhoru/smallus/assets/126074577/746bf473-72ca-4cbc-84f8-f7ea81ef21a6)
+- 클래스 승인
+![image](https://github.com/inhoru/smallus/assets/126074577/91b6dc50-b36d-412d-952c-378ca91594cd)
+
+- 정산관리
+![image](https://github.com/inhoru/smallus/assets/126074577/40e0c802-13e4-48aa-be74-e550ee1641ec)
+
+
+- 정상 승인
+![image](https://github.com/inhoru/smallus/assets/126074577/e9550b7a-3df8-44c2-a103-fac332164a2a)
+
+- 공지사항
+![image](https://github.com/inhoru/smallus/assets/126074577/80d46b52-1575-45f1-940c-467647708cfd)
+
+- 1:1 문의관리
+![image](https://github.com/inhoru/smallus/assets/126074577/a52bc329-2ecd-4bfc-8d90-cf54a2576e3b)
 
 
 
