@@ -33,7 +33,6 @@ Version Control System|Git / github
 ## 프로젝트 일정
 ![image](https://github.com/inhoru/smallus/assets/126074577/647db0b4-0e82-43e2-a0a3-1a4c721e7dea)
 
-![세미프로젝트 후기](https://inhoru126.tistory.com/category/%EA%B0%9C%EB%B0%9C)
 
 <br/>
 
