@@ -63,6 +63,9 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 ## 1) 메인화면
 
 
+![Uploading localhost_8080_GDJ64_smallus_semi_index.jsp (1).png…]()
+
+
 
 
 
