@@ -49,8 +49,7 @@ public class ClassesDao2 {
 		return classData;
 	}
 	
-	// 클래스 db 등록
-	// addClass=INSERT INTO CLASS VALUES('CLA'||SEQ_CLASS_ID.NEXTVAL,?,?,?,?,?,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,?)
+	// 클래스 db 등
 	public int addClass(Connection conn, Classes nc) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -79,7 +78,7 @@ public class ClassesDao2 {
 	}
 	
 	// 클래스디테일 db 등록
-	// addClassScheduld=INSERT INTO CLASS_DATAIL VALUES('CLD'||SEQ_CLASS_DETAIL.NEXTVAL,(SELECT 'CLA'||SEQ_CLASS_ID.CURRVAL FROM DUAL),?,?,(SELECT CLASS_PERSONNEL WHERE CLASS_ID='CLA'||SEQ_CLASS_ID.CURRVAL))
+	
 	public int addClassSchedule(Connection conn, List<ClassDetail> schedule) {
 		PreparedStatement pstmt=null;
 		int result=0;

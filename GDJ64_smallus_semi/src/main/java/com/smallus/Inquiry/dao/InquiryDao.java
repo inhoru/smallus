@@ -37,7 +37,7 @@ private Properties sql= new Properties();
 		List<Faq> list=new ArrayList<Faq>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectAllFaq"));
-			//SELECT * FROM FAQ
+			
 			rs=pstmt.executeQuery();
 			while(rs.next()) list.add(getFaq(rs));
 		}catch(SQLException e) {
@@ -54,7 +54,7 @@ private Properties sql= new Properties();
 		List<Faq> list=new ArrayList<Faq>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectCategorie"));
-			//SELECT * FROM FAQ WHERE FAQ_TYPE=?
+			
 			pstmt.setString(1, categorie);
 			rs=pstmt.executeQuery();
 			while(rs.next()) list.add(getFaq(rs));
@@ -71,7 +71,7 @@ private Properties sql= new Properties();
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectInquiryCount"));
-			//SELECT COUNT(MEMBER_ID) FROM BOARD WHERE MEMBER_ID=?
+			
 			pstmt.setString(1, memberId);
 			rs=pstmt.executeQuery();
 			if(rs.next())result=rs.getInt(1);
@@ -91,7 +91,7 @@ private Properties sql= new Properties();
 		List<Inquiry> list=new ArrayList<Inquiry>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectAllInquiry"));
-			//SELECT * FROM (SELECT ROWNUM AS RNUM, B.* FROM (SELECT * FROM BOARD LEFT JOIN BOARD_IMAGE USING(BOARD_ID) LEFT JOIN BOARD_COMMENT USING(BOARD_ID) WHERE MEMBER_ID=? ORDER BY BOARD_RDATE DESC)B) WHERE RNUM BETWEEN ? AND ?
+			
 			pstmt.setString(1, memberId);
 			pstmt.setInt(2,(cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
@@ -112,7 +112,7 @@ private Properties sql= new Properties();
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("inquiryRemove"));
-			//DELETE FROM BOARD WHERE MEMBER_ID = ? AND BOARD_ID=?
+		
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, remove);
 			result=pstmt.executeUpdate();
@@ -129,7 +129,7 @@ private Properties sql= new Properties();
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			//INSERT INTO BOARD VALUES('BAD'||SEQ_BAD.NEXTVAL,?,?,?,?,DEFAULT,DEFAULT)
+		
 			pstmt=conn.prepareStatement(sql.getProperty("insertInquiry"));
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, boardType);
@@ -147,7 +147,7 @@ private Properties sql= new Properties();
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			//INSERT INTO BOARD_IMAGE VALUES('BDE'||SEQ_BOARD_IMG.NEXTVAL,'BAD'||SEQ_BAD.CURRVAL,?);
+	
 			pstmt=conn.prepareStatement(sql.getProperty("insertupfiles"));
 			pstmt.setString(1, files);
 			result=pstmt.executeUpdate();
