@@ -60,6 +60,12 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 ## 기능 구현
 
 
+## 1) 메인화면
+
+
+
+
+
 
 
 
