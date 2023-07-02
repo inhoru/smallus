@@ -50,7 +50,15 @@ ERD 주소 : https://www.erdcloud.com/d/zjWk3Prk55ndZ5BMs
 
 <br/>
 
+## PPT
+
+[smallus.pdf](https://github.com/inhoru/smallus/files/11929572/semicolon.pdf)
+
+
+
+
 ## 기능 구현
+
 
 
 
