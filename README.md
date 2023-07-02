@@ -22,7 +22,14 @@
 
 ## 🖥️ 사용기술 및 개발환경
 
-Language | Java , Servlet/JSP, HTML5, CSS, JavaScr면
+Language | Java 8, Servlet/JSP, HTML5, CSS3, JavaScript
+------------ | ------------- 
+Web Application Server | Apache Tomcat 9.0
+Database|Oracle
+Framework & Open Api|Ajax, jQuery, Json,smtp,fullcalendar,I'mport,Kakao Developers,daterangepicker
+Document| erdCloud,Notion,figma
+IDE| Eclipse, Visual Studio Code /sqldeveloper
+Version Control System|Git / github
 
 <br/>
 
