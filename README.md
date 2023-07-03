@@ -36,6 +36,7 @@ Version Control System|Git / github
 ## 📆프로젝트 기간
 
 2023.6.15 ~ 2023.6.29
+[세미프로젝트 후기](https://inhoru126.tistory.com/entry/%EC%84%B8%EB%AF%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-smallUs-%ED%9B%84%EA%B8%B0)
 
 <br/>
 
