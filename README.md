@@ -22,7 +22,7 @@
 
 ## 🖥️ 사용기술 및 개발환경
 
-Language | Java 8, Servlet/JSP, HTML5, CSS3, JavaScript
+Language | Java, Servlet/JSP, HTML5, CSS3, JavaScript
 ------------ | ------------- 
 Web Application Server | Apache Tomcat 9.0
 Database|Oracle
